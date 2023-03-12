@@ -1,0 +1,241 @@
+html {
+  border: 0;
+  overflow: hidden;
+  font-family: Tahoma, sans-serif;
+
+}
+
+body {
+  background-color: darkgreen;
+}
+
+.field {
+  width: 100%;
+  height: 90vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: darkgreen;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  gap: 1px 1px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    ". . . . . . . . . ."
+    ". . . . . . . . . ."
+    ". . . . . . . . . ."
+    ". . . . . . . . . ."
+    ". . . . . . . . . ."
+    ". . . . . . . . . ."
+    ". . . . . . . . . ."
+    ". . . . . . . . . ."
+    ". . . . . . . . . ."
+    ". . . . . . . . . .";
+}
+
+.patch {
+  background-color: seagreen;
+  width: 100%;
+  height: 100%;
+  border-radius: 0.2em;
+}
+
+.patch:hover {
+  opacity: 50%;
+}
+
+.patch.svg {
+  width: 100%;
+  height: auto;
+}
+
+.page {
+  width: 100%;
+  height: 90vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  scroll-behavior: smooth;
+}
+
+.allocate {
+  background-color: wheat;
+  display: none;
+}
+
+.hardware {
+  background-color: salmon;
+  display: none;
+}
+
+.sales {
+  background-color: dodgerblue;
+  display: none;
+}
+
+.night {
+  background-color: navy;
+  display: none;
+}
+
+.controls {
+  position: absolute;
+  bottom: 0;
+  left: right;
+}
+
+.tools {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 10%;
+  background-color: rgb(19, 19, 54);
+  color: white;
+  font-weight: bold;
+  display: flex;
+}
+
+.tools div {
+  border: 1px solid white;
+  padding: 1em;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+}
+
+.tools div:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.hardware div {
+  width: 90%;
+  height: auto;
+}
+
+.buttonize {
+  background-color: rgba(0, 0, 0, .1);
+  border-top: 2px solid white;
+  border-left: 2px solid white;
+  border-bottom: 2px solid rgba(0, 0, 0, .20);
+  border-right: 2px solid rgba(0, 0, 0, .20);
+  padding: 10px;
+  margin: 10px;
+}
+
+.hardware div:hover,
+.machine:hover {
+  background-color: rgba(0, 0, 0, .05);
+}
+
+.tooMuch {
+  opacity: 50%;
+  background-color: rgba(0, 0, 0, .05);
+}
+
+.tooMuch:hover {
+  opacity: 50%;
+  background-color: rgba(0, 0, 0, .05);
+}
+
+.spudList {
+  padding: 5px;
+  margin: 2px;
+  background-color: rgba(0, 0, 0, .10);
+  border-radius: 5px;
+  display: flex;
+}
+
+.spudlist>div {
+  margin: 2px;
+}
+
+.spudList:hover {
+  background-color: rgba(0, 0, 0, .20);
+}
+
+.spudListButton {
+  padding: 2px;
+  width: 2em;
+  background-color: rgba(0, 0, 0, .10);
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 2px;
+  border-top: 2px solid white;
+  border-left: 2px solid white;
+  border-bottom: 2px solid rgba(0, 0, 0, .20);
+  border-right: 2px solid rgba(0, 0, 0, .20);
+}
+
+.spudListButton:hover {
+  background-color: rgba(0, 0, 0, .20);
+}
+
+.sackListButtons {
+  display: flex;
+}
+
+.allocateContent {
+  display: flex;
+  gap: 1em;
+  padding: 1em;
+  align-items: stretch;
+  height: 85%;
+}
+
+.sack {
+  border-radius: 5px;
+  border: 3px solid rgb(75, 46, 26, .5);
+  padding: 1em;
+  overflow-y: scroll;
+  flex-grow: 1;
+}
+
+.sackSpuds {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.sackSpudName {
+  width: 50%;
+  padding: 0.5em;
+}
+
+.machines {
+  border-radius: 5px;
+  border: 3px solid rgb(75, 46, 26, .5);
+  padding: 1em;
+  overflow-y: scroll;
+  flex-grow: 1;
+}
+
+.machine {
+  cursor: pointer;
+}
+
+.selected {
+  background-color: rgba(0, 0, 0, .30);
+}
+
+.selected:hover {
+  background-color: rgba(0, 0, 0, .25);
+}
+
+.machineName {
+  font-weight: bold;
+}
+
+.button_tool {
+  background-color: wheat;
+}
+
+.button_machine {
+  background-color: lightblue;
+}
+
+.night {
+  color: white;
+  font-weight: bold;
+}
