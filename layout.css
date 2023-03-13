@@ -1,3 +1,7 @@
+:root {
+  --sl-padding: 0.25em;
+}
+
 html {
   border: 0;
   overflow: hidden;
@@ -7,6 +11,11 @@ html {
 
 body {
   background-color: darkgreen;
+}
+
+h2 {
+  padding: var(--sl-padding);
+  margin: var(--sl-padding);
 }
 
 .field {
@@ -79,12 +88,6 @@ body {
   display: none;
 }
 
-.controls {
-  position: absolute;
-  bottom: 0;
-  left: right;
-}
-
 .tools {
   position: absolute;
   bottom: 0;
@@ -99,7 +102,7 @@ body {
 
 .tools div {
   border: 1px solid white;
-  padding: 1em;
+  padding: var(--sl-padding);
   border-radius: 5px;
   background-color: rgba(255, 255, 255, 0.1);
   cursor: pointer;
@@ -120,8 +123,8 @@ body {
   border-left: 2px solid white;
   border-bottom: 2px solid rgba(0, 0, 0, .20);
   border-right: 2px solid rgba(0, 0, 0, .20);
-  padding: 10px;
-  margin: 10px;
+  padding: var(--sl-padding);
+  margin: var(--sl-padding);
 }
 
 .hardware div:hover,
@@ -140,15 +143,15 @@ body {
 }
 
 .spudList {
-  padding: 5px;
-  margin: 2px;
+  padding: var(--sl-padding);
+  margin: var(--sl-padding);
   background-color: rgba(0, 0, 0, .10);
   border-radius: 5px;
   display: flex;
 }
 
 .spudlist>div {
-  margin: 2px;
+  margin: var(--sl-padding);
 }
 
 .spudList:hover {
@@ -156,12 +159,12 @@ body {
 }
 
 .spudListButton {
-  padding: 2px;
+  padding: var(--sl-padding);
   width: 2em;
   background-color: rgba(0, 0, 0, .10);
   border-radius: 5px;
   cursor: pointer;
-  margin: 2px;
+  margin: var(--sl-padding);
   border-top: 2px solid white;
   border-left: 2px solid white;
   border-bottom: 2px solid rgba(0, 0, 0, .20);
@@ -178,8 +181,8 @@ body {
 
 .allocateContent {
   display: flex;
-  gap: 1em;
-  padding: 1em;
+  gap: var(--sl-padding);
+  padding: var(--sl-padding);
   align-items: stretch;
   height: 85%;
 }
@@ -187,7 +190,7 @@ body {
 .sack {
   border-radius: 5px;
   border: 3px solid rgb(75, 46, 26, .5);
-  padding: 1em;
+  padding: var(--sl-padding);
   overflow-y: scroll;
   flex-grow: 1;
 }
@@ -200,13 +203,13 @@ body {
 
 .sackSpudName {
   width: 50%;
-  padding: 0.5em;
+  padding: var(--sl-padding);
 }
 
 .machines {
   border-radius: 5px;
   border: 3px solid rgb(75, 46, 26, .5);
-  padding: 1em;
+  padding: var(--sl-padding);
   overflow-y: scroll;
   flex-grow: 1;
 }
