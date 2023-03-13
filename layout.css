@@ -202,8 +202,7 @@ h2 {
 }
 
 .sackSpudName {
-  width: 50%;
-  padding: var(--sl-padding);
+  font-weight: bold;
 }
 
 .machines {

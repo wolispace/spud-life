@@ -72,7 +72,9 @@ function renderSack() {
   Object.entries(player.sack).forEach(([spudName, spudQty]) => {
     let spud = player.spuds.filter((spud) => spud.name == spudName)[0];
     let machine = player.shop.machines[player.shop.selected];
-    sackList += `<div class="sackSpuds buttonize"><div class="sackListButtons">`;
+    sackList += `<div class="sackSpuds buttonize">`;
+    sackList += `<div class="sackSpudName">${spudQty} ${spud.fullName}</div>`;
+    sackList += `<div class="sackListButtons">`;
     if (spudQty > 0) {
       sackList += `<div class="spudListButton" onclick="moveSpuds('${spudName}', ${spudQty})">&lt;&lt;</div>`;
       sackList += `<div class="spudListButton" onclick="moveSpuds('${spudName}', 1)">&lt;</div>`;
@@ -85,8 +87,7 @@ function renderSack() {
     } else {
       sackList += `<div class="spudListButton" >&gt;</div>`;
     }
-
-    sackList += `<div class="sackSpudName">${spudQty} ${spud.fullName}</div></div>`;
+    sackList += `</div>`;
     sackList += `<div class="sackSpudDesc">This is a ${spud.rareness} potato that is best for ${spud.bestFor}</div>`;
     sackList += `</div>`;
   });
@@ -94,6 +95,7 @@ function renderSack() {
   element = document.querySelector('.sack');
   element.innerHTML = sackList;
 }
+
 
 function moveSpuds(spudName, spudQty) {
   let machine = player.shop.machines[player.shop.selected];
@@ -477,8 +479,8 @@ function renderPatch(patch) {
   let newPatch = ' ';
   if (patch) {
     if (patch.block) {
-      let type = 
-patch.block.type.substr(0,1);
+      let type =
+        patch.block.type.substr(0, 1);
       newPatch = `${type}=${patch.block.qty}`;
     }
     if (patch.spud) {
