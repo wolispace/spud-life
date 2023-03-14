@@ -322,7 +322,7 @@ function sproutSpuds(qty) {
 
 // randomly fill the field with rocks, logs and spuds - splus some ranom treasure!
 function fillField() {
-  let i = 0;
+  let i = 10;
   while (i < 100) {
     if (rnd(2) > 0) {
       // rock, log or spud?
@@ -432,7 +432,6 @@ function patchClick(patchElement) {
     element = document.querySelector(`#patch_${player.pos}`);
     element.classList.remove("currentPos");
     let newPos = player.pos;
-
     if (index == 60) {
       newPos -= 10;
       if (newPos < 0) {
@@ -456,6 +455,9 @@ function patchClick(patchElement) {
       if (newPos > 99) {
         newPos = player.pos;
       }
+    }
+    if ([60, 70, 71, 80].indexOf(newPos) > -1) {
+      newPos = player.pos;
     }
     player.pos = newPos;
     element = document.querySelector(`#patch_${player.pos}`);
@@ -562,7 +564,7 @@ function drawField() {
   let index = 0;
   let patches = '';
   while (index <= maxPatches) {
-    patches += `<div class="patch" id="patch_${index}" onclick="patchClick(this)">${index}</div>`;
+    patches += `<div class="patch" id="patch_${index}" onclick="patchClick(this)"></div>`;
     index++;
   }
   element = document.querySelector('.field');

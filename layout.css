@@ -243,7 +243,7 @@ h2 {
 }
 
 .controlButton {
-  background-color: rgba(0, 0, 0, .1);
+  background-color: rgba(55, 53, 82);
   border-top: 2px solid white;
   border-left: 2px solid white;
   border-bottom: 2px solid rgba(0, 0, 0, .20);
@@ -251,5 +251,6 @@ h2 {
 }
 
 .currentPos {
-  border: 1px solid yellow;
+  background-color: rgba(0, 0, 0, .1);
+
 }
