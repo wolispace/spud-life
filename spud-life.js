@@ -432,19 +432,20 @@ function patchClick(patchElement) {
     element = document.querySelector(`#patch_${player.pos}`);
     element.classList.remove("currentPos");
     let newPos = player.pos;
+
     if (index == 60) {
       newPos -= 10;
       if (newPos < 0) {
         newPos = player.pos;
       }
     }
-    if (index == 70) {
+    if (index == 70 && player.pos % 10 > 0) {
       newPos -= 1;
       if (newPos < 0) {
         newPos = player.pos;
       }
     }
-    if (index == 71) {
+    if (index == 71 && player.pos % 10 < 9) {
       newPos += 1;
       if (newPos > 99) {
         newPos = player.pos;
