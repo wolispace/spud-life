@@ -18,7 +18,8 @@ let player = {
   shop: {
     machines: {}
   },
-  hardware: hardwareStore()
+  hardware: hardwareStore(),
+  controls: { start: 60 }
 };
 
 
@@ -361,6 +362,7 @@ function showPatches() {
       }
     }
     renderPatch(patch);
+    renderControls();
   });
 }
 
@@ -392,6 +394,7 @@ function dayCycle() {
     showPatches();
     resetTools();
     renderTools();
+
   }
 }
 
@@ -421,6 +424,16 @@ function patchClick(patchElement) {
   let id = patchElement.getAttribute('id');
   let bits = id.split('_');
   let index = parseInt(bits[1]);
+  if ([60, 70, 71, 80].indexOf(index) > -1) {
+    // we are trying to move
+    console.log(`trying to move ${index}`);
+
+  } else {
+    //We are digging
+    console.log(`digging ${index}`);
+  }
+  return;
+
   let patch = player.fields[player.currentField][index];
   // if nothing defined for a patch then its an empty spud
   if (!patch) {
@@ -515,11 +528,32 @@ function drawField() {
   let index = 0;
   let patches = '';
   while (index <= maxPatches) {
-    patches += `<div class="patch" id="patch_${index}" onclick="patchClick(this)"></div>`;
+    patches += `<div class="patch" id="patch_${index}" onclick="patchClick(this)">${index}</div>`;
     index++;
   }
   element = document.querySelector('.field');
   element.innerHTML = patches;
+}
+
+// allocate 4 patches to be movement buttons - they cant be dug
+function renderControls() {
+  let id = player.controls.start;
+  console.log(id);
+  element = document.querySelector(`#patch_${id}`);
+  element.innerHTML = '^<br/>Up';
+  element.classList.add("controlButton");
+  id += 10;
+  element = document.querySelector(`#patch_${id}`);
+  element.innerHTML = '&lt;<br/>Lt';
+  element.classList.add("controlButton");
+  id += 1;
+  element = document.querySelector(`#patch_${id}`);
+  element.innerHTML = '&gt;<br/>Rt';
+  element.classList.add("controlButton");
+  id += 9;
+  element = document.querySelector(`#patch_${id}`);
+  element.innerHTML = 'v<br/>Dn';
+  element.classList.add("controlButton");
 }
 
 function renderTools() {
