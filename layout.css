@@ -249,3 +249,7 @@ h2 {
   border-bottom: 2px solid rgba(0, 0, 0, .20);
   border-right: 2px solid rgba(0, 0, 0, .20);
 }
+
+.currentPos {
+  border: 1px solid yellow;
+}

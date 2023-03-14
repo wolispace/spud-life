@@ -4,6 +4,7 @@ let player = {
   phase: "field",
   sack: {},
   purse: 1000,
+  pos: 0,
   tools: {
     spade: {
       uses: 0,
@@ -19,7 +20,8 @@ let player = {
     machines: {}
   },
   hardware: hardwareStore(),
-  controls: { start: 60 }
+  controls: { start: 60 },
+
 };
 
 
@@ -427,6 +429,37 @@ function patchClick(patchElement) {
   if ([60, 70, 71, 80].indexOf(index) > -1) {
     // we are trying to move
     console.log(`trying to move ${index}`);
+    element = document.querySelector(`#patch_${player.pos}`);
+    element.classList.remove("currentPos");
+    let newPos = player.pos;
+    if (index == 60) {
+      newPos -= 10;
+      if (newPos < 0) {
+        newPos = player.pos;
+      }
+    }
+    if (index == 70) {
+      newPos -= 1;
+      if (newPos < 0) {
+        newPos = player.pos;
+      }
+    }
+    if (index == 71) {
+      newPos += 1;
+      if (newPos > 99) {
+        newPos = player.pos;
+      }
+    }
+    if (index == 80) {
+      newPos += 10;
+      if (newPos > 99) {
+        newPos = player.pos;
+      }
+    }
+    player.pos = newPos;
+    element = document.querySelector(`#patch_${player.pos}`);
+    element.classList.add("currentPos");
+
 
   } else {
     //We are digging
@@ -554,6 +587,10 @@ function renderControls() {
   element = document.querySelector(`#patch_${id}`);
   element.innerHTML = 'v<br/>Dn';
   element.classList.add("controlButton");
+
+  element = document.querySelector(`#patch_${player.pos}`);
+  element.classList.add("currentPos");
+
 }
 
 function renderTools() {
