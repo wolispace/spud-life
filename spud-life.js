@@ -398,10 +398,17 @@ function dayCycle() {
 function dream() {
   // random dreams based on ong titles eg:
   let dreams = [
-    "You dream of living in a park, but was rudly awoken by the dustmen",
-    "You dream you were a walrus",
+    "You dream of living in a park, but are rudly awoken by the dustmen",
+    "You dream you are a walrus",
     "You dream of holding onto nothing, to see how long nothing lasts",
     "You dream of spinning plates",
+    "You don't dream of anything but wake up back to life, back to reality",
+    "You dream you are a hero, just for one day",
+    "You dream a little dream of me",
+    "You dream the cake is a lie",
+    "You dream about the delivery man",
+    "You dream you are baba"
+
 
   ]
   let dream = dreams[rnd(dreams.length)];
