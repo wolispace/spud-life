@@ -492,85 +492,33 @@ function patchClick(patchElement) {
         }
       }
     }
-
-
     player.pos = newPos;
     element = document.querySelector(`#patch_${player.pos}`);
     element.classList.add("currentPos");
-
-
-  } else {
-    //We are digging
-    let patch = player.fields[player.currentField][player.pos];
-    let tool = player.tools['spade'];
-    // if nothing defined for a patch then its an empty spud
-    if (!patch) {
-      patch = { spud: { qty: 0 } };
-    }
-    patch.id = `patch_${player.pos}`;
-
-    if (patch.spud.qty > 0) {
-      // all spuds dug at once and moved to player sack
-      let sackQty = player.sack[patch.spud.name] || 0;
-      player.sack[patch.spud.name] = sackQty + patch.spud.qty;
-      // sput qty in negative meaning it takes this many days to return to a fresh patch
-      patch.spud.qty = -5;
-      tool.uses--;
-    } else if (patch.spud.qty == 0) {
-      patch.spud.qty = -5;
-      tool.uses--;
-      player.fields[player.currentField][player.pos] = patch;
-    }
-    renderTools();
-
-    if (patch) {
-      renderPatch(patch);
-    }
   }
+}
 
-
-  return;
-
-  let patch = player.fields[player.currentField][index];
+function digPatch() {
+  let patch = player.fields[player.currentField][player.pos];
+  let tool = player.tools['spade'];
   // if nothing defined for a patch then its an empty spud
   if (!patch) {
     patch = { spud: { qty: 0 } };
   }
+  patch.id = `patch_${player.pos}`;
 
-  let tool = selectTool(patch);
-
-  // dont continue if tool used up or no tool bought yet..
-  if (!tool || tool.uses <= 0) {
-    renderTools();
-    return;
-  }
-
-  // remember the elements id so we can render the patch later
-  patch.id = id;
-  if (patch.block) {
-    // if the patch is blocked.. the click reduces until zzero and the block is removed
-    if (patch.block.qty > 1) {
-      patch.block.qty--;
-    } else {
-      delete patch.block;
-    }
+  if (patch.spud.qty > 0) {
+    // all spuds dug at once and moved to player sack
+    let sackQty = player.sack[patch.spud.name] || 0;
+    player.sack[patch.spud.name] = sackQty + patch.spud.qty;
+    // sput qty in negative meaning it takes this many days to return to a fresh patch
+    patch.spud.qty = -5;
     tool.uses--;
-  } else if (patch.spud) {
-    // if no block we check for spuds
-    if (patch.spud.qty > 0) {
-      // all spuds dug at once and moved to player sack
-      let sackQty = player.sack[patch.spud.name] || 0;
-      player.sack[patch.spud.name] = sackQty + patch.spud.qty;
-      // sput qty in negative meaning it takes this many days to return to a fresh patch
-      patch.spud.qty = -5;
-      tool.uses--;
-    } else if (patch.spud.qty == 0) {
-      patch.spud.qty = -5;
-      tool.uses--;
-      player.fields[player.currentField][index] = patch;
-    }
+  } else if (patch.spud.qty == 0) {
+    patch.spud.qty = -5;
+    tool.uses--;
+    player.fields[player.currentField][player.pos] = patch;
   }
-
   renderTools();
 
   if (patch) {
@@ -638,18 +586,22 @@ function renderControls() {
   element = document.querySelector(`#patch_${id}`);
   element.innerHTML = '^<br/>Up';
   element.classList.add("controlButton");
+  element.classList.remove('patch');
   id += 10;
   element = document.querySelector(`#patch_${id}`);
   element.innerHTML = '&lt;<br/>Lt';
   element.classList.add("controlButton");
+  element.classList.remove('patch');
   id += 1;
   element = document.querySelector(`#patch_${id}`);
   element.innerHTML = '&gt;<br/>Rt';
   element.classList.add("controlButton");
+  element.classList.remove('patch');
   id += 9;
   element = document.querySelector(`#patch_${id}`);
   element.innerHTML = 'v<br/>Dn';
   element.classList.add("controlButton");
+  element.classList.remove('patch');
 
   element = document.querySelector(`#patch_${player.pos}`);
   element.classList.add("currentPos");
@@ -659,7 +611,7 @@ function renderControls() {
 function renderTools() {
   let tools = '';
   Object.entries(player.tools).forEach(([toolName, tool]) => {
-    tools += `<div>${toolName}=${tool.uses}</div>`;
+    tools += `<div onclick="digPatch()">${toolName}=${tool.uses}</div>`;
   });
   tools += `<div>Purse=${player.purse}</div>`;
   tools += `<div onclick="dayCycle()">Next &gt;</div>`;
@@ -727,6 +679,17 @@ function resetTools() {
   Object.entries(player.tools).forEach(([toolName, tool]) => {
     tool.uses = tool.maxUses;
   });
+  resetPlayer();
+}
+
+// player starts abck at the entrace of the field
+function resetPlayer() {
+  element = document.querySelector(`#patch_${player.pos}`);
+  element.classList.remove("currentPos");
+  player.pos = 0;
+  element = document.querySelector(`#patch_${player.pos}`);
+  element.classList.add("currentPos");
+
 }
 
 // page loaded - so init things

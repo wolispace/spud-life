@@ -50,10 +50,6 @@ h2 {
   border-radius: 0.2em;
 }
 
-.patch:hover {
-  opacity: 50%;
-}
-
 .patch.svg {
   width: 100%;
   height: auto;
@@ -246,11 +242,17 @@ h2 {
   background-color: rgba(55, 53, 82);
   border-top: 2px solid white;
   border-left: 2px solid white;
-  border-bottom: 2px solid rgba(0, 0, 0, .20);
-  border-right: 2px solid rgba(0, 0, 0, .20);
+  border-bottom: 2px solid rgba(0, 0, 0, .50);
+  border-right: 2px solid rgba(0, 0, 0, .5);
+  color: white;
+  border-radius: 5px;
+}
+
+.controlButton:hover {
+  background-color: rgba(81, 78, 116);
 }
 
 .currentPos {
-  background-color: rgba(0, 0, 0, .1);
+  background-color: rgba(221, 200, 131);
 
 }
