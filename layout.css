@@ -94,13 +94,17 @@ h2 {
   color: white;
   font-weight: bold;
   display: flex;
+  gap: 2px;
 }
 
 .tools div {
-  border: 1px solid white;
   padding: var(--sl-padding);
   border-radius: 5px;
   background-color: rgba(255, 255, 255, 0.1);
+  border-top: 2px solid white;
+  border-left: 2px solid white;
+  border-bottom: 2px solid rgba(0, 0, 0, .50);
+  border-right: 2px solid rgba(0, 0, 0, .5);
   cursor: pointer;
 }
 
