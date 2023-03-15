@@ -456,9 +456,45 @@ function patchClick(patchElement) {
         newPos = player.pos;
       }
     }
+
     if ([60, 70, 71, 80].indexOf(newPos) > -1) {
       newPos = player.pos;
     }
+
+    if (newPos !== player.pos) {
+      let patch = player.fields[player.currentField][newPos];
+      if (patch && patch.block) {
+        let tool = '';
+        if (patch.block.type == 'rock') {
+          tool = 'pick';
+        } else {
+          tool = 'axe';
+        }
+        let playerTool = player.tools[tool];
+        if (playerTool) {
+          // if the patch is blocked.. the click reduces until zzero and the block is removed
+          if (patch.block.qty > 1) {
+            patch.block.qty--;
+          } else {
+            delete patch.block;
+          }
+          playerTool.uses--;
+          console.log('blocked by ', patch.block, playerTool);
+          renderTools();
+
+          if (patch) {
+            renderPatch(patch);
+          }
+          if (patch.block) {
+            newPos = player.pos;
+          }
+        } else {
+          newPos = player.pos;
+        }
+      }
+    }
+
+
     player.pos = newPos;
     element = document.querySelector(`#patch_${player.pos}`);
     element.classList.add("currentPos");
@@ -468,6 +504,8 @@ function patchClick(patchElement) {
     //We are digging
     console.log(`digging ${index}`);
   }
+
+
   return;
 
   let patch = player.fields[player.currentField][index];
