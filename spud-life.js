@@ -428,10 +428,10 @@ function patchClick(patchElement) {
   let index = parseInt(bits[1]);
   if ([60, 70, 71, 80].indexOf(index) > -1) {
     // we are trying to move
-    console.log(`trying to move ${index}`);
     element = document.querySelector(`#patch_${player.pos}`);
     element.classList.remove("currentPos");
     let newPos = player.pos;
+
     if (index == 60) {
       newPos -= 10;
       if (newPos < 0) {
@@ -471,15 +471,14 @@ function patchClick(patchElement) {
           tool = 'axe';
         }
         let playerTool = player.tools[tool];
-        if (playerTool) {
-          // if the patch is blocked.. the click reduces until zzero and the block is removed
+        if (playerTool && playerTool.uses > 0) {
+          // if the patch is blocked.. the click reduces until zero and the block is removed
           if (patch.block.qty > 1) {
             patch.block.qty--;
           } else {
             delete patch.block;
           }
           playerTool.uses--;
-          console.log('blocked by ', patch.block, playerTool);
           renderTools();
 
           if (patch) {
@@ -502,7 +501,31 @@ function patchClick(patchElement) {
 
   } else {
     //We are digging
-    console.log(`digging ${index}`);
+    let patch = player.fields[player.currentField][player.pos];
+    let tool = player.tools['spade'];
+    // if nothing defined for a patch then its an empty spud
+    if (!patch) {
+      patch = { spud: { qty: 0 } };
+    }
+    patch.id = `patch_${player.pos}`;
+
+    if (patch.spud.qty > 0) {
+      // all spuds dug at once and moved to player sack
+      let sackQty = player.sack[patch.spud.name] || 0;
+      player.sack[patch.spud.name] = sackQty + patch.spud.qty;
+      // sput qty in negative meaning it takes this many days to return to a fresh patch
+      patch.spud.qty = -5;
+      tool.uses--;
+    } else if (patch.spud.qty == 0) {
+      patch.spud.qty = -5;
+      tool.uses--;
+      player.fields[player.currentField][player.pos] = patch;
+    }
+    renderTools();
+
+    if (patch) {
+      renderPatch(patch);
+    }
   }
 
 
@@ -612,7 +635,6 @@ function drawField() {
 // allocate 4 patches to be movement buttons - they cant be dug
 function renderControls() {
   let id = player.controls.start;
-  console.log(id);
   element = document.querySelector(`#patch_${id}`);
   element.innerHTML = '^<br/>Up';
   element.classList.add("controlButton");
