@@ -5,7 +5,7 @@ let player = {
   sack: {},
   purse: 1000,
   pos: 0,
-  spudRegen: -2,
+  spudRegen: -5,
   sowSeeds: 0,
   tools: {
     spade: {
@@ -443,14 +443,14 @@ function resowField() {
       let patch = {};
       switch (rnd(3)) {
         case 0:
-          patch.block = { "type": "rock", "qty": rnd(55) + 1 };
+          patch.block = { "type": "rock", "qty": rnd(5) + 1 };
           break;
         case 1:
-          patch.block = { "type": "log", "qty": rnd(55) + 1 };
+          patch.block = { "type": "log", "qty": rnd(5) + 1 };
           break;
       }
       let newSpud = player.spuds[rnd(player.spuds.length)];
-      patch.spud = { "name": newSpud.name, "qty": rnd(33) + 1 };
+      patch.spud = { "name": newSpud.name, "qty": rnd(3) + 1 };
       player.fields[player.currentField][index] = patch;
     };
 
