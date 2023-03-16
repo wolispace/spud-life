@@ -5,7 +5,7 @@ let player = {
   sack: {},
   purse: 1000,
   pos: 0,
-  spudRegen: -5,
+  spudRegen: -2,
   sowSeeds: 0,
   tools: {
     spade: {
@@ -542,7 +542,7 @@ function digPatch() {
   let patch = player.fields[player.currentField][player.pos];
   let tool = player.tools['spade'];
   // if nothing defined for a patch then its an empty spud
-  if (!patch) {
+  if (!patch || !patch.spud) {
     patch = { spud: { qty: 0 } };
   }
   patch.id = `patch_${player.pos}`;
