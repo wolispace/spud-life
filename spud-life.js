@@ -584,22 +584,22 @@ function drawField() {
 function renderControls() {
   let id = player.controls.start;
   element = document.querySelector(`#patch_${id}`);
-  element.innerHTML = '^<br/>Up';
+  element.innerHTML = images["controlIcon--up"];
   element.classList.add("controlButton");
   element.classList.remove('patch');
   id += 10;
   element = document.querySelector(`#patch_${id}`);
-  element.innerHTML = '&lt;<br/>Lt';
+  element.innerHTML = images["controlIcon--left"];;
   element.classList.add("controlButton");
   element.classList.remove('patch');
   id += 1;
   element = document.querySelector(`#patch_${id}`);
-  element.innerHTML = '&gt;<br/>Rt';
+  element.innerHTML = images["controlIcon--right"];
   element.classList.add("controlButton");
   element.classList.remove('patch');
   id += 9;
   element = document.querySelector(`#patch_${id}`);
-  element.innerHTML = 'v<br/>Dn';
+  element.innerHTML = images["controlIcon--down"];
   element.classList.add("controlButton");
   element.classList.remove('patch');
 

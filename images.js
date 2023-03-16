@@ -1,6 +1,22 @@
 // all the svg images
 const images = {
-  "hole": `<svg
+   "controlIcon--up": `
+   <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+     <path class="controlIcon" d="M 20,80 50,20 80,80" />
+   </svg>`,
+   "controlIcon--right": `
+   <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+     <path class="controlIcon" d="M 20,20 80,50 20,80" />
+   </svg>`,
+   "controlIcon--down": `
+   <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+     <path class="controlIcon" d="M 20,20 50,80 80,20" />
+   </svg>`,
+   "controlIcon--left": `
+   <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+     <path class="controlIcon" d="M 80,20 20,50 80,80" />
+   </svg>`,
+   "hole": `<svg
    viewBox="0 0 100 100"
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns="http://www.w3.org/2000/svg"
@@ -58,7 +74,7 @@ const images = {
 </svg>
 
 `,
-  "spud_001": `<svg
+   "spud_001": `<svg
 viewBox="0 0 150 150"
 xmlns:xlink="http://www.w3.org/1999/xlink"
 xmlns="http://www.w3.org/2000/svg>

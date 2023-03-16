@@ -260,3 +260,11 @@ h2 {
   background-color: rgba(221, 200, 131);
 
 }
+
+.controlIcon {
+  stroke: dodgerblue;
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
