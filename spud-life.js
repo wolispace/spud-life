@@ -5,6 +5,8 @@ let player = {
   sack: {},
   purse: 1000,
   pos: 0,
+  spudRegen: -2,
+  sowSeeds: 0,
   tools: {
     spade: {
       uses: 0,
@@ -361,6 +363,7 @@ function showPatches() {
       }
       if (patch.spud.qty == 0) {
         delete patch.spud;
+        player.sowSeeds++;
       }
     }
     renderPatch(patch);
@@ -413,12 +416,49 @@ function dream() {
     "You dream the cake is a lie",
     "You dream about the delivery man",
     "You dream you are baba"
-
-
   ]
   let dream = dreams[rnd(dreams.length)];
+  let sow = resowField();
+
   element = document.querySelector('.night');
-  element.innerHTML = `<div>${dream}</div>`;
+  element.innerHTML = `<div>${dream}</div>${sow}`;
+}
+
+function resowField() {
+  let sowMsg = '';
+  if (player.sowSeeds > 0) {
+    sowMsg = '<div>You find some seed potaoes at the bottom of your sack and scatter them randomly in the field</div>';
+    let blankPatches = [];
+    let i = 10;
+    while (i < 100) {
+      if (!player.fields[player.currentField][i]) {
+        // sow seed and set i to 99
+        blankPatches.push(i);
+      }
+      i++;
+    }
+    while (player.sowSeeds-- >= 0) {
+
+      let index = blankPatches[rnd(blankPatches.length)];
+      let patch = {};
+      switch (rnd(3)) {
+        case 0:
+          patch.block = { "type": "rock", "qty": rnd(55) + 1 };
+          break;
+        case 1:
+          patch.block = { "type": "log", "qty": rnd(55) + 1 };
+          break;
+      }
+      let newSpud = player.spuds[rnd(player.spuds.length)];
+      patch.spud = { "name": newSpud.name, "qty": rnd(33) + 1 };
+      player.fields[player.currentField][index] = patch;
+    };
+
+
+
+  }
+
+  return sowMsg;
 }
 
 // look through the field drawing what we can see
@@ -512,10 +552,10 @@ function digPatch() {
     let sackQty = player.sack[patch.spud.name] || 0;
     player.sack[patch.spud.name] = sackQty + patch.spud.qty;
     // sput qty in negative meaning it takes this many days to return to a fresh patch
-    patch.spud.qty = -5;
+    patch.spud.qty = player.spudRegen;
     tool.uses--;
   } else if (patch.spud.qty == 0) {
-    patch.spud.qty = -5;
+    patch.spud.qty = player.spudRegen;
     tool.uses--;
     player.fields[player.currentField][player.pos] = patch;
   }
@@ -556,6 +596,9 @@ function renderPatch(patch) {
       }
     }
   }
+  if (newPatch == ' ') {
+    newPatch = images.blank;
+  }
   if (newPatch) {
     element = document.querySelector(`#${patch.id}`);
     element.innerHTML = newPatch;
@@ -573,7 +616,7 @@ function drawField() {
   let index = 0;
   let patches = '';
   while (index <= maxPatches) {
-    patches += `<div class="patch" id="patch_${index}" onclick="patchClick(this)"></div>`;
+    patches += `<div class="patch" id="patch_${index}" onclick="patchClick(this)">${images.blank}</div>`;
     index++;
   }
   element = document.querySelector('.field');

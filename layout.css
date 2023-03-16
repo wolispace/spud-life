@@ -1,5 +1,6 @@
 :root {
   --sl-padding: 0.25em;
+  --sl-brown: rgb(58, 33, 21);
 }
 
 html {
@@ -82,6 +83,10 @@ h2 {
 .night {
   background-color: navy;
   display: none;
+}
+
+.night>div {
+  padding: 2em;
 }
 
 .tools {
@@ -267,4 +272,13 @@ h2 {
   stroke-linecap: round;
   stroke-linejoin: round;
   fill: none;
+}
+
+.patchMud {
+  stroke: var(--sl-brown);
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: var(--sl-brown);
+  opacity: .8;
 }
