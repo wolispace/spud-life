@@ -1,11 +1,9 @@
-
-
 let player = {
   phase: "field",
   sack: {},
   purse: 1000,
   pos: 0,
-  spudRegen: -2,
+  spudRegen: -5,
   sowSeeds: 0,
   tools: {
     spade: {
@@ -23,10 +21,7 @@ let player = {
   },
   hardware: hardwareStore(),
   controls: { start: 60 },
-
 };
-
-
 
 function sellSpuds() {
   let totalMeals = 0;
@@ -367,8 +362,8 @@ function showPatches() {
       }
     }
     renderPatch(patch);
-    renderControls();
   });
+  renderControls();
 }
 
 function dayCycle() {
@@ -585,18 +580,18 @@ function renderPatch(patch) {
   let newPatch = ' ';
   if (patch) {
     if (patch.block) {
-      newPatch = images[patch.block.type];
+      newPatch = svgImg(patch.block.type);
     }
     if (patch.spud) {
       if (patch.spud.qty > 0) {
         newPatch += ''; // `<br/>S=${patch.spud.qty}`
       } else {
-        newPatch = images.hole;
+        newPatch = svgImg('hole');
       }
     }
   }
   if (newPatch == ' ') {
-    newPatch = images.blank;
+    newPatch = svgImg('blank');
   }
   if (newPatch) {
     element = document.querySelector(`#${patch.id}`);
@@ -615,7 +610,7 @@ function drawField() {
   let index = 0;
   let patches = '';
   while (index <= maxPatches) {
-    patches += `<div class="patch" id="patch_${index}">${images.blank}</div>`;
+    patches += `<div class="patch" id="patch_${index}">${svgImg('blank')}</div>`;
     index++;
   }
   element = document.querySelector('.field');
@@ -636,7 +631,7 @@ function renderControls() {
 
 function renderControl(id, dir) {
   element = document.querySelector(`#patch_${id}`);
-  element.innerHTML = svgImg(`control-icon--${dir}`, "control-icon", 0);
+  element.innerHTML = svgImg(`control-icon--${dir}`, "control-icon", 1);
   element.classList.add("controlButton");
   element.classList.remove('patch');
   element.setAttribute("onclick", `patchClick(${id});`);

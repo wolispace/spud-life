@@ -280,7 +280,7 @@ h2 {
   fill: none;
 }
 
-.patch-mud {
+.hole {
   stroke: var(--sl-mud);
   stroke-width: 10;
   stroke-linecap: round;
@@ -289,7 +289,7 @@ h2 {
   opacity: .8;
 }
 
-.patch-rock {
+.rock {
   stroke: var(--sl-rock);
   stroke-width: 10;
   stroke-linecap: round;
@@ -298,7 +298,7 @@ h2 {
   opacity: 1;
 }
 
-.patch-rock-hi {
+.rock-hi {
   stroke: var(--sl-rock-hi);
   stroke-width: 10;
   stroke-linecap: round;
@@ -307,7 +307,7 @@ h2 {
   opacity: 1;
 }
 
-.patch-log {
+.log {
   stroke: var(--sl-log);
   stroke-width: 10;
   stroke-linecap: round;
@@ -316,7 +316,7 @@ h2 {
   opacity: 1;
 }
 
-.patch-log-hi {
+.log-hi {
   stroke: var(--sl-log-hi);
   stroke-width: 10;
   stroke-linecap: round;

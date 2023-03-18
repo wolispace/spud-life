@@ -2,18 +2,18 @@ function rnd(max) {
   return Math.floor(Math.random() * max);
 }
 
-function svgImg(svgName, svgClass = '', repeat = 0) {
+function svgImg(svgName, svgClass = '', repeat = 1) {
   let paths = ''
   let svgHtml = '';
   svgClass = svgClass != '' ? svgClass : svgName;
   let svgInfo = svgImags[svgName];
-  console.log(svgInfo);
-  if (svgInfo && svgInfo.length > 0) {
+  if (svgInfo) {
     while (repeat > 0) {
       svgInfo.paths.forEach((path) => {
         svgClass = path.c ? `${svgClass}-${path.c}` : svgClass;
-        paths += `<p class="${svgClass}" d="${path.d}" />`;
+        paths += `<path class="${svgClass}" d="${path.d}" />`;
       });
+      repeat--;
     }
 
     svgHtml = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
@@ -22,9 +22,8 @@ function svgImg(svgName, svgClass = '', repeat = 0) {
   } else {
     svgHtml = images[svgName];
   }
-  console.log(svgHtml);
-  return svgHtml;
 
+  return svgHtml;
 }
 
 function html(selector, text) {
