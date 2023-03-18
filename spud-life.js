@@ -634,9 +634,9 @@ function renderControls() {
   renderControl(id, 'down');
 }
 
-function renderControl(id, direction) {
+function renderControl(id, dir) {
   element = document.querySelector(`#patch_${id}`);
-  element.innerHTML = images[`control-icon--${direction}`];
+  element.innerHTML = svgImg(`control-icon--${dir}`, "control-icon", 0);
   element.classList.add("controlButton");
   element.classList.remove('patch');
   element.setAttribute("onclick", `patchClick(${id});`);

@@ -1,4 +1,11 @@
 // all the svg images
+
+const svgImags = {
+  "control-icon--up": {
+    "paths": [{ "c": "", "d": "m 20,80 30,-60 30,60" }]
+  },
+
+}
 const images = {
   "blank": `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
    </svg>`,
