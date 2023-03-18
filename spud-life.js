@@ -636,7 +636,7 @@ function renderControls() {
 
 function renderControl(id, direction) {
   element = document.querySelector(`#patch_${id}`);
-  element.innerHTML = images[`controlIcon--${direction}`];
+  element.innerHTML = images[`control-icon--${direction}`];
   element.classList.add("controlButton");
   element.classList.remove('patch');
   element.setAttribute("onclick", `patchClick(${id});`);
@@ -647,10 +647,20 @@ function renderTools() {
   Object.entries(player.tools).forEach(([toolName, tool]) => {
     tools += `<div onclick="digPatch()">${toolName}=${tool.uses}</div>`;
   });
-  tools += `<div>Purse=${player.purse}</div>`;
+  tools += `<div>Purse=${player.purse}`;
+  tools += `<br/>Sack=${countSpuds()}</div>`;
   tools += `<div onclick="dayCycle()">Next &gt;</div>`;
   element = document.querySelector('.tools');
   element.innerHTML = tools;
+}
+
+function countSpuds() {
+  let spuds = 0;
+  Object.entries(player.sack).forEach(([spudName, spudQty]) => {
+    spuds += spudQty;
+  });
+
+  return spuds;
 }
 
 function renderHardware() {

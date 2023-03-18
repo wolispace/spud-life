@@ -2,21 +2,21 @@
 const images = {
   "blank": `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
    </svg>`,
-  "controlIcon--up": `
+  "control-icon--up": `
    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-     <path class="controlIcon" d="m 20,80 30,-60 30,60" />
+     <path class="control-icon" d="m 20,80 30,-60 30,60" />
    </svg>`,
-  "controlIcon--right": `
+  "control-icon--right": `
    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-     <path class="controlIcon" d="m 20,20 60,30 -60,30" />
+     <path class="control-icon" d="m 20,20 60,30 -60,30" />
    </svg>`,
-  "controlIcon--down": `
+  "control-icon--down": `
    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-     <path class="controlIcon"d="m 20,20 30,60 30,-60" />
+     <path class="control-icon"d="m 20,20 30,60 30,-60" />
    </svg>`,
-  "controlIcon--left": `
+  "control-icon--left": `
    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-     <path class="controlIcon" d="m 80,20 -60,30 60,30" />
+     <path class="control-icon" d="m 80,20 -60,30 60,30" />
    </svg>`,
   "hole": `  
    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
