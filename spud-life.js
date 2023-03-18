@@ -399,6 +399,7 @@ function dayCycle() {
     showPatches();
     resetTools();
     renderTools();
+    resetPlayer();
 
   }
 }
@@ -462,10 +463,8 @@ function resowField() {
 }
 
 // look through the field drawing what we can see
-function patchClick(patchElement) {
-  let id = patchElement.getAttribute('id');
-  let bits = id.split('_');
-  let index = parseInt(bits[1]);
+function patchClick(index) {
+
   if ([60, 70, 71, 80].indexOf(index) > -1) {
     // we are trying to move
     element = document.querySelector(`#patch_${player.pos}`);
@@ -541,28 +540,30 @@ function patchClick(patchElement) {
 function digPatch() {
   let patch = player.fields[player.currentField][player.pos];
   let tool = player.tools['spade'];
-  // if nothing defined for a patch then its an empty spud
-  if (!patch || !patch.spud) {
-    patch = { spud: { qty: 0 } };
-  }
-  patch.id = `patch_${player.pos}`;
+  if (tool.uses > 0) {
+    // if nothing defined for a patch then its an empty spud
+    if (!patch || !patch.spud) {
+      patch = { spud: { qty: 0 } };
+    }
+    patch.id = `patch_${player.pos}`;
 
-  if (patch.spud.qty > 0) {
-    // all spuds dug at once and moved to player sack
-    let sackQty = player.sack[patch.spud.name] || 0;
-    player.sack[patch.spud.name] = sackQty + patch.spud.qty;
-    // sput qty in negative meaning it takes this many days to return to a fresh patch
-    patch.spud.qty = player.spudRegen;
-    tool.uses--;
-  } else if (patch.spud.qty == 0) {
-    patch.spud.qty = player.spudRegen;
-    tool.uses--;
-    player.fields[player.currentField][player.pos] = patch;
-  }
-  renderTools();
+    if (patch.spud.qty > 0) {
+      // all spuds dug at once and moved to player sack
+      let sackQty = player.sack[patch.spud.name] || 0;
+      player.sack[patch.spud.name] = sackQty + patch.spud.qty;
+      // sput qty in negative meaning it takes this many days to return to a fresh patch
+      patch.spud.qty = player.spudRegen;
+      tool.uses--;
+    } else if (patch.spud.qty == 0) {
+      patch.spud.qty = player.spudRegen;
+      tool.uses--;
+      player.fields[player.currentField][player.pos] = patch;
+    }
+    renderTools();
 
-  if (patch) {
-    renderPatch(patch);
+    if (patch) {
+      renderPatch(patch);
+    }
   }
 }
 
@@ -616,7 +617,7 @@ function drawField() {
   let index = 0;
   let patches = '';
   while (index <= maxPatches) {
-    patches += `<div class="patch" id="patch_${index}" onclick="patchClick(this)">${images.blank}</div>`;
+    patches += `<div class="patch" id="patch_${index}">${images.blank}</div>`;
     index++;
   }
   element = document.querySelector('.field');
@@ -626,29 +627,21 @@ function drawField() {
 // allocate 4 patches to be movement buttons - they cant be dug
 function renderControls() {
   let id = player.controls.start;
-  element = document.querySelector(`#patch_${id}`);
-  element.innerHTML = images["controlIcon--up"];
-  element.classList.add("controlButton");
-  element.classList.remove('patch');
+  renderControl(id, 'up');
   id += 10;
-  element = document.querySelector(`#patch_${id}`);
-  element.innerHTML = images["controlIcon--left"];;
-  element.classList.add("controlButton");
-  element.classList.remove('patch');
+  renderControl(id, 'left');
   id += 1;
-  element = document.querySelector(`#patch_${id}`);
-  element.innerHTML = images["controlIcon--right"];
-  element.classList.add("controlButton");
-  element.classList.remove('patch');
+  renderControl(id, 'right');
   id += 9;
+  renderControl(id, 'down');
+}
+
+function renderControl(id, direction) {
   element = document.querySelector(`#patch_${id}`);
-  element.innerHTML = images["controlIcon--down"];
+  element.innerHTML = images[`controlIcon--${direction}`];
   element.classList.add("controlButton");
   element.classList.remove('patch');
-
-  element = document.querySelector(`#patch_${player.pos}`);
-  element.classList.add("currentPos");
-
+  element.setAttribute("onclick", `patchClick(${id});`);
 }
 
 function renderTools() {
@@ -746,4 +739,26 @@ document.addEventListener("DOMContentLoaded", function () {
   // gift the first machine
   let starter = 'chipper';
   player.shop.machines[starter] = player.hardware[starter].initial;
+});
+
+document.addEventListener("keydown", (event) => {
+
+  if (event.code == 'ArrowUp') {
+    patchClick(player.controls.start)
+  }
+  if (event.code == 'ArrowLeft') {
+    patchClick(player.controls.start + 10)
+  }
+  if (event.code == 'ArrowRight') {
+    patchClick(player.controls.start + 10 + 1)
+  }
+  if (event.code == 'ArrowDown') {
+    patchClick(player.controls.start + 10 + 10)
+  }
+  if (event.code == 'Space') {
+    digPatch();
+  }
+  if (event.code == 'Enter') {
+    dayCycle();
+  }
 });
