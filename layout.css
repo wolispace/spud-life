@@ -1,6 +1,10 @@
 :root {
   --sl-padding: 0.25em;
-  --sl-brown: rgb(58, 33, 21);
+  --sl-mud: rgb(58, 33, 21);
+  --sl-rock: darkslategrey;
+  --sl-rock-hi: slategrey;
+  --sl-log: rgb(58, 33, 21);
+  --sl-log-hi: wheat;
 }
 
 html {
@@ -276,11 +280,47 @@ h2 {
   fill: none;
 }
 
-.patchMud {
-  stroke: var(--sl-brown);
+.patch-mud {
+  stroke: var(--sl-mud);
   stroke-width: 10;
   stroke-linecap: round;
   stroke-linejoin: round;
   fill: var(--sl-brown);
   opacity: .8;
+}
+
+.patch-rock {
+  stroke: var(--sl-rock);
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: var(--sl-rock);
+  opacity: 1;
+}
+
+.patch-rock-hi {
+  stroke: var(--sl-rock-hi);
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: var(--sl-rock-hi);
+  opacity: 1;
+}
+
+.patch-log {
+  stroke: var(--sl-log);
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: var(--sl-log);
+  opacity: 1;
+}
+
+.patch-log-hi {
+  stroke: var(--sl-log-hi);
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: var(--sl-log-hi);
+  opacity: 1;
 }

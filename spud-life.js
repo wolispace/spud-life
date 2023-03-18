@@ -585,13 +585,11 @@ function renderPatch(patch) {
   let newPatch = ' ';
   if (patch) {
     if (patch.block) {
-      let type =
-        patch.block.type.substr(0, 1);
-      newPatch = `${type}=${patch.block.qty}`;
+      newPatch = images[patch.block.type];
     }
     if (patch.spud) {
       if (patch.spud.qty > 0) {
-        newPatch += `<br/>S=${patch.spud.qty}`
+        newPatch += ''; // `<br/>S=${patch.spud.qty}`
       } else {
         newPatch = images.hole;
       }

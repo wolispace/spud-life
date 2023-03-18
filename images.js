@@ -1,28 +1,41 @@
 // all the svg images
 const images = {
-   "blank": `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  "blank": `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
    </svg>`,
-   "controlIcon--up": `
+  "controlIcon--up": `
    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-     <path class="controlIcon" d="M 20,80 50,20 80,80" />
+     <path class="controlIcon" d="m 20,80 30,-60 30,60" />
    </svg>`,
-   "controlIcon--right": `
+  "controlIcon--right": `
    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-     <path class="controlIcon" d="M 20,20 80,50 20,80" />
+     <path class="controlIcon" d="m 20,20 60,30 -60,30" />
    </svg>`,
-   "controlIcon--down": `
+  "controlIcon--down": `
    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-     <path class="controlIcon" d="M 20,20 50,80 80,20" />
+     <path class="controlIcon"d="m 20,20 30,60 30,-60" />
    </svg>`,
-   "controlIcon--left": `
+  "controlIcon--left": `
    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-     <path class="controlIcon" d="M 80,20 20,50 80,80" />
+     <path class="controlIcon" d="m 80,20 -60,30 60,30" />
    </svg>`,
-   "hole": `  
+  "hole": `  
    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-     <path class="patchMud" d="M 10,50 30,20 50,20 80,40 90,60 80,90 60,85 45,96 20,80 z" />
+     <path class="patch-mud" d="M 10,50 30,20 50,20 80,40 90,60 80,90 60,85 45,96 20,80 z" />
    </svg>`,
-   "spud_001": `<svg
+  "rock": `
+   <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+     <path class="patch-rock" d="m 20,30 10,-10 10,0 10,20 0,10 -10,10 -10,0 -10,-10 z " />
+     <path class="patch-rock-hi" d="m 20,35 -5,5 0,20 5,5 5,-5 0,-20  z " />
+   </svg>
+   `,
+  "log": `
+   <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+     <path class="patch-log" d="m 20,30 -10,10 0,20 10,10 60,0 10,-10 0,-20 -10,-10 z " />
+     <path class="patch-log-hi" d="m 20,35 -5,5 0,20 5,5 5,-5 0,-20  z " />
+   </svg>
+   `,
+
+  "spud_001": `<svg
 viewBox="0 0 150 150"
 xmlns:xlink="http://www.w3.org/1999/xlink"
 xmlns="http://www.w3.org/2000/svg>
