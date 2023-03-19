@@ -322,3 +322,7 @@ h2 {
   fill: var(--sl-log-hi);
   opacity: 1;
 }
+
+.hidden {
+  display: none;
+}

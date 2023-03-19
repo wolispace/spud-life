@@ -10,8 +10,16 @@ let player = {
       uses: 0,
       maxUses: 5,
     },
-
+    "pick": {
+      "uses": 0,
+      "maxUses": 5
+    },
+    "axe": {
+      "uses": 0,
+      "maxUses": 5
+    }
   },
+
   spuds: [],
   currentField: 0,
   fields: [],
@@ -459,7 +467,6 @@ function resowField() {
 
 // look through the field drawing what we can see
 function patchClick(index) {
-
   if ([60, 70, 71, 80].indexOf(index) > -1) {
     // we are trying to move
     element = document.querySelector(`#patch_${player.pos}`);
@@ -511,12 +518,14 @@ function patchClick(index) {
             patch.block.qty--;
           } else {
             delete patch.block;
+            element = document.querySelector(`#${patch.id}`);
+            element.innerHTML = svgImg('blank');
           }
           playerTool.uses--;
           renderTools();
 
           if (patch) {
-            renderPatch(patch);
+            updatePatch(patch);
           }
           if (patch.block) {
             newPos = player.pos;
@@ -573,6 +582,26 @@ function selectTool(patch) {
     }
   }
   return player.tools[tool];
+}
+
+function updatePatch(patch) {
+  if (patch) {
+    if (patch.block) {
+      let existing = document.querySelectorAll(`#${patch.id} svg g`);
+      if (existing) {
+        let doneOne = false;
+        let index = existing.length - 1;
+        while (index >= 0) {
+          let group = existing[index];
+          if (!doneOne && !group.classList.contains('hidden')) {
+            group.classList.add('hidden');
+            doneOne = true;
+          }
+          index--;
+        }
+      }
+    }
+  }
 }
 
 // based on patch contents decide what to show
