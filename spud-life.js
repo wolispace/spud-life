@@ -580,7 +580,7 @@ function renderPatch(patch) {
   let newPatch = ' ';
   if (patch) {
     if (patch.block) {
-      newPatch = svgImg(patch.block.type);
+      newPatch = svgImg(patch.block.type, '', patch.block.qty);
     }
     if (patch.spud) {
       if (patch.spud.qty > 0) {
