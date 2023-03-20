@@ -6,7 +6,9 @@ function svgImg(svgName, svgClass = '', repeat = 1) {
   let svgHtml = '';
   let svgInfo = svgImags[svgName];
   let isSingle = repeat == 1;
-  let scale = 15;
+  let ts = 10;
+  let ss = 10;
+  let rs = 45;
   if (svgInfo) {
 
     let paths = '';
@@ -19,11 +21,11 @@ function svgImg(svgName, svgClass = '', repeat = 1) {
       let rotate = 0;
       if (!isSingle) {
 
-        tx += rnd(scale) - (scale / 2);
-        ty += rnd(scale) - (scale / 2);
-        sx += (rnd(scale) - (scale / 2)) / 100;
-        sy += (rnd(scale) - (scale / 2)) / 100;
-        rotate = rnd(scale * 2) - (scale * 2 / 2);
+        tx += rnd(ts) - (ts / 2);
+        ty += rnd(ts) - (ts / 2);
+        sx += (rnd(ss) - (ss / 2)) / 100;
+        sy += (rnd(ss) - (ss / 2)) / 100;
+        rotate = rnd(rs) - (rs / 2);
       }
       paths += `<g transform="
        translate(${tx},${ty}) 

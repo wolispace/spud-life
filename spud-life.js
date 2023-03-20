@@ -399,11 +399,9 @@ function dayCycle() {
     }
   } else {
     // re-display the fields patches in their current state
-    showPatches();
     resetTools();
     renderTools();
     resetPlayer();
-
   }
 }
 
@@ -615,7 +613,7 @@ function renderPatch(patch) {
       if (patch.spud.qty > 0) {
         newPatch += ''; // `<br/>S=${patch.spud.qty}`
       } else {
-        newPatch = svgImg('hole');
+        newPatch = svgImg('hole', '', 5);
       }
     }
   }
@@ -625,6 +623,7 @@ function renderPatch(patch) {
   if (newPatch) {
     element = document.querySelector(`#${patch.id}`);
     element.innerHTML = newPatch;
+
     // if we drew a hole, make sure its opacity matches the spud qty -5 = 100%, 0 = 0%
     if (patch.spud && patch.spud.qty < 0) {
       let opacity = 0 - patch.spud.qty * 20 / 100;
@@ -672,7 +671,7 @@ function renderTools() {
     tools += `<div onclick="digPatch()">${toolName}=${tool.uses}</div>`;
   });
   tools += `<div>Purse=${player.purse}`;
-  tools += `<br/>Sack=${countSpuds()}</div>`;
+  tools += `<br/>Spuds=${countSpuds()}</div>`;
   tools += `<div onclick="dayCycle()">Next &gt;</div>`;
   element = document.querySelector('.tools');
   element.innerHTML = tools;
