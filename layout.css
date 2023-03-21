@@ -3,8 +3,10 @@
   --sl-mud: rgb(34, 19, 13);
   --sl-rock: darkslategrey;
   --sl-rock-hi: slategrey;
+  --sl-rock-lo: black;
   --sl-log: rgb(58, 33, 21);
   --sl-log-hi: wheat;
+  --sl-log-lo: black;
 }
 
 html {
@@ -295,7 +297,6 @@ h2 {
   stroke-linejoin: round;
   fill: var(--sl-rock);
   opacity: 1;
-  filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));
 }
 
 .rock-hi {
@@ -307,6 +308,15 @@ h2 {
   opacity: 1;
 }
 
+.rock-lo {
+  stroke: var(--sl-rock-lo);
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: var(--sl-rock-lo);
+  opacity: 1;
+}
+
 .log {
   stroke: var(--sl-log);
   stroke-width: 10;
@@ -314,7 +324,6 @@ h2 {
   stroke-linejoin: round;
   fill: var(--sl-log);
   opacity: 1;
-  filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));
 }
 
 .log-hi {
@@ -323,6 +332,15 @@ h2 {
   stroke-linecap: round;
   stroke-linejoin: round;
   fill: var(--sl-log-hi);
+  opacity: 1;
+}
+
+.log-lo {
+  stroke: var(--sl-log-lo);
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: var(--sl-log-lo);
   opacity: 1;
 }
 

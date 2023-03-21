@@ -356,7 +356,7 @@ function fillField() {
   };
 }
 
-function showPatches() {
+function rollPatches() {
   player.fields[player.currentField].forEach((patch, index) => {
     patch.id = `patch_${index}`;
     // roll the spuds so holes slowly get fill and can be re-seeded
@@ -371,7 +371,6 @@ function showPatches() {
     }
     renderPatch(patch);
   });
-  renderControls();
 }
 
 function dayCycle() {
@@ -402,6 +401,7 @@ function dayCycle() {
     resetTools();
     renderTools();
     resetPlayer();
+    rollPatches();
   }
 }
 
@@ -746,7 +746,6 @@ function resetTools() {
   Object.entries(player.tools).forEach(([toolName, tool]) => {
     tool.uses = tool.maxUses;
   });
-  resetPlayer();
 }
 
 // player starts abck at the entrace of the field
@@ -764,9 +763,11 @@ document.addEventListener("DOMContentLoaded", function () {
   sproutSpuds(6);
   drawField();
   fillField();
-  showPatches();
+  rollPatches();
   resetTools();
   renderTools();
+  resetPlayer();
+  renderControls();
   // gift the first machine
   let starter = 'chipper';
   player.shop.machines[starter] = player.hardware[starter].initial;

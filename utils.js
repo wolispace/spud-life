@@ -2,35 +2,39 @@ function rnd(max) {
   return Math.floor(Math.random() * max);
 }
 
+// returns a randome number equally half plus or minus the number eg 3 = -1 to 1
+function halfRnd(num) {
+  return rnd(num) - num / 2;
+}
+
 function svgImg(svgName, svgClass = '', repeat = 1) {
   let svgHtml = '';
   let svgInfo = svgImags[svgName];
-  let isSingle = repeat == 1;
-  let ts = 10;
-  let ss = 10;
-  let rs = 45;
+
+  let thisScale = '';
+  let thisShift = '';
+  let thisRotate = '';
   if (svgInfo) {
 
     let paths = '';
-    svgClass = svgClass != '' ? svgClass : svgName;
+    svgClass = svgInfo.class || svgName;
     while (repeat > 0) {
-      let tx = 0;
-      let ty = 0;
-      let sx = 1;
-      let sy = 1;
-      let rotate = 0;
-      if (!isSingle) {
-
-        tx += rnd(ts) - (ts / 2);
-        ty += rnd(ts) - (ts / 2);
-        sx += (rnd(ss) - (ss / 2)) / 100;
-        sy += (rnd(ss) - (ss / 2)) / 100;
-        rotate = rnd(rs) - (rs / 2);
+      if (svgInfo.shift) {
+        let shiftX = (svgInfo.shift.x) ? halfRnd(svgInfo.shift.x) : 0;
+        let shiftY = (svgInfo.shift.y) ? halfRnd(svgInfo.shift.y) : 0;
+        thisShift = `translate(${shiftX} ${shiftY})`;
       }
-      paths += `<g transform="
-       translate(${tx},${ty}) 
-       scale(${sx} ${sy})
-       rotate(${rotate}) " >`;
+      if (svgInfo.scale) {
+        let scaleX = (svgInfo.scale.x) ? halfRnd(svgInfo.scale.x) : 1;
+        let scaleY = (svgInfo.scale.y) ? halfRnd(svgInfo.scale.y) : 1;
+        thisScale = `scale(${scaleX} ${scaleY})`;
+      }
+      if (svgInfo.rotate) {
+        let rotate = halfRnd(svgInfo.rotate);
+        thisRotate = `rotate(${rotate}, 50, 50)`;
+      }
+
+      paths += `<g transform="${thisShift} ${thisScale} ${thisRotate}" >`;
 
       svgInfo.paths.forEach((path) => {
         let svgCls = path.c ? `${svgClass}-${path.c}` : svgClass;
