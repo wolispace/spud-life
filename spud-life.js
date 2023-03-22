@@ -5,6 +5,7 @@ let player = {
   pos: 0,
   spudRegen: -5,
   sowSeeds: 0,
+  grassQty: 7,
   tools: {
     spade: {
       uses: 0,
@@ -369,7 +370,19 @@ function rollPatches() {
         player.sowSeeds++;
       }
     }
-    renderPatch(patch);
+  });
+}
+
+function renderPatches() {
+  player.fields[player.currentField].forEach((patch, index) => {
+    patch.id = `patch_${index}`;
+    if (patch.block && patch.block.type == 'control') {
+      // leave alone
+    } else {
+      // if we dont have asvg then add one
+      let element = document.querySelector(`#${patch.id}`);
+      renderPatch(patch);
+    }
   });
 }
 
@@ -402,6 +415,7 @@ function dayCycle() {
     renderTools();
     resetPlayer();
     rollPatches();
+    renderPatches();
   }
 }
 
@@ -517,7 +531,7 @@ function patchClick(index) {
           } else {
             delete patch.block;
             element = document.querySelector(`#${patch.id}`);
-            element.innerHTML = svgImg('blank');
+            element.innerHTML = svgImg('blank', '', player.grassQty);
           }
           playerTool.uses--;
           renderTools();
@@ -606,7 +620,7 @@ function updatePatch(patch) {
 function renderPatch(patch) {
   let newPatch = ' ';
   if (patch) {
-    if (patch.block) {
+    if (patch.block && patch.block.type !== 'control') {
       newPatch = svgImg(patch.block.type, '', patch.block.qty);
     }
     if (patch.spud) {
@@ -618,7 +632,7 @@ function renderPatch(patch) {
     }
   }
   if (newPatch == ' ') {
-    newPatch = svgImg('blank');
+    newPatch = svgImg('blank', '', player.grassQty);
   }
   if (newPatch) {
     element = document.querySelector(`#${patch.id}`);
@@ -638,7 +652,7 @@ function drawField() {
   let index = 0;
   let patches = '';
   while (index <= maxPatches) {
-    patches += `<div class="patch" id="patch_${index}">${svgImg('blank')}</div>`;
+    patches += `<div class="patch" id="patch_${index}">${svgImg('blank', '', player.grassQty)}</div>`;
     index++;
   }
   element = document.querySelector('.field');
@@ -663,6 +677,7 @@ function renderControl(id, dir) {
   element.classList.add("controlButton");
   element.classList.remove('patch');
   element.setAttribute("onclick", `patchClick(${id});`);
+  player.fields[player.currentField][id] = { block: { type: "control" } };
 }
 
 function renderTools() {
@@ -764,6 +779,7 @@ document.addEventListener("DOMContentLoaded", function () {
   drawField();
   fillField();
   rollPatches();
+  renderPatches();
   resetTools();
   renderTools();
   resetPlayer();

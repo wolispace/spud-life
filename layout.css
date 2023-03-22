@@ -7,6 +7,7 @@
   --sl-log: rgb(58, 33, 21);
   --sl-log-hi: wheat;
   --sl-log-lo: black;
+  --sl-blank: darkgreen;
 }
 
 html {
@@ -341,6 +342,15 @@ h2 {
   stroke-linecap: round;
   stroke-linejoin: round;
   fill: var(--sl-log-lo);
+  opacity: 1;
+}
+
+.blank {
+  stroke: var(--sl-blank);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: var(--sl-blank);
   opacity: 1;
 }
 

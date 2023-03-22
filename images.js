@@ -2,18 +2,25 @@
 
 const svgImags = {
   "blank": {
-    paths: []
+    "paths": [{ "c": "", "d": "m 50,50 -3,-5 m 8,6 0,-8 m 5,8 2,5" }],
+    "shift": { "x": 70, "y": 70 },
+    "sXcale": { "x": 1, "y": 1 },
+    "rotate": 10,
   },
   "control-icon--up": {
+    "class": "control-icon",
     "paths": [{ "c": "", "d": "m 20,80 30,-60 30,60" }]
   },
   "control-icon--right": {
+    "class": "control-icon",
     "paths": [{ "c": "", "d": "m 20,20 60,30 -60,30" }]
   },
   "control-icon--down": {
+    "class": "control-icon",
     "paths": [{ "c": "", "d": "m 20,20 30,60 30,-60" }]
   },
   "control-icon--left": {
+    "class": "control-icon",
     "paths": [{ "c": "", "d": "m 80,20 -60,30 60,30" }]
   },
   "hole": {
