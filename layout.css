@@ -357,3 +357,52 @@ h2 {
 .hidden {
   display: none;
 }
+
+
+@keyframes jiggle-down {
+
+  0%,
+  100% {
+    transform: translateY(0rem);
+  }
+
+  50% {
+    transform: translateY(1rem);
+  }
+}
+
+@keyframes jiggle-up {
+
+  0%,
+  100% {
+    transform: translateY(0rem);
+  }
+
+  50% {
+    transform: translateY(-1rem);
+  }
+}
+
+@keyframes jiggle-left {
+
+  0%,
+  100% {
+    transform: translateX(0rem);
+  }
+
+  50% {
+    transform: translateX(-1rem);
+  }
+}
+
+@keyframes jiggle-right {
+
+  0%,
+  100% {
+    transform: translateX(0rem);
+  }
+
+  50% {
+    transform: translateX(1rem);
+  }
+}

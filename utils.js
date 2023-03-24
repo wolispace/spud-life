@@ -54,6 +54,13 @@ function svgImg(svgName, svgClass = '', repeat = 1) {
   return svgHtml;
 }
 
+// add animation then remove it after a timeout so it can be re-applied
+function animate(element, type, duration) {
+  element.style.animation = `${type} ${duration}s linear`;
+
+  setTimeout(() => { element.style.animation = '' }, duration * 1000, element);
+}
+
 function html(selector, text) {
   let elem = checkSelector(selector);
 

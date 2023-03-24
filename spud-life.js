@@ -484,21 +484,25 @@ function patchClick(index) {
     element = document.querySelector(`#patch_${player.pos}`);
     element.classList.remove("currentPos");
     let newPos = player.pos;
+    let direction = 'down';
 
     if (index == 60) {
       newPos -= 10;
+      direction = 'up';
       if (newPos < 0) {
         newPos = player.pos;
       }
     }
     if (index == 70 && player.pos % 10 > 0) {
       newPos -= 1;
+      direction = 'left';
       if (newPos < 0) {
         newPos = player.pos;
       }
     }
     if (index == 71 && player.pos % 10 < 9) {
       newPos += 1;
+      direction = 'right';
       if (newPos > 99) {
         newPos = player.pos;
       }
@@ -517,6 +521,10 @@ function patchClick(index) {
     if (newPos !== player.pos) {
       let patch = player.fields[player.currentField][newPos];
       if (patch && patch.block) {
+        // animate..
+        let thisBlock = document.querySelector(`#${patch.id} svg`);
+        animate(thisBlock, `jiggle-${direction}`, 0.25);
+
         let tool = '';
         if (patch.block.type == 'rock') {
           tool = 'pick';
@@ -531,7 +539,8 @@ function patchClick(index) {
           } else {
             delete patch.block;
             element = document.querySelector(`#${patch.id}`);
-            element.innerHTML = svgImg('blank', '', player.grassQty);
+            setTimeout(() => { element.innerHTML = svgImg('blank', '', player.grassQty); }, 250, element, player);
+            //element.innerHTML = svgImg('blank', '', player.grassQty);
           }
           playerTool.uses--;
           renderTools();
