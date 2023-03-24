@@ -8,6 +8,8 @@
   --sl-log-hi: wheat;
   --sl-log-lo: black;
   --sl-blank: darkgreen;
+  --sl-ani-distance: 0.5rem;
+  --sl-ani-distance-neg: -0.5rem;
 }
 
 html {
@@ -363,11 +365,12 @@ h2 {
 
   0%,
   100% {
-    transform: translateY(0rem);
+    transform: translateY(0rem) scale(1, 1);
   }
 
+
   50% {
-    transform: translateY(1rem);
+    transform: translateY(var(--sl-ani-distance)) scale(1.2, 1.2);
   }
 }
 
@@ -375,11 +378,11 @@ h2 {
 
   0%,
   100% {
-    transform: translateY(0rem);
+    transform: translateY(0rem) scale(1, 1);
   }
 
   50% {
-    transform: translateY(-1rem);
+    transform: translateY(var(--sl-ani-distance-neg)) scale(1.2, 1.2);
   }
 }
 
@@ -387,11 +390,11 @@ h2 {
 
   0%,
   100% {
-    transform: translateX(0rem);
+    transform: translateX(0rem) scale(1, 1);
   }
 
   50% {
-    transform: translateX(-1rem);
+    transform: translateX(var(--sl-ani-distance-neg)) scale(1.2, 1.2);
   }
 }
 
@@ -399,10 +402,10 @@ h2 {
 
   0%,
   100% {
-    transform: translateX(0rem);
+    transform: translateX(0rem) scale(1, 1) scale(1.2, 1.2);
   }
 
   50% {
-    transform: translateX(1rem);
+    transform: translateX(var(--sl-ani-distance));
   }
 }

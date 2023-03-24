@@ -531,6 +531,9 @@ function patchClick(index) {
         } else {
           tool = 'axe';
         }
+        let thisTool = document.querySelector(`.tool-${tool} svg`);
+
+        animate(thisTool, `jiggle-up`, 0.25);
         let playerTool = player.tools[tool];
         if (playerTool && playerTool.uses > 0) {
           // if the patch is blocked.. the click reduces until zero and the block is removed
@@ -565,6 +568,9 @@ function patchClick(index) {
 function digPatch() {
   let patch = player.fields[player.currentField][player.pos];
   let tool = player.tools['spade'];
+  let thisTool = document.querySelector(`.tool-spade svg`);
+  animate(thisTool, `jiggle-up`, 0.25);
+
   if (tool.uses > 0) {
     // if nothing defined for a patch then its an empty spud
     if (!patch || !patch.spud) {
@@ -691,12 +697,13 @@ function renderControl(id, dir) {
 
 function renderTools() {
   let tools = '';
+  let dummyImg = svgImg(`control-icon--up`, "control-icon", 1);
   Object.entries(player.tools).forEach(([toolName, tool]) => {
-    tools += `<div onclick="digPatch()">${toolName}=${tool.uses}</div>`;
+    tools += `<div  class="tool-${toolName}" onclick="digPatch()">${toolName}=${tool.uses} ${dummyImg}</div>`;
   });
-  tools += `<div>Purse=${player.purse}`;
+  tools += `<div class="tool-purse">Purse=${player.purse}`;
   tools += `<br/>Spuds=${countSpuds()}</div>`;
-  tools += `<div onclick="dayCycle()">Next &gt;</div>`;
+  tools += `<div class="tool-next" onclick="dayCycle()">Next &gt;</div>`;
   element = document.querySelector('.tools');
   element.innerHTML = tools;
 }

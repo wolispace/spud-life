@@ -56,7 +56,7 @@ function svgImg(svgName, svgClass = '', repeat = 1) {
 
 // add animation then remove it after a timeout so it can be re-applied
 function animate(element, type, duration) {
-  element.style.animation = `${type} ${duration}s linear`;
+  element.style.animation = `${type} ${duration}s ease`;
 
   setTimeout(() => { element.style.animation = '' }, duration * 1000, element);
 }
