@@ -579,6 +579,22 @@ function digPatch() {
     patch.id = `patch_${player.pos}`;
 
     if (patch.spud.qty > 0) {
+      // get patch pos..
+      let element = document.querySelector(`#patch_${player.pos}`);
+      element.innerHTML = svgImg('spud');
+      patch.showSpud = true;
+
+      // let position = element.getBoundingClientRect();
+      // let x = position.left;
+      // let y = position.top;
+      // let offScreen = document.querySelector(`.offScreen`);
+      // offScreen.innerHTML = svgImg('spud');
+      // // animate spud..
+      // let thisSpud = document.querySelector(`.offScreen svg`);
+      // thisSpud.style.top = `${y}px`;
+      // thisSpud.style.left = `${x}px`;
+      //animate(thisSpud, `dig-spud`, 3);
+
       // all spuds dug at once and moved to player sack
       let sackQty = player.sack[patch.spud.name] || 0;
       player.sack[patch.spud.name] = sackQty + patch.spud.qty;
@@ -640,9 +656,18 @@ function renderPatch(patch) {
     }
     if (patch.spud) {
       if (patch.spud.qty > 0) {
-        newPatch += ''; // `<br/>S=${patch.spud.qty}`
+        newPatch += ''; // `<br/>S=${patch.spud.qty}` 
       } else {
-        newPatch = svgImg('hole', '', 5);
+        if (patch.spud.qty == -5 && patch.spud.name) {
+          newPatch = svgImg('spud');
+          let thisSpud = document.querySelector(`#${patch.id} svg`);
+
+          animate(thisSpud, 'dig-spud', 3, function () { console.log('end ani') });
+
+          newPatch = svgImg('hole', '', 5);
+        } else {
+          newPatch = svgImg('hole', '', 5);
+        }
       }
     }
   }

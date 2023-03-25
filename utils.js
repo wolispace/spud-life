@@ -17,7 +17,7 @@ function svgImg(svgName, svgClass = '', repeat = 1) {
   if (svgInfo) {
 
     let paths = '';
-    svgClass = svgInfo.class || svgName;
+    svgClass = svgInfo.class += ' ' + svgName;
     while (repeat > 0) {
       if (svgInfo.shift) {
         let shiftX = (svgInfo.shift.x) ? halfRnd(svgInfo.shift.x) : 0;
@@ -25,9 +25,8 @@ function svgImg(svgName, svgClass = '', repeat = 1) {
         thisShift = `translate(${shiftX} ${shiftY})`;
       }
       if (svgInfo.scale) {
-        let scaleX = (svgInfo.scale.x) ? halfRnd(svgInfo.scale.x) : 1;
-        let scaleY = (svgInfo.scale.y) ? halfRnd(svgInfo.scale.y) : 1;
-        thisScale = `scale(${scaleX} ${scaleY})`;
+        let scale = (svgInfo.scale.x) ? (svgInfo.scale.x + (halfRnd(svgInfo.scale.x) / svgInfo.scale.y)) / 100 : 1;
+        thisScale = `scale(${scale} ${scale})`;
       }
       if (svgInfo.rotate) {
         let rotate = halfRnd(svgInfo.rotate);
@@ -44,7 +43,7 @@ function svgImg(svgName, svgClass = '', repeat = 1) {
       paths += '</g>';
     }
 
-    svgHtml = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    svgHtml = `<svg class="${svgClass}" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
        ${paths}
      </svg>`
   } else {
@@ -55,10 +54,19 @@ function svgImg(svgName, svgClass = '', repeat = 1) {
 }
 
 // add animation then remove it after a timeout so it can be re-applied
-function animate(element, type, duration) {
-  element.style.animation = `${type} ${duration}s ease`;
+function animate(element, type, duration, onEndFunction) {
+  if (element && element.style) {
+    element.style.animation = `${type} ${duration}s ease`;
 
-  setTimeout(() => { element.style.animation = '' }, duration * 1000, element);
+    element.addEventListener("animationend", function () {
+      element.style.animation = '';
+      if (onEndFunction) {
+        onEndFunction;
+      }
+    });
+
+    //setTimeout(() => { element.style.animation = '' }, duration * 1000, element);
+  }
 }
 
 function html(selector, text) {

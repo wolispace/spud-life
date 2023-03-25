@@ -7,9 +7,8 @@
   --sl-log: rgb(58, 33, 21);
   --sl-log-hi: wheat;
   --sl-log-lo: black;
+  --sl-spud: chocolate;
   --sl-blank: darkgreen;
-  --sl-ani-distance: 0.5rem;
-  --sl-ani-distance-neg: -0.5rem;
 }
 
 html {
@@ -26,6 +25,12 @@ body {
 h2 {
   padding: var(--sl-padding);
   margin: var(--sl-padding);
+}
+
+#offScreen {
+  position: absolute;
+  top: -10000px;
+  left: -10000px;
 }
 
 .field {
@@ -284,75 +289,85 @@ h2 {
   fill: none;
 }
 
-.hole {
-  stroke: var(--sl-mud);
+.thick {
   stroke-width: 10;
   stroke-linecap: round;
   stroke-linejoin: round;
+}
+
+.thin {
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.hole {
+  stroke: var(--sl-mud);
   fill: var(--sl-mud);
   opacity: .7;
 }
 
 .rock {
   stroke: var(--sl-rock);
-  stroke-width: 10;
-  stroke-linecap: round;
-  stroke-linejoin: round;
   fill: var(--sl-rock);
   opacity: 1;
 }
 
 .rock-hi {
   stroke: var(--sl-rock-hi);
-  stroke-width: 10;
-  stroke-linecap: round;
-  stroke-linejoin: round;
   fill: var(--sl-rock-hi);
   opacity: 1;
 }
 
 .rock-lo {
   stroke: var(--sl-rock-lo);
-  stroke-width: 10;
-  stroke-linecap: round;
-  stroke-linejoin: round;
   fill: var(--sl-rock-lo);
   opacity: 1;
 }
 
 .log {
   stroke: var(--sl-log);
-  stroke-width: 10;
-  stroke-linecap: round;
-  stroke-linejoin: round;
   fill: var(--sl-log);
   opacity: 1;
 }
 
 .log-hi {
   stroke: var(--sl-log-hi);
-  stroke-width: 10;
-  stroke-linecap: round;
-  stroke-linejoin: round;
   fill: var(--sl-log-hi);
   opacity: 1;
 }
 
 .log-lo {
   stroke: var(--sl-log-lo);
-  stroke-width: 10;
-  stroke-linecap: round;
-  stroke-linejoin: round;
   fill: var(--sl-log-lo);
   opacity: 1;
 }
 
 .blank {
   stroke: var(--sl-blank);
-  stroke-width: 3;
-  stroke-linecap: round;
-  stroke-linejoin: round;
   fill: var(--sl-blank);
+  opacity: 1;
+}
+
+.spud {
+  stroke: var(--sl-spud);
+  fill: var(--sl-spud);
+  opacity: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+}
+
+.spud-lo {
+  stroke: var(--sl-spud-lo);
+  fill: var(--sl-spud-lo);
+  opacity: 1;
+}
+
+.spud-hi {
+  stroke: var(--sl-spud-hi);
+  fill: var(--sl-spud-hi);
   opacity: 1;
 }
 
@@ -360,52 +375,75 @@ h2 {
   display: none;
 }
 
-
 @keyframes jiggle-down {
-
-  0%,
-  100% {
-    transform: translateY(0rem) scale(1, 1);
+  35% {
+    transform: translateY(0.20rem) scale(1, 1);
   }
 
-
   50% {
-    transform: translateY(var(--sl-ani-distance)) scale(1.2, 1.2);
+    transform: translateY(-0.20rem) scale(0.9, 1);
+  }
+
+  85% {
+    transform: translateY(0.15rem) scale(1.02, 1);
   }
 }
 
 @keyframes jiggle-up {
-
-  0%,
-  100% {
-    transform: translateY(0rem) scale(1, 1);
+  35% {
+    transform: translateY(-0.20rem) scale(1, 1);
   }
 
   50% {
-    transform: translateY(var(--sl-ani-distance-neg)) scale(1.2, 1.2);
+    transform: translateY(0.20rem) scale(0.9, 1);
+  }
+
+  85% {
+    transform: translateY(-0.15rem) scale(1.02, 1);
   }
 }
 
 @keyframes jiggle-left {
 
-  0%,
-  100% {
-    transform: translateX(0rem) scale(1, 1);
+  35% {
+    transform: translateX(-0.20rem) scale(1, 1);
   }
 
   50% {
-    transform: translateX(var(--sl-ani-distance-neg)) scale(1.2, 1.2);
+    transform: translateX(0.20rem) scale(0.9, 1);
+  }
+
+  85% {
+    transform: translateX(-0.15rem) scale(1.02, 1);
   }
 }
 
 @keyframes jiggle-right {
 
-  0%,
-  100% {
-    transform: translateX(0rem) scale(1, 1) scale(1.2, 1.2);
+  35% {
+    transform: translateX(0.20rem) scale(1, 1);
   }
 
   50% {
-    transform: translateX(var(--sl-ani-distance));
+    transform: translateX(-0.20rem) scale(0.9, 1);
   }
+
+  85% {
+    transform: translateX(0.15rem) scale(1.02, 1);
+  }
+}
+
+@keyframes dig-spud {
+  50% {
+    transform: translate(50vh, 50vw) scale(1, 1);
+  }
+
+  100% {
+    transform: translate(100vh, 100px) scale(1, 1);
+  }
+}
+
+.offScreen {
+  width: 100px;
+  height: 100px;
 }
