@@ -579,22 +579,6 @@ function digPatch() {
     patch.id = `patch_${player.pos}`;
 
     if (patch.spud.qty > 0) {
-      // get patch pos..
-      let element = document.querySelector(`#patch_${player.pos}`);
-      element.innerHTML = svgImg('spud');
-      patch.showSpud = true;
-
-      // let position = element.getBoundingClientRect();
-      // let x = position.left;
-      // let y = position.top;
-      // let offScreen = document.querySelector(`.offScreen`);
-      // offScreen.innerHTML = svgImg('spud');
-      // // animate spud..
-      // let thisSpud = document.querySelector(`.offScreen svg`);
-      // thisSpud.style.top = `${y}px`;
-      // thisSpud.style.left = `${x}px`;
-      //animate(thisSpud, `dig-spud`, 3);
-
       // all spuds dug at once and moved to player sack
       let sackQty = player.sack[patch.spud.name] || 0;
       player.sack[patch.spud.name] = sackQty + patch.spud.qty;
@@ -605,6 +589,9 @@ function digPatch() {
       patch.spud.qty = player.spudRegen;
       tool.uses--;
       player.fields[player.currentField][player.pos] = patch;
+    } else {
+      // leave holes alone
+      return;
     }
     renderTools();
 
@@ -660,11 +647,7 @@ function renderPatch(patch) {
       } else {
         if (patch.spud.qty == -5 && patch.spud.name) {
           newPatch = svgImg('spud');
-          let thisSpud = document.querySelector(`#${patch.id} svg`);
-
-          animate(thisSpud, 'dig-spud', 3, function () { console.log('end ani') });
-
-          newPatch = svgImg('hole', '', 5);
+          patch.spudFound = true;
         } else {
           newPatch = svgImg('hole', '', 5);
         }
@@ -677,6 +660,17 @@ function renderPatch(patch) {
   if (newPatch) {
     element = document.querySelector(`#${patch.id}`);
     element.innerHTML = newPatch;
+
+    if (patch.spudFound) {
+      delete patch.spudFound;
+      let thisSpud = document.querySelector(`#${patch.id} svg`);
+
+      function onEnd() {
+        newPatch = svgImg('hole', '', 5);
+        element.innerHTML = newPatch;
+      }
+      animate(thisSpud, 'dig-spud', 1, onEnd);
+    }
 
     // if we drew a hole, make sure its opacity matches the spud qty -5 = 100%, 0 = 0%
     if (patch.spud && patch.spud.qty < 0) {

@@ -17,7 +17,11 @@ function svgImg(svgName, svgClass = '', repeat = 1) {
   if (svgInfo) {
 
     let paths = '';
-    svgClass = svgInfo.class += ' ' + svgName;
+
+    svgClass = '';
+    if (svgInfo.class && svgInfo.class != svgName) {
+      svgInfo.class = `${svgInfo.class} ${svgName}`;
+    }
     while (repeat > 0) {
       if (svgInfo.shift) {
         let shiftX = (svgInfo.shift.x) ? halfRnd(svgInfo.shift.x) : 0;
@@ -36,14 +40,14 @@ function svgImg(svgName, svgClass = '', repeat = 1) {
       paths += `<g transform="${thisShift} ${thisScale} ${thisRotate}" >`;
 
       svgInfo.paths.forEach((path) => {
-        let svgCls = path.c ? `${svgClass}-${path.c}` : svgClass;
+        let svgCls = path.c ? `${svgInfo.class}-${path.c}` : svgInfo.class;
         paths += `<path class="${svgCls}" d="${path.d}" />`;
       });
       repeat--;
       paths += '</g>';
     }
 
-    svgHtml = `<svg class="${svgClass}" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    svgHtml = `<svg class="${svgInfo.class}" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
        ${paths}
      </svg>`
   } else {
@@ -54,14 +58,14 @@ function svgImg(svgName, svgClass = '', repeat = 1) {
 }
 
 // add animation then remove it after a timeout so it can be re-applied
-function animate(element, type, duration, onEndFunction) {
+function animate(element, type, duration, onEnd) {
   if (element && element.style) {
-    element.style.animation = `${type} ${duration}s ease`;
+    element.style.animation = `${type} ${duration}s ease-in-out`;
 
     element.addEventListener("animationend", function () {
       element.style.animation = '';
-      if (onEndFunction) {
-        onEndFunction;
+      if (typeof (onEnd) == 'function') {
+        onEnd();
       }
     });
 
