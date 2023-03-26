@@ -542,8 +542,7 @@ function patchClick(index) {
           } else {
             delete patch.block;
             element = document.querySelector(`#${patch.id}`);
-            setTimeout(() => { element.innerHTML = svgImg('blank', '', player.grassQty); }, 250, element, player);
-            //element.innerHTML = svgImg('blank', '', player.grassQty);
+            setTimeout(() => { element.innerHTML = svgImg('blank', player.grassQty); }, 250, element, player);
           }
           playerTool.uses--;
           renderTools();
@@ -639,7 +638,7 @@ function renderPatch(patch) {
   let newPatch = ' ';
   if (patch) {
     if (patch.block && patch.block.type !== 'control') {
-      newPatch = svgImg(patch.block.type, '', patch.block.qty);
+      newPatch = svgImg(patch.block.type, patch.block.qty);
     }
     if (patch.spud) {
       if (patch.spud.qty > 0) {
@@ -649,13 +648,13 @@ function renderPatch(patch) {
           newPatch = svgImg('spud');
           patch.spudFound = true;
         } else {
-          newPatch = svgImg('hole', '', 5);
+          newPatch = svgImg('hole', 5);
         }
       }
     }
   }
   if (newPatch == ' ') {
-    newPatch = svgImg('blank', '', player.grassQty);
+    newPatch = svgImg('blank', player.grassQty);
   }
   if (newPatch) {
     element = document.querySelector(`#${patch.id}`);
@@ -666,7 +665,7 @@ function renderPatch(patch) {
       let thisSpud = document.querySelector(`#${patch.id} svg`);
 
       function onEnd() {
-        newPatch = svgImg('hole', '', 5);
+        newPatch = svgImg('hole', 5);
         element.innerHTML = newPatch;
       }
       animate(thisSpud, 'dig-spud', 1, onEnd);
@@ -686,7 +685,7 @@ function drawField() {
   let index = 0;
   let patches = '';
   while (index <= maxPatches) {
-    patches += `<div class="patch" id="patch_${index}">${svgImg('blank', '', player.grassQty)}</div>`;
+    patches += `<div class="patch" id="patch_${index}">${svgImg('blank', player.grassQty)}</div>`;
     index++;
   }
   element = document.querySelector('.field');
@@ -707,7 +706,7 @@ function renderControls() {
 
 function renderControl(id, dir) {
   element = document.querySelector(`#patch_${id}`);
-  element.innerHTML = svgImg(`control-icon--${dir}`, "control-icon", 1);
+  element.innerHTML = svgImg(`control-icon--${dir}`);
   element.classList.add("controlButton");
   element.classList.remove('patch');
   element.setAttribute("onclick", `patchClick(${id});`);
@@ -716,7 +715,7 @@ function renderControl(id, dir) {
 
 function renderTools() {
   let tools = '';
-  let dummyImg = svgImg(`control-icon--up`, "control-icon", 1);
+  let dummyImg = svgImg(`control-icon--up`);
   Object.entries(player.tools).forEach(([toolName, tool]) => {
     tools += `<div  class="tool-${toolName}" onclick="digPatch()">${toolName}=${tool.uses} ${dummyImg}</div>`;
   });

@@ -7,9 +7,10 @@ function halfRnd(num) {
   return rnd(num) - num / 2;
 }
 
-function svgImg(svgName, svgClass = '', repeat = 1) {
+function svgImg(svgName, repeat = 1) {
   let svgHtml = '';
   let svgInfo = svgImags[svgName];
+  let svgClass = svgInfo.class;
 
   let thisScale = '';
   let thisShift = '';
@@ -18,9 +19,9 @@ function svgImg(svgName, svgClass = '', repeat = 1) {
 
     let paths = '';
 
-    svgClass = '';
-    if (svgInfo.class && svgInfo.class != svgName) {
-      svgInfo.class = `${svgInfo.class} ${svgName}`;
+    // add the images name into the class list
+    if (svgClass && svgClass != svgName) {
+      svgClass = `${svgClass} ${svgName}`;
     }
     while (repeat > 0) {
       if (svgInfo.shift) {
@@ -40,14 +41,14 @@ function svgImg(svgName, svgClass = '', repeat = 1) {
       paths += `<g transform="${thisShift} ${thisScale} ${thisRotate}" >`;
 
       svgInfo.paths.forEach((path) => {
-        let svgCls = path.c ? `${svgInfo.class}-${path.c}` : svgInfo.class;
+        let svgCls = path.c ? `${svgClass}-${path.c}` : svgClass;
         paths += `<path class="${svgCls}" d="${path.d}" />`;
       });
       repeat--;
       paths += '</g>';
     }
 
-    svgHtml = `<svg class="${svgInfo.class}" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    svgHtml = `<svg class="${svgClass}" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
        ${paths}
      </svg>`
   } else {
