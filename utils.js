@@ -63,7 +63,13 @@ function animate(element, type, duration, onEnd) {
   if (element && element.style) {
     element.style.animation = `${type} ${duration}s ease-in-out`;
 
+    element.addEventListener("animationstart", function () {
+      player.animating = true;
+      console.log('ani start');
+    });
     element.addEventListener("animationend", function () {
+      player.animating = false;
+      console.log('ani end');
       element.style.animation = '';
       if (typeof (onEnd) == 'function') {
         onEnd();

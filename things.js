@@ -3,7 +3,7 @@ let player = {
   sack: {},
   purse: 1000,
   pos: 0,
-  spudRegen: -1,
+  spudRegen: -5,
   sowSeeds: 0,
   grassQty: 7,
   tools: {
@@ -31,6 +31,7 @@ let player = {
   hardware: hardwareStore(),
   controls: { start: 60 },
   controlIds: [60, 70, 71, 80],
+  animating: false,
 };
 
 // all the svg images

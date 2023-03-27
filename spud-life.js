@@ -388,6 +388,10 @@ function resowField() {
 
 // user clicked a control to move up, down, left or right
 function controlClick(index) {
+  if (player.animating) {
+    setTimeout(player.animating = false, 2000);
+    return;
+  }
   if (player.controlIds.indexOf(index) > -1) {
     // we are trying to move
     element = document.querySelector(`#patch_${player.pos}`);
