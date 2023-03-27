@@ -80,25 +80,27 @@ function renderSack() {
   let sackList = '';
   Object.entries(player.sack).forEach(([spudName, spudQty]) => {
     let spud = player.spuds.filter((spud) => spud.name == spudName)[0];
-    let machine = player.shop.machines[player.shop.selected];
-    sackList += `<div class="sackSpuds buttonize">`;
-    sackList += `<div class="sackSpudName">${spudQty} ${spud.fullName}</div>`;
-    sackList += `<div class="sackListButtons">`;
-    if (spudQty > 0) {
-      sackList += `<div class="spudListButton" onclick="moveSpuds('${spudName}', ${spudQty})">&lt;&lt;</div>`;
-      sackList += `<div class="spudListButton" onclick="moveSpuds('${spudName}', 1)">&lt;</div>`;
-    } else {
-      sackList += `<div class="spudListButton" >&lt;&lt;</div>`;
-      sackList += `<div class="spudListButton" >&lt;</div>`;
+    if (spud) {
+      let machine = player.shop.machines[player.shop.selected];
+      sackList += `<div class="sackSpuds buttonize">`;
+      sackList += `<div class="sackSpudName">${spudQty} ${spud.fullName}</div>`;
+      sackList += `<div class="sackListButtons">`;
+      if (spudQty > 0) {
+        sackList += `<div class="spudListButton" onclick="moveSpuds('${spudName}', ${spudQty})">&lt;&lt;</div>`;
+        sackList += `<div class="spudListButton" onclick="moveSpuds('${spudName}', 1)">&lt;</div>`;
+      } else {
+        sackList += `<div class="spudListButton" >&lt;&lt;</div>`;
+        sackList += `<div class="spudListButton" >&lt;</div>`;
+      }
+      if (machine && machine.hopper && machine.hopper[spudName] > 0) {
+        sackList += `<div class="spudListButton" onclick="moveSpuds('${spudName}', -1)">&gt;</div>`;
+      } else {
+        sackList += `<div class="spudListButton" >&gt;</div>`;
+      }
+      sackList += `</div>`;
+      sackList += `<div class="sackSpudDesc">This is a ${spud.rareness} potato that is best for ${spud.bestFor}</div>`;
+      sackList += `</div>`;
     }
-    if (machine && machine.hopper && machine.hopper[spudName] > 0) {
-      sackList += `<div class="spudListButton" onclick="moveSpuds('${spudName}', -1)">&gt;</div>`;
-    } else {
-      sackList += `<div class="spudListButton" >&gt;</div>`;
-    }
-    sackList += `</div>`;
-    sackList += `<div class="sackSpudDesc">This is a ${spud.rareness} potato that is best for ${spud.bestFor}</div>`;
-    sackList += `</div>`;
   });
 
   element = document.querySelector('.sack');
@@ -537,6 +539,8 @@ function patchClick(index) {
         let playerTool = player.tools[tool];
         if (playerTool && playerTool.uses > 0) {
           // if the patch is blocked.. the click reduces until zero and the block is removed
+          player.sack[patch.block.type] = player.sack[patch.block.type] ?? 0;
+          player.sack[patch.block.type]++;
           if (patch.block.qty > 1) {
             patch.block.qty--;
           } else {

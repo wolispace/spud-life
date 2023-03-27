@@ -7,8 +7,11 @@
   --sl-log: rgb(58, 33, 21);
   --sl-log-hi: wheat;
   --sl-log-lo: black;
-  --sl-spud: rgb(58, 33, 21);
-  --sl-blank: darkgreen;
+  --sl-spud: rgb(179, 150, 97);
+  --sl-spud-hi: black;
+  --sl-spud-lo: rgb(61, 45, 14);
+
+  --sl-blank: black;
 }
 
 html {
@@ -19,7 +22,7 @@ html {
 }
 
 body {
-  background-color: darkgreen;
+  background-color: black;
 }
 
 h2 {
@@ -41,7 +44,7 @@ h2 {
   position: absolute;
   top: 0;
   left: 0;
-  background-color: darkgreen;
+  background-color: rgb(62, 122, 62);
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
@@ -91,11 +94,15 @@ h2 {
 
 .sales {
   background-color: dodgerblue;
+  color: white;
+  font-weight: bold;
   display: none;
 }
 
 .night {
   background-color: navy;
+  color: white;
+  font-weight: bold;
   display: none;
 }
 
@@ -256,10 +263,6 @@ h2 {
   background-color: lightblue;
 }
 
-.night {
-  color: white;
-  font-weight: bold;
-}
 
 .controlButton {
   background-color: rgba(55, 53, 82);
@@ -293,12 +296,14 @@ h2 {
   stroke-width: 10;
   stroke-linecap: round;
   stroke-linejoin: round;
+  fill: none;
 }
 
 .thin {
   stroke-width: 4;
   stroke-linecap: round;
   stroke-linejoin: round;
+  fill: none;
 }
 
 .hole {
