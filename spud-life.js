@@ -1,37 +1,43 @@
-let player = {
-  phase: "field",
-  sack: {},
-  purse: 1000,
-  pos: 0,
-  spudRegen: -5,
-  sowSeeds: 0,
-  grassQty: 7,
-  tools: {
-    spade: {
-      uses: 0,
-      maxUses: 5,
-    },
-    "pick": {
-      "uses": 0,
-      "maxUses": 5
-    },
-    "axe": {
-      "uses": 0,
-      "maxUses": 5
-    }
-  },
+// page loaded - so init things
+document.addEventListener("DOMContentLoaded", function () {
+  sproutSpuds(6);
+  drawField();
+  fillField(player.currentField);
+  rollPatches();
+  renderPatches();
+  resetTools();
+  renderTools();
+  resetPlayer();
+  renderControls();
+  // gift the first machine
+  let starter = 'chipper';
+  player.shop.machines[starter] = player.hardware[starter].initial;
+});
 
-  spuds: [],
-  currentField: 0,
-  fields: [],
+// hook into keys for movement and digging
+document.addEventListener("keydown", (event) => {
 
-  shop: {
-    machines: {}
-  },
-  hardware: hardwareStore(),
-  controls: { start: 60 },
-};
+  if (event.code == 'ArrowUp') {
+    controlClick(player.controls.start)
+  }
+  if (event.code == 'ArrowLeft') {
+    controlClick(player.controls.start + 10)
+  }
+  if (event.code == 'ArrowRight') {
+    controlClick(player.controls.start + 10 + 1)
+  }
+  if (event.code == 'ArrowDown') {
+    controlClick(player.controls.start + 10 + 10)
+  }
+  if (event.code == 'Space') {
+    digPatch();
+  }
+  if (event.code == 'Enter') {
+    dayCycle();
+  }
+});
 
+// selling the meals from the machines
 function sellSpuds() {
   let totalMeals = 0;
   let totalIncome = 0;
@@ -55,9 +61,7 @@ function sellSpuds() {
   });
 
   player.purse += totalIncome;
-
   let salesList = `Total meals=${totalMeals} income=${totalIncome}`;
-
   element = document.querySelector('.sales');
   element.innerHTML = salesList;
 }
@@ -76,6 +80,7 @@ function allocate() {
   renderSack();
 }
 
+// show contents of the sack
 function renderSack() {
   let sackList = '';
   Object.entries(player.sack).forEach(([spudName, spudQty]) => {
@@ -107,7 +112,7 @@ function renderSack() {
   element.innerHTML = sackList;
 }
 
-
+// move spuds from sack to machine hoppers
 function moveSpuds(spudName, spudQty) {
   let machine = player.shop.machines[player.shop.selected];
 
@@ -123,6 +128,7 @@ function moveSpuds(spudName, spudQty) {
   renderHopper(player.shop.selected);
 }
 
+// show the machines next to the contents of the sack
 function renderMachines() {
   let machineList = ``;
   player.shop.selected = '';
@@ -141,6 +147,7 @@ function renderMachines() {
   element.innerHTML = machineList;
 }
 
+// each machine has a hopper that is filled with spuds 
 function renderHopper(machineName) {
   element = document.querySelector(`#machine_${machineName}`);
   element.innerHTML = listHopper(machineName);
@@ -158,6 +165,7 @@ function listHopper(machineName) {
   return hopper;
 }
 
+// which machine gets the spuds
 function selectMachine(machineName) {
   let className = 'selected';
   player.shop.selected = machineName;
@@ -170,114 +178,7 @@ function selectMachine(machineName) {
   renderSack();
 }
 
-
-function hardwareStore() {
-  return {
-    "spade": {
-      type: "tool",
-      name: "Spade",
-      desc: "A useful tool for diging up spods",
-      price: 0,
-      upgradeCost: 50,
-      maxUpgrades: 100,
-      initial: {
-        uses: 0,
-        maxUses: 5,
-      }
-    },
-    "pick": {
-      type: "tool",
-      name: "Pick",
-      desc: "A tool for breaking rocks",
-      price: 100,
-      upgradeCost: 100,
-      maxUpgrades: 100,
-      initial: {
-        uses: 0,
-        maxUses: 5,
-      }
-    },
-    "axe": {
-      type: "tool",
-      name: "Axe",
-      desc: "A tool for clearing logs",
-      price: 150,
-      upgradeCost: 100,
-      maxUpgrades: 100,
-      initial: {
-        uses: 0,
-        maxUses: 5,
-      }
-    },
-    "chipper": {
-      type: "machine",
-      name: "Basic Chipper",
-      desc: "A basic all-purpose chip-maker",
-      price: 150,
-      upgradeCost: 100,
-      maxUpgrades: 100,
-      initial: {
-        pricePerItem: 5,
-        makes: "chips",
-        hopper: {}
-      }
-    },
-    "chipper-2000": {
-      type: "machine",
-      name: "Chipper 2000",
-      desc: "The latest upgrade of the tried-and-tested chip maker",
-      price: 500,
-      upgradeCost: 100,
-      maxUpgrades: 100,
-      initial: {
-        pricePerItem: 20,
-        makes: "chips",
-        hopper: {}
-      }
-    },
-    "back-o-matic": {
-      type: "machine",
-      name: "Bake-o-matic",
-      desc: "Makes an excellent baked potato",
-      price: 250,
-      upgradeCost: 100,
-      maxUpgrades: 100,
-      initial: {
-        pricePerItem: 15,
-        makes: "baked potatoes",
-        hopper: {}
-      }
-    },
-    "curly-cooker": {
-      type: "machine",
-      name: "Curly cooker",
-      desc: "Cooks a potato into a curly-fry",
-      price: 400,
-      upgradeCost: 100,
-      maxUpgrades: 100,
-      initial: {
-        pricePerItem: 20,
-        makes: "curly-fries",
-        hopper: {}
-      }
-    },
-    "soup-spinner": {
-      type: "machine",
-      name: "Soup spinner",
-      desc: "Makes a hearly potato soup",
-      price: 200,
-      upgradeCost: 100,
-      maxUpgrades: 100,
-      initial: {
-        pricePerItem: 10,
-        makes: "soup",
-        hopper: {}
-      }
-    },
-  }
-}
-
-//generate the the complete list of spuds for this session
+//generate the the complete random list of spuds for this session
 function sproutSpuds(qty) {
   let counter = 0;
   let spudBits = {
@@ -289,6 +190,7 @@ function sproutSpuds(qty) {
     "showColors": ['white', 'orange', 'black', 'pink', 'purple', 'red'],
     "rareness": ["common", "standard", "rare"]
   };
+  // used next element from array cycling back to the start so its not completely random.
   let colorCycle = rnd(spudBits.color.length);
   let rarityCicle = rnd(spudBits.rareness.length);
   let bestForCycle = rnd(spudBits.bestFor.length);
@@ -328,8 +230,8 @@ function sproutSpuds(qty) {
   }
 }
 
-// randomly fill the field with rocks, logs and spuds - splus some ranom treasure!
-function fillField() {
+// randomly fill the current field with rocks, logs and spuds - plus some ranom treasure!
+function fillField(fieldId) {
   let i = 10;
   while (i < 100) {
     if (rnd(2) > 0) {
@@ -350,28 +252,31 @@ function fillField() {
         let newSpud = player.spuds[rnd(player.spuds.length)];
         patch.spud = { "name": newSpud.name, "qty": rnd(3) + 1 };
       }
-      if (!player.fields[player.currentField]) {
-        player.fields[player.currentField] = [];
+      if (!player.fields[fieldId]) {
+        player.fields[fieldId] = [];
       }
-      player.fields[player.currentField][i] = patch;
+      player.fields[fieldId][i] = patch;
     }
     i++;
   };
 }
 
+// loop through all fields and increment the holes and sow seeds if needed
 function rollPatches() {
-  player.fields[player.currentField].forEach((patch, index) => {
-    patch.id = `patch_${index}`;
-    // roll the spuds so holes slowly get fill and can be re-seeded
-    if (patch.spud) {
-      if (patch.spud.qty < 0) {
-        patch.spud.qty++;
+  player.fields.forEach((field, fieldId) => {
+    field.forEach((patch, index) => {
+      patch.id = `patch_${index}`;
+      // roll the spuds so holes slowly get fill and can be re-seeded
+      if (patch.spud) {
+        if (patch.spud.qty < 0) {
+          patch.spud.qty++;
+        }
+        if (patch.spud.qty == 0) {
+          delete patch.spud;
+          player.sowSeeds++;
+        }
       }
-      if (patch.spud.qty == 0) {
-        delete patch.spud;
-        player.sowSeeds++;
-      }
-    }
+    });
   });
 }
 
@@ -409,14 +314,14 @@ function dayCycle() {
     } else if (player.phase == 'sales') {
       sellSpuds();
     } else if (player.phase == 'night') {
+      resetTools();
+      renderTools();
+      resetPlayer();
+      rollPatches();
       dream();
     }
   } else {
-    // re-display the fields patches in their current state
-    resetTools();
-    renderTools();
-    resetPlayer();
-    rollPatches();
+    // display the fields patches in their current state
     renderPatches();
   }
 }
@@ -455,8 +360,11 @@ function resowField() {
       }
       i++;
     }
-    while (player.sowSeeds-- >= 0) {
-
+    // add a few more seeds..
+    player.sowSeeds += 5;
+    // sow each seeds, some get blocks on top
+    while (player.sowSeeds > 0) {
+      player.sowSeeds--;
       let index = blankPatches[rnd(blankPatches.length)];
       let patch = {};
       switch (rnd(3)) {
@@ -471,17 +379,16 @@ function resowField() {
       patch.spud = { "name": newSpud.name, "qty": rnd(3) + 1 };
       player.fields[player.currentField][index] = patch;
     };
-
-
-
   }
 
   return sowMsg;
 }
 
-// look through the field drawing what we can see
-function patchClick(index) {
-  if ([60, 70, 71, 80].indexOf(index) > -1) {
+
+
+// user clicked a control to move up, down, left or right
+function controlClick(index) {
+  if (player.controlIds.indexOf(index) > -1) {
     // we are trying to move
     element = document.querySelector(`#patch_${player.pos}`);
     element.classList.remove("currentPos");
@@ -516,7 +423,7 @@ function patchClick(index) {
       }
     }
 
-    if ([60, 70, 71, 80].indexOf(newPos) > -1) {
+    if (player.controlIds.indexOf(newPos) > -1) {
       newPos = player.pos;
     }
 
@@ -713,7 +620,7 @@ function renderControl(id, dir) {
   element.innerHTML = svgImg(`control-icon--${dir}`);
   element.classList.add("controlButton");
   element.classList.remove('patch');
-  element.setAttribute("onclick", `patchClick(${id});`);
+  element.setAttribute("onclick", `controlClick(${id});`);
   player.fields[player.currentField][id] = { block: { type: "control" } };
 }
 
@@ -811,40 +718,3 @@ function resetPlayer() {
 
 }
 
-// page loaded - so init things
-document.addEventListener("DOMContentLoaded", function () {
-  sproutSpuds(6);
-  drawField();
-  fillField();
-  rollPatches();
-  renderPatches();
-  resetTools();
-  renderTools();
-  resetPlayer();
-  renderControls();
-  // gift the first machine
-  let starter = 'chipper';
-  player.shop.machines[starter] = player.hardware[starter].initial;
-});
-
-document.addEventListener("keydown", (event) => {
-
-  if (event.code == 'ArrowUp') {
-    patchClick(player.controls.start)
-  }
-  if (event.code == 'ArrowLeft') {
-    patchClick(player.controls.start + 10)
-  }
-  if (event.code == 'ArrowRight') {
-    patchClick(player.controls.start + 10 + 1)
-  }
-  if (event.code == 'ArrowDown') {
-    patchClick(player.controls.start + 10 + 10)
-  }
-  if (event.code == 'Space') {
-    digPatch();
-  }
-  if (event.code == 'Enter') {
-    dayCycle();
-  }
-});
