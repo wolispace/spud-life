@@ -2,7 +2,7 @@
 
 A homage to **Man Eats Fish** by [SuperMoof](http://www.supermoof.com/)
 
-Take on the role of chip shop owner, who has to harvest the potatoes, cook them, then then sell the meals from your food truck.
+Take on the role of chip shop owner. Find billions of procedurally-generate potatos and sell extraordinarily-teasty meals for the masses, one day at a time.
 
 ---
 
