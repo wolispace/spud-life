@@ -14,20 +14,12 @@ document.addEventListener("DOMContentLoaded", function () {
   player.shop.machines[starter] = player.hardware[starter].initial;
 });
 
+
 // hook into keys for movement and digging
 document.addEventListener("keydown", (event) => {
-
-  if (event.code == 'ArrowUp') {
-    controlClick(player.controls.start)
-  }
-  if (event.code == 'ArrowLeft') {
-    controlClick(player.controls.start + 10)
-  }
-  if (event.code == 'ArrowRight') {
-    controlClick(player.controls.start + 10 + 1)
-  }
-  if (event.code == 'ArrowDown') {
-    controlClick(player.controls.start + 10 + 10)
+  // convery keypresses into directonal movements
+  if (Object.keys(player.controlPos).includes(event.code)) {
+    controlClick(player.controls.start + player.controlPos[event.code]);
   }
   if (event.code == 'Space') {
     digPatch();
@@ -619,6 +611,7 @@ function renderControls() {
   renderControl(id, 'down');
 }
 
+// draw navigation buttons
 function renderControl(id, dir) {
   element = document.querySelector(`#patch_${id}`);
   element.innerHTML = svgImg(`control-icon--${dir}`);
@@ -628,20 +621,48 @@ function renderControl(id, dir) {
   player.fields[player.currentField][id] = { block: { type: "control" } };
 }
 
+// draw the tools across the bottom
 function renderTools() {
   let tools = '';
   let dummyImg = svgImg(`control-icon--up`);
   Object.entries(player.tools).forEach(([toolName, tool]) => {
     tools += `<div  class="tool-${toolName}" onclick="digPatch()">${toolName}=${tool.uses} ${dummyImg}</div>`;
   });
-  tools += `<div class="tool-purse">Purse=${player.purse}`;
-  tools += `<br/>Spuds=${countSpuds()}</div>`;
+  tools += `<div class="tool-purse" onclick="showSack()">Purse=${player.purse}`;
+  tools += `<br/>Sack=${countSack()}</div>`;
   tools += `<div class="tool-next" onclick="dayCycle()">Next &gt;</div>`;
   element = document.querySelector('.tools');
   element.innerHTML = tools;
 }
 
-function countSpuds() {
+// show or hide the sack via a dialog
+function showSack() {
+  let html = '';
+  Object.entries(player.sack).forEach(([spudName, spudQty]) => {
+    html += `<div class="buttonize">${spudName} = ${spudQty}</div>`;
+  });
+  showDialog('Sack contents', html);
+}
+
+// show or hide the dialog
+function showDialog(title, content) {
+  let element = document.querySelector(`.dialog`);
+  if (player.dialog) {
+    element.style["top"] = "-10000px";
+    element.style["left"] = "-10000px";
+  } else {
+    element.style["top"] = "20px";
+    element.style["left"] = "20px";
+    element = document.querySelector(`.dialog .header .title`);
+    element.innerHTML = title;
+    element = document.querySelector(`.dialog .content`);
+    element.innerHTML = content;
+  }
+  player.dialog = !player.dialog;
+}
+
+// count how many items are in the sack, spuds or other stuff
+function countSack() {
   let spuds = 0;
   Object.entries(player.sack).forEach(([spudName, spudQty]) => {
     spuds += spudQty;
@@ -650,6 +671,7 @@ function countSpuds() {
   return spuds;
 }
 
+// draw tools and machines for sale 
 function renderHardware() {
   let tools = '';
   Object.entries(player.hardware).forEach(([toolName, tool]) => {

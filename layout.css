@@ -30,10 +30,40 @@ h2 {
   margin: var(--sl-padding);
 }
 
-#offScreen {
+.dialog {
   position: absolute;
-  top: -10000px;
-  left: -10000px;
+  top: -1000px;
+  left: -1000px;
+  width: 80vw;
+  height: 80vh;
+  max-width: 35em;
+  max-height: 35em;
+  background-color: silver;
+  border-radius: 10px;
+  border-top: 2px solid white;
+  border-left: 2px solid white;
+  border-bottom: 2px solid rgba(0, 0, 0, .50);
+  border-right: 2px solid rgba(0, 0, 0, .5);
+}
+
+.dialog .header {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.dialog .close {
+  cursor: pointer;
+}
+
+.dialog .header .title {
+  padding: 10px;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.dialog .content {
+  padding: 10px;
 }
 
 .field {
@@ -447,9 +477,4 @@ h2 {
     opacity: 0.9;
   }
 
-}
-
-.offScreen {
-  width: 100px;
-  height: 100px;
 }
