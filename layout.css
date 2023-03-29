@@ -50,16 +50,24 @@ h2 {
   display: flex;
   justify-content: flex-end;
   gap: 10px;
+  border-right: 2px solid rgba(0, 0, 0, .60);
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  color: rgba(255, 255, 255, .8);
+  background-color: rgba(0, 0, 0, .6);
 }
 
 .dialog .close {
   cursor: pointer;
+  background-color: brown;
 }
 
 .dialog .header .title {
-  padding: 10px;
+  padding: 0.40rem 0 0 0.80rem;
   font-size: 1.25rem;
   font-weight: bold;
+  text-align: left;
+  width: 100%;
 }
 
 .dialog .content {
@@ -177,8 +185,9 @@ h2 {
   background-color: rgba(0, 0, 0, .1);
   border-top: 2px solid white;
   border-left: 2px solid white;
-  border-bottom: 2px solid rgba(0, 0, 0, .20);
-  border-right: 2px solid rgba(0, 0, 0, .20);
+  border-bottom: 2px solid rgba(0, 0, 0, .50);
+  border-right: 2px solid rgba(0, 0, 0, .40);
+  border-radius: 3px;
   padding: var(--sl-padding);
   margin: var(--sl-padding);
 }
