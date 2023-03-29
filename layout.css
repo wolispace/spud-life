@@ -74,6 +74,19 @@ h2 {
   padding: 10px;
 }
 
+.dialog .footer {
+  position: absolute;
+  bottom: 0;
+  width: 95%;
+  text-align: right;
+
+  padding: var(--sl-padding);
+}
+
+button {
+  cursor: pointer;
+}
+
 .field {
   width: 100%;
   height: 90vh;

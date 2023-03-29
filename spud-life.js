@@ -637,26 +637,29 @@ function renderTools() {
 
 // show or hide the sack via a dialog
 function showSack() {
-  let html = '';
+  let content = '';
   Object.entries(player.sack).forEach(([spudName, spudQty]) => {
-    html += `<div class="buttonize">${spudName} = ${spudQty}</div>`;
+    content += `<div class="buttonize">${spudName} = ${spudQty}</div>`;
   });
-  showDialog('Sack contents', html);
+  const footer = `<button class="buttonize" onclick="showSack()"> Ok </button>`;
+  showDialog('Inventory', content, footer);
 }
 
 // show or hide the dialog
-function showDialog(title, content) {
+function showDialog(title, content, footer) {
   let element = document.querySelector(`.dialog`);
   if (player.dialog) {
     element.style["top"] = "-10000px";
     element.style["left"] = "-10000px";
   } else {
-    element.style["top"] = "20px";
-    element.style["left"] = "20px";
+    element.style["top"] = "5vh";
+    element.style["left"] = "9vw";
     element = document.querySelector(`.dialog .header .title`);
     element.innerHTML = title;
     element = document.querySelector(`.dialog .content`);
     element.innerHTML = content;
+    element = document.querySelector(`.dialog .footer`);
+    element.innerHTML = footer;
   }
   player.dialog = !player.dialog;
 }
