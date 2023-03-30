@@ -2,11 +2,13 @@
 
 A homage to **Man Eats Fish** by [SuperMoof](http://www.supermoof.com/)
 
-Take on the role of chip shop owner. Find billions of procedurally-generate potatos and sell extraordinarily-teasty meals for the masses, one day at a time.
+Take on the role of chip shop owner. Find billions of procedurally-generate potatoes and sell extraordinarily-teasty meals for the masses, one day at a time.
 
 ---
 
 This will be a simple browser game wit no back-end server. Progerss will be storred locally in the browser. 
+
+### Codespaces notes
 
 `npm i -g http-server`
 `http-server`
