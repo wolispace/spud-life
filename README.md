@@ -6,7 +6,7 @@ Take on the role of chip shop owner. Find billions of procedurally-generate pota
 
 ---
 
-This will be a simple browser game wit no back-end server. Progerss will be storred locally in the browser. 
+This will be a simple browser game with no back-end server. Progerss will be stored locally in the browser. 
 
 ### Codespaces notes
 
