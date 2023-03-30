@@ -224,6 +224,20 @@ function sproutSpuds(qty) {
 
 // randomly fill the current field with rocks, logs and spuds - plus some ranom treasure!
 function fillField(fieldId) {
+  // skip the fisrt row
+  if (!player.fields[fieldId]) {
+    player.fields[fieldId] = [];
+  }
+  // player.fields[fieldId - 1] = [1];
+  // player.fields[fieldId + 1] = [1];
+
+  // first row 0 and 10 may contain links to other fields
+  if (player.fields[fieldId - 1]) {
+    player.fields[fieldId][0] = { id: "patch_0", block: { type: "control-icon--left", qty: 1, onclick: `switchField(${fieldId - 1})` } };
+  }
+  if (player.fields[fieldId + 1]) {
+    player.fields[fieldId][9] = { id: "patch_9", block: { type: "control-icon--right", qty: 1, onclick: `switchField(${fieldId + 1})` } };
+  }
   let i = 10;
   while (i < 100) {
     if (rnd(2) > 0) {
@@ -271,20 +285,72 @@ function rollPatches() {
     });
   });
 }
-
+// add an svg to each patch
 function renderPatches() {
   player.fields[player.currentField].forEach((patch, index) => {
     patch.id = `patch_${index}`;
     if (patch.block && patch.block.type == 'control') {
       // leave alone
+      //renderPatch(patch);
     } else {
-      // if we dont have asvg then add one
-      let element = document.querySelector(`#${patch.id}`);
       renderPatch(patch);
     }
   });
 }
 
+// based on patch contents decide what to show
+function renderPatch(patch) {
+  let newPatch = ' ';
+  if (patch) {
+    if (patch.block) {
+      if (patch.block.type == 'control') {
+        //newPatch = svgImg(patch.block.type, patch.block.qty);
+      } else {
+        newPatch = svgImg(patch.block.type, patch.block.qty);
+      }
+    }
+
+    if (patch.spud) {
+      if (patch.spud.qty > 0) {
+        newPatch += ''; // `<br/>S=${patch.spud.qty}` 
+      } else {
+        if (patch.spud.qty == -5 && patch.spud.name) {
+          newPatch = svgImg('spud');
+          patch.spudFound = true;
+        } else {
+          newPatch = svgImg('hole', 5);
+        }
+      }
+    }
+  }
+  if (newPatch == ' ') {
+    newPatch = svgImg('blank', player.grassQty);
+  }
+  if (newPatch) {
+    element = document.querySelector(`#${patch.id}`);
+    element.innerHTML = newPatch;
+
+    if (patch.spudFound) {
+      delete patch.spudFound;
+      let thisSpud = document.querySelector(`#${patch.id} svg`);
+
+      function onEnd() {
+        newPatch = svgImg('hole', 5);
+        element.innerHTML = newPatch;
+      }
+      animate(thisSpud, 'dig-spud', 1, onEnd);
+    }
+
+    // if we drew a hole, make sure its opacity matches the spud qty -5 = 100%, 0 = 0%
+    if (patch.spud && patch.spud.qty < 0) {
+      let opacity = 0 - patch.spud.qty * 20 / 100;
+      let hole = document.querySelector(`#${patch.id} svg`);
+      hole.style.opacity = opacity;
+    }
+  }
+}
+
+// move to the next phase in the day
 function dayCycle() {
   const phases = ['field', 'allocate', 'hardware', 'sales', 'night'];
   let pages = document.querySelectorAll(`.page`);
@@ -318,8 +384,8 @@ function dayCycle() {
   }
 }
 
+// random dreams based on ong titles eg:
 function dream() {
-  // random dreams based on ong titles eg:
   let dreams = [
     "You dream of living in a park, but are rudly awoken by the dustmen",
     "You dream you are a walrus",
@@ -339,6 +405,8 @@ function dream() {
   element.innerHTML = `<div>${dream}</div>${sow}`;
 }
 
+
+// randomly (ish) scatter more seeds and some get blocks on top
 function resowField() {
   let sowMsg = '';
   if (player.sowSeeds > 0) {
@@ -376,9 +444,7 @@ function resowField() {
   return sowMsg;
 }
 
-
-
-// user clicked a control to move up, down, left or right
+// user clicked a control to move up, down, left or right - interact with the patch we are moving into
 function controlClick(index) {
   if (player.animating) {
     setTimeout(player.animating = false, 2000);
@@ -471,6 +537,7 @@ function controlClick(index) {
   }
 }
 
+// dig for a pus in the current patch
 function digPatch() {
   let patch = player.fields[player.currentField][player.pos];
   let tool = player.tools['spade'];
@@ -520,6 +587,7 @@ function selectTool(patch) {
   return player.tools[tool];
 }
 
+// update the dvg in a patch to have the same number of visible paths as the patches qty
 function updatePatch(patch) {
   if (patch) {
     if (patch.block) {
@@ -540,53 +608,7 @@ function updatePatch(patch) {
   }
 }
 
-// based on patch contents decide what to show
-function renderPatch(patch) {
-  let newPatch = ' ';
-  if (patch) {
-    if (patch.block && patch.block.type !== 'control') {
-      newPatch = svgImg(patch.block.type, patch.block.qty);
-    }
-    if (patch.spud) {
-      if (patch.spud.qty > 0) {
-        newPatch += ''; // `<br/>S=${patch.spud.qty}` 
-      } else {
-        if (patch.spud.qty == -5 && patch.spud.name) {
-          newPatch = svgImg('spud');
-          patch.spudFound = true;
-        } else {
-          newPatch = svgImg('hole', 5);
-        }
-      }
-    }
-  }
-  if (newPatch == ' ') {
-    newPatch = svgImg('blank', player.grassQty);
-  }
-  if (newPatch) {
-    element = document.querySelector(`#${patch.id}`);
-    element.innerHTML = newPatch;
-
-    if (patch.spudFound) {
-      delete patch.spudFound;
-      let thisSpud = document.querySelector(`#${patch.id} svg`);
-
-      function onEnd() {
-        newPatch = svgImg('hole', 5);
-        element.innerHTML = newPatch;
-      }
-      animate(thisSpud, 'dig-spud', 1, onEnd);
-    }
-
-    // if we drew a hole, make sure its opacity matches the spud qty -5 = 100%, 0 = 0%
-    if (patch.spud && patch.spud.qty < 0) {
-      let opacity = 0 - patch.spud.qty * 20 / 100;
-      let hole = document.querySelector(`#${patch.id} svg`);
-      hole.style.opacity = opacity;
-    }
-  }
-}
-
+// one off setup the grid of patches
 function drawField() {
   const maxPatches = 99;
   let index = 0;
@@ -709,6 +731,7 @@ function refreshHardware() {
   });
 }
 
+// buy a tool or an upgrade to a tool or machine
 function buyTool(toolName) {
   let tool = player.hardware[toolName];
   if (tool.type == 'tool') {
@@ -731,13 +754,15 @@ function buyTool(toolName) {
   renderHardware();
 }
 
+// start of a new day reset toos to their max uses
 function resetTools() {
   Object.entries(player.tools).forEach(([toolName, tool]) => {
     tool.uses = tool.maxUses;
   });
 }
 
-// player starts abck at the entrace of the field
+// player starts back at the entrace of the field
+// TODO: do we reset them to their first field or leave on last (an upgrade perhaps?)
 function resetPlayer() {
   element = document.querySelector(`#patch_${player.pos}`);
   element.classList.remove("currentPos");
