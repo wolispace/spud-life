@@ -3,6 +3,8 @@ document.addEventListener("DOMContentLoaded", function () {
   sproutSpuds(6);
   drawField();
   fillField(player.currentField);
+  // TOTO remove temp second patch
+  fillField(player.currentField + 1);
   rollPatches();
   renderPatches();
   resetTools();
@@ -224,12 +226,9 @@ function sproutSpuds(qty) {
 
 // randomly fill the current field with rocks, logs and spuds - plus some ranom treasure!
 function fillField(fieldId) {
-  // skip the fisrt row
   if (!player.fields[fieldId]) {
     player.fields[fieldId] = [];
   }
-  // player.fields[fieldId - 1] = [1];
-  // player.fields[fieldId + 1] = [1];
 
   // first row 0 and 10 may contain links to other fields
   if (player.fields[fieldId - 1]) {
@@ -238,6 +237,7 @@ function fillField(fieldId) {
   if (player.fields[fieldId + 1]) {
     player.fields[fieldId][9] = { id: "patch_9", block: { type: "control-icon--right", qty: 1, onclick: `switchField(${fieldId + 1})` } };
   }
+  // skip the fisrt row
   let i = 10;
   while (i < 100) {
     if (rnd(2) > 0) {
@@ -291,7 +291,7 @@ function renderPatches() {
     patch.id = `patch_${index}`;
     if (patch.block && patch.block.type == 'control') {
       // leave alone
-      //renderPatch(patch);
+      renderPatch(patch);
     } else {
       renderPatch(patch);
     }
@@ -468,12 +468,19 @@ function controlClick(index) {
       newPos -= 1;
       direction = 'left';
       if (newPos < 0) {
+        // If there is an patch-1 then switch to that patch and put player in patch_9
         newPos = player.pos;
       }
     }
     if (index == 71 && player.pos % 10 < 9) {
       newPos += 1;
       direction = 'right';
+      if (newPos == 10 && player.fields[player.currentField + 1]) {
+        player.currentField++;
+        player.pos = 9;
+        renderPatches();
+        exit;
+      }
       if (newPos > 99) {
         newPos = player.pos;
       }
