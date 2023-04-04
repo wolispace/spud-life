@@ -18,6 +18,20 @@ function svgImg(svgName, repeat = 1) {
   if (svgInfo) {
 
     let paths = '';
+    let highlight = svgName != 'spud' ? '' : `
+    <defs>
+      <radialGradient id="spudHi">
+        <stop offset="0%" stop-color="white" />
+        <stop offset="100%" stop-color="transparent" />
+      </radialGradient>
+    </defs>
+    <g>
+      <circle cx="40", cy="40" r="30" 
+        fill="url('#spudHi')" 
+        stroke="none"
+        opacity="50%" />
+    </g>
+    `;
 
     // add the images name into the class list
     if (svgClass && svgClass != svgName) {
@@ -48,8 +62,12 @@ function svgImg(svgName, repeat = 1) {
       paths += '</g>';
     }
 
-    svgHtml = `<svg class="${svgClass}" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-       ${paths}
+    svgHtml = `<svg class="${svgClass}"
+      viewBox="0 0 100 100" 
+      xmlns="http://www.w3.org/2000/svg">
+      ${paths}
+      ${highlight}
+      <cXircle cx="50" cy="50" r="40" fill="url('#spudHi')" />
      </svg>`
   } else {
     svgHtml = images[svgName];

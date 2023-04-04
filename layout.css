@@ -361,7 +361,7 @@ button {
 .hole {
   stroke: var(--sl-mud);
   fill: var(--sl-mud);
-  opacity: .7;
+  opacity: .85;
 }
 
 .rock {
