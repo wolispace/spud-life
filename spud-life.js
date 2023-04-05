@@ -353,7 +353,7 @@ function renderPatch(patch) {
     newPatch = svgImg('blank', player.grassQty);
   }
   if (newPatch) {
-    element = document.querySelector(`#${patch.id}`);
+    let element = document.querySelector(`#${patch.id}`);
     element.innerHTML = newPatch;
 
     if (patch.spudFound) {
@@ -549,7 +549,7 @@ function controlClick(index) {
             patch.block.qty--;
           } else {
             delete patch.block;
-            element = document.querySelector(`#${patch.id}`);
+            let element = document.querySelector(`#${patch.id}`);
             setTimeout(() => { element.innerHTML = svgImg('blank', player.grassQty); }, 250, element, player);
           }
           playerTool.uses--;
