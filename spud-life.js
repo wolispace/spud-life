@@ -1,19 +1,21 @@
 // page loaded - so init things
-let player = loadPlayer();
+let app = {
+  state: loadPlayer(),
+};
 
 document.addEventListener("DOMContentLoaded", function () {
 
-  player = player ?? defaultPlayer();
+  app.state = app.state ?? defaultPlayer();
   //console.log(player);
 
   drawField();
-  if (player.spuds.length < 1) {
+  if (app.state.spuds.length < 1) {
     sproutSpuds(6);
-    fillField(player.currentField);
+    fillField(app.state.currentField);
     rollPatches();
     // gift the first machine first off
     let starter = 'chipper';
-    player.shop.machines[starter] = player.hardware[starter].initial;
+    app.state.shop.machines[starter] = app.state.hardware[starter].initial;
     renderPatches();
     resetTools();
     resetPlayer();
@@ -21,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
   renderControls();
   renderTools();
   // TOTO remove temp second patch
-  //fillField(player.currentField + 1);
+  //fillField(app.state.currentField + 1);
   dayCycle();
 });
 
@@ -29,8 +31,8 @@ document.addEventListener("DOMContentLoaded", function () {
 // hook into keys for movement and digging
 document.addEventListener("keydown", (event) => {
   // convery keypresses into directonal movements
-  if (Object.keys(player.controlPos).includes(event.code)) {
-    controlClick(player.controls.start + player.controlPos[event.code]);
+  if (Object.keys(app.state.controlPos).includes(event.code)) {
+    controlClick(app.state.controls.start + app.state.controlPos[event.code]);
   }
   if (event.code == 'Space') {
     digPatch();
@@ -42,13 +44,13 @@ document.addEventListener("keydown", (event) => {
 
 // save all player data compressed in local storage 
 function savePlayer() {
-  let compressed = LZString.compressToUTF16(JSON.stringify(player));
-  localStorage.setItem("player", compressed);
+  let compressed = LZString.compressToUTF16(JSON.stringify(app.state));
+  localStorage.setItem("state", compressed);
 }
 
 // retrieve compressed player data from local story
 function loadPlayer() {
-  let compressed = localStorage.getItem("player");
+  let compressed = localStorage.getItem("state");
   if (compressed) {
     let decompressed = LZString.decompressFromUTF16(compressed);
     return JSON.parse(decompressed);
@@ -63,10 +65,10 @@ function sellSpuds() {
   // loop through all machines
   // if machine has spuds in its hopper
   // convert spuds into food (hopper.qty x spud.price)
-  Object.entries(player.shop.machines).forEach(([machineName, machine]) => {
+  Object.entries(app.state.shop.machines).forEach(([machineName, machine]) => {
     if (machine.hopper) {
       Object.entries(machine.hopper).forEach(([spudName, spudQty]) => {
-        let spudInfo = player.spuds.filter(spud => spud.name == spudName);
+        let spudInfo = app.state.spuds.filter(spud => spud.name == spudName);
         let bonus = (machine.makes = spudInfo.bestFor) ? 2 : 1;
         let salePrice = machine.pricePerItem * bonus * spudQty;
         totalMeals = totalMeals + spudQty;
@@ -78,7 +80,7 @@ function sellSpuds() {
     }
   });
 
-  player.purse += totalIncome;
+  app.state.purse += totalIncome;
   let salesList = `Total meals=${totalMeals} income=${totalIncome}`;
   element = document.querySelector('.sales');
   element.innerHTML = salesList;
@@ -101,10 +103,10 @@ function allocate() {
 // show contents of the sack
 function renderSack() {
   let sackList = '';
-  Object.entries(player.sack).forEach(([spudName, spudQty]) => {
-    let spud = player.spuds.filter((spud) => spud.name == spudName)[0];
+  Object.entries(app.state.sack).forEach(([spudName, spudQty]) => {
+    let spud = app.state.spuds.filter((spud) => spud.name == spudName)[0];
     if (spud) {
-      let machine = player.shop.machines[player.shop.selected];
+      let machine = app.state.shop.machines[app.state.shop.selected];
       sackList += `<div class="sackSpuds buttonize">`;
       sackList += `<div class="sackSpudName">${spudQty} ${spud.fullName}</div>`;
       sackList += `<div class="sackListButtons">`;
@@ -132,7 +134,7 @@ function renderSack() {
 
 // move spuds from sack to machine hoppers
 function moveSpuds(spudName, spudQty) {
-  let machine = player.shop.machines[player.shop.selected];
+  let machine = app.state.shop.machines[app.state.shop.selected];
 
   if (!machine.hopper[spudName]) {
     machine.hopper[spudName] = 0;
@@ -140,21 +142,21 @@ function moveSpuds(spudName, spudQty) {
   let existing = machine.hopper[spudName];
 
   machine.hopper[spudName] = spudQty + existing;
-  player.sack[spudName] -= spudQty;
+  app.state.sack[spudName] -= spudQty;
 
   renderSack();
-  renderHopper(player.shop.selected);
+  renderHopper(app.state.shop.selected);
 }
 
 // show the machines next to the contents of the sack
 function renderMachines() {
   let machineList = ``;
-  player.shop.selected = '';
-  Object.entries(player.shop.machines).forEach(([machineName, machine]) => {
+  app.state.shop.selected = '';
+  Object.entries(app.state.shop.machines).forEach(([machineName, machine]) => {
     let selected = '';
-    if (player.shop.selected == '') {
+    if (app.state.shop.selected == '') {
       selected = 'selected';
-      player.shop.selected = machineName;
+      app.state.shop.selected = machineName;
     }
     machineList += `<div class="machine buttonize ${selected}" id="machine_${machineName}" onclick="selectMachine('${machineName}')">`;
     machineList += listHopper(machineName);
@@ -172,9 +174,9 @@ function renderHopper(machineName) {
 }
 
 function listHopper(machineName) {
-  let machine = player.hardware[machineName];
+  let machine = app.state.hardware[machineName];
   let hopper = `<div class="machineName">${machine.name}</div><div>`;
-  Object.entries(player.shop.machines[machineName].hopper).forEach(([spudName, spudQty]) => {
+  Object.entries(app.state.shop.machines[machineName].hopper).forEach(([spudName, spudQty]) => {
     hopper += `<div>${spudName} = ${spudQty}</div > `;
   });
   hopper += `</div>`;
@@ -186,7 +188,7 @@ function listHopper(machineName) {
 // which machine gets the spuds
 function selectMachine(machineName) {
   let className = 'selected';
-  player.shop.selected = machineName;
+  app.state.shop.selected = machineName;
 
   let elements = document.querySelectorAll(`.machine`);
   elements.forEach((element) => { element.classList.remove(className); });
@@ -234,7 +236,7 @@ function sproutSpuds(qty) {
     // uppercase first letter
     fullName = fullName.charAt(0).toUpperCase() + fullName.slice(1);
 
-    player.spuds[counter++] = {
+    app.state.spuds[counter++] = {
       "name": name,
       "fullName": fullName,
       "color": colorName,
@@ -250,16 +252,16 @@ function sproutSpuds(qty) {
 
 // randomly fill the current field with rocks, logs and spuds - plus some ranom treasure!
 function fillField(fieldId) {
-  if (!player.fields[fieldId]) {
-    player.fields[fieldId] = [];
+  if (!app.state.fields[fieldId]) {
+    app.state.fields[fieldId] = [];
   }
 
   // first row 0 and 10 may contain links to other fields
-  if (player.fields[fieldId - 1]) {
-    player.fields[fieldId][0] = { id: "patch_0", block: { type: "control-icon--left", qty: 1, onclick: `switchField(${fieldId - 1})` } };
+  if (app.state.fields[fieldId - 1]) {
+    app.state.fields[fieldId][0] = { id: "patch_0", block: { type: "control-icon--left", qty: 1, onclick: `switchField(${fieldId - 1})` } };
   }
-  if (player.fields[fieldId + 1]) {
-    player.fields[fieldId][9] = { id: "patch_9", block: { type: "control-icon--right", qty: 1, onclick: `switchField(${fieldId + 1})` } };
+  if (app.state.fields[fieldId + 1]) {
+    app.state.fields[fieldId][9] = { id: "patch_9", block: { type: "control-icon--right", qty: 1, onclick: `switchField(${fieldId + 1})` } };
   }
   // skip the fisrt row
   let i = 10;
@@ -279,13 +281,13 @@ function fillField(fieldId) {
           break;
       }
       if (patch !== {}) {
-        let newSpud = player.spuds[rnd(player.spuds.length)];
+        let newSpud = app.state.spuds[rnd(app.state.spuds.length)];
         patch.spud = { "name": newSpud.name, "qty": rnd(3) + 1 };
       }
-      if (!player.fields[fieldId]) {
-        player.fields[fieldId] = [];
+      if (!app.state.fields[fieldId]) {
+        app.state.fields[fieldId] = [];
       }
-      player.fields[fieldId][i] = patch;
+      app.state.fields[fieldId][i] = patch;
     }
     i++;
   };
@@ -293,7 +295,7 @@ function fillField(fieldId) {
 
 // loop through all fields and increment the holes and sow seeds if needed
 function rollPatches() {
-  player.fields.forEach((field, fieldId) => {
+  app.state.fields.forEach((field, fieldId) => {
     field.forEach((patch, index) => {
       patch = patch ?? {};
       patch.id = `patch_${index}`;
@@ -304,7 +306,7 @@ function rollPatches() {
         }
         if (patch.spud.qty == 0) {
           delete patch.spud;
-          player.sowSeeds++;
+          app.state.sowSeeds++;
         }
       }
     });
@@ -312,7 +314,7 @@ function rollPatches() {
 }
 // add an svg to each patch
 function renderPatches() {
-  player.fields[player.currentField].forEach((patch, index) => {
+  app.state.fields[app.state.currentField].forEach((patch, index) => {
     patch = patch ?? {};
     patch.id = `patch_${index}`;
     if (patch.block && patch.block.type == 'control') {
@@ -350,7 +352,7 @@ function renderPatch(patch) {
     }
   }
   if (newPatch == ' ') {
-    newPatch = svgImg('blank', player.grassQty);
+    newPatch = svgImg('blank', app.state.grassQty);
   }
   if (newPatch) {
     let element = document.querySelector(`#${patch.id}`);
@@ -384,21 +386,21 @@ function dayCycle() {
   // turn all pages off..
   pages.forEach((page) => { page.style['display'] = 'none' });
   // increment the page the player is on
-  let pos = phases.indexOf(player.phase);
+  let pos = phases.indexOf(app.state.phase);
   pos++;
   pos = pos >= phases.length ? 0 : pos;
-  player.phase = phases[pos];
+  app.state.phase = phases[pos];
   // turn on the page the player is on
-  if (player.phase != 'field') {
-    element = document.querySelector('.' + player.phase);
+  if (app.state.phase != 'field') {
+    element = document.querySelector('.' + app.state.phase);
     element.style['display'] = 'block';
-    if (player.phase == 'allocate') {
+    if (app.state.phase == 'allocate') {
       allocate();
-    } else if (player.phase == 'hardware') {
+    } else if (app.state.phase == 'hardware') {
       renderHardware();
-    } else if (player.phase == 'sales') {
+    } else if (app.state.phase == 'sales') {
       sellSpuds();
-    } else if (player.phase == 'night') {
+    } else if (app.state.phase == 'night') {
       resetTools();
       renderTools();
       resetPlayer();
@@ -437,22 +439,22 @@ function dream() {
 // randomly (ish) scatter more seeds and some get blocks on top
 function resowField() {
   let sowMsg = '';
-  if (player.sowSeeds > 0) {
+  if (app.state.sowSeeds > 0) {
     sowMsg = '<div>You find some seed potaoes at the bottom of your sack and scatter them randomly in the field</div>';
     let blankPatches = [];
     let i = 10;
     while (i < 100) {
-      if (!player.fields[player.currentField][i]) {
+      if (!app.state.fields[app.state.currentField][i]) {
         // sow seed and set i to 99
         blankPatches.push(i);
       }
       i++;
     }
     // add a few more seeds..
-    player.sowSeeds += 5;
+    app.state.sowSeeds += 5;
     // sow each seeds, some get blocks on top
-    while (player.sowSeeds > 0) {
-      player.sowSeeds--;
+    while (app.state.sowSeeds > 0) {
+      app.state.sowSeeds--;
       let index = blankPatches[rnd(blankPatches.length)];
       let patch = {};
       switch (rnd(3)) {
@@ -463,9 +465,9 @@ function resowField() {
           patch.block = { "type": "log", "qty": rnd(5) + 1 };
           break;
       }
-      let newSpud = player.spuds[rnd(player.spuds.length)];
+      let newSpud = app.state.spuds[rnd(app.state.spuds.length)];
       patch.spud = { "name": newSpud.name, "qty": rnd(3) + 1 };
-      player.fields[player.currentField][index] = patch;
+      app.state.fields[app.state.currentField][index] = patch;
     };
   }
 
@@ -474,58 +476,58 @@ function resowField() {
 
 // user clicked a control to move up, down, left or right - interact with the patch we are moving into
 function controlClick(index) {
-  if (player.animating) {
-    setTimeout(player.animating = false, 2000);
+  if (app.state.animating) {
+    setTimeout(app.state.animating = false, 2000);
     return;
   }
-  if (player.controlIds.indexOf(index) > -1) {
+  if (app.state.controlIds.indexOf(index) > -1) {
     // we are trying to move
-    element = document.querySelector(`#patch_${player.pos}`);
+    element = document.querySelector(`#patch_${app.state.pos}`);
     element.classList.remove("currentPos");
-    let newPos = player.pos;
+    let newPos = app.state.pos;
     let direction = 'down';
 
     if (index == 60) {
       newPos -= 10;
       direction = 'up';
       if (newPos < 0) {
-        newPos = player.pos;
+        newPos = app.state.pos;
       }
     }
-    if (index == 70 && player.pos % 10 > 0) {
+    if (index == 70 && app.state.pos % 10 > 0) {
       newPos -= 1;
       direction = 'left';
       if (newPos < 0) {
         // If there is an patch-1 then switch to that patch and put player in patch_9
-        newPos = player.pos;
+        newPos = app.state.pos;
       }
     }
-    if (index == 71 && player.pos % 10 < 9) {
+    if (index == 71 && app.state.pos % 10 < 9) {
       newPos += 1;
       direction = 'right';
-      if (newPos == 10 && player.fields[player.currentField + 1]) {
-        player.currentField++;
-        player.pos = 9;
+      if (newPos == 10 && app.state.fields[app.state.currentField + 1]) {
+        app.state.currentField++;
+        app.state.pos = 9;
         renderPatches();
         exit;
       }
       if (newPos > 99) {
-        newPos = player.pos;
+        newPos = app.state.pos;
       }
     }
     if (index == 80) {
       newPos += 10;
       if (newPos > 99) {
-        newPos = player.pos;
+        newPos = app.state.pos;
       }
     }
 
-    if (player.controlIds.indexOf(newPos) > -1) {
-      newPos = player.pos;
+    if (app.state.controlIds.indexOf(newPos) > -1) {
+      newPos = app.state.pos;
     }
 
-    if (newPos !== player.pos) {
-      let patch = player.fields[player.currentField][newPos];
+    if (newPos !== app.state.pos) {
+      let patch = app.state.fields[app.state.currentField][newPos];
       if (patch && patch.block) {
         // animate..
         let thisBlock = document.querySelector(`#${patch.id} svg`);
@@ -540,17 +542,17 @@ function controlClick(index) {
         let thisTool = document.querySelector(`.tool-${tool} svg`);
 
         animate(thisTool, `jiggle-up`, 0.25);
-        let playerTool = player.tools[tool];
+        let playerTool = app.state.tools[tool];
         if (playerTool && playerTool.uses > 0) {
           // if the patch is blocked.. the click reduces until zero and the block is removed
-          player.sack[patch.block.type] = player.sack[patch.block.type] ?? 0;
-          player.sack[patch.block.type]++;
+          app.state.sack[patch.block.type] = app.state.sack[patch.block.type] ?? 0;
+          app.state.sack[patch.block.type]++;
           if (patch.block.qty > 1) {
             patch.block.qty--;
           } else {
             delete patch.block;
             let element = document.querySelector(`#${patch.id}`);
-            setTimeout(() => { element.innerHTML = svgImg('blank', player.grassQty); }, 250, element, player);
+            setTimeout(() => { element.innerHTML = svgImg('blank', app.state.grassQty); }, 250, element, app.state);
           }
           playerTool.uses--;
           renderTools();
@@ -559,27 +561,27 @@ function controlClick(index) {
             updatePatch(patch);
           }
           if (patch.block) {
-            newPos = player.pos;
+            newPos = app.state.pos;
           }
         } else {
-          newPos = player.pos;
+          newPos = app.state.pos;
         }
       }
     }
-    player.pos = newPos;
+    app.state.pos = newPos;
     highlightCurrentPos();
   }
   //savePlayer();
 }
 
 function highlightCurrentPos() {
-  let element = document.querySelector(`#patch_${player.pos}`);
+  let element = document.querySelector(`#patch_${app.state.pos}`);
   element.classList.add("currentPos");
 }
 // dig for a pus in the current patch
 function digPatch() {
-  let patch = player.fields[player.currentField][player.pos];
-  let tool = player.tools['spade'];
+  let patch = app.state.fields[app.state.currentField][app.state.pos];
+  let tool = app.state.tools['spade'];
   let thisTool = document.querySelector(`.tool-spade svg`);
   animate(thisTool, `jiggle-up`, 0.25);
 
@@ -588,19 +590,19 @@ function digPatch() {
     if (!patch || !patch.spud) {
       patch = { spud: { qty: 0 } };
     }
-    patch.id = `patch_${player.pos}`;
+    patch.id = `patch_${app.state.pos}`;
 
     if (patch.spud.qty > 0) {
       // all spuds dug at once and moved to player sack
-      let sackQty = player.sack[patch.spud.name] || 0;
-      player.sack[patch.spud.name] = sackQty + patch.spud.qty;
+      let sackQty = app.state.sack[patch.spud.name] || 0;
+      app.state.sack[patch.spud.name] = sackQty + patch.spud.qty;
       // sput qty in negative meaning it takes this many days to return to a fresh patch
-      patch.spud.qty = player.spudRegen;
+      patch.spud.qty = app.state.spudRegen;
       tool.uses--;
     } else if (patch.spud.qty == 0) {
-      patch.spud.qty = player.spudRegen;
+      patch.spud.qty = app.state.spudRegen;
       tool.uses--;
-      player.fields[player.currentField][player.pos] = patch;
+      app.state.fields[app.state.currentField][app.state.pos] = patch;
     } else {
       // leave holes alone
       return;
@@ -623,7 +625,7 @@ function selectTool(patch) {
       tool = 'axe';
     }
   }
-  return player.tools[tool];
+  return app.state.tools[tool];
 }
 
 // update the dvg in a patch to have the same number of visible paths as the patches qty
@@ -653,7 +655,7 @@ function drawField() {
   let index = 0;
   let patches = '';
   while (index <= maxPatches) {
-    patches += `<div class="patch" id="patch_${index}">${svgImg('blank', player.grassQty)}</div>`;
+    patches += `<div class="patch" id="patch_${index}">${svgImg('blank', app.state.grassQty)}</div>`;
     index++;
   }
   element = document.querySelector('.field');
@@ -662,7 +664,7 @@ function drawField() {
 
 // allocate 4 patches to be movement buttons - they cant be dug
 function renderControls() {
-  let id = player.controls.start;
+  let id = app.state.controls.start;
   renderControl(id, 'up');
   id += 10;
   renderControl(id, 'left');
@@ -679,17 +681,17 @@ function renderControl(id, dir) {
   element.classList.add("controlButton");
   element.classList.remove('patch');
   element.setAttribute("onclick", `controlClick(${id});`);
-  player.fields[player.currentField][id] = { block: { type: "control" } };
+  app.state.fields[app.state.currentField][id] = { block: { type: "control" } };
 }
 
 // draw the tools across the bottom
 function renderTools() {
   let tools = '';
   let dummyImg = svgImg(`control-icon--up`);
-  Object.entries(player.tools).forEach(([toolName, tool]) => {
+  Object.entries(app.state.tools).forEach(([toolName, tool]) => {
     tools += `<div  class="tool-${toolName}" onclick="digPatch()">${toolName}=${tool.uses} ${dummyImg}</div>`;
   });
-  tools += `<div class="tool-purse" onclick="showSack()">Purse=${player.purse}`;
+  tools += `<div class="tool-purse" onclick="showSack()">Purse=${app.state.purse}`;
   tools += `<br/>Sack=${countSack()}</div>`;
   tools += `<div class="tool-next" onclick="dayCycle()">Next &gt;</div>`;
   element = document.querySelector('.tools');
@@ -699,7 +701,7 @@ function renderTools() {
 // show or hide the sack via a dialog
 function showSack() {
   let content = '';
-  Object.entries(player.sack).forEach(([spudName, spudQty]) => {
+  Object.entries(app.state.sack).forEach(([spudName, spudQty]) => {
     content += `<div class="buttonize">${spudName} = ${spudQty}</div>`;
   });
   const footer = `<button class="buttonize" onclick="showSack()"> Ok </button>`;
@@ -709,7 +711,7 @@ function showSack() {
 // show or hide the dialog
 function showDialog(title, content, footer) {
   let element = document.querySelector(`.dialog`);
-  if (player.dialog) {
+  if (app.state.dialog) {
     element.style["top"] = "-10000px";
     element.style["left"] = "-10000px";
   } else {
@@ -722,13 +724,13 @@ function showDialog(title, content, footer) {
     element = document.querySelector(`.dialog .footer`);
     element.innerHTML = footer;
   }
-  player.dialog = !player.dialog;
+  app.state.dialog = !app.state.dialog;
 }
 
 // count how many items are in the sack, spuds or other stuff
 function countSack() {
   let spuds = 0;
-  Object.entries(player.sack).forEach(([spudName, spudQty]) => {
+  Object.entries(app.state.sack).forEach(([spudName, spudQty]) => {
     spuds += spudQty;
   });
 
@@ -738,21 +740,21 @@ function countSack() {
 // draw tools and machines for sale 
 function renderHardware() {
   let tools = '';
-  Object.entries(player.hardware).forEach(([toolName, tool]) => {
+  Object.entries(app.state.hardware).forEach(([toolName, tool]) => {
     let state = 'buy';
     let cost = tool.price;
-    if (player.tools[toolName]) {
+    if (app.state.tools[toolName]) {
       state = 'upgrade'
       cost = tool.upgradeCost;
     }
     let onClick = '';
     let canBuyClass = 'tooMuch';
-    if (cost <= player.purse) {
+    if (cost <= app.state.purse) {
       onClick = `onclick="buyTool('${toolName}')"`;
       canBuyClass = ``;
 
     }
-    if (!player.shop.machines[toolName]) {
+    if (!app.state.shop.machines[toolName]) {
       tools += `<div class="buttonize button_${tool.type} ${canBuyClass}" ${onClick} id="hardware_${toolName}" ${onClick}>`;
       tools += `<strong>${tool.name}. </strong>`;
       tools += `${tool.desc}<br/>${state}=${cost}</div>`;
@@ -772,22 +774,22 @@ function refreshHardware() {
 
 // buy a tool or an upgrade to a tool or machine
 function buyTool(toolName) {
-  let tool = player.hardware[toolName];
+  let tool = app.state.hardware[toolName];
   if (tool.type == 'tool') {
-    if (player.tools[toolName]) {
+    if (app.state.tools[toolName]) {
       // upgrade
-      player.tools[toolName].maxUses++;
-      player.tools[toolName].uses++;
-      player.purse = player.purse - player.hardware[toolName].upgradeCost;
+      app.state.tools[toolName].maxUses++;
+      app.state.tools[toolName].uses++;
+      app.state.purse = app.state.purse - app.state.hardware[toolName].upgradeCost;
     } else {
       // buy
-      player.tools[toolName] = player.hardware[toolName].initial;
-      player.purse = player.purse - player.hardware[toolName].price;
+      app.state.tools[toolName] = app.state.hardware[toolName].initial;
+      app.state.purse = app.state.purse - app.state.hardware[toolName].price;
     }
   } else {
     // buy machine
-    player.shop.machines[toolName] = player.hardware[toolName].initial;
-    player.purse = player.purse - player.hardware[toolName].price;
+    app.state.shop.machines[toolName] = app.state.hardware[toolName].initial;
+    app.state.purse = app.state.purse - app.state.hardware[toolName].price;
   }
   renderTools();
   renderHardware();
@@ -795,7 +797,7 @@ function buyTool(toolName) {
 
 // start of a new day reset toos to their max uses
 function resetTools() {
-  Object.entries(player.tools).forEach(([toolName, tool]) => {
+  Object.entries(app.state.tools).forEach(([toolName, tool]) => {
     tool.uses = tool.maxUses;
   });
 }
@@ -803,10 +805,10 @@ function resetTools() {
 // player starts back at the entrace of the field
 // TODO: do we reset them to their first field or leave on last (an upgrade perhaps?)
 function resetPlayer() {
-  element = document.querySelector(`#patch_${player.pos}`);
+  element = document.querySelector(`#patch_${app.state.pos}`);
   element.classList.remove("currentPos");
-  player.pos = 0;
-  element = document.querySelector(`#patch_${player.pos}`);
+  app.state.pos = 0;
+  element = document.querySelector(`#patch_${app.state.pos}`);
   element.classList.add("currentPos");
 
 }
