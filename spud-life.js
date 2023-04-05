@@ -40,11 +40,13 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
+// save all player data compressed in local storage 
 function savePlayer() {
   let compressed = LZString.compressToUTF16(JSON.stringify(player));
   localStorage.setItem("player", compressed);
 }
 
+// retrieve compressed player data from local story
 function loadPlayer() {
   let compressed = localStorage.getItem("player");
   if (compressed) {
