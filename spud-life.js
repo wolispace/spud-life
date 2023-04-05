@@ -1,19 +1,28 @@
 // page loaded - so init things
+let player = loadPlayer();
+
 document.addEventListener("DOMContentLoaded", function () {
-  sproutSpuds(6);
+
+  player = player ?? defaultPlayer();
+  //console.log(player);
+
   drawField();
-  fillField(player.currentField);
-  // TOTO remove temp second patch
-  fillField(player.currentField + 1);
-  rollPatches();
-  renderPatches();
-  resetTools();
-  renderTools();
-  resetPlayer();
+  if (player.spuds.length < 1) {
+    sproutSpuds(6);
+    fillField(player.currentField);
+    rollPatches();
+    // gift the first machine first off
+    let starter = 'chipper';
+    player.shop.machines[starter] = player.hardware[starter].initial;
+    renderPatches();
+    resetTools();
+    resetPlayer();
+  }
   renderControls();
-  // gift the first machine
-  let starter = 'chipper';
-  player.shop.machines[starter] = player.hardware[starter].initial;
+  renderTools();
+  // TOTO remove temp second patch
+  //fillField(player.currentField + 1);
+  dayCycle();
 });
 
 
@@ -30,6 +39,19 @@ document.addEventListener("keydown", (event) => {
     dayCycle();
   }
 });
+
+function savePlayer() {
+  let compressed = LZString.compressToUTF16(JSON.stringify(player));
+  localStorage.setItem("player", compressed);
+}
+
+function loadPlayer() {
+  let compressed = localStorage.getItem("player");
+  if (compressed) {
+    let decompressed = LZString.decompressFromUTF16(compressed);
+    return JSON.parse(decompressed);
+  }
+}
 
 // selling the meals from the machines
 function sellSpuds() {
@@ -271,6 +293,7 @@ function fillField(fieldId) {
 function rollPatches() {
   player.fields.forEach((field, fieldId) => {
     field.forEach((patch, index) => {
+      patch = patch ?? {};
       patch.id = `patch_${index}`;
       // roll the spuds so holes slowly get fill and can be re-seeded
       if (patch.spud) {
@@ -288,6 +311,7 @@ function rollPatches() {
 // add an svg to each patch
 function renderPatches() {
   player.fields[player.currentField].forEach((patch, index) => {
+    patch = patch ?? {};
     patch.id = `patch_${index}`;
     if (patch.block && patch.block.type == 'control') {
       // leave alone
@@ -352,6 +376,7 @@ function renderPatch(patch) {
 
 // move to the next phase in the day
 function dayCycle() {
+  savePlayer();
   const phases = ['field', 'allocate', 'hardware', 'sales', 'night'];
   let pages = document.querySelectorAll(`.page`);
   // turn all pages off..
@@ -381,6 +406,7 @@ function dayCycle() {
   } else {
     // display the fields patches in their current state
     renderPatches();
+    highlightCurrentPos();
   }
 }
 
@@ -539,11 +565,15 @@ function controlClick(index) {
       }
     }
     player.pos = newPos;
-    element = document.querySelector(`#patch_${player.pos}`);
-    element.classList.add("currentPos");
+    highlightCurrentPos();
   }
+  //savePlayer();
 }
 
+function highlightCurrentPos() {
+  let element = document.querySelector(`#patch_${player.pos}`);
+  element.classList.add("currentPos");
+}
 // dig for a pus in the current patch
 function digPatch() {
   let patch = player.fields[player.currentField][player.pos];
