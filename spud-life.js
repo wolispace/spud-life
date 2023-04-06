@@ -1,10 +1,13 @@
 // page loaded - so init things
 
-let app = defaultPlayer();
+let app = initApp();
 let saved = app.load();
 if (saved) {
   app.state = saved;
 }
+let controls = initControls();
+let tools = initTools();
+let fields = initFields();
 
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -23,8 +26,8 @@ document.addEventListener("DOMContentLoaded", function () {
     resetTools();
     resetPlayer();
   }
-  renderControls();
-  renderTools();
+  controls.render();
+  tools.render();
   // TOTO remove temp second patch
   //fillField(app.state.currentField + 1);
   dayCycle();
@@ -44,6 +47,7 @@ document.addEventListener("keydown", (event) => {
     dayCycle();
   }
 });
+
 
 // selling the meals from the machines
 function sellSpuds() {
@@ -390,7 +394,7 @@ function dayCycle() {
       sellSpuds();
     } else if (app.state.phase == 'night') {
       resetTools();
-      renderTools();
+      tools.render();
       resetPlayer();
       rollPatches();
       dream();
@@ -543,7 +547,7 @@ function controlClick(index) {
             setTimeout(() => { element.innerHTML = svgImg('blank', app.state.grassQty); }, 250, element, app.state);
           }
           playerTool.uses--;
-          renderTools();
+          tools.render();
 
           if (patch) {
             updatePatch(patch);
@@ -594,7 +598,7 @@ function digPatch() {
       // leave holes alone
       return;
     }
-    renderTools();
+    tools.render();
 
     if (patch) {
       renderPatch(patch);
@@ -649,41 +653,6 @@ function drawField() {
   element.innerHTML = patches;
 }
 
-// allocate 4 patches to be movement buttons - they cant be dug
-function renderControls() {
-  let id = app.state.controls.start;
-  renderControl(id, 'up');
-  id += 10;
-  renderControl(id, 'left');
-  id += 1;
-  renderControl(id, 'right');
-  id += 9;
-  renderControl(id, 'down');
-}
-
-// draw navigation buttons
-function renderControl(id, dir) {
-  element = document.querySelector(`#patch_${id}`);
-  element.innerHTML = svgImg(`control-icon--${dir}`);
-  element.classList.add("controlButton");
-  element.classList.remove('patch');
-  element.setAttribute("onclick", `controlClick(${id});`);
-  app.state.fields[app.state.currentField][id] = { block: { type: "control" } };
-}
-
-// draw the tools across the bottom
-function renderTools() {
-  let tools = '';
-  let dummyImg = svgImg(`control-icon--up`);
-  Object.entries(app.state.tools).forEach(([toolName, tool]) => {
-    tools += `<div  class="tool-${toolName}" onclick="digPatch()">${toolName}=${tool.uses} ${dummyImg}</div>`;
-  });
-  tools += `<div class="tool-purse" onclick="showSack()">Purse=${app.state.purse}`;
-  tools += `<br/>Sack=${countSack()}</div>`;
-  tools += `<div class="tool-next" onclick="dayCycle()">Next &gt;</div>`;
-  element = document.querySelector('.tools');
-  element.innerHTML = tools;
-}
 
 // show or hide the sack via a dialog
 function showSack() {
@@ -778,7 +747,7 @@ function buyTool(toolName) {
     app.state.shop.machines[toolName] = app.state.hardware[toolName].initial;
     app.state.purse = app.state.purse - app.state.hardware[toolName].price;
   }
-  renderTools();
+  tools.render();
   renderHardware();
 }
 

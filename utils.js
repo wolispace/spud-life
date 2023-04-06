@@ -67,7 +67,6 @@ function svgImg(svgName, repeat = 1) {
       xmlns="http://www.w3.org/2000/svg">
       ${paths}
       ${highlight}
-      <cXircle cx="50" cy="50" r="40" fill="url('#spudHi')" />
      </svg>`
   } else {
     svgHtml = images[svgName];

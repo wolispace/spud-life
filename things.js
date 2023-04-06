@@ -1,4 +1,4 @@
-function defaultPlayer() {
+function initApp() {
   return {
     state: {
       phase: "night",
@@ -230,7 +230,58 @@ function hardwareStore() {
         hopper: {}
       }
     },
+
   }
 }
 
+function initControls() {
+  return {
+    // allocate 4 patches to be movement buttons - they cant be dug
+    render: () => {
+      let id = app.state.controls.start;
+      controls.renderControl(id, 'up');
+      id += 10;
+      controls.renderControl(id, 'left');
+      id += 1;
+      controls.renderControl(id, 'right');
+      id += 9;
+      controls.renderControl(id, 'down');
+    },
 
+    // draw navigation buttons
+    renderControl: (id, dir) => {
+      element = document.querySelector(`#patch_${id}`);
+      element.innerHTML = svgImg(`control-icon--${dir}`);
+      element.classList.add("controlButton");
+      element.classList.remove('patch');
+      element.setAttribute("onclick", `controlClick(${id});`);
+      app.state.fields[app.state.currentField][id] = { block: { type: "control" } };
+    }
+
+  }
+
+}
+
+function initTools() {
+  return {
+    // draw the tools across the bottom
+    render: () => {
+      let tools = '';
+      let dummyImg = svgImg(`control-icon--up`);
+      Object.entries(app.state.tools).forEach(([toolName, tool]) => {
+        tools += `<div  class="tool-${toolName}" onclick="digPatch()">${toolName}=${tool.uses} ${dummyImg}</div>`;
+      });
+      tools += `<div class="tool-purse" onclick="showSack()">Purse=${app.state.purse}`;
+      tools += `<br/>Sack=${countSack()}</div>`;
+      tools += `<div class="tool-next" onclick="dayCycle()">Next &gt;</div>`;
+      element = document.querySelector('.tools');
+      element.innerHTML = tools;
+    }
+  };
+}
+
+function initFields() {
+  return {
+
+  }
+}
