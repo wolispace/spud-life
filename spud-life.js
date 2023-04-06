@@ -1,11 +1,14 @@
 // page loaded - so init things
-let app = {
-  state: loadPlayer(),
-};
+
+let app = defaultPlayer();
+let saved = app.load();
+if (saved) {
+  app.state = saved;
+}
 
 document.addEventListener("DOMContentLoaded", function () {
 
-  app.state = app.state ?? defaultPlayer();
+  //app.state = app.state ?? defPlayer;
   //console.log(player);
 
   drawField();
@@ -41,21 +44,6 @@ document.addEventListener("keydown", (event) => {
     dayCycle();
   }
 });
-
-// save all player data compressed in local storage 
-function savePlayer() {
-  let compressed = LZString.compressToUTF16(JSON.stringify(app.state));
-  localStorage.setItem("state", compressed);
-}
-
-// retrieve compressed player data from local story
-function loadPlayer() {
-  let compressed = localStorage.getItem("state");
-  if (compressed) {
-    let decompressed = LZString.decompressFromUTF16(compressed);
-    return JSON.parse(decompressed);
-  }
-}
 
 // selling the meals from the machines
 function sellSpuds() {
@@ -380,7 +368,7 @@ function renderPatch(patch) {
 
 // move to the next phase in the day
 function dayCycle() {
-  savePlayer();
+  app.save();
   const phases = ['field', 'allocate', 'hardware', 'sales', 'night'];
   let pages = document.querySelectorAll(`.page`);
   // turn all pages off..
@@ -571,7 +559,6 @@ function controlClick(index) {
     app.state.pos = newPos;
     highlightCurrentPos();
   }
-  //savePlayer();
 }
 
 function highlightCurrentPos() {
