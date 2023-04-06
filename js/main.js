@@ -52,8 +52,8 @@ function allocate() {
   element = document.querySelector('.allocate');
   element.innerHTML = allocate;
 
-  renderMachines();
-  renderSack();
+  machines.render();
+  sack.render();
 }
 
 
@@ -71,58 +71,9 @@ function moveSpuds(spudName, spudQty) {
   player.sack[spudName] -= spudQty;
 
   sack.render();
-  renderHopper(player.shop.selected);
+  machines.renderHopper(player.shop.selected);
 }
 
-// show the machines next to the contents of the sack
-function renderMachines() {
-  let machineList = ``;
-  player.shop.selected = '';
-  Object.entries(player.shop.machines).forEach(([machineName, machine]) => {
-    let selected = '';
-    if (player.shop.selected == '') {
-      selected = 'selected';
-      player.shop.selected = machineName;
-    }
-    machineList += `<div class="machine buttonize ${selected}" id="machine_${machineName}" onclick="selectMachine('${machineName}')">`;
-    machineList += listHopper(machineName);
-    machineList += `</div>`;
-  });
-
-  element = document.querySelector('.machines');
-  element.innerHTML = machineList;
-}
-
-// each machine has a hopper that is filled with spuds 
-function renderHopper(machineName) {
-  element = document.querySelector(`#machine_${machineName}`);
-  element.innerHTML = listHopper(machineName);
-}
-
-function listHopper(machineName) {
-  let machine = player.hardware[machineName];
-  let hopper = `<div class="machineName">${machine.name}</div><div>`;
-  Object.entries(player.shop.machines[machineName].hopper).forEach(([spudName, spudQty]) => {
-    hopper += `<div>${spudName} = ${spudQty}</div > `;
-  });
-  hopper += `</div>`;
-  hopper += `<div>${machine.desc}</div>`;
-
-  return hopper;
-}
-
-// which machine gets the spuds
-function selectMachine(machineName) {
-  let className = 'selected';
-  player.shop.selected = machineName;
-
-  let elements = document.querySelectorAll(`.machine`);
-  elements.forEach((element) => { element.classList.remove(className); });
-
-  let element = document.querySelector(`#machine_${machineName}`);
-  element.classList.add(className);
-  sack.render();
-}
 
 
 
@@ -184,11 +135,7 @@ function dream() {
   element.innerHTML = `<div>${dream}</div>${sow}`;
 }
 
-
-
-
-
-
+//TODO: is this needed?
 // update the dvg in a patch to have the same number of visible paths as the patches qty
 function updatePatch(patch) {
   if (patch) {
