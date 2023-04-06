@@ -23,8 +23,8 @@ document.addEventListener("DOMContentLoaded", function () {
     let starter = 'chipper';
     app.state.shop.machines[starter] = app.state.hardware[starter].initial;
     fields.renderPatches();
-    resetTools();
-    resetPlayer();
+    tools.reset();
+    fields.resetPlayer();
   }
   controls.render();
   tools.render();
@@ -266,16 +266,16 @@ function dayCycle() {
     } else if (app.state.phase == 'sales') {
       sellSpuds();
     } else if (app.state.phase == 'night') {
-      resetTools();
+      tools.reset();
       tools.render();
-      resetPlayer();
+      fields.resetPlayer();
       fields.rollPatches();
       dream();
     }
   } else {
     // display the fields patches in their current state
     fields.renderPatches();
-    highlightCurrentPos();
+    fields.highlightCurrentPos();
   }
 }
 
@@ -397,14 +397,10 @@ function controlClick(index) {
       }
     }
     app.state.pos = newPos;
-    highlightCurrentPos();
+    fields.highlightCurrentPos();
   }
 }
 
-function highlightCurrentPos() {
-  let element = document.querySelector(`#patch_${app.state.pos}`);
-  element.classList.add("currentPos");
-}
 
 
 // update the dvg in a patch to have the same number of visible paths as the patches qty
@@ -506,21 +502,5 @@ function refreshHardware() {
 
 
 
-// start of a new day reset toos to their max uses
-function resetTools() {
-  Object.entries(app.state.tools).forEach(([toolName, tool]) => {
-    tool.uses = tool.maxUses;
-  });
-}
 
-// player starts back at the entrace of the field
-// TODO: do we reset them to their first field or leave on last (an upgrade perhaps?)
-function resetPlayer() {
-  element = document.querySelector(`#patch_${app.state.pos}`);
-  element.classList.remove("currentPos");
-  app.state.pos = 0;
-  element = document.querySelector(`#patch_${app.state.pos}`);
-  element.classList.add("currentPos");
-
-}
 

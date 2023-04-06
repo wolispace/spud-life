@@ -311,6 +311,13 @@ function initTools() {
       tools.render();
       renderHardware();
     },
+    // start of a new day reset toos to their max uses
+    reset: () => {
+      Object.entries(app.state.tools).forEach(([toolName, tool]) => {
+        tool.uses = tool.maxUses;
+      });
+    },
+
   };
 }
 
@@ -530,6 +537,20 @@ function initFields() {
         }
       }
     },
+    highlightCurrentPos: () => {
+      let element = document.querySelector(`#patch_${app.state.pos}`);
+      element.classList.add("currentPos");
+    },
+    // player starts back at the entrace of the field
+    // TODO: do we reset them to their first field or leave on last (an upgrade perhaps?)
+    resetPlayer: () => {
+      element = document.querySelector(`#patch_${app.state.pos}`);
+      element.classList.remove("currentPos");
+      app.state.pos = 0;
+      element = document.querySelector(`#patch_${app.state.pos}`);
+      element.classList.add("currentPos");
+    },
+
 
 
 
