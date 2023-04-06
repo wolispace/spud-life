@@ -14,11 +14,11 @@ document.addEventListener("DOMContentLoaded", function () {
   //app.state = app.state ?? defPlayer;
   //console.log(player);
 
-  drawField();
+  fields.render();
   if (app.state.spuds.length < 1) {
     sproutSpuds(6);
     fillField(app.state.currentField);
-    rollPatches();
+    fields.rollPatches();
     // gift the first machine first off
     let starter = 'chipper';
     app.state.shop.machines[starter] = app.state.hardware[starter].initial;
@@ -285,25 +285,7 @@ function fillField(fieldId) {
   };
 }
 
-// loop through all fields and increment the holes and sow seeds if needed
-function rollPatches() {
-  app.state.fields.forEach((field, fieldId) => {
-    field.forEach((patch, index) => {
-      patch = patch ?? {};
-      patch.id = `patch_${index}`;
-      // roll the spuds so holes slowly get fill and can be re-seeded
-      if (patch.spud) {
-        if (patch.spud.qty < 0) {
-          patch.spud.qty++;
-        }
-        if (patch.spud.qty == 0) {
-          delete patch.spud;
-          app.state.sowSeeds++;
-        }
-      }
-    });
-  });
-}
+
 // add an svg to each patch
 function renderPatches() {
   app.state.fields[app.state.currentField].forEach((patch, index) => {
@@ -396,7 +378,7 @@ function dayCycle() {
       resetTools();
       tools.render();
       resetPlayer();
-      rollPatches();
+      fields.rollPatches();
       dream();
     }
   } else {
@@ -640,18 +622,6 @@ function updatePatch(patch) {
   }
 }
 
-// one off setup the grid of patches
-function drawField() {
-  const maxPatches = 99;
-  let index = 0;
-  let patches = '';
-  while (index <= maxPatches) {
-    patches += `<div class="patch" id="patch_${index}">${svgImg('blank', app.state.grassQty)}</div>`;
-    index++;
-  }
-  element = document.querySelector('.field');
-  element.innerHTML = patches;
-}
 
 
 // show or hide the sack via a dialog

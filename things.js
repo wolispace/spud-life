@@ -282,6 +282,38 @@ function initTools() {
 
 function initFields() {
   return {
+    // one off setup the grid of patches
+    render() {
+      const maxPatches = 99;
+      let index = 0;
+      let patches = '';
+      while (index <= maxPatches) {
+        patches += `<div class="patch" id="patch_${index}">${svgImg('blank', app.state.grassQty)}</div>`;
+        index++;
+      }
+      element = document.querySelector('.field');
+      element.innerHTML = patches;
+    },
+    // loop through all fields and increment the holes and sow seeds if needed
+    rollPatches: () => {
+      app.state.fields.forEach((field, fieldId) => {
+        field.forEach((patch, index) => {
+          patch = patch ?? {};
+          patch.id = `patch_${index}`;
+          // roll the spuds so holes slowly get fill and can be re-seeded
+          if (patch.spud) {
+            if (patch.spud.qty < 0) {
+              patch.spud.qty++;
+            }
+            if (patch.spud.qty == 0) {
+              delete patch.spud;
+              app.state.sowSeeds++;
+            }
+          }
+        });
+      });
+    }
+
 
   }
 }
