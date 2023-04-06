@@ -5,7 +5,7 @@ const fields = {
     let index = 0;
     let patches = '';
     while (index <= maxPatches) {
-      patches += `<div class="patch" id="patch_${index}">${svgImg('blank', app.state.grassQty)}</div>`;
+      patches += `<div class="patch" id="patch_${index}">${svgImg('blank', player.grassQty)}</div>`;
       index++;
     }
     element = document.querySelector('.field');
@@ -14,16 +14,16 @@ const fields = {
 
   // randomly fill the current field with rocks, logs and spuds - plus some ranom treasure!
   fillField: (fieldId) => {
-    if (!app.state.fields[fieldId]) {
-      app.state.fields[fieldId] = [];
+    if (!player.fields[fieldId]) {
+      player.fields[fieldId] = [];
     }
 
     // first row 0 and 10 may contain links to other fields
-    if (app.state.fields[fieldId - 1]) {
-      app.state.fields[fieldId][0] = { id: "patch_0", block: { type: "control-icon--left", qty: 1, onclick: `switchField(${fieldId - 1})` } };
+    if (player.fields[fieldId - 1]) {
+      player.fields[fieldId][0] = { id: "patch_0", block: { type: "control-icon--left", qty: 1, onclick: `switchField(${fieldId - 1})` } };
     }
-    if (app.state.fields[fieldId + 1]) {
-      app.state.fields[fieldId][9] = { id: "patch_9", block: { type: "control-icon--right", qty: 1, onclick: `switchField(${fieldId + 1})` } };
+    if (player.fields[fieldId + 1]) {
+      player.fields[fieldId][9] = { id: "patch_9", block: { type: "control-icon--right", qty: 1, onclick: `switchField(${fieldId + 1})` } };
     }
     // skip the fisrt row
     let i = 10;
@@ -43,13 +43,13 @@ const fields = {
             break;
         }
         if (patch !== {}) {
-          let newSpud = app.state.spuds[rnd(app.state.spuds.length)];
+          let newSpud = player.spuds[rnd(player.spuds.length)];
           patch.spud = { "name": newSpud.name, "qty": rnd(3) + 1 };
         }
-        if (!app.state.fields[fieldId]) {
-          app.state.fields[fieldId] = [];
+        if (!player.fields[fieldId]) {
+          player.fields[fieldId] = [];
         }
-        app.state.fields[fieldId][i] = patch;
+        player.fields[fieldId][i] = patch;
       }
       i++;
     };
@@ -57,7 +57,7 @@ const fields = {
   ,
   // loop through all fields and increment the holes and sow seeds if needed
   rollPatches: () => {
-    app.state.fields.forEach((field, fieldId) => {
+    player.fields.forEach((field, fieldId) => {
       field.forEach((patch, index) => {
         patch = patch ?? {};
         patch.id = `patch_${index}`;
@@ -68,7 +68,7 @@ const fields = {
           }
           if (patch.spud.qty == 0) {
             delete patch.spud;
-            app.state.sowSeeds++;
+            player.sowSeeds++;
           }
         }
       });
@@ -76,7 +76,7 @@ const fields = {
   },
   // add an svg to each patch
   renderPatches: () => {
-    app.state.fields[app.state.currentField].forEach((patch, index) => {
+    player.fields[player.currentField].forEach((patch, index) => {
       patch = patch ?? {};
       patch.id = `patch_${index}`;
       if (patch.block && patch.block.type == 'control') {
@@ -114,7 +114,7 @@ const fields = {
       }
     }
     if (newPatch == ' ') {
-      newPatch = svgImg('blank', app.state.grassQty);
+      newPatch = svgImg('blank', player.grassQty);
     }
     if (newPatch) {
       let element = document.querySelector(`#${patch.id}`);
@@ -143,22 +143,22 @@ const fields = {
   // randomly (ish) scatter more seeds and some get blocks on top
   resowField: () => {
     let sowMsg = '';
-    if (app.state.sowSeeds > 0) {
+    if (player.sowSeeds > 0) {
       sowMsg = '<div>You find some seed potaoes at the bottom of your sack and scatter them randomly in the field</div>';
       let blankPatches = [];
       let i = 10;
       while (i < 100) {
-        if (!app.state.fields[app.state.currentField][i]) {
+        if (!player.fields[player.currentField][i]) {
           // sow seed and set i to 99
           blankPatches.push(i);
         }
         i++;
       }
       // add a few more seeds..
-      app.state.sowSeeds += 5;
+      player.sowSeeds += 5;
       // sow each seeds, some get blocks on top
-      while (app.state.sowSeeds > 0) {
-        app.state.sowSeeds--;
+      while (player.sowSeeds > 0) {
+        player.sowSeeds--;
         let index = blankPatches[rnd(blankPatches.length)];
         let patch = {};
         switch (rnd(3)) {
@@ -169,9 +169,9 @@ const fields = {
             patch.block = { "type": "log", "qty": rnd(5) + 1 };
             break;
         }
-        let newSpud = app.state.spuds[rnd(app.state.spuds.length)];
+        let newSpud = player.spuds[rnd(player.spuds.length)];
         patch.spud = { "name": newSpud.name, "qty": rnd(3) + 1 };
-        app.state.fields[app.state.currentField][index] = patch;
+        player.fields[player.currentField][index] = patch;
       };
     }
 
@@ -179,8 +179,8 @@ const fields = {
   },
   // dig for a pus in the current patch
   digPatch: () => {
-    let patch = app.state.fields[app.state.currentField][app.state.pos];
-    let tool = app.state.tools['spade'];
+    let patch = player.fields[player.currentField][player.pos];
+    let tool = player.tools['spade'];
     let thisTool = document.querySelector(`.tool-spade svg`);
     animate(thisTool, `jiggle-up`, 0.25);
 
@@ -189,19 +189,19 @@ const fields = {
       if (!patch || !patch.spud) {
         patch = { spud: { qty: 0 } };
       }
-      patch.id = `patch_${app.state.pos}`;
+      patch.id = `patch_${player.pos}`;
 
       if (patch.spud.qty > 0) {
         // all spuds dug at once and moved to player sack
-        let sackQty = app.state.sack[patch.spud.name] || 0;
-        app.state.sack[patch.spud.name] = sackQty + patch.spud.qty;
+        let sackQty = player.sack[patch.spud.name] || 0;
+        player.sack[patch.spud.name] = sackQty + patch.spud.qty;
         // sput qty in negative meaning it takes this many days to return to a fresh patch
-        patch.spud.qty = app.state.spudRegen;
+        patch.spud.qty = player.spudRegen;
         tool.uses--;
       } else if (patch.spud.qty == 0) {
-        patch.spud.qty = app.state.spudRegen;
+        patch.spud.qty = player.spudRegen;
         tool.uses--;
-        app.state.fields[app.state.currentField][app.state.pos] = patch;
+        player.fields[player.currentField][player.pos] = patch;
       } else {
         // leave holes alone
         return;
@@ -214,16 +214,16 @@ const fields = {
     }
   },
   highlightCurrentPos: () => {
-    let element = document.querySelector(`#patch_${app.state.pos}`);
+    let element = document.querySelector(`#patch_${player.pos}`);
     element.classList.add("currentPos");
   },
   // player starts back at the entrace of the field
   // TODO: do we reset them to their first field or leave on last (an upgrade perhaps?)
   resetPlayer: () => {
-    element = document.querySelector(`#patch_${app.state.pos}`);
+    element = document.querySelector(`#patch_${player.pos}`);
     element.classList.remove("currentPos");
-    app.state.pos = 0;
-    element = document.querySelector(`#patch_${app.state.pos}`);
+    player.pos = 0;
+    element = document.querySelector(`#patch_${player.pos}`);
     element.classList.add("currentPos");
   },
 

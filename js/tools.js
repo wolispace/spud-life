@@ -3,10 +3,10 @@ const tools = {
   render: () => {
     let tools = '';
     let dummyImg = svgImg(`control-icon--up`);
-    Object.entries(app.state.tools).forEach(([toolName, tool]) => {
+    Object.entries(player.tools).forEach(([toolName, tool]) => {
       tools += `<div  class="tool-${toolName}" onclick="fields.digPatch()">${toolName}=${tool.uses} ${dummyImg}</div>`;
     });
-    tools += `<div class="tool-purse" onclick="showSack()">Purse=${app.state.purse}`;
+    tools += `<div class="tool-purse" onclick="showSack()">Purse=${player.purse}`;
     tools += `<br/>Sack=${countSack()}</div>`;
     tools += `<div class="tool-next" onclick="dayCycle()">Next &gt;</div>`;
     element = document.querySelector('.tools');
@@ -22,33 +22,33 @@ const tools = {
         tool = 'axe';
       }
     }
-    return app.state.tools[tool];
+    return player.tools[tool];
   },
   // buy a tool or an upgrade to a tool or machine
   buyTool: (toolName) => {
-    let tool = app.state.hardware[toolName];
+    let tool = player.hardware[toolName];
     if (tool.type == 'tool') {
-      if (app.state.tools[toolName]) {
+      if (player.tools[toolName]) {
         // upgrade
-        app.state.tools[toolName].maxUses++;
-        app.state.tools[toolName].uses++;
-        app.state.purse = app.state.purse - app.state.hardware[toolName].upgradeCost;
+        player.tools[toolName].maxUses++;
+        player.tools[toolName].uses++;
+        player.purse = player.purse - player.hardware[toolName].upgradeCost;
       } else {
         // buy
-        app.state.tools[toolName] = app.state.hardware[toolName].initial;
-        app.state.purse = app.state.purse - app.state.hardware[toolName].price;
+        player.tools[toolName] = player.hardware[toolName].initial;
+        player.purse = player.purse - player.hardware[toolName].price;
       }
     } else {
       // buy machine
-      app.state.shop.machines[toolName] = app.state.hardware[toolName].initial;
-      app.state.purse = app.state.purse - app.state.hardware[toolName].price;
+      player.shop.machines[toolName] = player.hardware[toolName].initial;
+      player.purse = player.purse - player.hardware[toolName].price;
     }
     tools.render();
     renderHardware();
   },
   // start of a new day reset toos to their max uses
   reset: () => {
-    Object.entries(app.state.tools).forEach(([toolName, tool]) => {
+    Object.entries(player.tools).forEach(([toolName, tool]) => {
       tool.uses = tool.maxUses;
     });
   },

@@ -42,21 +42,25 @@ function initApp() {
       },
       animating: false,
     },
-    save: () => {
-      let compressed = LZString.compressToUTF16(JSON.stringify(app.state));
-      localStorage.setItem("state", compressed);
-    },
-    load: () => {
-      let compressed = localStorage.getItem("state");
-      if (compressed) {
-        let decompressed = LZString.decompressFromUTF16(compressed);
-        return JSON.parse(decompressed);
-      }
-    },
+
 
   };
 
 }
+
+const state = {
+  save: () => {
+    let compressed = LZString.compressToUTF16(JSON.stringify(player));
+    localStorage.setItem("state", compressed);
+  },
+  load: () => {
+    let compressed = localStorage.getItem("state");
+    if (compressed) {
+      let decompressed = LZString.decompressFromUTF16(compressed);
+      return JSON.parse(decompressed);
+    }
+  },
+};
 
 // all the svg images
 const svgImags = {

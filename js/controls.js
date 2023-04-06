@@ -1,7 +1,7 @@
 const controls = {
   // allocate 4 patches to be movement buttons - they cant be dug
   render: () => {
-    let id = app.state.controls.start;
+    let id = player.controls.start;
     controls.renderControl(id, 'up');
     id += 10;
     controls.renderControl(id, 'left');
@@ -18,64 +18,64 @@ const controls = {
     element.classList.add("controlButton");
     element.classList.remove('patch');
     element.setAttribute("onclick", `controls.click(${id});`);
-    app.state.fields[app.state.currentField][id] = { block: { type: "control" } };
+    player.fields[player.currentField][id] = { block: { type: "control" } };
   },
 
   click: (index) => {
     // user clicked a control to move up, down, left or right - interact with the patch we are moving into
 
-    if (app.state.animating) {
-      setTimeout(app.state.animating = false, 2000);
+    if (player.animating) {
+      setTimeout(player.animating = false, 2000);
       return;
     }
-    if (app.state.controlIds.indexOf(index) > -1) {
+    if (player.controlIds.indexOf(index) > -1) {
       // we are trying to move
-      element = document.querySelector(`#patch_${app.state.pos}`);
+      element = document.querySelector(`#patch_${player.pos}`);
       element.classList.remove("currentPos");
-      let newPos = app.state.pos;
+      let newPos = player.pos;
       let direction = 'down';
 
       if (index == 60) {
         newPos -= 10;
         direction = 'up';
         if (newPos < 0) {
-          newPos = app.state.pos;
+          newPos = player.pos;
         }
       }
-      if (index == 70 && app.state.pos % 10 > 0) {
+      if (index == 70 && player.pos % 10 > 0) {
         newPos -= 1;
         direction = 'left';
         if (newPos < 0) {
           // If there is an patch-1 then switch to that patch and put player in patch_9
-          newPos = app.state.pos;
+          newPos = player.pos;
         }
       }
-      if (index == 71 && app.state.pos % 10 < 9) {
+      if (index == 71 && player.pos % 10 < 9) {
         newPos += 1;
         direction = 'right';
-        if (newPos == 10 && app.state.fields[app.state.currentField + 1]) {
-          app.state.currentField++;
-          app.state.pos = 9;
+        if (newPos == 10 && player.fields[player.currentField + 1]) {
+          player.currentField++;
+          player.pos = 9;
           fields.renderPatches();
           exit;
         }
         if (newPos > 99) {
-          newPos = app.state.pos;
+          newPos = player.pos;
         }
       }
       if (index == 80) {
         newPos += 10;
         if (newPos > 99) {
-          newPos = app.state.pos;
+          newPos = player.pos;
         }
       }
 
-      if (app.state.controlIds.indexOf(newPos) > -1) {
-        newPos = app.state.pos;
+      if (player.controlIds.indexOf(newPos) > -1) {
+        newPos = player.pos;
       }
 
-      if (newPos !== app.state.pos) {
-        let patch = app.state.fields[app.state.currentField][newPos];
+      if (newPos !== player.pos) {
+        let patch = player.fields[player.currentField][newPos];
         if (patch && patch.block) {
           // animate..
           let thisBlock = document.querySelector(`#${patch.id} svg`);
@@ -90,17 +90,17 @@ const controls = {
           let thisTool = document.querySelector(`.tool-${tool} svg`);
 
           animate(thisTool, `jiggle-up`, 0.25);
-          let playerTool = app.state.tools[tool];
+          let playerTool = player.tools[tool];
           if (playerTool && playerTool.uses > 0) {
             // if the patch is blocked.. the click reduces until zero and the block is removed
-            app.state.sack[patch.block.type] = app.state.sack[patch.block.type] ?? 0;
-            app.state.sack[patch.block.type]++;
+            player.sack[patch.block.type] = player.sack[patch.block.type] ?? 0;
+            player.sack[patch.block.type]++;
             if (patch.block.qty > 1) {
               patch.block.qty--;
             } else {
               delete patch.block;
               let element = document.querySelector(`#${patch.id}`);
-              setTimeout(() => { element.innerHTML = svgImg('blank', app.state.grassQty); }, 250, element, app.state);
+              setTimeout(() => { element.innerHTML = svgImg('blank', player.grassQty); }, 250, element, player);
             }
             playerTool.uses--;
             tools.render();
@@ -109,14 +109,14 @@ const controls = {
               updatePatch(patch);
             }
             if (patch.block) {
-              newPos = app.state.pos;
+              newPos = player.pos;
             }
           } else {
-            newPos = app.state.pos;
+            newPos = player.pos;
           }
         }
       }
-      app.state.pos = newPos;
+      player.pos = newPos;
       fields.highlightCurrentPos();
     }
   }

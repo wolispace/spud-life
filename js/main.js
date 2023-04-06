@@ -1,21 +1,22 @@
 // page loaded - so init things
 
 let app = initApp();
-let saved = app.load();
+let saved = state.load();
 if (saved) {
-  app.state = saved;
+  player = saved;
 }
+player.hardware = hardwareStore();
 
 
 document.addEventListener("DOMContentLoaded", function () {
   fields.render();
-  if (app.state.spuds.length < 1) {
+  if (player.spuds.length < 1) {
     sproutSpuds(6);
-    fields.fillField(app.state.currentField);
+    fields.fillField(player.currentField);
     fields.rollPatches();
     // gift the first machine first off
     let starter = 'chipper';
-    app.state.shop.machines[starter] = app.state.hardware[starter].initial;
+    player.shop.machines[starter] = player.hardware[starter].initial;
     fields.renderPatches();
     tools.reset();
     fields.resetPlayer();
@@ -23,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
   controls.render();
   tools.render();
   // TOTO remove temp second patch
-  //fillField(app.state.currentField + 1);
+  //fillField(player.currentField + 1);
   dayCycle();
 });
 
@@ -31,8 +32,8 @@ document.addEventListener("DOMContentLoaded", function () {
 // hook into keys for movement and digging
 document.addEventListener("keydown", (event) => {
   // convery keypresses into directonal movements
-  if (Object.keys(app.state.controlPos).includes(event.code)) {
-    control.click(app.state.controls.start + app.state.controlPos[event.code]);
+  if (Object.keys(player.controlPos).includes(event.code)) {
+    control.click(player.controls.start + player.controlPos[event.code]);
   }
   if (event.code == 'Space') {
     fields.digPatch();
@@ -51,10 +52,10 @@ function sellSpuds() {
   // loop through all machines
   // if machine has spuds in its hopper
   // convert spuds into food (hopper.qty x spud.price)
-  Object.entries(app.state.shop.machines).forEach(([machineName, machine]) => {
+  Object.entries(player.shop.machines).forEach(([machineName, machine]) => {
     if (machine.hopper) {
       Object.entries(machine.hopper).forEach(([spudName, spudQty]) => {
-        let spudInfo = app.state.spuds.filter(spud => spud.name == spudName);
+        let spudInfo = player.spuds.filter(spud => spud.name == spudName);
         let bonus = (machine.makes = spudInfo.bestFor) ? 2 : 1;
         let salePrice = machine.pricePerItem * bonus * spudQty;
         totalMeals = totalMeals + spudQty;
@@ -66,7 +67,7 @@ function sellSpuds() {
     }
   });
 
-  app.state.purse += totalIncome;
+  player.purse += totalIncome;
   let salesList = `Total meals=${totalMeals} income=${totalIncome}`;
   element = document.querySelector('.sales');
   element.innerHTML = salesList;
@@ -89,10 +90,10 @@ function allocate() {
 // show contents of the sack
 function renderSack() {
   let sackList = '';
-  Object.entries(app.state.sack).forEach(([spudName, spudQty]) => {
-    let spud = app.state.spuds.filter((spud) => spud.name == spudName)[0];
+  Object.entries(player.sack).forEach(([spudName, spudQty]) => {
+    let spud = player.spuds.filter((spud) => spud.name == spudName)[0];
     if (spud) {
-      let machine = app.state.shop.machines[app.state.shop.selected];
+      let machine = player.shop.machines[player.shop.selected];
       sackList += `<div class="sackSpuds buttonize">`;
       sackList += `<div class="sackSpudName">${spudQty} ${spud.fullName}</div>`;
       sackList += `<div class="sackListButtons">`;
@@ -120,7 +121,7 @@ function renderSack() {
 
 // move spuds from sack to machine hoppers
 function moveSpuds(spudName, spudQty) {
-  let machine = app.state.shop.machines[app.state.shop.selected];
+  let machine = player.shop.machines[player.shop.selected];
 
   if (!machine.hopper[spudName]) {
     machine.hopper[spudName] = 0;
@@ -128,21 +129,21 @@ function moveSpuds(spudName, spudQty) {
   let existing = machine.hopper[spudName];
 
   machine.hopper[spudName] = spudQty + existing;
-  app.state.sack[spudName] -= spudQty;
+  player.sack[spudName] -= spudQty;
 
   renderSack();
-  renderHopper(app.state.shop.selected);
+  renderHopper(player.shop.selected);
 }
 
 // show the machines next to the contents of the sack
 function renderMachines() {
   let machineList = ``;
-  app.state.shop.selected = '';
-  Object.entries(app.state.shop.machines).forEach(([machineName, machine]) => {
+  player.shop.selected = '';
+  Object.entries(player.shop.machines).forEach(([machineName, machine]) => {
     let selected = '';
-    if (app.state.shop.selected == '') {
+    if (player.shop.selected == '') {
       selected = 'selected';
-      app.state.shop.selected = machineName;
+      player.shop.selected = machineName;
     }
     machineList += `<div class="machine buttonize ${selected}" id="machine_${machineName}" onclick="selectMachine('${machineName}')">`;
     machineList += listHopper(machineName);
@@ -160,9 +161,9 @@ function renderHopper(machineName) {
 }
 
 function listHopper(machineName) {
-  let machine = app.state.hardware[machineName];
+  let machine = player.hardware[machineName];
   let hopper = `<div class="machineName">${machine.name}</div><div>`;
-  Object.entries(app.state.shop.machines[machineName].hopper).forEach(([spudName, spudQty]) => {
+  Object.entries(player.shop.machines[machineName].hopper).forEach(([spudName, spudQty]) => {
     hopper += `<div>${spudName} = ${spudQty}</div > `;
   });
   hopper += `</div>`;
@@ -174,7 +175,7 @@ function listHopper(machineName) {
 // which machine gets the spuds
 function selectMachine(machineName) {
   let className = 'selected';
-  app.state.shop.selected = machineName;
+  player.shop.selected = machineName;
 
   let elements = document.querySelectorAll(`.machine`);
   elements.forEach((element) => { element.classList.remove(className); });
@@ -222,7 +223,7 @@ function sproutSpuds(qty) {
     // uppercase first letter
     fullName = fullName.charAt(0).toUpperCase() + fullName.slice(1);
 
-    app.state.spuds[counter++] = {
+    player.spuds[counter++] = {
       "name": name,
       "fullName": fullName,
       "color": colorName,
@@ -239,27 +240,27 @@ function sproutSpuds(qty) {
 
 // move to the next phase in the day
 function dayCycle() {
-  app.save();
+  state.save();
   const phases = ['field', 'allocate', 'hardware', 'sales', 'night'];
   let pages = document.querySelectorAll(`.page`);
   // turn all pages off..
   pages.forEach((page) => { page.style['display'] = 'none' });
   // increment the page the player is on
-  let pos = phases.indexOf(app.state.phase);
+  let pos = phases.indexOf(player.phase);
   pos++;
   pos = pos >= phases.length ? 0 : pos;
-  app.state.phase = phases[pos];
+  player.phase = phases[pos];
   // turn on the page the player is on
-  if (app.state.phase != 'field') {
-    element = document.querySelector('.' + app.state.phase);
+  if (player.phase != 'field') {
+    element = document.querySelector('.' + player.phase);
     element.style['display'] = 'block';
-    if (app.state.phase == 'allocate') {
+    if (player.phase == 'allocate') {
       allocate();
-    } else if (app.state.phase == 'hardware') {
+    } else if (player.phase == 'hardware') {
       renderHardware();
-    } else if (app.state.phase == 'sales') {
+    } else if (player.phase == 'sales') {
       sellSpuds();
-    } else if (app.state.phase == 'night') {
+    } else if (player.phase == 'night') {
       tools.reset();
       tools.render();
       fields.resetPlayer();
@@ -325,7 +326,7 @@ function updatePatch(patch) {
 // show or hide the sack via a dialog
 function showSack() {
   let content = '';
-  Object.entries(app.state.sack).forEach(([spudName, spudQty]) => {
+  Object.entries(player.sack).forEach(([spudName, spudQty]) => {
     content += `<div class="buttonize">${spudName} = ${spudQty}</div>`;
   });
   const footer = `<button class="buttonize" onclick="showSack()"> Ok </button>`;
@@ -335,7 +336,7 @@ function showSack() {
 // show or hide the dialog
 function showDialog(title, content, footer) {
   let element = document.querySelector(`.dialog`);
-  if (app.state.dialog) {
+  if (player.dialog) {
     element.style["top"] = "-10000px";
     element.style["left"] = "-10000px";
   } else {
@@ -348,13 +349,13 @@ function showDialog(title, content, footer) {
     element = document.querySelector(`.dialog .footer`);
     element.innerHTML = footer;
   }
-  app.state.dialog = !app.state.dialog;
+  player.dialog = !player.dialog;
 }
 
 // count how many items are in the sack, spuds or other stuff
 function countSack() {
   let spuds = 0;
-  Object.entries(app.state.sack).forEach(([spudName, spudQty]) => {
+  Object.entries(player.sack).forEach(([spudName, spudQty]) => {
     spuds += spudQty;
   });
 
@@ -364,21 +365,21 @@ function countSack() {
 // draw tools and machines for sale 
 function renderHardware() {
   let tools = '';
-  Object.entries(app.state.hardware).forEach(([toolName, tool]) => {
+  Object.entries(player.hardware).forEach(([toolName, tool]) => {
     let state = 'buy';
     let cost = tool.price;
-    if (app.state.tools[toolName]) {
+    if (player.tools[toolName]) {
       state = 'upgrade'
       cost = tool.upgradeCost;
     }
     let onClick = '';
     let canBuyClass = 'tooMuch';
-    if (cost <= app.state.purse) {
+    if (cost <= player.purse) {
       onClick = `onclick="tools.buyTool('${toolName}')"`;
       canBuyClass = ``;
 
     }
-    if (!app.state.shop.machines[toolName]) {
+    if (!player.shop.machines[toolName]) {
       tools += `<div class="buttonize button_${tool.type} ${canBuyClass}" ${onClick} id="hardware_${toolName}" ${onClick}>`;
       tools += `<strong>${tool.name}. </strong>`;
       tools += `${tool.desc}<br/>${state}=${cost}</div>`;
