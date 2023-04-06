@@ -269,14 +269,48 @@ function initTools() {
       let tools = '';
       let dummyImg = svgImg(`control-icon--up`);
       Object.entries(app.state.tools).forEach(([toolName, tool]) => {
-        tools += `<div  class="tool-${toolName}" onclick="digPatch()">${toolName}=${tool.uses} ${dummyImg}</div>`;
+        tools += `<div  class="tool-${toolName}" onclick="fields.digPatch()">${toolName}=${tool.uses} ${dummyImg}</div>`;
       });
       tools += `<div class="tool-purse" onclick="showSack()">Purse=${app.state.purse}`;
       tools += `<br/>Sack=${countSack()}</div>`;
       tools += `<div class="tool-next" onclick="dayCycle()">Next &gt;</div>`;
       element = document.querySelector('.tools');
       element.innerHTML = tools;
-    }
+    },
+    // TODO: not used!?! returns the players tool
+    selectTool: (patch) => {
+      let tool = 'spade';
+      if (patch.block) {
+        if (patch.block.type == 'rock') {
+          tool = 'pick';
+        } else {
+          tool = 'axe';
+        }
+      }
+      return app.state.tools[tool];
+    },
+    // buy a tool or an upgrade to a tool or machine
+    buyTool: (toolName) => {
+      let tool = app.state.hardware[toolName];
+      if (tool.type == 'tool') {
+        if (app.state.tools[toolName]) {
+          // upgrade
+          app.state.tools[toolName].maxUses++;
+          app.state.tools[toolName].uses++;
+          app.state.purse = app.state.purse - app.state.hardware[toolName].upgradeCost;
+        } else {
+          // buy
+          app.state.tools[toolName] = app.state.hardware[toolName].initial;
+          app.state.purse = app.state.purse - app.state.hardware[toolName].price;
+        }
+      } else {
+        // buy machine
+        app.state.shop.machines[toolName] = app.state.hardware[toolName].initial;
+        app.state.purse = app.state.purse - app.state.hardware[toolName].price;
+      }
+      tools.render();
+      renderHardware();
+    },
   };
 }
 
@@ -312,7 +346,96 @@ function initFields() {
           }
         });
       });
-    }
+    },
+    // add an svg to each patch
+    renderPatches: () => {
+      app.state.fields[app.state.currentField].forEach((patch, index) => {
+        patch = patch ?? {};
+        patch.id = `patch_${index}`;
+        if (patch.block && patch.block.type == 'control') {
+          // leave alone
+          renderPatch(patch);
+        } else {
+          renderPatch(patch);
+        }
+      });
+    },
+
+    // randomly (ish) scatter more seeds and some get blocks on top
+    resowField: () => {
+      let sowMsg = '';
+      if (app.state.sowSeeds > 0) {
+        sowMsg = '<div>You find some seed potaoes at the bottom of your sack and scatter them randomly in the field</div>';
+        let blankPatches = [];
+        let i = 10;
+        while (i < 100) {
+          if (!app.state.fields[app.state.currentField][i]) {
+            // sow seed and set i to 99
+            blankPatches.push(i);
+          }
+          i++;
+        }
+        // add a few more seeds..
+        app.state.sowSeeds += 5;
+        // sow each seeds, some get blocks on top
+        while (app.state.sowSeeds > 0) {
+          app.state.sowSeeds--;
+          let index = blankPatches[rnd(blankPatches.length)];
+          let patch = {};
+          switch (rnd(3)) {
+            case 0:
+              patch.block = { "type": "rock", "qty": rnd(5) + 1 };
+              break;
+            case 1:
+              patch.block = { "type": "log", "qty": rnd(5) + 1 };
+              break;
+          }
+          let newSpud = app.state.spuds[rnd(app.state.spuds.length)];
+          patch.spud = { "name": newSpud.name, "qty": rnd(3) + 1 };
+          app.state.fields[app.state.currentField][index] = patch;
+        };
+      }
+
+      return sowMsg;
+    },
+    // dig for a pus in the current patch
+    digPatch: () => {
+      let patch = app.state.fields[app.state.currentField][app.state.pos];
+      let tool = app.state.tools['spade'];
+      let thisTool = document.querySelector(`.tool-spade svg`);
+      animate(thisTool, `jiggle-up`, 0.25);
+
+      if (tool.uses > 0) {
+        // if nothing defined for a patch then its an empty spud
+        if (!patch || !patch.spud) {
+          patch = { spud: { qty: 0 } };
+        }
+        patch.id = `patch_${app.state.pos}`;
+
+        if (patch.spud.qty > 0) {
+          // all spuds dug at once and moved to player sack
+          let sackQty = app.state.sack[patch.spud.name] || 0;
+          app.state.sack[patch.spud.name] = sackQty + patch.spud.qty;
+          // sput qty in negative meaning it takes this many days to return to a fresh patch
+          patch.spud.qty = app.state.spudRegen;
+          tool.uses--;
+        } else if (patch.spud.qty == 0) {
+          patch.spud.qty = app.state.spudRegen;
+          tool.uses--;
+          app.state.fields[app.state.currentField][app.state.pos] = patch;
+        } else {
+          // leave holes alone
+          return;
+        }
+        tools.render();
+
+        if (patch) {
+          renderPatch(patch);
+        }
+      }
+    },
+
+
 
 
   }
