@@ -1,5 +1,6 @@
-// page loaded - so init things
+// we have already defined things like player, spuds, controls, tools etc.. when including the js in html
 
+// lods previously save state from localstorage if found
 player = state.load();
 
 
@@ -55,37 +56,7 @@ function allocate() {
   renderSack();
 }
 
-// show contents of the sack
-function renderSack() {
-  let sackList = '';
-  Object.entries(player.sack).forEach(([spudName, spudQty]) => {
-    let spud = player.spuds.filter((spud) => spud.name == spudName)[0];
-    if (spud) {
-      let machine = player.shop.machines[player.shop.selected];
-      sackList += `<div class="sackSpuds buttonize">`;
-      sackList += `<div class="sackSpudName">${spudQty} ${spud.fullName}</div>`;
-      sackList += `<div class="sackListButtons">`;
-      if (spudQty > 0) {
-        sackList += `<div class="spudListButton" onclick="moveSpuds('${spudName}', ${spudQty})">&lt;&lt;</div>`;
-        sackList += `<div class="spudListButton" onclick="moveSpuds('${spudName}', 1)">&lt;</div>`;
-      } else {
-        sackList += `<div class="spudListButton" >&lt;&lt;</div>`;
-        sackList += `<div class="spudListButton" >&lt;</div>`;
-      }
-      if (machine && machine.hopper && machine.hopper[spudName] > 0) {
-        sackList += `<div class="spudListButton" onclick="moveSpuds('${spudName}', -1)">&gt;</div>`;
-      } else {
-        sackList += `<div class="spudListButton" >&gt;</div>`;
-      }
-      sackList += `</div>`;
-      sackList += `<div class="sackSpudDesc">This is a ${spud.rareness} potato that is best for ${spud.bestFor}</div>`;
-      sackList += `</div>`;
-    }
-  });
 
-  element = document.querySelector('.sack');
-  element.innerHTML = sackList;
-}
 
 // move spuds from sack to machine hoppers
 function moveSpuds(spudName, spudQty) {
@@ -99,7 +70,7 @@ function moveSpuds(spudName, spudQty) {
   machine.hopper[spudName] = spudQty + existing;
   player.sack[spudName] -= spudQty;
 
-  renderSack();
+  sack.render();
   renderHopper(player.shop.selected);
 }
 
@@ -150,7 +121,7 @@ function selectMachine(machineName) {
 
   let element = document.querySelector(`#machine_${machineName}`);
   element.classList.add(className);
-  renderSack();
+  sack.render();
 }
 
 
@@ -241,15 +212,7 @@ function updatePatch(patch) {
 
 
 
-// show or hide the sack via a dialog
-function showSack() {
-  let content = '';
-  Object.entries(player.sack).forEach(([spudName, spudQty]) => {
-    content += `<div class="buttonize">${spudName} = ${spudQty}</div>`;
-  });
-  const footer = `<button class="buttonize" onclick="showSack()"> Ok </button>`;
-  showDialog('Inventory', content, footer);
-}
+
 
 // show or hide the dialog
 function showDialog(title, content, footer) {

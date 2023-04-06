@@ -6,7 +6,7 @@ const tools = {
     Object.entries(player.tools).forEach(([toolName, tool]) => {
       tools += `<div  class="tool-${toolName}" onclick="fields.digPatch()">${toolName}=${tool.uses} ${dummyImg}</div>`;
     });
-    tools += `<div class="tool-purse" onclick="showSack()">Purse=${player.purse}`;
+    tools += `<div class="tool-purse" onclick="sack.show()">Purse=${player.purse}`;
     tools += `<br/>Sack=${sack.count()}</div>`;
     tools += `<div class="tool-next" onclick="dayCycle()">Next &gt;</div>`;
     element = document.querySelector('.tools');
