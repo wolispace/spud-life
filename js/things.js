@@ -1,52 +1,3 @@
-function initApp() {
-  return {
-    state: {
-      phase: "night",
-      sack: {},
-      purse: 1000,
-      pos: 0,
-      spudRegen: -5,
-      sowSeeds: 0,
-      grassQty: 7,
-      dialog: false,
-      tools: {
-        spade: {
-          uses: 0,
-          maxUses: 5,
-        },
-        "pick": {
-          "uses": 0,
-          "maxUses": 5
-        },
-        "axe": {
-          "uses": 0,
-          "maxUses": 5
-        }
-      },
-
-      spuds: [],
-      currentField: 0,
-      fields: [],
-
-      shop: {
-        machines: {}
-      },
-      hardware: hardwareStore(),
-      controls: { start: 60 },
-      controlIds: [60, 70, 71, 80],
-      controlPos: {
-        "ArrowUp": 0,
-        "ArrowLeft": 10,
-        "ArrowRight": 11,
-        "ArrowDown": 20
-      },
-      animating: false,
-    },
-
-
-  };
-
-}
 
 const state = {
   save: () => {
@@ -58,6 +9,8 @@ const state = {
     if (compressed) {
       let decompressed = LZString.decompressFromUTF16(compressed);
       return JSON.parse(decompressed);
+    } else {
+      return player;
     }
   },
 };
@@ -131,112 +84,7 @@ const svgImags = {
 }
 
 
-function hardwareStore() {
-  return {
-    "spade": {
-      type: "tool",
-      name: "Spade",
-      desc: "A useful tool for diging up spods",
-      price: 0,
-      upgradeCost: 50,
-      maxUpgrades: 100,
-      initial: {
-        uses: 0,
-        maxUses: 5,
-      }
-    },
-    "pick": {
-      type: "tool",
-      name: "Pick",
-      desc: "A tool for breaking rocks",
-      price: 100,
-      upgradeCost: 100,
-      maxUpgrades: 100,
-      initial: {
-        uses: 0,
-        maxUses: 5,
-      }
-    },
-    "axe": {
-      type: "tool",
-      name: "Axe",
-      desc: "A tool for clearing logs",
-      price: 150,
-      upgradeCost: 100,
-      maxUpgrades: 100,
-      initial: {
-        uses: 0,
-        maxUses: 5,
-      }
-    },
-    "chipper": {
-      type: "machine",
-      name: "Basic Chipper",
-      desc: "A basic all-purpose chip-maker",
-      price: 150,
-      upgradeCost: 100,
-      maxUpgrades: 100,
-      initial: {
-        pricePerItem: 5,
-        makes: "chips",
-        hopper: {}
-      }
-    },
-    "chipper-2000": {
-      type: "machine",
-      name: "Chipper 2000",
-      desc: "The latest upgrade of the tried-and-tested chip maker",
-      price: 500,
-      upgradeCost: 100,
-      maxUpgrades: 100,
-      initial: {
-        pricePerItem: 20,
-        makes: "chips",
-        hopper: {}
-      }
-    },
-    "back-o-matic": {
-      type: "machine",
-      name: "Bake-o-matic",
-      desc: "Makes an excellent baked potato",
-      price: 250,
-      upgradeCost: 100,
-      maxUpgrades: 100,
-      initial: {
-        pricePerItem: 15,
-        makes: "baked potatoes",
-        hopper: {}
-      }
-    },
-    "curly-cooker": {
-      type: "machine",
-      name: "Curly cooker",
-      desc: "Cooks a potato into a curly-fry",
-      price: 400,
-      upgradeCost: 100,
-      maxUpgrades: 100,
-      initial: {
-        pricePerItem: 20,
-        makes: "curly-fries",
-        hopper: {}
-      }
-    },
-    "soup-spinner": {
-      type: "machine",
-      name: "Soup spinner",
-      desc: "Makes a hearly potato soup",
-      price: 200,
-      upgradeCost: 100,
-      maxUpgrades: 100,
-      initial: {
-        pricePerItem: 10,
-        makes: "soup",
-        hopper: {}
-      }
-    },
 
-  }
-}
 
 
 

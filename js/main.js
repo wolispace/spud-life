@@ -1,20 +1,16 @@
 // page loaded - so init things
 
-let app = initApp();
-let saved = state.load();
-if (saved) {
-  player = saved;
-}
-player.hardware = hardwareStore();
+player = state.load();
 
 
 document.addEventListener("DOMContentLoaded", function () {
   fields.render();
   if (player.spuds.length < 1) {
-    sproutSpuds(6);
+    spuds.sprout(6);
     fields.fillField(player.currentField);
     fields.rollPatches();
     // gift the first machine first off
+    player.hardware = hardware.store();
     let starter = 'chipper';
     player.shop.machines[starter] = player.hardware[starter].initial;
     fields.renderPatches();
@@ -33,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("keydown", (event) => {
   // convery keypresses into directonal movements
   if (Object.keys(player.controlPos).includes(event.code)) {
-    control.click(player.controls.start + player.controlPos[event.code]);
+    controls.click(player.controls.start + player.controlPos[event.code]);
   }
   if (event.code == 'Space') {
     fields.digPatch();
@@ -44,34 +40,6 @@ document.addEventListener("keydown", (event) => {
 });
 
 
-// selling the meals from the machines
-function sellSpuds() {
-  let totalMeals = 0;
-  let totalIncome = 0;
-
-  // loop through all machines
-  // if machine has spuds in its hopper
-  // convert spuds into food (hopper.qty x spud.price)
-  Object.entries(player.shop.machines).forEach(([machineName, machine]) => {
-    if (machine.hopper) {
-      Object.entries(machine.hopper).forEach(([spudName, spudQty]) => {
-        let spudInfo = player.spuds.filter(spud => spud.name == spudName);
-        let bonus = (machine.makes = spudInfo.bestFor) ? 2 : 1;
-        let salePrice = machine.pricePerItem * bonus * spudQty;
-        totalMeals = totalMeals + spudQty;
-        totalIncome = totalIncome + salePrice;
-        //console.log(`${salePrice} = ${machine.pricePerItem} * ${bonus} * ${spudQty} `);
-      });
-      // empty the machine
-      machine.hopper = {};
-    }
-  });
-
-  player.purse += totalIncome;
-  let salesList = `Total meals=${totalMeals} income=${totalIncome}`;
-  element = document.querySelector('.sales');
-  element.innerHTML = salesList;
-}
 
 // player chooses which spuds to put in what machines
 function allocate() {
@@ -185,57 +153,7 @@ function selectMachine(machineName) {
   renderSack();
 }
 
-//generate the the complete random list of spuds for this session
-function sproutSpuds(qty) {
-  let counter = 0;
-  let spudBits = {
-    "prefix": ['Bo', 'Sa', 'Ru', 'Kri', 'Ar'],
-    "middle": ['sa', 'cho', 'ma', 'nal', 'sso', 'li'],
-    "suffix": ['lor', 'ker', 'pry', 'ly', 'der', 'mid'],
-    "bestFor": ['chips', 'baked potatoes', 'curly-fries', 'soup'],
-    "color": ['white', 'brick', 'wheat', 'teal', 'orange', 'maroon', 'black', 'navy', 'pink', 'purple', 'red'],
-    "showColors": ['white', 'orange', 'black', 'pink', 'purple', 'red'],
-    "rareness": ["common", "standard", "rare"]
-  };
-  // used next element from array cycling back to the start so its not completely random.
-  let colorCycle = rnd(spudBits.color.length);
-  let rarityCicle = rnd(spudBits.rareness.length);
-  let bestForCycle = rnd(spudBits.bestFor.length);
-  let namedSpuds = [];
-  while (counter < qty) {
-    let name = spudBits.prefix[rnd(spudBits.prefix.length)];
-    name += spudBits.middle[rnd(spudBits.middle.length)];
-    while (namedSpuds.includes(name)) {
-      name += spudBits.middle[rnd(spudBits.middle.length)];
-    }
-    namedSpuds.push(name);
-    if (rnd(3) > 1) {
-      name += spudBits.suffix[rnd(spudBits.suffix.length)];
-    }
 
-    let colorName = spudBits.color[colorCycle];
-    let rarityName = spudBits.rareness[rarityCicle];
-    let fullName = rnd(3) > 1 ? `${rarityName} ` : '';
-    if (spudBits.showColors.includes(colorName)) {
-      fullName += `${colorName} `;
-    }
-    fullName += name;
-    // uppercase first letter
-    fullName = fullName.charAt(0).toUpperCase() + fullName.slice(1);
-
-    player.spuds[counter++] = {
-      "name": name,
-      "fullName": fullName,
-      "color": colorName,
-      "rareness": rarityName,
-      "bestFor": spudBits.bestFor[bestForCycle],
-    }
-    // roll on to next item in the list so everyone gets atleast one ofeverything
-    colorCycle = ++colorCycle >= spudBits.color.length ? 0 : colorCycle;
-    rarityCicle = ++rarityCicle >= spudBits.rareness.length ? 0 : rarityCicle;
-    bestForCycle = ++bestForCycle >= spudBits.bestFor.length ? 0 : bestForCycle;
-  }
-}
 
 
 // move to the next phase in the day
@@ -257,9 +175,9 @@ function dayCycle() {
     if (player.phase == 'allocate') {
       allocate();
     } else if (player.phase == 'hardware') {
-      renderHardware();
+      hardware.render();
     } else if (player.phase == 'sales') {
-      sellSpuds();
+      spuds.sell();
     } else if (player.phase == 'night') {
       tools.reset();
       tools.render();
@@ -352,50 +270,9 @@ function showDialog(title, content, footer) {
   player.dialog = !player.dialog;
 }
 
-// count how many items are in the sack, spuds or other stuff
-function countSack() {
-  let spuds = 0;
-  Object.entries(player.sack).forEach(([spudName, spudQty]) => {
-    spuds += spudQty;
-  });
 
-  return spuds;
-}
 
-// draw tools and machines for sale 
-function renderHardware() {
-  let tools = '';
-  Object.entries(player.hardware).forEach(([toolName, tool]) => {
-    let state = 'buy';
-    let cost = tool.price;
-    if (player.tools[toolName]) {
-      state = 'upgrade'
-      cost = tool.upgradeCost;
-    }
-    let onClick = '';
-    let canBuyClass = 'tooMuch';
-    if (cost <= player.purse) {
-      onClick = `onclick="tools.buyTool('${toolName}')"`;
-      canBuyClass = ``;
 
-    }
-    if (!player.shop.machines[toolName]) {
-      tools += `<div class="buttonize button_${tool.type} ${canBuyClass}" ${onClick} id="hardware_${toolName}" ${onClick}>`;
-      tools += `<strong>${tool.name}. </strong>`;
-      tools += `${tool.desc}<br/>${state}=${cost}</div>`;
-    }
-  });
-
-  element = document.querySelector('.hardware');
-  element.innerHTML = tools;
-}
-
-// loop through each tool on sale and change style if we can afford it or not
-function refreshHardware() {
-  let elements = document.querySelector('.hardware div');
-  elements.each((element) => {
-  });
-}
 
 
 

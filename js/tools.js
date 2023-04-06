@@ -7,7 +7,7 @@ const tools = {
       tools += `<div  class="tool-${toolName}" onclick="fields.digPatch()">${toolName}=${tool.uses} ${dummyImg}</div>`;
     });
     tools += `<div class="tool-purse" onclick="showSack()">Purse=${player.purse}`;
-    tools += `<br/>Sack=${countSack()}</div>`;
+    tools += `<br/>Sack=${sack.count()}</div>`;
     tools += `<div class="tool-next" onclick="dayCycle()">Next &gt;</div>`;
     element = document.querySelector('.tools');
     element.innerHTML = tools;
@@ -44,7 +44,7 @@ const tools = {
       player.purse = player.purse - player.hardware[toolName].price;
     }
     tools.render();
-    renderHardware();
+    hardware.render();
   },
   // start of a new day reset toos to their max uses
   reset: () => {
