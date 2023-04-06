@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
   fields.render();
   if (app.state.spuds.length < 1) {
     sproutSpuds(6);
-    fillField(app.state.currentField);
+    fields.fillField(app.state.currentField);
     fields.rollPatches();
     // gift the first machine first off
     let starter = 'chipper';
@@ -242,102 +242,6 @@ function sproutSpuds(qty) {
   }
 }
 
-// randomly fill the current field with rocks, logs and spuds - plus some ranom treasure!
-function fillField(fieldId) {
-  if (!app.state.fields[fieldId]) {
-    app.state.fields[fieldId] = [];
-  }
-
-  // first row 0 and 10 may contain links to other fields
-  if (app.state.fields[fieldId - 1]) {
-    app.state.fields[fieldId][0] = { id: "patch_0", block: { type: "control-icon--left", qty: 1, onclick: `switchField(${fieldId - 1})` } };
-  }
-  if (app.state.fields[fieldId + 1]) {
-    app.state.fields[fieldId][9] = { id: "patch_9", block: { type: "control-icon--right", qty: 1, onclick: `switchField(${fieldId + 1})` } };
-  }
-  // skip the fisrt row
-  let i = 10;
-  while (i < 100) {
-    if (rnd(2) > 0) {
-      // rock, log or spud?
-      let patch = {};
-      switch (rnd(3)) {
-        case 0:
-          patch.block = { "type": "rock", "qty": rnd(5) + 1 };
-          break;
-        case 1:
-          patch.block = { "type": "log", "qty": rnd(5) + 1 };
-          break;
-        case 2:
-          patch.spud = {};
-          break;
-      }
-      if (patch !== {}) {
-        let newSpud = app.state.spuds[rnd(app.state.spuds.length)];
-        patch.spud = { "name": newSpud.name, "qty": rnd(3) + 1 };
-      }
-      if (!app.state.fields[fieldId]) {
-        app.state.fields[fieldId] = [];
-      }
-      app.state.fields[fieldId][i] = patch;
-    }
-    i++;
-  };
-}
-
-
-
-// based on patch contents decide what to show
-function renderPatch(patch) {
-  let newPatch = ' ';
-  if (patch) {
-    if (patch.block) {
-      if (patch.block.type == 'control') {
-        //newPatch = svgImg(patch.block.type, patch.block.qty);
-      } else {
-        newPatch = svgImg(patch.block.type, patch.block.qty);
-      }
-    }
-
-    if (patch.spud) {
-      if (patch.spud.qty > 0) {
-        newPatch += ''; // `<br/>S=${patch.spud.qty}` 
-      } else {
-        if (patch.spud.qty == -5 && patch.spud.name) {
-          newPatch = svgImg('spud');
-          patch.spudFound = true;
-        } else {
-          newPatch = svgImg('hole', 5);
-        }
-      }
-    }
-  }
-  if (newPatch == ' ') {
-    newPatch = svgImg('blank', app.state.grassQty);
-  }
-  if (newPatch) {
-    let element = document.querySelector(`#${patch.id}`);
-    element.innerHTML = newPatch;
-
-    if (patch.spudFound) {
-      delete patch.spudFound;
-      let thisSpud = document.querySelector(`#${patch.id} svg`);
-
-      function onEnd() {
-        newPatch = svgImg('hole', 5);
-        element.innerHTML = newPatch;
-      }
-      animate(thisSpud, 'dig-spud', 1, onEnd);
-    }
-
-    // if we drew a hole, make sure its opacity matches the spud qty -5 = 100%, 0 = 0%
-    if (patch.spud && patch.spud.qty < 0) {
-      let opacity = 0 - patch.spud.qty * 20 / 100;
-      let hole = document.querySelector(`#${patch.id} svg`);
-      hole.style.opacity = opacity;
-    }
-  }
-}
 
 // move to the next phase in the day
 function dayCycle() {
