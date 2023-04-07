@@ -5,7 +5,7 @@ const fields = {
     let index = 0;
     let patches = '';
     while (index <= maxPatches) {
-      patches += `<div class="patch" id="patch_${index}">${svgImg('blank', player.grassQty)}</div>`;
+      patches += `<div class="patch" id="patch_${index}">${svg.render('blank', player.grassQty)}</div>`;
       index++;
     }
     element = document.querySelector('.field');
@@ -94,9 +94,9 @@ const fields = {
     if (patch) {
       if (patch.block) {
         if (patch.block.type == 'control') {
-          //newPatch = svgImg(patch.block.type, patch.block.qty);
+          //newPatch = svg.render(patch.block.type, patch.block.qty);
         } else {
-          newPatch = svgImg(patch.block.type, patch.block.qty);
+          newPatch = svg.render(patch.block.type, patch.block.qty);
         }
       }
 
@@ -105,16 +105,16 @@ const fields = {
           newPatch += ''; // `<br/>S=${patch.spud.qty}` 
         } else {
           if (patch.spud.qty == -5 && patch.spud.name) {
-            newPatch = svgImg('spud');
+            newPatch = svg.render('spud');
             patch.spudFound = true;
           } else {
-            newPatch = svgImg('hole', 5);
+            newPatch = svg.render('hole', 5);
           }
         }
       }
     }
     if (newPatch == ' ') {
-      newPatch = svgImg('blank', player.grassQty);
+      newPatch = svg.render('blank', player.grassQty);
     }
     if (newPatch) {
       let element = document.querySelector(`#${patch.id}`);
@@ -125,10 +125,10 @@ const fields = {
         let thisSpud = document.querySelector(`#${patch.id} svg`);
 
         function onEnd() {
-          newPatch = svgImg('hole', 5);
+          newPatch = svg.render('hole', 5);
           element.innerHTML = newPatch;
         }
-        animate(thisSpud, 'dig-spud', 1, onEnd);
+        svg.animate(thisSpud, 'dig-spud', 1, onEnd);
       }
 
       // if we drew a hole, make sure its opacity matches the spud qty -5 = 100%, 0 = 0%
@@ -182,7 +182,7 @@ const fields = {
     let patch = player.fields[player.currentField][player.pos];
     let tool = player.tools['spade'];
     let thisTool = document.querySelector(`.tool-spade svg`);
-    animate(thisTool, `jiggle-up`, 0.25);
+    svg.animate(thisTool, `jiggle-up`, 0.25);
 
     if (tool.uses > 0) {
       // if nothing defined for a patch then its an empty spud

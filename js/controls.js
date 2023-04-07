@@ -14,7 +14,7 @@ const controls = {
   // draw navigation buttons
   renderControl: (id, dir) => {
     element = document.querySelector(`#patch_${id}`);
-    element.innerHTML = svgImg(`control-icon--${dir}`);
+    element.innerHTML = svg.render(`control-icon--${dir}`);
     element.classList.add("controlButton");
     element.classList.remove('patch');
     element.setAttribute("onclick", `controls.click(${id});`);
@@ -79,7 +79,7 @@ const controls = {
         if (patch && patch.block) {
           // animate..
           let thisBlock = document.querySelector(`#${patch.id} svg`);
-          animate(thisBlock, `jiggle-${direction}`, 0.25);
+          svg.animate(thisBlock, `jiggle-${direction}`, 0.25);
 
           let tool = '';
           if (patch.block.type == 'rock') {
@@ -89,7 +89,7 @@ const controls = {
           }
           let thisTool = document.querySelector(`.tool-${tool} svg`);
 
-          animate(thisTool, `jiggle-up`, 0.25);
+          svg.animate(thisTool, `jiggle-up`, 0.25);
           let playerTool = player.tools[tool];
           if (playerTool && playerTool.uses > 0) {
             // if the patch is blocked.. the click reduces until zero and the block is removed
@@ -100,7 +100,7 @@ const controls = {
             } else {
               delete patch.block;
               let element = document.querySelector(`#${patch.id}`);
-              setTimeout(() => { element.innerHTML = svgImg('blank', player.grassQty); }, 250, element, player);
+              setTimeout(() => { element.innerHTML = svg.render('blank', player.grassQty); }, 250, element, player);
             }
             playerTool.uses--;
             tools.render();
@@ -118,7 +118,11 @@ const controls = {
       }
       player.pos = newPos;
       fields.highlightCurrentPos();
-    }
+      // so the day can be cycled on first loading..
+      player.phase = 'night';
+      state.save();
+      player.phase = 'field';
+    };
   }
 
 }

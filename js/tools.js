@@ -2,7 +2,7 @@ const tools = {
   // draw the tools across the bottom
   render: () => {
     let tools = '';
-    let dummyImg = svgImg(`control-icon--up`);
+    let dummyImg = svg.render(`control-icon--up`);
     Object.entries(player.tools).forEach(([toolName, tool]) => {
       tools += `<div  class="tool-${toolName}" onclick="fields.digPatch()">${toolName}=${tool.uses} ${dummyImg}</div>`;
     });
