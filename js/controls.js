@@ -26,6 +26,7 @@ const controls = {
         newPos -= 1;
         direction = 'left';
         if (newPos < 0) {
+          console.log('move to previous patch');
           // If there is an patch-1 then switch to that patch and put player in patch_9
           newPos = player.pos;
         }
@@ -33,7 +34,8 @@ const controls = {
       if (index == 71 && player.pos % 10 < 9) {
         newPos += 1;
         direction = 'right';
-        if (newPos == 10 && player.fields[player.currentField + 1]) {
+        if (newPos == 10 && player.fields[player.currentField + 1].length > -1) {
+          console.log('next field');
           player.currentField++;
           player.pos = 9;
           fields.renderField();

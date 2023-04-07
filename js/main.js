@@ -18,8 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
     fields.resetPlayer();
   }
   tools.render();
-  // TOTO remove temp second patch
-  //fillField(player.currentField + 1);
+  console.log(player);
   dayCycle();
 });
 
@@ -28,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("keydown", (event) => {
   // convery keypresses into directonal movements
   if (Object.keys(player.controlPos).includes(event.code)) {
-    controls.click(player.controls.start + player.controlPos[event.code]);
+    controls.click('patch_' + (player.controls.start + player.controlPos[event.code]));
   }
   if (event.code == 'Space') {
     fields.digPatch();
