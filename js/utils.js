@@ -9,8 +9,11 @@ function halfRnd(num) {
 
 
 const state = {
-  save: () => {
+  save: (backTrack) => {
 
+    if (backTrack) {
+      player.phase = 'night';
+    }
     let compressed = LZString.compressToUTF16(JSON.stringify(player));
     localStorage.setItem("state", compressed);
   },

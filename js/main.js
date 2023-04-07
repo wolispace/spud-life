@@ -14,8 +14,6 @@ document.addEventListener("DOMContentLoaded", function () {
     player.hardware = hardware.store();
     let starter = 'chipper';
     player.shop.machines[starter] = player.hardware[starter].initial;
-    console.log(player);
-    fields.renderField();
     tools.reset();
     fields.resetPlayer();
   }
@@ -24,7 +22,6 @@ document.addEventListener("DOMContentLoaded", function () {
   // TOTO remove temp second patch
   //fillField(player.currentField + 1);
   dayCycle();
-  console.log(player);
 });
 
 

@@ -29,12 +29,12 @@ const fields = {
   buyField: () => {
     // find highest field ID, add 1, set that field as an empty array so it can be filled
     player.fields[player.fields.length] = [];
-    state.save();
+    state.save(true);
   },
 
   // randomly fill the selecte field (if empty) with rocks, logs and spuds - plus some ranom treasure!
   fillField: (fieldId) => {
-    if (!player.fields[fieldId] == []) {
+    if (player.fields[fieldId].length < 1) {
       // first row 0 and 10 may contain links to other fields
       if (player.fields[fieldId - 1]) {
         player.fields[fieldId][0] = { id: "patch_0", block: { type: "control-icon--left", qty: 1, onclick: `switchField(${fieldId - 1})` } };
@@ -97,6 +97,7 @@ const fields = {
 
   // add an svg to each patch
   renderField: () => {
+
     player.fields[player.currentField].forEach((patch, index) => {
       patch = patch ?? {};
       patch.id = `patch_${index}`;
