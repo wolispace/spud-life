@@ -1,6 +1,6 @@
 const fields = {
   // one off setup the grid of patches
-  render() {
+  setupGrid() {
     const maxPatches = 99;
     let index = 0;
     let patches = '';
@@ -12,70 +12,91 @@ const fields = {
     element.innerHTML = patches;
   },
 
-  // randomly fill the current field with rocks, logs and spuds - plus some ranom treasure!
-  fillField: (fieldId) => {
-    if (!player.fields[fieldId]) {
-      player.fields[fieldId] = [];
-    }
+  // player chose to switch to this field..
+  switchField: (fieldId) => {
+    player.currentField = fieldId;
+    // if field is empty then fill it
+    fields.fillField(fieldId);
+    // wipe grid
+    fields.setupGrid();
+    // render current field
+    fields.renderField();
+    // reset player to 0
+    state.save();
 
-    // first row 0 and 10 may contain links to other fields
-    if (player.fields[fieldId - 1]) {
-      player.fields[fieldId][0] = { id: "patch_0", block: { type: "control-icon--left", qty: 1, onclick: `switchField(${fieldId - 1})` } };
-    }
-    if (player.fields[fieldId + 1]) {
-      player.fields[fieldId][9] = { id: "patch_9", block: { type: "control-icon--right", qty: 1, onclick: `switchField(${fieldId + 1})` } };
-    }
-    // skip the fisrt row
-    let i = 10;
-    while (i < 100) {
-      if (rnd(2) > 0) {
-        // rock, log or spud?
-        let patch = {};
-        switch (rnd(3)) {
-          case 0:
-            patch.block = { "type": "rock", "qty": rnd(5) + 1 };
-            break;
-          case 1:
-            patch.block = { "type": "log", "qty": rnd(5) + 1 };
-            break;
-          case 2:
-            patch.spud = {};
-            break;
-        }
-        if (patch !== {}) {
-          let newSpud = player.spuds[rnd(player.spuds.length)];
-          patch.spud = { "name": newSpud.name, "qty": rnd(3) + 1 };
-        }
-        if (!player.fields[fieldId]) {
-          player.fields[fieldId] = [];
-        }
-        player.fields[fieldId][i] = patch;
+  },
+
+  buyField: () => {
+    // find highest field ID, add 1, set that field as an empty array so it can be filled
+    player.fields[player.fields.length] = [];
+    state.save();
+  },
+
+  // randomly fill the selecte field (if empty) with rocks, logs and spuds - plus some ranom treasure!
+  fillField: (fieldId) => {
+    if (!player.fields[fieldId] == []) {
+      // first row 0 and 10 may contain links to other fields
+      if (player.fields[fieldId - 1]) {
+        player.fields[fieldId][0] = { id: "patch_0", block: { type: "control-icon--left", qty: 1, onclick: `switchField(${fieldId - 1})` } };
       }
-      i++;
-    };
-  }
-  ,
+      if (player.fields[fieldId + 1]) {
+        player.fields[fieldId][9] = { id: "patch_9", block: { type: "control-icon--right", qty: 1, onclick: `switchField(${fieldId + 1})` } };
+      }
+      // skip the fisrt row
+      let i = 10;
+      while (i < 100) {
+        if (rnd(2) > 0) {
+          // rock, log or spud?
+          let patch = {};
+          switch (rnd(3)) {
+            case 0:
+              patch.block = { "type": "rock", "qty": rnd(5) + 1 };
+              break;
+            case 1:
+              patch.block = { "type": "log", "qty": rnd(5) + 1 };
+              break;
+            case 2:
+              patch.spud = {};
+              break;
+          }
+          if (patch !== {}) {
+            let newSpud = player.spuds[rnd(player.spuds.length)];
+            patch.spud = { "name": newSpud.name, "qty": rnd(3) + 1 };
+          }
+          if (!player.fields[fieldId]) {
+            player.fields[fieldId] = [];
+          }
+          player.fields[fieldId][i] = patch;
+        }
+        i++;
+      };
+    }
+  },
+
   // loop through all fields and increment the holes and sow seeds if needed
   rollPatches: () => {
     player.fields.forEach((field, fieldId) => {
-      field.forEach((patch, index) => {
-        patch = patch ?? {};
-        patch.id = `patch_${index}`;
-        // roll the spuds so holes slowly get fill and can be re-seeded
-        if (patch.spud) {
-          if (patch.spud.qty < 0) {
-            patch.spud.qty++;
+      if (field != []) {
+        field.forEach((patch, index) => {
+          patch = patch ?? {};
+          patch.id = `patch_${index}`;
+          // roll the spuds so holes slowly get fill and can be re-seeded
+          if (patch.spud) {
+            if (patch.spud.qty < 0) {
+              patch.spud.qty++;
+            }
+            if (patch.spud.qty == 0) {
+              delete patch.spud;
+              player.sowSeeds++;
+            }
           }
-          if (patch.spud.qty == 0) {
-            delete patch.spud;
-            player.sowSeeds++;
-          }
-        }
-      });
+        });
+      }
     });
   },
+
   // add an svg to each patch
-  renderPatches: () => {
+  renderField: () => {
     player.fields[player.currentField].forEach((patch, index) => {
       patch = patch ?? {};
       patch.id = `patch_${index}`;
@@ -226,5 +247,26 @@ const fields = {
     element = document.querySelector(`#patch_${player.pos}`);
     element.classList.add("currentPos");
   },
+
+  // update the dvg in a patch to have the same number of visible paths as the patches qty
+  updatePatch: (patch) => {
+    if (patch) {
+      if (patch.block) {
+        let existing = document.querySelectorAll(`#${patch.id} svg g`);
+        if (existing) {
+          let doneOne = false;
+          let index = existing.length - 1;
+          while (index >= 0) {
+            let group = existing[index];
+            if (!doneOne && !group.classList.contains('hidden')) {
+              group.classList.add('hidden');
+              doneOne = true;
+            }
+            index--;
+          }
+        }
+      }
+    }
+  }
 
 }

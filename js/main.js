@@ -5,7 +5,7 @@ player = state.load();
 
 
 document.addEventListener("DOMContentLoaded", function () {
-  fields.render();
+  fields.setupGrid();
   if (player.spuds.length < 1) {
     spuds.sprout(6);
     fields.fillField(player.currentField);
@@ -14,7 +14,8 @@ document.addEventListener("DOMContentLoaded", function () {
     player.hardware = hardware.store();
     let starter = 'chipper';
     player.shop.machines[starter] = player.hardware[starter].initial;
-    fields.renderPatches();
+    console.log(player);
+    fields.renderField();
     tools.reset();
     fields.resetPlayer();
   }
@@ -23,6 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // TOTO remove temp second patch
   //fillField(player.currentField + 1);
   dayCycle();
+  console.log(player);
 });
 
 
@@ -56,28 +58,6 @@ function allocate() {
   sack.render();
 }
 
-
-
-// move spuds from sack to machine hoppers
-function moveSpuds(spudName, spudQty) {
-  let machine = player.shop.machines[player.shop.selected];
-
-  if (!machine.hopper[spudName]) {
-    machine.hopper[spudName] = 0;
-  }
-  let existing = machine.hopper[spudName];
-
-  machine.hopper[spudName] = spudQty + existing;
-  player.sack[spudName] -= spudQty;
-
-  sack.render();
-  machines.renderHopper(player.shop.selected);
-}
-
-
-
-
-
 // move to the next phase in the day
 function dayCycle() {
   state.save();
@@ -109,7 +89,7 @@ function dayCycle() {
     }
   } else {
     // display the fields patches in their current state
-    fields.renderPatches();
+    fields.renderField();
     fields.highlightCurrentPos();
   }
 }
@@ -134,31 +114,6 @@ function dream() {
   element = document.querySelector('.night');
   element.innerHTML = `<div>${dream}</div>${sow}`;
 }
-
-//TODO: is this needed?
-// update the dvg in a patch to have the same number of visible paths as the patches qty
-function updatePatch(patch) {
-  if (patch) {
-    if (patch.block) {
-      let existing = document.querySelectorAll(`#${patch.id} svg g`);
-      if (existing) {
-        let doneOne = false;
-        let index = existing.length - 1;
-        while (index >= 0) {
-          let group = existing[index];
-          if (!doneOne && !group.classList.contains('hidden')) {
-            group.classList.add('hidden');
-            doneOne = true;
-          }
-          index--;
-        }
-      }
-    }
-  }
-}
-
-
-
 
 
 // show or hide the dialog

@@ -10,7 +10,7 @@ function halfRnd(num) {
 
 const state = {
   save: () => {
-    
+
     let compressed = LZString.compressToUTF16(JSON.stringify(player));
     localStorage.setItem("state", compressed);
   },
@@ -23,6 +23,10 @@ const state = {
       return player;
     }
   },
+  clear: () => {
+    localStorage.clear();
+    window.location.reload();
+  }
 };
 
 // add animation then remove it after a timeout so it can be re-applied

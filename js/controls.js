@@ -56,7 +56,7 @@ const controls = {
         if (newPos == 10 && player.fields[player.currentField + 1]) {
           player.currentField++;
           player.pos = 9;
-          fields.renderPatches();
+          fields.renderField();
           exit;
         }
         if (newPos > 99) {
@@ -106,7 +106,7 @@ const controls = {
             tools.render();
 
             if (patch) {
-              updatePatch(patch);
+              fields.updatePatch(patch);
             }
             if (patch.block) {
               newPos = player.pos;

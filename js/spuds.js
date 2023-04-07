@@ -77,7 +77,24 @@ const spuds = {
     let salesList = `Total meals=${totalMeals} income=${totalIncome}`;
     element = document.querySelector('.sales');
     element.innerHTML = salesList;
+  },
+
+  // move spuds from sack to machine hoppers
+  moveSpuds: (spudName, spudQty) => {
+    let machine = player.shop.machines[player.shop.selected];
+
+    if (!machine.hopper[spudName]) {
+      machine.hopper[spudName] = 0;
+    }
+    let existing = machine.hopper[spudName];
+
+    machine.hopper[spudName] = spudQty + existing;
+    player.sack[spudName] -= spudQty;
+
+    sack.render();
+    machines.renderHopper(player.shop.selected);
   }
+
 
 
 }

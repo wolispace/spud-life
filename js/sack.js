@@ -45,7 +45,11 @@ const sack = {
     Object.entries(player.sack).forEach(([spudName, spudQty]) => {
       content += `<div class="buttonize">${spudName} = ${spudQty}</div>`;
     });
-    const footer = `<button class="buttonize" onclick="sack.show()"> Ok </button>`;
+    let footer = '';
+    footer += `<button class="buttonize" onclick="state.clear()"> Reset! </button>`;
+    footer += `<button class="buttonize" onclick="fields.switchField(0)"> Field 0 </button>`;
+    footer += `<button class="buttonize" onclick="fields.switchField(1)"> Field 1 </button>`;
+    footer += `<button class="buttonize" onclick="sack.show()"> Ok </button>`;
     showDialog('Inventory', content, footer);
   },
 }
