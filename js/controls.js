@@ -1,29 +1,9 @@
 const controls = {
-  // allocate 4 patches to be movement buttons - they cant be dug
-  render: () => {
-    let id = player.controls.start;
-    controls.renderControl(id, 'up');
-    id += 10;
-    controls.renderControl(id, 'left');
-    id += 1;
-    controls.renderControl(id, 'right');
-    id += 9;
-    controls.renderControl(id, 'down');
-  },
 
-  // draw navigation buttons
-  renderControl: (id, dir) => {
-    element = document.querySelector(`#patch_${id}`);
-    element.innerHTML = svg.render(`control-icon--${dir}`);
-    element.classList.add("controlButton");
-    element.classList.remove('patch');
-    element.setAttribute("onclick", `controls.click(${id});`);
-    player.fields[player.currentField][id] = { block: { type: "control" } };
-  },
-
-  click: (index) => {
+  click: (indexId) => {
     // user clicked a control to move up, down, left or right - interact with the patch we are moving into
-
+    let bits = indexId.split('_');
+    let index = parseInt(bits[1]);
     if (player.animating) {
       setTimeout(player.animating = false, 2000);
       return;

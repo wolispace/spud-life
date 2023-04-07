@@ -17,7 +17,6 @@ document.addEventListener("DOMContentLoaded", function () {
     tools.reset();
     fields.resetPlayer();
   }
-  controls.render();
   tools.render();
   // TOTO remove temp second patch
   //fillField(player.currentField + 1);

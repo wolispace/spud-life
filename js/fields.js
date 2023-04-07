@@ -70,7 +70,17 @@ const fields = {
         }
         i++;
       };
+      // put controls in
+      let id = player.controls.start;
+      player.fields[fieldId][id] = { id: `patch_${id}`, block: { type: "control-icon--up", qty: 1, onclick: `controls.click(${id})` } };
+      id += 10;
+      player.fields[fieldId][id] = { id: `patch_${id}`, block: { type: "control-icon--left", qty: 1, onclick: `controls.click(${id})` } };
+      id += 1;
+      player.fields[fieldId][id] = { id: `patch_${id}`, block: { type: "control-icon--right", qty: 1, onclick: `controls.click(${id})` } };
+      id += 9;
+      player.fields[fieldId][id] = { id: `patch_${id}`, block: { type: "control-icon--down", qty: 1, onclick: `controls.click(${id})` } };
     }
+    console.log(player);
   },
 
   // loop through all fields and increment the holes and sow seeds if needed
@@ -95,18 +105,12 @@ const fields = {
     });
   },
 
-  // add an svg to each patch
+  // add an svg to each patsch
   renderField: () => {
-
     player.fields[player.currentField].forEach((patch, index) => {
       patch = patch ?? {};
       patch.id = `patch_${index}`;
-      if (patch.block && patch.block.type == 'control') {
-        // leave alone
-        fields.renderPatch(patch);
-      } else {
-        fields.renderPatch(patch);
-      }
+      fields.renderPatch(patch);
     });
   },
 
@@ -115,8 +119,13 @@ const fields = {
     let newPatch = ' ';
     if (patch) {
       if (patch.block) {
-        if (patch.block.type == 'control') {
-          //newPatch = svg.render(patch.block.type, patch.block.qty);
+        if (patch.block.type.indexOf('control') > -1) {
+          newPatch = svg.render(patch.block.type, patch.block.qty);
+          element = document.querySelector(`#${patch.id}`);
+          element.innerHTML = svg.render(patch.block.type);
+          element.classList.add("controlButton");
+          element.classList.remove('patch');
+          element.setAttribute("onclick", `controls.click('${patch.id}');`);
         } else {
           newPatch = svg.render(patch.block.type, patch.block.qty);
         }
