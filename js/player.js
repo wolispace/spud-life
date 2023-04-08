@@ -6,6 +6,7 @@ let player = {
   spudRegen: -5,
   sowSeeds: 0,
   grassQty: 7,
+  scope: [-11, -10, -9, -1, 0, 1, 9, 10, 11],
   dialog: false,
   tools: {
     spade: {

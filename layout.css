@@ -336,6 +336,10 @@ button {
   border-radius: 0.2em;
 }
 
+.inRange {
+  background-color: rgb(211, 119, 76);
+}
+
 .control-icon {
   stroke: dodgerblue;
   stroke-width: 10;

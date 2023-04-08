@@ -84,7 +84,6 @@ const fields = {
       id += 9;
       player.fields[fieldId][id] = { id: `patch_${id}`, block: { type: "control-icon--down", qty: 1, onclick: `controls.click(${id})` } };
     }
-    console.log(player);
   },
 
   // loop through all fields and increment the holes and sow seeds if needed
@@ -156,7 +155,6 @@ const fields = {
     if (newPatch) {
       let element = document.querySelector(`#${patch.id}`);
       element.innerHTML = newPatch;
-
       if (patch.spudFound) {
         delete patch.spudFound;
         let thisSpud = document.querySelector(`#${patch.id} svg`);
@@ -214,7 +212,7 @@ const fields = {
 
     return sowMsg;
   },
-  // dig for a pus in the current patch
+  // dig for a spud in the current patch
   digPatch: () => {
     let patch = player.fields[player.currentField][player.pos];
     let tool = player.tools['spade'];
@@ -255,15 +253,23 @@ const fields = {
   highlightCurrentPos: () => {
     let element = document.querySelector(`#patch_${player.pos}`);
     element.classList.add("currentPos");
+    if (fields.inRange()) {
+      element.classList.add("inRange");
+    } else {
+      element.classList.remove("inRange");
+    }
+  },
+  removeCurrentPosHighlight: () => {
+    element = document.querySelector(`#patch_${player.pos}`);
+    element.classList.remove("currentPos");
+    element.classList.remove("inRange");
   },
   // player starts back at the entrace of the field
   // TODO: do we reset them to their first field or leave on last (an upgrade perhaps?)
   resetPlayer: () => {
-    element = document.querySelector(`#patch_${player.pos}`);
-    element.classList.remove("currentPos");
+    fields.removeCurrentPosHighlight();
     player.pos = 0;
-    element = document.querySelector(`#patch_${player.pos}`);
-    element.classList.add("currentPos");
+    fields.highlightCurrentPos();
   },
 
   // update the dvg in a patch to have the same number of visible paths as the patches qty
@@ -285,6 +291,25 @@ const fields = {
         }
       }
     }
-  }
+  },
 
+  // returns true if there is a spud in range of the current pos
+  // upgrades to the scanner will reduce the range (kings moves, plus, straight line, dot)
+  inRange: () => {
+    let field = player.fields[player.currentField];
+    let inRange = false;
+    player.scope.forEach((patchId) => {
+      if (!inRange && fields.checkForSpuds(field, player.pos + patchId)) {
+        inRange = true;
+      }
+    });
+
+    return inRange;
+  },
+
+  checkForSpuds: (field, patchId) => {
+    if (field[patchId] && field[patchId].spud && field[patchId].spud.qty > 0) {
+      return true;
+    }
+  }
 }

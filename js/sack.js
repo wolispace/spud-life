@@ -19,14 +19,14 @@ const sack = {
         sackList += `<div class="sackSpudName">${spudQty} ${spud.fullName}</div>`;
         sackList += `<div class="sackListButtons">`;
         if (spudQty > 0) {
-          sackList += `<div class="spudListButton" onclick="moveSpuds('${spudName}', ${spudQty})">&lt;&lt;</div>`;
-          sackList += `<div class="spudListButton" onclick="moveSpuds('${spudName}', 1)">&lt;</div>`;
+          sackList += `<div class="spudListButton" onclick="spuds.move('${spudName}', ${spudQty})">&lt;&lt;</div>`;
+          sackList += `<div class="spudListButton" onclick="spuds.move('${spudName}', 1)">&lt;</div>`;
         } else {
           sackList += `<div class="spudListButton" >&lt;&lt;</div>`;
           sackList += `<div class="spudListButton" >&lt;</div>`;
         }
         if (machine && machine.hopper && machine.hopper[spudName] > 0) {
-          sackList += `<div class="spudListButton" onclick="moveSpuds('${spudName}', -1)">&gt;</div>`;
+          sackList += `<div class="spudListButton" onclick="spuds.move('${spudName}', -1)">&gt;</div>`;
         } else {
           sackList += `<div class="spudListButton" >&gt;</div>`;
         }

@@ -80,7 +80,7 @@ const spuds = {
   },
 
   // move spuds from sack to machine hoppers
-  moveSpuds: (spudName, spudQty) => {
+  move: (spudName, spudQty) => {
     let machine = player.shop.machines[player.shop.selected];
 
     if (!machine.hopper[spudName]) {

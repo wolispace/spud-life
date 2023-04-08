@@ -10,8 +10,7 @@ const controls = {
     }
     if (player.controlIds.indexOf(index) > -1) {
       // we are trying to move
-      element = document.querySelector(`#patch_${player.pos}`);
-      element.classList.remove("currentPos");
+      fields.removeCurrentPosHighlight();
       let newPos = player.pos;
       let direction = 'down';
 
