@@ -14,6 +14,7 @@ const fields = {
 
   // player chose to switch to this field..
   switchField: (fieldId) => {
+    player.pos = player.currentField < fieldId ? 0 : 9;
     player.currentField = fieldId;
     // if field is empty then fill it
     fields.fillField(fieldId);
@@ -21,14 +22,17 @@ const fields = {
     fields.setupGrid();
     // render current field
     fields.renderField();
-    // reset player to 0
+    fields.highlightCurrentPos();
+    tools.render();
     state.save();
-
   },
 
   buyField: () => {
     // find highest field ID, add 1, set that field as an empty array so it can be filled
     player.fields[player.fields.length] = [];
+    let patch = { id: "patch_9", block: { type: "control-field--right", qty: 1 } };
+    player.fields[player.currentField][9] = patch;
+    fields.renderPatch(patch);
     state.save(true);
   },
 
@@ -37,10 +41,10 @@ const fields = {
     if (player.fields[fieldId].length < 1) {
       // first row 0 and 10 may contain links to other fields
       if (player.fields[fieldId - 1]) {
-        player.fields[fieldId][0] = { id: "patch_0", block: { type: "control-icon--left", qty: 1, onclick: `switchField(${fieldId - 1})` } };
+        player.fields[fieldId][0] = { id: "patch_0", block: { type: "control-field--left", qty: 1 } };
       }
       if (player.fields[fieldId + 1]) {
-        player.fields[fieldId][9] = { id: "patch_9", block: { type: "control-icon--right", qty: 1, onclick: `switchField(${fieldId + 1})` } };
+        player.fields[fieldId][9] = { id: "patch_9", block: { type: "control-field--right", qty: 1 } };
       }
       // skip the fisrt row
       let i = 10;
@@ -105,7 +109,7 @@ const fields = {
     });
   },
 
-  // add an svg to each patsch
+  // add an svg to each patch
   renderField: () => {
     player.fields[player.currentField].forEach((patch, index) => {
       patch = patch ?? {};
@@ -123,9 +127,11 @@ const fields = {
           newPatch = svg.render(patch.block.type, patch.block.qty);
           element = document.querySelector(`#${patch.id}`);
           element.innerHTML = svg.render(patch.block.type);
-          element.classList.add("controlButton");
-          element.classList.remove('patch');
-          element.setAttribute("onclick", `controls.click('${patch.id}');`);
+          if (patch.block.type.indexOf('icon') > -1) {
+            element.classList.add("controlButton");
+            element.classList.remove('patch');
+            element.setAttribute("onclick", `controls.click('${patch.id}');`);
+          }
         } else {
           newPatch = svg.render(patch.block.type, patch.block.qty);
         }

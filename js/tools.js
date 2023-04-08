@@ -7,8 +7,7 @@ const tools = {
       tools += `<div  class="tool-${toolName}" onclick="fields.digPatch()">${toolName}=${tool.uses} ${dummyImg}</div>`;
     });
     tools += `<div class="tool-purse" onclick="sack.show()">Purse=${player.purse}`;
-    tools += `<br/>Sack=${sack.count()}</div>`;
-    tools += `<div class="tool-test" onclick="fields.buyField()">Buy!</div>`;
+    tools += `<br/>Sack=${sack.count()}<br>Field=${player.currentField}</div>`;
     tools += `<div class="tool-next" onclick="dayCycle()">Next &gt;</div>`;
     element = document.querySelector('.tools');
     element.innerHTML = tools;

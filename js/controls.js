@@ -15,6 +15,22 @@ const controls = {
       let newPos = player.pos;
       let direction = 'down';
 
+      // move to next/prev fields
+      if (index == 70 && player.pos == 0) {
+        let newField = player.currentField - 1;
+        if (player.fields[newField]) {
+          fields.switchField(newField);
+          return;
+        }
+      }
+      if (index == 71 && player.pos == 9) {
+        let newField = player.currentField + 1;
+        if (player.fields[newField]) {
+          fields.switchField(newField);
+          return;
+        }
+      }
+
       if (index == 60) {
         newPos -= 10;
         direction = 'up';
@@ -26,21 +42,13 @@ const controls = {
         newPos -= 1;
         direction = 'left';
         if (newPos < 0) {
-          console.log('move to previous patch');
-          // If there is an patch-1 then switch to that patch and put player in patch_9
-          newPos = player.pos;
+
         }
       }
       if (index == 71 && player.pos % 10 < 9) {
         newPos += 1;
         direction = 'right';
-        if (newPos == 10 && player.fields[player.currentField + 1].length > -1) {
-          console.log('next field');
-          player.currentField++;
-          player.pos = 9;
-          fields.renderField();
-          exit;
-        }
+
         if (newPos > 99) {
           newPos = player.pos;
         }
@@ -58,7 +66,7 @@ const controls = {
 
       if (newPos !== player.pos) {
         let patch = player.fields[player.currentField][newPos];
-        if (patch && patch.block) {
+        if (patch && patch.block && patch.block.type.indexOf('control') < 0) {
           // animate..
           let thisBlock = document.querySelector(`#${patch.id} svg`);
           svg.animate(thisBlock, `jiggle-${direction}`, 0.25);
