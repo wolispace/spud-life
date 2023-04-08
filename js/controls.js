@@ -109,7 +109,7 @@ const controls = {
       player.pos = newPos;
       fields.highlightCurrentPos();
       // so the day can be cycled on first loading..
-      state.save(true);
+      state.save();
       player.phase = 'field';
     };
   }

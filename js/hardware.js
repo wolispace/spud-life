@@ -73,8 +73,8 @@ const hardware = {
       },
       "chipper": {
         type: "machine",
-        name: "Basic Chipper",
-        desc: "A basic all-purpose chip-maker",
+        name: "Humble Chipper",
+        desc: "A basic heavy-duty chip-maker",
         price: 150,
         upgradeCost: 100,
         maxUpgrades: 100,

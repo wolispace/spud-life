@@ -33,7 +33,7 @@ const fields = {
     let patch = { id: "patch_9", block: { type: "control-field--right", qty: 1 } };
     player.fields[player.currentField][9] = patch;
     fields.renderPatch(patch);
-    state.save(true);
+    state.save();
   },
 
   // randomly fill the selecte field (if empty) with rocks, logs and spuds - plus some ranom treasure!
@@ -249,7 +249,9 @@ const fields = {
         fields.renderPatch(patch);
       }
     }
+    state.save();
   },
+
   highlightCurrentPos: () => {
     let element = document.querySelector(`#patch_${player.pos}`);
     element.classList.add("currentPos");

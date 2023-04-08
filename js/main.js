@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   tools.render();
   console.log(player);
-  dayCycle();
+  dayCycle(false);
 });
 
 
@@ -54,17 +54,19 @@ function allocate() {
 }
 
 // move to the next phase in the day
-function dayCycle() {
+function dayCycle(moveOn = true) {
   state.save();
   const phases = ['field', 'allocate', 'hardware', 'sales', 'night'];
   let pages = document.querySelectorAll(`.page`);
   // turn all pages off..
   pages.forEach((page) => { page.style['display'] = 'none' });
   // increment the page the player is on
-  let pos = phases.indexOf(player.phase);
-  pos++;
-  pos = pos >= phases.length ? 0 : pos;
-  player.phase = phases[pos];
+  if (moveOn) {
+    let pos = phases.indexOf(player.phase);
+    pos++;
+    pos = pos >= phases.length ? 0 : pos;
+    player.phase = phases[pos];
+  }
   // turn on the page the player is on
   if (player.phase != 'field') {
     element = document.querySelector('.' + player.phase);
