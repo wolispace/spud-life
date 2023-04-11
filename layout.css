@@ -3,12 +3,12 @@
   --sl-mud: rgb(34, 19, 13);
   --sl-rock: darkslategrey;
   --sl-rock-hi: slategrey;
-  --sl-rock-lo: black;
+  --sl-rock-lo: rgb(41, 48, 48);
   --sl-log: rgb(58, 33, 21);
   --sl-log-hi: wheat;
   --sl-log-lo: black;
   --sl-spud: rgb(179, 150, 97);
-  --sl-spud-hi: black;
+  --sl-spud-hi: rgb(41, 38, 38);
   --sl-spud-lo: rgb(61, 45, 14);
 
   --sl-blank: black;

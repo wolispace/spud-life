@@ -1,10 +1,11 @@
+// random number between 0 and max
 function rnd(max) {
   return Math.floor(Math.random() * max);
 }
 
 // returns a randome number equally half plus or minus the number eg 3 = -1 to 1
 function halfRnd(num) {
-  return rnd(num) - num / 2;
+  return rnd(num * 2) - num;
 }
 
 
@@ -13,6 +14,7 @@ const state = {
     // remove these before saving
 
     player.dialog = false;
+    player.animating = false;
     let compressed = LZString.compressToUTF16(JSON.stringify(player));
     localStorage.setItem("state", compressed);
   },

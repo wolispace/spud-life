@@ -37,12 +37,16 @@ const spuds = {
       // uppercase first letter
       fullName = fullName.charAt(0).toUpperCase() + fullName.slice(1);
 
+      let svgInfo = svg.imgList['spud'];
+      console.log(svgInfo);
+
       player.spuds[counter++] = {
         "name": name,
         "fullName": fullName,
         "color": colorName,
         "rareness": rarityName,
         "bestFor": spudBits.bestFor[bestForCycle],
+        'path': svg.jiggle(svgInfo.paths[0].d, 1),
       }
       // roll on to next item in the list so everyone gets atleast one ofeverything
       colorCycle = ++colorCycle >= spudBits.color.length ? 0 : colorCycle;
@@ -93,6 +97,28 @@ const spuds = {
 
     sack.render();
     machines.renderHopper(player.shop.selected);
+  },
+
+  // draw a variety of potato in a predictable way
+  render: (spudName) => {
+    let spudInfo = player.spuds.filter(spud => spud.name == spudName)[0];
+    let svgInfo = svg.imgList['spud'];
+    let svgClass = svgInfo.class;
+    svgClass = svg.setClass(svgClass, 'spud');
+    console.log(spudInfo, svgInfo);
+    let highlight = svg.highlight();
+    let paths = '';
+    svgInfo.paths.forEach((path, index) => {
+      let onePath = spudInfo.path;
+      let svgCls = path.c ? `${svgClass}-${path.c}` : svgClass;
+
+      let svgStyle = (index > -1) ? ` style="fill:${spudInfo.color}; stroke:${spudInfo.color}" ` : '';
+      paths += `<path class="${svgCls}" ${svgStyle}
+        d="${onePath}" />`;
+    });
+
+
+    return svg.wrap(svgClass, `${paths}${highlight}`);
   }
 
 

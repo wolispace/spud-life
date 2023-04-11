@@ -6,8 +6,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Spud shop - texst svg</title>
   <link rel="stylesheet" href="layout.css?1">
-  <script src="utils.js?1"></script>
-  <script src="things.js?1"></script>
+  <script src="js/lz-string.min.js"></script>
+  <script src="js/utils.js?1"></script>
+  <script src="js/player.js?1"></script>
+  <script src="js/sack.js?1"></script>
+  <script src="js/hardware.js?1"></script>
+  <script src="js/machines.js?1"></script>
+  <script src="js/tools.js?1"></script>
+  <script src="js/spuds.js?1"></script>
+  <script src="js/controls.js?1"></script>
+  <script src="js/fields.js?1"></script>
+  <script src="js/svg.js?1"></script>
   <style>
     .img {
       border: 1px solid slategrey;
@@ -16,8 +25,13 @@
 </head>
 <script>
   document.addEventListener("DOMContentLoaded", function () {
+    player = state.load();
+    let spudName = player.spuds[5].name;
+    let spudInfo = player.spuds.filter(spud => spud.name == spudName)[0];
+    spuds.sprout();
+    console.log(spudName, spudInfo);
     element = document.querySelector('.img');
-    element.innerHTML = svgImg('spud');
+    element.innerHTML = spuds.render(spudName);
   });
 
 </script>
