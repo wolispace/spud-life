@@ -3,8 +3,8 @@
 // lods previously save state from localstorage if found
 player = state.load();
 
-
 document.addEventListener("DOMContentLoaded", function () {
+
   fields.setupGrid();
   if (player.spuds.length < 1) {
     spuds.sprout(6);
@@ -18,7 +18,6 @@ document.addEventListener("DOMContentLoaded", function () {
     fields.resetPlayer();
   }
   tools.render();
-  console.log(player);
   dayCycle(false);
 });
 

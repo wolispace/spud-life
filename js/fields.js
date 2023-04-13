@@ -140,9 +140,8 @@ const fields = {
         if (patch.spud.qty > 0) {
           newPatch += ''; // `<br/>S=${patch.spud.qty}` 
         } else {
-          if (patch.spud.qty == -5 && patch.spud.name) {
-            newPatch = svg.render('spud');
-            patch.spudFound = true;
+          if (patch.spud.qty == -5 && patch.spud.name && patch.spudFound) {
+            newPatch = spuds.render(patch.spud.name);
           } else {
             newPatch = svg.render('hole', 5);
           }
@@ -163,6 +162,7 @@ const fields = {
           newPatch = svg.render('hole', 5);
           element.innerHTML = newPatch;
         }
+        console.log(patch);
         svg.animate(thisSpud, 'dig-spud', 1, onEnd);
       }
 
@@ -232,6 +232,7 @@ const fields = {
         player.sack[patch.spud.name] = sackQty + patch.spud.qty;
         // sput qty in negative meaning it takes this many days to return to a fresh patch
         patch.spud.qty = player.spudRegen;
+        patch.spudFound = true;
         tool.uses--;
       } else if (patch.spud.qty == 0) {
         patch.spud.qty = player.spudRegen;
