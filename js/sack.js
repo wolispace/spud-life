@@ -42,15 +42,25 @@ const sack = {
   // show or hide the sack via a dialog
   show: () => {
     let content = '';
+    let content2 = '';
+    let style = `style="width:2rem;"`;
     Object.entries(player.sack).forEach(([spudName, spudQty]) => {
-      content += `<div class="buttonize">${spudName} = ${spudQty}</div>`;
+      let spudInfo = player.spuds.filter(spud => spud.name == spudName)[0];
+      if (spudInfo) {
+        let icon = spuds.render(spudInfo.name, style);
+        content += `<div class="buttonize">${icon} ${spudName} = ${spudQty}</div>`;
+      } else {
+        let icon = svg.render(spudName, 1, style);
+        content2 += `<div class="buttonize">${icon} ${spudName} = ${spudQty}</div>`;
+      }
     });
+
     let footer = '';
     footer += `<button class="buttonize" onclick="state.clear()"> Reset! </button>`;
     footer += `<button class="buttonize" onclick="fields.switchField(0)"> Field 0 </button>`;
     footer += `<button class="buttonize" onclick="fields.switchField(1)"> Field 1 </button>`;
     footer += `<button class="buttonize" onclick="fields.buyField()"> Buy a field </button>`;
     footer += `<button class="buttonize" onclick="sack.show()"> Ok </button>`;
-    showDialog('Inventory', content, footer);
+    showDialog('Inventory', `${content}${content2}`, footer);
   },
 }

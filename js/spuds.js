@@ -100,12 +100,11 @@ const spuds = {
   },
 
   // draw a variety of potato in a predictable way
-  render: (spudName) => {
+  render: (spudName, style = '') => {
     let spudInfo = player.spuds.filter(spud => spud.name == spudName)[0];
     let svgInfo = svg.imgList['spud'];
     let svgClass = svgInfo.class;
     svgClass = svg.setClass(svgClass, 'spud');
-    console.log(spudInfo, svgInfo);
     let highlight = svg.highlight();
     let paths = '';
     svgInfo.paths.forEach((path, index) => {
@@ -118,7 +117,7 @@ const spuds = {
     });
 
 
-    return svg.wrap(svgClass, `${paths}${highlight}`);
+    return svg.wrap(svgClass, style, `${paths}${highlight}`);
   }
 
 

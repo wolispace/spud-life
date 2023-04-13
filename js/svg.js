@@ -72,7 +72,7 @@ const svg = {
 
   },
 
-  render: (svgName, repeat = 1) => {
+  render: (svgName, repeat = 1, style = '') => {
     let svgHtml = '';
     let svgInfo = svg.imgList[svgName];
     let svgClass = svgInfo.class;
@@ -115,7 +115,7 @@ const svg = {
       }
       let highlight = svgName == 'spud' ? svg.highlight() : '';
 
-      svgHtml = svg.wrap(svgClass, `${paths}${highlight}`);
+      svgHtml = svg.wrap(svgClass, style, `${paths}${highlight}`);
 
     } else {
       svgHtml = svg.imgList[svgName];
@@ -124,8 +124,8 @@ const svg = {
     return svgHtml;
   },
 
-  wrap: (svgClass, guts) => {
-    return `<svg class="${svgClass}"
+  wrap: (svgClass, style, guts) => {
+    return `<svg class="${svgClass}" ${style}
     viewBox="0 0 100 100" 
     xmlns="http://www.w3.org/2000/svg">
       ${guts}
