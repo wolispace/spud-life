@@ -11,12 +11,14 @@ const sack = {
   // show contents of the sack
   render: () => {
     let sackList = '';
+    let style = `style="width:2rem;"`;
     Object.entries(player.sack).forEach(([spudName, spudQty]) => {
-      let spud = player.spuds.filter((spud) => spud.name == spudName)[0];
-      if (spud) {
+      let spudInfo = player.spuds.filter((spud) => spud.name == spudName)[0];
+      if (spudInfo) {
+        let icon = spuds.render(spudInfo.name, style);
         let machine = player.shop.machines[player.shop.selected];
         sackList += `<div class="sackSpuds buttonize">`;
-        sackList += `<div class="sackSpudName">${spudQty} ${spud.fullName}</div>`;
+        sackList += `<div class="sackSpudName">${icon} ${spudQty} ${spudInfo.fullName}</div>`;
         sackList += `<div class="sackListButtons">`;
         if (spudQty > 0) {
           sackList += `<div class="spudListButton" onclick="spuds.move('${spudName}', ${spudQty})">&lt;&lt;</div>`;
@@ -31,7 +33,7 @@ const sack = {
           sackList += `<div class="spudListButton" >&gt;</div>`;
         }
         sackList += `</div>`;
-        sackList += `<div class="sackSpudDesc">This is a ${spud.rareness} potato that is best for ${spud.bestFor}</div>`;
+        sackList += `<div class="sackSpudDesc">This is a ${spudInfo.rareness} potato that is best for ${spudInfo.bestFor}</div>`;
         sackList += `</div>`;
       }
     });

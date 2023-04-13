@@ -46,7 +46,7 @@ const spuds = {
         "color": colorName,
         "rareness": rarityName,
         "bestFor": spudBits.bestFor[bestForCycle],
-        'path': svg.jiggle(svgInfo.paths[0].d, 1),
+        'path': svg.jiggle(svgInfo.paths[0].d, 3),
       }
       // roll on to next item in the list so everyone gets atleast one ofeverything
       colorCycle = ++colorCycle >= spudBits.color.length ? 0 : colorCycle;
