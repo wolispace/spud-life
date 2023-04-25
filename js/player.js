@@ -39,4 +39,12 @@ let player = {
     "ArrowDown": 20
   },
   animating: false,
+  body: {
+    "body-big": "fill-navy",
+    "head": "fill-wheat",
+    "nose-triangle": "fill-wheat",
+    "eyebrow-03": "eyebrow",
+    "eye": "fill-dodgerblue",
+    "hair-curly": "fill-brown",
+  }
 }

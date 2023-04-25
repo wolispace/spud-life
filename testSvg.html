@@ -18,6 +18,10 @@
   <script src="js/fields.js?1"></script>
   <script src="js/svg.js?1"></script>
   <style>
+    body {
+      background-color: darkslategrey;
+    }
+
     .img {
       border: 1px solid slategrey;
     }
@@ -25,13 +29,15 @@
 </head>
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    player = state.load();
-    let spudName = player.spuds[5].name;
-    let spudInfo = player.spuds.filter(spud => spud.name == spudName)[0];
-    spuds.sprout();
-    console.log(spudName, spudInfo);
-    element = document.querySelector('.img');
-    element.innerHTML = spuds.render(spudName);
+    // player = state.load();
+    // let spudName = player.spuds[5].name;
+    // let spudInfo = player.spuds.filter(spud => spud.name == spudName)[0];
+    // spuds.sprout();
+    // console.log(spudName, spudInfo);
+    let element = document.querySelector('.img');
+    // element.innerHTML = spuds.render(spudName);
+    let svgPaths = svg.assemblePerson();
+    element.innerHTML = svg.render("eye", 1, '', { "paths": svgPaths });
   });
 
 </script>

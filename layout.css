@@ -14,6 +14,44 @@
   --sl-blank: black;
 }
 
+.fill-red {
+  fill: maroon;
+}
+
+.fill-wheat {
+  fill: wheat;
+}
+
+.fill-dodgerblue {
+  fill: dodgerblue;
+}
+
+.fill-yellow {
+  fill: rgb(236, 236, 124);
+}
+
+.fill-orange {
+  fill: orange;
+}
+
+.fill-black {
+  fill: black;
+}
+
+.fill-navy {
+  fill: navy;
+}
+
+.fill-brown {
+  fill: brown;
+}
+
+.eyebrow {
+  stroke: black;
+  stroke-linecap: round;
+  stroke-width: 1.2;
+}
+
 html {
   border: 0;
   overflow: hidden;
