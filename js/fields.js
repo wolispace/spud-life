@@ -22,7 +22,9 @@ const fields = {
     fields.setupGrid();
     // render current field
     fields.renderField();
+    svg.hidePlayerSprite();
     fields.highlightCurrentPos();
+    svg.showPlayerSprite();
     tools.render();
     state.save();
   },
@@ -278,6 +280,7 @@ const fields = {
     element.style.left = posX;
     element.style.width = width;
     element.style.height = height;
+    element.style.transition = "0.15s ease-in-out";
   },
 
   removeCurrentPosHighlight: () => {

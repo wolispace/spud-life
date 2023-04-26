@@ -335,6 +335,17 @@ const svg = {
     } else {
       playerSprite.setAttribute('transform', 'translate(100, 0) scale(-1, 1)');
     }
-  }
+  },
+
+  showPlayerSprite() {
+    let playerSprite = document.querySelector('#playerSprite');
+    playerSprite.style.display = 'block';
+  },
+
+  hidePlayerSprite() {
+    let playerSprite = document.querySelector('#playerSprite');
+    playerSprite.style.display = 'none';
+  },
+
 }
 

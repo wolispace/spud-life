@@ -5,6 +5,7 @@ player = state.load();
 
 document.addEventListener("DOMContentLoaded", function () {
 
+  svg.hidePlayerSprite();
   fields.setupGrid();
   if (player.spuds.length < 1) {
     spuds.sprout(6);
@@ -19,6 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   tools.render();
   dayCycle(false);
+  svg.showPlayerSprite();
 });
 
 
