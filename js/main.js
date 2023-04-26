@@ -70,6 +70,7 @@ function dayCycle(moveOn = true) {
   }
   // turn on the page the player is on
   if (player.phase != 'field') {
+    svg.hidePlayerSprite();
     element = document.querySelector('.' + player.phase);
     element.style['display'] = 'block';
     if (player.phase == 'allocate') {
@@ -89,6 +90,7 @@ function dayCycle(moveOn = true) {
     // display the fields patches in their current state
     fields.renderField();
     fields.highlightCurrentPos();
+    svg.showPlayerSprite();
   }
 }
 
@@ -120,7 +122,9 @@ function showDialog(title, content, footer) {
   if (player.dialog) {
     element.style["top"] = "-10000px";
     element.style["left"] = "-10000px";
+    svg.showPlayerSprite();
   } else {
+    svg.hidePlayerSprite();
     element.style["top"] = "5vh";
     element.style["left"] = "9vw";
     element = document.querySelector(`.dialog .header .title`);
