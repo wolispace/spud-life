@@ -253,13 +253,33 @@ const fields = {
 
   highlightCurrentPos: () => {
     let element = document.querySelector(`#patch_${player.pos}`);
-    element.classList.add("currentPos");
+    //element.classList.add("currentPos");
+
+
     if (fields.inRange()) {
-      element.classList.add("inRange");
+      //element.classList.add("inRange");
     } else {
-      element.classList.remove("inRange");
+      //element.classList.remove("inRange");
     }
+
+    // move player spite
+    let patch = element.getBoundingClientRect();
+    let posY = patch.top + 'px';
+    let posX = patch.left + 'px';
+    let height = patch.height + 'px';
+    let width = patch.width + 'px';
+
+    let svgPaths = svg.assemblePerson();
+    element = document.querySelector(`#playerSprite`);
+    if (element.innerHTML == '') {
+      element.innerHTML = svg.render("eye", 1, 'person', { "paths": svgPaths });
+    }
+    element.style.top = posY;
+    element.style.left = posX;
+    element.style.width = width;
+    element.style.height = height;
   },
+
   removeCurrentPosHighlight: () => {
     element = document.querySelector(`#patch_${player.pos}`);
     element.classList.remove("currentPos");

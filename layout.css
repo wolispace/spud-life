@@ -68,6 +68,12 @@ h2 {
   margin: var(--sl-padding);
 }
 
+#playerSprite {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+}
+
 .dialog {
   position: absolute;
   top: -1000px;

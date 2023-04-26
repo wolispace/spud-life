@@ -163,17 +163,17 @@ const svg = {
         { "c": "", "d": "m 15,30 c 2.316426,-1.034119 4.632389,-2.068031 7.039753,-2.464523 2.407364,-0.396492 4.905353,-0.155889 7.011012,0.732458 2.105658,0.888347 3.818766,2.423494 4.906039,3.957603 1.087272,1.534109 1.54928,3.066777 1.759929,3.83253 0.210649,0.765753 0.169299,0.765753 1.480405,0.769303 1.311106,0.0035 3.973566,0.01064 6.637082,0.01774 -0.235596,-1.798829 -0.471042,-3.59651 -1.059283,-5.766468 -0.588242,-2.169959 -1.529368,-4.710951 -3.586837,-6.957426 -2.057468,-2.246475 -5.231757,-4.197679 -8.354525,-5.20648 -3.122768,-1.008801 -6.19349,-1.074381 -8.906534,-0.806698 -2.713045,0.267684 -5.067761,0.868798 -7.0103,1.646027 -1.942539,0.777229 -3.472236,1.730467 -4.60833,2.981912 -1.1360946,1.251445 -1.8777848,2.799958 -2.619693,4.348927 -0.00294,0.0205 -0.006,0.04184 -0.00882,0.0615" }
       ]
     },
-    "eyebrow-01": {
+    "eyebrow-straight": {
       "paths": [
-        { "c": "", "d": "m 40,24 c 1.668255,-0.468869 1.668239,-0.468865 2.591623,-0.435498 0.923384,0.03337 1.935773,0.333893 2.59038,0.814829 0.654608,0.480936 0.952055,1.141411 1.248968,1.800702" }
+        { "c": " eyebrow ", "d": "m 40,24 c 1.668255,-0.468869 1.668239,-0.468865 2.591623,-0.435498 0.923384,0.03337 1.935773,0.333893 2.59038,0.814829 0.654608,0.480936 0.952055,1.141411 1.248968,1.800702" }
       ]
     },
-    "eyebrow-02": {
+    "eyebrow-arch": {
       "paths": [
-        { "c": "", "d": "m 40,24 c 1.668589,-0.467682 1.668573,-0.467677 2.501384,-0.703023 0.87902,-0.09136 1.757003,-0.183709 2.634006,-0.277063 0.525913,0.113513 1.050816,0.226023 1.574737,0.337538" }
+        { "c": " eyebrow ", "d": "m 40,24 c 1.668589,-0.467682 1.668573,-0.467677 2.501384,-0.703023 0.87902,-0.09136 1.757003,-0.183709 2.634006,-0.277063 0.525913,0.113513 1.050816,0.226023 1.574737,0.337538" }
       ]
     },
-    "eyebrow-03": {
+    "eyebrow-wave": {
       "paths": [
         { "c": " eyebrow ", "d": "m 40,26 c 0.820722,0.917813 0.820714,0.917804 1.583482,1.027839 0.762768,0.110035 1.878545,-0.127062 2.766277,0.02312 0.887731,0.150181 1.54704,0.686588 2.205281,1.222126" }
       ]
@@ -183,7 +183,7 @@ const svg = {
   render: (svgName, repeat = 1, style = '', svgInfo = null) => {
     let svgHtml = '';
     svgInfo = svgInfo ?? svg.imgList[svgName];
-    let svgClass = svgInfo.class;
+    let svgClass = svgInfo.class ?? '';
 
     let thisScale = '';
     let thisShift = '';
@@ -312,20 +312,29 @@ const svg = {
   assemblePerson() {
     // somehow we know which of these paths to select and what styles to apply
     let paths = [];
-    paths.push(svg.buildPath('body-big'));
-    paths.push(svg.buildPath('head'));
-    paths.push(svg.buildPath('nose-triangle'));
-    paths.push(svg.buildPath('eyebrow-03'));
-    paths.push(svg.buildPath('eye'));
-    paths.push(svg.buildPath('hair-curly'));
+    Object.entries(player.body).forEach(([part, colour]) => {
+      paths.push(svg.buildPath(part, colour));
+    });
 
     return paths;
   },
 
-  buildPath(partName) {
+  buildPath(partName, colour) {
     let path = svg.imgList[partName].paths[0];
-    path.c = ' ' + player.body[partName];
+    let bits = partName.split('-');
+    path.c = ` ${bits[0]} fill-${colour}`;
 
     return path;
+  },
+
+  directPlayerSprite(left) {
+    let playerSprite = document.querySelector('#playerSprite > svg > g');
+    playerSprite.setAttribute('wallace', 'thing');
+    if (left) {
+      playerSprite.setAttribute('transform', 'translate(0, 0) scale(1, 1)');
+    } else {
+      playerSprite.setAttribute('transform', 'translate(100, 0) scale(-1, 1)');
+    }
   }
 }
+
