@@ -26,8 +26,12 @@
   fill: dodgerblue;
 }
 
-.fill-yellow {
-  fill: rgb(236, 236, 124);
+.fill-gold {
+  fill: gold;
+}
+
+.fill-darkgreen {
+  fill: darkgreen;
 }
 
 .fill-orange {
@@ -36,6 +40,10 @@
 
 .fill-black {
   fill: black;
+}
+
+.fill-grey {
+  fill: grey;
 }
 
 .fill-navy {
@@ -377,12 +385,14 @@ button {
 
 .creator {
   display: flex;
-  outline: 1px solid red;
+}
+
+.creator .left div {
+  padding-bottom: 0.75rem;
 }
 
 .demoBody {
   width: 100%;
-  outline: 1px solid blue;
 }
 
 .currentPos {
