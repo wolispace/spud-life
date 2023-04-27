@@ -38,7 +38,6 @@ const spuds = {
       fullName = fullName.charAt(0).toUpperCase() + fullName.slice(1);
 
       let svgInfo = svg.imgList['spud'];
-      console.log(svgInfo);
 
       player.spuds[counter++] = {
         "name": name,

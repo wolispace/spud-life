@@ -62,7 +62,7 @@ const sack = {
     footer += `<button class="buttonize" onclick="fields.switchField(0)"> Field 0 </button>`;
     footer += `<button class="buttonize" onclick="fields.switchField(1)"> Field 1 </button>`;
     footer += `<button class="buttonize" onclick="fields.buyField()"> Buy a field </button>`;
-    footer += `<button class="buttonize" onclick="sack.show()"> Ok </button>`;
+    footer += `<button class="buttonize" onclick="hideDialog()"> Ok </button>`;
     showDialog('Inventory', `${content}${content2}`, footer);
   },
 }

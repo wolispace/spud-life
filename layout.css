@@ -375,6 +375,16 @@ button {
   background-color: rgba(81, 78, 116);
 }
 
+.creator {
+  display: flex;
+  outline: 1px solid red;
+}
+
+.demoBody {
+  width: 100%;
+  outline: 1px solid blue;
+}
+
 .currentPos {
   background-color: rgba(221, 200, 131);
   border-radius: 0.2em;

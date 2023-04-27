@@ -8,19 +8,13 @@ document.addEventListener("DOMContentLoaded", function () {
   svg.hidePlayerSprite();
   fields.setupGrid();
   if (player.spuds.length < 1) {
-    spuds.sprout(6);
-    fields.fillField(player.currentField);
-    fields.rollPatches();
-    // gift the first machine first off
-    player.hardware = hardware.store();
-    let starter = 'chipper';
-    player.shop.machines[starter] = player.hardware[starter].initial;
-    tools.reset();
-    fields.resetPlayer();
+
+    // intro to game
+    initGame();
   }
   tools.render();
   dayCycle(false);
-  svg.showPlayerSprite();
+
 });
 
 
@@ -38,7 +32,121 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
+function initGame() {
+  spuds.sprout(6);
+  fields.fillField(player.currentField);
+  fields.rollPatches();
+  // gift the first machine first off
+  player.hardware = hardware.store();
+  let starter = 'chipper';
+  player.shop.machines[starter] = player.hardware[starter].initial;
+  tools.reset();
+  //fields.resetPlayer();
 
+}
+
+function defineCharacter(save = false) {
+  console.trace('new player save=', save);
+
+  // setup the default body
+  if (!player.body) {
+
+    player.body = {
+      "body-big": "navy",
+      "head": "wheat",
+      "nose-triangle": "wheat",
+      "eyebrow-wave": "black",
+      "eye": "dodgerblue",
+      "hair-curly": "brown",
+    }
+  }
+  // show or hide the sack via a dialog
+  if (save) {
+
+    hideDialog();
+    dayCycle();
+    console.log('saved player body', player.body);
+  } else {
+    let content = '';
+    content += '<div class="creator">';
+    content += '<div class="left">';
+    let colour = `
+    <option >red</option>
+    <option >orange</option>
+    <option >navy</option>
+    <option >wheat</option>
+    <option >black</option>
+    `;
+
+    let part = `
+        <option>hair-pony-1</option>
+        <option>hair-pony-2</option>
+        <option>hair-bun</option>
+        <option>hair-curly</option>
+        <option>hair-straight</option>
+        <option>facial-big</option>
+        <option>hair-short</option>
+        <option>hair-bob-2</option>
+        <option>hair-crop</option>
+        <option>hair-long</option>
+        <option>hair-mohawk</option>
+        `;
+    content += `<div><select id="hair" onchange="demoBody()">${part}</select>
+      <br/><select id="hair-colour" onchange="demoBody()">${colour}</select></div>`;
+
+    part = '<option>eye</option>';
+    content += `<div><select id="eye" onchange="demoBody()">${part}</select>
+      <br/><select id="eye-color" onchange="demoBody()">${colour}</select></div>`;
+
+    // content += '<div>Head <select></select> <select></select></div>';
+    // content += '<div>Nose <select></select> <select></select></div>';
+    // content += '<div>Eyes <select></select> <select></select></div>';
+    // content += '<div>Eyebrows <select></select> <select></select></div>';
+    // content += '<div>Facial <select></select> <select></select></div>';
+    content += '</div>';
+    content += '<div class="demoBody">';
+    content += '</div>';
+    content += '</div>';
+    // let style = `style="width:2rem;"`;
+    // Object.entries(player.sack).forEach(([spudName, spudQty]) => {
+    //   let spudInfo = player.spuds.filter(spud => spud.name == spudName)[0];
+    //   if (spudInfo) {
+    //     let icon = spuds.render(spudInfo.name, style);
+    //     content += `<div class="buttonize">${icon} ${spudName} = ${spudQty}</div>`;
+    //   } else {
+    //     let icon = svg.render(spudName, 1, style);
+    //     content2 += `<div class="buttonize">${icon} ${spudName} = ${spudQty}</div>`;
+    //   }
+    // });
+
+    let footer = '';
+    footer += `<button class="buttonize" onclick="defineCharacter(true)"> Ok </button>`;
+    showDialog('Character creator', `${content}`, footer);
+    demoBody();
+  }
+}
+
+// redisplay character using current body parts
+function demoBody() {
+  // read values from form
+  let element = document.querySelector('#hair');
+  let hair = element.value;
+  element = document.querySelector('#hair-colour');
+  let hairColour = element.value;
+  player.body = {
+    "body-big": "navy",
+    "head": "wheat",
+    "nose-triangle": "wheat",
+    "eyebrow-wave": "black",
+    "eye": "dodgerblue",
+    "hair-curly": hairColour,
+  }
+
+  element = document.querySelector('.demoBody');
+  // element.innerHTML = spuds.render(spudName);
+  let svgPaths = svg.assemblePerson();
+  element.innerHTML = svg.render("eye", 1, 'person', { "paths": svgPaths });
+}
 
 // player chooses which spuds to put in what machines
 function allocate() {
@@ -82,9 +190,13 @@ function dayCycle(moveOn = true) {
     } else if (player.phase == 'night') {
       tools.reset();
       tools.render();
-      fields.resetPlayer();
       fields.rollPatches();
-      dream();
+      if (player.body) {
+        dream();
+        fields.resetPlayer();
+      } else {
+        defineCharacter();
+      }
     }
   } else {
     // display the fields patches in their current state
@@ -116,25 +228,29 @@ function dream() {
 }
 
 
-// show or hide the dialog
+// show the dialog
 function showDialog(title, content, footer) {
   let element = document.querySelector(`.dialog`);
-  if (player.dialog) {
-    element.style["top"] = "-10000px";
-    element.style["left"] = "-10000px";
-    svg.showPlayerSprite();
-  } else {
-    svg.hidePlayerSprite();
-    element.style["top"] = "5vh";
-    element.style["left"] = "9vw";
-    element = document.querySelector(`.dialog .header .title`);
-    element.innerHTML = title;
-    element = document.querySelector(`.dialog .content`);
-    element.innerHTML = content;
-    element = document.querySelector(`.dialog .footer`);
-    element.innerHTML = footer;
-  }
-  player.dialog = !player.dialog;
+
+  svg.hidePlayerSprite();
+  element.style["top"] = "5vh";
+  element.style["left"] = "9vw";
+  element = document.querySelector(`.dialog .header .title`);
+  element.innerHTML = title;
+  element = document.querySelector(`.dialog .content`);
+  element.innerHTML = content;
+  element = document.querySelector(`.dialog .footer`);
+  element.innerHTML = footer;
+  player.dialog = true;
+}
+
+// hide the dialog
+function hideDialog() {
+  let element = document.querySelector(`.dialog`);
+  element.style["top"] = "-10000px";
+  element.style["left"] = "-10000px";
+  player.dialog = false;
+  svg.showPlayerSprite();
 }
 
 

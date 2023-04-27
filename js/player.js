@@ -39,12 +39,5 @@ let player = {
     "ArrowDown": 20
   },
   animating: false,
-  body: {
-    "body-big": "navy",
-    "head": "wheat",
-    "nose-triangle": "wheat",
-    "eyebrow-wave": "black",
-    "eye": "dodgerblue",
-    "hair-curly": "brown",
-  }
+
 }

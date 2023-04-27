@@ -310,6 +310,10 @@ const svg = {
 
   // puts the bits of a human together
   assemblePerson() {
+    // TODO: should not need this..
+    if (!player.body) {
+      defineCharacter();
+    }
     // somehow we know which of these paths to select and what styles to apply
     let paths = [];
     Object.entries(player.body).forEach(([part, colour]) => {
