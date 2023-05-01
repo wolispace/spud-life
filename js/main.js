@@ -49,22 +49,22 @@ function defineCharacter(save = false) {
   if (!player.body) {
     player.body = {
       body: {
-        type: "body-big", colour: "navy"
+        type: "body-big", colour: "Navy"
       },
       head: {
-        type: "head", colour: "wheat"
+        type: "head", colour: "Wheat"
       },
       nose: {
-        type: "nose-triangle", colour: "wheat"
+        type: "nose-triangle", colour: "Wheat"
       },
       eyebrow: {
-        type: "eyebrow-wave", colour: "black"
+        type: "eyebrow-wave", colour: "Black"
       },
       eye: {
-        type: "eye", colour: "dodgerblue"
+        type: "eye", colour: "DodgerBlue"
       },
       hair: {
-        type: "hair-curly", colour: "brown"
+        type: "hair-curly", colour: "Brown"
       },
     }
   }
@@ -76,19 +76,22 @@ function defineCharacter(save = false) {
     let content = '';
     content += '<div class="creator">';
     content += '<div class="left">';
-    let colour = svg.colourOptions();
+    let colour = svg.colourOptions(player.body.hair.colour);
+    console.log(player.body.hair.colour);
 
     let part = svg.bodyPartOptions('hair');
-    content += `<div><select id="hair" onchange="demoBody()">${part}</select>
-      <br/><select id="hair-colour" onchange="demoBody()">${colour}</select></div>`;
+    content += `<div><select id="hair" class="selectPart" onchange="demoBody()">${part}</select>
+       <select id="hair-colour" class="selectColour" onchange="demoBody()">${colour}</select></div>`;
 
+    colour = svg.colourOptions(player.body.eye.colour);
     part = '<option>eye</option>';
-    content += `<div><select id="eye" onchange="demoBody()">${part}</select>
-      <br/><select id="eye-color" onchange="demoBody()">${colour}</select></div>`;
+    content += `<div><select id="eye" class="selectPart" onchange="demoBody()">${part}</select>
+       <select id="eye-color" class="selectColour" onchange="demoBody()">${colour}</select></div>`;
 
+    colour = svg.colourOptions(player.body.body.colour);
     part = '<option>body</option>';
-    content += `<div><select id="body" onchange="demoBody()">${part}</select>
-        <br/><select id="body-color" onchange="demoBody()">${colour}</select></div>`;
+    content += `<div><select id="body" class="selectPart" onchange="demoBody()">${part}</select>
+         <select id="body-color" class="selectColour" onchange="demoBody()">${colour}</select></div>`;
 
     content += '</div>';
     content += '<div class="demoBody">';
@@ -146,7 +149,7 @@ function demoBody() {
   let element = document.querySelector('.demoBody');
   // element.innerHTML = spuds.render(spudName);
   let svgPaths = svg.assemblePerson();
-  element.innerHTML = svg.render("eye", 1, 'person', { "paths": svgPaths });
+  element.innerHTML = svg.render("eye", 1, 'style="max-height: 20rem;"', { "paths": svgPaths });
 }
 
 // player chooses which spuds to put in what machines
