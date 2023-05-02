@@ -44,29 +44,34 @@ function initGame() {
   tools.reset();
 }
 
+// the default
+function defaultBody() {
+  return {
+    body: {
+      type: "body-big", colour: "Navy"
+    },
+    head: {
+      type: "head-head", colour: "Wheat"
+    },
+    nose: {
+      type: "nose-triangle", colour: "Wheat"
+    },
+    brows: {
+      type: "brows-wave", colour: "Black"
+    },
+    eye: {
+      type: "eye-eye", colour: "DodgerBlue"
+    },
+    hair: {
+      type: "hair-curly", colour: "Brown"
+    },
+  }
+}
+
 // setup the default body
 function defineCharacter(save = false) {
   if (!player.body) {
-    player.body = {
-      body: {
-        type: "body-big", colour: "Navy"
-      },
-      head: {
-        type: "head", colour: "Wheat"
-      },
-      nose: {
-        type: "nose-triangle", colour: "Wheat"
-      },
-      eyebrow: {
-        type: "eyebrow-wave", colour: "Black"
-      },
-      eye: {
-        type: "eye", colour: "DodgerBlue"
-      },
-      hair: {
-        type: "hair-curly", colour: "Brown"
-      },
-    }
+    player.body = defaultBody();
   }
   // show or hide the sack via a dialog
   if (save) {
@@ -76,38 +81,15 @@ function defineCharacter(save = false) {
     let content = '';
     content += '<div class="creator">';
     content += '<div class="left">';
-    let colour = svg.colourOptions(player.body.hair.colour);
-    console.log(player.body.hair.colour);
 
-    let part = svg.bodyPartOptions('hair');
-    content += `<div><select id="hair" class="selectPart" onchange="demoBody()">${part}</select>
-       <select id="hair-colour" class="selectColour" onchange="demoBody()">${colour}</select></div>`;
-
-    colour = svg.colourOptions(player.body.eye.colour);
-    part = '<option>eye</option>';
-    content += `<div><select id="eye" class="selectPart" onchange="demoBody()">${part}</select>
-       <select id="eye-color" class="selectColour" onchange="demoBody()">${colour}</select></div>`;
-
-    colour = svg.colourOptions(player.body.body.colour);
-    part = '<option>body</option>';
-    content += `<div><select id="body" class="selectPart" onchange="demoBody()">${part}</select>
-         <select id="body-color" class="selectColour" onchange="demoBody()">${colour}</select></div>`;
+    Object.entries(player.body).forEach(([key, part]) => {
+      content += buildBodySelect(key);
+    });
 
     content += '</div>';
     content += '<div class="demoBody">';
     content += '</div>';
     content += '</div>';
-    // let style = `style="width:2rem;"`;
-    // Object.entries(player.sack).forEach(([spudName, spudQty]) => {
-    //   let spudInfo = player.spuds.filter(spud => spud.name == spudName)[0];
-    //   if (spudInfo) {
-    //     let icon = spuds.render(spudInfo.name, style);
-    //     content += `<div class="buttonize">${icon} ${spudName} = ${spudQty}</div>`;
-    //   } else {
-    //     let icon = svg.render(spudName, 1, style);
-    //     content2 += `<div class="buttonize">${icon} ${spudName} = ${spudQty}</div>`;
-    //   }
-    // });
 
     let footer = '';
     footer += `<button class="buttonize" onclick="defineCharacter(true)"> Ok </button>`;
@@ -116,35 +98,29 @@ function defineCharacter(save = false) {
   }
 }
 
+function buildBodySelect(bodyPart) {
+  let colour = svg.colourOptions(player.body[bodyPart].colour);
+  let part = svg.bodyPartOptions(bodyPart);
+
+  return `<div>${bodyPart}<br/><select id="${bodyPart}" class="selectPart" onchange="demoBody()">${part}</select>
+     <select id="${bodyPart}-colour" class="selectColour" onchange="demoBody()">${colour}</select></div>`;
+}
+
 // get the selected value from a select
 function getSelectValue(id) {
   let element = document.querySelector(id);
+
   return element.value;
 }
 
 // redisplay character using current body parts
 function demoBody() {
-
-  player.body = {
-    body: {
-      type: "body-big", colour: getSelectValue('#body-color')
-    },
-    head: {
-      type: "head", colour: "wheat"
-    },
-    nose: {
-      type: "nose-triangle", colour: "wheat"
-    },
-    eyebrow: {
-      type: "eyebrow-wave", colour: "black"
-    },
-    eye: {
-      type: "eye", colour: getSelectValue('#eye-color')
-    },
-    hair: {
-      type: getSelectValue('#hair'), colour: getSelectValue('#hair-colour')
-    },
-  }
+  Object.entries(player.body).forEach(([key, part]) => {
+    player.body[key] = {
+      type: getSelectValue(`#${key}`),
+      colour: getSelectValue(`#${key}-colour`),
+    }
+  });
 
   let element = document.querySelector('.demoBody');
   // element.innerHTML = spuds.render(spudName);
