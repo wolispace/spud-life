@@ -336,15 +336,15 @@ const svg = {
 
   // puts the bits of a human together
   assemblePerson() {
-    // TODO: should not need this..
-    if (!player.body) {
-      defineCharacter();
-    }
 
-    // somehow we know which of these paths to select and what styles to apply
-    let paths = [];
+    // group everything but the body
+    // then wrap in another group
+
+    let paths = [svg.buildPath(player.body.body.type, player.body.body.colour)];
     Object.entries(player.body).forEach(([key, part]) => {
-      paths.push(svg.buildPath(part.type, part.colour));
+      if (key != 'body') {
+        paths.push(svg.buildPath(part.type, part.colour));
+      }
     });
 
     return paths;
@@ -359,13 +359,17 @@ const svg = {
     return path;
   },
 
-  directPlayerSprite(left) {
+  directPlayerSprite(direction) {
     let playerSprite = document.querySelector('#playerSprite > svg > g');
 
-    if (left) {
+    if (direction == 'left') {
       playerSprite.setAttribute('transform', 'translate(0, 0) scale(1, 1)');
-    } else {
+    } else if (direction == 'right') {
       playerSprite.setAttribute('transform', 'translate(100, 0) scale(-1, 1)');
+    } else if (direction == 'up') {
+      //playerSprite.setAttribute('transform', 'translate(100, 0) scale(-1, 1)');
+    } else if (direction == 'down') {
+      //playerSprite.setAttribute('transform', 'translate(100, 0) scale(-1, 1)');
     }
   },
 

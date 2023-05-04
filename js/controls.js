@@ -33,6 +33,7 @@ const controls = {
       if (index == 60) {
         newPos -= 10;
         direction = 'up';
+        svg.directPlayerSprite('up');
         if (newPos < 0) {
           newPos = player.pos;
         }
@@ -40,7 +41,7 @@ const controls = {
       if (index == 70 && player.pos % 10 > 0) {
         newPos -= 1;
         direction = 'left';
-        svg.directPlayerSprite(true);
+        svg.directPlayerSprite('left');
         if (newPos < 0) {
 
         }
@@ -48,13 +49,14 @@ const controls = {
       if (index == 71 && player.pos % 10 < 9) {
         newPos += 1;
         direction = 'right';
-        svg.directPlayerSprite(false);
+        svg.directPlayerSprite('right');
         if (newPos > 99) {
           newPos = player.pos;
         }
       }
       if (index == 80) {
         newPos += 10;
+        svg.directPlayerSprite('down');
         if (newPos > 99) {
           newPos = player.pos;
         }
