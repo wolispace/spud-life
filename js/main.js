@@ -50,6 +50,7 @@ function defaultBody() {
     body: {
       type: "body-big", colour: "Navy"
     },
+
     head: {
       type: "head-head", colour: "Wheat"
     },
@@ -61,6 +62,9 @@ function defaultBody() {
     },
     eye: {
       type: "eye-eye", colour: "DodgerBlue"
+    },
+    facial: {
+      type: "facial-mustache", colour: "Brown"
     },
     hair: {
       type: "hair-curly", colour: "Brown"
