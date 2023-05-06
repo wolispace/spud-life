@@ -313,7 +313,7 @@ const fields = {
     let svgPaths = svg.assemblePerson();
     element = document.querySelector(`#playerSprite`);
     if (element.innerHTML == "") {
-      element.innerHTML = svg.render("eye", 1, "person", { paths: svgPaths });
+      element.innerHTML = svg.renderPlayer(svgPaths); //svg.render("eye", 1, "person", { paths: svgPaths });
     }
     element.style.top = posY;
     element.style.left = posX;

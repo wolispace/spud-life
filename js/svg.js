@@ -407,22 +407,22 @@ const svg = {
 
   renderPlayer: () => {
     let paths = svg.assemblePerson();
-    // seperate the first lement of paths so we can wrap in <g>
+    // separate the first element of paths so we can wrap in <g>
     let body = paths.pop();
-    let guts = `<g><g id="playerHead">`;
+    let head = ``;
 
     paths.forEach((path) => {
       // path
       if (path.d) {
-        guts += `<path d="${path.d}" />`;
+        head += `<path d="${path.d}" style="${path.s}" />`;
       }
       // circle
       if (path.r) {
-        guts += `<circle cx="${path.cx}" cy="${path.cy}" r="${path.r}" />`;
+        head += `<circle cx="${path.cx}" cy="${path.cy}" r="${path.r}"  style="${path.s}" />`;
       }
     });
 
-    guts += `'<g>$<path d="${body.d}"></g>`;
+    let guts = `<g><path style="${body.s}" d="${body.d}"></g><g class="playerHead">${head}</g>`;
 
     return svg.wrap("", "", guts);
   },
@@ -453,16 +453,19 @@ const svg = {
   },
 
   directPlayerSprite(direction) {
-    let playerSprite = document.querySelector("#playerSprite > svg > g");
-
+    let playerSprite = document.querySelector("#playerSprite > svg");
+    let playerHead = document.querySelector("#playerSprite .playerHead");
+    console.log(playerSprite, playerHead);
     if (direction == "left") {
+      playerHead.setAttribute("transform", "rotate(0, 51, 21.2)");
       playerSprite.setAttribute("transform", "translate(0, 0) scale(1, 1)");
     } else if (direction == "right") {
-      playerSprite.setAttribute("transform", "translate(100, 0) scale(-1, 1)");
+      playerHead.setAttribute("transform", "rotate(0, 51, 21.2)");
+      playerSprite.setAttribute("transform", "translate(0, 0) scale(-1, 1)");
     } else if (direction == "up") {
-      //playerSprite.setAttribute('transform', 'translate(100, 0) scale(-1, 1)');
+      playerHead.setAttribute("transform", "rotate(45, 51, 21.2)");
     } else if (direction == "down") {
-      //playerSprite.setAttribute('transform', 'translate(100, 0) scale(-1, 1)');
+      playerHead.setAttribute("transform", "rotate(-30, 51, 21.2)");
     }
   },
 

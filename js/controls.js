@@ -1,18 +1,17 @@
 const controls = {
-
   click: (indexId) => {
     // user clicked a control to move up, down, left or right - interact with the patch we are moving into
-    let bits = indexId.split('_');
+    let bits = indexId.split("_");
     let index = parseInt(bits[1]);
     if (player.animating) {
-      setTimeout(player.animating = false, 2000);
+      setTimeout((player.animating = false), 2000);
       return;
     }
     if (player.controlIds.indexOf(index) > -1) {
       // we are trying to move
       fields.removeCurrentPosHighlight();
       let newPos = player.pos;
-      let direction = 'down';
+      let direction = "down";
 
       // move to next/prev fields
       if (index == 70 && player.pos == 0) {
@@ -32,31 +31,30 @@ const controls = {
 
       if (index == 60) {
         newPos -= 10;
-        direction = 'up';
-        svg.directPlayerSprite('up');
+        direction = "up";
+        svg.directPlayerSprite("up");
         if (newPos < 0) {
           newPos = player.pos;
         }
       }
       if (index == 70 && player.pos % 10 > 0) {
         newPos -= 1;
-        direction = 'left';
-        svg.directPlayerSprite('left');
+        direction = "left";
+        svg.directPlayerSprite("left");
         if (newPos < 0) {
-
         }
       }
       if (index == 71 && player.pos % 10 < 9) {
         newPos += 1;
-        direction = 'right';
-        svg.directPlayerSprite('right');
+        direction = "right";
+        svg.directPlayerSprite("right");
         if (newPos > 99) {
           newPos = player.pos;
         }
       }
       if (index == 80) {
         newPos += 10;
-        svg.directPlayerSprite('down');
+        svg.directPlayerSprite("down");
         if (newPos > 99) {
           newPos = player.pos;
         }
@@ -68,16 +66,16 @@ const controls = {
 
       if (newPos !== player.pos) {
         let patch = player.fields[player.currentField][newPos];
-        if (patch && patch.block && patch.block.type.indexOf('control') < 0) {
+        if (patch && patch.block && patch.block.type.indexOf("control") < 0) {
           // animate..
           let thisBlock = document.querySelector(`#${patch.id} svg`);
           svg.animate(thisBlock, `jiggle-${direction}`, 0.25);
 
-          let tool = '';
-          if (patch.block.type == 'rock') {
-            tool = 'pick';
+          let tool = "";
+          if (patch.block.type == "rock") {
+            tool = "pick";
           } else {
-            tool = 'axe';
+            tool = "axe";
           }
           let thisTool = document.querySelector(`.tool-${tool} svg`);
 
@@ -92,7 +90,14 @@ const controls = {
             } else {
               delete patch.block;
               let element = document.querySelector(`#${patch.id}`);
-              setTimeout(() => { element.innerHTML = svg.render('blank', player.grassQty); }, 250, element, player);
+              setTimeout(
+                () => {
+                  element.innerHTML = svg.render("blank", player.grassQty);
+                },
+                250,
+                element,
+                player
+              );
             }
             playerTool.uses--;
             tools.render();
@@ -112,8 +117,7 @@ const controls = {
       fields.highlightCurrentPos();
       // so the day can be cycled on first loading..
       state.save();
-      player.phase = 'field';
-    };
-  }
-
-}
+      player.phase = "field";
+    }
+  },
+};
