@@ -10,7 +10,7 @@ const sack = {
   },
   // show contents of the sack
   render: () => {
-    let sackList = '';
+    let sackList = "";
     let style = `style="width:2rem;"`;
     Object.entries(player.sack).forEach(([spudName, spudQty]) => {
       let spudInfo = player.spuds.filter((spud) => spud.name == spudName)[0];
@@ -38,16 +38,16 @@ const sack = {
       }
     });
 
-    element = document.querySelector('.sack');
+    element = document.querySelector(".sack");
     element.innerHTML = sackList;
   },
   // show or hide the sack via a dialog
   show: () => {
-    let content = '';
-    let content2 = '';
+    let content = "";
+    let content2 = "";
     let style = `style="width:2rem;"`;
     Object.entries(player.sack).forEach(([spudName, spudQty]) => {
-      let spudInfo = player.spuds.filter(spud => spud.name == spudName)[0];
+      let spudInfo = player.spuds.filter((spud) => spud.name == spudName)[0];
       if (spudInfo) {
         let icon = spuds.render(spudInfo.name, style);
         content += `<div class="buttonize">${icon} ${spudName} = ${spudQty}</div>`;
@@ -57,12 +57,12 @@ const sack = {
       }
     });
 
-    let footer = '';
+    let footer = "";
     footer += `<button class="buttonize" onclick="state.clear()"> Reset! </button>`;
     footer += `<button class="buttonize" onclick="fields.switchField(0)"> Field 0 </button>`;
     footer += `<button class="buttonize" onclick="fields.switchField(1)"> Field 1 </button>`;
     footer += `<button class="buttonize" onclick="fields.buyField()"> Buy a field </button>`;
     footer += `<button class="buttonize" onclick="hideDialog()"> Ok </button>`;
-    showDialog('Inventory', `${content}${content2}`, footer);
+    showDialog("Inventory", `${content}${content2}`, footer);
   },
-}
+};
