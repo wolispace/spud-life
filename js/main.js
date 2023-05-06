@@ -4,42 +4,40 @@
 player = state.load();
 
 document.addEventListener("DOMContentLoaded", function () {
-
   svg.hidePlayerSprite();
   fields.setupGrid();
   if (player.spuds.length < 1) {
-
     // intro to game
     initGame();
   }
   tools.render();
   dayCycle(false);
-
 });
-
 
 // hook into keys for movement and digging
 document.addEventListener("keydown", (event) => {
   // convery keypresses into directonal movements
   if (Object.keys(player.controlPos).includes(event.code)) {
-    controls.click('patch_' + (player.controls.start + player.controlPos[event.code]));
+    controls.click(
+      "patch_" + (player.controls.start + player.controlPos[event.code])
+    );
   }
-  if (event.code == 'Space') {
+  if (event.code == "Space") {
     fields.digPatch();
   }
-  if (event.code == 'Enter') {
+  if (event.code == "Enter") {
     dayCycle();
   }
 });
 
-// new game so generate 
+// new game so generate
 function initGame() {
   spuds.sprout(6);
   fields.fillField(player.currentField);
   fields.rollPatches();
   // gift the first machine first off
   player.hardware = hardware.store();
-  let starter = 'chipper';
+  let starter = "chipper";
   player.shop.machines[starter] = player.hardware[starter].initial;
   tools.reset();
 }
@@ -48,28 +46,35 @@ function initGame() {
 function defaultBody() {
   return {
     body: {
-      type: "body-big", colour: "Navy"
+      type: "body-big",
+      colour: "Navy",
     },
 
     head: {
-      type: "head-head", colour: "Wheat"
+      type: "head-head",
+      colour: "Wheat",
     },
     nose: {
-      type: "nose-triangle", colour: "Wheat"
+      type: "nose-triangle",
+      colour: "Wheat",
     },
     brows: {
-      type: "brows-wave", colour: "Black"
+      type: "brows-wave",
+      colour: "Black",
     },
     eye: {
-      type: "eye-eye", colour: "DodgerBlue"
+      type: "eye-eye",
+      colour: "DodgerBlue",
     },
     facial: {
-      type: "facial-mustache", colour: "Brown"
+      type: "facial-mustache",
+      colour: "Brown",
     },
     hair: {
-      type: "hair-curly", colour: "Brown"
+      type: "hair-curly",
+      colour: "Brown",
     },
-  }
+  };
 }
 
 // setup the default body
@@ -82,7 +87,7 @@ function defineCharacter(save = false) {
     hideDialog();
     dayCycle();
   } else {
-    let content = '';
+    let content = "";
     content += '<div class="creator">';
     content += '<div class="left">';
 
@@ -90,14 +95,14 @@ function defineCharacter(save = false) {
       content += buildBodySelect(key);
     });
 
-    content += '</div>';
+    content += "</div>";
     content += '<div class="demoBody">';
-    content += '</div>';
-    content += '</div>';
+    content += "</div>";
+    content += "</div>";
 
-    let footer = '';
+    let footer = "";
     footer += `<button class="buttonize" onclick="defineCharacter(true)"> Ok </button>`;
-    showDialog('Character creator', `${content}`, footer);
+    showDialog("Character creator", `${content}`, footer);
     demoBody();
   }
 }
@@ -123,23 +128,25 @@ function demoBody() {
     player.body[key] = {
       type: getSelectValue(`#${key}`),
       colour: getSelectValue(`#${key}-colour`),
-    }
+    };
   });
 
-  let element = document.querySelector('.demoBody');
+  let element = document.querySelector(".demoBody");
   // element.innerHTML = spuds.render(spudName);
   let svgPaths = svg.assemblePerson();
-  element.innerHTML = svg.render("eye", 1, 'style="max-height: 20rem;"', { "paths": svgPaths });
+  element.innerHTML = svg.render("eye", 1, 'style="max-height: 20rem;"', {
+    paths: svgPaths,
+  });
 }
 
 // player chooses which spuds to put in what machines
 function allocate() {
   // list all spuds in sack and all machines owned..
-  let allocate = '<div><h2>Load machine hoppers</h2></div>';
+  let allocate = "<div><h2>Load machine hoppers</h2></div>";
   allocate += '<div class="allocateContent">';
   allocate += '<div class="machines"></div><div class="sack"></div></div>';
 
-  element = document.querySelector('.allocate');
+  element = document.querySelector(".allocate");
   element.innerHTML = allocate;
 
   machines.render();
@@ -149,10 +156,12 @@ function allocate() {
 // move to the next phase in the day
 function dayCycle(moveOn = true) {
   state.save();
-  const phases = ['field', 'allocate', 'hardware', 'sales', 'night'];
+  const phases = ["field", "allocate", "hardware", "sales", "night"];
   let pages = document.querySelectorAll(`.page`);
   // turn all pages off..
-  pages.forEach((page) => { page.style['display'] = 'none' });
+  pages.forEach((page) => {
+    page.style["display"] = "none";
+  });
   // increment the page the player is on
   if (moveOn) {
     let pos = phases.indexOf(player.phase);
@@ -161,17 +170,17 @@ function dayCycle(moveOn = true) {
     player.phase = phases[pos];
   }
   // turn on the page the player is on
-  if (player.phase != 'field') {
+  if (player.phase != "field") {
     svg.hidePlayerSprite();
-    element = document.querySelector('.' + player.phase);
-    element.style['display'] = 'block';
-    if (player.phase == 'allocate') {
+    element = document.querySelector("." + player.phase);
+    element.style["display"] = "block";
+    if (player.phase == "allocate") {
       allocate();
-    } else if (player.phase == 'hardware') {
+    } else if (player.phase == "hardware") {
       hardware.render();
-    } else if (player.phase == 'sales') {
+    } else if (player.phase == "sales") {
       spuds.sell();
-    } else if (player.phase == 'night') {
+    } else if (player.phase == "night") {
       tools.reset();
       tools.render();
       fields.rollPatches();
@@ -202,15 +211,14 @@ function dream() {
     "You dream a little dream of me",
     "You dream the cake is a lie",
     "You dream about the delivery man",
-    "You dream you are baba"
-  ]
+    "You dream you are baba",
+  ];
   let dream = dreams[rnd(dreams.length)];
   let sow = fields.resowField();
 
-  element = document.querySelector('.night');
+  element = document.querySelector(".night");
   element.innerHTML = `<div>${dream}</div>${sow}`;
 }
-
 
 // show the dialog
 function showDialog(title, content, footer) {
@@ -236,12 +244,3 @@ function hideDialog() {
   player.dialog = false;
   svg.showPlayerSprite();
 }
-
-
-
-
-
-
-
-
-

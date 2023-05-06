@@ -1,49 +1,82 @@
-<!doctype html>
+<!DOCTYPE html>
 <html dir="ltr" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spud shop - texst svg</title>
+    <link rel="stylesheet" href="layout.css?1" />
+    <script src="js/lz-string.min.js"></script>
+    <script src="js/utils.js?1"></script>
+    <script src="js/player.js?1"></script>
+    <script src="js/sack.js?1"></script>
+    <script src="js/hardware.js?1"></script>
+    <script src="js/machines.js?1"></script>
+    <script src="js/tools.js?1"></script>
+    <script src="js/spuds.js?1"></script>
+    <script src="js/controls.js?1"></script>
+    <script src="js/fields.js?1"></script>
+    <script src="js/svg.js?1"></script>
+    <style>
+      body {
+        background-color: darkslategrey;
+      }
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Spud shop - texst svg</title>
-  <link rel="stylesheet" href="layout.css?1">
-  <script src="js/lz-string.min.js"></script>
-  <script src="js/utils.js?1"></script>
-  <script src="js/player.js?1"></script>
-  <script src="js/sack.js?1"></script>
-  <script src="js/hardware.js?1"></script>
-  <script src="js/machines.js?1"></script>
-  <script src="js/tools.js?1"></script>
-  <script src="js/spuds.js?1"></script>
-  <script src="js/controls.js?1"></script>
-  <script src="js/fields.js?1"></script>
-  <script src="js/svg.js?1"></script>
-  <style>
-    body {
-      background-color: darkslategrey;
+      .img {
+        border: 1px solid slategrey;
+      }
+    </style>
+  </head>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // player = state.load();
+      // let spudName = player.spuds[5].name;
+      // let spudInfo = player.spuds.filter(spud => spud.name == spudName)[0];
+      // spuds.sprout();
+      // console.log(spudName, spudInfo);
+      player.body = defaultBody();
+      let element = document.querySelector(".img");
+      // element.innerHTML = spuds.render(spudName);
+      let svgPaths = svg.assemblePerson();
+      element.innerHTML = svg.renderPlayer(svgPaths);
+    });
+
+    // the default
+    function defaultBody() {
+      return {
+        body: {
+          type: "body-one",
+          colour: "Navy",
+        },
+
+        head: {
+          type: "head-head",
+          colour: "Wheat",
+        },
+        nose: {
+          type: "nose-triangle",
+          colour: "Wheat",
+        },
+        brows: {
+          type: "brows-wave",
+          colour: "Black",
+        },
+        eye: {
+          type: "eye-eye",
+          colour: "DodgerBlue",
+        },
+        facial: {
+          type: "facial-mustache",
+          colour: "Brown",
+        },
+        hair: {
+          type: "hair-curly",
+          colour: "Brown",
+        },
+      };
     }
+  </script>
 
-    .img {
-      border: 1px solid slategrey;
-    }
-  </style>
-</head>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    // player = state.load();
-    // let spudName = player.spuds[5].name;
-    // let spudInfo = player.spuds.filter(spud => spud.name == spudName)[0];
-    // spuds.sprout();
-    // console.log(spudName, spudInfo);
-    let element = document.querySelector('.img');
-    // element.innerHTML = spuds.render(spudName);
-    let svgPaths = svg.assemblePerson();
-    element.innerHTML = svg.render("eye", 1, 'person', { "paths": svgPaths });
-  });
-
-</script>
-
-<body>
-  <div class="img"></div>
-</body>
-
+  <body>
+    <div class="img"></div>
+  </body>
 </html>
