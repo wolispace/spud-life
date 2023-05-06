@@ -409,11 +409,22 @@ const svg = {
     let paths = svg.assemblePerson();
     // seperate the first lement of paths so we can wrap in <g>
     let body = paths.pop();
-    console.log(body, paths);
     let guts = `<g><g id="playerHead">`;
-    guts += paths.join();
-    guts += `'<g>${body}</g>;`;
-    svg.wrap("", "", guts);
+
+    paths.forEach((path) => {
+      // path
+      if (path.d) {
+        guts += `<path d="${path.d}" />`;
+      }
+      // circle
+      if (path.r) {
+        guts += `<circle cx="${path.cx}" cy="${path.cy}" r="${path.r}" />`;
+      }
+    });
+
+    guts += `'<g>$<path d="${body.d}"></g>`;
+
+    return svg.wrap("", "", guts);
   },
 
   // puts the bits of a human together
@@ -433,7 +444,6 @@ const svg = {
   },
 
   buildPath(partName, colour) {
-    console.log(partName, colour, svg.imgList);
     let path = svg.imgList[partName].paths[0];
     let bits = partName.split("-");
     path.c = ` ${bits[0]}`;

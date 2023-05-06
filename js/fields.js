@@ -3,12 +3,15 @@ const fields = {
   setupGrid() {
     const maxPatches = 99;
     let index = 0;
-    let patches = '';
+    let patches = "";
     while (index <= maxPatches) {
-      patches += `<div class="patch" id="patch_${index}">${svg.render('blank', player.grassQty)}</div>`;
+      patches += `<div class="patch" id="patch_${index}">${svg.render(
+        "blank",
+        player.grassQty
+      )}</div>`;
       index++;
     }
-    element = document.querySelector('.field');
+    element = document.querySelector(".field");
     element.innerHTML = patches;
   },
 
@@ -32,7 +35,10 @@ const fields = {
   buyField: () => {
     // find highest field ID, add 1, set that field as an empty array so it can be filled
     player.fields[player.fields.length] = [];
-    let patch = { id: "patch_9", block: { type: "control-field--right", qty: 1 } };
+    let patch = {
+      id: "patch_9",
+      block: { type: "control-field--right", qty: 1 },
+    };
     player.fields[player.currentField][9] = patch;
     fields.renderPatch(patch);
     state.save();
@@ -43,10 +49,16 @@ const fields = {
     if (player.fields[fieldId].length < 1) {
       // first row 0 and 10 may contain links to other fields
       if (player.fields[fieldId - 1]) {
-        player.fields[fieldId][0] = { id: "patch_0", block: { type: "control-field--left", qty: 1 } };
+        player.fields[fieldId][0] = {
+          id: "patch_0",
+          block: { type: "control-field--left", qty: 1 },
+        };
       }
       if (player.fields[fieldId + 1]) {
-        player.fields[fieldId][9] = { id: "patch_9", block: { type: "control-field--right", qty: 1 } };
+        player.fields[fieldId][9] = {
+          id: "patch_9",
+          block: { type: "control-field--right", qty: 1 },
+        };
       }
       // skip the fisrt row
       let i = 10;
@@ -56,10 +68,10 @@ const fields = {
           let patch = {};
           switch (rnd(3)) {
             case 0:
-              patch.block = { "type": "rock", "qty": rnd(5) + 1 };
+              patch.block = { type: "rock", qty: rnd(5) + 1 };
               break;
             case 1:
-              patch.block = { "type": "log", "qty": rnd(5) + 1 };
+              patch.block = { type: "log", qty: rnd(5) + 1 };
               break;
             case 2:
               patch.spud = {};
@@ -67,7 +79,7 @@ const fields = {
           }
           if (patch !== {}) {
             let newSpud = player.spuds[rnd(player.spuds.length)];
-            patch.spud = { "name": newSpud.name, "qty": rnd(3) + 1 };
+            patch.spud = { name: newSpud.name, qty: rnd(3) + 1 };
           }
           if (!player.fields[fieldId]) {
             player.fields[fieldId] = [];
@@ -75,16 +87,44 @@ const fields = {
           player.fields[fieldId][i] = patch;
         }
         i++;
-      };
+      }
       // put controls in
       let id = player.controls.start;
-      player.fields[fieldId][id] = { id: `patch_${id}`, block: { type: "control-icon--up", qty: 1, onclick: `controls.click(${id})` } };
+      player.fields[fieldId][id] = {
+        id: `patch_${id}`,
+        block: {
+          type: "control-icon--up",
+          qty: 1,
+          onclick: `controls.click(${id})`,
+        },
+      };
       id += 10;
-      player.fields[fieldId][id] = { id: `patch_${id}`, block: { type: "control-icon--left", qty: 1, onclick: `controls.click(${id})` } };
+      player.fields[fieldId][id] = {
+        id: `patch_${id}`,
+        block: {
+          type: "control-icon--left",
+          qty: 1,
+          onclick: `controls.click(${id})`,
+        },
+      };
       id += 1;
-      player.fields[fieldId][id] = { id: `patch_${id}`, block: { type: "control-icon--right", qty: 1, onclick: `controls.click(${id})` } };
+      player.fields[fieldId][id] = {
+        id: `patch_${id}`,
+        block: {
+          type: "control-icon--right",
+          qty: 1,
+          onclick: `controls.click(${id})`,
+        },
+      };
       id += 9;
-      player.fields[fieldId][id] = { id: `patch_${id}`, block: { type: "control-icon--down", qty: 1, onclick: `controls.click(${id})` } };
+      player.fields[fieldId][id] = {
+        id: `patch_${id}`,
+        block: {
+          type: "control-icon--down",
+          qty: 1,
+          onclick: `controls.click(${id})`,
+        },
+      };
     }
   },
 
@@ -121,16 +161,16 @@ const fields = {
 
   // based on patch contents decide what to show
   renderPatch: (patch) => {
-    let newPatch = ' ';
+    let newPatch = " ";
     if (patch) {
       if (patch.block) {
-        if (patch.block.type.indexOf('control') > -1) {
+        if (patch.block.type.indexOf("control") > -1) {
           newPatch = svg.render(patch.block.type, patch.block.qty);
           element = document.querySelector(`#${patch.id}`);
           element.innerHTML = svg.render(patch.block.type);
-          if (patch.block.type.indexOf('icon') > -1) {
+          if (patch.block.type.indexOf("icon") > -1) {
             element.classList.add("controlButton");
-            element.classList.remove('patch');
+            element.classList.remove("patch");
             element.setAttribute("onclick", `controls.click('${patch.id}');`);
           }
         } else {
@@ -140,18 +180,18 @@ const fields = {
 
       if (patch.spud) {
         if (patch.spud.qty > 0) {
-          newPatch += ''; // `<br/>S=${patch.spud.qty}` 
+          newPatch += ""; // `<br/>S=${patch.spud.qty}`
         } else {
           if (patch.spud.qty == -5 && patch.spud.name && patch.spudFound) {
             newPatch = spuds.render(patch.spud.name);
           } else {
-            newPatch = svg.render('hole', 5);
+            newPatch = svg.render("hole", 5);
           }
         }
       }
     }
-    if (newPatch == ' ') {
-      newPatch = svg.render('blank', player.grassQty);
+    if (newPatch == " ") {
+      newPatch = svg.render("blank", player.grassQty);
     }
     if (newPatch) {
       let element = document.querySelector(`#${patch.id}`);
@@ -161,16 +201,15 @@ const fields = {
         let thisSpud = document.querySelector(`#${patch.id} svg`);
 
         function onEnd() {
-          newPatch = svg.render('hole', 5);
+          newPatch = svg.render("hole", 5);
           element.innerHTML = newPatch;
         }
-        console.log(patch);
-        svg.animate(thisSpud, 'dig-spud', 1, onEnd);
+        svg.animate(thisSpud, "dig-spud", 1, onEnd);
       }
 
       // if we drew a hole, make sure its opacity matches the spud qty -5 = 100%, 0 = 0%
       if (patch.spud && patch.spud.qty < 0) {
-        let opacity = 0 - patch.spud.qty * 20 / 100;
+        let opacity = 0 - (patch.spud.qty * 20) / 100;
         let hole = document.querySelector(`#${patch.id} svg`);
         hole.style.opacity = opacity;
       }
@@ -179,9 +218,10 @@ const fields = {
 
   // randomly (ish) scatter more seeds and some get blocks on top
   resowField: () => {
-    let sowMsg = '';
+    let sowMsg = "";
     if (player.sowSeeds > 0) {
-      sowMsg = '<div>You find some seed potaoes at the bottom of your sack and scatter them randomly in the field</div>';
+      sowMsg =
+        "<div>You find some seed potaoes at the bottom of your sack and scatter them randomly in the field</div>";
       let blankPatches = [];
       let i = 10;
       while (i < 100) {
@@ -200,16 +240,16 @@ const fields = {
         let patch = {};
         switch (rnd(3)) {
           case 0:
-            patch.block = { "type": "rock", "qty": rnd(5) + 1 };
+            patch.block = { type: "rock", qty: rnd(5) + 1 };
             break;
           case 1:
-            patch.block = { "type": "log", "qty": rnd(5) + 1 };
+            patch.block = { type: "log", qty: rnd(5) + 1 };
             break;
         }
         let newSpud = player.spuds[rnd(player.spuds.length)];
-        patch.spud = { "name": newSpud.name, "qty": rnd(3) + 1 };
+        patch.spud = { name: newSpud.name, qty: rnd(3) + 1 };
         player.fields[player.currentField][index] = patch;
-      };
+      }
     }
 
     return sowMsg;
@@ -217,7 +257,7 @@ const fields = {
   // dig for a spud in the current patch
   digPatch: () => {
     let patch = player.fields[player.currentField][player.pos];
-    let tool = player.tools['spade'];
+    let tool = player.tools["spade"];
     let thisTool = document.querySelector(`.tool-spade svg`);
     svg.animate(thisTool, `jiggle-up`, 0.25);
 
@@ -257,7 +297,6 @@ const fields = {
     let element = document.querySelector(`#patch_${player.pos}`);
     //element.classList.add("currentPos");
 
-
     if (fields.inRange()) {
       //element.classList.add("inRange");
     } else {
@@ -266,15 +305,15 @@ const fields = {
 
     // move player spite
     let patch = element.getBoundingClientRect();
-    let posY = patch.top + 'px';
-    let posX = patch.left + 'px';
-    let height = patch.height + 'px';
-    let width = patch.width + 'px';
+    let posY = patch.top + "px";
+    let posX = patch.left + "px";
+    let height = patch.height + "px";
+    let width = patch.width + "px";
 
     let svgPaths = svg.assemblePerson();
     element = document.querySelector(`#playerSprite`);
-    if (element.innerHTML == '') {
-      element.innerHTML = svg.render("eye", 1, 'person', { "paths": svgPaths });
+    if (element.innerHTML == "") {
+      element.innerHTML = svg.render("eye", 1, "person", { paths: svgPaths });
     }
     element.style.top = posY;
     element.style.left = posX;
@@ -306,8 +345,8 @@ const fields = {
           let index = existing.length - 1;
           while (index >= 0) {
             let group = existing[index];
-            if (!doneOne && !group.classList.contains('hidden')) {
-              group.classList.add('hidden');
+            if (!doneOne && !group.classList.contains("hidden")) {
+              group.classList.add("hidden");
               doneOne = true;
             }
             index--;
@@ -335,5 +374,5 @@ const fields = {
     if (field[patchId] && field[patchId].spud && field[patchId].spud.qty > 0) {
       return true;
     }
-  }
-}
+  },
+};
