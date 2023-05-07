@@ -422,7 +422,7 @@ const svg = {
       }
     });
 
-    let guts = `<g><path style="${body.s}" d="${body.d}"></g><g class="playerHead">${head}</g>`;
+    let guts = `<g class="playerBody"><path style="${body.s}" d="${body.d}"></g><g class="playerHead">${head}</g>`;
 
     return svg.wrap("", "", guts);
   },
@@ -455,7 +455,6 @@ const svg = {
   directPlayerSprite(direction) {
     let playerSprite = document.querySelector("#playerSprite > svg");
     let playerHead = document.querySelector("#playerSprite .playerHead");
-    console.log(playerSprite, playerHead);
     if (direction == "left") {
       playerHead.setAttribute("transform", "rotate(0, 51, 21.2)");
       playerSprite.setAttribute("transform", "translate(0, 0) scale(1, 1)");

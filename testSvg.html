@@ -41,7 +41,12 @@
       let svgPaths = svg.assemblePerson();
       element.innerHTML = svg.renderPlayer(svgPaths);
 
-      svg.directPlayerSprite("down");
+      svg.directPlayerSprite("right");
+
+      let playerHead = document.querySelector("#playerSprite .playerHead");
+      let playerBody = document.querySelector("#playerSprite .playerBody");
+      playerHead.setAttribute("transform", "translate(0, 10)");
+      playerBody.setAttribute("transform", "scale(1, 0.81) translate(0, 22)");
     });
 
     // the default
