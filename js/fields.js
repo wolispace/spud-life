@@ -5,7 +5,8 @@ const fields = {
     let index = 0;
     let patches = "";
     while (index <= maxPatches) {
-      patches += `<div class="patch" id="patch_${index}">${svg.render(
+      let patchClass = index < 10 ? "sky" : "patch";
+      patches += `<div class="${patchClass}" id="patch_${index}">${svg.render(
         "blank",
         player.grassQty
       )}</div>`;
@@ -44,9 +45,26 @@ const fields = {
     state.save();
   },
 
-  // randomly fill the selecte field (if empty) with rocks, logs and spuds - plus some ranom treasure!
+  // randomly fill the selected field (if empty) with rocks, logs and spuds - plus some random treasure!
   fillField: (fieldId) => {
     if (player.fields[fieldId].length < 1) {
+      // first row
+      // if this field has building on it..
+      if (player.buildings[fieldId].length > -1) {
+        // fill top row with nothing
+        let i = 0;
+        do {
+          i++;
+          player.fields[fieldId][i] = { id: `patch_${i}` };
+        } while (i < 10);
+
+        player.buildings[fieldId].forEach((building, index) => {
+          player.fields[fieldId][building.pos] = {
+            id: `patch_${building.pos}`,
+            building: building.id,
+          };
+        });
+      }
       // first row 0 and 10 may contain links to other fields
       if (player.fields[fieldId - 1]) {
         player.fields[fieldId][0] = {
@@ -60,7 +78,8 @@ const fields = {
           block: { type: "control-field--right", qty: 1 },
         };
       }
-      // skip the fisrt row
+
+      // skip the first row
       let i = 10;
       while (i < 100) {
         if (rnd(2) > 0) {
@@ -155,12 +174,12 @@ const fields = {
     player.fields[player.currentField].forEach((patch, index) => {
       patch = patch ?? {};
       patch.id = `patch_${index}`;
-      fields.renderPatch(patch);
+      fields.renderPatch(patch, index);
     });
   },
 
   // based on patch contents decide what to show
-  renderPatch: (patch) => {
+  renderPatch: (patch, index) => {
     let newPatch = " ";
     if (patch) {
       if (patch.block) {
@@ -189,8 +208,12 @@ const fields = {
           }
         }
       }
+      if (patch.building) {
+        newPatch = svg.render(patch.building, 1);
+      }
     }
-    if (newPatch == " ") {
+    // add the grass if below top row
+    if (newPatch == " " && index > 9) {
       newPatch = svg.render("blank", player.grassQty);
     }
     if (newPatch) {
@@ -221,7 +244,7 @@ const fields = {
     let sowMsg = "";
     if (player.sowSeeds > 0) {
       sowMsg =
-        "<div>You find some seed potaoes at the bottom of your sack and scatter them randomly in the field</div>";
+        "<div>You find some seed potatoes at the bottom of your sack and scatter them randomly in the field</div>";
       let blankPatches = [];
       let i = 10;
       while (i < 100) {

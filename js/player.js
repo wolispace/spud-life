@@ -13,31 +13,36 @@ let player = {
       uses: 0,
       maxUses: 5,
     },
-    "pick": {
-      "uses": 0,
-      "maxUses": 5
+    pick: {
+      uses: 0,
+      maxUses: 5,
     },
-    "axe": {
-      "uses": 0,
-      "maxUses": 5
-    }
+    axe: {
+      uses: 0,
+      maxUses: 5,
+    },
   },
-
+  buildings: [
+    [
+      { pos: 0, id: "house" },
+      { pos: 3, id: "shop" },
+      { pos: 6, id: "cart" },
+    ],
+  ],
   spuds: [],
   currentField: 0,
   fields: [[]],
 
   shop: {
-    machines: {}
+    machines: {},
   },
   controls: { start: 60 },
   controlIds: [60, 70, 71, 80],
   controlPos: {
-    "ArrowUp": 0,
-    "ArrowLeft": 10,
-    "ArrowRight": 11,
-    "ArrowDown": 20
+    ArrowUp: 0,
+    ArrowLeft: 10,
+    ArrowRight: 11,
+    ArrowDown: 20,
   },
   animating: false,
-
-}
+};

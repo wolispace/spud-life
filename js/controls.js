@@ -74,8 +74,9 @@ const controls = {
           let tool = "";
           if (patch.block.type == "rock") {
             tool = "pick";
-          } else {
+          } else if (patch.block.type == "log") {
             tool = "axe";
+          } else {
           }
           let thisTool = document.querySelector(`.tool-${tool} svg`);
 
@@ -109,7 +110,12 @@ const controls = {
               newPos = player.pos;
             }
           } else {
-            newPos = player.pos;
+            console.log(patch.block);
+            // not something we can chop or cut..
+            if (patch.block.pos) {
+            } else {
+              newPos = player.pos;
+            }
           }
         }
       }

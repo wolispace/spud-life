@@ -7,6 +7,18 @@ const svg = {
       scale: 90,
       rotate: 40,
     },
+    house: {
+      class: "thick control-icon",
+      paths: [{ c: "", d: "m 20,80 0,-40 30,-20 30,20 0,40 z" }],
+    },
+    shop: {
+      class: "thick control-icon",
+      paths: [{ c: "", d: "m 20,80 0,-40 30,-20 30,20 0,40 z" }],
+    },
+    cart: {
+      class: "thick control-icon",
+      paths: [{ c: "", d: "m 20,80 0,-40 30,-20 30,20 0,40 z" }],
+    },
     "control-icon--up": {
       class: "thick control-icon",
       paths: [{ c: "", d: "m 20,80 30,-60 30,60" }],

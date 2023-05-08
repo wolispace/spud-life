@@ -177,6 +177,11 @@ button {
     ". . . . . . . . . .";
 }
 
+.sky {
+  background: rgb(2, 0, 36);
+  background: linear-gradient(180deg, rgba(2, 0, 36, 1) 0%, rgba(82, 82, 246, 1) 0%, rgba(216, 248, 255, 1) 100%);
+}
+
 .patch {
   background-color: seagreen;
   width: 100%;
@@ -221,7 +226,7 @@ button {
   display: none;
 }
 
-.night > div {
+.night>div {
   padding: 2em;
 }
 
@@ -292,7 +297,7 @@ button {
   display: flex;
 }
 
-.spudlist > div {
+.spudlist>div {
   margin: var(--sl-padding);
 }
 
