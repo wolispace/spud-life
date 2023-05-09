@@ -117,15 +117,15 @@ const svg = {
     },
 
     "head-head": {
-      paths: [{ c: " fill-wheat", cx: 51, cy: 21.2, r: 13 }],
+      paths: [{ c: "", cx: 51, cy: 21.2, r: 13 }],
     },
 
     "eye-eye": {
-      paths: [{ c: " fill-dodgerblue", cx: 44, cy: 20, r: 1.5 }],
+      paths: [{ c: "", cx: 44, cy: 20, r: 1.5 }],
     },
 
     "nose-triangle": {
-      paths: [{ c: " fill-wheat", d: "m 37.5,20 -3,6 6,0 z" }],
+      paths: [{ c: "", d: "m 37.5,20 -3,6 6,0 z" }],
     },
     "nose-round": {
       paths: [{ c: "", cx: 37, cy: 22, r: 3 }],

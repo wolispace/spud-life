@@ -30,6 +30,11 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
+window.addEventListener("resize", (event) => {
+  fields.renderGrassLine();
+  fields.highlightCurrentPos();
+});
+
 // new game so generate
 function initGame() {
   spuds.sprout(6);

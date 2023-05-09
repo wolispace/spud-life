@@ -110,7 +110,6 @@ const controls = {
               newPos = player.pos;
             }
           } else {
-            console.log(patch.block);
             // not something we can chop or cut..
             if (patch.block.pos) {
             } else {

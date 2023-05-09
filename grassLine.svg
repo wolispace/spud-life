@@ -1,0 +1,9 @@
+<svg class="thick log" viewBox="0 0 6 6" xmlns="http://www.w3.org/2000/svg">
+  <g id="grass">
+    <path style="stroke-width:2;stroke-linecap:round;stroke:seagreen;" d="M 1,5 0.5,1" />
+    <path style="stroke-width:2;stroke-linecap:round;stroke:seagreen;" d="M 2.5,4.5 1.6,1" />
+    <path style="stroke-width:2;stroke-linecap:round;stroke:seagreen;" d="M 4,5 4,2" />
+    <path style="stroke-width:2;stroke-linecap:round;stroke:seagreen;" d="M 6,6 4,2" />
+  </g>
+
+</svg>

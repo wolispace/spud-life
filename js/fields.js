@@ -50,7 +50,7 @@ const fields = {
     if (player.fields[fieldId].length < 1) {
       // first row
       // if this field has building on it..
-      if (player.buildings[fieldId].length > -1) {
+      if (player.buildings[fieldId]) {
         // fill top row with nothing
         let i = 0;
         do {
@@ -176,6 +176,28 @@ const fields = {
       patch.id = `patch_${index}`;
       fields.renderPatch(patch, index);
     });
+    fields.renderGrassLine();
+  },
+
+  renderGrassLine: () => {
+    // find patch_10
+    let element = document.querySelector(`#patch_10`);
+
+    // move player spite
+    let patch = element.getBoundingClientRect();
+    let posY = patch.top;
+    let posX = patch.left;
+    let width = patch.width * 10;
+    let height = patch.height / 6;
+
+    let svgPaths = svg.assemblePerson();
+    element = document.querySelector(`#grassLine`);
+    let grassBox = element.getBoundingClientRect();
+    let newY = posY - grassBox.height / 2;
+    element.style.top = `${newY}px`; //parseInt(posY) - 10;
+    element.style.left = `${posX}px`;
+    element.style.width = `${width}px`;
+    element.style.height = `${height}px`;
   },
 
   // based on patch contents decide what to show

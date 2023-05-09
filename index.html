@@ -1,43 +1,42 @@
-<!doctype html>
+<!DOCTYPE html>
 <html dir="ltr" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spud shop - field</title>
+    <link rel="stylesheet" href="layout.css?1" />
+    <script src="js/lz-string.min.js"></script>
+    <script src="js/utils.js?1"></script>
+    <script src="js/player.js?1"></script>
+    <script src="js/sack.js?1"></script>
+    <script src="js/hardware.js?1"></script>
+    <script src="js/machines.js?1"></script>
+    <script src="js/tools.js?1"></script>
+    <script src="js/spuds.js?1"></script>
+    <script src="js/controls.js?1"></script>
+    <script src="js/fields.js?1"></script>
+    <script src="js/svg.js?1"></script>
+    <script src="js/main.js?1"></script>
+  </head>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Spud shop - field</title>
-  <link rel="stylesheet" href="layout.css?1">
-  <script src="js/lz-string.min.js"></script>
-  <script src="js/utils.js?1"></script>
-  <script src="js/player.js?1"></script>
-  <script src="js/sack.js?1"></script>
-  <script src="js/hardware.js?1"></script>
-  <script src="js/machines.js?1"></script>
-  <script src="js/tools.js?1"></script>
-  <script src="js/spuds.js?1"></script>
-  <script src="js/controls.js?1"></script>
-  <script src="js/fields.js?1"></script>
-  <script src="js/svg.js?1"></script>
-  <script src="js/main.js?1"></script>
-</head>
-
-<body>
-  <div class="field">
-    <!-- patches go here -->
-  </div>
-  <div class="allocate page"></div>
-  <div class="hardware page"></div>
-  <div class="sales page"></div>
-  <div class="night page"></div>
-  <div class="tools"></div>
-  <div class="dialog">
-    <div class="header">
-      <div class="title">Title</div>
-      <div class="close buttonize" onclick="hideDialog()">X</div>
+  <body>
+    <div class="field">
+      <!-- patches go here -->
     </div>
-    <div class="content"></div>
-    <div class="footer"></div>
-  </div>
-  <div id="playerSprite"></div>
-</body>
-
+    <div class="allocate page"></div>
+    <div class="hardware page"></div>
+    <div class="sales page"></div>
+    <div class="night page"></div>
+    <div class="tools"></div>
+    <div class="dialog">
+      <div class="header">
+        <div class="title">Title</div>
+        <div class="close buttonize" onclick="hideDialog()">X</div>
+      </div>
+      <div class="content"></div>
+      <div class="footer"></div>
+    </div>
+    <div id="playerSprite"></div>
+    <div id="grassLine"></div>
+  </body>
 </html>
