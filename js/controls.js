@@ -1,3 +1,8 @@
+USER_KEY_UP = 60;
+USER_KEY_LEFT = 70;
+USER_KEY_RIGHT = 71;
+USER_KEY_DOWN = 80;
+
 const controls = {
   click: (indexId) => {
     // user clicked a control to move up, down, left or right - interact with the patch we are moving into
@@ -10,26 +15,37 @@ const controls = {
     if (player.controlIds.indexOf(index) > -1) {
       // we are trying to move
       fields.removeCurrentPosHighlight();
+      // use current pos unless is Ok to move
       let newPos = player.pos;
       let direction = "down";
 
       // move to next/prev fields
-      if (index == 70 && player.pos == 0) {
+      if (index == USER_KEY_LEFT && player.pos == 0) {
         let newField = player.currentField - 1;
         if (player.fields[newField]) {
           fields.switchField(newField);
           return;
         }
       }
-      if (index == 71 && player.pos == 9) {
+      if (index == USER_KEY_RIGHT && player.pos == 9) {
         let newField = player.currentField + 1;
         if (player.fields[newField]) {
           fields.switchField(newField);
           return;
         }
       }
+      if (index == USER_KEY_UP) {
+        if (player.pos == 0) {
+          // go into home
+          console.log("going home");
+        } else if (player.pos == 3) {
+          console.log("going shopping");
+        } else if (player.pos == 6) {
+          console.log("going selling");
+        }
+      }
 
-      if (index == 60) {
+      if (index == USER_KEY_UP) {
         newPos -= 10;
         direction = "up";
         svg.directPlayerSprite("up");
@@ -37,14 +53,14 @@ const controls = {
           newPos = player.pos;
         }
       }
-      if (index == 70 && player.pos % 10 > 0) {
+      if (index == USER_KEY_LEFT && player.pos % 10 > 0) {
         newPos -= 1;
         direction = "left";
         svg.directPlayerSprite("left");
         if (newPos < 0) {
         }
       }
-      if (index == 71 && player.pos % 10 < 9) {
+      if (index == USER_KEY_RIGHT && player.pos % 10 < 9) {
         newPos += 1;
         direction = "right";
         svg.directPlayerSprite("right");
@@ -52,7 +68,7 @@ const controls = {
           newPos = player.pos;
         }
       }
-      if (index == 80) {
+      if (index == USER_KEY_DOWN) {
         newPos += 10;
         svg.directPlayerSprite("down");
         if (newPos > 99) {

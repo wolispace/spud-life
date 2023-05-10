@@ -15,10 +15,58 @@ const svg = {
       class: "thick control-icon",
       paths: [{ c: "", d: "m 20,80 0,-40 30,-20 30,20 0,40 z" }],
     },
-    cart: {
-      class: "thick control-icon",
-      paths: [{ c: "", d: "m 20,80 0,-40 30,-20 30,20 0,40 z" }],
-    },
+    cart: `<svg width="100%" viewBox="0 0 100.0 100.0" version="1.1" id="SVGRoot" sodipodi:docname="drawing.svg"
+    inkscape:version="1.2 (dc2aedaf03, 2022-05-15)" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+  
+    <defs id="defs1050">
+      <linearGradient inkscape:collect="always" id="linearGradient1711">
+        <stop style="stop-color:#614c32;stop-opacity:0;" offset="0.20955104" id="stop1707" />
+        <stop style="stop-color:#000000;stop-opacity:0.49681529;" offset="0.78571904" id="stop1709" />
+      </linearGradient>
+      <linearGradient inkscape:collect="always" id="linearGradient38878">
+        <stop style="stop-color:#5c9fac;stop-opacity:1;" offset="0" id="stop38876" />
+        <stop style="stop-color:#3e1eac;stop-opacity:1;" offset="1" id="stop38874" />
+      </linearGradient>
+      <linearGradient inkscape:collect="always" id="linearGradient38742">
+        <stop style="stop-color:#efe9e7;stop-opacity:1;" offset="0.08681672" id="stop38738" />
+        <stop style="stop-color:#e48b43;stop-opacity:1;" offset="1" id="stop38740" />
+      </linearGradient>
+      <radialGradient xlink:href="#linearGradient38742" id="radialGradient38744" cx="38.305481" cy="36.086533"
+        fx="38.305481" fy="36.086533" r="15.233229"
+        gradientTransform="matrix(1.6734859,-0.00371013,0.00183867,0.7995359,-25.544643,12.653611)"
+        gradientUnits="userSpaceOnUse" />
+      <radialGradient inkscape:collect="always" xlink:href="#linearGradient38878" id="radialGradient38880" cx="30.099112"
+        cy="-3.4177504" fx="30.099112" fy="-3.4177504" r="37.812653"
+        gradientTransform="matrix(1.5007827,-0.33349594,0.11561858,0.5203013,-17.502016,33.311042)"
+        gradientUnits="userSpaceOnUse" />
+      <radialGradient inkscape:collect="always" xlink:href="#linearGradient1711" id="radialGradient1713" cx="44.877426"
+        cy="58.661476" fx="44.877426" fy="58.661476" r="15.45935"
+        gradientTransform="matrix(1.5795029,0.00451045,0.00126694,1.2675538,-26.451144,-19.311817)"
+        gradientUnits="userSpaceOnUse" />
+    </defs>
+    <path style="fill:url(#radialGradient38880)"
+      d="M 11,72 C 10,58 9,42 11,33 14,23 20,18 29,16 c 9,-2 22,-2 32,0 9.92993,2.906113 17,9 21,18 4,9 4,22 3,30 -1,7 -4,8 -14,9 -10,0 -28,1 -45,0"
+      id="path696" />
+    <rect style="fill:url(#radialGradient38744);stroke-width:0.994873" width="30.120626" height="16.758745" x="30" y="40"
+      inkscape:highlight-color="#b85ac9" id="rect698" />
+    <rect style="display:inline;fill:#2d0000;" width="37" height="2" x="27" y="57" id="rect700" />
+    <rect style="display:inline;fill:silver;" width="60" height="3" x="3" y="71" id="rect702" />
+    <rect style="display:inline;fill:silver;" width="2" height="10" x="6" y="71" id="rect704" />
+    <circle cx="7" cy="80" r="3" id="circle706" />
+    <circle cx="70" cy="73" r="10" id="circle708" />
+    <circle style="fill:silver" cx="70" cy="73" r="6" id="circle710" />
+    <rect style="display:inline;fill:snow;" width="60" height="11" x="16" y="27" id="rect712" />
+    <text style="font-weight:bold;font-size:8px;font-family:'Comic Sans MS';fill:maroon" x="17" y="35" id="text714">FISH
+      &amp; CHIPS</text>
+    <rect style="fill:url(#radialGradient1713);stroke-width:0.398;" width="32" height="18" x="29" y="39" />
+    <path style="stroke:darkslategrey;stroke-width:2;stroke-linecap:round;" d="m 16,36 c 9,-3 19,-5 30,-7" id="path2044"
+      sodipodi:nodetypes="cc" />
+    <path style="stroke:darkslategrey;stroke-width:2;stroke-linecap:round;"
+      d="m 17.249698,28.468034 c 9.463248,3.424201 19.930327,3.608515 30.156816,6.755127" id="path2046"
+      sodipodi:nodetypes="cc" />
+  </svg>`,
     "control-icon--up": {
       class: "thick control-icon",
       paths: [{ c: "", d: "m 20,80 30,-60 30,60" }],
@@ -294,7 +342,8 @@ const svg = {
     let thisScale = "";
     let thisShift = "";
     let thisRotate = "";
-    if (svgInfo) {
+
+    if (svgInfo.paths) {
       let paths = "";
 
       // add the images name into the class list
