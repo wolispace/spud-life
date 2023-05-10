@@ -37,11 +37,13 @@ const controls = {
       if (index == USER_KEY_UP) {
         if (player.pos == 0) {
           // go into home
-          console.log("going home");
+          player.phase = "night";
+          dayCycle(true);
         } else if (player.pos == 3) {
-          console.log("going shopping");
+          dayCycle(true);
         } else if (player.pos == 6) {
-          console.log("going selling");
+          player.phase = "hardware";
+          dayCycle(true);
         }
       }
 

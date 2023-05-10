@@ -160,7 +160,7 @@ function allocate() {
 // move to the next phase in the day
 function dayCycle(moveOn = true) {
   state.save();
-  const phases = ["field", "allocate", "hardware", "sales", "night"];
+  const phases = ["field", "hardware", "allocate", "sales", "night"];
   let pages = document.querySelectorAll(`.page`);
   // turn all pages off..
   pages.forEach((page) => {
