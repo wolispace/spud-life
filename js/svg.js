@@ -530,13 +530,26 @@ const svg = {
   },
 
   showPlayerSprite() {
-    let playerSprite = document.querySelector("#playerSprite");
-    playerSprite.style.display = "block";
+    svg.showElement("#playerSprite");
+    svg.showElement("#grassLine");
+    fields.renderGrassLine();
   },
 
   hidePlayerSprite() {
-    let playerSprite = document.querySelector("#playerSprite");
-    playerSprite.style.display = "none";
+    svg.hideElement("#playerSprite");
+    svg.hideElement("#grassLine");
+  },
+
+  hideElement(elementQuery) {
+    console.log("hide", elementQuery);
+    let thisElement = document.querySelector(elementQuery);
+    thisElement.style.display = "none";
+  },
+
+  showElement(elementQuery) {
+    console.log("show", elementQuery);
+    let thisElement = document.querySelector(elementQuery);
+    thisElement.style.display = "block";
   },
 
   colourOptions(selectedColour = "") {
