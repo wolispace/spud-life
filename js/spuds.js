@@ -3,13 +3,25 @@ const spuds = {
   sprout: (qty) => {
     let counter = 0;
     let spudBits = {
-      "prefix": ['Bo', 'Sa', 'Ru', 'Kri', 'Ar'],
-      "middle": ['sa', 'cho', 'ma', 'nal', 'sso', 'li'],
-      "suffix": ['lor', 'ker', 'pry', 'ly', 'der', 'mid'],
-      "bestFor": ['chips', 'baked potatoes', 'curly-fries', 'soup'],
-      "color": ['white', 'brick', 'wheat', 'teal', 'orange', 'maroon', 'black', 'navy', 'pink', 'purple', 'red'],
-      "showColors": ['white', 'orange', 'black', 'pink', 'purple', 'red'],
-      "rareness": ["common", "standard", "rare"]
+      prefix: ["Bo", "Sa", "Ru", "Kri", "Ar"],
+      middle: ["sa", "cho", "ma", "nal", "sso", "li"],
+      suffix: ["lor", "ker", "pry", "ly", "der", "mid"],
+      bestFor: ["chips", "baked potatoes", "curly-fries", "soup"],
+      color: [
+        "white",
+        "brick",
+        "wheat",
+        "teal",
+        "orange",
+        "maroon",
+        "black",
+        "navy",
+        "pink",
+        "purple",
+        "red",
+      ],
+      showColors: ["white", "orange", "black", "pink", "purple", "red"],
+      rareness: ["common", "standard", "rare"],
     };
     // used next element from array cycling back to the start so its not completely random.
     let colorCycle = rnd(spudBits.color.length);
@@ -29,7 +41,7 @@ const spuds = {
 
       let colorName = spudBits.color[colorCycle];
       let rarityName = spudBits.rareness[rarityCicle];
-      let fullName = rnd(3) > 1 ? `${rarityName} ` : '';
+      let fullName = rnd(3) > 1 ? `${rarityName} ` : "";
       if (spudBits.showColors.includes(colorName)) {
         fullName += `${colorName} `;
       }
@@ -37,20 +49,21 @@ const spuds = {
       // uppercase first letter
       fullName = fullName.charAt(0).toUpperCase() + fullName.slice(1);
 
-      let svgInfo = svg.imgList['spud'];
+      let svgInfo = svg.imgList["spud"];
 
       player.spuds[counter++] = {
-        "name": name,
-        "fullName": fullName,
-        "color": colorName,
-        "rareness": rarityName,
-        "bestFor": spudBits.bestFor[bestForCycle],
-        'path': svg.jiggle(svgInfo.paths[0].d, 3),
-      }
+        name: name,
+        fullName: fullName,
+        color: colorName,
+        rareness: rarityName,
+        bestFor: spudBits.bestFor[bestForCycle],
+        path: svg.jiggle(svgInfo.paths[0].d, 3),
+      };
       // roll on to next item in the list so everyone gets atleast one ofeverything
       colorCycle = ++colorCycle >= spudBits.color.length ? 0 : colorCycle;
       rarityCicle = ++rarityCicle >= spudBits.rareness.length ? 0 : rarityCicle;
-      bestForCycle = ++bestForCycle >= spudBits.bestFor.length ? 0 : bestForCycle;
+      bestForCycle =
+        ++bestForCycle >= spudBits.bestFor.length ? 0 : bestForCycle;
     }
   },
   // selling the meals from the machines
@@ -64,7 +77,7 @@ const spuds = {
     Object.entries(player.shop.machines).forEach(([machineName, machine]) => {
       if (machine.hopper) {
         Object.entries(machine.hopper).forEach(([spudName, spudQty]) => {
-          let spudInfo = player.spuds.filter(spud => spud.name == spudName);
+          let spudInfo = player.spuds.filter((spud) => spud.name == spudName);
           let bonus = (machine.makes = spudInfo.bestFor) ? 2 : 1;
           let salePrice = machine.pricePerItem * bonus * spudQty;
           totalMeals = totalMeals + spudQty;
@@ -77,9 +90,11 @@ const spuds = {
     });
 
     player.purse += totalIncome;
-    let salesList = `Total meals=${totalMeals} income=${totalIncome}`;
-    element = document.querySelector('.sales');
-    element.innerHTML = salesList;
+    let content = `Total meals=${totalMeals} income=${totalIncome}`;
+    let title = "Shop sales";
+    let footer = "";
+    footer += `<button class="buttonize" onclick="setPhase('night')"> Bedtime </button>`;
+    showDialog(title, content, footer);
   },
 
   // move spuds from sack to machine hoppers
@@ -99,26 +114,25 @@ const spuds = {
   },
 
   // draw a variety of potato in a predictable way
-  render: (spudName, style = '') => {
-    let spudInfo = player.spuds.filter(spud => spud.name == spudName)[0];
-    let svgInfo = svg.imgList['spud'];
+  render: (spudName, style = "") => {
+    let spudInfo = player.spuds.filter((spud) => spud.name == spudName)[0];
+    let svgInfo = svg.imgList["spud"];
     let svgClass = svgInfo.class;
-    svgClass = svg.setClass(svgClass, 'spud');
+    svgClass = svg.setClass(svgClass, "spud");
     let highlight = svg.highlight();
-    let paths = '';
+    let paths = "";
     svgInfo.paths.forEach((path, index) => {
       let onePath = spudInfo.path;
       let svgCls = path.c ? `${svgClass}-${path.c}` : svgClass;
 
-      let svgStyle = (index > -1) ? ` style="fill:${spudInfo.color}; stroke:${spudInfo.color}" ` : '';
+      let svgStyle =
+        index > -1
+          ? ` style="fill:${spudInfo.color}; stroke:${spudInfo.color}" `
+          : "";
       paths += `<path class="${svgCls}" ${svgStyle}
         d="${onePath}" />`;
     });
 
-
     return svg.wrap(svgClass, style, `${paths}${highlight}`);
-  }
-
-
-
-}
+  },
+};

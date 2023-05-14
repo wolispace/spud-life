@@ -1,25 +1,25 @@
 const tools = {
   // draw the tools across the bottom
   render: () => {
-    let tools = '';
+    let tools = "";
     let dummyImg = svg.render(`control-icon--up`);
     Object.entries(player.tools).forEach(([toolName, tool]) => {
       tools += `<div  class="tool-${toolName}" onclick="fields.digPatch()">${toolName}=${tool.uses} ${dummyImg}</div>`;
     });
     tools += `<div class="tool-purse" onclick="sack.show()">Purse=${player.purse}`;
     tools += `<br/>Sack=${sack.count()}<br>Field=${player.currentField}</div>`;
-    tools += `<div class="tool-next" onclick="dayCycle()">Next &gt;</div>`;
-    element = document.querySelector('.tools');
+    //tools += `<div class="tool-next" onclick="dayCycle()">Next &gt;</div>`;
+    element = document.querySelector(".tools");
     element.innerHTML = tools;
   },
   // TODO: not used!?! returns the players tool
   selectTool: (patch) => {
-    let tool = 'spade';
+    let tool = "spade";
     if (patch.block) {
-      if (patch.block.type == 'rock') {
-        tool = 'pick';
+      if (patch.block.type == "rock") {
+        tool = "pick";
       } else {
-        tool = 'axe';
+        tool = "axe";
       }
     }
     return player.tools[tool];
@@ -27,7 +27,7 @@ const tools = {
   // buy a tool or an upgrade to a tool or machine
   buyTool: (toolName) => {
     let tool = player.hardware[toolName];
-    if (tool.type == 'tool') {
+    if (tool.type == "tool") {
       if (player.tools[toolName]) {
         // upgrade
         player.tools[toolName].maxUses++;
@@ -52,6 +52,4 @@ const tools = {
       tool.uses = tool.maxUses;
     });
   },
-
 };
-

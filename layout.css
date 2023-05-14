@@ -108,6 +108,7 @@ h2 {
   border-left: 2px solid white;
   border-bottom: 2px solid rgba(0, 0, 0, 0.5);
   border-right: 2px solid rgba(0, 0, 0, 0.5);
+  overflow-y: auto;
 }
 
 .dialog .header {
@@ -119,6 +120,8 @@ h2 {
   border-top-right-radius: 5px;
   color: rgba(255, 255, 255, 0.8);
   background-color: rgba(0, 0, 0, 0.6);
+  position: sticky;
+  top: 0;
 }
 
 .dialog .close {
@@ -179,7 +182,12 @@ button {
 
 .sky {
   background: rgb(2, 0, 36);
-  background: linear-gradient(180deg, rgba(2, 0, 36, 1) 0%, rgba(82, 82, 246, 1) 0%, rgba(216, 248, 255, 1) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(82, 82, 246, 1) 0%,
+    rgba(216, 248, 255, 1) 100%
+  );
 }
 
 #grassLine {
@@ -235,7 +243,7 @@ button {
   display: none;
 }
 
-.night>div {
+.night > div {
   padding: 2em;
 }
 
@@ -306,7 +314,7 @@ button {
   display: flex;
 }
 
-.spudlist>div {
+.spudlist > div {
   margin: var(--sl-padding);
 }
 

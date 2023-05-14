@@ -1,41 +1,40 @@
 const hardware = {
-  // draw tools and machines for sale 
+  // draw tools and machines for sale
   render: () => {
-    let tools = '';
+    let content = "";
     Object.entries(player.hardware).forEach(([toolName, tool]) => {
-      let state = 'buy';
+      let state = "buy";
       let cost = tool.price;
       if (player.tools[toolName]) {
-        state = 'upgrade'
+        state = "upgrade";
         cost = tool.upgradeCost;
       }
-      let onClick = '';
-      let canBuyClass = 'tooMuch';
+      let onClick = "";
+      let canBuyClass = "tooMuch";
       if (cost <= player.purse) {
         onClick = `onclick="tools.buyTool('${toolName}')"`;
         canBuyClass = ``;
-
       }
       if (!player.shop.machines[toolName]) {
-        tools += `<div class="buttonize button_${tool.type} ${canBuyClass}" ${onClick} id="hardware_${toolName}" ${onClick}>`;
-        tools += `<strong>${tool.name}. </strong>`;
-        tools += `${tool.desc}<br/>${state}=${cost}</div>`;
+        content += `<div class="buttonize button_${tool.type} ${canBuyClass}" ${onClick} id="hardware_${toolName}" ${onClick}>`;
+        content += `<strong>${tool.name}. </strong>`;
+        content += `${tool.desc}<br/>${state}=${cost}</div>`;
       }
     });
 
-    element = document.querySelector('.hardware');
-    element.innerHTML = tools;
+    let title = "Hardware shop";
+    let footer = "";
+    showDialog(title, content, footer);
   },
   // loop through each tool on sale and change style if we can afford it or not
   refresh: () => {
-    let elements = document.querySelector('.hardware div');
-    elements.each((element) => {
-    });
+    let elements = document.querySelector(".hardware div");
+    elements.each((element) => {});
   },
 
   store: () => {
     return {
-      "spade": {
+      spade: {
         type: "tool",
         name: "Spade",
         desc: "A useful tool for diging up spods",
@@ -45,9 +44,9 @@ const hardware = {
         initial: {
           uses: 0,
           maxUses: 5,
-        }
+        },
       },
-      "pick": {
+      pick: {
         type: "tool",
         name: "Pick",
         desc: "A tool for breaking rocks",
@@ -57,9 +56,9 @@ const hardware = {
         initial: {
           uses: 0,
           maxUses: 5,
-        }
+        },
       },
-      "axe": {
+      axe: {
         type: "tool",
         name: "Axe",
         desc: "A tool for clearing logs",
@@ -69,9 +68,9 @@ const hardware = {
         initial: {
           uses: 0,
           maxUses: 5,
-        }
+        },
       },
-      "chipper": {
+      chipper: {
         type: "machine",
         name: "Humble Chipper",
         desc: "A basic heavy-duty chip-maker",
@@ -81,8 +80,8 @@ const hardware = {
         initial: {
           pricePerItem: 5,
           makes: "chips",
-          hopper: {}
-        }
+          hopper: {},
+        },
       },
       "chipper-2000": {
         type: "machine",
@@ -94,8 +93,8 @@ const hardware = {
         initial: {
           pricePerItem: 20,
           makes: "chips",
-          hopper: {}
-        }
+          hopper: {},
+        },
       },
       "back-o-matic": {
         type: "machine",
@@ -107,8 +106,8 @@ const hardware = {
         initial: {
           pricePerItem: 15,
           makes: "baked potatoes",
-          hopper: {}
-        }
+          hopper: {},
+        },
       },
       "curly-cooker": {
         type: "machine",
@@ -120,8 +119,8 @@ const hardware = {
         initial: {
           pricePerItem: 20,
           makes: "curly-fries",
-          hopper: {}
-        }
+          hopper: {},
+        },
       },
       "soup-spinner": {
         type: "machine",
@@ -133,10 +132,9 @@ const hardware = {
         initial: {
           pricePerItem: 10,
           makes: "soup",
-          hopper: {}
-        }
+          hopper: {},
+        },
       },
-
-    }
-  }
-}
+    };
+  },
+};

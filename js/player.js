@@ -1,5 +1,5 @@
 let player = {
-  phase: "night",
+  phase: "field",
   sack: {},
   purse: 1000,
   pos: 0,

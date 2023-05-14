@@ -11,7 +11,8 @@ document.addEventListener("DOMContentLoaded", function () {
     initGame();
   }
   tools.render();
-  dayCycle(false);
+  setPhase(player.phase);
+  //dayCycle(false);
 });
 
 // hook into keys for movement and digging
@@ -26,7 +27,7 @@ document.addEventListener("keydown", (event) => {
     fields.digPatch();
   }
   if (event.code == "Enter") {
-    dayCycle();
+    //dayCycle();
   }
 });
 
@@ -45,6 +46,7 @@ function initGame() {
   let starter = "chipper";
   player.shop.machines[starter] = player.hardware[starter].initial;
   tools.reset();
+  defineCharacter();
 }
 
 // the default
@@ -90,7 +92,8 @@ function defineCharacter(save = false) {
   // show or hide the sack via a dialog
   if (save) {
     hideDialog();
-    dayCycle();
+    //setPhase("field");
+    //dayCycle();
   } else {
     let content = "";
     content += '<div class="creator">';
@@ -146,23 +149,24 @@ function demoBody() {
 // player chooses which spuds to put in what machines
 function allocate() {
   // list all spuds in sack and all machines owned..
-  let allocate = "<div><h2>Load machine hoppers</h2></div>";
-  allocate += '<div class="allocateContent">';
-  allocate += '<div class="machines"></div><div class="sack"></div></div>';
+  let content = "<div><h2>Load machine hoppers</h2></div>";
+  content += '<div class="allocateContent">';
+  content += '<div class="machines"></div><div class="sack"></div></div>';
 
-  element = document.querySelector(".allocate");
-  element.innerHTML = allocate;
+  let title = "Allocate spuds";
+  let footer = "";
+  footer += `<button class="buttonize" onclick="setPhase('sales')"> Open shop </button>`;
+  showDialog(title, content, footer);
 
   machines.render();
   sack.render();
 }
 
 function setPhase(phase) {
+  hideDialog();
   player.phase = phase;
+  state.save();
   if (player.phase != "field") {
-    svg.hidePlayerSprite();
-    element = document.querySelector("." + player.phase);
-    element.style["display"] = "block";
     if (player.phase == "allocate") {
       allocate();
     } else if (player.phase == "hardware") {
@@ -190,7 +194,6 @@ function setPhase(phase) {
 
 // move to the next phase in the day
 function dayCycle(moveOn = true) {
-  state.save();
   const phases = ["field", "hardware", "allocate", "sales", "night"];
   let pages = document.querySelectorAll(`.page`);
   // turn all pages off..
@@ -210,7 +213,7 @@ function dayCycle(moveOn = true) {
 // random dreams based on ong titles eg:
 function dream() {
   let dreams = [
-    "You dream of living in a park, but are rudly awoken by the dustmen",
+    "You dream of living in a park, but are rudely awoken by the dustmen",
     "You dream you are a walrus",
     "You dream of holding onto nothing, to see how long nothing lasts",
     "You dream of spinning plates",
