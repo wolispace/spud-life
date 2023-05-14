@@ -37,13 +37,15 @@ const controls = {
       if (index == USER_KEY_UP) {
         if (player.pos == 0) {
           // go into home
-          player.phase = "night";
-          dayCycle(true);
+          let thisBlock = document.querySelector(`#playerSprite svg`);
+          svg.animate(thisBlock, `shrink`, 1, setPhase("night"));
         } else if (player.pos == 3) {
-          dayCycle(true);
+          let thisBlock = document.querySelector(`#playerSprite svg`);
+          svg.animate(thisBlock, `shrink`, 1, setPhase("hardware"));
         } else if (player.pos == 6) {
           player.phase = "hardware";
-          dayCycle(true);
+          let thisBlock = document.querySelector(`#playerSprite svg`);
+          svg.animate(thisBlock, `shrink`, 1, setPhase("allocate"));
         }
       }
 

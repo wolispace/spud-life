@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // hook into keys for movement and digging
 document.addEventListener("keydown", (event) => {
-  // convery keypresses into directonal movements
+  // convey keypresses into directional movements
   if (Object.keys(player.controlPos).includes(event.code)) {
     controls.click(
       "patch_" + (player.controls.start + player.controlPos[event.code])
@@ -157,23 +157,8 @@ function allocate() {
   sack.render();
 }
 
-// move to the next phase in the day
-function dayCycle(moveOn = true) {
-  state.save();
-  const phases = ["field", "hardware", "allocate", "sales", "night"];
-  let pages = document.querySelectorAll(`.page`);
-  // turn all pages off..
-  pages.forEach((page) => {
-    page.style["display"] = "none";
-  });
-  // increment the page the player is on
-  if (moveOn) {
-    let pos = phases.indexOf(player.phase);
-    pos++;
-    pos = pos >= phases.length ? 0 : pos;
-    player.phase = phases[pos];
-  }
-  // turn on the page the player is on
+function setPhase(phase) {
+  player.phase = phase;
   if (player.phase != "field") {
     svg.hidePlayerSprite();
     element = document.querySelector("." + player.phase);
@@ -201,6 +186,25 @@ function dayCycle(moveOn = true) {
     fields.highlightCurrentPos();
     svg.showPlayerSprite();
   }
+}
+
+// move to the next phase in the day
+function dayCycle(moveOn = true) {
+  state.save();
+  const phases = ["field", "hardware", "allocate", "sales", "night"];
+  let pages = document.querySelectorAll(`.page`);
+  // turn all pages off..
+  pages.forEach((page) => {
+    page.style["display"] = "none";
+  });
+  // increment the page the player is on
+  if (moveOn) {
+    let pos = phases.indexOf(player.phase);
+    pos++;
+    pos = pos >= phases.length ? 0 : pos;
+    player.phase = phases[pos];
+  }
+  setPhase(player.phase);
 }
 
 // random dreams based on ong titles eg:

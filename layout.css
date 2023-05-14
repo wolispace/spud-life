@@ -520,6 +520,16 @@ button {
   display: none;
 }
 
+@keyframes shrink {
+  0% {
+    transform: scale(1, 1);
+  }
+
+  100% {
+    transform: scale(0, 0);
+  }
+}
+
 @keyframes jiggle-down {
   35% {
     transform: translateY(0.2rem) scale(1, 1);
