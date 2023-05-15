@@ -12,7 +12,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   tools.render();
   setPhase(player.phase);
-  //dayCycle(false);
 });
 
 // hook into keys for movement and digging
@@ -25,9 +24,6 @@ document.addEventListener("keydown", (event) => {
   }
   if (event.code == "Space") {
     fields.digPatch();
-  }
-  if (event.code == "Enter") {
-    //dayCycle();
   }
 });
 
@@ -93,8 +89,6 @@ function defineCharacter(save = false) {
   if (save) {
     hideDialog();
     state.save();
-    //setPhase("field");
-    //dayCycle();
   } else {
     let content = "";
     content += '<div class="creator">';
@@ -163,6 +157,7 @@ function allocate() {
   sack.render();
 }
 
+// const phases = ["field", "hardware", "allocate", "sales", "night"];
 function setPhase(phase) {
   hideDialog();
   player.phase = phase;
@@ -192,24 +187,6 @@ function setPhase(phase) {
     fields.highlightCurrentPos();
     svg.showPlayerSprite();
   }
-}
-
-// move to the next phase in the day
-function dayCycle(moveOn = true) {
-  const phases = ["field", "hardware", "allocate", "sales", "night"];
-  let pages = document.querySelectorAll(`.page`);
-  // turn all pages off..
-  pages.forEach((page) => {
-    page.style["display"] = "none";
-  });
-  // increment the page the player is on
-  if (moveOn) {
-    let pos = phases.indexOf(player.phase);
-    pos++;
-    pos = pos >= phases.length ? 0 : pos;
-    player.phase = phases[pos];
-  }
-  setPhase(player.phase);
 }
 
 // random dreams based on ong titles eg:
