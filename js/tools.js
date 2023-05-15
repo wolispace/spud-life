@@ -8,7 +8,6 @@ const tools = {
     });
     tools += `<div class="tool-purse" onclick="sack.show()">Purse=${player.purse}`;
     tools += `<br/>Sack=${sack.count()}<br>Field=${player.currentField}</div>`;
-    //tools += `<div class="tool-next" onclick="dayCycle()">Next &gt;</div>`;
     element = document.querySelector(".tools");
     element.innerHTML = tools;
   },
