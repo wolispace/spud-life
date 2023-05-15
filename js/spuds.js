@@ -91,7 +91,7 @@ const spuds = {
 
     hideDialog();
 
-    svg.showCustomers(totalMeals);
+    spuds.showCustomers(totalMeals);
 
     player.purse += totalIncome;
     let content = `Total meals=${totalMeals} income=${totalIncome}`;
@@ -99,6 +99,13 @@ const spuds = {
     let footer = "";
     footer += `<button class="buttonize" onclick="setPhase('night')"> Bedtime </button>`;
     showDialog(title, content, footer);
+  },
+
+  showCustomers(qty) {
+    // build a character
+    // add a new sprite
+    // setup animation
+    //
   },
 
   // move spuds from sack to machine hoppers

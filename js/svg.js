@@ -707,8 +707,8 @@ const svg = {
     }
   },
 
-  renderPlayer: () => {
-    let paths = svg.assemblePerson();
+  renderPerson: (person) => {
+    let paths = svg.assemblePerson(person);
     // separate the first element of paths so we can wrap in <g>
     let body = paths.pop();
     let head = ``;
@@ -730,17 +730,17 @@ const svg = {
   },
 
   // puts the bits of a human together
-  assemblePerson() {
+  assemblePerson(body) {
     // group everything but the body
     // then wrap in another group
     let paths = [];
-    Object.entries(player.body).forEach(([key, part]) => {
+    Object.entries(body).forEach(([key, part]) => {
       if (key != "body") {
         paths.push(svg.buildPath(part.type, part.colour));
       }
     });
     // add the body last so it is put in a separate svg group
-    paths.push(svg.buildPath(player.body.body.type, player.body.body.colour));
+    paths.push(svg.buildPath(body.body.type, body.body.colour));
 
     return paths;
   },
@@ -777,8 +777,6 @@ const svg = {
   hidePlayerSprite() {
     svg.hideElement("#playerSprite");
   },
-
-  showCustomers(qty) {},
 
   hideElement(elementQuery) {
     console.log("hide", elementQuery);

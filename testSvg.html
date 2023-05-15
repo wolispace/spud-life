@@ -38,8 +38,8 @@
       player.body = defaultBody();
       let element = document.querySelector("#playerSprite");
       // element.innerHTML = spuds.render(spudName);
-      let svgPaths = svg.assemblePerson();
-      element.innerHTML = svg.renderPlayer(svgPaths);
+      //let svgPaths = svg.assemblePerson(player.body);
+      element.innerHTML = svg.renderPerson(player.body);
 
       svg.directPlayerSprite("right");
 
