@@ -89,6 +89,10 @@ const spuds = {
       }
     });
 
+    hideDialog();
+
+    svg.showCustomers(totalMeals);
+
     player.purse += totalIncome;
     let content = `Total meals=${totalMeals} income=${totalIncome}`;
     let title = "Shop sales";

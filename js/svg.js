@@ -771,15 +771,14 @@ const svg = {
   },
 
   showPlayerSprite() {
-    //svg.showElement("#playerSprite");
-    //svg.showElement("#grassLine");
-    //fields.renderGrassLine();
+    svg.showElement("#playerSprite");
   },
 
   hidePlayerSprite() {
-    // svg.hideElement("#playerSprite");
-    // svg.hideElement("#grassLine");
+    svg.hideElement("#playerSprite");
   },
+
+  showCustomers(qty) {},
 
   hideElement(elementQuery) {
     console.log("hide", elementQuery);

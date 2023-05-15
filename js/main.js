@@ -92,6 +92,7 @@ function defineCharacter(save = false) {
   // show or hide the sack via a dialog
   if (save) {
     hideDialog();
+    state.save();
     //setPhase("field");
     //dayCycle();
   } else {
@@ -174,6 +175,7 @@ function setPhase(phase) {
     } else if (player.phase == "sales") {
       spuds.sell();
     } else if (player.phase == "night") {
+      hideDialog();
       tools.reset();
       tools.render();
       fields.rollPatches();
@@ -217,7 +219,7 @@ function dream() {
     "You dream you are a walrus",
     "You dream of holding onto nothing, to see how long nothing lasts",
     "You dream of spinning plates",
-    "You don't dream of anything but wake up back to life, back to reality",
+    "You don't dream of anything, however you wake up, back to life, back to reality",
     "You dream you are a hero, just for one day",
     "You dream a little dream of me",
     "You dream the cake is a lie",
@@ -227,12 +229,16 @@ function dream() {
   let dream = dreams[rnd(dreams.length)];
   let sow = fields.resowField();
 
-  element = document.querySelector(".night");
-  element.innerHTML = `<div>${dream}</div>${sow}`;
+  let content = `<div>${dream}</div>${sow}`;
+  let title = "Sleeping Zzzz";
+  let footer = "";
+  footer += `<button class="buttonize" onclick="setPhase('field')"> Get out of bed </button>`;
+  showDialog(title, content, footer);
 }
 
 // show the dialog
 function showDialog(title, content, footer) {
+  hideDialog();
   let element = document.querySelector(`.dialog`);
 
   svg.hidePlayerSprite();
