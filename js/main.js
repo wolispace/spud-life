@@ -2,6 +2,7 @@
 
 // lods previously save state from localstorage if found
 player = state.load();
+bodySet = getBodySet();
 
 document.addEventListener("DOMContentLoaded", function () {
   svg.hidePlayerSprite();
@@ -12,6 +13,9 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   tools.render();
   setPhase(player.phase);
+  let newBody = randomBody();
+  let baseBody = defaultBody();
+  console.log("newBody", newBody);
 });
 
 // hook into keys for movement and digging
@@ -78,6 +82,46 @@ function defaultBody() {
       colour: "Brown",
     },
   };
+}
+
+// takes list of body parts from imgList and make easy-to-parse lists for each part
+function getBodySet() {
+  let partOptions = [];
+  // extract body bits
+  let baseBody = defaultBody();
+
+  Object.keys(baseBody).forEach((bodyPart) => {
+    partOptions[bodyPart] = [];
+    Object.entries(svg.imgList).forEach(([key, part]) => {
+      if (`${key}-`.indexOf(bodyPart) > -1) {
+        let bits = key.split("-");
+        partOptions[bodyPart].push(key);
+      }
+    });
+  });
+
+  return partOptions;
+}
+
+// the default
+function randomBody() {
+  //let name = spudBits.prefix[rnd(spudBits.prefix.length)];
+  let newBody = {};
+
+  let colourNames = Object.keys(CSS_COLOR_NAMES);
+  let colour = CSS_COLOR_NAMES[rnd(colourNames.length)];
+
+  Object.keys(bodySet).forEach((bodyPart) => {
+    let variations = bodySet[bodyPart];
+    let variation = variations[rnd(variations.length)];
+    newBody[bodyPart] = {
+      type: variation,
+      colour: CSS_COLOR_NAMES[rnd(colourNames.length)],
+    };
+  });
+
+  //console.log(newBody);
+  return newBody;
 }
 
 // setup the default body

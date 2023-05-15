@@ -102,9 +102,10 @@ const spuds = {
   },
 
   showCustomers(qty) {
-    // build a character
+    // build a customer
     // add a new sprite
     // setup animation
+    svg.renderPerson(customer);
     //
   },
 
