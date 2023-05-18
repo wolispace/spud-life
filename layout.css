@@ -91,6 +91,11 @@ h2 {
   position: absolute;
   width: 30px;
   height: 30px;
+  display: flex;
+}
+
+#playerSprite > svg {
+  align-self: flex-end;
 }
 
 .dialog {
@@ -203,11 +208,19 @@ button {
   background-color: seagreen;
   width: 100%;
   height: 100%;
+  display: flex;
 }
 
-.patch.svg {
-  width: 100%;
-  height: auto;
+.patch > svg {
+  align-self: flex-end;
+}
+
+.sky {
+  display: flex;
+}
+
+.sky > svg {
+  align-self: flex-end;
 }
 
 .page {

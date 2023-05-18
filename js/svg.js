@@ -787,7 +787,7 @@ const svg = {
   showElement(elementQuery) {
     console.log("show", elementQuery);
     let thisElement = document.querySelector(elementQuery);
-    thisElement.style.display = "block";
+    thisElement.style.display = "flex";
   },
 
   colourOptions(selectedColour = "") {
