@@ -162,8 +162,8 @@ button {
 .field {
   width: 100%;
   height: 90vh;
-  max-width: 40em;
-  max-height: 40em;
+  max-width: 50em;
+  max-height: 50em;
   position: absolute;
   top: 0;
   left: 0;
