@@ -10,12 +10,10 @@ document.addEventListener("DOMContentLoaded", function () {
   if (player.spuds.length < 1) {
     // intro to game
     initGame();
+  } else {
+    tools.render();
+    setPhase(player.phase);
   }
-  tools.render();
-  setPhase(player.phase);
-  let newBody = randomBody();
-  let baseBody = defaultBody();
-  console.log("newBody", newBody);
 });
 
 // hook into keys for movement and digging
@@ -126,14 +124,18 @@ function randomBody() {
 
 // setup the default body
 function defineCharacter(save = false) {
-  if (!player.body) {
-    player.body = defaultBody();
-  }
-  // show or hide the sack via a dialog
+  // show or hide the character creator via a dialog
   if (save) {
     hideDialog();
     state.save();
+    tools.render();
+    setPhase(player.phase);
   } else {
+    let newBody = randomBody();
+    let baseBody = defaultBody();
+    console.log("newBody", newBody);
+
+    player.body = defaultBody();
     let content = "";
     content += '<div class="creator">';
     content += '<div class="left">';
