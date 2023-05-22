@@ -101,12 +101,20 @@ const spuds = {
     showDialog(title, content, footer);
   },
 
+  // show all of the customers for the night
   showCustomers(qty) {
-    // build a customer
-    // add a new sprite
-    // setup animation
-    svg.renderPerson(customer);
-    //
+    let customerList = "";
+    for (let customer = 0; customer < qty; customer++) {
+      // build a random customer
+      let customerBody = randomBody();
+
+      customerList +=
+        `<div class="customer" id="customer_${customer}">` +
+        svg.renderPerson(customerBody) +
+        `</div>`;
+    }
+    let element = document.querySelector(`#customerParade`);
+    element.innerHTML = customerList;
   },
 
   // move spuds from sack to machine hoppers

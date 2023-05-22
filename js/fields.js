@@ -198,6 +198,12 @@ const fields = {
     element.style.left = `${posX}px`;
     element.style.width = `${width}px`;
     element.style.height = `${height}px`;
+    // align the path the cusomer parade along
+    element = document.querySelector(`#customerParade`);
+    element.style.top = `${newY - 20}px`; //parseInt(posY) - 10;
+    element.style.left = `${posX}px`;
+    element.style.width = `${width}px`;
+    element.style.height = `${height + 20}px`;
   },
 
   // based on patch contents decide what to show

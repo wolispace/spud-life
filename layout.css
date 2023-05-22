@@ -98,6 +98,17 @@ h2 {
   align-self: flex-end;
 }
 
+#customerParade {
+  border: 1px solid red;
+  position: absolute;
+}
+
+.customer {
+  width: 3%;
+  position: absolute;
+  border: 1px solid blue;
+}
+
 .dialog {
   position: absolute;
   top: -1000px;
