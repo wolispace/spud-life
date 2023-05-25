@@ -187,7 +187,7 @@ const fields = {
     let patch = element.getBoundingClientRect();
     let posY = patch.top;
     let posX = patch.left;
-    let width = patch.width * 15;
+    let width = patch.width * 12;
     let height = patch.height / 6;
 
     let svgPaths = svg.assemblePerson(player.body);

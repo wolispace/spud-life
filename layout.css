@@ -103,7 +103,7 @@ h2 {
 }
 
 .customer {
-  width: 3%;
+  width: 5%;
   position: absolute;
 }
 
@@ -632,12 +632,12 @@ button {
 
 @keyframes move-customer {
   from {
-    left: -10%;
+    left: 100%;
   }
-  41% {
-    left: 41%;
+  35% {
+    left: 53%;
   }
   to {
-    left: 100%;
+    left: -20%;
   }
 }

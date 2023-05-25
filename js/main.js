@@ -108,16 +108,21 @@ function getBodySet() {
 function randomBody() {
   //let name = spudBits.prefix[rnd(spudBits.prefix.length)];
   let newBody = {};
+  let skinTones = ["Cornsilk", "Bisque", "Wheat", "Tan", "SaddleBrown"];
 
   let colourNames = Object.keys(CSS_COLOR_NAMES);
-  let colour = CSS_COLOR_NAMES[rnd(colourNames.length)];
+  let skinTone = skinTones[rnd(skinTones.length)];
 
   Object.keys(bodySet).forEach((bodyPart) => {
     let variations = bodySet[bodyPart];
     let variation = variations[rnd(variations.length)];
+    let colour = colourNames[rnd(colourNames.length)];
+    if (",head,nose".indexOf(bodyPart) > 0) {
+      let colour = skinTone;
+    }
     newBody[bodyPart] = {
       type: variation,
-      colour: CSS_COLOR_NAMES[rnd(colourNames.length)],
+      colour: colour,
     };
   });
 
