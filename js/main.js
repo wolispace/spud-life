@@ -14,9 +14,6 @@ document.addEventListener("DOMContentLoaded", function () {
     tools.render();
     setPhase(player.phase);
   }
-  customers.qty = 30;
-  customers.render();
-  customers.move();
   resizeStuff();
 });
 

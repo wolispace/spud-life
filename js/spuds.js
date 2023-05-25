@@ -91,8 +91,11 @@ const spuds = {
 
     hideDialog();
 
-    spuds.showCustomers(totalMeals);
+    customers.qty = totalMeals;
+    customers.render();
+    customers.move();
 
+    // TODO only show this when animation has finished
     player.purse += totalIncome;
     let content = `Total meals=${totalMeals} income=${totalIncome}`;
     let title = "Shop sales";
