@@ -14,9 +14,10 @@ document.addEventListener("DOMContentLoaded", function () {
     tools.render();
     setPhase(player.phase);
   }
-  customers.qty = 10;
+  customers.qty = 30;
   customers.render();
   customers.move();
+  resizeStuff();
 });
 
 // hook into keys for movement and digging
@@ -33,10 +34,14 @@ document.addEventListener("keydown", (event) => {
 });
 
 window.addEventListener("resize", (event) => {
-  fields.renderGrassLine();
-  fields.highlightCurrentPos();
+  resizeStuff();
 });
 
+function resizeStuff() {
+  fields.renderGrassLine();
+  fields.highlightCurrentPos();
+  svg.showPlayerSprite();
+}
 // new game so generate
 function initGame() {
   spuds.sprout(6);
@@ -119,7 +124,6 @@ function randomBody() {
     let colour = colourNames[rnd(colourNames.length)];
     if (",head,nose".indexOf(bodyPart) > 0) {
       colour = skinTone;
-      console.log(bodyPart, skinTone);
     }
     newBody[bodyPart] = {
       type: variation,
