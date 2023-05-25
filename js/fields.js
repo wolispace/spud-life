@@ -187,7 +187,7 @@ const fields = {
     let patch = element.getBoundingClientRect();
     let posY = patch.top;
     let posX = patch.left;
-    let width = patch.width * 10;
+    let width = patch.width * 15;
     let height = patch.height / 6;
 
     let svgPaths = svg.assemblePerson(player.body);
@@ -198,12 +198,17 @@ const fields = {
     element.style.left = `${posX}px`;
     element.style.width = `${width}px`;
     element.style.height = `${height}px`;
-    // align the path the cusomer parade along
+    // align the path the customer parade along
     element = document.querySelector(`#customerParade`);
     element.style.top = `${newY - 20}px`; //parseInt(posY) - 10;
     element.style.left = `${posX}px`;
     element.style.width = `${width}px`;
     element.style.height = `${height + 20}px`;
+
+    // let cartPosX = patch.left - patch.width / 2;
+    // element.style.left = `${cartPosX}px`;
+    // let cartWidth = patch.width * 7;
+    // element.style.width = `${cartWidth}px`;
   },
 
   // based on patch contents decide what to show

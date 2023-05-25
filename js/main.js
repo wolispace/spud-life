@@ -14,7 +14,9 @@ document.addEventListener("DOMContentLoaded", function () {
     tools.render();
     setPhase(player.phase);
   }
-  spuds.showCustomers(10);
+  customers.qty = 10;
+  customers.render();
+  customers.move();
 });
 
 // hook into keys for movement and digging

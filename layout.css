@@ -99,14 +99,12 @@ h2 {
 }
 
 #customerParade {
-  border: 1px solid red;
   position: absolute;
 }
 
 .customer {
   width: 3%;
   position: absolute;
-  border: 1px solid blue;
 }
 
 .dialog {
@@ -629,5 +627,17 @@ button {
 
   100% {
     opacity: 0.9;
+  }
+}
+
+@keyframes move-customer {
+  from {
+    left: -10%;
+  }
+  41% {
+    left: 41%;
+  }
+  to {
+    left: 100%;
   }
 }

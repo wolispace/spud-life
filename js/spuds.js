@@ -101,22 +101,6 @@ const spuds = {
     showDialog(title, content, footer);
   },
 
-  // show all of the customers for the night
-  showCustomers(qty) {
-    let customerList = "";
-    for (let customer = 0; customer < qty; customer++) {
-      // build a random customer
-      let customerBody = randomBody();
-
-      customerList +=
-        `<div class="customer" id="customer_${customer}">` +
-        svg.renderPerson(customerBody) +
-        `</div>`;
-    }
-    let element = document.querySelector(`#customerParade`);
-    element.innerHTML = customerList;
-  },
-
   // move spuds from sack to machine hoppers
   move: (spudName, spudQty) => {
     let machine = player.shop.machines[player.shop.selected];
