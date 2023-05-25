@@ -118,7 +118,8 @@ function randomBody() {
     let variation = variations[rnd(variations.length)];
     let colour = colourNames[rnd(colourNames.length)];
     if (",head,nose".indexOf(bodyPart) > 0) {
-      let colour = skinTone;
+      colour = skinTone;
+      console.log(bodyPart, skinTone);
     }
     newBody[bodyPart] = {
       type: variation,

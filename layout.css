@@ -103,8 +103,9 @@ h2 {
 }
 
 .customer {
-  width: 5%;
+  width: 4%;
   position: absolute;
+  left: -10%;
 }
 
 .dialog {
