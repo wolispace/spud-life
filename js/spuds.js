@@ -93,7 +93,6 @@ const spuds = {
 
     customers.qty = totalMeals;
     customers.render();
-    customers.move();
 
     // TODO only show this when animation has finished
     player.purse += totalIncome;

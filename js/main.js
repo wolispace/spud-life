@@ -15,6 +15,8 @@ document.addEventListener("DOMContentLoaded", function () {
     setPhase(player.phase);
   }
   resizeStuff();
+  customers.qty = 50;
+  customers.render();
 });
 
 // hook into keys for movement and digging
