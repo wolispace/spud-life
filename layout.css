@@ -204,7 +204,15 @@ button {
     rgba(216, 248, 255, 1) 100%
   );
 }
+#skyBox {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 3rem;
+}
 
+,
 #grassLine {
   position: absolute;
   left: 0;
