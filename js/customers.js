@@ -5,9 +5,12 @@ const customers = {
   render: () => {
     let customerList = "";
     for (let id = 0; id < customers.qty; id++) {
-      let interval = rnd(15000) + 500;
+      customers.add(id);
+    }
+    for (let id = 0; id < customers.qty; id++) {
+      let interval = (1 + id) * 1000; // rnd(15000) + 500;
       setTimeout(function () {
-        customers.add(id);
+        customers.run(id);
       }, interval);
     }
   },
@@ -15,17 +18,18 @@ const customers = {
   add: (id) => {
     // build a random customer
     let customerBody = randomBody();
-
     let customerHtml =
       `<div class="customer" id="customer_${id}">` +
       svg.renderPerson(customerBody) +
       `</div>`;
-
     let element = document.querySelector(`#customerParade`);
     element.innerHTML += customerHtml;
-    let speed = rnd(30) + 3;
-    element = document.querySelector(`#customer_${id}`);
-    svg.animate(element, `move-customer`, speed);
-    //console.log(`added ${id} speed ${speed} `);
+  },
+
+  run: (id) => {
+    console.log(id);
+    let customerSprite = document.querySelector(`#customer_${id}`);
+    let duration = 5; //rnd(30) + 3;
+    customerSprite.style.animation = `move-customer ${duration}s ease-in-out`;
   },
 };
