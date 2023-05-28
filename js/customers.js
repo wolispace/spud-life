@@ -8,7 +8,7 @@ const customers = {
       customers.add(id);
     }
     for (let id = 0; id < customers.qty; id++) {
-      let interval = (1 + id) * 1000; // rnd(15000) + 500;
+      let interval = (1 + id) * 200 + rnd(10000);
       setTimeout(function () {
         customers.run(id);
       }, interval);
@@ -29,7 +29,7 @@ const customers = {
   run: (id) => {
     console.log(id);
     let customerSprite = document.querySelector(`#customer_${id}`);
-    let duration = 5; //rnd(30) + 3;
+    let duration = rnd(2) + 5;
     customerSprite.style.animation = `move-customer ${duration}s ease-in-out`;
   },
 };
