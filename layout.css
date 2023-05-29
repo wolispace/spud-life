@@ -98,16 +98,6 @@ h2 {
   align-self: flex-end;
 }
 
-#customerParade {
-  position: absolute;
-}
-
-.customer {
-  width: 4%;
-  position: absolute;
-  left: -10%;
-}
-
 .dialog {
   position: absolute;
   top: -1000px;
@@ -212,14 +202,28 @@ button {
   height: 3rem;
 }
 
-,
+#buildingLine {
+}
+
+#customerParade {
+  position: absolute;
+  left: 0;
+  width: 120%;
+  height: 1.2vh;
+}
+
 #grassLine {
   position: absolute;
   left: 0;
   width: 100%;
-  height: 1rem;
-  background-color: transparent;
+  height: 1.2vh;
   background-image: url("grassLine.svg");
+}
+
+.customer {
+  width: 3.8vh;
+  position: absolute;
+  left: -10%;
 }
 
 .patch {

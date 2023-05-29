@@ -180,29 +180,25 @@ const fields = {
   },
 
   renderGrassLine: () => {
-    // find patch_10
-    let element = document.querySelector(`#patch_10`);
-
     // move player spite
-    let patch = element.getBoundingClientRect();
-    let posY = patch.top;
-    let posX = patch.left;
+    let patch = getElementPos(`#patch_10`);
     let width = patch.width * 12;
-    let height = patch.height / 6;
+    let height = patch.height / 3;
 
-    element = document.querySelector(`#grassLine`);
-    let grassBox = element.getBoundingClientRect();
-    let newY = posY - grassBox.height / 2;
-    element.style.top = `${newY}px`; //parseInt(posY) - 10;
-    element.style.left = `${posX}px`;
-    element.style.width = `${width}px`;
-    element.style.height = `${height}px`;
+    let grassElement = document.querySelector(`#grassLine`);
+    let grassBox = grassElement.getBoundingClientRect();
+    let grassLineTop = patch.top - grassBox.height * 0.8;
+    grassElement.style.top = `${grassLineTop}px`;
+
     // align the path the customer parade along
-    element = document.querySelector(`#customerParade`);
-    element.style.top = `${newY - 20}px`; //parseInt(posY) - 10;
-    element.style.left = `${posX}px`;
-    element.style.width = `${width}px`;
-    element.style.height = `${height + 20}px`;
+    let customerElement = document.querySelector(`#customerParade`);
+    let customerBox = customerElement.getBoundingClientRect();
+    let customerLineTop = patch.top - customerBox.height * 1.2;
+    customerElement.style.top = `${customerLineTop}px`;
+    // element.style.top = `${newY - 20}px`; //parseInt(posY) - 10;
+    // element.style.left = `${patch.left}px`;
+    // element.style.width = `${width}px`;
+    customerElement.style.height = `${height}px`;
 
     // let cartPosX = patch.left - patch.width / 2;
     // element.style.left = `${cartPosX}px`;

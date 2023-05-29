@@ -8,7 +8,6 @@ function halfRnd(num) {
   return rnd(num * 2) - num;
 }
 
-
 const state = {
   save: () => {
     // remove these before saving
@@ -30,7 +29,7 @@ const state = {
   clear: () => {
     localStorage.clear();
     window.location.reload();
-  }
+  },
 };
 
 // add animation then remove it after a timeout so it can be re-applied
@@ -48,7 +47,7 @@ function html(selector, text) {
 
 function checkSelector(selector) {
   let elem = selector;
-  if (typeof (selector) === 'string') {
+  if (typeof selector === "string") {
     elem = document.querySelector(selector);
   }
   return elem;
@@ -58,4 +57,9 @@ function css(selector, styles) {
   let elem = checkSelector(selector);
   Object.assign(elem.style, styles);
   return selector;
+}
+
+function getElementPos(selector) {
+  let element = document.querySelector(selector);
+  return element.getBoundingClientRect();
 }

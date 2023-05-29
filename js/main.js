@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
     setPhase(player.phase);
   }
   resizeStuff();
-  sky.clouds();
+  sky.render();
 });
 
 // hook into keys for movement and digging
