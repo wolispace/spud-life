@@ -431,11 +431,4 @@ const fields = {
       return true;
     }
   },
-
-  clouds: () => {
-    let svgInfo = svg.imgList["cloud_001"];
-    let element = document.querySelector(`#skyBox`);
-    let cloudSprite = `<div id="cloud-001">${svgInfo}</div>`;
-    element.innerHTML = cloudSprite;
-  },
 };
