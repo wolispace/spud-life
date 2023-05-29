@@ -190,7 +190,6 @@ const fields = {
     let width = patch.width * 12;
     let height = patch.height / 6;
 
-    let svgPaths = svg.assemblePerson(player.body);
     element = document.querySelector(`#grassLine`);
     let grassBox = element.getBoundingClientRect();
     let newY = posY - grassBox.height / 2;
@@ -366,7 +365,6 @@ const fields = {
     let height = patch.height + "px";
     let width = patch.width + "px";
 
-    //let svgPaths = svg.assemblePerson(player.body);
     element = document.querySelector(`#playerSprite`);
     if (element.innerHTML == "") {
       element.innerHTML = svg.renderPerson(player.body); //svg.render("eye", 1, "person", { paths: svgPaths });

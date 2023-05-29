@@ -192,10 +192,7 @@ function demoBody() {
   });
 
   let element = document.querySelector(".demoBody");
-  // element.innerHTML = spuds.render(spudName);
-  //let svgPaths = svg.assemblePerson(player.body);
   element.innerHTML = svg.renderPerson(player.body);
-  //svg.render("eye", 1, 'style="max-height: 20rem;"', {paths: svgPaths,});
 }
 
 // player chooses which spuds to put in what machines
