@@ -12,6 +12,7 @@ const customers = {
     let element = document.querySelector(`#customerParade`);
     element.innerHTML += customerList;
     customers.animate();
+    sky.dim();
   },
 
   /**
