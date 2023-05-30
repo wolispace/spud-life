@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   resizeStuff();
   sky.render();
+  svg.showPlayerSprite();
 });
 
 // hook into keys for movement and digging
@@ -38,7 +39,7 @@ window.addEventListener("resize", (event) => {
 function resizeStuff() {
   fields.renderGrassLine();
   fields.highlightCurrentPos();
-  svg.showPlayerSprite();
+  //svg.showPlayerSprite();
 }
 // new game so generate
 function initGame() {
@@ -213,7 +214,7 @@ function allocate() {
 
 // const phases = ["field", "hardware", "allocate", "sales", "night"];
 function setPhase(phase) {
-  hideDialog();
+  //hideDialog();
   player.phase = phase;
   state.save();
   if (player.phase != "field") {
@@ -239,7 +240,7 @@ function setPhase(phase) {
     // display the fields patches in their current state
     fields.renderField();
     fields.highlightCurrentPos();
-    svg.showPlayerSprite();
+    //svg.showPlayerSprite();
   }
 }
 
