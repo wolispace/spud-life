@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   resizeStuff();
   sky.render();
+  sky.clouds();
   svg.showPlayerSprite();
 });
 

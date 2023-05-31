@@ -13,8 +13,21 @@ const sky = {
     let svgInfo = svg.render("cloud-001");
 
     let element = document.querySelector(`#skyBox`);
-    let cloudSprite = `<div id="cloud-001">${svgInfo}</div>`;
-    // element.innerHTML = cloudSprite;
+    let cloudSprite = `<div id="cloud-001" class="cloud">${svgInfo}</div>`;
+    element.innerHTML = cloudSprite;
+    let cloudBox = document.querySelector(`#cloud-001`);
+
+    let patch10 = document.querySelector(`#patch_10`);
+    let patch = patch10.getBoundingClientRect();
+    let posY = 0 + "px";
+    let posX = patch.width + "px";
+    let height = patch.height + "px";
+    let width = patch.width + "px";
+    cloudBox.style.top = posY;
+    cloudBox.style.left = posX;
+    cloudBox.style.width = width;
+    cloudBox.style.height = height;
+    console.log(`${posY}, ${posX}, ${width} ,${height},`);
   },
 
   dim: () => {

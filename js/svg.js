@@ -453,7 +453,7 @@ const svg = {
  `,
 
     "cloud-001": {
-      class: "thin",
+      class: "cloud",
       paths: [
         {
           c: "thin",

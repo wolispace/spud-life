@@ -21,70 +21,20 @@
         background-color: darkslategrey;
       }
 
-      #playerSprite {
+      .img {
         border: 1px solid slategrey;
-        width: 100%;
-        height: 100%;
       }
     </style>
   </head>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      // player = state.load();
-      // let spudName = player.spuds[5].name;
-      // let spudInfo = player.spuds.filter(spud => spud.name == spudName)[0];
-      // spuds.sprout();
-      // console.log(spudName, spudInfo);
-      player.body = defaultBody();
-      let element = document.querySelector("#playerSprite");
+      let element = document.querySelector(".img");
       // element.innerHTML = spuds.render(spudName);
-      element.innerHTML = svg.renderPerson(player.body);
-
-      svg.directPlayerSprite("right");
-
-      let playerHead = document.querySelector("#playerSprite .playerHead");
-      let playerBody = document.querySelector("#playerSprite .playerBody");
-      playerHead.setAttribute("transform", "translate(0, 10)");
-      playerBody.setAttribute("transform", "scale(1, 0.81) translate(0, 22)");
+      element.innerHTML = svg.render("cloud-001");
     });
-
-    // the default
-    function defaultBody() {
-      return {
-        body: {
-          type: "body-one",
-          colour: "Navy",
-        },
-
-        head: {
-          type: "head-head",
-          colour: "Wheat",
-        },
-        nose: {
-          type: "nose-triangle",
-          colour: "Wheat",
-        },
-        brows: {
-          type: "brows-wave",
-          colour: "Black",
-        },
-        eye: {
-          type: "eye-eye",
-          colour: "DodgerBlue",
-        },
-        facial: {
-          type: "facial-mustache",
-          colour: "Brown",
-        },
-        hair: {
-          type: "hair-curly",
-          colour: "Brown",
-        },
-      };
-    }
   </script>
 
   <body>
-    <div id="playerSprite"></div>
+    <div class="img"></div>
   </body>
 </html>
