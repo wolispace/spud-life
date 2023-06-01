@@ -466,6 +466,21 @@ const svg = {
         },
       ],
     },
+    "cloud-003": `
+    <svg id="SVGRoot" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+ <circle cx="19.417" cy="21.154" r="8.995" style="fill:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-width:1.7764"/>
+ <circle cx="9.8015" cy="30.149" r="6.0794" style="fill:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-width:1.7764"/>
+ <circle cx="29.901" cy="23.573" r="4.4665" style="fill:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-width:1.7764"/>
+ <circle cx="76.551" cy="31.762" r="11.166" style="fill:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-width:1.7764"/>
+ <circle cx="58.127" cy="17.928" r="7.2581" style="fill:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-width:1.7764"/>
+ <circle cx="36.538" cy="17.68" r="5.6452" style="fill:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-width:1.7764"/>
+ <circle cx="46.464" cy="13.958" r="8.6228" style="fill:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-width:1.7764"/>
+ <circle cx="16.129" cy="33.251" r="8.6228" style="fill:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-width:1.7764"/>
+ <circle cx="61.166" cy="29.777" r="7.6923" style="fill:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-width:1.7764"/>
+ <circle cx="65.136" cy="39.206" r="3.9702" style="fill:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-width:1.7764"/>
+ <rect x="16.253" y="20.844" width="47.022" height="21.092" style="fill:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-width:1.8899"/>
+</svg>
+    `,
     "control-icon--up": {
       class: "thick control-icon",
       paths: [{ c: "", d: "m 20,80 30,-60 30,60" }],

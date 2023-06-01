@@ -10,7 +10,7 @@ const sky = {
   },
 
   clouds: () => {
-    let svgInfo = svg.render("cloud-001");
+    let svgInfo = svg.render("cloud-003");
 
     let element = document.querySelector(`#skyBox`);
     let cloudSprite = `<div id="cloud-001" class="cloud">${svgInfo}</div>`;
