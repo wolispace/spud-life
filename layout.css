@@ -209,6 +209,7 @@ button {
   left: 0;
   top: 0;
   fill: white;
+  opacity: 75%;
 }
 
 #buildingLine {
@@ -664,5 +665,13 @@ button {
   }
   to {
     left: -10%;
+  }
+}
+@keyframes move-cloud {
+  from {
+    left: -20%;
+  }
+  to {
+    left: 120%;
   }
 }

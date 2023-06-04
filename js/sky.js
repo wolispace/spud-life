@@ -27,7 +27,8 @@ const sky = {
     cloudBox.style.left = posX;
     cloudBox.style.width = width;
     cloudBox.style.height = height;
-    console.log(`${posY}, ${posX}, ${width} ,${height},`);
+    let duration = rnd(3) + 20;
+    cloudBox.style.animation = "move-cloud 100s linear infinite";
   },
 
   dim: () => {
