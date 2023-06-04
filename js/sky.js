@@ -1,3 +1,15 @@
+/*
+layers:
+0 = field rectangle sky
+1 = night overlay
+2 = star overlay
+3 = clouds
+4 = buildings
+5 = customers
+6 = player
+7 = grassLine
+*/
+
 const sky = {
   render: () => {
     // find patch_10
@@ -10,6 +22,7 @@ const sky = {
   },
 
   clouds: () => {
+    //https://codepen.io/NvIGA/pen/geRNmv
     let svgInfo = svg.render("cloud-003");
 
     let element = document.querySelector(`#skyBox`);
