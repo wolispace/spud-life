@@ -47,35 +47,31 @@ const sky = {
   buildCloud: () => {
     let guts = "";
     let paths = [];
-    let size = rnd(20) + 1;
-    let yPos = rnd(40) + size / 2;
+    let yMax = 20;
+    let sizeMax = 15;
+    let size = rnd(sizeMax) + 4;
+    let yPos = rnd(yMax) + size;
     let xPos = size;
     let i = 0;
 
     while (i++ < 20) {
       paths.push({
-        c: "",
+        s: "",
         cx: xPos,
         cy: yPos,
         r: size,
       });
-      size = rnd(20) + 2;
-      xPos += rnd(10);
-      yPos = rnd(40) + size / 2;
+      size = rnd(sizeMax) + 4;
+      xPos += rnd(5) + size / 2;
+      if (xPos < size) {
+        xPos = size;
+      }
+      yPos = rnd(yMax) + size;
       // stop when we hit the edge
-      if (xPos + size / 2 > 100) {
+      if (xPos + size > 100) {
         i = 999;
       }
     }
-    // // TODO: build this..
-    // let paths = [
-    //   { c: "", cx: 19, cy: 21, r: 8 },
-    //   { c: "", cx: 9, cy: 30, r: 6 },
-    //   { c: "", cx: 29, cy: 31, r: 4 },
-    //   { c: "", cx: 76, cy: 21, r: 11 },
-    //   { c: "", cx: 58, cy: 17, r: 7 },
-    //   { c: "", cx: 36, cy: 17, r: 5 },
-    // ];
 
     paths.forEach((path) => {
       // path

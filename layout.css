@@ -212,6 +212,10 @@ button {
   opacity: 75%;
 }
 
+.marker {
+  fill: yellow;
+}
+
 #buildingLine {
 }
 
