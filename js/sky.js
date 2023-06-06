@@ -40,8 +40,19 @@ const sky = {
     cloudBox.style.left = posX;
     cloudBox.style.width = width;
     cloudBox.style.height = height;
-    let duration = rnd(3) + 20;
-    cloudBox.style.animation = "move-cloud 20s linear infinite";
+    let duration = rnd(100) + 50;
+    cloudBox.style.animation = `move-cloud ${duration}s linear`;
+
+    // restart with a new cloud and a new speed
+    cloudBox.addEventListener("animationend", function () {
+      console.log("cloud finished", this);
+      this.innerHTML = sky.buildCloud();
+      //console.log(this.style.animationPlayState);
+      this.style.animationPlayState = "paused";
+      duration = rnd(3) + 5;
+      this.style.animation = `move-cloud 10s linear`;
+      this.style.animationPlayState = "running";
+    });
   },
 
   buildCloud: () => {
