@@ -16,6 +16,7 @@
     <script src="js/controls.js?1"></script>
     <script src="js/fields.js?1"></script>
     <script src="js/svg.js?1"></script>
+    <script src="js/sky.js?1"></script>
     <style>
       body {
         background-color: darkslategrey;
@@ -30,7 +31,7 @@
     document.addEventListener("DOMContentLoaded", function () {
       let element = document.querySelector(".img");
       // element.innerHTML = spuds.render(spudName);
-      element.innerHTML = svg.render("cloud-001");
+      element.innerHTML = sky.buildCloud();
     });
   </script>
 
