@@ -878,6 +878,7 @@ const svg = {
         player.animating = true;
         console.log("ani start");
       });
+
       element.addEventListener("animationend", function () {
         player.animating = false;
         console.log("ani end");

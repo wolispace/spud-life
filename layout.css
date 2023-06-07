@@ -210,6 +210,7 @@ button {
   top: 0;
   fill: white;
   opacity: 75%;
+  animation-fill-mode: freeze;
 }
 
 .marker {
@@ -671,11 +672,16 @@ button {
     left: -10%;
   }
 }
-@keyframes move-cloud {
+
+.cloudBox {
+  animation: drift 100s linear infinite;
+}
+
+@keyframes drift {
   from {
-    left: -20%;
+    left: -15%;
   }
   to {
-    left: 120%;
+    left: 110%;
   }
 }

@@ -26,7 +26,7 @@ const sky = {
     let svgInfo = sky.buildCloud(); // svg.render("cloud-004");
 
     let element = document.querySelector(`#skyBox`);
-    let cloudSprite = `<div id="cloud-001" class="cloud">${svgInfo}</div>`;
+    let cloudSprite = `<div id="cloud-001" class="cloud cloudBox">${svgInfo}</div>`;
     element.innerHTML = cloudSprite;
     let cloudBox = document.querySelector(`#cloud-001`);
 
@@ -40,19 +40,19 @@ const sky = {
     cloudBox.style.left = posX;
     cloudBox.style.width = width;
     cloudBox.style.height = height;
-    let duration = rnd(100) + 50;
-    cloudBox.style.animation = `move-cloud ${duration}s linear`;
+    let duration = 3; //rnd(100) + 50;
+    //cloudBox.style.animation = `move-cloud ${duration}s linear`;
 
     // restart with a new cloud and a new speed
-    cloudBox.addEventListener("animationend", function () {
-      console.log("cloud finished", this);
-      this.innerHTML = sky.buildCloud();
-      //console.log(this.style.animationPlayState);
-      this.style.animationPlayState = "paused";
-      duration = rnd(3) + 5;
-      this.style.animation = `move-cloud 10s linear`;
-      this.style.animationPlayState = "running";
+    //cloudBox.addEventListener("animationiteration", sky.changeCloud());
+    cloudBox.addEventListener("animationiteration", (event) => {
+      sky.changeCloud();
     });
+  },
+  changeCloud: () => {
+    let svgInfo = sky.buildCloud();
+    let cloudBox = document.querySelector(`#cloud-001`);
+    cloudBox.innerHTML = svgInfo;
   },
 
   buildCloud: () => {
@@ -73,7 +73,7 @@ const sky = {
         r: size,
       });
       size = rnd(sizeMax) + 4;
-      xPos += rnd(5) + size / 2;
+      xPos += 3;
       if (xPos < size) {
         xPos = size;
       }
