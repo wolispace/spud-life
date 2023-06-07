@@ -191,7 +191,7 @@ const fields = {
     grassElement.style.top = `${grassLineTop}px`;
 
     // align the path the customer parade along
-    let customerElement = document.querySelector(`#customerParade`);
+    let customerElement = document.querySelector(`#customerLine`);
     let customerBox = customerElement.getBoundingClientRect();
     let customerLineTop = patch.top - customerBox.height * 1.2;
     customerElement.style.top = `${customerLineTop}px`;

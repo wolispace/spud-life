@@ -9,14 +9,14 @@ const customers = {
     for (let id = 0; id < customers.qty; id++) {
       customerList += customers.build(id);
     }
-    let element = document.querySelector(`#customerParade`);
+    let element = document.querySelector(`#customerLine`);
     element.innerHTML += customerList;
     customers.animate();
     sky.dim();
   },
 
   /**
-   * Returns the html of a customer for adding into the customerParade
+   * Returns the html of a customer for adding into the customerLine
    * @param {id} id
    * @returns
    */

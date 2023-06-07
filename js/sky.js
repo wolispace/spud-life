@@ -1,12 +1,12 @@
 /*
 layers:
 0 = field rectangle sky
-1 = night overlay
-2 = star overlay
-3 = clouds
-4 = buildings
-5 = customers
-6 = player
+1 = nightShade
+2 = starField
+3 = cloudLine
+4 = buildingLine
+5 = customerLine
+6 = playerSprite
 7 = grassLine
 */
 
@@ -16,7 +16,7 @@ const sky = {
     let patch = getElementPos(`#patch_10`);
     let height = patch.height;
 
-    let element = document.querySelector(`#skyBox`);
+    let element = document.querySelector(`#cloudLine`);
     // element.style.width = `${width}px`;
     element.style.height = `${height}px`;
   },
@@ -25,7 +25,7 @@ const sky = {
     //https://codepen.io/NvIGA/pen/geRNmv
     let svgInfo = sky.buildCloud(); // svg.render("cloud-004");
 
-    let element = document.querySelector(`#skyBox`);
+    let element = document.querySelector(`#cloudLine`);
     let cloudSprite = `<div id="cloud-001" class="cloud cloudBox">${svgInfo}</div>`;
     element.innerHTML = cloudSprite;
     let cloudBox = document.querySelector(`#cloud-001`);
@@ -100,7 +100,7 @@ const sky = {
   },
 
   dim: () => {
-    let element = document.querySelector(`#skyBox`);
+    let element = document.querySelector(`#cloudLine`);
     element.style.opacity = 0.75;
   },
 };

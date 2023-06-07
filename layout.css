@@ -194,7 +194,7 @@ button {
     rgba(216, 248, 255, 1) 100%
   );
 }
-#skyBox {
+#cloudLine {
   position: absolute;
   left: 0;
   top: 0;
@@ -220,7 +220,7 @@ button {
 #buildingLine {
 }
 
-#customerParade {
+#customerLine {
   position: absolute;
   left: 0;
   width: 120%;
