@@ -60,12 +60,13 @@ const sky = {
     let paths = [];
     let yMax = 20;
     let sizeMax = 15;
+    let widthMax = rnd(30) + 10;
     let size = rnd(sizeMax) + 4;
     let yPos = rnd(yMax) + size;
     let xPos = size;
     let i = 0;
 
-    while (i++ < 20) {
+    while (i++ < widthMax) {
       paths.push({
         s: "",
         cx: xPos,
