@@ -62,6 +62,7 @@ const sack = {
     footer += `<button class="buttonize" onclick="state.clear()"> Reset! </button>`;
     footer += `<button class="buttonize" onclick="fields.buyField()"> Buy a field </button>`;
     footer += `<button class="buttonize" onclick="customers.render(${random}); hideDialog();"> Show ${random} customers! </button>`;
+    footer += `<a href="testSvg.html">Test SVG</a>`;
     footer += `<button class="buttonize" onclick="hideDialog()"> Ok </button>`;
     showDialog("Inventory", `${content}${content2}`, footer);
   },

@@ -30,16 +30,11 @@ const sky = {
     element.innerHTML = cloudSprite;
     let cloudBox = document.querySelector(`#cloud-001`);
 
-    let patch10 = document.querySelector(`#patch_10`);
-    let patch = patch10.getBoundingClientRect();
-    let posY = 0 + "px";
-    let posX = patch.width + "px";
-    let height = patch.height + "px";
-    let width = patch.width + "px";
-    cloudBox.style.top = posY;
-    cloudBox.style.left = posX;
-    cloudBox.style.width = width;
-    cloudBox.style.height = height;
+    let patch = getElementPos(`#patch_10`);
+    cloudBox.style.top = 0 + "px";
+    cloudBox.style.left = patch.width + "px";
+    cloudBox.style.width = patch.width + "px";
+    cloudBox.style.height = patch.height + "px";
     let duration = 3; //rnd(100) + 50;
     //cloudBox.style.animation = `move-cloud ${duration}s linear`;
 
