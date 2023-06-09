@@ -674,7 +674,7 @@ button {
 }
 
 .cloudBox {
-  animation: drift 100s linear infinite;
+  animation: drift 10s linear infinite;
 }
 
 @keyframes drift {

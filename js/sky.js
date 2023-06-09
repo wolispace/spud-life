@@ -22,19 +22,21 @@ const sky = {
   },
 
   clouds: () => {
-    //https://codepen.io/NvIGA/pen/geRNmv
-    let svgInfo = sky.buildCloud(); // svg.render("cloud-004");
-
     let element = document.querySelector(`#cloudLine`);
-    let cloudSprite = `<div id="cloud-001" class="cloud cloudBox">${svgInfo}</div>`;
+    let cloudSprite = `<div id="cloud-001" class="cloud cloudBox"></div>`;
     element.innerHTML = cloudSprite;
     let cloudBox = document.querySelector(`#cloud-001`);
 
     let patch = getElementPos(`#patch_10`);
-    cloudBox.style.top = 0 + "px";
-    cloudBox.style.left = patch.width + "px";
-    cloudBox.style.width = patch.width + "px";
-    cloudBox.style.height = patch.height + "px";
+
+    Object.assign(cloudBox.style, {
+      top: 0 + "px",
+      left: patch.width + "px",
+      width: patch.width + "px",
+      height: patch.height + "px",
+    });
+
+    sky.changeCloud();
     let duration = 3; //rnd(100) + 50;
     //cloudBox.style.animation = `move-cloud ${duration}s linear`;
 
