@@ -258,6 +258,7 @@ button {
 
 .sky > svg {
   align-self: flex-end;
+  z-index: 1;
 }
 
 .page {
@@ -286,15 +287,14 @@ button {
   display: none;
 }
 
-.night {
-  background-color: navy;
-  color: white;
-  font-weight: bold;
-  display: none;
-}
-
-.night > div {
-  padding: 2em;
+#nightShade {
+  opacity: 0%;
+  background-color: black;
+  height: 10%;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
 }
 
 .tools {

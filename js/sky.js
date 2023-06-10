@@ -22,33 +22,38 @@ const sky = {
   },
 
   clouds: () => {
-    let element = document.querySelector(`#cloudLine`);
-    let cloudSprite = `<div id="cloud-001" class="cloud cloudBox"></div>`;
-    element.innerHTML = cloudSprite;
-    let cloudBox = document.querySelector(`#cloud-001`);
-
+    let cloudLine = document.querySelector(`#cloudLine`);
+    let maxClouds = 5;
     let patch = getElementPos(`#patch_10`);
+    let i = 0;
 
-    Object.assign(cloudBox.style, {
-      top: 0 + "px",
-      left: patch.width + "px",
-      width: patch.width + "px",
-      height: patch.height + "px",
-    });
+    while (i++ < maxClouds) {
+      let cloudSprite = `<div id="cloud-${i}" class="cloud cloudBox"></div>`;
 
-    sky.changeCloud();
-    let duration = 3; //rnd(100) + 50;
-    //cloudBox.style.animation = `move-cloud ${duration}s linear`;
+      // add the div that hold the svg to the sky cloudLine
+      cloudLine.innerHTML += cloudSprite;
+      let cloudBox = document.querySelector(`#cloud-${i}`);
 
-    // restart with a new cloud and a new speed
-    //cloudBox.addEventListener("animationiteration", sky.changeCloud());
-    cloudBox.addEventListener("animationiteration", (event) => {
-      sky.changeCloud();
-    });
+      // set the cloudBox size
+      Object.assign(cloudBox.style, {
+        top: 0 + "px",
+        left: patch.width + "px",
+        width: patch.width + "px",
+        height: patch.height + "px",
+      });
+      // restart with a new cloud and a new speed
+      //cloudBox.addEventListener("animationiteration", sky.changeCloud());
+      cloudBox.addEventListener("animationiteration", (event) => {
+        sky.changeCloud(i);
+      });
+      sky.changeCloud(i);
+      let duration = rnd(100) + 50;
+      cloudBox.style.animation = `drift ${duration}s linear infinite`;
+    }
   },
-  changeCloud: () => {
+  changeCloud: (i) => {
     let svgInfo = sky.buildCloud();
-    let cloudBox = document.querySelector(`#cloud-001`);
+    let cloudBox = document.querySelector(`#cloud-${i}`);
     cloudBox.innerHTML = svgInfo;
   },
 
