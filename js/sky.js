@@ -54,7 +54,11 @@ const sky = {
   changeCloud: (i) => {
     let svgInfo = sky.buildCloud();
     let cloudBox = document.querySelector(`#cloud-${i}`);
-    cloudBox.innerHTML = svgInfo;
+    if (!cloudBox) {
+      console.log(`cant find #cloud-${i}`);
+    } else {
+      cloudBox.innerHTML = svgInfo;
+    }
   },
 
   buildCloud: () => {

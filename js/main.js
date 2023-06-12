@@ -109,7 +109,7 @@ function getBodySet() {
   return partOptions;
 }
 
-// the default
+// make a random body
 function randomBody() {
   //let name = spudBits.prefix[rnd(spudBits.prefix.length)];
   let newBody = {};
@@ -136,19 +136,19 @@ function randomBody() {
 }
 
 // setup the default body
-function defineCharacter(save = false) {
+function defineCharacter(mode) {
   // show or hide the character creator via a dialog
-  if (save) {
+  if (mode == "save") {
     hideDialog();
     state.save();
     tools.render();
     setPhase(player.phase);
+    let element = document.querySelector(`#playerSprite`);
+    element.innerHTML = svg.renderPerson(player.body);
   } else {
-    let newBody = randomBody();
-    let baseBody = defaultBody();
-    console.log("newBody", newBody);
+    let newBody = mode == "random" ? randomBody() : defaultBody();
 
-    player.body = defaultBody();
+    player.body = newBody;
     let content = "";
     content += '<div class="creator">';
     content += '<div class="left">';
@@ -163,7 +163,8 @@ function defineCharacter(save = false) {
     content += "</div>";
 
     let footer = "";
-    footer += `<button class="buttonize" onclick="defineCharacter(true)"> Ok </button>`;
+    footer += `<button class="buttonize" onclick="defineCharacter('random')"> Ransomize </button>`;
+    footer += `<button class="buttonize" onclick="defineCharacter('save')"> Ok </button>`;
     showDialog("Character creator", `${content}`, footer);
     demoBody();
   }
