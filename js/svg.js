@@ -494,7 +494,7 @@ const svg = {
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
   
-  <rect
+   <rect
      style="fill:#693f1d;fill-opacity:1;stroke:#000000;stroke-width:2.53228346;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
      id="rect14754"
      width="7.7201447"
@@ -527,7 +527,17 @@ const svg = {
      style="fill:#693f1d;fill-opacity:1;stroke:#ffffff;stroke-width:2.15433;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:0.48745519"
      d="m 38.212767,74.549014 h 23.541794 v 0.170593"
      id="path2486" />
-</svg>
+  <path
+     style="fill:#693f1d;fill-opacity:1;stroke:#000000;stroke-width:2.15433;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:0.487455"
+     d="M 47.595366,30.024317 50.324849,19.788755"
+     id="path5472"
+     sodipodi:nodetypes="cc" />
+  <path
+     style="fill:#693f1d;fill-opacity:1;stroke:#ffffff;stroke-width:2.15433;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:0.487455"
+     d="m 51.860184,19.276976 1.87652,10.747341 v 0.170593"
+     id="path5470"
+     sodipodi:nodetypes="ccc" />
+     </svg>
     `,
     axe: `<svg
    id="SVGRoot"

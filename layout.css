@@ -303,10 +303,10 @@ button {
 
 .tools {
   position: absolute;
-  bottom: 0;
+  bottom: 0.25em;
   left: 0;
   right: 0;
-  height: 4em;
+  height: 4.5em;
   background-color: rgb(19, 19, 54);
   color: white;
   font-weight: bold;
@@ -327,6 +327,17 @@ button {
 
 .tools div:hover {
   background-color: rgba(255, 255, 255, 0.05);
+}
+
+.tools svg {
+  width: 4rem;
+}
+
+.toolNum {
+  border: 0;
+  position: absolute;
+  bottom: 0;
+  border: 0 !important;
 }
 
 .hardware div {
