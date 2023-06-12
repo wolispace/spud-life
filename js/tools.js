@@ -4,7 +4,8 @@ const tools = {
     let tools = "";
     let dummyImg = svg.render(`control-icon--up`);
     Object.entries(player.tools).forEach(([toolName, tool]) => {
-      tools += `<div  class="tool-${toolName}" onclick="fields.digPatch()">${toolName}=${tool.uses} ${dummyImg}</div>`;
+      let toolSvg = svg.render(toolName) ?? dummyImg;
+      tools += `<div  class="tool-${toolName}" onclick="fields.digPatch()">${toolName}=${tool.uses} ${toolSvg}</div>`;
     });
     tools += `<div class="tool-purse" onclick="sack.show()">Purse=${player.purse}`;
     tools += `<br/>Sack=${sack.count()}<br>Field=${player.currentField}</div>`;
