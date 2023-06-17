@@ -323,7 +323,7 @@ const fields = {
         // all spuds dug at once and moved to player sack
         let sackQty = player.sack[patch.spud.name] || 0;
         player.sack[patch.spud.name] = sackQty + patch.spud.qty;
-        // sput qty in negative meaning it takes this many days to return to a fresh patch
+        // spud qty in negative meaning it takes this many days to return to a fresh patch
         patch.spud.qty = player.spudRegen;
         patch.spudFound = true;
         tool.uses--;
@@ -377,7 +377,7 @@ const fields = {
     element.classList.remove("currentPos");
     element.classList.remove("inRange");
   },
-  // player starts back at the entrace of the field
+  // player starts back at the entrance of the field
   // TODO: do we reset them to their first field or leave on last (an upgrade perhaps?)
   resetPlayer: () => {
     fields.removeCurrentPosHighlight();

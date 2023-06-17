@@ -1,6 +1,6 @@
 // we have already defined things like player, spuds, controls, tools etc.. when including the js in html
 
-// lods previously save state from localstorage if found
+// loads previously save state from localStorage if found
 player = state.load();
 bodySet = getBodySet();
 
@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // hook into keys for movement and digging
 document.addEventListener("keydown", (event) => {
-  // convey keypresses into directional movements
+  // convey key presses into directional movements
   if (Object.keys(player.controlPos).includes(event.code)) {
     controls.click(
       "patch_" + (player.controls.start + player.controlPos[event.code])
@@ -163,7 +163,7 @@ function defineCharacter(mode) {
     content += "</div>";
 
     let footer = "";
-    footer += `<button class="buttonize" onclick="defineCharacter('random')"> Ransomize </button>`;
+    footer += `<button class="buttonize" onclick="defineCharacter('random')"> Randomize </button>`;
     footer += `<button class="buttonize" onclick="defineCharacter('save')"> Ok </button>`;
     showDialog("Character creator", `${content}`, footer);
     demoBody();

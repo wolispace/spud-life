@@ -25,7 +25,7 @@ const spuds = {
     };
     // used next element from array cycling back to the start so its not completely random.
     let colorCycle = rnd(spudBits.color.length);
-    let rarityCicle = rnd(spudBits.rareness.length);
+    let rarityCycle = rnd(spudBits.rareness.length);
     let bestForCycle = rnd(spudBits.bestFor.length);
     let namedSpuds = [];
     while (counter < qty) {
@@ -40,7 +40,7 @@ const spuds = {
       }
 
       let colorName = spudBits.color[colorCycle];
-      let rarityName = spudBits.rareness[rarityCicle];
+      let rarityName = spudBits.rareness[rarityCycle];
       let fullName = rnd(3) > 1 ? `${rarityName} ` : "";
       if (spudBits.showColors.includes(colorName)) {
         fullName += `${colorName} `;
@@ -59,9 +59,9 @@ const spuds = {
         bestFor: spudBits.bestFor[bestForCycle],
         path: svg.jiggle(svgInfo.paths[0].d, 3),
       };
-      // roll on to next item in the list so everyone gets atleast one ofeverything
+      // roll on to next item in the list so everyone gets at least one of everything
       colorCycle = ++colorCycle >= spudBits.color.length ? 0 : colorCycle;
-      rarityCicle = ++rarityCicle >= spudBits.rareness.length ? 0 : rarityCicle;
+      rarityCycle = ++rarityCycle >= spudBits.rareness.length ? 0 : rarityCycle;
       bestForCycle =
         ++bestForCycle >= spudBits.bestFor.length ? 0 : bestForCycle;
     }

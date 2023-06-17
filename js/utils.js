@@ -3,7 +3,7 @@ function rnd(max) {
   return Math.floor(Math.random() * max);
 }
 
-// returns a randome number equally half plus or minus the number eg 3 = -1 to 1
+// returns a random number equally half plus or minus the number eg 3 = -1 to 1
 function halfRnd(num) {
   return rnd(num * 2) - num;
 }

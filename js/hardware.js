@@ -37,7 +37,7 @@ const hardware = {
       spade: {
         type: "tool",
         name: "Spade",
-        desc: "A useful tool for diging up spods",
+        desc: "A useful tool for digging up spuds",
         price: 0,
         upgradeCost: 50,
         maxUpgrades: 100,
@@ -125,7 +125,7 @@ const hardware = {
       "soup-spinner": {
         type: "machine",
         name: "Soup spinner",
-        desc: "Makes a hearly potato soup",
+        desc: "Makes a hearty potato soup",
         price: 200,
         upgradeCost: 100,
         maxUpgrades: 100,

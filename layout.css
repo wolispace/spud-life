@@ -219,9 +219,6 @@ button {
   fill: yellow;
 }
 
-#buildingLine {
-}
-
 #customerLine {
   position: absolute;
   left: 0;
@@ -379,7 +376,7 @@ button {
   display: flex;
 }
 
-.spudlist > div {
+.spudList > div {
   margin: var(--sl-padding);
 }
 

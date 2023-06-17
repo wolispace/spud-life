@@ -49,7 +49,7 @@ const tools = {
     tools.render();
     hardware.render();
   },
-  // start of a new day reset toos to their max uses
+  // start of a new day reset tools to their max uses
   reset: () => {
     Object.entries(player.tools).forEach(([toolName, tool]) => {
       tool.uses = tool.maxUses;
