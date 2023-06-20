@@ -241,7 +241,7 @@ function setPhase(phase) {
     // display the fields patches in their current state
     fields.renderField();
     fields.highlightCurrentPos();
-    //svg.showPlayerSprite();
+    hideDialog();
   }
 }
 
