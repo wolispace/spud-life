@@ -182,28 +182,21 @@ const fields = {
   renderGrassLine: () => {
     // move player spite
     let patch = getElementPos(`#patch_10`);
-    let width = patch.width * 12;
-    let height = patch.height / 3;
-
+    
     let grassElement = document.querySelector(`#grassLine`);
     let grassBox = grassElement.getBoundingClientRect();
     let grassLineTop = patch.top - grassBox.height * 0.8;
+    let grassLineWidth =  patch.width * 10;
     grassElement.style.top = `${grassLineTop}px`;
-
+    grassElement.style.width = `${grassLineWidth}px`;
+    
     // align the path the customer parade along
     let customerElement = document.querySelector(`#customerLine`);
     let customerBox = customerElement.getBoundingClientRect();
     let customerLineTop = patch.top - customerBox.height * 1.2;
+    let customerLineHeight = patch.height / 3;
     customerElement.style.top = `${customerLineTop}px`;
-    // element.style.top = `${newY - 20}px`; //parseInt(posY) - 10;
-    // element.style.left = `${patch.left}px`;
-    // element.style.width = `${width}px`;
-    customerElement.style.height = `${height}px`;
-
-    // let cartPosX = patch.left - patch.width / 2;
-    // element.style.left = `${cartPosX}px`;
-    // let cartWidth = patch.width * 7;
-    // element.style.width = `${cartWidth}px`;
+    customerElement.style.height = `${customerLineHeight}px`;
   },
 
   // based on patch contents decide what to show
