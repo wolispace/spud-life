@@ -16,7 +16,7 @@ const hardware = {
         canBuyClass = ``;
       }
       if (!player.shop.machines[toolName]) {
-        content += `<div class="buttonize button_${tool.type} ${canBuyClass}" ${onClick} id="hardware_${toolName}" ${onClick}>`;
+        content += `<div class="buttonize button button_${tool.type} ${canBuyClass}" ${onClick} id="hardware_${toolName}" ${onClick}>`;
         content += `<strong>${tool.name}. </strong>`;
         content += `${tool.desc}<br/>${state}=${cost}</div>`;
       }

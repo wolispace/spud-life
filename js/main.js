@@ -131,7 +131,6 @@ function randomBody() {
     };
   });
 
-  //console.log(newBody);
   return newBody;
 }
 

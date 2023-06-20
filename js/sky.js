@@ -51,6 +51,7 @@ const sky = {
       cloudBox.style.animation = `drift ${duration}s linear infinite`;
     }
   },
+  
   changeCloud: (i) => {
     let svgInfo = sky.buildCloud();
     let cloudBox = document.querySelector(`#cloud-${i}`);

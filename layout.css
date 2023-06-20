@@ -157,7 +157,7 @@ h2 {
   padding: var(--sl-padding);
 }
 
-button {
+.button {
   cursor: pointer;
 }
 
