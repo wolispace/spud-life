@@ -226,16 +226,22 @@ function setPhase(phase) {
     } else if (player.phase == "sales") {
       spuds.sell();
     } else if (player.phase == "night") {
-      hideDialog();
-      tools.reset();
-      tools.render();
-      fields.rollPatches();
-      if (player.body) {
-        dream();
-        fields.resetPlayer();
-      } else {
-        defineCharacter();
+      let nightShade = document.querySelector(`#nightShade`);
+
+      function onEnd() {
+        hideDialog();
+        tools.reset();
+        tools.render();
+        fields.rollPatches();
+        if (player.body) {
+          dream();
+          fields.resetPlayer();
+        } else {
+          defineCharacter();
+        }
       }
+      svg.animate(nightShade, "go-dark", 1, onEnd);
+
     }
   } else {
     // display the fields patches in their current state

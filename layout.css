@@ -692,3 +692,12 @@ h2 {
     left: 110%;
   }
 }
+
+@keyframes go-dark {
+  from {
+    opacity: 0%;
+  }
+  to {
+    opacity: 100%;
+  }
+}
