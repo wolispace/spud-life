@@ -40,8 +40,8 @@ window.addEventListener("resize", (event) => {
 function resizeStuff() {
   fields.renderGrassLine();
   fields.highlightCurrentPos();
-  //svg.showPlayerSprite();
 }
+
 // new game so generate
 function initGame() {
   spuds.sprout(6);

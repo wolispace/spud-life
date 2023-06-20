@@ -338,37 +338,35 @@ const fields = {
   },
 
   highlightCurrentPos: () => {
-    let element = document.querySelector(`#patch_${player.pos}`);
-
-    let playerSprite = document.querySelector(`#playerSprite`);
-    if (fields.inRange()) {
-      playerSprite.classList.add("inRange");
-    } else {
-      console.log('remove');
-      playerSprite.classList.remove("inRange");
-    }
-
     // move player spite
+    let element = document.querySelector(`#patch_${player.pos}`);
     let patch = element.getBoundingClientRect();
     let posY = patch.top + "px";
     let posX = patch.left + "px";
     let height = patch.height + "px";
     let width = patch.width + "px";
-
-    element = document.querySelector(`#playerSprite`);
-    if (element.innerHTML == "") {
-      element.innerHTML = svg.renderPerson(player.body); //svg.render("eye", 1, "person", { paths: svgPaths });
+    
+    let playerSprite = document.querySelector(`#playerSprite`);
+ 
+    if (playerSprite.innerHTML == "") {
+      playerSprite.innerHTML = svg.renderPerson(player.body); //svg.render("eye", 1, "person", { paths: svgPaths });
     }
-    element.style.top = posY;
-    element.style.left = posX;
-    element.style.width = width;
-    element.style.height = height;
-    element.style.transition = "0.15s ease-in-out";
+    playerSprite.style.top = posY;
+    playerSprite.style.left = posX;
+    playerSprite.style.width = width;
+    playerSprite.style.height = height;
+    playerSprite.style.transition = "0.15s ease-in-out";
+
+    // show if spuds in range using current spud diviner
+    if (fields.inRange()) {
+      playerSprite.classList.add("inRange");
+    } else {
+      playerSprite.classList.remove("inRange");
+    }
   },
 
   removeCurrentPosHighlight: () => {
-    element = document.querySelector(`#patch_${player.pos}`);
-    element.classList.remove("currentPos");
+    element = document.querySelector(`#playerSprite`);
     element.classList.remove("inRange");
   },
   // player starts back at the entrance of the field
@@ -400,7 +398,7 @@ const fields = {
     }
   },
 
-  // returns true if there is a spud in range of the current pos
+  // returns true if there is a spud in range 'spud diviner' of the current pos
   // upgrades to the scanner will reduce the range (kings moves, plus, straight vg.line, dot)
   inRange: () => {
     let field = player.fields[player.currentField];
