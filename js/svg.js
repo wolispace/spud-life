@@ -952,18 +952,17 @@ const svg = {
     return res;
   },
 
+  // remember to wrap functions in functions before passing them as onEnd
   animate: (element, type, duration, onEnd) => {
     if (element && element.style) {
       element.style.animation = `${type} ${duration}s ease-in-out`;
 
       element.addEventListener("animationstart", function () {
         player.animating = true;
-        console.log("ani start");
       });
 
       element.addEventListener("animationend", function () {
         player.animating = false;
-        console.log("ani end");
         element.style.animation = "";
         if (typeof onEnd == "function") {
           onEnd();
@@ -1046,13 +1045,11 @@ const svg = {
   },
 
   hideElement(elementQuery) {
-    console.log("hide", elementQuery);
     let thisElement = document.querySelector(elementQuery);
     thisElement.style.display = "none";
   },
 
   showElement(elementQuery) {
-    console.log("show", elementQuery);
     let thisElement = document.querySelector(elementQuery);
     thisElement.style.display = "flex";
   },

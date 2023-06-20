@@ -82,7 +82,6 @@ const spuds = {
           let salePrice = machine.pricePerItem * bonus * spudQty;
           totalMeals = totalMeals + spudQty;
           totalIncome = totalIncome + salePrice;
-          //console.log(`${salePrice} = ${machine.pricePerItem} * ${bonus} * ${spudQty} `);
         });
         // empty the machine
         machine.hopper = {};
