@@ -489,13 +489,8 @@ button {
   width: 100%;
 }
 
-.currentPos {
-  background-color: rgba(221, 200, 131);
-  border-radius: 0.2em;
-}
-
 .inRange {
-  background-color: rgb(211, 119, 76);
+  filter: drop-shadow(0px 0px 1rem rgb(255,255,255,1 ));
 }
 
 .control-icon {

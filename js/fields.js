@@ -339,12 +339,13 @@ const fields = {
 
   highlightCurrentPos: () => {
     let element = document.querySelector(`#patch_${player.pos}`);
-    //element.classList.add("currentPos");
 
+    let playerSprite = document.querySelector(`#playerSprite`);
     if (fields.inRange()) {
-      //element.classList.add("inRange");
+      playerSprite.classList.add("inRange");
     } else {
-      //element.classList.remove("inRange");
+      console.log('remove');
+      playerSprite.classList.remove("inRange");
     }
 
     // move player spite
