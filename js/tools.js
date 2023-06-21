@@ -5,13 +5,23 @@ const tools = {
     let dummyImg = svg.render(`control-icon--up`);
     Object.entries(player.tools).forEach(([toolName, tool]) => {
       let toolSvg = svg.render(toolName) ?? dummyImg;
-      tools += `<div  class="tool-${toolName}" 
+      tools += `<div class="tool-${toolName}" 
       onclick="fields.digPatch()"
       title="${toolName}=${tool.uses}">
        ${toolSvg}<div class="toolNum">${tool.uses}</div></div>`;
     });
-    tools += `<div class="tool-purse" onclick="sack.show()">Purse=${player.purse}`;
-    tools += `<br/>Sack=${sack.count()}<br>Field=${player.currentField}</div>`;
+    let basket = svg.render('basket') ?? dummyImg;
+    tools += `<div class="tool-basket" 
+      onclick="sack.show()"
+      title="basket=${sack.count()}">
+      ${basket}<div class="toolNum">${sack.count()}</div></div>`;
+
+    let purse = svg.render('basket') ?? dummyImg;
+      tools += `<div class="tool-purse" 
+        onclick="sack.show()"
+        title="purse=${player.purse}">
+        ${basket}<div class="toolNum">${player.purse}</div></div>`;
+
     element = document.querySelector(".tools");
     element.innerHTML = tools;
   },
