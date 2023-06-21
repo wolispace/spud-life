@@ -14,11 +14,15 @@ const sky = {
   render: () => {
     // find patch_10
     let patch = getElementPos(`#patch_10`);
-    let height = patch.height;
+    let width = patch.width * 10;
 
     let element = document.querySelector(`#cloudLine`);
-    // element.style.width = `${width}px`;
-    element.style.height = `${height}px`;
+    element.style.width = `${width}px`;
+    element.style.height = `${patch.height}px`;
+
+    element = document.querySelector(`#nightShade`);
+    element.style.width = `${width}px`;
+    element.style.height = `${patch.height}px`;
   },
 
   clouds: () => {

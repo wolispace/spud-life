@@ -697,7 +697,10 @@ h2 {
   from {
     opacity: 0%;
   }
-  to {
+  50% {
     opacity: 100%;
+  }
+  to {
+    opacity: 0%;
   }
 }

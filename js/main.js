@@ -14,10 +14,10 @@ document.addEventListener("DOMContentLoaded", function () {
     tools.render();
     setPhase(player.phase);
   }
-  resizeStuff();
   sky.render();
   sky.clouds();
   svg.showPlayerSprite();
+  resizeStuff();
 });
 
 // hook into keys for movement and digging
@@ -39,6 +39,7 @@ window.addEventListener("resize", (event) => {
 
 function resizeStuff() {
   fields.renderGrassLine();
+  sky.render();
   fields.highlightCurrentPos();
 }
 
@@ -226,22 +227,16 @@ function setPhase(phase) {
     } else if (player.phase == "sales") {
       spuds.sell();
     } else if (player.phase == "night") {
-      let nightShade = document.querySelector(`#nightShade`);
-
-      function onEnd() {
-        hideDialog();
-        tools.reset();
-        tools.render();
-        fields.rollPatches();
-        if (player.body) {
-          dream();
-          fields.resetPlayer();
-        } else {
-          defineCharacter();
-        }
+      hideDialog();
+      tools.reset();
+      tools.render();
+      fields.rollPatches();
+      if (player.body) {
+        dream();
+        fields.resetPlayer();
+      } else {
+        defineCharacter();
       }
-      svg.animate(nightShade, "go-dark", 1, onEnd);
-
     }
   } else {
     // display the fields patches in their current state

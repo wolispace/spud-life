@@ -38,7 +38,13 @@ const controls = {
         if (player.pos == 0) {
           // go into home
           let thisBlock = document.querySelector(`#playerSprite svg`);
-          svg.animate(thisBlock, `shrink`, 1, () => {setPhase("night");});
+          svg.animate(thisBlock, `shrink`, 1, () => {svg.hidePlayerSprite();});
+
+          // nightime.. when it ends.. wak and say
+          let nightShade = document.querySelector(`#nightShade`);
+
+          svg.animate(nightShade, "go-dark", 4,() => {setPhase("night")});
+
         } else if (player.pos == 3) {
           let thisBlock = document.querySelector(`#playerSprite svg`);
           svg.animate(thisBlock, `shrink`, 1, () => {setPhase("hardware")});
