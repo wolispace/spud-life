@@ -955,7 +955,7 @@ const svg = {
   // remember to wrap functions in functions before passing them as onEnd
   animate: (element, type, duration, onEnd) => {
     if (element && element.style) {
-      element.style.animation = `${type} ${duration}s ease-in-out`;
+      element.style.animation = `${type} ${duration}s ease-in-out 0s 1 normal forwards`;
 
       element.addEventListener("animationstart", function () {
         player.animating = true;

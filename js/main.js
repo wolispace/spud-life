@@ -264,10 +264,16 @@ function dream() {
   let sow = fields.resowField();
 
   let content = `<div>${dream}</div>${sow}`;
-  let title = "Sleeping Zzzz";
+  let title = "Morning";
   let footer = "";
-  footer += `<button class="buttonize" onclick="setPhase('field')"> Get out of bed </button>`;
+  footer += `<button class="buttonize" onclick="wake();"> Get out of bed </button>`;
   showDialog(title, content, footer);
+}
+
+function wake() {
+  let playerSprite = document.querySelector(`#playerSprite svg`);
+  svg.animate(playerSprite, `grow`, 1, () => {svg.showPlayerSprite();});
+  setPhase('field');
 }
 
 // show the dialog

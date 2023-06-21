@@ -595,6 +595,16 @@ h2 {
   }
 }
 
+@keyframes grow {
+  0% {
+    transform: scale(0, 0);
+  }
+
+  100% {
+    transform: scale(1, 1);
+  }
+}
+
 @keyframes jiggle-down {
   35% {
     transform: translateY(0.2rem) scale(1, 1);
