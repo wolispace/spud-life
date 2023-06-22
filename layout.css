@@ -92,7 +92,7 @@ h2 {
   width: 30px;
   height: 30px;
   display: flex;
-  z-index: 3;
+  z-index: 5;
 }
 
 #playerSprite > svg {
@@ -115,7 +115,7 @@ h2 {
   border-bottom: 2px solid rgba(0, 0, 0, 0.5);
   border-right: 2px solid rgba(0, 0, 0, 0.5);
   overflow-y: auto;
-  z-index: 4;
+  z-index: 6;
 }
 
 .dialog .header {
