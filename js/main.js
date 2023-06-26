@@ -216,7 +216,7 @@ function allocate() {
 
 // const phases = ["field", "hardware", "allocate", "sales", "night"];
 function setPhase(phase) {
-  //hideDialog();
+  hideDialog();
   player.phase = phase;
   state.save();
   if (player.phase != "field") {

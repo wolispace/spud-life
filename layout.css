@@ -99,6 +99,14 @@ h2 {
   align-self: flex-end;
 }
 
+#itemSprite {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  z-index: 4;
+}
+
 .dialog {
   position: absolute;
   top: -1000px;
@@ -661,17 +669,11 @@ h2 {
   }
 }
 
-@keyframes dig-spud {
-  0% {
-    transform: scale(1, 1);
-  }
-
-  50% {
-    transform: scale(5, 5);
-  }
-
-  100% {
-    opacity: 0.9;
+/* animate along the parabolic curve into the basket */
+@keyframes into-basket {
+  100% { 
+    motion-offset: 100%;
+    offset-distance: 100%; 
   }
 }
 

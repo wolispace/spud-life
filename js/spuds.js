@@ -140,4 +140,37 @@ const spuds = {
 
     return svg.wrap(svgClass, style, `${paths}${highlight}`);
   },
+
+  // animate an item being dug up into the basket
+  animate: (patch) => {
+    let patchPos = getElementPos(`#${patch.id}`);
+
+    let itemSprite = document.querySelector(`#itemSprite`);
+    itemSprite.innerHTML = spuds.render(patch.spud.name);
+    itemSprite.style.top = patchPos.top + "px";
+    itemSprite.style.left = patchPos.left + "px";
+    itemSprite.style.width = patchPos.width + "px";
+    itemSprite.style.height = patchPos.height + "px";    
+
+    let basketPos = getElementPos(`.tool-basket`);
+
+    let startX = 0 + (patchPos.width / 2);
+    let startY = 0 + (patchPos.height / 2);
+    let top = 0 - patchPos.top;
+    let endX = basketPos.left - patchPos.left + (patchPos.width / 2);
+    let endY = basketPos.top - patchPos.top + (patchPos.height / 2);
+
+    // everything must be relative to the patch - it is 0,0
+    // calculate x2,y2 from the middle of the basket tool
+    // calculate top.. or just use zero?
+    // calculate offset for beizer control points (in a little from vertical based on distance between x1 and x2)
+    // Mx1,y1 Cx1+(x2-x1/5),top x2-(x2-x1/5),top x2,y2
+    let bit = (endX-startX)/5;
+
+    let arc = `path('M ${startX},${startY} C ${startX+bit},${top} ${endX-bit},${top} ${endX},${endY}')`;
+
+    var easing = 'cubic-bezier(.645,.045,0.355,1)';
+    itemSprite.style.offsetPath = arc;
+    itemSprite.style.animation = `into-basket 2s ${easing} 0s 1 normal forwards`;
+  }
 };

@@ -242,13 +242,15 @@ const fields = {
       element.innerHTML = newPatch;
       if (patch.spudFound) {
         delete patch.spudFound;
-        let thisSpud = document.querySelector(`#${patch.id} svg`);
+        spuds.animate(patch);
 
-        function onEnd() {
-          newPatch = svg.render("hole", 5);
-          element.innerHTML = newPatch;
-        }
-        svg.animate(thisSpud, "dig-spud", 1, onEnd);
+        // let thisSpud = document.querySelector(`#${patch.id} svg`);
+
+        // function onEnd() {
+        // newPatch = svg.render("hole", 5);
+        //   element.innerHTML = newPatch;
+        // }
+        // svg.animate(thisSpud, "dig-spud", 1, onEnd);
       }
 
       // if we drew a hole, make sure its opacity matches the spud qty -5 = 100%, 0 = 0%
