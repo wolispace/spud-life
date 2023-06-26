@@ -613,14 +613,28 @@ const svg = {
       class: "thick control-icon",
       paths: [{ c: "", d: "m 80,20 -60,30 60,30" }],
     },
-    "control-field--left": {
-      class: "thick control-icon",
-      paths: [{ c: "", d: "m 80,20 -60,30 60,30" }],
-    },
-    "control-field--right": {
-      class: "thick control-icon",
-      paths: [{ c: "", d: "m 20,20 60,30 -60,30" }],
-    },
+    "control-field--left": `<?xml version="1.0" encoding="UTF-8"?>
+    <svg id="SVGRoot" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+     <path d="m11.5 17.75c0.70711-1.591 74.631-6.6062 75.25-4.75 0.7955 1.149 1.3107 44.674 0.25 46-1.9507 1.256-70.571 2.0026-72.25 0.5s-3.1616-38.303-3.25-41.75z" style="fill:#4b3d2c;stroke-linecap:round;stroke-width:2.5;stroke:#000"/>
+     <path d="m12.75 31.5 9-1" style="fill:#0f0c09;stroke-linecap:round;stroke-opacity:.51915;stroke-width:2.5;stroke:#000"/>
+     <path d="m86 41-10.5 1.25" style="fill:#140f0b;stroke-linecap:round;stroke-opacity:.53617;stroke-width:2.5;stroke:#000"/>
+     <path d="m70.858 33.341c0.88388 1.591 1.7374 12.013 0.5 13.25-1.2374 1.4142-19.75-2.25-19.75-2.25s0.21967 6.227 0.75 11c-1.4142 2.8284-22.53-16.732-22-18.5-0.53033-2.1213 18.172-18.298 21-16 0 5.1265 0.25 12.75 0.25 12.75s19.25-2.0178 19.25-0.25z" style="fill:#dee14c;stroke-linecap:round;stroke-width:2.5;stroke:#dee14c"/>
+     <path d="M 42.75,61.5 54,61.25 53.25,98 H 42 Z" style="fill:#4b3d2c;stroke-linecap:round;stroke-width:2.5;stroke:#000"/>
+     <path d="m51 65.5-0.25 27.75-0.25-0.75" style="fill:#4b3d2c;stroke-linecap:round;stroke-opacity:.26267;stroke-width:2.5;stroke:#fff"/>
+     <path d="m15.026 19.092s67.175-4.773 69.473-2.4749c1.591 2.1213 0.53033 20.86 0.53033 20.86" style="fill:none;stroke-linecap:round;stroke-opacity:.28511;stroke-width:2.5;stroke:#fff"/>
+     <path d="m85.206 43.487-0.17678 13.081" style="fill:none;stroke-linecap:round;stroke-opacity:.28511;stroke-width:2.5;stroke:#fff"/>
+    </svg>`,
+    "control-field--right": `<?xml version="1.0" encoding="UTF-8"?>
+    <svg id="SVGRoot" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+     <path d="m11.5 17.75c0.70711-1.591 74.631-6.6062 75.25-4.75 0.7955 1.149 1.3107 44.674 0.25 46-1.9507 1.256-70.571 2.0026-72.25 0.5s-3.1616-38.303-3.25-41.75z" style="fill:#4b3d2c;stroke-linecap:round;stroke-width:2.5;stroke:#000"/>
+     <path d="m12.75 31.5 9-1" style="fill:#0f0c09;stroke-linecap:round;stroke-opacity:.51915;stroke-width:2.5;stroke:#000"/>
+     <path d="m86 41-10.5 1.25" style="fill:#140f0b;stroke-linecap:round;stroke-opacity:.53617;stroke-width:2.5;stroke:#000"/>
+     <path d="m31.439 33.341c-0.88388 1.591-1.7374 12.013-0.5 13.25 1.2374 1.4142 19.75-2.25 19.75-2.25s-0.21967 6.227-0.75 11c1.4142 2.8284 22.53-16.732 22-18.5 0.53033-2.1213-18.172-18.298-21-16 0 5.1265-0.25 12.75-0.25 12.75s-19.25-2.0178-19.25-0.25z" style="fill:#dee14c;stroke-linecap:round;stroke-width:2.5;stroke:#dee14c"/>
+     <path d="M 42.75,61.5 54,61.25 53.25,98 H 42 Z" style="fill:#4b3d2c;stroke-linecap:round;stroke-width:2.5;stroke:#000"/>
+     <path d="m51 65.5-0.25 27.75-0.25-0.75" style="fill:#4b3d2c;stroke-linecap:round;stroke-opacity:.26267;stroke-width:2.5;stroke:#fff"/>
+     <path d="m15.026 19.092s67.175-4.773 69.473-2.4749c1.591 2.1213 0.53033 20.86 0.53033 20.86" style="fill:none;stroke-linecap:round;stroke-opacity:.28511;stroke-width:2.5;stroke:#fff"/>
+     <path d="m85.206 43.487-0.17678 13.081" style="fill:none;stroke-linecap:round;stroke-opacity:.28511;stroke-width:2.5;stroke:#fff"/>
+    </svg>`,
     hole: {
       class: "thick",
       paths: [
