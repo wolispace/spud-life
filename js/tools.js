@@ -16,11 +16,11 @@ const tools = {
       title="basket=${sack.count()}">
       ${basket}<div class="toolNum">${sack.count()}</div></div>`;
 
-    let purse = svg.render('basket') ?? dummyImg;
-      tools += `<div class="tool-purse" 
+    let wallet = svg.render('wallet') ?? dummyImg;
+      tools += `<div class="tool-wallet" 
         onclick="sack.show()"
-        title="purse=${player.purse}">
-        ${basket}<div class="toolNum">${player.purse}</div></div>`;
+        title="wallet=${player.wallet}">
+        ${wallet}<div class="toolNum">${player.wallet}</div></div>`;
 
     element = document.querySelector(".tools");
     element.innerHTML = tools;
@@ -45,16 +45,16 @@ const tools = {
         // upgrade
         player.tools[toolName].maxUses++;
         player.tools[toolName].uses++;
-        player.purse = player.purse - player.hardware[toolName].upgradeCost;
+        player.wallet = player.wallet - player.hardware[toolName].upgradeCost;
       } else {
         // buy
         player.tools[toolName] = player.hardware[toolName].initial;
-        player.purse = player.purse - player.hardware[toolName].price;
+        player.wallet = player.wallet - player.hardware[toolName].price;
       }
     } else {
       // buy machine
       player.shop.machines[toolName] = player.hardware[toolName].initial;
-      player.purse = player.purse - player.hardware[toolName].price;
+      player.wallet = player.wallet - player.hardware[toolName].price;
     }
     tools.render();
     hardware.render();

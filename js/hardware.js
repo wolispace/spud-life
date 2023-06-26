@@ -11,7 +11,7 @@ const hardware = {
       }
       let onClick = "";
       let canBuyClass = "tooMuch";
-      if (cost <= player.purse) {
+      if (cost <= player.wallet) {
         onClick = `onclick="tools.buyTool('${toolName}')"`;
         canBuyClass = ``;
       }

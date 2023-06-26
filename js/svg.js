@@ -587,6 +587,16 @@ const svg = {
      <path d="m57.149 64.484 2.2177-24.907s1e-6 -5.459-4.4354-12.453c-4.1666-6.5705-13.136-3.4119-15.012 3.9236-1.8765 7.3355-1.3647 17.571-1.3647 17.571l6.8237-0.34118s-1.6774-10.172 0.34118-16.889c2.8269-9.4054 8.7672-8.9921 13.477-6.3119 2.4698 1.4055 5.8002 5.6296 6.8237 10.065l0.51178 7.3355-1.5353 21.153" style="fill:#4b3d2c;stroke-linecap:round;stroke-width:2.5;stroke:#000"/>
      <path d="m56.978 26.271s2.3835 0.22338 4.9472 5.1178c1.8765 3.5824 2.0471 9.0414 2.0471 9.0414" style="fill:none;stroke-linecap:round;stroke-opacity:.43404;stroke-width:2.5;stroke:#fff"/>
     </svg>`,
+    wallet: `<?xml version="1.0" encoding="UTF-8"?>
+    <svg id="SVGRoot" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+     <path d="m82.396 23.712 0.17059-8.1884s1.8765-8.1885-4.9472-5.2884c-6.8237 2.9001-54.248 12.112-60.049 16.036-6.8237 1.0236-15.012 16.206 3.753 13.136 18.765-3.0707 65.337-15.695 65.337-15.695s5.1178-2.0471 4.9472 7.6767c-0.16203 9.2358-2.0471 44.013-2.0471 44.013s1.7059 7.5061-6.6531 10.236c-8.4886 2.7718-58.684 11.941-58.684 11.941s-16.889 4.0942-15.865-7.8473c1.0236-11.941 0-52.713 0-52.713" style="fill:#4b3d2c;stroke-linecap:round;stroke-width:2.5;stroke:#000"/>
+     <path d="m13.647 33.948 66.361-16.078" style="fill:none;stroke-linecap:round;stroke-width:2.5;stroke:#e9e8e1"/>
+     <path d="m15.609 35.91 65.252-15.737" style="fill:none;stroke-linecap:round;stroke-width:2.5;stroke:#fbfbfb"/>
+     <path d="m17.486 38.127 63.802-15.524" style="fill:none;stroke-linecap:round;stroke-opacity:.9447;stroke-width:2.5;stroke:#c2e1bf"/>
+     <path d="m92.461 41.283s4.7766-0.85296 4.4354 4.9472c-0.34118 5.8002-0.85296 15.695-0.85296 15.695s-0.51178 4.2648-3.4119 4.606c-2.9001 0.34118-19.959 4.2648-20.471 4.0942-12.283-7.5061-4.0942-18.253-1.8765-20.983 2.2177-2.7295 21.495-5.9707 21.495-5.9707" style="fill:#4b3d2c;stroke-linecap:round;stroke-opacity:.6129;stroke-width:2.5;stroke:#000"/>
+     <path d="m86.832 27.807-65.166 15.865s-4.0942 1.5353-4.2648 8.1884c-0.17059 6.6531-0.68237 41.454-0.68237 41.454v0" style="fill:#4b3d2c;stroke-linecap:round;stroke-opacity:.38249;stroke-width:2.5;stroke:#fff"/>
+     <path d="m93.338 47.023s-18.031 2.2981-20.153 5.1265c-5.6133 6.1229-4.5169 11.492-0.53033 13.612" style="fill:#4b3d2c;stroke-linecap:round;stroke-opacity:.38249;stroke-width:2.5;stroke:#fff"/>
+    </svg>`,
     "control-icon--up": {
       class: "thick control-icon",
       paths: [{ c: "", d: "m 20,80 30,-60 30,60" }],

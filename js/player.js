@@ -1,7 +1,7 @@
 let player = {
   phase: "field",
   sack: {},
-  purse: 1000,
+  wallet: 1000,
   pos: 0,
   spudRegen: -5,
   sowSeeds: 0,

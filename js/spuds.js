@@ -94,7 +94,7 @@ const spuds = {
     customers.render();
 
     // TODO only show this when animation has finished
-    player.purse += totalIncome;
+    player.wallet += totalIncome;
     let content = `Total meals=${totalMeals} income=${totalIncome}`;
     let title = "Shop sales";
     let footer = "";
