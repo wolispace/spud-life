@@ -156,7 +156,7 @@ const spuds = {
 
     let startX = 0 + (patchPos.width / 2);
     let startY = 0 + (patchPos.height / 2);
-    let top = 0 - patchPos.top;
+    let top = 0 - (patchPos.top/2);
     let endX = basketPos.left - patchPos.left + (patchPos.width / 2);
     let endY = basketPos.top - patchPos.top + (patchPos.height / 2);
 
@@ -168,8 +168,8 @@ const spuds = {
     let bit = (endX-startX)/5;
 
     let arc = `path('M ${startX},${startY} C ${startX+bit},${top} ${endX-bit},${top} ${endX},${endY}')`;
-
-    var easing = 'cubic-bezier(.645,.045,0.355,1)';
+    // slow start fast middle
+    var easing = 'cubic-bezier(0, 0, .25, 0)';
     itemSprite.style.display = 'block';
     itemSprite.style.offsetPath = arc;
     itemSprite.style.animation = `into-basket 2s ${easing} 0s 1 normal forwards`;

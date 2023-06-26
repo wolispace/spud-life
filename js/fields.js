@@ -222,11 +222,7 @@ const fields = {
         if (patch.spud.qty > 0) {
           newPatch += ""; // `<br/>S=${patch.spud.qty}`
         } else {
-          if (patch.spud.qty == -5 && patch.spud.name && patch.spudFound) {
-            newPatch = spuds.render(patch.spud.name);
-          } else {
-            newPatch = svg.render("hole", 5);
-          }
+          newPatch = svg.render("hole", 5);
         }
       }
       if (patch.building) {
