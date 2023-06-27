@@ -27,7 +27,7 @@ const sky = {
 
   clouds: () => {
     let cloudLine = document.querySelector(`#cloudLine`);
-    let maxClouds = 5;
+    let maxClouds = 10;
     let patch = getElementPos(`#patch_10`);
     let i = 0;
 
