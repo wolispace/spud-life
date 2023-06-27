@@ -48,11 +48,16 @@ const sky = {
       // restart with a new cloud and a new speed
       //cloudBox.addEventListener("animationiteration", sky.changeCloud());
       cloudBox.addEventListener("animationiteration", (event) => {
-        sky.changeCloud(i);
+        if (i <= maxClouds) {
+          sky.changeCloud(i);
+        }
       });
       sky.changeCloud(i);
-      let duration = rnd(100) + 50;
-      cloudBox.style.animation = `drift ${duration}s linear infinite`;
+      let duration = rnd(250) + 50;
+      let delay = rnd(50);
+      cloudBox.style.left = "-100px";
+      cloudBox.style.animation = `drift ${duration}s ${delay}s linear infinite`;
+      
     }
   },
   

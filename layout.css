@@ -697,12 +697,8 @@ h2 {
 }
 
 @keyframes drift {
-  from {
-    left: -15%;
-  }
-  to {
-    left: 110%;
-  }
+  from { transform: translateX(-100%); }
+  to { transform: translateX(1300%); }
 }
 
 @keyframes go-dark {
