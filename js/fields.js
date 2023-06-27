@@ -111,7 +111,8 @@ const fields = {
                 patch.item = itemName;
               }
             }
-          });  
+          });
+          patch.item = 'bone';
         }
         if (!player.fields[fieldId]) {
           player.fields[fieldId] = [];
@@ -315,7 +316,7 @@ const fields = {
         patch = { spud: { qty: 0 } };
       }
       patch.id = `patch_${player.pos}`;
-
+      console.log(patch);
       if (patch.spud.qty > 0) {
         // all spuds dug at once and moved to player sack
         let sackQty = player.sack[patch.spud.name] || 0;
@@ -328,6 +329,8 @@ const fields = {
         patch.spud.qty = player.spudRegen;
         tool.uses--;
         player.fields[player.currentField][player.pos] = patch;
+      } else if (patch.item) {
+        spuds.animate(patch);
       } else {
         // leave holes alone
         return;

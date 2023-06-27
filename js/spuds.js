@@ -146,7 +146,14 @@ const spuds = {
     let patchPos = getElementPos(`#${patch.id}`);
 
     let itemSprite = document.querySelector(`#itemSprite`);
-    itemSprite.innerHTML = spuds.render(patch.spud.name);
+    console.log(patch);
+
+    if(patch.spud) {
+      itemSprite.innerHTML = spuds.render(patch.spud.name);
+    } else {
+      itemSprite.innerHTML = svg.render(patch.item);
+      console.log(patch.item);
+    }
     itemSprite.style.top = patchPos.top + "px";
     itemSprite.style.left = patchPos.left + "px";
     itemSprite.style.width = patchPos.width + "px";

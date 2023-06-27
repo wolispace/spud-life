@@ -635,6 +635,14 @@ const svg = {
      <path d="m15.026 19.092s67.175-4.773 69.473-2.4749c1.591 2.1213 0.53033 20.86 0.53033 20.86" style="fill:none;stroke-linecap:round;stroke-opacity:.28511;stroke-width:2.5;stroke:#fff"/>
      <path d="m85.206 43.487-0.17678 13.081" style="fill:none;stroke-linecap:round;stroke-opacity:.28511;stroke-width:2.5;stroke:#fff"/>
     </svg>`,
+    bone: `<?xml version="1.0" encoding="UTF-8"?>
+    <svg id="SVGRoot" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+     <path d="m23.335 41.189 48.437-12.374s-1.3465-4.7873 4.4194-9.0156c2.6517-1.9445 16.794 0.17678 13.081 7.6014-3.7123 7.4246-7.4246 3.7123-1.7678 7.7782 5.6569 4.0659 1.2924 9.2949-5.4801 13.258-6.6768 0.36558-11.501-1.9087-10.783-9.7227l-44.725 11.49s6.7109 2.463-3.0052 11.844c-5.1265 4.9497-12.162-1.2001-10.96-5.3033 3.045-10.394 0.54355 0.31744-4.4194-9.3692-3.04-5.9334 3.3588-11.314 6.0104-12.905 5.5603-1.2481 8.954-3.9928 9.1924 6.7175z" style="fill:#eaddb9;stroke-linecap:round;stroke-width:2.5;stroke:#000"/>
+     <path d="m22.981 44.194 48.437-12.374" style="fill:#eaddb9;stroke-linecap:round;stroke-opacity:.65899;stroke-width:2.5;stroke:#fff"/>
+     <path d="m75.13 24.042s3.3438-5.034 8.3085-1.2374l3.0052 2.2981" style="fill:#eaddb9;stroke-linecap:round;stroke-opacity:.75115;stroke-width:2.5;stroke:#fff"/>
+     <path d="m12.021 40.128s4.097-4.7659 6.5407-3.3588c2.6607 1.5321 0.96008 3.0641 1.4142 4.5962" style="fill:#eaddb9;stroke-linecap:round;stroke-opacity:.6129;stroke-width:2.5;stroke:#fff"/>
+    </svg>`
+    ,
     hole: {
       class: "thick",
       paths: [

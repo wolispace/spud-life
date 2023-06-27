@@ -11,15 +11,15 @@ let player = {
   tools: {
     spade: {
       uses: 0,
-      maxUses: 5,
+      maxUses: 55,
     },
     pick: {
       uses: 0,
-      maxUses: 5,
+      maxUses: 55,
     },
     axe: {
       uses: 0,
-      maxUses: 5,
+      maxUses: 55,
     },
   },
   buildings: [
