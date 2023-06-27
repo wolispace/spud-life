@@ -48,15 +48,16 @@ const fields = {
   // randomly fill the selected field (if empty) with rocks, logs and spuds - plus some random treasure!
   fillField: (fieldId) => {
     if (player.fields[fieldId].length < 1) {
+      let items = hardware.store();
       // first row
+      let i = 0;
+      do {
+        i++;
+        player.fields[fieldId][i] = { id: `patch_${i}` };
+      } while (i < 10);
       // if this field has building on it..
       if (player.buildings[fieldId]) {
         // fill top row with nothing
-        let i = 0;
-        do {
-          i++;
-          player.fields[fieldId][i] = { id: `patch_${i}` };
-        } while (i < 10);
 
         player.buildings[fieldId].forEach((building, index) => {
           player.fields[fieldId][building.pos] = {
@@ -80,11 +81,11 @@ const fields = {
       }
 
       // skip the first row
-      let i = 10;
+      i = 10;
       while (i < 100) {
+        let patch = {};
         if (rnd(2) > 0) {
           // rock, log or spud?
-          let patch = {};
           switch (rnd(3)) {
             case 0:
               patch.block = { type: "rock", qty: rnd(5) + 1 };
@@ -100,11 +101,23 @@ const fields = {
             let newSpud = player.spuds[rnd(player.spuds.length)];
             patch.spud = { name: newSpud.name, qty: rnd(3) + 1 };
           }
-          if (!player.fields[fieldId]) {
-            player.fields[fieldId] = [];
-          }
-          player.fields[fieldId][i] = patch;
         }
+
+        // if no spud then randomly add another item..
+        if (!patch.spud) {
+          Object.entries(items).forEach(([itemName, item]) => {
+            if (!patch.item)  {
+              if (rnd(item.rareness) == 1) {
+                patch.item = itemName;
+              }
+            }
+          });  
+        }
+        if (!player.fields[fieldId]) {
+          player.fields[fieldId] = [];
+        }
+        player.fields[fieldId][i] = patch;
+
         i++;
       }
       // put controls in

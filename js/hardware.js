@@ -39,7 +39,7 @@ const hardware = {
         name: "Spade",
         desc: "A useful tool for digging up spuds",
         price: 50,
-        rareness: 50,
+        rareness: 100,
         upgradeCost: 50,
         maxUpgrades: 100,
         initial: {
@@ -52,7 +52,7 @@ const hardware = {
         name: "Pick",
         desc: "A tool for breaking rocks",
         price: 100,
-        rareness: 50,
+        rareness: 100,
         upgradeCost: 100,
         maxUpgrades: 100,
         initial: {
@@ -65,7 +65,7 @@ const hardware = {
         name: "Axe",
         desc: "A tool for clearing logs",
         price: 150,
-        rareness: 50,
+        rareness: 100,
         upgradeCost: 100,
         maxUpgrades: 100,
         initial: {
@@ -78,7 +78,7 @@ const hardware = {
         name: "Humble Chipper",
         desc: "A basic heavy-duty chip-maker",
         price: 150,
-        rareness: 200,
+        rareness: 300,
         upgradeCost: 100,
         maxUpgrades: 100,
         initial: {
@@ -92,7 +92,7 @@ const hardware = {
         name: "Chipper 2000",
         desc: "The latest upgrade of the tried-and-tested chip maker",
         price: 500,
-        rareness: 200,
+        rareness: 300,
         upgradeCost: 100,
         maxUpgrades: 100,
         initial: {
@@ -106,7 +106,7 @@ const hardware = {
         name: "Bake-o-matic",
         desc: "Makes an excellent baked potato",
         price: 250,
-        rareness: 200,
+        rareness: 300,
         upgradeCost: 100,
         maxUpgrades: 100,
         initial: {
@@ -120,7 +120,7 @@ const hardware = {
         name: "Curly cooker",
         desc: "Cooks a potato into a curly-fry",
         price: 400,
-        rareness: 200,
+        rareness: 300,
         upgradeCost: 100,
         maxUpgrades: 100,
         initial: {
@@ -134,7 +134,7 @@ const hardware = {
         name: "Soup spinner",
         desc: "Makes a hearty potato soup",
         price: 200,
-        rareness: 200,
+        rareness: 300,
         upgradeCost: 100,
         maxUpgrades: 100,
         initial: {
@@ -148,35 +148,35 @@ const hardware = {
         name: "An old bone",
         desc: "I think a dog buried it",
         price: 5,
-        rareness: 10,        
+        rareness: 20,        
       },
       gold: {
         type: "item",
         name: "A few gold coins",
         desc: "A small hoard of old gold coins maybe dating back to Anglo-Saxon times",
         price: 100,
-        rareness: 100,            
+        rareness: 150,            
       },
       diamond: {
         type: "item",
         name: "A small diamond",
         desc: "Maybe it fell out of someones wedding ring",
         price: 50,
-        rareness: 100,            
+        rareness: 150,            
       },
       tin: {
         type: "item",
         name: "A rusty tin",
         desc: "Looks like it once stored baked beans",
         price: 1,
-        rareness: 10,            
+        rareness: 20,            
       }, 
       pottery: {
         type: "item",
         name: "A piece of pottery",
         desc: "Possibly from a broken terracotta flowerpot",
         price: 1,
-        rareness: 10,            
+        rareness: 20,            
       },
       bottle: {
         type: "item",

@@ -170,6 +170,8 @@ const spuds = {
     let arc = `path('M ${startX},${startY} C ${startX+bit},${top} ${endX-bit},${top} ${endX},${endY}')`;
     // slow start fast middle
     var easing = 'cubic-bezier(0, 0, .25, 0)';
+    // slow and get faster
+    easing = 'cubic-bezier(0.3, 0, 1, 1)';
     itemSprite.style.display = 'block';
     itemSprite.style.offsetPath = arc;
     itemSprite.style.animation = `into-basket 2s ${easing} 0s 1 normal forwards`;
