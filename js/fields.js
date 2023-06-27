@@ -177,6 +177,7 @@ const fields = {
       fields.renderPatch(patch, index);
     });
     fields.renderGrassLine();
+    console.log(player);
   },
 
   renderGrassLine: () => {
@@ -239,14 +240,6 @@ const fields = {
       if (patch.spudFound) {
         delete patch.spudFound;
         spuds.animate(patch);
-
-        // let thisSpud = document.querySelector(`#${patch.id} svg`);
-
-        // function onEnd() {
-        // newPatch = svg.render("hole", 5);
-        //   element.innerHTML = newPatch;
-        // }
-        // svg.animate(thisSpud, "dig-spud", 1, onEnd);
       }
 
       // if we drew a hole, make sure its opacity matches the spud qty -5 = 100%, 0 = 0%
