@@ -148,11 +148,11 @@ const spuds = {
     let itemSprite = document.querySelector(`#itemSprite`);
     console.log(patch);
 
-    if(patch.spud) {
-      itemSprite.innerHTML = spuds.render(patch.spud.name);
-    } else {
+    if(patch.item) {
       itemSprite.innerHTML = svg.render(patch.item);
       console.log(patch.item);
+    } else {
+      itemSprite.innerHTML = spuds.render(patch.spud.name);
     }
     itemSprite.style.top = patchPos.top + "px";
     itemSprite.style.left = patchPos.left + "px";

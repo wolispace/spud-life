@@ -311,12 +311,26 @@ const fields = {
     svg.animate(thisTool, `jiggle-up`, 0.25);
 
     if (tool.uses > 0) {
-      // if nothing defined for a patch then its an empty spud
-      if (!patch || !patch.spud) {
-        patch = { spud: { qty: 0 } };
+      // if nothing defined for a patch then its an empty patch
+      if (!patch) {
+        patch = {};
       }
+      // make sure every patch have an id referencing itself
       patch.id = `patch_${player.pos}`;
-      console.log(patch);
+      // if there is an item defined, dig it up and add it to the sack
+      if (patch.item) {
+        spuds.animate(patch);
+        // increment the players count of this item
+        let sackQty = player.sack[patch.item] || 0;
+        player.sack[patch.item] = sackQty + 1;
+        delete patch.item;
+      }
+      
+      // if no spuds then make sure we are quite clear there are no spuds
+      if (!patch.spud) {
+        patch.spud = { qty: 0 };
+      }
+      // if there are spuds then dig them up
       if (patch.spud.qty > 0) {
         // all spuds dug at once and moved to player sack
         let sackQty = player.sack[patch.spud.name] || 0;
@@ -329,8 +343,6 @@ const fields = {
         patch.spud.qty = player.spudRegen;
         tool.uses--;
         player.fields[player.currentField][player.pos] = patch;
-      } else if (patch.item) {
-        spuds.animate(patch);
       } else {
         // leave holes alone
         return;

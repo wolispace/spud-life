@@ -945,6 +945,10 @@ const svg = {
       svgHtml = svg.wrap(svgClass, style, `${paths}${highlight}`);
     } else {
       svgHtml = svg.imgList[svgName];
+      if (style != "") {
+        // inject our style
+        svgHtml = svgHtml.replace(`<svg `, `<svg ${style} `); 
+      }
     }
 
     return svgHtml;
