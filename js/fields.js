@@ -112,7 +112,6 @@ const fields = {
               }
             }
           });
-          patch.item = 'bone';
         }
         if (!player.fields[fieldId]) {
           player.fields[fieldId] = [];
