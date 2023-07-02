@@ -57,7 +57,7 @@ const sack = {
       }
     });
 
-    let random = rnd(50) + 5;
+    let random = rnd(5) + 5;
     let footer = "";
     footer += `<button class="buttonize" onclick="state.clear()"> Reset! </button>`;
     footer += `<button class="buttonize" onclick="fields.buyField()"> Buy a field </button>`;

@@ -1,9 +1,13 @@
 const customers = {
   qty: 10,
+  meals: 0,
+  income: 0,
 
   // show all of the customers for the night
-  render: (qty) => {
-    customers.qty = qty;
+  render: (qty = 0) => {
+    console.trace(`render`);
+    customers.qty = qty > 0 ? qty : customers.qty;
+    console.trace(`render customers ${customers.qty}`);
     svg.hidePlayerSprite();
     let customerList = "";
     for (let id = 0; id < customers.qty; id++) {
@@ -46,8 +50,27 @@ const customers = {
    * Run the animation for the customerSprite for 5 to 7 seconds in duration
    */
   run: (id) => {
+    
     let customerSprite = document.querySelector(`#customer_${id}`);
     let duration = rnd(3) + 6;
     customerSprite.style.animation = `move-customer ${duration}s ease-in-out`;
+    customerSprite.addEventListener("animationend", function () {
+      customers.meals++;
+      // when every customer has had their meal its time for bed 
+      if (customers.qty == customers.meals) {
+        let content = `Total meals=${customers.meals} income=${customers.income}`;
+        let title = "Shop sales";
+        let footer = "";
+        footer += `<button class="buttonize" onclick="hideDialog()"> Bedtime </button>`;
+        showDialog(title, content, footer);
+        // reset the customer numbers
+        customers.qty = 0;
+        customers.meals = 0;
+        customers.income = 0;
+
+        setPhase('night');
+        sky.dim();
+      }
+    });
   },
 };

@@ -88,18 +88,14 @@ const spuds = {
       }
     });
 
-    hideDialog();
-
+    // inform the customers so they know how many to parade
     customers.qty = totalMeals;
+    customers.income = totalIncome;
+
+    player.wallet += totalIncome;
+    console.trace(`sold ${totalMeals} = ${totalIncome}`);
     customers.render();
 
-    // TODO only show this when animation has finished
-    player.wallet += totalIncome;
-    let content = `Total meals=${totalMeals} income=${totalIncome}`;
-    let title = "Shop sales";
-    let footer = "";
-    footer += `<button class="buttonize" onclick="setPhase('night')"> Bedtime </button>`;
-    showDialog(title, content, footer);
   },
 
   // move spuds from sack to machine hoppers
@@ -146,11 +142,9 @@ const spuds = {
     let patchPos = getElementPos(`#${patch.id}`);
 
     let itemSprite = document.querySelector(`#itemSprite`);
-    console.log(patch);
 
     if(patch.item) {
       itemSprite.innerHTML = svg.render(patch.item);
-      console.log(patch.item);
     } else {
       itemSprite.innerHTML = spuds.render(patch.spud.name);
     }

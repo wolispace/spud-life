@@ -12,6 +12,9 @@ document.addEventListener("DOMContentLoaded", function () {
     initGame();
   } else {
     tools.render();
+    if (player.phase == 'sales') {
+      player.phase = 'field';
+    }
     setPhase(player.phase);
   }
   sky.render();
@@ -218,6 +221,7 @@ function allocate() {
 function setPhase(phase) {
   hideDialog();
   player.phase = phase;
+  console.trace('setPhase', phase);
   state.save();
   if (player.phase != "field") {
     if (player.phase == "allocate") {
@@ -245,6 +249,7 @@ function setPhase(phase) {
     hideDialog();
   }
 }
+
 
 // random dreams based on ong titles eg:
 function dream() {
@@ -298,6 +303,12 @@ function hideDialog() {
   let element = document.querySelector(`.dialog`);
   element.style["top"] = "-10000px";
   element.style["left"] = "-10000px";
+  element = document.querySelector(`.dialog .header .title`);
+  element.innerHTML = '';
+  element = document.querySelector(`.dialog .content`);
+  element.innerHTML = '';
+  element = document.querySelector(`.dialog .footer`);
+  element.innerHTML = '';
   player.dialog = false;
   svg.showPlayerSprite();
 }
