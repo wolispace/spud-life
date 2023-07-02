@@ -16,7 +16,7 @@ const customers = {
     let element = document.querySelector(`#customerLine`);
     element.innerHTML += customerList;
     customers.animate();
-    sky.dim();
+    sky.goDark();
   },
 
   /**
@@ -58,19 +58,19 @@ const customers = {
       customers.meals++;
       // when every customer has had their meal its time for bed 
       if (customers.qty == customers.meals) {
-        let content = `Total meals=${customers.meals} income=${customers.income}`;
-        let title = "Shop sales";
-        let footer = "";
-        footer += `<button class="buttonize" onclick="hideDialog()"> Bedtime </button>`;
-        showDialog(title, content, footer);
-        // reset the customer numbers
-        customers.qty = 0;
-        customers.meals = 0;
-        customers.income = 0;
-
-        setPhase('night');
-        sky.dim();
+        customers.summarise();
       }
     });
   },
+  summarise: () => {
+    let content = `Total meals=${customers.meals} income=${customers.income}`;
+    let title = "Shop sales";
+    let footer = "";
+    footer += `<button class="buttonize" onclick="hideDialog()"> I'll head on home now </button>`;
+    showDialog(title, content, footer);
+    // reset the customer numbers
+    customers.qty = 0;
+    customers.meals = 0;
+    customers.income = 0;
+  }
 };

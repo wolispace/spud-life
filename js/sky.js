@@ -119,4 +119,16 @@ const sky = {
     let element = document.querySelector(`#cloudLine`);
     element.style.opacity = 0.75;
   },
+
+  goDark: () => {
+    // nightime.. when it ends..wait for customers to finish parade
+    let nightShade = document.querySelector(`#nightShade`);
+    svg.animate(nightShade, "go-dark", 4);
+    //element.style.animation = `${type} ${duration}s ease-in-out 0s 1 normal forwards`;
+  },
+  goLight: () => {
+    // daytime.. when it ends.. wake up
+    let nightShade = document.querySelector(`#nightShade`);
+    svg.animate(nightShade, "go-light", 4,() => {setPhase("night")});
+  },
 };

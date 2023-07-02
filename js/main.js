@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
     initGame();
   } else {
     tools.render();
-    if (player.phase == 'sales') {
+    if (player.phase == 'sales' || player.phase ==  'allocate') {
       player.phase = 'field';
     }
     setPhase(player.phase);
