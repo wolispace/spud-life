@@ -157,12 +157,13 @@ h2 {
 }
 
 .dialog .footer {
-  position: absolute;
+  position: sticky;
   bottom: 0;
-  width: 95%;
+  height: 2rem;
+  width: 100%;
+  padding-right: 0.4rem 0 0 0.8rem;;
+  background-color:rgba(0, 0, 0, 0.2);
   text-align: right;
-
-  padding: var(--sl-padding);
 }
 
 .button {
@@ -705,10 +706,17 @@ h2 {
   from {
     opacity: 0%;
   }
-  50% {
+  to {
+    opacity: 100%;
+  }
+}
+
+@keyframes go-light {
+  from {
     opacity: 100%;
   }
   to {
     opacity: 0%;
   }
 }
+
