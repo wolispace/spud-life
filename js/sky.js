@@ -115,15 +115,14 @@ const sky = {
     return svg.wrap("", "", guts);
   },
 
-  dim: () => {
-    let element = document.querySelector(`#cloudLine`);
-    element.style.opacity = 0.75;
-  },
-
   goDark: () => {
     // nightime.. when it ends..wait for customers to finish parade
     let nightShade = document.querySelector(`#nightShade`);
-    svg.animate(nightShade, "go-dark", 4);
+     
+    svg.animate(nightShade, "go-dark", 8, function () { 
+      let nightShade = document.querySelector(`#nightShade`);
+      nightShade.style.opacity = 1;
+    });
     //element.style.animation = `${type} ${duration}s ease-in-out 0s 1 normal forwards`;
   },
   goLight: () => {

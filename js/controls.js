@@ -44,7 +44,7 @@ const controls = {
           let thisBlock = document.querySelector(`#playerSprite svg`);
           svg.animate(thisBlock, `shrink`, 1, () => {setPhase("hardware")});
         } else if (player.pos == 6) {
-          player.phase = "hardware";
+          console.log('Going into shop becuase 6 == ', player.pos);
           let thisBlock = document.querySelector(`#playerSprite svg`);
           svg.animate(thisBlock, `shrink`, 1, () => {setPhase("allocate")});
         }

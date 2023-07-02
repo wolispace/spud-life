@@ -278,6 +278,7 @@ function dream() {
 function wake() {
   let playerSprite = document.querySelector(`#playerSprite svg`);
   svg.animate(playerSprite, `grow`, 1, () => {svg.showPlayerSprite();});
+  sky.goLight();
   setPhase('field');
 }
 

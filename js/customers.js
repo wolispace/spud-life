@@ -72,5 +72,6 @@ const customers = {
     customers.qty = 0;
     customers.meals = 0;
     customers.income = 0;
+    player.phase = 'night';
   }
 };
