@@ -363,6 +363,14 @@ const fields = {
     let posX = patch.left + "px";
     let height = patch.height + "px";
     let width = patch.width + "px";
+
+    // player is smaller on top row
+    if (player.pos < 10) {
+      height = patch.height / 2 + "px";
+      width = patch.width / 1.5 + "px";
+      posY = patch.top + (patch.width / 1.5) + "px";
+      console.log(`width=${width} height=${height} pos=${player.pos}`);
+    }
     
     let playerSprite = document.querySelector(`#playerSprite`);
  
@@ -374,6 +382,7 @@ const fields = {
     playerSprite.style.width = width;
     playerSprite.style.height = height;
     playerSprite.style.transition = "0.15s ease-in-out";
+    playerSprite.style.outline = '1px solid red;';
 
     // show if spuds in range using current spud diviner
     if (fields.inRange()) {
