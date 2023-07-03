@@ -158,11 +158,9 @@ h2 {
 
 .dialog .footer {
   position: sticky;
-  bottom: 0;
   height: 2rem;
-  width: 100%;
-  padding-right: 0.4rem 0 0 0.8rem;;
-  background-color:rgba(0, 0, 0, 0.2);
+  padding: 0.2rem;
+  background-color:rgb(160, 160, 160);
   text-align: right;
 }
 
