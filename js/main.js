@@ -237,6 +237,7 @@ function setPhase(phase) {
       fields.rollPatches();
       if (player.body) {
         dream();
+        sky.goLight();
         fields.resetPlayer();
       } else {
         defineCharacter();
@@ -278,8 +279,9 @@ function dream() {
 function wake() {
   let playerSprite = document.querySelector(`#playerSprite svg`);
   svg.animate(playerSprite, `grow`, 1, () => {svg.showPlayerSprite();});
-  sky.goLight();
+  //
   setPhase('field');
+  hideDialog();
 }
 
 // show the dialog

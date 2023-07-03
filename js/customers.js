@@ -54,12 +54,14 @@ const customers = {
     let customerSprite = document.querySelector(`#customer_${id}`);
     let duration = rnd(3) + 6;
     customerSprite.style.animation = `move-customer ${duration}s ease-in-out`;
-    customerSprite.addEventListener("animationend", function () {
+    customerSprite.addEventListener("animationend", function handler() {
       customers.meals++;
       // when every customer has had their meal its time for bed 
       if (customers.qty == customers.meals) {
         customers.summarise();
       }
+      console.trace('end anim run');
+      this.removeEventListener("animationend", handler);
     });
   },
   summarise: () => {

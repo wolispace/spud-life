@@ -176,9 +176,11 @@ const spuds = {
     itemSprite.style.display = 'block';
     itemSprite.style.offsetPath = arc;
     itemSprite.style.animation = `into-basket 2s ${easing} 0s 1 normal forwards`;
-    itemSprite.addEventListener("animationend", function () {
+    itemSprite.addEventListener("animationend", function handler() {
       itemSprite.style.animation = 'none';
       itemSprite.style.display = 'none';
+      console.trace('end anim');
+      this.removeEventListener("animationend", handler);
     });
   }
 };

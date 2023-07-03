@@ -128,6 +128,9 @@ const sky = {
   goLight: () => {
     // daytime.. when it ends.. wake up
     let nightShade = document.querySelector(`#nightShade`);
-    svg.animate(nightShade, "go-light", 4,() => {setPhase("night")});
+    svg.animate(nightShade, "go-light", 4, function () { 
+      let nightShade = document.querySelector(`#nightShade`);
+      nightShade.style.opacity = 0;
+    });
   },
 };

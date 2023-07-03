@@ -680,8 +680,8 @@ const svg = {
   animate: (element, type, duration, onEnd) => {
     if (element && element.style) {
       element.style.animation = `${type} ${duration}s ease-in-out 0s 1 normal forwards`;
-
       element.addEventListener("animationstart", function handler() {
+        console.log('svg.animate started'); 
         player.animating = true;
         this.removeEventListener("animationstart", handler);
       });
@@ -690,9 +690,9 @@ const svg = {
         player.animating = false;
         element.style.animation = "";
         if (typeof onEnd == "function") {
-          console.log(onEnd);
           onEnd();
         }
+        console.trace('end svg.animate', handler);
         this.removeEventListener("animationend", handler);
       });
     }
