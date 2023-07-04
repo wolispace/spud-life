@@ -93,8 +93,8 @@ h2 {
   height: 30px;
   display: flex;
   z-index: 5;
-  align-items: end;
   flex-direction: column;
+  justify-content: end;
 }
 
 #playerSprite > svg {
