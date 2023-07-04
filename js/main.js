@@ -204,11 +204,10 @@ function demoBody() {
 // player chooses which spuds to put in what machines
 function allocate() {
   // list all spuds in sack and all machines owned..
-  let content = "<div><h2>Load machine hoppers</h2></div>";
-  content += '<div class="allocateContent">';
+  let content = '<div class="allocateContent">';
   content += '<div class="machines"></div><div class="sack"></div></div>';
 
-  let title = "Allocate spuds";
+  let title = "Load spuds into machines";
   let footer = "";
   footer += `<button class="buttonize" onclick="setPhase('sales')"> Open shop </button>`;
   showDialog(title, content, footer);

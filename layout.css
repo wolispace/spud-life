@@ -126,6 +126,8 @@ h2 {
   border-right: 2px solid rgba(0, 0, 0, 0.5);
   overflow-y: auto;
   z-index: 6;
+  display: flex;
+  flex-direction: column;
 }
 
 .dialog .header {
@@ -155,7 +157,8 @@ h2 {
 }
 
 .dialog .content {
-  padding: 10px;
+  flex: auto;
+  overflow-y: auto;
 }
 
 .dialog .footer {
@@ -419,7 +422,7 @@ h2 {
   gap: var(--sl-padding);
   padding: var(--sl-padding);
   align-items: stretch;
-  height: 85%;
+  height: 98%;
 }
 
 .sack {
