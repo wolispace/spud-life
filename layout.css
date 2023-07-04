@@ -293,6 +293,22 @@ h2 {
   display: none;
 }
 
+.hardware-button {
+  display: flex;
+}
+
+.hardware-button-buy  {
+  display:flex;
+  flex: auto;
+  gap: 0.5rem;
+}
+
+.hardware-button-sell {
+  background-color: rgb(187 115 115 / 76%) !important;
+  color: white;
+  font-weight: bold;
+}
+
 .sales {
   background-color: dodgerblue;
   color: white;
