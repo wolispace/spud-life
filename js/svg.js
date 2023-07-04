@@ -681,7 +681,6 @@ const svg = {
     if (element && element.style) {
       element.style.animation = `${type} ${duration}s ease-in-out 0s 1 normal forwards`;
       element.addEventListener("animationstart", function handler() {
-        console.log('svg.animate started'); 
         player.animating = true;
         this.removeEventListener("animationstart", handler);
       });
@@ -692,7 +691,6 @@ const svg = {
         if (typeof onEnd == "function") {
           onEnd();
         }
-        console.trace('end svg.animate', handler);
         this.removeEventListener("animationend", handler);
       });
     }

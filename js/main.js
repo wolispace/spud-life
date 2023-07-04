@@ -221,7 +221,6 @@ function allocate() {
 function setPhase(phase) {
   hideDialog();
   player.phase = phase;
-  console.trace('setPhase', phase);
   state.save();
   if (player.phase != "field") {
     if (player.phase == "allocate") {

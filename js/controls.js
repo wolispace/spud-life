@@ -35,7 +35,6 @@ const controls = {
         }
       }
       if (index == USER_KEY_UP) {
-        console.trace(`UP pos=${player.pos}`);
         if (player.pos == 0) {
           // go into home
           let thisBlock = document.querySelector(`#playerSprite svg`);
@@ -44,7 +43,6 @@ const controls = {
           let thisBlock = document.querySelector(`#playerSprite svg`);
           svg.animate(thisBlock, `shrink`, 1, () => {setPhase("hardware")});
         } else if (player.pos == 6) {
-          console.log('Going into shop becuase 6 == ', player.pos);
           let thisBlock = document.querySelector(`#playerSprite svg`);
           svg.animate(thisBlock, `shrink`, 1, () => {setPhase("allocate")});
         }

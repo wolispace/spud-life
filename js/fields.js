@@ -367,9 +367,9 @@ const fields = {
     // player is smaller on top row
     if (player.pos < 10) {
       height = patch.height / 2 + "px";
-      width = patch.width / 1.5 + "px";
-      posY = patch.top + (patch.width / 1.5) + "px";
-      console.log(`width=${width} height=${height} pos=${player.pos}`);
+      width = patch.width / 2 + "px";
+      posY = patch.top + (patch.height / 2) + "px";
+      posX = patch.left + (patch.width / 4) + "px";
     }
     
     let playerSprite = document.querySelector(`#playerSprite`);

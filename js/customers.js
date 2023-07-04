@@ -5,9 +5,7 @@ const customers = {
 
   // show all of the customers for the night
   render: (qty = 0) => {
-    console.trace(`render`);
     customers.qty = qty > 0 ? qty : customers.qty;
-    console.trace(`render customers ${customers.qty}`);
     svg.hidePlayerSprite();
     let customerList = "";
     for (let id = 0; id < customers.qty; id++) {
@@ -60,7 +58,6 @@ const customers = {
       if (customers.qty == customers.meals) {
         customers.summarise();
       }
-      console.trace('end anim run');
       this.removeEventListener("animationend", handler);
     });
   },

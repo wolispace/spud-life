@@ -93,7 +93,6 @@ const spuds = {
     customers.income = totalIncome;
 
     player.wallet += totalIncome;
-    console.trace(`sold ${totalMeals} = ${totalIncome}`);
     customers.render();
 
   },
@@ -179,7 +178,6 @@ const spuds = {
     itemSprite.addEventListener("animationend", function handler() {
       itemSprite.style.animation = 'none';
       itemSprite.style.display = 'none';
-      console.trace('end anim');
       this.removeEventListener("animationend", handler);
     });
   }
