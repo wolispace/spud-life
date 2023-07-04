@@ -4,15 +4,16 @@ const hardware = {
     let content = "";
     let style = `style="width:2rem;"`;
     Object.entries(player.hardware).forEach(([toolName, tool]) => {
-      let state = "buy";
+      let state = "Buy";
       let cost = tool.price;
       if (player.tools[toolName]) {
-        state = "upgrade";
+        state = "Upgade";
         cost = tool.upgradeCost;
       }
       let onClickBuy = "";
       let onClickSell = "";
       let canBuyClass = "tooMuch";
+      let canSellClass = "tooMuch";
       if (cost <= player.wallet) {
         onClickBuy = `onclick="tools.buyTool('${toolName}')"`;
         canBuyClass = ``;
@@ -20,14 +21,12 @@ const hardware = {
 
       onClickSell = `onclick="tools.sellTool('${toolName}')"`;
       if (!player.shop.machines[toolName]) {
-        console.log(toolName);
         let itemIcon = svg.render(toolName, 1, style);
-        content += `<div class="hardware-button button_${tool.type} ">`;
-        content += ` <div class="buttonize button hardware-button-buy button_${tool.type} ${canBuyClass}" ${onClickBuy} id="hardware_${toolName}" ${onClickBuy}</div>`;
-        content += `  <div ${onClickBuy}>${itemIcon}</div>`;
-        content += `  <div ${onClickBuy}><strong>${tool.name}. </strong> ${tool.desc}<br/>${state}=${cost}</div>`;
-        content += ` </div>`;
-        content += ` <div class="buttonize button hardware-button-sell" ${onClickSell}>Sell</div>`;
+        content += `<div class="hardware-button buttonize button_${tool.type} " id="hardware_${toolName}">`;
+        content += ` <div class="hardware-button-icon">${itemIcon}</div>`;
+        content += ` <div class="hardware-button-buy buttonize button ${canBuyClass}" ${onClickBuy}>${state}</br>$${cost}</div>`;
+        content += ` <div class="hardware-button-desc"><strong>${tool.name}. </strong> ${tool.desc}</div>`;
+        content += ` <div class="hardware-button-sell buttonize button  ${canSellClass}" ${onClickSell}>Sell<br/>$${cost}</div>`;
         content += `</div>`;
 
 

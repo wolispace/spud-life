@@ -295,16 +295,21 @@ h2 {
 
 .hardware-button {
   display: flex;
+  align-items: center;
 }
 
 .hardware-button-buy  {
-  display:flex;
+  font-weight: bold;
+  color: white;
+  background-color: rgb(187 115 115 / 76%) !important;  
+}
+
+.hardware-button-desc  {
   flex: auto;
-  gap: 0.5rem;
 }
 
 .hardware-button-sell {
-  background-color: rgb(187 115 115 / 76%) !important;
+  background-color: rgba(40, 117, 53, 0.76) !important;
   color: white;
   font-weight: bold;
 }
