@@ -6,20 +6,23 @@ const hardware = {
     console.log(player);
     Object.entries(player.hardware).forEach(([toolName, tool]) => {
       let state = "Buy";
-      let cost = tool.price;
+      let buyCost = tool.price;
+      let sellCost = tool.price;
+
       if (player.tools[toolName]) {
         state = "Upgade";
-        cost = tool.upgradeCost;
+        buyCost = tool.upgradeCost;
       }
       let onClickBuy = "";
       let onClickSell = "";
       let canBuyClass = "tooMuch";
       let canSellClass = "tooMuch";
       if (player.sack[toolName]) {
+        sellCost = sellCost * player.sack[toolName];
         onClickSell = `onclick="sack.sellItem('${toolName}')"`;
         canSellClass = '';
       }
-      if (cost <= player.wallet) {
+      if (buyCost <= player.wallet) {
         onClickBuy = `onclick="tools.buyTool('${toolName}')"`;
         canBuyClass = ``;
       }
@@ -28,9 +31,9 @@ const hardware = {
         let itemIcon = svg.render(toolName, 1, style);
         content += `<div class="hardware-button buttonize button_${tool.type} " id="hardware_${toolName}">`;
         content += ` <div class="hardware-button-icon">${itemIcon}</div>`;
-        content += ` <div class="hardware-button-buy buttonize button ${canBuyClass}" ${onClickBuy}>${state}</br>$${cost}</div>`;
         content += ` <div class="hardware-button-desc"><strong>${tool.name}. </strong> ${tool.desc}</div>`;
-        content += ` <div class="hardware-button-sell buttonize button  ${canSellClass}" ${onClickSell}>Sell<br/>$${cost}</div>`;
+        content += ` <div class="hardware-button-buy buttonize button ${canBuyClass}" ${onClickBuy}>${state}</br>$${buyCost}</div>`;
+        content += ` <div class="hardware-button-sell buttonize button  ${canSellClass}" ${onClickSell}>Sell<br/>$${buyCost}</div>`;
         content += `</div>`;
       }
     });
