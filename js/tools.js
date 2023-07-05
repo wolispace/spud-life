@@ -1,6 +1,7 @@
 const tools = {
   // draw the tools across the bottom
   render: () => {
+    console.trace('tools render');
     let tools = "";
     let dummyImg = svg.render(`control-icon--up`);
     Object.entries(player.tools).forEach(([toolName, tool]) => {
@@ -38,30 +39,36 @@ const tools = {
     return player.tools[tool];
   },
   // buy a tool or an upgrade to a tool or machine
-  buyTool: (toolName) => {
-    let tool = player.hardware[toolName];
-    if (tool.type == "tool") {
-      if (player.tools[toolName]) {
+  buyTool: (itemName) => {
+    let item = player.hardware[itemName];
+    if (item.type == "tool") {
+      if (player.tools[itemName]) {
         // upgrade
-        player.tools[toolName].maxUses++;
-        player.tools[toolName].uses++;
-        player.wallet = player.wallet - player.hardware[toolName].upgradeCost;
+        player.tools[itemName].maxUses++;
+        player.tools[itemName].uses++;
+        player.wallet = player.wallet - item.upgradeCost;
       } else {
         // buy
-        player.tools[toolName] = player.hardware[toolName].initial;
-        player.wallet = player.wallet - player.hardware[toolName].price;
+        player.tools[itemName] = item.initial;
+        player.wallet = player.wallet - item.price;
       }
-    } else {
+    } else if (item.type == "item") {
+      // buy an item
+      player.sack[itemName] = player.sack[itemName] || 0;
+      player.sack[itemName]++;
+      player.wallet = player.wallet - item.price;
+
+    } else if (item.type == "machine") {
       // buy machine
-      player.shop.machines[toolName] = player.hardware[toolName].initial;
-      player.wallet = player.wallet - player.hardware[toolName].price;
+      player.shop.machines[itemName] = item.initial;
+      player.wallet = player.wallet - item.price;
     }
     tools.render();
     hardware.render();
   },
   // start of a new day reset tools to their max uses
   reset: () => {
-    Object.entries(player.tools).forEach(([toolName, tool]) => {
+    Object.entries(player.tools).forEach(([itemName, tool]) => {
       tool.uses = tool.maxUses;
     });
   },

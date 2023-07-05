@@ -3,6 +3,7 @@ const hardware = {
   render: () => {
     let content = "";
     let style = `style="width:2rem;"`;
+    console.log(player);
     Object.entries(player.hardware).forEach(([toolName, tool]) => {
       let state = "Buy";
       let cost = tool.price;
@@ -14,12 +15,15 @@ const hardware = {
       let onClickSell = "";
       let canBuyClass = "tooMuch";
       let canSellClass = "tooMuch";
+      if (player.sack[toolName]) {
+        onClickSell = `onclick="sack.sellItem('${toolName}')"`;
+        canSellClass = '';
+      }
       if (cost <= player.wallet) {
         onClickBuy = `onclick="tools.buyTool('${toolName}')"`;
         canBuyClass = ``;
       }
 
-      onClickSell = `onclick="tools.sellTool('${toolName}')"`;
       if (!player.shop.machines[toolName]) {
         let itemIcon = svg.render(toolName, 1, style);
         content += `<div class="hardware-button buttonize button_${tool.type} " id="hardware_${toolName}">`;
@@ -28,14 +32,13 @@ const hardware = {
         content += ` <div class="hardware-button-desc"><strong>${tool.name}. </strong> ${tool.desc}</div>`;
         content += ` <div class="hardware-button-sell buttonize button  ${canSellClass}" ${onClickSell}>Sell<br/>$${cost}</div>`;
         content += `</div>`;
-
-
       }
     });
 
     let title = "Hardware shop";
     let footer = "";
     showDialog(title, content, footer);
+    fields.renderField();
   },
   // loop through each tool on sale and change style if we can afford it or not
   refresh: () => {
@@ -210,6 +213,21 @@ const hardware = {
         price: 50,
         rareness: 50, 
       },
+      rock: {        
+        type: "block",
+        name: "A rock",
+        desc: "It is one you cleared from the field. Its heavy, hard and doesn't taste nice",
+        price: 1,
+        rareness: 1, 
+      },
+      log: {        
+        type: "block",
+        name: "A log",
+        desc: "It's old and splintered, however neatly cut on each end",
+        price: 1,
+        rareness: 1, 
+      },
+           
 
     };
   },

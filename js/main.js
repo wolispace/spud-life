@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
   sky.clouds();
   svg.showPlayerSprite();
   resizeStuff();
+  console.log(player.phase, player);
 });
 
 // hook into keys for movement and digging
@@ -40,10 +41,22 @@ window.addEventListener("resize", (event) => {
   resizeStuff();
 });
 
+function animatePlayerOn() {
+  let playerSprite = document.querySelector(`#playerSprite`);
+  playerSprite.style.transition = "0.15s ease-in-out";
+}
+
+function animatePlayerOff() {
+  let playerSprite = document.querySelector(`#playerSprite`);
+  playerSprite.style.transition = "";
+}
+
 function resizeStuff() {
+  animatePlayerOff();
   fields.renderGrassLine();
   sky.render();
   fields.highlightCurrentPos();
+  animatePlayerOn();
 }
 
 // new game so generate

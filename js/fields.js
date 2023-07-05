@@ -190,7 +190,6 @@ const fields = {
       fields.renderPatch(patch, index);
     });
     fields.renderGrassLine();
-    console.log(player);
   },
 
   renderGrassLine: () => {
@@ -381,8 +380,7 @@ const fields = {
     playerSprite.style.left = posX;
     playerSprite.style.width = width;
     playerSprite.style.height = height;
-    playerSprite.style.transition = "0.15s ease-in-out";
-    playerSprite.style.outline = '1px solid red;';
+ 
 
     // show if spuds in range using current spud diviner
     if (fields.inRange()) {
