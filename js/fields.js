@@ -107,7 +107,7 @@ const fields = {
         if (!patch.spud) {
           Object.entries(items).forEach(([itemName, item]) => {
             if (!patch.item)  {
-              if (rnd(item.rareness) == 1) {
+              if (rnd(item.rareness) == 0) {
                 patch.item = itemName;
               }
             }
@@ -318,10 +318,23 @@ const fields = {
       // if there is an item defined, dig it up and add it to the sack
       if (patch.item) {
         spuds.animate(patch);
-        // increment the players count of this item
-        let sackQty = player.sack[patch.item] || 0;
-        player.sack[patch.item] = sackQty + 1;
-        delete patch.item;
+        let item = player.hardware[patch.item];
+        if (item.type == 'tool') {
+          // upgrade the tool
+          player.tools[patch.item] = player.tools[patch.item] ?? {};
+          player.tools[patch.item].maxUses++;
+          player.tools[patch.item].uses++;
+
+        } else if (item.type == 'machine') {
+          if (!player.shop.machines[patch.item]) {
+            player.shop.machines[patch.item] = item.initial;
+          }
+        } else {
+          // increment the players count of this item
+          let sackQty = player.sack[patch.item] || 0;
+          player.sack[patch.item] = sackQty + 1;
+          delete patch.item;
+        }
       }
       
       // if no spuds then make sure we are quite clear there are no spuds

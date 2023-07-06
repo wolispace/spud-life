@@ -1,6 +1,8 @@
 const hardware = {
   // draw tools and machines for sale
   render: () => {
+    // return to the field when the dialog closes
+    player.phase = 'field';
     let content = "";
     let style = `style="width:2rem;"`;
     console.log(player);
@@ -32,8 +34,10 @@ const hardware = {
         content += `<div class="hardware-button buttonize button_${tool.type} " id="hardware_${toolName}">`;
         content += ` <div class="hardware-button-icon">${itemIcon}</div>`;
         content += ` <div class="hardware-button-desc"><strong>${tool.name}. </strong> ${tool.desc}</div>`;
+        if (!player.tools[toolName] && player.sack[toolName]) {
+          content += ` <div class="hardware-button-sell buttonize button  ${canSellClass}" ${onClickSell}>Sell<br/>$${sellCost}</div>`;
+        }
         content += ` <div class="hardware-button-buy buttonize button ${canBuyClass}" ${onClickBuy}>${state}</br>$${buyCost}</div>`;
-        content += ` <div class="hardware-button-sell buttonize button  ${canSellClass}" ${onClickSell}>Sell<br/>$${buyCost}</div>`;
         content += `</div>`;
       }
     });
@@ -56,7 +60,7 @@ const hardware = {
         name: "Spade",
         desc: "A useful tool for digging up spuds",
         price: 50,
-        rareness: 100,
+        rareness: 1,
         upgradeCost: 50,
         maxUpgrades: 100,
         initial: {
@@ -69,7 +73,7 @@ const hardware = {
         name: "Pick",
         desc: "A tool for breaking rocks",
         price: 100,
-        rareness: 100,
+        rareness: 1,
         upgradeCost: 100,
         maxUpgrades: 100,
         initial: {
@@ -82,7 +86,7 @@ const hardware = {
         name: "Axe",
         desc: "A tool for clearing logs",
         price: 150,
-        rareness: 100,
+        rareness: 1,
         upgradeCost: 100,
         maxUpgrades: 100,
         initial: {
@@ -104,7 +108,7 @@ const hardware = {
           hopper: {},
         },
       },
-      "chipper-2000": {
+      chipper2000: {
         type: "machine",
         name: "Chipper 2000",
         desc: "The latest upgrade of the tried-and-tested chip maker",
@@ -118,7 +122,7 @@ const hardware = {
           hopper: {},
         },
       },
-      "back-o-matic": {
+      bake: {
         type: "machine",
         name: "Bake-o-matic",
         desc: "Makes an excellent baked potato",
@@ -132,7 +136,7 @@ const hardware = {
           hopper: {},
         },
       },
-      "curly-cooker": {
+      curly: {
         type: "machine",
         name: "Curly cooker",
         desc: "Cooks a potato into a curly-fry",
@@ -146,7 +150,7 @@ const hardware = {
           hopper: {},
         },
       },
-      "soup-spinner": {
+      soup: {
         type: "machine",
         name: "Soup spinner",
         desc: "Makes a hearty potato soup",

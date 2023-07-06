@@ -73,6 +73,7 @@ const sack = {
 
       player.wallet = player.wallet + (item.price * itemQty);
       delete player.sack[itemName];
+      state.save();
       tools.render();
       hardware.render();
     },

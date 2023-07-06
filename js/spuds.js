@@ -172,9 +172,11 @@ const spuds = {
     var easing = 'cubic-bezier(0, 0, .25, 0)';
     // slow and get faster
     easing = 'cubic-bezier(0.3, 0, 1, 1)';
+    easing = 'ease-in';
     itemSprite.style.display = 'block';
     itemSprite.style.offsetPath = arc;
-    itemSprite.style.animation = `into-basket 2s ${easing} 0s 1 normal forwards`;
+    itemSprite.style.offsetRotate = `0deg`;
+    itemSprite.style.animation = `into-basket 1.5s ${easing} 0s 1 normal forwards`;
     itemSprite.addEventListener("animationend", function handler() {
       itemSprite.style.animation = 'none';
       itemSprite.style.display = 'none';

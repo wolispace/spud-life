@@ -1,10 +1,10 @@
 const tools = {
   // draw the tools across the bottom
   render: () => {
-    console.trace('tools render');
     let tools = "";
     let dummyImg = svg.render(`control-icon--up`);
     Object.entries(player.tools).forEach(([toolName, tool]) => {
+      tool = tool ?? {uses: 0, maxUses: 0};
       let toolSvg = svg.render(toolName) ?? dummyImg;
       tools += `<div class="tool-${toolName}" 
       onclick="fields.digPatch()"
@@ -63,6 +63,7 @@ const tools = {
       player.shop.machines[itemName] = item.initial;
       player.wallet = player.wallet - item.price;
     }
+    state.save();
     tools.render();
     hardware.render();
   },

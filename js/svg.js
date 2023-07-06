@@ -267,7 +267,7 @@ const svg = {
       <circle cx="64.972" cy="46.427" r="2.9375" style="fill:#dd3d06;stroke-linecap:round;stroke-opacity:.99574;stroke-width:2.5;stroke:#000"/>
       <ellipse cx="41.062" cy="7.5625" rx="22.043" ry="3.7927" style="fill:#76766c;stroke-linecap:round;stroke-opacity:.99574;stroke-width:2.5396;stroke:#000"/>
       </svg>`,
-    "chipper-2000": `<svg id="SVGRoot" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    chipper2000: `<svg id="SVGRoot" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
       <path d="m18.75 8.5 44.25-0.5s-1.75 9.5-8.25 14.5c-13.424 10.326-18.009 5.0148-26.25-0.25-9-5.75-9.75-13.75-9.75-13.75z" style="fill:#ddad06;stroke-linecap:round;stroke-width:2.5;stroke:#000"/>
       <path d="m52 11.25s0.39175 5.7877-1.75 8.25c-4.3347 4.9835-5.5 5.25-5.5 5.25" style="fill:none;stroke-linecap:round;stroke-opacity:.6;stroke-width:2.5;stroke:#fff"/>
       <path d="m4.5 93.5 0.14638-8.755 6.1036 0.005048 0.25-53.75s0.25-4.5 6-4.75 60 0 60 0 7.5-1.75 7.25 6.75-0.5 51-0.5 51h6s1.75 0.5 1.75 3.25-0.25 6.5-0.25 6.5z" style="fill:#8f3432;stroke-linecap:round;stroke-width:2.5;stroke:#000"/>
