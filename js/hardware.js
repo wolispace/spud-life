@@ -238,14 +238,14 @@ const hardware = {
         name: "A rock",
         desc: "It is one you cleared from the field. Its heavy, hard and doesn't taste nice",
         price: 1,
-        rareness: 1, 
+        rareness: 20, 
       },
       log: {        
         type: "block",
         name: "A log",
         desc: "It's old and splintered, however neatly cut on each end",
         price: 1,
-        rareness: 1, 
+        rareness: 20, 
       },
            
 
