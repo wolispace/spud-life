@@ -248,6 +248,7 @@ function setPhase(phase) {
       if (player.body) {
         dream();
         sky.goLight();
+        sky.darkDoor();
         fields.resetPlayer();
       } else {
         defineCharacter();
@@ -289,7 +290,6 @@ function dream() {
 function wake() {
   let playerSprite = document.querySelector(`#playerSprite svg`);
   svg.animate(playerSprite, `grow`, 1, () => {svg.showPlayerSprite();});
-  //
   setPhase('field');
   hideDialog();
 }

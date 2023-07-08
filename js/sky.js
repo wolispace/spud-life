@@ -120,6 +120,7 @@ const sky = {
     svg.animate(nightShade, "go-dark", 8, function () { 
       let nightShade = document.querySelector(`#nightShade`);
       nightShade.style.opacity = 1;
+      sky.lightDoor();
     });
     //element.style.animation = `${type} ${duration}s ease-in-out 0s 1 normal forwards`;
   },
@@ -130,5 +131,16 @@ const sky = {
       let nightShade = document.querySelector(`#nightShade`);
       nightShade.style.opacity = 0;
     });
+  },
+
+  lightDoor: () => {
+    console.log('light door');
+    let nightShade = document.querySelector(`#house-door`);
+    nightShade.style.fill = 'yellow';
+  },
+  darkDoor: () => {
+    console.log('light door');
+    let nightShade = document.querySelector(`#house-door`);
+    nightShade.style.fill = 'black';
   },
 };

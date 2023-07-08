@@ -9,7 +9,7 @@ const svg = {
     },
     house: `<svg id="SVGRoot" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
       <rect x="13.125" y="55.375" width="70.75" height="43.75" style="fill:#aa6c2c"/>
-      <rect x="40.375" y="69.625" width="16.625" height="29.625"/>
+      <rect id="house-door" x="40.375" y="69.625" width="16.625" height="29.625"/>
       <g transform="rotate(89.312 -5.5718 57.246)">
       <rect x="8.125" y="17.625" width="17.125" height="16.25" style="fill:#aae1e4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-width:1.7764;stroke:#001700"/>
       <path d="m7.875 25.25 17.25 0.25" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-width:1.7764;stroke:#001700"/>
