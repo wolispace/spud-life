@@ -210,6 +210,7 @@ const fields = {
     let customerLineHeight = patch.height / 3;
     customerElement.style.top = `${customerLineTop}px`;
     customerElement.style.height = `${customerLineHeight}px`;
+    customerElement.style.width = `${grassLineWidth}px`;
   },
 
   // based on patch contents decide what to show
