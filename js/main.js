@@ -21,7 +21,6 @@ document.addEventListener("DOMContentLoaded", function () {
   sky.clouds();
   svg.showPlayerSprite();
   resizeStuff();
-  console.log(player.phase, player);
 });
 
 // hook into keys for movement and digging

@@ -66,10 +66,10 @@ const sack = {
     footer += `<button class="buttonize" onclick="hideDialog()"> Ok </button>`;
     showDialog("Inventory", `${content}${content2}`, footer);
   },
-    // buy a tool or an upgrade to a tool or machine
+    // sell something
     sellItem: (itemName) => {
       let item = player.hardware[itemName];
-      let itemQty = player.sack[itemName];
+      let itemQty = player.sack[itemName] ?? 0;
 
       player.wallet = player.wallet + (item.price * itemQty);
       delete player.sack[itemName];

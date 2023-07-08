@@ -324,6 +324,8 @@ const fields = {
           player.tools[patch.item] = player.tools[patch.item] ?? {};
           player.tools[patch.item].maxUses++;
           player.tools[patch.item].uses++;
+          state.save();
+          tools.render();
 
         } else if (item.type == 'machine') {
           if (!player.shop.machines[patch.item]) {

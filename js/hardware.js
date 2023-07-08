@@ -5,7 +5,6 @@ const hardware = {
     player.phase = 'field';
     let content = "";
     let style = `style="width:2rem;"`;
-    console.log(player);
     Object.entries(player.hardware).forEach(([toolName, tool]) => {
       let state = "Buy";
       let buyCost = tool.price;
@@ -25,7 +24,7 @@ const hardware = {
         canSellClass = '';
       }
       if (buyCost <= player.wallet) {
-        onClickBuy = `onclick="tools.buyTool('${toolName}')"`;
+        onClickBuy = `onclick="tools.buyItem('${toolName}')"`;
         canBuyClass = ``;
       }
 

@@ -39,7 +39,7 @@ const tools = {
     return player.tools[tool];
   },
   // buy a tool or an upgrade to a tool or machine
-  buyTool: (itemName) => {
+  buyItem: (itemName) => {
     let item = player.hardware[itemName];
     if (item.type == "tool") {
       if (player.tools[itemName]) {
@@ -48,11 +48,11 @@ const tools = {
         player.tools[itemName].uses++;
         player.wallet = player.wallet - item.upgradeCost;
       } else {
-        // buy
+        // buy tool
         player.tools[itemName] = item.initial;
         player.wallet = player.wallet - item.price;
       }
-    } else if (item.type == "item") {
+    } else if (item.type == "item" || item.type == "block") {
       // buy an item
       player.sack[itemName] = player.sack[itemName] || 0;
       player.sack[itemName]++;
