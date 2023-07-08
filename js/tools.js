@@ -53,14 +53,15 @@ const tools = {
         player.wallet = player.wallet - item.price;
       }
     } else if (item.type == "item" || item.type == "block") {
-      // buy an item
       player.sack[itemName] = player.sack[itemName] || 0;
       player.sack[itemName]++;
       player.wallet = player.wallet - item.price;
 
     } else if (item.type == "machine") {
-      // buy machine
       player.shop.machines[itemName] = item.initial;
+      player.wallet = player.wallet - item.price;
+    } else if (item.type == "field") {
+      fields.buyField();
       player.wallet = player.wallet - item.price;
     }
     state.save();

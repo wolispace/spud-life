@@ -1,6 +1,7 @@
 const hardware = {
   // draw tools and machines for sale
   render: () => {
+    console.log(player);
     // return to the field when the dialog closes
     player.phase = 'field';
     let content = "";
@@ -27,8 +28,15 @@ const hardware = {
         onClickBuy = `onclick="tools.buyItem('${toolName}')"`;
         canBuyClass = ``;
       }
+      let showItem = true;
+      if (player.shop.machines[toolName]) {
+        showItem = false;
+      }
+      if ('item,block'.indexOf(tool.type) > -1 && !player.sack[toolName]) {
+        showItem = false;
+      }
 
-      if (!player.shop.machines[toolName]) {
+      if (showItem) {
         let itemIcon = svg.render(toolName, 1, style);
         content += `<div class="hardware-button buttonize button_${tool.type} " id="hardware_${toolName}">`;
         content += ` <div class="hardware-button-icon">${itemIcon}</div>`;
@@ -59,7 +67,7 @@ const hardware = {
         name: "Spade",
         desc: "A useful tool for digging up spuds",
         price: 50,
-        rareness: 1,
+        rareness: 100,
         upgradeCost: 50,
         maxUpgrades: 100,
         initial: {
@@ -72,7 +80,7 @@ const hardware = {
         name: "Pick",
         desc: "A tool for breaking rocks",
         price: 100,
-        rareness: 1,
+        rareness: 100,
         upgradeCost: 100,
         maxUpgrades: 100,
         initial: {
@@ -85,7 +93,7 @@ const hardware = {
         name: "Axe",
         desc: "A tool for clearing logs",
         price: 150,
-        rareness: 1,
+        rareness: 100,
         upgradeCost: 100,
         maxUpgrades: 100,
         initial: {
@@ -162,6 +170,12 @@ const hardware = {
           makes: "soup",
           hopper: {},
         },
+      },
+      "control-field--right": {
+        type: "field",
+        name: "A field for sale",
+        desc: "Next to your plot of land is another, you can expand your digging activities and maybe find rarer potatoes",
+        price: 1000,       
       },
       bone: {
         type: "item",

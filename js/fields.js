@@ -36,13 +36,13 @@ const fields = {
   buyField: () => {
     // find highest field ID, add 1, set that field as an empty array so it can be filled
     player.fields[player.fields.length] = [];
+    // add the sign
     let patch = {
       id: "patch_9",
       block: { type: "control-field--right", qty: 1 },
     };
     player.fields[player.currentField][9] = patch;
     fields.renderPatch(patch);
-    state.save();
   },
 
   // randomly fill the selected field (if empty) with rocks, logs and spuds - plus some random treasure!
