@@ -324,18 +324,24 @@ const fields = {
           player.tools[patch.item] = player.tools[patch.item] ?? {};
           player.tools[patch.item].maxUses++;
           player.tools[patch.item].uses++;
+          delete patch.item;
           state.save();
           tools.render();
 
         } else if (item.type == 'machine') {
           if (!player.shop.machines[patch.item]) {
             player.shop.machines[patch.item] = item.initial;
+            delete patch.item;
+            state.save();
+            tools.render();
           }
         } else {
           // increment the players count of this item
           let sackQty = player.sack[patch.item] || 0;
           player.sack[patch.item] = sackQty + 1;
           delete patch.item;
+          state.save();
+          tools.render();
         }
       }
       
