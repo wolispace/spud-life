@@ -206,7 +206,7 @@ h2 {
   left: 70vh;
   width: 100px;
   height: 100px;
-  z-index: 100;
+  z-index: 5;
 }
 
 .sky {
@@ -729,15 +729,27 @@ h2 {
 @keyframes move-customer {
   from {
     left: 100%;
+    transform: scale(1, 1);
   }
   35% {
     left: 63%;
+    transform: scale(1, 1);
+  }
+  36% {
+    left: 63%;
+    transform: scale(-1, 1);
+  }
+  36% {
+    left: 62%;
+    transform: scale(-1, 1);
   }
   45% {
-    left: 62%;
+    left: 63%;
+    transform: scale(-1, 1); 
   }
   to {
     left: 100%;
+    transform: scale(-1, 1); 
   }
 }
 
