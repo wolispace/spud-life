@@ -1,10 +1,11 @@
-USER_KEY_UP = 60;
-USER_KEY_LEFT = 70;
-USER_KEY_RIGHT = 71;
-USER_KEY_DOWN = 80;
 
 const controls = {
   click: (indexId) => {
+    const USER_KEY_UP = player.maxPatches - 30;
+    const USER_KEY_LEFT = player.maxPatches - 30 + 10;
+    const USER_KEY_RIGHT = player.maxPatches - 30 + 11;
+    const USER_KEY_DOWN = player.maxPatches - 30 + 20;
+    let controlIds = [USER_KEY_UP,USER_KEY_LEFT,USER_KEY_RIGHT,USER_KEY_DOWN];
     // user clicked a control to move up, down, left or right - interact with the patch we are moving into
     let bits = indexId.split("_");
     let index = parseInt(bits[1]);
@@ -12,7 +13,7 @@ const controls = {
       setTimeout((player.animating = false), 2000);
       return;
     }
-    if (player.controlIds.indexOf(index) > -1) {
+    if (controlIds.indexOf(index) > -1) {
       // we are trying to move
       fields.removeCurrentPosHighlight();
       // use current pos unless is Ok to move
@@ -67,19 +68,19 @@ const controls = {
         newPos += 1;
         direction = "right";
         svg.directPlayerSprite("right");
-        if (newPos > 99) {
+        if (newPos >= player.maxPatches) {
           newPos = player.pos;
         }
       }
       if (index == USER_KEY_DOWN) {
         newPos += 10;
         svg.directPlayerSprite("down");
-        if (newPos > 99) {
+        if (newPos >= player.maxPatches) {
           newPos = player.pos;
         }
       }
 
-      if (player.controlIds.indexOf(newPos) > -1) {
+      if (controlIds.indexOf(newPos) > -1) {
         newPos = player.pos;
       }
 

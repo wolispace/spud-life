@@ -120,7 +120,8 @@ const fields = {
         i++;
       }
       // put controls in
-      let id = player.controls.start;
+      //120 - 10 * 3
+      let id = player.maxPatches - 30; //controls.start;
       player.fields[fieldId][id] = {
         id: `patch_${id}`,
         block: {
@@ -239,7 +240,8 @@ const fields = {
         }
       }
       if (patch.building) {
-        newPatch = svg.render(patch.building, 1);
+        let style=``;
+        newPatch = svg.render(patch.building, 1, style);
       }
     }
     // add the grass if below top row

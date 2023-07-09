@@ -37,8 +37,6 @@ let player = {
   shop: {
     machines: {},
   },
-  controls: { start: 60 },
-  controlIds: [60, 70, 71, 80],
   controlPos: {
     ArrowUp: 0,
     ArrowLeft: 10,
