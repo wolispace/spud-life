@@ -181,7 +181,6 @@ h2 {
 
 .field {
   width: 70vh;
-  hXeight: 90vh;
   max-width: 50em;
   max-height: 50em;
   background-color: rgb(62, 122, 62);
@@ -213,6 +212,7 @@ h2 {
   height: 100px;
   z-index: 5;
 }
+
 
 .sky {
   background: rgb(2, 0, 36);
@@ -354,7 +354,9 @@ h2 {
   gap: 2px;
 }
 
-.tools div {
+.tool-button {
+  display:flex;
+  flex-direction: column;
   padding: var(--sl-padding);
   border-radius: 5px;
   background-color: rgba(255, 255, 255, 0.1);
@@ -365,7 +367,7 @@ h2 {
   cursor: pointer;
 }
 
-.tools div:hover {
+.tool-button:hover {
   background-color: rgba(255, 255, 255, 0.05);
 }
 
@@ -374,10 +376,8 @@ h2 {
 }
 
 .toolNum {
-  border: 0;
   position: absolute;
-  bottom: 0;
-  border: 0 !important;
+  bottom: 1rem;
 }
 
 .hardware div {
