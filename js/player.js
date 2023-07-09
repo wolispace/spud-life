@@ -1,5 +1,6 @@
 let player = {
   phase: "field",
+  maxPatches: 120,
   sack: {},
   wallet: 1000,
   pos: 0,

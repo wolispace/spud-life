@@ -1,10 +1,9 @@
 const fields = {
   // one off setup the grid of patches
   setupGrid() {
-    const maxPatches = 99;
     let index = 0;
     let patches = "";
-    while (index <= maxPatches) {
+    while (index < player.maxPatches) {
       let patchClass = index < 10 ? "sky" : "patch";
       patches += `<div class="${patchClass}" id="patch_${index}">${svg.render(
         "blank",
@@ -82,7 +81,7 @@ const fields = {
 
       // skip the first row
       i = 10;
-      while (i < 100) {
+      while (i < player.maxPatches) {
         let patch = {};
         if (rnd(2) > 0) {
           // rock, log or spud?
