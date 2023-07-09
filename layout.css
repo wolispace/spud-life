@@ -182,7 +182,6 @@ h2 {
 .field {
   width: 70vh;
   max-width: 50em;
-  max-height: 50em;
   background-color: rgb(62, 122, 62);
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
@@ -376,8 +375,8 @@ h2 {
 }
 
 .toolNum {
-  position: absolute;
-  bottom: 1rem;
+  position: relative;
+  bottom: 2rem;
 }
 
 .hardware div {
