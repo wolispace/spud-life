@@ -80,6 +80,7 @@ html {
 
 body {
   background-color: black;
+  margin: 0;
 }
 
 h2 {
@@ -173,14 +174,16 @@ h2 {
   cursor: pointer;
 }
 
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
 .field {
   width: 70vh;
-  height: 90vh;
+  hXeight: 90vh;
   max-width: 50em;
   max-height: 50em;
-  position: absolute;
-  top: 0;
-  left: 0;
   background-color: rgb(62, 122, 62);
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
@@ -344,10 +347,6 @@ h2 {
 }
 
 .tools {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 10vh;
   background-color: rgb(19, 19, 54);
   color: white;
   font-weight: bold;
@@ -371,7 +370,7 @@ h2 {
 }
 
 .tools svg {
-  width: 4rem;
+  width: 9vh;
 }
 
 .toolNum {
