@@ -1,11 +1,11 @@
 
 const controls = {
+  ArrowDown: player.maxPatches - 9,
+  ArrowUp: player.maxPatches - 19,
+  ArrowRight: player.maxPatches - 8,
+  ArrowLeft: player.maxPatches - 10,
   click: (indexId) => {
-    const USER_KEY_UP = player.maxPatches - 30;
-    const USER_KEY_LEFT = player.maxPatches - 30 + 10;
-    const USER_KEY_RIGHT = player.maxPatches - 30 + 11;
-    const USER_KEY_DOWN = player.maxPatches - 30 + 20;
-    let controlIds = [USER_KEY_UP,USER_KEY_LEFT,USER_KEY_RIGHT,USER_KEY_DOWN];
+    let controlIds = [controls.ArrowUp,controls.ArrowLeft,controls.ArrowRight,controls.ArrowDown];
     // user clicked a control to move up, down, left or right - interact with the patch we are moving into
     let bits = indexId.split("_");
     let index = parseInt(bits[1]);
@@ -21,21 +21,21 @@ const controls = {
       let direction = "down";
 
       // move to next/prev fields
-      if (index == USER_KEY_LEFT && player.pos == 0) {
+      if (index == controls.ArrowLeft && player.pos == 0) {
         let newField = player.currentField - 1;
         if (player.fields[newField]) {
           fields.switchField(newField);
           return;
         }
       }
-      if (index == USER_KEY_RIGHT && player.pos == 9) {
+      if (index == controls.ArrowRight && player.pos == 9) {
         let newField = player.currentField + 1;
         if (player.fields[newField]) {
           fields.switchField(newField);
           return;
         }
       }
-      if (index == USER_KEY_UP) {
+      if (index == controls.ArrowUp) {
         if (player.pos == 0) {
           // go into home
           let thisBlock = document.querySelector(`#playerSprite svg`);
@@ -49,7 +49,7 @@ const controls = {
         }
       }
 
-      if (index == USER_KEY_UP) {
+      if (index == controls.ArrowUp) {
         newPos -= 10;
         direction = "up";
         svg.directPlayerSprite("up");
@@ -57,14 +57,14 @@ const controls = {
           newPos = player.pos;
         }
       }
-      if (index == USER_KEY_LEFT && player.pos % 10 > 0) {
+      if (index == controls.ArrowLeft && player.pos % 10 > 0) {
         newPos -= 1;
         direction = "left";
         svg.directPlayerSprite("left");
         if (newPos < 0) {
         }
       }
-      if (index == USER_KEY_RIGHT && player.pos % 10 < 9) {
+      if (index == controls.ArrowRight && player.pos % 10 < 9) {
         newPos += 1;
         direction = "right";
         svg.directPlayerSprite("right");
@@ -72,7 +72,7 @@ const controls = {
           newPos = player.pos;
         }
       }
-      if (index == USER_KEY_DOWN) {
+      if (index == controls.ArrowDown) {
         newPos += 10;
         svg.directPlayerSprite("down");
         if (newPos >= player.maxPatches) {

@@ -121,7 +121,7 @@ const fields = {
       }
       // put controls in
       //120 - 10 * 3
-      let id = player.maxPatches - 30; //controls.start;
+      let id = controls.ArrowUp;
       player.fields[fieldId][id] = {
         id: `patch_${id}`,
         block: {
@@ -130,7 +130,7 @@ const fields = {
           onclick: `controls.click(${id})`,
         },
       };
-      id += 10;
+      id = controls.ArrowLeft;
       player.fields[fieldId][id] = {
         id: `patch_${id}`,
         block: {
@@ -139,7 +139,7 @@ const fields = {
           onclick: `controls.click(${id})`,
         },
       };
-      id += 1;
+      id = controls.ArrowRight;
       player.fields[fieldId][id] = {
         id: `patch_${id}`,
         block: {
@@ -148,7 +148,7 @@ const fields = {
           onclick: `controls.click(${id})`,
         },
       };
-      id += 9;
+      id = controls.ArrowDown;
       player.fields[fieldId][id] = {
         id: `patch_${id}`,
         block: {

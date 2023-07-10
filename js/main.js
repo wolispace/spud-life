@@ -27,8 +27,9 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("keydown", (event) => {
   // convey key presses into directional movements
   if (Object.keys(player.controlPos).includes(event.code)) {
+    console.log(event.code);
     controls.click(
-      "patch_" + (player.maxPatches - 30 + player.controlPos[event.code])
+      "patch_" + controls[event.code]
     );
   }
   if (event.code == "Space") {
