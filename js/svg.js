@@ -339,7 +339,7 @@ const svg = {
       <path d="m55.508 24.926-36.239 7.7782 27.577 48.967 37.83-10.607z" style="fill:#a9a8a6;stroke-linecap:round;stroke-width:2.5;stroke:#000"/>
       <path d="m18.915 32.704 0.35355 22.804 23.158 42.957 3.8891-16.087" style="fill:#4d4c4b;stroke-linecap:round;stroke-width:2.5;stroke:#000"/>
       <path d="m43.31 99.879 38.007-10.607 3.5355-17.147-37.83 10.253" style="fill:#646361;stroke-linecap:round;stroke-width:2.5;stroke:#000"/>
-      <path d="m26.34 35.886 27.224-6.0104 12.728 20.153-27.577 7.7782z" style="fill:#222e1f;stroke-linecap:round;stroke-width:2.5;stroke:#000"/>
+      <path id="scanner-screen" d="m26.34 35.886 27.224-6.0104 12.728 20.153-27.577 7.7782z" style="fill:#222e1f;stroke-linecap:round;stroke-width:2.5;stroke:#000"/>
       <ellipse transform="rotate(-29.243)" cx="12.971" cy="85.122" rx="3.4252" ry="4.0803" style="fill:#97dd06;stroke-linecap:round;stroke-opacity:.99574;stroke-width:2.5124;stroke:#000"/>
       <ellipse transform="rotate(-31.219)" cx="24.122" cy="89.475" rx="3.0962" ry="4.1676" style="fill:#dd3d06;stroke-linecap:round;stroke-opacity:.99574;stroke-width:2.6915;stroke:#000"/>
       <path d="m45.785 52.679s-2.1666-3.3645 2.4749-4.4194c3.8891-0.88388 5.1265 1.591 5.1265 1.591" style="fill:none;stroke-linecap:round;stroke-width:2.5;stroke:#479438"/>
