@@ -26,9 +26,12 @@ const state = {
       return player;
     }
   },
-  clear: () => {
+  clear: (reload = false) => {
     localStorage.clear();
-    window.location.reload();
+    if (reload) {
+      window.location.reload();
+    }
+    
   },
 };
 

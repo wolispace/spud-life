@@ -1,5 +1,10 @@
 // we have already defined things like player, spuds, controls, tools etc.. when including the js in html
 
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.has('reset')) {
+  state.clear();
+}
+
 // loads previously save state from localStorage if found
 player = state.load();
 bodySet = getBodySet();
@@ -27,7 +32,6 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("keydown", (event) => {
   // convey key presses into directional movements
   if (Object.keys(player.controlPos).includes(event.code)) {
-    console.log(event.code);
     controls.click(
       "patch_" + controls[event.code]
     );
