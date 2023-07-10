@@ -101,6 +101,15 @@ const hardware = {
           maxUses: 5,
         },
       },
+      scanner: {
+        type: "tool",
+        name: "Scanner",
+        desc: "Scans the patches around you for buried items",
+        price: 500,
+        rareness: 500,
+        upgradeCost: 500,
+        maxUpgrades: 4,
+      },
       chipper: {
         type: "machine",
         name: "Humble Chipper",

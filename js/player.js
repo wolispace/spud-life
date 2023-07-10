@@ -3,6 +3,7 @@ let player = {
   maxPatches: 120,
   sack: {},
   wallet: 1000,
+  scanner: 1,
   pos: 0,
   spudRegen: -5,
   sowSeeds: 0,

@@ -335,6 +335,19 @@ const svg = {
     <circle cx="26.081" cy="72.413" r="2.9375" style="fill:#dd3d06;stroke-linecap:round;stroke-opacity:.99574;stroke-width:2.5;stroke:#000"/>
    </svg>
     `,
+    scanner: `<svg id="SVGRoot" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+      <path d="m55.508 24.926-36.239 7.7782 27.577 48.967 37.83-10.607z" style="fill:#a9a8a6;stroke-linecap:round;stroke-width:2.5;stroke:#000"/>
+      <path d="m18.915 32.704 0.35355 22.804 23.158 42.957 3.8891-16.087" style="fill:#4d4c4b;stroke-linecap:round;stroke-width:2.5;stroke:#000"/>
+      <path d="m43.31 99.879 38.007-10.607 3.5355-17.147-37.83 10.253" style="fill:#646361;stroke-linecap:round;stroke-width:2.5;stroke:#000"/>
+      <path d="m26.34 35.886 27.224-6.0104 12.728 20.153-27.577 7.7782z" style="fill:#222e1f;stroke-linecap:round;stroke-width:2.5;stroke:#000"/>
+      <ellipse transform="rotate(-29.243)" cx="12.971" cy="85.122" rx="3.4252" ry="4.0803" style="fill:#97dd06;stroke-linecap:round;stroke-opacity:.99574;stroke-width:2.5124;stroke:#000"/>
+      <ellipse transform="rotate(-31.219)" cx="24.122" cy="89.475" rx="3.0962" ry="4.1676" style="fill:#dd3d06;stroke-linecap:round;stroke-opacity:.99574;stroke-width:2.6915;stroke:#000"/>
+      <path d="m45.785 52.679s-2.1666-3.3645 2.4749-4.4194c3.8891-0.88388 5.1265 1.591 5.1265 1.591" style="fill:none;stroke-linecap:round;stroke-width:2.5;stroke:#479438"/>
+      <path d="m40.128 53.563s-1.0616-7.8851 5.8336-9.7227c6.371-1.6979 12.198 3.8891 12.198 3.8891m-22.564-0.27492s-0.03582-6.2971 7.0711-9.0156c8.8373-3.3804 14.496 2.1213 14.496 2.1213" style="fill:none;stroke-linecap:round;stroke-width:2.5;stroke:#479438"/>
+      <path d="m36.946 28.638-9.0156-14.319s-2.5116-2.9404-5.3033-0.70711c-2.6516 2.1213-0.35355 5.1265-0.35355 5.1265l6.5407 11.49" style="fill:#a9a8a6;stroke-linecap:round;stroke-width:2.5;stroke:#000"/>
+      <path d="m23.688 17.324 6.8943 11.667v0" style="fill:#a9a8a6;stroke-linecap:round;stroke-opacity:.58222;stroke-width:2.5;stroke:#000"/>
+      <path d="m24.572 33.941 30.229-6.5407 25.809 41.719" style="fill:none;stroke-linecap:round;stroke-opacity:.85778;stroke-width:2.5;stroke:#fff"/>
+    </svg>`,
     hole: {
       class: "thick",
       paths: [

@@ -11,6 +11,12 @@ const tools = {
       title="${toolName}=${tool.uses}">
        ${toolSvg}<div class="toolNum">${tool.uses}</div></div>`;
     });
+    let scanner = svg.render('scanner') ?? dummyImg;
+    tools += `<div class="tool-button tool-scanner" 
+      onclick="scanner.show()"
+      title="scanner=${player.scanner}">
+      ${scanner}<div class="toolNum">${player.scanner}</div></div>`;
+
     let basket = svg.render('basket') ?? dummyImg;
     tools += `<div class="tool-button tool-basket" 
       onclick="sack.show()"

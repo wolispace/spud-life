@@ -405,12 +405,7 @@ const fields = {
     playerSprite.style.height = height;
  
 
-    // show if spuds in range using current spud diviner
-    if (fields.inRange()) {
-      playerSprite.classList.add("inRange");
-    } else {
-      playerSprite.classList.remove("inRange");
-    }
+   scanner.check();
   },
 
   removeCurrentPosHighlight: () => {
@@ -446,23 +441,6 @@ const fields = {
     }
   },
 
-  // returns true if there is a spud in range 'spud diviner' of the current pos
-  // upgrades to the scanner will reduce the range (kings moves, plus, straight vg.line, dot)
-  inRange: () => {
-    let field = player.fields[player.currentField];
-    let inRange = false;
-    player.scope.forEach((patchId) => {
-      if (!inRange && fields.checkForSpuds(field, player.pos + patchId)) {
-        inRange = true;
-      }
-    });
 
-    return inRange;
-  },
 
-  checkForSpuds: (field, patchId) => {
-    if (field[patchId] && field[patchId].spud && field[patchId].spud.qty > 0) {
-      return true;
-    }
-  },
 };

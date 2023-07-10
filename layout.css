@@ -175,8 +175,9 @@ h2 {
 }
 
 .container {
-  display: flex;
-  flex-direction: column;
+
+  width: 70vh;
+    overflow: hidden;
 }
 
 .field {
@@ -200,16 +201,6 @@ h2 {
     ". . . . . . . . . ."
     ". . . . . . . . . ."
     ". . . . . . . . . .";
-}
-
-#void {
-  background-color: black;
-  position: absolute;
-  top: 0;
-  left: 70vh;
-  width: 300px;
-  height: 100px;
-  z-index: 5;
 }
 
 
