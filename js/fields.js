@@ -4,7 +4,7 @@ const fields = {
     let index = 0;
     let patches = "";
     while (index < player.maxPatches) {
-      let patchClass = index < 10 ? "sky" : "patch";
+      let patchClass = index < player.cols ? "sky" : "patch";
       patches += `<div class="${patchClass}" id="patch_${index}">${svg.render(
         "blank",
         player.grassQty
@@ -53,7 +53,7 @@ const fields = {
       do {
         i++;
         player.fields[fieldId][i] = { id: `patch_${i}` };
-      } while (i < 10);
+      } while (i < player.cols);
       // if this field has building on it..
       if (player.buildings[fieldId]) {
         // fill top row with nothing
@@ -80,7 +80,7 @@ const fields = {
       }
 
       // skip the first row
-      i = 10;
+      i = player.cols;
       while (i < player.maxPatches) {
         let patch = {};
         if (rnd(2) > 0) {
@@ -194,12 +194,12 @@ const fields = {
 
   renderGrassLine: () => {
     // move player spite
-    let patch = getElementPos(`#patch_10`);
+    let patch = getElementPos(`#patch_${player.cols}`);
     
     let grassElement = document.querySelector(`#grassLine`);
     let grassBox = grassElement.getBoundingClientRect();
     let grassLineTop = patch.top - grassBox.height * 0.8;
-    let grassLineWidth =  patch.width * 10;
+    let grassLineWidth =  patch.width * player.cols;
     grassElement.style.top = `${grassLineTop}px`;
     grassElement.style.width = `${grassLineWidth}px`;
     
@@ -272,8 +272,8 @@ const fields = {
       sowMsg =
         "<div>You find some seed potatoes at the bottom of your sack and scatter them randomly in the field</div>";
       let blankPatches = [];
-      let i = 10;
-      while (i < 100) {
+      let i = player.cols;
+      while (i < player.maxPatches) {
         if (!player.fields[player.currentField][i]) {
           // sow seed and set i to 99
           blankPatches.push(i);
@@ -387,7 +387,7 @@ const fields = {
     let width = patch.width + "px";
 
     // player is smaller on top row
-    if (player.pos < 10) {
+    if (player.pos < player.colCount) {
       height = patch.height / 2 + "px";
       width = patch.width / 2 + "px";
       posY = patch.top + (patch.height / 2) + "px";

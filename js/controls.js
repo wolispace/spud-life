@@ -1,11 +1,11 @@
 
 const controls = {
-  ArrowDown: player.maxPatches - 9,
-  ArrowUp: player.maxPatches - 19,
-  ArrowRight: player.maxPatches - 8,
-  ArrowLeft: player.maxPatches - 10,
+  ArrowLeft: player.maxPatches - player.cols,
+  ArrowDown: player.maxPatches - player.cols + 1,
+  ArrowRight: player.maxPatches - player.cols + 2,
+  ArrowUp: player.maxPatches - (player.cols*2) + 1,
   click: (indexId) => {
-    let controlIds = [controls.ArrowUp,controls.ArrowLeft,controls.ArrowRight,controls.ArrowDown];
+    let controlIds = [controls.ArrowUp, controls.ArrowLeft, controls.ArrowRight, controls.ArrowDown];
     // user clicked a control to move up, down, left or right - interact with the patch we are moving into
     let bits = indexId.split("_");
     let index = parseInt(bits[1]);
@@ -28,7 +28,7 @@ const controls = {
           return;
         }
       }
-      if (index == controls.ArrowRight && player.pos == 9) {
+      if (index == controls.ArrowRight && player.pos == player.cols - 1) {
         let newField = player.currentField + 1;
         if (player.fields[newField]) {
           fields.switchField(newField);
@@ -50,21 +50,21 @@ const controls = {
       }
 
       if (index == controls.ArrowUp) {
-        newPos -= 10;
+        newPos -= player.cols;
         direction = "up";
         svg.directPlayerSprite("up");
         if (newPos < 0) {
           newPos = player.pos;
         }
       }
-      if (index == controls.ArrowLeft && player.pos % 10 > 0) {
+      if (index == controls.ArrowLeft && player.pos % player.cols > 0) {
         newPos -= 1;
         direction = "left";
         svg.directPlayerSprite("left");
         if (newPos < 0) {
         }
       }
-      if (index == controls.ArrowRight && player.pos % 10 < 9) {
+      if (index == controls.ArrowRight && player.pos % player.cols < 9) {
         newPos += 1;
         direction = "right";
         svg.directPlayerSprite("right");
@@ -73,7 +73,7 @@ const controls = {
         }
       }
       if (index == controls.ArrowDown) {
-        newPos += 10;
+        newPos += player.cols;
         svg.directPlayerSprite("down");
         if (newPos >= player.maxPatches) {
           newPos = player.pos;

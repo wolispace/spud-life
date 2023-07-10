@@ -1,6 +1,11 @@
+const rows = 13;
+const cols = 10;
+
 let player = {
   phase: "field",
-  maxPatches: 130,
+  maxPatches: cols * rows,
+  cols: cols,
+  rows: rows,
   sack: {},
   wallet: 1000,
   scanner: 1,
@@ -8,7 +13,7 @@ let player = {
   spudRegen: -5,
   sowSeeds: 0,
   grassQty: 7,
-  scope: [-11, -10, -9, -1, 0, 1, 9, 10, 11],
+  scope: [-cols-1, -cols, -cols+1, -1, 0, 1, cols-1, cols, cols+1],
   dialog: false,
   tools: {
     spade: {
@@ -40,9 +45,9 @@ let player = {
   },
   controlPos: {
     ArrowUp: 0,
-    ArrowLeft: 10,
-    ArrowRight: 11,
-    ArrowDown: 20,
+    ArrowLeft: cols,
+    ArrowRight: cols+1,
+    ArrowDown: cols*2,
   },
   animating: false,
 };
