@@ -9,7 +9,13 @@ if (urlParams.has('reset')) {
 player = state.load();
 bodySet = getBodySet();
 
+
+
 document.addEventListener("DOMContentLoaded", function () {
+  // set the grid column
+  let wholeField = document.querySelector(`.field`);
+
+  wholeField.style.gridTemplateColumns = `1fr `.repeat(player.cols);
   svg.hidePlayerSprite();
   fields.setupGrid();
   if (player.spuds.length < 1) {
