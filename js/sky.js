@@ -53,7 +53,7 @@ const sky = {
         }
       });
       sky.changeCloud(i);
-      let duration = rnd(250) + 50;
+      let duration = rnd(2) + 50;
       let delay = rnd(50);
       cloudBox.style.left = "-100px";
       cloudBox.style.animation = `drift ${duration}s ${delay}s linear infinite`;
@@ -134,12 +134,10 @@ const sky = {
   },
 
   lightDoor: () => {
-    console.log('light door');
     let nightShade = document.querySelector(`#house-door`);
     nightShade.style.fill = 'yellow';
   },
   darkDoor: () => {
-    console.log('light door');
     let nightShade = document.querySelector(`#house-door`);
     nightShade.style.fill = 'black';
   },
