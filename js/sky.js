@@ -53,7 +53,7 @@ const sky = {
         }
       });
       sky.changeCloud(i);
-      let duration = rnd(2) + 50;
+      let duration = rnd(300) + 50;
       let delay = rnd(50);
       cloudBox.style.left = "-100px";
       cloudBox.style.animation = `drift ${duration}s ${delay}s linear infinite`;

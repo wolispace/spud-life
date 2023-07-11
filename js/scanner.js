@@ -17,17 +17,17 @@ const scanner = {
   on: function () {
     let scannerIcon = document.querySelector(`#scanner-screen`);
     if (scannerIcon) {
-      console.trace('on');
       scannerIcon.classList.add("inRange");
-      //scannerIcon.style.fill = 'white';
+      let duration = 0.5;
+      let delay = 0;
+      scannerIcon.style.animation = `glow ${duration}s ${delay}s linear infinite`;
     }
   },
   off: function () {
     let scannerIcon = document.querySelector(`#scanner-screen`);
     if (scannerIcon) {
-      console.trace('off');
       scannerIcon.classList.remove("inRange");
-      //scannerIcon.style.fill = 'black';
+      scannerIcon.style.animation = null;
     }
   },
 

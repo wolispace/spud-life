@@ -526,7 +526,7 @@ h2 {
 
 .inRange {
   filter: drop-shadow(0px 0px 5px rgb(253, 228, 2));
-  fill: white;
+
 }
 
 .control-icon {
@@ -759,3 +759,14 @@ h2 {
   }
 }
 
+@keyframes glow {
+  from {
+    fill: rgb(0,0,0);
+  }
+  50% {
+    fill: rgb(255, 255, 255);
+  }
+  to {
+    fill: rgb(0,0,0);
+  }
+}
