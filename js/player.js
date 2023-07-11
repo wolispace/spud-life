@@ -3,7 +3,6 @@ const cols = 10;
 
 let player = {
   phase: "field",
-  maxPatches: cols * rows,
   cols: cols,
   rows: rows,
   sack: {},

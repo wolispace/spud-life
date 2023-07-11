@@ -8,17 +8,29 @@ const scanner = {
   },
   // show if spuds in range using current level spud diviner
   check: function () {
-    let scannerIcon = document.querySelector(`#scanner-screen`);
-    if (scannerIcon) {
-      if (scanner.inRange()) {
-        scannerIcon.classList.add("inRange");
-        scannerIcon.style.fill = 'white';
-      } else {
-        scannerIcon.classList.remove("inRange");
-        scannerIcon.style.fill = 'black';
-      }
+    if (scanner.inRange()) {
+      scanner.on();
+    } else {
+      scanner.off();
     }
   },
+  on: function () {
+    let scannerIcon = document.querySelector(`#scanner-screen`);
+    if (scannerIcon) {
+      console.trace('on');
+      scannerIcon.classList.add("inRange");
+      //scannerIcon.style.fill = 'white';
+    }
+  },
+  off: function () {
+    let scannerIcon = document.querySelector(`#scanner-screen`);
+    if (scannerIcon) {
+      console.trace('off');
+      scannerIcon.classList.remove("inRange");
+      //scannerIcon.style.fill = 'black';
+    }
+  },
+
   // returns true if there is a spud in range 'spud diviner' of the current pos
   // upgrades to the scanner will reduce the range:      
   // focus 1=kings squares, 2=plus, 3=horizontal, 4=infront.

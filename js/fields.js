@@ -3,7 +3,7 @@ const fields = {
   setupGrid() {
     let index = 0;
     let patches = "";
-    while (index < player.maxPatches) {
+    while (index < (player.cols * player.rows)) {
       let patchClass = index < player.cols ? "sky" : "patch";
       patches += `<div class="${patchClass}" id="patch_${index}">${svg.render(
         "blank",
@@ -81,7 +81,7 @@ const fields = {
 
       // skip the first row
       i = player.cols;
-      while (i < player.maxPatches) {
+      while (i < (player.cols * player.rows)) {
         let patch = {};
         if (rnd(2) > 0) {
           // rock, log or spud?
@@ -273,7 +273,7 @@ const fields = {
         "<div>You find some seed potatoes at the bottom of your sack and scatter them randomly in the field</div>";
       let blankPatches = [];
       let i = player.cols;
-      while (i < player.maxPatches) {
+      while (i < (player.cols * player.rows)) {
         if (!player.fields[player.currentField][i]) {
           // sow seed and set i to 99
           blankPatches.push(i);
@@ -410,7 +410,7 @@ const fields = {
 
   removeCurrentPosHighlight: () => {
     element = document.querySelector(`#playerSprite`);
-    element.classList.remove("inRange");
+    //scanner.off();
   },
   // player starts back at the entrance of the field
   // TODO: do we reset them to their first field or leave on last (an upgrade perhaps?)

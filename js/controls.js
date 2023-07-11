@@ -1,9 +1,9 @@
 
 const controls = {
-  ArrowLeft: player.maxPatches - player.cols,
-  ArrowDown: player.maxPatches - player.cols + 1,
-  ArrowRight: player.maxPatches - player.cols + 2,
-  ArrowUp: player.maxPatches - (player.cols*2) + 1,
+  ArrowLeft: (player.cols * player.rows) - player.cols,
+  ArrowDown: (player.cols * player.rows) - player.cols + 1,
+  ArrowRight: (player.cols * player.rows) - player.cols + 2,
+  ArrowUp: (player.cols * player.rows) - (player.cols*2) + 1,
   click: (indexId) => {
     let controlIds = [controls.ArrowUp, controls.ArrowLeft, controls.ArrowRight, controls.ArrowDown];
     // user clicked a control to move up, down, left or right - interact with the patch we are moving into
@@ -68,14 +68,14 @@ const controls = {
         newPos += 1;
         direction = "right";
         svg.directPlayerSprite("right");
-        if (newPos >= player.maxPatches) {
+        if (newPos >= (player.cols * player.rows)) {
           newPos = player.pos;
         }
       }
       if (index == controls.ArrowDown) {
         newPos += player.cols;
         svg.directPlayerSprite("down");
-        if (newPos >= player.maxPatches) {
+        if (newPos >= (player.cols * player.rows)) {
           newPos = player.pos;
         }
       }
