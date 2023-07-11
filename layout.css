@@ -114,10 +114,10 @@ h2 {
   position: absolute;
   top: -1000px;
   left: -1000px;
-  width: 80vw;
+  width: 90%;
+  max-width: 33rem;
   height: 80vh;
   overflow: hidden;
-  max-width: 50em;
   max-height: 50em;
   background-color: silver;
   border-radius: 10px;

@@ -311,8 +311,8 @@ function showDialog(title, content, footer) {
   let element = document.querySelector(`.dialog`);
 
   svg.hidePlayerSprite();
-  element.style["top"] = "5vh";
-  element.style["left"] = "9vw";
+  element.style["top"] = "1rem";
+  element.style["left"] = "1rem";
   element = document.querySelector(`.dialog .header .title`);
   element.innerHTML = title;
   element = document.querySelector(`.dialog .content`);
