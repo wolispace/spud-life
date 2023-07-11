@@ -369,6 +369,8 @@ const fields = {
         return;
       }
       tools.render();
+      // match duration of spuds.animate() which is 1.5s
+      setTimeout(() => {tools.jiggle('basket')}, 1500);
 
       if (patch) {
         fields.renderPatch(patch);
