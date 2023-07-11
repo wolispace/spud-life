@@ -397,7 +397,7 @@ const fields = {
     let playerSprite = document.querySelector(`#playerSprite`);
  
     if (playerSprite.innerHTML == "") {
-      playerSprite.innerHTML = svg.renderPerson(player.body); //svg.render("eye", 1, "person", { paths: svgPaths });
+      playerSprite.innerHTML = svg.renderPerson(player.body);
     }
     playerSprite.style.top = posY;
     playerSprite.style.left = posX;
@@ -405,7 +405,7 @@ const fields = {
     playerSprite.style.height = height;
  
 
-   scanner.check();
+    scanner.check();
   },
 
   removeCurrentPosHighlight: () => {
@@ -441,6 +441,14 @@ const fields = {
     }
   },
 
-
+  whichTool: function (patch) {
+    let tool = '';
+    if (patch.block.type == "rock") {
+      tool = "pick";
+    } else if (patch.block.type == "log") {
+      tool = "axe";
+    }
+    return tool;
+  }
 
 };

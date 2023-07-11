@@ -81,4 +81,9 @@ const tools = {
       tool.uses = tool.maxUses;
     });
   },
+  jiggle: function (tool) {
+    let thisTool = document.querySelector(`.tool-${tool} svg`);
+    console.log(tool, thisTool);
+    svg.animate(thisTool, `jiggle-up`, 0.25);
+  }
 };

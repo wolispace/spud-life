@@ -64,7 +64,7 @@ const controls = {
         if (newPos < 0) {
         }
       }
-      if (index == controls.ArrowRight && player.pos % player.cols < 9) {
+      if (index == controls.ArrowRight && player.pos % player.cols < (player.cols - 1)) {
         newPos += 1;
         direction = "right";
         svg.directPlayerSprite("right");
@@ -91,17 +91,12 @@ const controls = {
           let thisBlock = document.querySelector(`#${patch.id} svg`);
           svg.animate(thisBlock, `jiggle-${direction}`, 0.25);
 
-          let tool = "";
-          if (patch.block.type == "rock") {
-            tool = "pick";
-          } else if (patch.block.type == "log") {
-            tool = "axe";
-          } else {
-          }
-          let thisTool = document.querySelector(`.tool-${tool} svg`);
-
-          svg.animate(thisTool, `jiggle-up`, 0.25);
+          let tool = fields.whichTool(patch);
           let playerTool = player.tools[tool];
+          if (playerTool) {
+            tools.jiggle(tool);
+          }
+
           if (playerTool && playerTool.uses > 0) {
             // if the patch is blocked.. the click reduces until zero and the block is removed
             player.sack[patch.block.type] = player.sack[patch.block.type] ?? 0;
@@ -118,10 +113,10 @@ const controls = {
                 250,
                 element,
                 player
-              );
-            }
-            playerTool.uses--;
-            tools.render();
+                );
+              }
+              playerTool.uses--;
+              tools.render();
 
             if (patch) {
               fields.updatePatch(patch);
