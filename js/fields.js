@@ -389,7 +389,7 @@ const fields = {
     let width = patch.width + "px";
 
     // player is smaller on top row
-    if (player.pos < player.colCount) {
+    if (player.pos < player.cols) {
       height = patch.height / 2 + "px";
       width = patch.width / 2 + "px";
       posY = patch.top + (patch.height / 2) + "px";
