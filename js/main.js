@@ -277,21 +277,23 @@ function setPhase(phase) {
 // random dreams based on ong titles eg:
 function dream() {
   let dreams = [
-    "You dream of living in a park, but are rudely awoken by the dustmen",
-    "You dream you are a walrus",
-    "You dream of holding onto nothing, to see how long nothing lasts",
-    "You dream of spinning plates",
-    "You don't dream of anything, however you wake up, back to life, back to reality",
-    "You dream you are a hero, just for one day",
-    "You dream a little dream of me",
-    "You dream the cake is a lie",
-    "You dream about the delivery man",
-    "You dream you are baba",
+    "You dreamt of living in a park, but were rudely awoken by the dustmen",
+    "You dreamt you were a walrus",
+    "You dreamt of holding onto nothing, to see how long nothing lasts",
+    "You dreamt of spinning plates",
+    "You didn't dream of anything, however you wake up, back to life, back to reality",
+    "You dreamt you were a hero, just for one day",
+    "You dreamt a little dreamt of me",
+    "You dreamt the cake is a lie",
+    "You dreamt about the delivery man",
+    "You dreamt you were baba",
   ];
   let dream = dreams[rnd(dreams.length)];
   let sow = fields.resowField();
 
-  let content = `<div>${dream}</div>${sow}`;
+  let content = `<div class="dialog-message-content">`;
+  content += `<div>${dream}.</div>${sow}`;
+  content += `<div>`;
   let title = "Morning";
   let footer = "";
   footer += `<button class="buttonize" onclick="wake();"> Get out of bed </button>`;

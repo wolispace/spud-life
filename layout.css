@@ -129,6 +129,7 @@ h2 {
   z-index: 6;
   display: flex;
   flex-direction: column;
+  text-shadow: 0px 0px 4px rgba(0,0,0,0.45);
 }
 
 .dialog .header {
@@ -162,6 +163,13 @@ h2 {
   overflow-y: auto;
 }
 
+.dialog-message-content {
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
 .dialog .footer {
   position: sticky;
   height: 2rem;
@@ -173,6 +181,27 @@ h2 {
 .button {
   cursor: pointer;
 }
+
+button {
+  background-color: rgb(109, 160, 143) !important;
+  padding:0.3rem !important;
+  font-weight: bold;
+  border-radius: 3px;
+  cursor: pointer;
+}
+button:hover {
+  opacity: .75;
+}
+
+
+.scan-off-true {
+  opacity: 0.5;
+}
+
+.scan-on-false {
+  opacity: 0.5;
+}
+
 
 .container {
 
@@ -371,6 +400,7 @@ h2 {
   border-radius: 3px;
   padding: var(--sl-padding);
   margin: var(--sl-padding);
+  text-shadow: 0px 0px 4px rgba(0,0,0,0.45);
 }
 
 .hardware div:hover,

@@ -270,7 +270,7 @@ const fields = {
     let sowMsg = "";
     if (player.sowSeeds > 0) {
       sowMsg =
-        "<div>You find some seed potatoes at the bottom of your sack and scatter them randomly in the field</div>";
+        "<div>You find some seed potatoes at the bottom of your basket and scatter them randomly.</div>";
       let blankPatches = [];
       let i = player.cols;
       while (i < (player.cols * player.rows)) {

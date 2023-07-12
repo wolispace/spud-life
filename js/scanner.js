@@ -1,19 +1,36 @@
 const scanner = {
   // show scanner dialog.. could be used to show where things are
-  show: function () {
-    let content = `<div>Scanner level ${player.scanner}</div>`;
+  show: function (scanState) {
+    player.scanState = scanState;
+    console.log(scanState, player.scanState);
+    let content = `<div class="dialog-message-content">`;
+    content += `<div>Scanner level ${player.scanLevel}</div>`;
+    content += `<div><button class="scan-off-${scanState}" onclick="scanner.show(false);">OFF</button>`;
+    content += `<button class="scan-on-${scanState}" onclick="scanner.show(true);">ON</button>`;
+    content += `<div><div>`;
     let title = "Scanner";
-    let footer = "";
+    let footer = `<button onclick="hideDialog()">Ok</button>`;
     showDialog(title, content, footer);
+    scanner.check();
+    state.save();
   },
   // show if spuds in range using current level spud diviner
   check: function () {
-    if (scanner.inRange()) {
-      scanner.on();
+    if (player.scanState) {
+      if (scanner.inRange()) {
+        scanner.on();
+      } else {
+        scanner.off();
+      }
     } else {
       scanner.off();
     }
   },
+  // stet the state to true or false
+  setState: function (state) {
+    player.scanState = state;
+  },
+
   on: function () {
     let scannerIcon = document.querySelector(`#scanner-screen`);
     if (scannerIcon) {

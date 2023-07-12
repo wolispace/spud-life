@@ -1,4 +1,4 @@
-const rows = 13;
+const rows = 12;
 const cols = 10;
 
 let player = {
@@ -7,7 +7,8 @@ let player = {
   rows: rows,
   sack: {},
   wallet: 1000,
-  scanner: 1,
+  scanLevel: 1,
+  scanState: true,
   pos: 0,
   spudRegen: -5,
   sowSeeds: 0,

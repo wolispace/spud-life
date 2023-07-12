@@ -13,9 +13,9 @@ const tools = {
     });
     let scannerImg = svg.render('scanner') ?? dummyImg;
     tools += `<div class="tool-button tool-scanner" 
-      onclick="scanner.show()"
-      title="scanner=${player.scanner}">
-      ${scannerImg}<div class="toolNum">${player.scanner}</div></div>`;
+      onclick="scanner.show(player.scanState)"
+      title="scanner=${player.scanLevel}">
+      ${scannerImg}<div class="toolNum">${player.scanLevel}</div></div>`;
 
     let basket = svg.render('basket') ?? dummyImg;
     tools += `<div class="tool-button tool-basket" 
