@@ -94,6 +94,8 @@ const spuds = {
 
     player.wallet += totalIncome;
     customers.render();
+    state.save();
+    tools.render();
 
   },
 

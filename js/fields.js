@@ -254,6 +254,8 @@ const fields = {
       if (patch.spudFound) {
         delete patch.spudFound;
         spuds.animate(patch);
+        state.save();
+        tools.render();
       }
 
       // if we drew a hole, make sure its opacity matches the spud qty -5 = 100%, 0 = 0%
