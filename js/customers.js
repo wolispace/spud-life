@@ -12,7 +12,7 @@ const customers = {
       customerList += customers.build(id);
     }
     let element = document.querySelector(`#customerLine`);
-    element.innerHTML += customerList;
+    element.innerHTML = customerList;
     customers.animate();
     sky.goDark();
   },
@@ -66,6 +66,8 @@ const customers = {
     customers.qty = 0;
     customers.meals = 0;
     customers.income = 0;
+    // let element = document.querySelector(`#customerLine`);
+    // element.innerHTML = customerList;
     svg.showPlayerSprite();
     player.phase = 'night';
     // turn light on in house

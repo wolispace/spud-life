@@ -198,7 +198,7 @@ const fields = {
     
     let grassElement = document.querySelector(`#grassLine`);
     let grassBox = grassElement.getBoundingClientRect();
-    let grassLineTop = patch.top - grassBox.height * 0.8;
+    let grassLineTop = patch.top - (grassBox.height * 0.5);
     let grassLineWidth =  patch.width * player.cols;
     grassElement.style.top = `${grassLineTop}px`;
     grassElement.style.width = `${grassLineWidth}px`;
@@ -206,7 +206,7 @@ const fields = {
     // align the path the customer parade along
     let customerElement = document.querySelector(`#customerLine`);
     let customerBox = customerElement.getBoundingClientRect();
-    let customerLineTop = patch.top - customerBox.height * 1.2;
+    let customerLineTop = patch.top - (customerBox.height * 1.3);
     let customerLineHeight = patch.height / 3;
     customerElement.style.top = `${customerLineTop}px`;
     customerElement.style.height = `${customerLineHeight}px`;

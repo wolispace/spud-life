@@ -235,7 +235,7 @@ button:hover {
   top: 0;
   width: 100%;
   height: 3rem;
-
+  overflow: hidden;
   background-color: rgba(0, 0, 0, 0.01);
 }
 
@@ -265,12 +265,13 @@ button:hover {
   left: 0;
   width: 100%;
   height: 1.2vh;
+  background-color: transparent;
   background-image: url("grassLine.svg");
   z-index: 4;
 }
 
 .customer {
-  width: 3.8vh;
+  width: 3vh;
   position: absolute;
   left: -10%;
 }
@@ -740,20 +741,20 @@ button:hover {
     left: 100%;
     transform: scale(1, 1);
   }
-  35% {
+  30% {
     left: 63%;
     transform: scale(1, 1);
   }
-  36% {
-    left: 63%;
-    transform: scale(-1, 1);
-  }
-  36% {
+  31% {
     left: 62%;
     transform: scale(-1, 1);
-  }
+  } 
   45% {
     left: 63%;
+    transform: scale(-1, 1);
+  }
+  70% {
+    left: 62%;
     transform: scale(-1, 1); 
   }
   to {
