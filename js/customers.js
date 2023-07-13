@@ -48,7 +48,6 @@ const customers = {
    * Run the animation for the customerSprite for 5 to 7 seconds in duration
    */
   run: (id) => {
-    
     let customerSprite = document.querySelector(`#customer_${id}`);
     let duration = rnd(3) + 6;
     customerSprite.style.animation = `move-customer ${duration}s ease-in-out`;
@@ -70,7 +69,15 @@ const customers = {
     // element.innerHTML = customerList;
     svg.showPlayerSprite();
     player.phase = 'night';
+    customers.showMoney();
+    tools.render();
     // turn light on in house
 
-  }
+  },
+  showMoney: function () {
+    let startPatch = `#patch_6`;
+    let endTool = `.tool-wallet`;
+    let itemSvg = svg.render('gold');
+    svg.animateArc(startPatch, endTool, itemSvg);
+  },
 };

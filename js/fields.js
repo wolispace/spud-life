@@ -378,6 +378,17 @@ const fields = {
     }
     state.save();
   },
+  // based on a patch, what is the svg for the buried item
+  getPatchSvg: function (patch) {
+    let itemSvg = '';
+    if(patch.item) {
+      itemSvg = svg.render(patch.item);
+    } else {
+      itemSvg = spuds.render(patch.spud.name);
+    }
+
+    return itemSvg;
+  },
 
   highlightCurrentPos: () => {
     // move player spite

@@ -138,49 +138,9 @@ const spuds = {
 
   // animate an item being dug up into the basket
   animate: (patch) => {
-    let patchPos = getElementPos(`#${patch.id}`);
-
-    let itemSprite = document.querySelector(`#itemSprite`);
-
-    if(patch.item) {
-      itemSprite.innerHTML = svg.render(patch.item);
-    } else {
-      itemSprite.innerHTML = spuds.render(patch.spud.name);
-    }
-    itemSprite.style.top = patchPos.top + "px";
-    itemSprite.style.left = patchPos.left + "px";
-    itemSprite.style.width = patchPos.width + "px";
-    itemSprite.style.height = patchPos.height + "px";    
-
-    let basketPos = getElementPos(`.tool-basket`);
-
-    let startX = 0 + (patchPos.width / 2);
-    let startY = 0 + (patchPos.height / 2);
-    let top = 0 - (patchPos.top/2);
-    let endX = basketPos.left - patchPos.left + (patchPos.width / 2);
-    let endY = basketPos.top - patchPos.top + (patchPos.height / 2);
-
-    // everything must be relative to the patch - it is 0,0
-    // calculate x2,y2 from the middle of the basket tool
-    // calculate top.. or just use zero?
-    // calculate offset for beizer control points (in a little from vertical based on distance between x1 and x2)
-    // Mx1,y1 Cx1+(x2-x1/5),top x2-(x2-x1/5),top x2,y2
-    let bit = (endX-startX)/5;
-
-    let arc = `path('M ${startX},${startY} C ${startX+bit},${top} ${endX-bit},${top} ${endX},${endY}')`;
-    // slow start fast middle
-    var easing = 'cubic-bezier(0, 0, .25, 0)';
-    // slow and get faster
-    easing = 'cubic-bezier(0.3, 0, 1, 1)';
-    easing = 'ease-in';
-    itemSprite.style.display = 'block';
-    itemSprite.style.offsetPath = arc;
-    itemSprite.style.offsetRotate = `0deg`;
-    itemSprite.style.animation = `into-basket 1.5s ${easing} 0s 1 normal forwards`;
-    itemSprite.addEventListener("animationend", function handler() {
-      itemSprite.style.animation = 'none';
-      itemSprite.style.display = 'none';
-      this.removeEventListener("animationend", handler);
-    });
+    let startPatch = `#${patch.id}`;
+    let endTool = `.tool-basket`;
+    let itemSvg = fields.getPatchSvg(patch);
+    svg.animateArc(startPatch, endTool, itemSvg);
   }
 };
