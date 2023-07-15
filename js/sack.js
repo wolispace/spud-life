@@ -60,6 +60,7 @@ const sack = {
     let random = rnd(5) + 5;
     let footer = "";
     footer += `<button class="buttonize" onclick="state.clear(true);"> Reset! </button>`;
+    footer += `<button class="buttonize" onclick="hint.test();"> Hints </button>`;
     footer += `<button class="buttonize" onclick="defineCharacter()"> Customize </button>`;
     footer += `<button class="buttonize" onclick="customers.render(${random}); hideDialog();"> ${random} customers </button>`;
     footer += `<button class="buttonize" onclick="hideDialog()"> Ok </button>`;

@@ -61,10 +61,6 @@ const customers = {
     });
   },
   endSale: () => {
-    // reset the customer numbers
-    customers.qty = 0;
-    customers.meals = 0;
-    customers.income = 0;
     // let element = document.querySelector(`#customerLine`);
     // element.innerHTML = customerList;
     svg.showPlayerSprite();
@@ -79,5 +75,17 @@ const customers = {
     let endTool = `.tool-wallet`;
     let itemSvg = svg.render('gold');
     svg.animateArc(startPatch, endTool, itemSvg);
+  },
+  getIncome: function () {
+    let msg = '';
+    if (customers.qty) {
+      msg = `<div>You sold ${customers.qty} meals and made $${customers.income}.</div>`;
+    }
+    // reset the customer numbers
+    customers.qty = 0;
+    customers.meals = 0;
+    customers.income = 0;
+
+    return msg;
   },
 };

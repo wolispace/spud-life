@@ -112,7 +112,7 @@ h2 {
 
 #hintSprite {
   position: absolute;
-  width: 300px;
+  width: 43vw;
   top: -1000px;
   left: 0;
   z-index: 10;
@@ -133,7 +133,7 @@ h2 {
 }
 
 .hintArrowRight {
-  left: 250px;
+  left: 34vw;
 }
 
 #hintText {
