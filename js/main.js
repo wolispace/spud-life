@@ -33,7 +33,16 @@ document.addEventListener("DOMContentLoaded", function () {
   svg.showPlayerSprite();
   resizeStuff();
 
-  setTimeout( () => {hint.render(101,"The hardware shop where you can buy an upgrade items. [Got that]")}, 1000);
+  setTimeout( () => {hint.render(`#patch_111`,"Use your spade to dig for potatoes. [Got that]")}, 1000);
+  //setTimeout( () => {hint.render(`#patch_3`,"The hardware shop where you can buy an upgrade items. [Got that]")}, 3000);
+  setTimeout( () => {hint.render(`#patch_6`,"Your food truck where you sell your delicious potato-centric dishes. [Got that]")}, 6000);
+  //setTimeout( () => {hint.render(`#patch_119`,"Some logs that are blocking your way.Some logs that are blocking your way.Some logs that are blocking your way.Some logs that are blocking your way. Usually under anything that blocks you way will be a potato. [Got that]")}, 9000);
+  setTimeout( () => {hint.render(`.tool-spade`,"Some logs that are blocking your way.Some logs that are blocking your way.Some logs that are blocking your way.Some logs that are blocking your way. Usually under anything that blocks you way will be a potato. [Got that]")}, 12000);
+  setTimeout( () => {hint.render(`.tool-pick`,"Some logs that are blocking your way.Some logs that are blocking your way.Some logs that are blocking your way.Some logs that are blocking your way. Usually under anything that blocks you way will be a potato. [Got that]")}, 14000);
+  setTimeout( () => {hint.render(`.tool-axe`,"Some logs that are blocking your way.Some logs that are blocking your way.Some logs that are blocking your way.Some logs that are blocking your way. Usually under anything that blocks you way will be a potato. [Got that]")}, 16000);
+  setTimeout( () => {hint.render(`.tool-scanner`,"Some logs that are blocking your way.Some logs that are blocking your way.Some logs that are blocking your way.Some logs that are blocking your way. Usually under anything that blocks you way will be a potato. [Got that]")}, 18000);
+  setTimeout( () => {hint.render(`.tool-basket`,"Some logs that are blocking your way.Some logs that are blocking your way.Some logs that are blocking your way.Some logs that are blocking your way. Usually under anything that blocks you way will be a potato. [Got that]")}, 20000);
+  setTimeout( () => {hint.render(`.tool-wallet`,"Some logs that are blocking your way.Some logs that are blocking your way.Some logs that are blocking your way.Some logs that are blocking your way. Usually under anything that blocks you way will be a potato. [Got that]")}, 22000);
 });
 
 // hook into keys for movement and digging

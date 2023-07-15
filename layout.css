@@ -113,7 +113,6 @@ h2 {
 #hintSprite {
   position: absolute;
   width: 300px;
-  height: 100px;
   top: -1000px;
   left: 0;
   z-index: 10;
@@ -121,22 +120,38 @@ h2 {
 }
 
 #hintArrow {
-  position: absolute;
-  top: 20px;
+  position: relative;
   z-index: 11;
 }
-#hintArrowTR {
-  right: 0;
+
+.hintArrowTop {
+  top: 20px;
+}
+
+.hintArrowButton {
+  top: -20px;
+}
+
+.hintArrowRight {
+  left: 250px;
 }
 
 #hintText {
-  position: absolute;
   background-color: yellow;
   border:3px solid black;
   border-radius: 10px;
   padding: 1rem;
   margin: 0 27px;
+}
+
+.hintTextTop {
+  position: absolute;
   top: 57px;
+
+}
+
+.hintTextBottom {
+
 }
 
 .dialog {
