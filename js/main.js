@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
   svg.showPlayerSprite();
   resizeStuff();
 
-  setTimeout( () => {hint.render(3,"this is not a pipe")}, 1000);
+  setTimeout( () => {hint.render(101,"The hardware shop where you can buy an upgrade items. [Got that]")}, 1000);
 });
 
 // hook into keys for movement and digging
