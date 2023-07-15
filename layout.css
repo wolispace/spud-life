@@ -110,6 +110,33 @@ h2 {
   z-index: 4;
 }
 
+#hintSprite {
+  position: absolute;
+  width: 200px;
+  height: 100px;
+  top: -1000px;
+  left: 0;
+  display: flex;
+  z-index: 110;
+  flex-direction: column;
+  justify-content: end;
+  transition: 0.5s ease-in-out;
+}
+
+#hintArrow {
+  position: relative;
+  top: 20px;
+
+}
+
+#hintText {
+  background-color: yellow;
+  border:3px solid black;
+  border-radius: 10px;
+  padding: 1rem;
+  margin: 0 27px;
+}
+
 .dialog {
   position: absolute;
   top: -1000px;

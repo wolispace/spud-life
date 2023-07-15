@@ -32,6 +32,8 @@ document.addEventListener("DOMContentLoaded", function () {
   sky.clouds();
   svg.showPlayerSprite();
   resizeStuff();
+
+  setTimeout( () => {hint.render(3,"this is not a pipe")}, 1000);
 });
 
 // hook into keys for movement and digging
@@ -71,6 +73,7 @@ function resizeStuff() {
 
 // new game so generate
 function initGame() {
+  // intro to game and initial settings (hints on/off)
   spuds.sprout(6);
   fields.fillField(player.currentField);
   fields.rollPatches();
@@ -80,6 +83,31 @@ function initGame() {
   player.shop.machines[starter] = player.hardware[starter].initial;
   tools.reset();
   defineCharacter();
+}
+
+function gameIntro () {
+  content = 'You are a humble potato farmer.';
+  content += 'During the day, you dig for potatoes (spuds).';
+  content += 'At the end of the day you open your food cart and sell delicious potato meals.';
+  content += 'Then you go to sleep and wake refreshed and ready to find more spuds!';
+  content += 'Visit the hardware store to upgrade your equipment and sell any junk you found in your travels.';
+
+
+  // toggle hints
+  // - these show you what to do next 
+  // 'Stand infront of your house and press UP to go into it and end the day'
+  // 'Stand infront of your food cart and press UP to open yur cart for the evening'
+  // 'Stand infront of the Hardware store to buy or upgrade equipment'
+  // 'You can but new machiens for making different potato-based foods of varying quality'
+  // 'Some potatoes are better in some machines and you get more from each meal'
+  // 'You need a pick to break rocks'
+  // 'You need an axe to clear logs'
+  // 'You have used up your {tool} for today. Sleep and rejuvenate it'
+  // 'Stand on the sign and press RIGHT to enter your new field'
+  // 'Click on the basket to view its contents'
+  // 'Click on your wallet to see how much money you have'
+  // 'Choose a machine on the left'
+  // 'Move all spuds (or one at a time) into, or out of, the machines hopper'
 }
 
 // the default

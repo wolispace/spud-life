@@ -60,9 +60,8 @@ const sack = {
     let random = rnd(5) + 5;
     let footer = "";
     footer += `<button class="buttonize" onclick="state.clear(true);"> Reset! </button>`;
-    footer += `<button class="buttonize" onclick="fields.buyField()"> Buy a field </button>`;
-    footer += `<button class="buttonize" onclick="customers.render(${random}); hideDialog();"> Show ${random} customers! </button>`;
-    footer += `<a href="testSvg.html">Test SVG</a>`;
+    footer += `<button class="buttonize" onclick="defineCharacter()"> Customize </button>`;
+    footer += `<button class="buttonize" onclick="customers.render(${random}); hideDialog();"> ${random} customers </button>`;
     footer += `<button class="buttonize" onclick="hideDialog()"> Ok </button>`;
     showDialog("Inventory", `${content}${content2}`, footer);
   },

@@ -348,6 +348,12 @@ const svg = {
       <path d="m23.688 17.324 6.8943 11.667v0" style="fill:#a9a8a6;stroke-linecap:round;stroke-opacity:.58222;stroke-width:2.5;stroke:#000"/>
       <path d="m24.572 33.941 30.229-6.5407 25.809 41.719" style="fill:none;stroke-linecap:round;stroke-opacity:.85778;stroke-width:2.5;stroke:#fff"/>
     </svg>`,
+    arrow: `<svg id="SVGRoot" width="49.183" height="56.179" version="1.1" viewBox="0 0 49.183 56.179" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
+    <path d="m1.1293 2.6975 5.187 29.554 7.5995-5.3076 20.024 27.986 14.113-10.615-21.954-24.367 10.374-7.7201z" style="fill:yellow"/>
+    <path d="m33.337 54.929-19.059-28.589-7.7201 7.2376-5.3076-32.328 34.258 11.701-10.615 5.9107 23.04 25.09" style="fill:yellow;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.85778;stroke-width:2.5;stroke:#000"/>
+    </svg>
+    `,
+
     hole: {
       class: "thick",
       paths: [
