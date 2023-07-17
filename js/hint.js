@@ -1,5 +1,5 @@
 const hint = {
-  render: function (item, text, okButton, showCancel = true) {
+  render: function (item, text, okButton, showOff = true) {
     if (!player.hints) {
       return;
     }
@@ -21,8 +21,8 @@ const hint = {
 
     let hintSprite = document.querySelector('#hintSprite');
     let arrowSvg = svg.render('arrow', 1, style);
-    let cancelButton = showCancel ? `<button class="button buttonize" onclick="hint.cancel()"> Cancel </button>` : '';
-    let buttonStart = `<div class="hintButtons">${cancelButton}`;
+    let offButton = showOff ? `<button class="button buttonize" onclick="hint.off()"> Off </button>` : '';
+    let buttonStart = `<div class="hintButtons">${offButton}`;
     buttonStart += ` <button class="button buttonize" onclick="${okButton}()"> `;
     let buttonEnd = `</button></div>`;
     text = text.replace('[', buttonStart);
@@ -69,7 +69,7 @@ const hint = {
     hintSprite.style.top = "-1000px";
   },
 
-  cancel: function () {
+  off: function () {
     hint.close();
     player.hints = false;
     state.save();

@@ -80,16 +80,22 @@ function initGame() {
   let starter = "chipper";
   player.shop.machines[starter] = player.hardware[starter].initial;
   tools.reset();
-  defineCharacter();
+  gameIntro();
 }
 
 function gameIntro () {
-  content = 'You are a humble potato farmer.';
-  content += 'During the day, you dig for potatoes (spuds).';
-  content += 'At the end of the day you open your food cart and sell delicious potato meals.';
-  content += 'Then you go to sleep and wake refreshed and ready to find more spuds!';
-  content += 'Visit the hardware store to upgrade your equipment and sell any junk you found in your travels.';
+  let content = '<div class="dialog-content">';
+  content += '<p>You are a humble potato farmer.</p>';
+  content += '<p>During the day, you dig for potatoes (spuds).</p>';
+  content += '<p>At the end of the day you open your food cart and sell delicious potato meals.</p>';
+  content += '<p>Then you go to sleep and wake refreshed and ready to find more spuds!</p>';
+  content += '<p>Visit the hardware store to upgrade your equipment and sell any junk you found in your travels.</p>';
+  content += '</div>';
 
+  let footer = "";
+  footer += `<button class="buttonize" onclick="hints.off(); defineCharacter()"> Skip tutorial </button>`;
+  footer += `<button class="buttonize" onclick="defineCharacter()"> Create your character </button>`;
+  showDialog("Welcome", content, footer);
 
   // toggle hints
   // - these show you what to do next 
@@ -197,6 +203,7 @@ function defineCharacter(mode) {
     setPhase(player.phase);
     let element = document.querySelector(`#playerSprite`);
     element.innerHTML = svg.renderPerson(player.body);
+    resizeStuff();
     hint.player();
   } else {
     let newBody = mode == "random" ? randomBody() : defaultBody();

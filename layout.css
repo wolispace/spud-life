@@ -209,6 +209,10 @@ h2 {
   gap: 1rem;
 }
 
+.dialog-content {
+  padding: 2rem;
+}
+
 .dialog .footer {
   position: sticky;
   height: 2rem;
@@ -584,6 +588,7 @@ button:hover {
 
 .creator {
   display: flex;
+  padding: 1rem;
 }
 
 .creator .left div {
