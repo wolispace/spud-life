@@ -2,7 +2,9 @@ const rows = 12;
 const cols = 10;
 
 let player = {
+  hints: true,
   phase: "field",
+  daytime: true,
   cols: cols,
   rows: rows,
   sack: {},

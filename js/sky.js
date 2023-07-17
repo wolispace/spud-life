@@ -121,6 +121,8 @@ const sky = {
       let nightShade = document.querySelector(`#nightShade`);
       nightShade.style.opacity = 1;
       sky.lightDoor();
+      player.daytime = false;
+      state.save();
     });
     //element.style.animation = `${type} ${duration}s ease-in-out 0s 1 normal forwards`;
   },
@@ -130,6 +132,8 @@ const sky = {
     svg.animate(nightShade, "go-light", 4, function () { 
       let nightShade = document.querySelector(`#nightShade`);
       nightShade.style.opacity = 0;
+      player.daytime = true;
+      state.save();
     });
   },
 

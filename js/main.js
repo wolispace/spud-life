@@ -197,6 +197,7 @@ function defineCharacter(mode) {
     setPhase(player.phase);
     let element = document.querySelector(`#playerSprite`);
     element.innerHTML = svg.renderPerson(player.body);
+    hint.home();
   } else {
     let newBody = mode == "random" ? randomBody() : defaultBody();
 

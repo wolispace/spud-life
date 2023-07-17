@@ -112,7 +112,6 @@ h2 {
 
 #hintSprite {
   position: absolute;
-  width: 43vw;
   top: -1000px;
   left: 0;
   z-index: 10;
