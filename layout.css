@@ -131,10 +131,6 @@ h2 {
   top: -20px;
 }
 
-.hintArrowRight {
-  left: 34vw;
-}
-
 #hintText {
   background-color: yellow;
   border:3px solid black;
@@ -149,8 +145,8 @@ h2 {
 
 }
 
-.hintTextBottom {
-
+.hintButtons {
+  padding-top: 1rem;
 }
 
 .dialog {
@@ -233,7 +229,7 @@ button {
   cursor: pointer;
 }
 button:hover {
-  opacity: .75;
+  background-color: rgba(109, 160, 143, .75) !important;
 }
 
 

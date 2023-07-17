@@ -1,5 +1,5 @@
 const hint = {
-  render: function (item, text, okButton) {
+  render: function (item, text, okButton, showCancel = true) {
     if (!player.hints) {
       return;
     }
@@ -21,9 +21,10 @@ const hint = {
 
     let hintSprite = document.querySelector('#hintSprite');
     let arrowSvg = svg.render('arrow', 1, style);
-    let buttonStart = `<br/><button class="button buttonize" onclick="hint.cancel()"> Cancel </button>`;
+    let cancelButton = showCancel ? `<button class="button buttonize" onclick="hint.cancel()"> Cancel </button>` : '';
+    let buttonStart = `<div class="hintButtons">${cancelButton}`;
     buttonStart += ` <button class="button buttonize" onclick="${okButton}()"> `;
-    let buttonEnd = `</button>`;
+    let buttonEnd = `</button></div>`;
     text = text.replace('[', buttonStart);
     text = text.replace(']', buttonEnd);
     let content = ``;
@@ -76,21 +77,38 @@ const hint = {
 
   test: function () {
     hideDialog();
-    setTimeout(() => { hint.render(`#patch_111`, "Use your spade to dig for potatoes. [Got that]") }, 1);
+    setTimeout(() => { hint.render(`#patch_111`, "Use your spade to dig for potatoes. [Got that]", 'hint.close') }, 1);
     //setTimeout( () => {hint.render(`#patch_3`,"The hardware shop where you can buy an upgrade items. [Got that]")}, 3000);
-    setTimeout(() => { hint.render(`#patch_6`, "Your food truck where you sell your delicious potato-centric dishes. [Got that]") }, 2000);
-    //setTimeout( () => {hint.render(`#patch_119`,"Some logs that are blocking your way.Some logs that are blocking your way.Some logs that are blocking your way.Some logs that are blocking your way. Usually under anything that blocks you way will be a potato. [Got that]")}, 9000);
-    setTimeout(() => { hint.render(`.tool-spade`, "Some logs that are blocking your way.Some logs that are blocking your way.Some logs that are blocking your way.Some logs that are blocking your way. Usually under anything that blocks you way will be a potato. [Got that]") }, 4000);
-    setTimeout(() => { hint.render(`.tool-pick`, "Some logs that are blocking your way.Some logs that are blocking your way.Some logs that are blocking your way.Some logs that are blocking your way. Usually under anything that blocks you way will be a potato. [Got that]") }, 6000);
-    setTimeout(() => { hint.render(`.tool-axe`, "Some logs that are blocking your way.Some logs that are blocking your way.Some logs that are blocking your way.Some logs that are blocking your way. Usually under anything that blocks you way will be a potato. [Got that]") }, 8000);
-    setTimeout(() => { hint.render(`.tool-scanner`, "Some logs that are blocking your way.Some logs that are blocking your way.Some logs that are blocking your way.Some logs that are blocking your way. Usually under anything that blocks you way will be a potato. [Got that]") }, 10000);
-    setTimeout(() => { hint.render(`.tool-basket`, "Some logs that are blocking your way.Some logs that are blocking your way.Some logs that are blocking your way.Some logs that are blocking your way. Usually under anything that blocks you way will be a potato. [Got that]") }, 12000);
-    setTimeout(() => { hint.render(`.tool-wallet`, "Some logs that are blocking your way.Some logs that are blocking your way.Some logs that are blocking your way.Some logs that are blocking your way. Usually under anything that blocks you way will be a potato. [Got that]") }, 14000);
+    setTimeout(() => { hint.render(`#patch_6`, "Your food truck where you sell your delicious potato-centric dishes. [Got that]", 'hint.close') }, 2000);
+    //setTimeout( () => {hint.render(`#patch_119`,"Some logs that are blocking your way.Some logs that are blocking your way.Some logs that are blocking your way.Some logs that are blocking your way. Usually under anything that blocks you way will be a potato. [Got that]", 'hint.close')}, 9000);
+    setTimeout(() => { hint.render(`.tool-spade`, "Some logs that are blocking your way.Some logs that are blocking your way.Some logs that are blocking your way. [Ok]", 'hint.close') }, 4000);
+    setTimeout(() => { hint.render(`.tool-pick`, "Some logs that are blocking your way.Some logs that are blocking your way.Some logs that are blocking your way.Some logs that are blocking your way. Usually under anything that blocks you way will be a potato. [Sure thing]", 'hint.close') }, 6000);
+    setTimeout(() => { hint.render(`.tool-axe`, "Some logs that are blocking your way.Some logs that are blocking your way.Some logs that are blocking your way. [Right!]", 'hint.close') }, 8000);
+    setTimeout(() => { hint.render(`.tool-scanner`, "Some logs that are blocking your way.Some logs that are blocking your way.Some logs that are blocking your way.Some logs that are blocking your way. Usually under anything that blocks you way will be a potato. [Got that]", 'hint.close') }, 10000);
+    setTimeout(() => { hint.render(`.tool-basket`, "Some logs that are blocking your way.. [Got that]", 'hint.close') }, 12000);
+    setTimeout(() => { hint.render(`.tool-wallet`, "Some logs that are blocking your way.Some logs that are blocking your way.Some logs that are blocking your way.Some logs that are blocking your way. Usually under anything that blocks you way will be a potato. [Got that]", 'hint.close') }, 14000);
 
   },
 
+  player: function () {
+    const msg = "This is you. [Okay..]";
+    hint.render(`#patch_0`, msg, 'hint.controls', false);
+  },
+  controls: function () {
+    const msg = "Use these to move around the field. [Right..]";
+    hint.render(`#patch_111`, msg, 'hint.field', false);
+  },
+  field: function () {
+    const msg = "Use the spade to dig where you stand. [Aha..]";
+    hint.render(`.tool-spade`, msg, 'hint.spade', false);
+  },
+  spade: function () {
+    const msg = "Rocks and logs block your path. [Let's start digging!]";
+    hint.render(`#patch_53`, msg, 'hint.close', false);
+  },   
+
   home: function () {
-    const msg = "Your home. Stand in front and press UP to go inside. [Got that]";
+    const msg = "Your home. Stand in front and press UP to go inside. [Ok]";
     hint.render(`#patch_0`, msg, 'hint.hardware');
   },
 
