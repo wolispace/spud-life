@@ -340,7 +340,7 @@ function dream() {
   let content = `<div class="dialog-message-content">`;
   content += `${income}${sleep}${dream}${sow}`;
   content += `<div>`;
-  let title = "Home time";
+  let title = "Home sweet home";
   let footer = "";
   footer += `<button class="buttonize" onclick="wake();"> Get out of bed </button>`;
   showDialog(title, content, footer);

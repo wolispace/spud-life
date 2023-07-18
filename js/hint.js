@@ -1,6 +1,6 @@
 const hint = {
-  render: function (item, text, okButton, showOff = true) {
-    if (!player.hints) {
+  render: function (item, text, okButton, hintType) {
+    if (player.hinted[hintType]) {
       return;
     }
     // if itemBox is below player.cols / 2 arrow is on left else right
@@ -21,8 +21,8 @@ const hint = {
 
     let hintSprite = document.querySelector('#hintSprite');
     let arrowSvg = svg.render('arrow', 1, style);
-    let offButton = showOff ? `<button class="button buttonize" onclick="hint.off()"> Skip hints </button>` : '';
-    let buttonStart = `<div class="hintButtons">${offButton}`;
+    let skipCheckbox = hintType ? `<input type="checkbox" class="checkbox buttonize" id="hintSkip" data-hint="${hintType}" > Skip this </input>` : '';
+    let buttonStart = `<div class="hintButtons">${skipCheckbox}`;
     buttonStart += ` <button class="button buttonize" onclick="${okButton}()"> `;
     let buttonEnd = `</button></div>`;
     text = text.replace('[', buttonStart);
@@ -63,8 +63,19 @@ const hint = {
     }
   },
 
-
+  isItSkipped: function () {
+    let skipHint = document.querySelector('#hintSkip');
+    if (skipHint && skipHint.checked) {
+      player.hinted[skipHint.dataset.hint] = true;
+      hint.hide();
+    }
+  },
   close: function () {
+    // if they dont want to see this again, then mark it as hinted
+    hint.isItSkipped();
+    hint.hide();
+  },
+  hide: function () {
     let hintSprite = document.querySelector('#hintSprite');
     hintSprite.style.top = "-1000px";
   },
@@ -108,30 +119,38 @@ const hint = {
   },
   player: function () {
     const msg = `This is you. In front of your house. [${hint.ok()}..]`;
-    hint.render(`#patch_0`, msg, 'hint.controls', false);
+    hint.render(`#patch_0`, msg, 'hint.controls', 'intro');
   },
   controls: function () {
+    hint.isItSkipped();
     const msg = `Use these to move around the field. [${hint.ok()}..]`;
-    hint.render(`#patch_111`, msg, 'hint.field', false);
+    hint.render(`#patch_111`, msg, 'hint.field', 'intro');
   },
   field: function () {
+    hint.isItSkipped();
     const msg = `Use the spade to dig where you stand. [${hint.ok()}..]`;
-    hint.render(`.tool-spade`, msg, 'hint.spade', false);
+    hint.render(`.tool-spade`, msg, 'hint.spade', 'intro');
   },
   spade: function () {
+    hint.isItSkipped();
     const msg = `Rocks and logs block your path. [Let's start digging!]`;
-    hint.render(`#patch_53`, msg, 'hint.close', false);
+    hint.render(`#patch_53`, msg, 'hint.close', 'intro');
   },   
 
   noDigHome: function () {
     console.log(player.pos);
     const msg = `You can't dig on the top row. Move down onto an empty patch and dig there. [${hint.ok()}]`;
-    hint.render(`#patch_${player.pos}`, msg, 'hint.close', false);
+    hint.render(`#patch_${player.pos}`, msg, 'hint.close', 'noDigHome');
   },
 
   toolUsedUp: function (toolName) {
     const msg = `Your ${toolName} is exhausted. Tomorrow morning it will be refreshed and you can use it again. [${hint.ok()}]`;
-    hint.render(`.tool-${toolName}`, msg, 'hint.close', false);
+    hint.render(`.tool-${toolName}`, msg, 'hint.close', 'toolUsedUp');
+  },
+
+  goHome: function () {
+    const msg = `Its getting late. Go home and get some sleep. [${hint.ok()}]`;
+    hint.render(`#patch_0`, msg, 'hint.close', 'goHome'); 
   },
 
   home: function () {

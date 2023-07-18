@@ -3,6 +3,7 @@ const cols = 10;
 
 let player = {
   hints: true,
+  hinted: {},
   phase: "field",
   daytime: true,
   cols: cols,
