@@ -15,7 +15,7 @@
 }
 
 @media (max-width: 480px) {
-  .dialog, button {
+  .dialog, button, #hintSprite {
     font-size: 1.25rem;
   }
 }
