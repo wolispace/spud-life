@@ -312,7 +312,7 @@ const fields = {
     let thisTool = document.querySelector(`.tool-spade svg`);
     svg.animate(thisTool, `jiggle-up`, 0.25);
 
-    if (tool.uses > 0 && patch.id > 9) {
+    if (tool.uses > 0 && player.pos >= player.cols) {
       // if nothing defined for a patch then its an empty patch
       if (!patch) {
         patch = {};
