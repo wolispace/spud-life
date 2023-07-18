@@ -124,13 +124,14 @@ const hint = {
   },   
 
   noDigHome: function () {
-    const msg = `You can't dig on the top row. Move down onto an empty patch and dig there. [${hint.ok()}]`;
-    hint.render(`#patch_0`, msg, 'hint.close', false);
-  },
-
-  toolUsedUp: function () {
+    console.log(player.pos);
     const msg = `You can't dig on the top row. Move down onto an empty patch and dig there. [${hint.ok()}]`;
     hint.render(`#patch_${player.pos}`, msg, 'hint.close', false);
+  },
+
+  toolUsedUp: function (toolName) {
+    const msg = `Your ${toolName} is exhausted. Tomorrow morning it will be refreshed and you can use it again. [${hint.ok()}]`;
+    hint.render(`.tool-${toolName}`, msg, 'hint.close', false);
   },
 
   home: function () {

@@ -71,7 +71,7 @@ const hardware = {
         upgradeCost: 50,
         maxUpgrades: 100,
         initial: {
-          uses: 0,
+          uses: 5,
           maxUses: 5,
         },
       },
@@ -84,7 +84,7 @@ const hardware = {
         upgradeCost: 100,
         maxUpgrades: 100,
         initial: {
-          uses: 0,
+          uses: 5,
           maxUses: 5,
         },
       },
@@ -97,7 +97,7 @@ const hardware = {
         upgradeCost: 100,
         maxUpgrades: 100,
         initial: {
-          uses: 0,
+          uses: 5,
           maxUses: 5,
         },
       },

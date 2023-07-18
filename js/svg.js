@@ -737,6 +737,9 @@ const svg = {
   },
 
   renderPerson: (person) => {
+    if (!person) {
+      return;
+    }
     let paths = svg.assemblePerson(person);
     // separate the first element of paths so we can wrap in <g>
     let body = paths.pop();

@@ -313,7 +313,7 @@ const fields = {
     svg.animate(thisTool, `jiggle-up`, 0.25);
 
     if (tool.uses < 1) {
-      hint.toolUsedUp();
+      hint.toolUsedUp('spade');
     }
 
     if (player.pos < player.cols) {
