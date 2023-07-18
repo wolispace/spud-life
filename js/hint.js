@@ -138,7 +138,6 @@ const hint = {
   },   
 
   noDigHome: function () {
-    console.log(player.pos);
     const msg = `You can't dig on the top row. Move down onto an empty patch and dig there. [${hint.ok()}]`;
     hint.render(`#patch_${player.pos}`, msg, 'hint.close', 'noDigHome');
   },

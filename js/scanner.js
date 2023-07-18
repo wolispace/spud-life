@@ -2,9 +2,9 @@ const scanner = {
   // show scanner dialog.. could be used to show where things are
   show: function (scanState) {
     player.scanState = scanState;
-    console.log(scanState, player.scanState);
     let content = `<div class="dialog-message-content">`;
-    content += `<div>Scanner level ${player.scanLevel}</div>`;
+    content += `<div>Your scanner blinks if there is something underground near you.</div>`;
+    content += `<div>You have a basic level ${player.scanLevel} scanner. This detects all squares directly next to you and under you.</div>`;
     content += `<div><button class="scan-off-${scanState}" onclick="scanner.show(false);">OFF</button>`;
     content += `<button class="scan-on-${scanState}" onclick="scanner.show(true);">ON</button>`;
     content += `<div><div>`;
