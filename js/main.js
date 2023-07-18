@@ -85,7 +85,9 @@ function initGame() {
 
 function gameIntro () {
   let content = '<div class="dialog-content">';
-  content += '<p>You are a humble potato farmer.</p>';
+  content += '<p><i>You receive a letter from a distance aunt. ';
+  content += 'She is retiring from the food business and gives some things to see if you can make it into a thriving business</i></p>';
+  content += '<p><b>Welcome to Spud life!</b></p>';
   content += '<p>During the day, you dig for potatoes (spuds).</p>';
   content += '<p>At the end of the day you open your food cart and sell delicious potato meals.</p>';
   content += '<p>Then you go to sleep and wake refreshed and ready to find more spuds!</p>';
@@ -95,7 +97,7 @@ function gameIntro () {
   let footer = "";
   footer += `<button class="buttonize" onclick="hints.off(); defineCharacter()"> Skip tutorial </button>`;
   footer += `<button class="buttonize" onclick="defineCharacter()"> Create your character </button>`;
-  showDialog("Welcome", content, footer);
+  showDialog("Welcome to spud life", content, footer);
 
   // toggle hints
   // - these show you what to do next 

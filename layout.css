@@ -403,7 +403,7 @@ button:hover {
   color: white;
   font-weight: bold;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 
 .tool-button {

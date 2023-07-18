@@ -8,7 +8,7 @@ let player = {
   cols: cols,
   rows: rows,
   sack: {},
-  wallet: 1000,
+  wallet: 0,
   scanLevel: 1,
   scanState: true,
   pos: 0,
@@ -20,15 +20,7 @@ let player = {
   tools: {
     spade: {
       uses: 0,
-      maxUses: 55,
-    },
-    pick: {
-      uses: 0,
-      maxUses: 55,
-    },
-    axe: {
-      uses: 0,
-      maxUses: 55,
+      maxUses: 5,
     },
   },
   buildings: [

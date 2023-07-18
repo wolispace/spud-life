@@ -312,6 +312,14 @@ const fields = {
     let thisTool = document.querySelector(`.tool-spade svg`);
     svg.animate(thisTool, `jiggle-up`, 0.25);
 
+    if (tool.uses < 1) {
+      hint.toolUsedUp();
+    }
+
+    if (player.pos < player.cols) {
+      hint.noDigHome();
+    }
+
     if (tool.uses > 0 && player.pos >= player.cols) {
       // if nothing defined for a patch then its an empty patch
       if (!patch) {

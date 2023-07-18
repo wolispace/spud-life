@@ -21,7 +21,7 @@ const hint = {
 
     let hintSprite = document.querySelector('#hintSprite');
     let arrowSvg = svg.render('arrow', 1, style);
-    let offButton = showOff ? `<button class="button buttonize" onclick="hint.off()"> Off </button>` : '';
+    let offButton = showOff ? `<button class="button buttonize" onclick="hint.off()"> Skip hints </button>` : '';
     let buttonStart = `<div class="hintButtons">${offButton}`;
     buttonStart += ` <button class="button buttonize" onclick="${okButton}()"> `;
     let buttonEnd = `</button></div>`;
@@ -89,31 +89,57 @@ const hint = {
     setTimeout(() => { hint.render(`.tool-wallet`, "Some logs that are blocking your way.Some logs that are blocking your way.Some logs that are blocking your way.Some logs that are blocking your way. Usually under anything that blocks you way will be a potato. [Got that]", 'hint.close') }, 14000);
 
   },
-
+  // a random OK message
+  ok: function () {
+    okText = [
+     "Ok",
+     "Okay",
+     "Righto",
+     "Gotcha",
+     "I see",
+     "Interesting",
+     "Thanks",
+     "Got that",
+     "Roger",
+     "Understood",
+     "Aha",
+    ];
+    return okText[rnd(okText.length)];
+  },
   player: function () {
-    const msg = "This is you. In front of your house. [Okay..]";
+    const msg = `This is you. In front of your house. [${hint.ok()}..]`;
     hint.render(`#patch_0`, msg, 'hint.controls', false);
   },
   controls: function () {
-    const msg = "Use these to move around the field. [Right..]";
+    const msg = `Use these to move around the field. [${hint.ok()}..]`;
     hint.render(`#patch_111`, msg, 'hint.field', false);
   },
   field: function () {
-    const msg = "Use the spade to dig where you stand. [Aha..]";
+    const msg = `Use the spade to dig where you stand. [${hint.ok()}..]`;
     hint.render(`.tool-spade`, msg, 'hint.spade', false);
   },
   spade: function () {
-    const msg = "Rocks and logs block your path. [Let's start digging!]";
+    const msg = `Rocks and logs block your path. [Let's start digging!]`;
     hint.render(`#patch_53`, msg, 'hint.close', false);
   },   
 
+  noDigHome: function () {
+    const msg = `You can't dig on the top row. Move down onto an empty patch and dig there. [${hint.ok()}]`;
+    hint.render(`#patch_0`, msg, 'hint.close', false);
+  },
+
+  toolUsedUp: function () {
+    const msg = `You can't dig on the top row. Move down onto an empty patch and dig there. [${hint.ok()}]`;
+    hint.render(`#patch_${player.pos}`, msg, 'hint.close', false);
+  },
+
   home: function () {
-    const msg = "Your home. Stand in front and press UP to go inside. [Ok]";
+    const msg = `Your home. Stand in front and press UP to go inside. [${hint.ok()}]`;
     hint.render(`#patch_0`, msg, 'hint.hardware');
   },
 
   hardware: function () {
-    const msg = "Your local hardware shop. Stand in front and press UP to go inside. [Got that]";
+    const msg = `Your local hardware shop. Stand in front and press UP to go inside. [${hint.ok()}]`;
     hint.render(`#patch_3`, msg, 'hint.close');
   } ,
 }
