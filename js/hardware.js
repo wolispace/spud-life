@@ -5,7 +5,7 @@ const hardware = {
     // return to the field when the dialog closes
     player.phase = 'field';
     let content = "";
-    let style = `style="width:2rem;"`;
+    let style = `style="width: 3rem;"`;
     Object.entries(player.hardware).forEach(([toolName, tool]) => {
       let state = "Buy";
       let buyCost = tool.price;

@@ -14,6 +14,12 @@
   --sl-blank: black;
 }
 
+@media (max-width: 480px) {
+  .dialog, button {
+    font-size: 1.25rem;
+  }
+}
+
 .selectPart {
   width: 4rem;
 }
@@ -152,9 +158,8 @@ h2 {
 .dialog {
   position: absolute;
   top: -1000px;
-  left: -1000px;
-  width: 90%;
-  max-width: 33rem;
+  left: 20x;
+  right: 20px;
   height: 80vh;
   overflow: hidden;
   max-height: 50em;
@@ -215,7 +220,6 @@ h2 {
 
 .dialog .footer {
   position: sticky;
-  height: 2rem;
   padding: 0.2rem;
   background-color:rgb(160, 160, 160);
   text-align: right;
@@ -247,14 +251,12 @@ button:hover {
 
 
 .container {
-
-  width: 70vh;
-    overflow: hidden;
+  width: 100vw;
+  max-width:540px;
+  overflow: hidden;
 }
 
 .field {
-  width: 70vh;
-  max-width: 50em;
   background-color: rgb(62, 122, 62);
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
@@ -401,7 +403,7 @@ button:hover {
   color: white;
   font-weight: bold;
   display: flex;
-  gap: 2px;
+  justify-content: space-between;
 }
 
 .tool-button {
@@ -422,7 +424,8 @@ button:hover {
 }
 
 .tools svg {
-  width: 9vh;
+  width: 14vw;
+  max-width: 75px;
 }
 
 .toolNum {

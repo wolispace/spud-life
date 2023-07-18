@@ -91,7 +91,7 @@ const hint = {
   },
 
   player: function () {
-    const msg = "This is you. [Okay..]";
+    const msg = "This is you. In front of your house. [Okay..]";
     hint.render(`#patch_0`, msg, 'hint.controls', false);
   },
   controls: function () {

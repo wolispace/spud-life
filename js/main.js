@@ -354,11 +354,14 @@ function wake() {
 // show the dialog
 function showDialog(title, content, footer) {
   hideDialog();
+  let itemObj = document.querySelector('#patch_0');
+  let patch = itemObj.getBoundingClientRect();
   let element = document.querySelector(`.dialog`);
 
   svg.hidePlayerSprite();
-  element.style["top"] = "1rem";
-  element.style["left"] = "1rem";
+  element.style.top = "1rem";
+  element.style.left = (patch.width/2) + 'px';;
+  element.style.width = ((patch.width * (player.cols - 1) )) + 'px';
   element = document.querySelector(`.dialog .header .title`);
   element.innerHTML = title;
   element = document.querySelector(`.dialog .content`);
