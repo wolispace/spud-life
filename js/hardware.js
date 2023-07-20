@@ -12,7 +12,7 @@ const hardware = {
       let sellCost = tool.price;
 
       if (player.tools[toolName]) {
-        state = "Upgade";
+        state = "Upgrade";
         buyCost = tool.upgradeCost;
       }
       let onClickBuy = "";
