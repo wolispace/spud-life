@@ -7,10 +7,15 @@ const home = {
     }
   },
   day: function () {
-    console.log('day');
+    let content = `<div class="dialog-message-content">`;
+    content += `<div>${svg.inline('house')} Your home is a little messy.</div>`;
+    content += `<div>Go outside and use your spade to dig for potatoes.<div>`;
+    content += `<div>Your scanner flashes when something is buried in the patches directly next to you and under you.<div>`;
+    let title = "Home sweet home";
+    let footer = `<button onclick="hideDialog()">Go outside</button>`;
+    showDialog(title, content, footer);
   },
   night: function () {
-    console.log('night');
     hideDialog();
     tools.reset();
     tools.render();

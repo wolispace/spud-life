@@ -596,6 +596,10 @@ const svg = {
       ],
     },
   },
+  inline: function (itemName) {
+    let style = `style="width: 3rem;"`;
+    return svg.render(itemName, 1, style);
+  },
 
   render: (svgName, repeat = 1, style = "", svgInfo = null) => {
     let svgHtml = "";

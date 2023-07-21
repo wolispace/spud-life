@@ -5,13 +5,12 @@ const hardware = {
     // return to the field when the dialog closes
     player.phase = 'field';
     let content = "";
-    let style = `style="width: 3rem;"`;
     Object.entries(player.hardware).forEach(([toolName, tool]) => {
       let state = "Buy";
       let buyCost = tool.price;
       let sellCost = tool.price;
 
-      if (player.tools[toolName]) {
+      if (player.tools[toolName] || toolName == 'scanner') {
         state = "Upgrade";
         buyCost = tool.upgradeCost;
       }
@@ -37,9 +36,8 @@ const hardware = {
       }
 
       if (showItem) {
-        let itemIcon = svg.render(toolName, 1, style);
         content += `<div class="hardware-button buttonize button_${tool.type} " id="hardware_${toolName}">`;
-        content += ` <div class="hardware-button-icon">${itemIcon}</div>`;
+        content += ` <div class="hardware-button-icon">${svg.inline(toolName)}</div>`;
         content += ` <div class="hardware-button-desc"><strong>${tool.name}. </strong> ${tool.desc}</div>`;
         if (!player.tools[toolName] && player.sack[toolName]) {
           content += ` <div class="hardware-button-sell buttonize button  ${canSellClass}" ${onClickSell}>Sell<br/>$${sellCost}</div>`;
