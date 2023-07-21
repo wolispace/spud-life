@@ -39,7 +39,7 @@ const controls = {
         if (player.pos == 0) {
           // go into home
           let thisBlock = document.querySelector(`#playerSprite svg`);
-          svg.animate(thisBlock, `shrink`, 1, () => {setPhase("night")});
+          svg.animate(thisBlock, `shrink`, 1, () => {home.enter()});
         } else if (player.pos == 3) {
           let thisBlock = document.querySelector(`#playerSprite svg`);
           svg.animate(thisBlock, `shrink`, 1, () => {setPhase("hardware")});

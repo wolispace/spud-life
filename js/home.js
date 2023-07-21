@@ -11,5 +11,17 @@ const home = {
   },
   night: function () {
     console.log('night');
+    hideDialog();
+    tools.reset();
+    tools.render();
+    fields.rollPatches();
+    if (player.body) {
+      dream();
+      sky.goLight();
+      sky.darkDoor();
+      fields.resetPlayer();
+    } else {
+      defineCharacter();
+    }
   }
 };
