@@ -49,7 +49,7 @@ const hardware = {
 
     let title = "Hardware shop";
     let footer = "";
-    showDialog(title, content, footer);
+    dialog.render(title, content, footer);
     fields.renderField();
   },
   // loop through each tool on sale and change style if we can afford it or not

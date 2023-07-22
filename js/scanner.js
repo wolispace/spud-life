@@ -9,8 +9,8 @@ const scanner = {
     content += `<button class="scan-on-${scanState}" onclick="scanner.show(true);">ON</button>`;
     content += `<div><div>`;
     let title = "Scanner";
-    let footer = `<button onclick="hideDialog()">Ok</button>`;
-    showDialog(title, content, footer);
+    let footer = `<button onclick="dialog.hide()">Ok</button>`;
+    dialog.render(title, content, footer);
     scanner.check();
     state.save();
   },

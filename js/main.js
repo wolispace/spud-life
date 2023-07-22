@@ -65,7 +65,8 @@ window.addEventListener("resize", (event) => {
 });
 
 function initModules() {
-  hint.sprite = hint.sprite ?? document.querySelector('#hintSprite');
+  hint.sprite = document.querySelector('#hintSprite');
+  dialog.sprite = document.querySelector(`.dialog`);
   // set the grid column
   let wholeField = document.querySelector(`.field`);
   wholeField.style.gridTemplateColumns = `1fr `.repeat(player.cols);
@@ -117,8 +118,8 @@ function gameIntro () {
   let footer = "";
   footer += `<button class="buttonize" onclick="hints.off(); defineCharacter()"> Skip tutorial </button>`;
   footer += `<button class="buttonize" onclick="defineCharacter()"> Create your character </button>`;
-  showDialog("Welcome to spud life", content, footer);
-
+  dialog.render("Welcome to spud life", content, footer);
+console.log('ok');
   // toggle hints
   // - these show you what to do next 
   // 'Stand infront of your house and press UP to go into it and end the day'
@@ -219,7 +220,7 @@ function randomBody() {
 function defineCharacter(mode) {
   // show or hide the character creator via a dialog
   if (mode == "save") {
-    hideDialog();
+    dialog.hide();
     state.save();
     tools.render();
     setPhase(player.phase);
@@ -247,7 +248,7 @@ function defineCharacter(mode) {
     let footer = "";
     footer += `<button class="buttonize" onclick="defineCharacter('random')"> Randomize </button>`;
     footer += `<button class="buttonize" onclick="defineCharacter('save')"> Ok </button>`;
-    showDialog("Character creator", `${content}`, footer);
+    dialog.render("Character creator", `${content}`, footer);
     demoBody();
   }
 }
@@ -289,7 +290,7 @@ function allocate() {
   let title = "Load spuds into machines";
   let footer = "";
   footer += `<button class="buttonize" onclick="setPhase('sales')"> Open shop </button>`;
-  showDialog(title, content, footer);
+  dialog.render(title, content, footer);
 
   machines.render();
   sack.render();
@@ -297,7 +298,7 @@ function allocate() {
 
 // const phases = ["field", "hardware", "allocate", "sales", "night"];
 function setPhase(phase) {
-  hideDialog();
+  dialog.hide();
   player.phase = phase;
   state.save();
   if (player.phase != "field") {
@@ -308,7 +309,7 @@ function setPhase(phase) {
     } else if (player.phase == "sales") {
       spuds.sell();
     } else if (player.phase == "night") {
-      hideDialog();
+      dialog.hide();
       tools.reset();
       tools.render();
       fields.rollPatches();
@@ -325,7 +326,7 @@ function setPhase(phase) {
     // display the fields patches in their current state
     fields.renderField();
     fields.highlightCurrentPos();
-    hideDialog();
+    dialog.hide();
   }
 }
 
@@ -363,47 +364,14 @@ function dream() {
   let title = "Home sweet home";
   let footer = "";
   footer += `<button class="buttonize" onclick="wake();"> Get out of bed </button>`;
-  showDialog(title, content, footer);
+  dialog.render(title, content, footer);
 }
 
 function wake() {
   let playerSprite = document.querySelector(`#playerSprite svg`);
   svg.animate(playerSprite, `grow`, 1, () => {svg.showPlayerSprite();});
   setPhase('field');
-  hideDialog();
+  dialog.hide();
 }
 
-// show the dialog
-function showDialog(title, content, footer) {
-  hideDialog();
-  let itemObj = document.querySelector('#patch_0');
-  let patch = itemObj.getBoundingClientRect();
-  let element = document.querySelector(`.dialog`);
 
-  svg.hidePlayerSprite();
-  element.style.top = "1rem";
-  element.style.left = (patch.width/2) + 'px';;
-  element.style.width = ((patch.width * (player.cols - 1) )) + 'px';
-  element = document.querySelector(`.dialog .header .title`);
-  element.innerHTML = title;
-  element = document.querySelector(`.dialog .content`);
-  element.innerHTML = content;
-  element = document.querySelector(`.dialog .footer`);
-  element.innerHTML = footer;
-  player.dialog = true;
-}
-
-// hide the dialog
-function hideDialog() {
-  let element = document.querySelector(`.dialog`);
-  element.style["top"] = "-10000px";
-  element.style["left"] = "-10000px";
-  element = document.querySelector(`.dialog .header .title`);
-  element.innerHTML = '';
-  element = document.querySelector(`.dialog .content`);
-  element.innerHTML = '';
-  element = document.querySelector(`.dialog .footer`);
-  element.innerHTML = '';
-  player.dialog = false;
-  svg.showPlayerSprite();
-}

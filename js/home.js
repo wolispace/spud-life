@@ -12,11 +12,11 @@ const home = {
     content += `<div>Go outside and use your spade to dig for potatoes.<div>`;
     content += `<div>Your scanner flashes when something is buried in the patches directly next to you and under you.<div>`;
     let title = "Home sweet home";
-    let footer = `<button onclick="hideDialog()">Go outside</button>`;
-    showDialog(title, content, footer);
+    let footer = `<button onclick="dialog.hide()">Go outside</button>`;
+    dialog.render(title, content, footer);
   },
   night: function () {
-    hideDialog();
+    dialog.hide();
     tools.reset();
     tools.render();
     fields.rollPatches();
