@@ -10,25 +10,24 @@ const dialog = {
     dialog.sprite.style.top = "1rem";
     dialog.sprite.style.left = (patch.width/2) + 'px';;
     dialog.sprite.style.width = ((patch.width * (player.cols - 1) )) + 'px';
-    let dialogPart = document.querySelector(`.dialog .header .title`);
-    dialogPart.innerHTML = title;
-    dialogPart = document.querySelector(`.dialog .content`);
+    dialog.part(`.dialog .header .title`, title);
+    dialog.part(`.dialog .content`, content);
+    dialog.part(`.dialog .footer`, footer);
+    dialog.visible = true;
+  },
+  
+  part: function (partClass, content) {
+    let dialogPart = document.querySelector(partClass);
     dialogPart.innerHTML = content;
-    dialogPart = document.querySelector(`.dialog .footer`);
-    dialogPart.innerHTML = footer;
-    player.dialog = true;
   },
 
   hide: function () {
     dialog.sprite.style["top"] = "-10000px";
     dialog.sprite.style["left"] = "-10000px";
-    let dialogPart = document.querySelector(`.dialog .header .title`);
-    dialogPart.innerHTML = '';
-    dialogPart = document.querySelector(`.dialog .content`);
-    dialogPart.innerHTML = '';
-    dialogPart = document.querySelector(`.dialog .footer`);
-    dialogPart.innerHTML = '';
-    dialogPart = false;
+    dialog.part(`.dialog .header .title`, '');
+    dialog.part(`.dialog .content`, '');
+    dialog.part(`.dialog .footer`, '');
+    dialog.visible = false;
     svg.showPlayerSprite();
   },
 
