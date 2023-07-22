@@ -9,15 +9,13 @@ let player = {
   cols: cols,
   rows: rows,
   sack: {},
-  wallet: 0,
-  scanLevel: 1,
+  wallet: 999999,
+  scanLevel: 2,
   scanState: true,
   pos: 0,
   spudRegen: -5,
   sowSeeds: 0,
   grassQty: 7,
-  scope: [-cols-1, -cols, -cols+1, -1, 0, 1, cols-1, cols, cols+1],
-  dialog: false,
   tools: {
     spade: {
       uses: 0,

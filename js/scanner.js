@@ -54,13 +54,26 @@ const scanner = {
   inRange: function () {
     let field = player.fields[player.currentField];
     let inRange = false;
-    player.scope.forEach((patchId) => {
+    let scope = scanner.scope();
+    scope.forEach((patchId) => {
         if (!inRange && scanner.checkPatches(field, player.pos + patchId)) {
         inRange = true;
       }
     });
-
     return inRange;
+  },
+  scope: function () {
+    // cos is a global defined in player.js
+    // depending on player.scanLevel (scan level 0 is off, 1 is full area.)
+    let scanLevels = [
+      [],
+      [-cols-1, -cols, -cols+1, -1, 0, 1, cols-1, cols, cols+1],
+      [-cols, -1, 0, 1,  cols],
+      [-1, 0, 1],
+      [0],
+    ];
+    let squares = scanLevels[player.scanLevel];
+    return squares;
   },
   // look at a patch and return true if its got something buried
   checkPatches: (field, patchId) => {
