@@ -1,21 +1,22 @@
 const hint = {
-  state: false,
-  okButton: function () {},
-  render: function (item, text, okButton, hintType) {
-    if (player.hinted[hintType]) {
+  sprite: null,
+  visible: false,
+  pointTo: null,
+  message: '',  
+  okButton: null,
+  group: '',
+
+  render: function () {
+    if (player.hinted[hint.group]) {
       return;
     }
-    // set this as a state so it can be clicked with the Spacebar
-    hint.okButton = okButton;
-    hint.state = true;
+    hint.visible = true;
 
-    // if itemBox is below player.cols / 2 arrow is on left else right
-    let itemObj = document.querySelector(item);
-    let itemBox = itemObj.getBoundingClientRect();
-    let posY = itemBox.top + (itemBox.height / 2);
-    let posX = itemBox.left + (itemBox.width / 2);
+    // if hint.pointTo is below player.cols / 2 arrow is on left else right
+    let posY = hint.pointTo.top + (hint.pointTo.height / 2);
+    let posX = hint.pointTo.left + (hint.pointTo.width / 2);
 
-    // itemBox is below half way, arrow is on top else bottom
+    // hint.pointTo is below half way, arrow is on top else bottom
     let arrowTop = (posY < (window.innerHeight / 2));
     let arrowLeft = (posX < (window.innerWidth / 2));
 
@@ -25,26 +26,25 @@ const hint = {
 
     let arrowClass = arrowLeft ? 'Left' : 'Right';
 
-    let hintSprite = document.querySelector('#hintSprite');
     let arrowSvg = svg.render('arrow', 1, style);
-    let skipCheckbox = hintType ? `<input type="checkbox" class="checkbox buttonize" id="hintSkip" data-hint="${hintType}" > Skip this </input>` : '';
+    let skipCheckbox = hint.group ? `<input type="checkbox" class="checkbox buttonize" id="hintSkip" data-hint="${hint.group}" > Skip this </input>` : '';
     let buttonStart = `<div class="hintButtons">${skipCheckbox}`;
-    buttonStart += ` <button class="button buttonize" onclick="${okButton}()"> `;
+    buttonStart += ` <button class="button buttonize" onclick="${hint.okButton}()"> `;
     let buttonEnd = `</button></div>`;
-    text = text.replace('[', buttonStart);
-    text = text.replace(']', buttonEnd);
+    hint.message = hint.message.replace('[', buttonStart);
+    hint.message = hint.message.replace(']', buttonEnd);
     let content = ``;
     if (arrowTop) {
       content += `<div id="hintArrow" class="hintArrowTop hintArrow${arrowClass}">${arrowSvg}</div>`;
     }
-    content += `<div id="hintText">${text}</div>`;
+    content += `<div id="hintText">${hint.message}</div>`;
     if (!arrowTop) {
       content += `<div id="hintArrow" class="hintArrowButton hintArrow${arrowClass}">${arrowSvg}</div>`;
     }
 
-    // position sprite on itemBox..
-    hintSprite.innerHTML = content;
-    let hintBox = hintSprite.getBoundingClientRect();
+    // position sprite on hint.pointTo..
+    hint.sprite.innerHTML = content;
+    let hintBox = hint.sprite.getBoundingClientRect();
 
     // use hint size to calc corner positions
     if (!arrowTop) {
@@ -56,12 +56,11 @@ const hint = {
     if (!arrowLeft) {
       posX -= hintBox.width;
     }
-    hintSprite.style.top = `${posY}px`;
-    hintSprite.style.left = `${posX}px`;
-    let patchObj = document.querySelector('#patch_1');
-    let patch = patchObj.getBoundingClientRect();
+    hint.sprite.style.top = `${posY}px`;
+    hint.sprite.style.left = `${posX}px`;
+    let patch = getElementPos(`#patch_0`);
     let hintWidth = patch.width * player.cols / 1.7;
-    hintSprite.style.width = `${hintWidth}px`;
+    hint.sprite.style.width = `${hintWidth}px`;
 
     let arrowObj = document.querySelector('.hintArrowRight');
     if (arrowObj) {
@@ -82,30 +81,13 @@ const hint = {
     hint.hide();
   },
   hide: function () {
-    let hintSprite = document.querySelector('#hintSprite');
-    hintSprite.style.top = "-1000px";
-    hint.state = false;
+    hint.sprite.style.top = "-1000px";
+    hint.visible = false;
   },
 
   off: function () {
     hint.close();
-    player.hints = false;
     state.save();
-  },
-
-  test: function () {
-    hideDialog();
-    setTimeout(() => { hint.render(`#patch_111`, "Use your spade to dig for potatoes. [Got that]", 'hint.close') }, 1);
-    //setTimeout( () => {hint.render(`#patch_3`,"The hardware shop where you can buy an upgrade items. [Got that]")}, 3000);
-    setTimeout(() => { hint.render(`#patch_6`, "Your food truck where you sell your delicious potato-centric dishes. [Got that]", 'hint.close') }, 2000);
-    //setTimeout( () => {hint.render(`#patch_119`,"Some logs that are blocking your way.Some logs that are blocking your way.Some logs that are blocking your way.Some logs that are blocking your way. Usually under anything that blocks you way will be a potato. [Got that]", 'hint.close')}, 9000);
-    setTimeout(() => { hint.render(`.tool-spade`, "Some logs that are blocking your way.Some logs that are blocking your way.Some logs that are blocking your way. [Ok]", 'hint.close') }, 4000);
-    setTimeout(() => { hint.render(`.tool-pick`, "Some logs that are blocking your way.Some logs that are blocking your way.Some logs that are blocking your way.Some logs that are blocking your way. Usually under anything that blocks you way will be a potato. [Sure thing]", 'hint.close') }, 6000);
-    setTimeout(() => { hint.render(`.tool-axe`, "Some logs that are blocking your way.Some logs that are blocking your way.Some logs that are blocking your way. [Right!]", 'hint.close') }, 8000);
-    setTimeout(() => { hint.render(`.tool-scanner`, "Some logs that are blocking your way.Some logs that are blocking your way.Some logs that are blocking your way.Some logs that are blocking your way. Usually under anything that blocks you way will be a potato. [Got that]", 'hint.close') }, 10000);
-    setTimeout(() => { hint.render(`.tool-basket`, "Some logs that are blocking your way.. [Got that]", 'hint.close') }, 12000);
-    setTimeout(() => { hint.render(`.tool-wallet`, "Some logs that are blocking your way.Some logs that are blocking your way.Some logs that are blocking your way.Some logs that are blocking your way. Usually under anything that blocks you way will be a potato. [Got that]", 'hint.close') }, 14000);
-
   },
   // a random OK message
   ok: function () {
@@ -121,51 +103,84 @@ const hint = {
      "Roger",
      "Understood",
      "Aha",
+     "Go",
+     "Yup",
+     "Makes sense",
+     "Agreed",
+     "Affirmative",
     ];
     return okText[rnd(okText.length)];
   },
   player: function () {
-    const msg = `This is you. In front of your house. [${hint.ok()}..]`;
-    hint.render(`#patch_0`, msg, 'hint.controls', 'intro');
+    hint.pointTo = getElementPos(`#patch_0`);
+    hint.message = `This is you. In front of your house. [${hint.ok()}..]`;
+    hint.okButton = 'hint.controls';
+    hint.group = 'into',
+    hint.render();
+    //hint.render(`#patch_0`, msg, 'hint.controls', 'intro');
   },
   controls: function () {
     hint.isItSkipped();
-    const msg = `Use these to move around the field. [${hint.ok()}..]`;
-    hint.render(`#patch_111`, msg, 'hint.field', 'intro');
-  },
-  field: function () {
-    hint.isItSkipped();
-    const msg = `Use the spade to dig where you stand. [${hint.ok()}..]`;
-    hint.render(`.tool-spade`, msg, 'hint.spade', 'intro');
+    hint.pointTo = getElementPos(`#patch_111`);
+    hint.message = `Use these to move around the field. [${hint.ok()}..]`;
+    hint.okButton = 'hint.spade';
+    hint.group = 'into',
+    hint.render();
   },
   spade: function () {
     hint.isItSkipped();
-    const msg = `Rocks and logs block your path. [Let's start digging!]`;
-    hint.render(`#patch_53`, msg, 'hint.close', 'intro');
+    hint.pointTo = getElementPos(`.tool-spade`);
+    hint.message = `Use the spade to dig where you stand. [${hint.ok()}..]`;
+    hint.okButton = 'hint.field';
+    hint.group = 'into',
+    hint.render();
+  },
+  field: function () {
+    hint.isItSkipped();
+    hint.pointTo = getElementPos(`#patch_53`);
+    hint.message = `Rocks and logs block your path. [Let's start digging!]`;
+    hint.okButton = 'hint.close';
+    hint.group = 'into',
+    hint.render();
   },   
 
   noDigHome: function () {
-    const msg = `You can't dig on the top row. Move down onto an empty patch and dig there. [${hint.ok()}]`;
-    hint.render(`#patch_${player.pos}`, msg, 'hint.close', 'noDigHome');
+    hint.pointTo = getElementPos(`#patch_${player.pos}`);
+    hint.message = `You can't dig on the top row. Move down onto an empty patch and dig there. [${hint.ok()}]`;
+    hint.okButton = 'hint.close';
+    hint.group = 'noDigHome';
+    hint.render();
   },
 
   toolUsedUp: function (toolName) {
-    const msg = `Your ${toolName} is exhausted. Tomorrow morning it will be refreshed and you can use it again. [${hint.ok()}]`;
-    hint.render(`.tool-${toolName}`, msg, 'hint.close', 'toolUsedUp');
+    hint.pointTo = getElementPos(`.tool-${toolName}`);
+    hint.message = `Your ${toolName} is exhausted. Tomorrow morning it will be refreshed and you can use it again. [${hint.ok()}]`;
+    hint.okButton = 'hint.close';
+    hint.group = 'toolUsedUp';
+    hint.render();
   },
 
   goHome: function () {
-    const msg = `Its getting late. Go home and get some sleep. [${hint.ok()}]`;
-    hint.render(`#patch_0`, msg, 'hint.close', 'goHome'); 
+    hint.pointTo = getElementPos(`#patch_0`);
+    hint.message = `Its getting late. Go home and get some sleep. [${hint.ok()}]`;
+    hint.okButton = 'hint.close';
+    hint.group = 'goHome';
+    hint.render();
   },
 
   home: function () {
-    const msg = `Your home. Stand in front and press UP to go inside. [${hint.ok()}]`;
-    hint.render(`#patch_0`, msg, 'hint.hardware');
+    hint.pointTo = getElementPos(`#patch_0`);
+    hint.message = `Your home. Stand in front and press UP to go inside. [${hint.ok()}]`;
+    hint.okButton = 'hint.hardware';
+    hint.group = 'home';
+    hint.render();
   },
 
   hardware: function () {
-    const msg = `Your local hardware shop. Stand in front and press UP to go inside. [${hint.ok()}]`;
-    hint.render(`#patch_3`, msg, 'hint.close');
+    hint.pointTo = getElementPos(`#patch_3`);
+    hint.message = `Your local hardware shop. Stand in front and press UP to go inside. [${hint.ok()}]`;
+    hint.okButton = 'hint.close';
+    hint.group = 'hardware';
+    hint.render();
   } ,
 }

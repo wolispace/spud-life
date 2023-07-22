@@ -12,10 +12,8 @@ bodySet = getBodySet();
 
 
 document.addEventListener("DOMContentLoaded", function () {
-  // set the grid column
-  let wholeField = document.querySelector(`.field`);
+  initModules();
 
-  wholeField.style.gridTemplateColumns = `1fr `.repeat(player.cols);
   svg.hidePlayerSprite();
   fields.setupGrid();
   if (player.spuds.length < 1) {
@@ -42,9 +40,9 @@ document.addEventListener("keydown", (event) => {
       "patch_" + controls[event.code]
     );
   }
-  if (hint.state) {
+  if (hint.visible) {
+      // if any key is pressed and hit is visible then close it
       eval(`${hint.okButton}()`);
-    
   } else {
     let fieldDigKeys = ['Space'];
     if (fieldDigKeys.includes(event.code)) {
@@ -57,6 +55,13 @@ document.addEventListener("keydown", (event) => {
 window.addEventListener("resize", (event) => {
   resizeStuff();
 });
+
+function initModules() {
+  hint.sprite = hint.sprite ?? document.querySelector('#hintSprite');
+  // set the grid column
+  let wholeField = document.querySelector(`.field`);
+  wholeField.style.gridTemplateColumns = `1fr `.repeat(player.cols);
+}
 
 function animatePlayerOn() {
   let playerSprite = document.querySelector(`#playerSprite`);

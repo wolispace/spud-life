@@ -9,8 +9,6 @@ function halfRnd(num) {
 }
 
 const state = {
-  dialog: false,
-  hint: false,
   save: () => {
     // remove these before saving
 
