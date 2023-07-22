@@ -26,9 +26,9 @@ const fields = {
     fields.setupGrid();
     // render current field
     fields.renderField();
-    svg.hidePlayerSprite();
+    character.hide();
     fields.highlightCurrentPos();
-    svg.showPlayerSprite();
+    character.render();
     tools.render();
     state.save();
   },

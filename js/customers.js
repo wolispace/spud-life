@@ -6,7 +6,7 @@ const customers = {
   // show all of the customers for the night
   render: (qty = 0) => {
     customers.qty = qty > 0 ? qty : customers.qty;
-    svg.hidePlayerSprite();
+    character.hide();
     let customerList = "";
     for (let id = 0; id < customers.qty; id++) {
       customerList += customers.build(id);
@@ -63,7 +63,7 @@ const customers = {
   endSale: () => {
     // let element = document.querySelector(`#customerLine`);
     // element.innerHTML = customerList;
-    svg.showPlayerSprite();
+    character.render();
     player.phase = 'night';
     customers.showMoney();
     tools.render();

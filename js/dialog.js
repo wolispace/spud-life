@@ -9,7 +9,7 @@ const dialog = {
     dialog.hide();
     let patch = getElementPos(`#patch_0`);
   
-    svg.hidePlayerSprite();
+    character.hide();
     dialog.sprite.style.top = "1rem";
     dialog.sprite.style.left = (patch.width/2) + 'px';;
     dialog.sprite.style.width = ((patch.width * (player.cols - 1) )) + 'px';
@@ -39,7 +39,7 @@ const dialog = {
     dialog.part(`.dialog .content`, '');
     dialog.part(`.dialog .footer`, '');
     dialog.visible = false;
-    svg.showPlayerSprite();
+    character.render();
   },
 
   

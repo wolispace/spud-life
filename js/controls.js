@@ -52,7 +52,7 @@ const controls = {
       if (index == controls.ArrowUp) {
         newPos -= player.cols;
         direction = "up";
-        svg.directPlayerSprite("up");
+        character.look("up");
         if (newPos < 0) {
           newPos = player.pos;
         }
@@ -60,21 +60,21 @@ const controls = {
       if (index == controls.ArrowLeft && player.pos % player.cols > 0) {
         newPos -= 1;
         direction = "left";
-        svg.directPlayerSprite("left");
+        character.look("left");
         if (newPos < 0) {
         }
       }
       if (index == controls.ArrowRight && player.pos % player.cols < (player.cols - 1)) {
         newPos += 1;
         direction = "right";
-        svg.directPlayerSprite("right");
+        character.look("right");
         if (newPos >= (player.cols * player.rows)) {
           newPos = player.pos;
         }
       }
       if (index == controls.ArrowDown) {
         newPos += player.cols;
-        svg.directPlayerSprite("down");
+        character.look("down");
         if (newPos >= (player.cols * player.rows)) {
           newPos = player.pos;
         }

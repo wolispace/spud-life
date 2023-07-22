@@ -14,7 +14,7 @@ bodySet = getBodySet();
 document.addEventListener("DOMContentLoaded", function () {
   initModules();
 
-  svg.hidePlayerSprite();
+  character.hide();
   fields.setupGrid();
   if (player.spuds.length < 1) {
     // intro to game
@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   sky.render();
   sky.clouds();
-  svg.showPlayerSprite();
+  character.render();
   resizeStuff();
 });
 
@@ -368,7 +368,7 @@ function dream() {
 
 function wake() {
   let playerSprite = document.querySelector(`#playerSprite svg`);
-  svg.animate(playerSprite, `grow`, 1, () => {svg.showPlayerSprite();});
+  svg.animate(playerSprite, `grow`, 1, () => {character.render();});
   setPhase('field');
   dialog.hide();
 }

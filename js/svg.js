@@ -790,30 +790,6 @@ const svg = {
     return path;
   },
 
-  directPlayerSprite(direction) {
-    let playerSprite = document.querySelector("#playerSprite > svg");
-    let playerHead = document.querySelector("#playerSprite .playerHead");
-    if (direction == "left") {
-      playerHead.setAttribute("transform", "rotate(0, 51, 21.2)");
-      playerSprite.setAttribute("transform", "translate(0, 0) scale(1, 1)");
-    } else if (direction == "right") {
-      playerHead.setAttribute("transform", "rotate(0, 51, 21.2)");
-      playerSprite.setAttribute("transform", "translate(0, 0) scale(-1, 1)");
-    } else if (direction == "up") {
-      playerHead.setAttribute("transform", "rotate(45, 51, 21.2)");
-    } else if (direction == "down") {
-      playerHead.setAttribute("transform", "rotate(-30, 51, 21.2)");
-    }
-  },
-
-  showPlayerSprite() {
-    svg.showElement("#playerSprite");
-  },
-
-  hidePlayerSprite() {
-    svg.hideElement("#playerSprite");
-  },
-
   hideElement(elementQuery) {
     let thisElement = document.querySelector(elementQuery);
     thisElement.style.display = "none";

@@ -46,3 +46,29 @@ let player = {
   },
   animating: false,
 };
+
+const character = {
+  render: function () {
+    svg.showElement("#playerSprite");
+  },
+  hide: function () {
+    svg.hideElement("#playerSprite");
+  },
+
+  look: function (direction) {
+    let playerSprite = document.querySelector("#playerSprite > svg");
+    let playerHead = document.querySelector("#playerSprite .playerHead");
+    if (direction == "left") {
+      playerHead.setAttribute("transform", "rotate(0, 51, 21.2)");
+      playerSprite.setAttribute("transform", "translate(0, 0) scale(1, 1)");
+    } else if (direction == "right") {
+      playerHead.setAttribute("transform", "rotate(0, 51, 21.2)");
+      playerSprite.setAttribute("transform", "translate(0, 0) scale(-1, 1)");
+    } else if (direction == "up") {
+      playerHead.setAttribute("transform", "rotate(45, 51, 21.2)");
+    } else if (direction == "down") {
+      playerHead.setAttribute("transform", "rotate(-30, 51, 21.2)");
+    }
+  },
+}
+
