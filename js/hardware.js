@@ -7,12 +7,22 @@ const hardware = {
     let content = "";
     Object.entries(player.hardware).forEach(([toolName, tool]) => {
       let state = "Buy";
+      let showItem = true;
       let buyCost = tool.price;
       let sellCost = tool.price;
 
       if (player.tools[toolName] || toolName == 'scanner') {
         state = "Upgrade";
         buyCost = tool.upgradeCost;
+        if (toolName == 'scanner') {
+          if (player.scanLevel >= tool.maxUpgrades) {
+            showItem = false;
+          }
+        } else {
+          if (player.tools[toolName].maxUses >= tool.maxUpgrades) {
+            showItem = false;
+          }
+        }
       }
       let onClickBuy = "";
       let onClickSell = "";
@@ -27,7 +37,6 @@ const hardware = {
         onClickBuy = `onclick="tools.buyItem('${toolName}')"`;
         canBuyClass = ``;
       }
-      let showItem = true;
       if (player.shop.machines[toolName]) {
         showItem = false;
       }
@@ -67,7 +76,7 @@ const hardware = {
         price: 50,
         rareness: 100,
         upgradeCost: 50,
-        maxUpgrades: 100,
+        maxUpgrades: 10,
         initial: {
           uses: 5,
           maxUses: 5,
