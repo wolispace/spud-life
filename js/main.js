@@ -34,22 +34,30 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // hook into keys for movement and digging
 document.addEventListener("keydown", (event) => {
-  // convey key presses into directional movements
-  if (Object.keys(player.controlPos).includes(event.code)) {
-    controls.click(
-      "patch_" + controls[event.code]
-    );
-  }
+
   if (hint.visible) {
       // if any key is pressed and hit is visible then close it
       eval(`${hint.okButton}()`);
+  } else if (dialog.visible) {
+    if (dialog.closeKey.includes(event.code)) {
+      dialog.close();
+    } else if (dialog.cancelKey.includes(event.code)) {
+      dialog.cancel();
+    } else {
+      // all other keys go to dialog
+    }
   } else {
-    let fieldDigKeys = ['Space'];
-    if (fieldDigKeys.includes(event.code)) {
+    // if the dig key was pressed then dig
+    if (fields.digKey.includes(event.code)) {
       fields.digPatch();
     }
+    // convey key presses into directional movements
+    if (Object.keys(player.controlPos).includes(event.code)) {
+      controls.click(
+        "patch_" + controls[event.code]
+      );
+    }    
   }
-
 });
 
 window.addEventListener("resize", (event) => {

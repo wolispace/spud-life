@@ -1,0 +1,4 @@
+const dialog = {
+  visible: false,
+    
+}

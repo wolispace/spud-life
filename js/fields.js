@@ -1,4 +1,5 @@
 const fields = {
+  digKey: ['Space'],
   // one off setup the grid of patches
   setupGrid() {
     let index = 0;
