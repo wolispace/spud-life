@@ -42,9 +42,16 @@ document.addEventListener("keydown", (event) => {
       "patch_" + controls[event.code]
     );
   }
-  if (event.code == "Space") {
-    fields.digPatch();
+  if (hint.state) {
+      eval(`${hint.okButton}()`);
+    
+  } else {
+    let fieldDigKeys = ['Space'];
+    if (fieldDigKeys.includes(event.code)) {
+      fields.digPatch();
+    }
   }
+
 });
 
 window.addEventListener("resize", (event) => {

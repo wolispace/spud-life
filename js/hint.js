@@ -1,8 +1,14 @@
 const hint = {
+  state: false,
+  okButton: function () {},
   render: function (item, text, okButton, hintType) {
     if (player.hinted[hintType]) {
       return;
     }
+    // set this as a state so it can be clicked with the Spacebar
+    hint.okButton = okButton;
+    hint.state = true;
+
     // if itemBox is below player.cols / 2 arrow is on left else right
     let itemObj = document.querySelector(item);
     let itemBox = itemObj.getBoundingClientRect();
@@ -78,6 +84,7 @@ const hint = {
   hide: function () {
     let hintSprite = document.querySelector('#hintSprite');
     hintSprite.style.top = "-1000px";
+    hint.state = false;
   },
 
   off: function () {
