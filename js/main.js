@@ -119,7 +119,6 @@ function gameIntro () {
   footer += `<button class="buttonize" onclick="hints.off(); defineCharacter()"> Skip tutorial </button>`;
   footer += `<button class="buttonize" onclick="defineCharacter()"> Create your character </button>`;
   dialog.render("Welcome to spud life", content, footer);
-console.log('ok');
   // toggle hints
   // - these show you what to do next 
   // 'Stand infront of your house and press UP to go into it and end the day'
