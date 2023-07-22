@@ -49,10 +49,14 @@ const tools = {
   buyItem: (itemName) => {
     let item = player.hardware[itemName];
     if (item.type == "tool") {
-      if (player.tools[itemName]) {
+      if (player.tools[itemName] || itemName == 'scanner') {
         // upgrade
-        player.tools[itemName].maxUses++;
-        player.tools[itemName].uses++;
+        if (itemName == 'scanner') {
+          player.scanLevel++;
+        } else {
+          player.tools[itemName].maxUses++;
+          player.tools[itemName].uses++;
+        }
         player.wallet = player.wallet - item.upgradeCost;
       } else {
         // buy tool
