@@ -1,6 +1,9 @@
 const dialog = {
   sprite: null,
   visible: false,
+  cancelKey: 'Escape',
+  confirmKey: 'Enter',
+  okButton: null,
   
   render: function (title, content, footer) {
     dialog.hide();
@@ -15,10 +18,18 @@ const dialog = {
     dialog.part(`.dialog .footer`, footer);
     dialog.visible = true;
   },
-  
+
   part: function (partClass, content) {
     let dialogPart = document.querySelector(partClass);
     dialogPart.innerHTML = content;
+  },
+
+  confirm: function () {
+    // do whatever is in the OkButton
+    dialog.hide();
+  },
+  cancel: function () {
+    dialog.hide();
   },
 
   hide: function () {

@@ -67,7 +67,9 @@ const hint = {
       arrowObj.style.left = `${hintWidth-50}px`;
     }
   },
-
+  confirm: function () {
+    eval(`${hint.okButton}()`);
+  },
   isItSkipped: function () {
     let skipHint = document.querySelector('#hintSkip');
     if (skipHint && skipHint.checked) {

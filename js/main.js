@@ -37,10 +37,10 @@ document.addEventListener("keydown", (event) => {
 
   if (hint.visible) {
       // if any key is pressed and hit is visible then close it
-      eval(`${hint.okButton}()`);
+      hint.confirm();
   } else if (dialog.visible) {
-    if (dialog.closeKey.includes(event.code)) {
-      dialog.close();
+    if (dialog.confirmKey.includes(event.code)) {
+      dialog.confirm();
     } else if (dialog.cancelKey.includes(event.code)) {
       dialog.cancel();
     } else {
