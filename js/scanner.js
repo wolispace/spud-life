@@ -13,11 +13,11 @@ const scanner = {
     dialog.okButton = function () { scanner.save(); };
     dialog.render(title, content, footer);
     scanner.check();
-    state.save();
   },
   save: function () {
     let chk = document.querySelector(`#scannerCheckbox`);
     player.scanState = chk.checked;
+    state.save();
   },
   checkbox: function () {
     let checked = player.scanState ? 'checked' : '';

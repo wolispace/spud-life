@@ -75,7 +75,7 @@ const hardware = {
         price: 50,
         rareness: 100,
         upgradeCost: 50,
-        maxUpgrades: 10,
+        maxUpgrades: 100,
         initial: {
           uses: 5,
           maxUses: 5,
