@@ -213,6 +213,7 @@ function allocate() {
 
   machines.render();
   sack.render();
+  hint.chipper();
 }
 
 // const phases = ["field", "hardware", "allocate", "sales", "night"];

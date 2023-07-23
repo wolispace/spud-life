@@ -35,7 +35,7 @@ const controls = {
           return;
         }
       }
-      if (index == controls.ArrowUp) {
+      if (index == controls.ArrowUp && player.currentField == 0) {
         if (player.pos == 0) {
           // go into home
           let thisBlock = document.querySelector(`#playerSprite svg`);

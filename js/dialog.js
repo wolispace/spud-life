@@ -44,6 +44,7 @@ const dialog = {
     dialog.part(`.dialog .footer`, '');
     dialog.visible = false;
     character.render();
+    hint.hide();
   },
 
   

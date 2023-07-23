@@ -196,6 +196,29 @@ const hint = {
     hint.render();
   },
 
+  chipper: function () {
+    hint.pointTo = getElementPos(`#machine_chipper`);
+    hint.message = `Choose a machine you want to load with spuds. [${hint.ok()}]`;
+    hint.okButton = 'hint.moveSpuds';
+    hint.group = 'allocate';
+    hint.render();
+  },
+  moveSpuds: function () {
+    hint.isItSkipped();
+    hint.pointTo = getElementPos(`.sackSpuds`);
+    hint.message = `Move all, or one at a time, to the selected machine. [${hint.ok()}]`;
+    hint.okButton = 'hint.spudTypes';
+    hint.group = 'allocate';
+    hint.render();
+  },
+  spudTypes: function () {
+    hint.isItSkipped();
+    hint.pointTo = getElementPos(`.sackSpudDesc`);
+    hint.message = `Use the matching machine to make more money per meal. [${hint.ok()}]`;
+    hint.okButton = 'hint.close';
+    hint.group = 'allocate';
+    hint.render();
+  },
 
   home: function () {
     hint.pointTo = getElementPos(`#patch_0`);

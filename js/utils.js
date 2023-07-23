@@ -62,5 +62,8 @@ function css(selector, styles) {
 
 function getElementPos(selector) {
   let element = document.querySelector(selector);
+  if (!element) {
+    element = document.querySelector('#patch_0');
+  }
   return element.getBoundingClientRect();
 }
