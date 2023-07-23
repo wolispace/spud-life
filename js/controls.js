@@ -50,7 +50,10 @@ const controls = {
       }
 
       if (index == controls.ArrowUp) {
-        newPos -= player.cols;
+        newPos -= player.cols;        
+        if (newPos < player.cols && player.pos > player.cols) {
+          hint.playerShrink(newPos);
+        }
         direction = "up";
         character.look("up");
         if (newPos < 0) {
@@ -74,6 +77,10 @@ const controls = {
       }
       if (index == controls.ArrowDown) {
         newPos += player.cols;
+        if (player.pos < player.cols && newPos > player.cols) {
+          hint.playerGrow(newPos);
+        }
+
         character.look("down");
         if (newPos >= (player.cols * player.rows)) {
           newPos = player.pos;

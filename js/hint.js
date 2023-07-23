@@ -181,6 +181,22 @@ const hint = {
     hint.render();
   },
 
+  playerGrow: function (newPos) {
+    hint.pointTo = getElementPos(`#patch_${newPos}`);
+    hint.message = `Due to perspective you look larger when walking around the field. [${hint.ok()}]`;
+    hint.okButton = 'hint.close';
+    hint.group = 'playerGrow';
+    hint.render();
+  },
+  playerShrink: function (newPos) {
+    hint.pointTo = getElementPos(`#patch_${newPos}`);
+    hint.message = `Due to perspective you look smaller when walking near buildings. [${hint.ok()}]`;
+    hint.okButton = 'hint.close';
+    hint.group = 'playerShrink';
+    hint.render();
+  },
+
+
   home: function () {
     hint.pointTo = getElementPos(`#patch_0`);
     hint.message = `Your home. Stand in front and press UP to go inside. [${hint.ok()}]`;
