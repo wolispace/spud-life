@@ -198,9 +198,16 @@ const hint = {
 
   chipper: function () {
     hint.pointTo = getElementPos(`#machine_chipper`);
-    hint.message = `Choose a machine you want to load with spuds. [${hint.ok()}]`;
-    hint.okButton = 'hint.moveSpuds';
-    hint.group = 'allocate';
+    let spuds = document.querySelector('.sackSpuds');
+    if (spuds) {
+      hint.message = `Choose a machine you want to load with spuds. [${hint.ok()}]`;
+      hint.okButton = 'hint.moveSpuds';
+      hint.group = 'allocate';
+    } else {
+      hint.message = `When you have dug up some spuds you can load them into your machines so they can make delicious spud-based meals. [${hint.ok()}]`;
+      hint.okButton = 'hint.close';
+      hint.group = 'allocateInto';
+    }
     hint.render();
   },
   moveSpuds: function () {

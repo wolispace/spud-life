@@ -152,14 +152,16 @@ const character = {
 
   settings: function () {
     
-    let resetCheckbox = character.makeCheckbox('resetHints', 'Reset hints so they pop up and annoy you like your a new player', false);
+    let resetCheckbox = character.makeCheckbox('resetHints', 'Reset hints. Do this if you have forgotten stuff', false);
     let content = `<div class="dialog-message-content">`;
     content += `<div>Your game is constantly saving.</div>`;
     content += `<div>Sadly there is no way to transfer this game to another device just yet.</div>`;
     content += `<div>${resetCheckbox}</div>`;
      content += `<div><div>`;
     let title = "Settings";
-    let footer = `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
+    let footer =  `<button class="buttonize" onclick="character.reset()"> Reset! </button>`;
+    footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
+   
     dialog.okButton = function () { character.saveSettings(); };
     dialog.render(title, content, footer);
 
@@ -177,6 +179,11 @@ const character = {
       player.hinted = {};
     };
     state.save();
+  },
+  reset: function () {
+    if (confirm('Are you really sure you want to wipe your progress and start from scratch?')) {
+      state.clear(true);
+    }
   },
   // the default
   defaultBody: {
