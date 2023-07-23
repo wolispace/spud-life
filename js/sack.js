@@ -61,7 +61,6 @@ const sack = {
     let footer = "";
     footer += `<button class="buttonize" onclick="state.clear(true);"> Reset! </button>`;
     footer += `<button class="buttonize" onclick="hint.test();"> Hints </button>`;
-    footer += `<button class="buttonize" onclick="character.customize()"> Customize </button>`;
     footer += `<button class="buttonize" onclick="customers.render(${random}); dialog.hide();"> ${random} customers </button>`;
     footer += `<button class="buttonize" onclick="dialog.hide()"> Ok </button>`;
     dialog.render("Inventory", `${content}${content2}`, footer);

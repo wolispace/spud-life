@@ -82,6 +82,7 @@ html {
   border: 0;
   overflow: hidden;
   font-family: Tahoma, sans-serif;
+  font-weight: bold;
 }
 
 body {
@@ -241,16 +242,6 @@ button:hover {
   background-color: rgba(109, 160, 143, .75) !important;
 }
 
-
-.scan-off-true {
-  opacity: 0.5;
-}
-
-.scan-on-false {
-  opacity: 0.5;
-}
-
-
 .container {
   width: 100vw;
   max-width:540px;
@@ -387,6 +378,19 @@ button:hover {
   color: white;
   font-weight: bold;
   display: none;
+}
+
+.checkboxSpan {
+  padding: 3px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.checkboxSpan > label {
+  cursor: pointer;
+}
+
+.checkboxSpan:hover {
+  background-color:rgb(248, 189, 117);
 }
 
 #nightShade {

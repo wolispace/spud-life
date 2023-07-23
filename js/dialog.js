@@ -26,6 +26,10 @@ const dialog = {
 
   confirm: function () {
     // do whatever is in the OkButton
+    if (typeof dialog.okButton === "function") {
+      dialog.okButton();
+    }
+    dialog.okButton = null;
     dialog.hide();
   },
   cancel: function () {

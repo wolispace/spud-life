@@ -8,11 +8,25 @@ const home = {
   },
   day: function () {
     let content = `<div class="dialog-message-content">`;
-    content += `<div>${svg.inline('house')} Your home is a little messy.</div>`;
+    let insides = [
+      "Your house is a little messy",
+      "Your looks so much nicer after the fresh coat of paint",
+      "Your house is small",
+      "Your house is bigger on the inside",
+      "Your house is where you lay your hat",
+      "Your house is a very nice house",
+      "Your house looks a lot like my house",
+      "Your house is your castle",
+      "Your house is cozy",
+    ];
+
+    content += `<div>${svg.inline('house')} ${insides[rnd(insides.length)]}.</div>`;
     content += `<div>Go outside and use your spade to dig for potatoes.<div>`;
     content += `<div>Your scanner flashes when something is buried in the patches directly next to you and under you.<div>`;
     let title = "Home sweet home";
-    let footer = `<button onclick="dialog.hide()">Go outside</button>`;
+    let footer = `<button class="buttonize" onclick="character.customize()"> Customize </button>`;
+    footer += `<button class="buttonize" onclick="dialog.confirm()">Go outside</button>`;
+
     dialog.render(title, content, footer);
   },
   night: function () {
@@ -28,5 +42,6 @@ const home = {
     } else {
       character.customize();
     }
-  }
+  },
+  
 };

@@ -27,7 +27,7 @@ const hint = {
     let arrowClass = arrowLeft ? 'Left' : 'Right';
 
     let arrowSvg = svg.render('arrow', 1, style);
-    let skipCheckbox = hint.group ? `<input type="checkbox" class="checkbox buttonize" id="hintSkip" data-hint="${hint.group}" /><label for="hintSkip">Skip this </label>` : '';
+    let skipCheckbox = hint.buildSkip();
     let buttonStart = `<div class="hintButtons">${skipCheckbox}`;
     buttonStart += ` <button class="button buttonize" onclick="${hint.okButton}()"> `;
     let buttonEnd = `</button></div>`;
@@ -67,6 +67,17 @@ const hint = {
       arrowObj.style.left = `${hintWidth-50}px`;
     }
   },
+
+  buildSkip: function () {
+    let skipCheckbox = '';
+    if (hint.group) {
+      skipCheckbox = `<span class="checkboxSpan">`;
+      skipCheckbox += `<input type="checkbox" id="hintSkip" data-hint="${hint.group}" />`;
+      skipCheckbox += `<label class="checkboxLabel" for="hintSkip">Skip this </label></span>`;
+    }
+    return skipCheckbox;
+  },
+
   confirm: function () {
     eval(`${hint.okButton}()`);
   },

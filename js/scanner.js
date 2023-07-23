@@ -2,17 +2,30 @@ const scanner = {
   // show scanner dialog.. could be used to show where things are
   show: function (scanState) {
     player.scanState = scanState;
+    let scannerCheckbox = scanner.checkbox();
     let content = `<div class="dialog-message-content">`;
     content += `<div>Your scanner blinks if there is something underground near you.</div>`;
     content += `<div>You have a basic level ${player.scanLevel} scanner. This detects all squares directly next to you and under you.</div>`;
-    content += `<div><button class="scan-off-${scanState}" onclick="scanner.show(false);">OFF</button>`;
-    content += `<button class="scan-on-${scanState}" onclick="scanner.show(true);">ON</button>`;
-    content += `<div><div>`;
+    content += `<div>${scannerCheckbox}</div>`;
+     content += `<div><div>`;
     let title = "Scanner";
-    let footer = `<button onclick="dialog.hide()">Ok</button>`;
+    let footer = `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
+    dialog.okButton = function () { scanner.save(); };
     dialog.render(title, content, footer);
     scanner.check();
     state.save();
+  },
+  save: function () {
+    let chk = document.querySelector(`#scannerCheckbox`);
+    player.scanState = chk.checked;
+  },
+  checkbox: function () {
+    let checked = player.scanState ? 'checked' : '';
+    let scannerCheckbox = `<span class="checkboxSpan">`;
+    scannerCheckbox += `<input type="checkbox" id="scannerCheckbox" ${checked} />`;
+    scannerCheckbox += `<label class="checkboxLabel" for="scannerCheckbox">Enable scanner </label></span>`;
+
+    return scannerCheckbox;
   },
   // show if spuds in range using current level spud diviner
   check: function () {
