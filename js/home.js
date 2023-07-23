@@ -26,7 +26,7 @@ const home = {
       sky.darkDoor();
       fields.resetPlayer();
     } else {
-      defineCharacter();
+      character.customize();
     }
   }
 };

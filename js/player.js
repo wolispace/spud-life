@@ -39,8 +39,8 @@ let player = {
   controlPos: {
     ArrowUp: 0,
     ArrowLeft: cols,
-    ArrowRight: cols+1,
-    ArrowDown: cols*2,
+    ArrowRight: cols + 1,
+    ArrowDown: cols * 2,
   },
   animating: false,
 };
@@ -70,7 +70,7 @@ const character = {
   },
 
   // make a random body
-  randomBody: function() {
+  randomBody: function () {
     //let name = spudBits.prefix[rnd(spudBits.prefix.length)];
     let newBody = {};
     let skinTones = ["Cornsilk", "Bisque", "Wheat", "Tan", "SaddleBrown"];
@@ -94,8 +94,64 @@ const character = {
     return newBody;
   },
 
+  save: function () {
+    dialog.hide();
+    state.save();
+    tools.render();
+    setPhase(player.phase);
+    let element = document.querySelector(`#playerSprite`);
+    element.innerHTML = svg.renderPerson(player.body);
+    resizeStuff();
+    hint.player();
+  },
+
+  customize: function (mode) {
+    let newBody = mode == "random" ? character.randomBody() : character.defaultBody;
+
+    player.body = newBody;
+    let content = "";
+    content += '<div class="creator">';
+    content += '<div class="left">';
+
+    Object.entries(player.body).forEach(([key, part]) => {
+      content += character.buildBodySelect(key);
+    });
+
+    content += "</div>";
+    content += '<div class="demoBody">';
+    content += "</div>";
+    content += "</div>";
+
+    let footer = "";
+    footer += `<button class="buttonize" onclick="character.customize('random')"> Randomize </button>`;
+    footer += `<button class="buttonize" onclick="character.save()"> Ok </button>`;
+    dialog.render("Character creator", `${content}`, footer);
+    character.demoBody();
+  },
+
+  buildBodySelect: function (bodyPart) {
+    let colour = svg.colourOptions(player.body[bodyPart].colour);
+    let part = svg.bodyPartOptions(bodyPart);
+
+    return `<div>${bodyPart}<br/><select id="${bodyPart}" class="selectPart" onchange="character.demoBody()">${part}</select>
+       <select id="${bodyPart}-colour" class="selectColour" onchange="character.demoBody()">${colour}</select></div>`;
+  },
+
+  // redisplay character using current body parts
+  demoBody: function () {
+    Object.entries(player.body).forEach(([key, part]) => {
+      player.body[key] = {
+        type: getSelectValue(`#${key}`),
+        colour: getSelectValue(`#${key}-colour`),
+      };
+    });
+
+    let element = document.querySelector(".demoBody");
+    element.innerHTML = svg.renderPerson(player.body);
+  },
+
   // the default
- defaultBody: {
+  defaultBody: {
     body: {
       type: "body-big",
       colour: "Navy",

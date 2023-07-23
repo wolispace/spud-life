@@ -116,8 +116,8 @@ function gameIntro () {
   content += '</div>';
 
   let footer = "";
-  footer += `<button class="buttonize" onclick="hints.off(); defineCharacter()"> Skip tutorial </button>`;
-  footer += `<button class="buttonize" onclick="defineCharacter()"> Create your character </button>`;
+  footer += `<button class="buttonize" onclick="hints.off(); character.customize()"> Skip tutorial </button>`;
+  footer += `<button class="buttonize" onclick="character.customize()"> Create your character </button>`;
   dialog.render("Welcome to spud life", content, footer);
   // toggle hints
   // - these show you what to do next 
@@ -192,51 +192,6 @@ function getBodySet() {
 
 
 
-// setup the default body
-function defineCharacter(mode) {
-  // show or hide the character creator via a dialog
-  if (mode == "save") {
-    dialog.hide();
-    state.save();
-    tools.render();
-    setPhase(player.phase);
-    let element = document.querySelector(`#playerSprite`);
-    element.innerHTML = svg.renderPerson(player.body);
-    resizeStuff();
-    hint.player();
-  } else {
-    let newBody = mode == "random" ? character.randomBody() : character.defaultBody;
-
-    player.body = newBody;
-    let content = "";
-    content += '<div class="creator">';
-    content += '<div class="left">';
-
-    Object.entries(player.body).forEach(([key, part]) => {
-      content += buildBodySelect(key);
-    });
-
-    content += "</div>";
-    content += '<div class="demoBody">';
-    content += "</div>";
-    content += "</div>";
-
-    let footer = "";
-    footer += `<button class="buttonize" onclick="defineCharacter('random')"> Randomize </button>`;
-    footer += `<button class="buttonize" onclick="defineCharacter('save')"> Ok </button>`;
-    dialog.render("Character creator", `${content}`, footer);
-    demoBody();
-  }
-}
-
-function buildBodySelect(bodyPart) {
-  let colour = svg.colourOptions(player.body[bodyPart].colour);
-  let part = svg.bodyPartOptions(bodyPart);
-
-  return `<div>${bodyPart}<br/><select id="${bodyPart}" class="selectPart" onchange="demoBody()">${part}</select>
-     <select id="${bodyPart}-colour" class="selectColour" onchange="demoBody()">${colour}</select></div>`;
-}
-
 // get the selected value from a select
 function getSelectValue(id) {
   let element = document.querySelector(id);
@@ -244,18 +199,6 @@ function getSelectValue(id) {
   return element.value;
 }
 
-// redisplay character using current body parts
-function demoBody() {
-  Object.entries(player.body).forEach(([key, part]) => {
-    player.body[key] = {
-      type: getSelectValue(`#${key}`),
-      colour: getSelectValue(`#${key}-colour`),
-    };
-  });
-
-  let element = document.querySelector(".demoBody");
-  element.innerHTML = svg.renderPerson(player.body);
-}
 
 // player chooses which spuds to put in what machines
 function allocate() {
