@@ -68,5 +68,63 @@ const character = {
       playerHead.setAttribute("transform", "rotate(-30, 51, 21.2)");
     }
   },
+
+  // make a random body
+  randomBody: function() {
+    //let name = spudBits.prefix[rnd(spudBits.prefix.length)];
+    let newBody = {};
+    let skinTones = ["Cornsilk", "Bisque", "Wheat", "Tan", "SaddleBrown"];
+
+    let colourNames = Object.keys(CSS_COLOR_NAMES);
+    let skinTone = skinTones[rnd(skinTones.length)];
+
+    Object.keys(bodySet).forEach((bodyPart) => {
+      let variations = bodySet[bodyPart];
+      let variation = variations[rnd(variations.length)];
+      let colour = colourNames[rnd(colourNames.length)];
+      if (",head,nose".indexOf(bodyPart) > 0) {
+        colour = skinTone;
+      }
+      newBody[bodyPart] = {
+        type: variation,
+        colour: colour,
+      };
+    });
+
+    return newBody;
+  },
+
+  // the default
+ defaultBody: {
+    body: {
+      type: "body-big",
+      colour: "Navy",
+    },
+
+    head: {
+      type: "head-head",
+      colour: "Wheat",
+    },
+    nose: {
+      type: "nose-triangle",
+      colour: "Wheat",
+    },
+    brows: {
+      type: "brows-wave",
+      colour: "Black",
+    },
+    eye: {
+      type: "eye-eye",
+      colour: "DodgerBlue",
+    },
+    facial: {
+      type: "facial-mustache",
+      colour: "Brown",
+    },
+    hair: {
+      type: "hair-curly",
+      colour: "Brown",
+    },
+  },
 }
 

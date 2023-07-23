@@ -175,7 +175,7 @@ function defaultBody() {
 function getBodySet() {
   let partOptions = [];
   // extract body bits
-  let baseBody = defaultBody();
+  let baseBody = character.defaultBody;
 
   Object.keys(baseBody).forEach((bodyPart) => {
     partOptions[bodyPart] = [];
@@ -190,30 +190,7 @@ function getBodySet() {
   return partOptions;
 }
 
-// make a random body
-function randomBody() {
-  //let name = spudBits.prefix[rnd(spudBits.prefix.length)];
-  let newBody = {};
-  let skinTones = ["Cornsilk", "Bisque", "Wheat", "Tan", "SaddleBrown"];
 
-  let colourNames = Object.keys(CSS_COLOR_NAMES);
-  let skinTone = skinTones[rnd(skinTones.length)];
-
-  Object.keys(bodySet).forEach((bodyPart) => {
-    let variations = bodySet[bodyPart];
-    let variation = variations[rnd(variations.length)];
-    let colour = colourNames[rnd(colourNames.length)];
-    if (",head,nose".indexOf(bodyPart) > 0) {
-      colour = skinTone;
-    }
-    newBody[bodyPart] = {
-      type: variation,
-      colour: colour,
-    };
-  });
-
-  return newBody;
-}
 
 // setup the default body
 function defineCharacter(mode) {
@@ -228,7 +205,7 @@ function defineCharacter(mode) {
     resizeStuff();
     hint.player();
   } else {
-    let newBody = mode == "random" ? randomBody() : defaultBody();
+    let newBody = mode == "random" ? character.randomBody() : character.defaultBody;
 
     player.body = newBody;
     let content = "";

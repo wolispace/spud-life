@@ -1,7 +1,6 @@
 const hardware = {
   // draw tools and machines for sale
   render: () => {
-    console.log(player);
     // return to the field when the dialog closes
     player.phase = 'field';
     let content = "";

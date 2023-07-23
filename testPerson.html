@@ -35,7 +35,7 @@
       // let spudInfo = player.spuds.filter(spud => spud.name == spudName)[0];
       // spuds.sprout();
       // console.log(spudName, spudInfo);
-      player.body = defaultBody();
+      player.body = character.defaultBody;
       let element = document.querySelector("#playerSprite");
       // element.innerHTML = spuds.render(spudName);
       element.innerHTML = svg.renderPerson(player.body);

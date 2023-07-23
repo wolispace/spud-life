@@ -24,7 +24,7 @@ const customers = {
    */
   build: (id) => {
     // build a random customer
-    let customerBody = randomBody();
+    let customerBody = character.randomBody();
     return (
       `<div class="customer" id="customer_${id}">` +
       svg.renderPerson(customerBody) +
