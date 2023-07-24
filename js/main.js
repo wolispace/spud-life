@@ -210,7 +210,7 @@ function allocate() {
   let footer = "";
   footer += `<button class="buttonize" onclick="dialog.hide()"> Return to the field </button>`;
   footer += `<button class="buttonize okButton" onclick="dialog.confirm()"> Open shop </button>`;
-  dialog.onButton =  function () {setPhase('sales'); };
+  dialog.okButton = function () { setPhase('sales'); };
   dialog.render(title, content, footer);
 
   machines.render();

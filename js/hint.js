@@ -85,6 +85,7 @@ const hint = {
     let skipHint = document.querySelector('#hintSkip');
     if (skipHint && skipHint.checked) {
       player.hinted[skipHint.dataset.hint] = true;
+      state.save();
       hint.hide();
     }
   },
