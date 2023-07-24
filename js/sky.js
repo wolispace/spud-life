@@ -122,6 +122,7 @@ const sky = {
       nightShade.style.opacity = 1;
       sky.lightDoor();
       player.daytime = false;
+      character.render();
       state.save();
     });
     //element.style.animation = `${type} ${duration}s ease-in-out 0s 1 normal forwards`;

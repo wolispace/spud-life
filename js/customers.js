@@ -13,7 +13,9 @@ const customers = {
     }
     let element = document.querySelector(`#customerLine`);
     element.innerHTML = customerList;
-    customers.animate();
+    if (customers.qty > 0) {
+      customers.animate();
+    }
     sky.goDark();
   },
 
