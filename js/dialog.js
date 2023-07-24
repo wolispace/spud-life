@@ -29,13 +29,12 @@ const dialog = {
     if (typeof dialog.okButton === "function") {
       dialog.okButton();
     }
-    dialog.okButton = null;
     dialog.hide();
   },
   cancel: function () {
     dialog.hide();
   },
-
+  
   hide: function () {
     dialog.sprite.style["top"] = "-10000px";
     dialog.sprite.style["left"] = "-10000px";
@@ -43,6 +42,7 @@ const dialog = {
     dialog.part(`.dialog .content`, '');
     dialog.part(`.dialog .footer`, '');
     dialog.visible = false;
+    dialog.okButton = null;
     character.render();
     hint.hide();
   },

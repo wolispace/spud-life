@@ -208,7 +208,9 @@ function allocate() {
 
   let title = "Load spuds into machines";
   let footer = "";
-  footer += `<button class="buttonize" onclick="setPhase('sales')"> Open shop </button>`;
+  footer += `<button class="buttonize" onclick="dialog.hide()"> Return to the field </button>`;
+  footer += `<button class="buttonize okButton" onclick="dialog.confirm()"> Open shop </button>`;
+  dialog.onButton =  function () {setPhase('sales'); };
   dialog.render(title, content, footer);
 
   machines.render();

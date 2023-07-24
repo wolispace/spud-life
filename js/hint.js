@@ -204,10 +204,26 @@ const hint = {
       hint.okButton = 'hint.moveSpuds';
       hint.group = 'allocate';
     } else {
-      hint.message = `When you have dug up some spuds you can load them into your machines so they can make delicious spud-based meals. [${hint.ok()}]`;
-      hint.okButton = 'hint.close';
-      hint.group = 'allocateInto';
+      hint.message = `When you have dug up some spuds you can load them into your machines.<p>When you open your shop, your machines will make meals for you to sell.</p> [${hint.ok()}]`;
+      hint.okButton = 'hint.noSales';
+      hint.group = 'allocateIntro';
     }
+    hint.render();
+  },
+  noSales: function () {
+    hint.isItSkipped();
+    hint.pointTo = getElementPos(`.dialog .okButton`);
+    hint.message = `Your machines have no spuds.<p>Open for the night will not make any money but you will refresh your tools.</p> [${hint.ok()}]`;
+    hint.okButton = 'hint.howToClose';
+    hint.group = 'noSales';
+    hint.render();
+  },
+  howToClose: function () {
+    hint.isItSkipped();
+    hint.pointTo = getElementPos(`.dialog .close`);
+    hint.message = `You can also click this to return to the field. [${hint.ok()}]`;
+    hint.okButton = 'hint.close';
+    hint.group = 'howToClose';
     hint.render();
   },
   moveSpuds: function () {
@@ -222,6 +238,14 @@ const hint = {
     hint.isItSkipped();
     hint.pointTo = getElementPos(`.sackSpudDesc`);
     hint.message = `Use the matching machine to make more money per meal. [${hint.ok()}]`;
+    hint.okButton = 'hint.close';
+    hint.group = 'allocate';
+    hint.render();
+  },
+  openShop: function () {
+    hint.isItSkipped();
+    hint.pointTo = getElementPos(`.dialog .okButton`);
+    hint.message = `When your ready, open your shop and sell your potato-based meals. [${hint.ok()}]`;
     hint.okButton = 'hint.close';
     hint.group = 'allocate';
     hint.render();

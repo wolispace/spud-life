@@ -9,7 +9,9 @@ const scanner = {
     content += `<div>${scannerCheckbox}</div>`;
      content += `<div><div>`;
     let title = "Scanner";
-    let footer = `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
+    let footer = '';
+    footer += `<button class="buttonize" onclick="character.settings()"> Settings </button>`;
+    footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
     dialog.okButton = function () { scanner.save(); };
     dialog.render(title, content, footer);
     scanner.check();
