@@ -48,11 +48,9 @@ let player = {
 const character = {
   render: function () {
     svg.showElement("#playerSprite");
-    console.trace('show');
   },
   hide: function () {
     svg.hideElement("#playerSprite");
-    console.trace('hide');
   },
 
   look: function (direction) {

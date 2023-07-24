@@ -38,13 +38,14 @@ const home = {
     dialog.cancelButton = function () { home.exit(); };
     dialog.render(title, content, footer);
   },
+
   night: function () {
     dialog.hide();
     tools.reset();
     tools.render();
     fields.rollPatches();
     if (player.body) {
-      dream();
+      home.dream();
       sky.goLight();
       sky.darkDoor();
       fields.resetPlayer();
@@ -52,5 +53,49 @@ const home = {
       character.customize();
     }
   },
+  dream: function() {
+    let dreams = [
+      "You dreamt of living in a park, but were rudely awoken by the dustmen",
+      "You dreamt you were a walrus",
+      "You dreamt of holding onto nothing, to see how long nothing lasts",
+      "You dreamt of spinning plates",
+      "You didn't dream of anything, however you wake up, back to life, back to reality",
+      "You dreamt you were a hero, just for one day",
+      "You dreamt a little dreamt of me",
+      "You dreamt the cake is a lie",
+      "You dreamt about the delivery man",
+      "You dreamt you were baba",
+    ];
+    let dream = `<div>` + dreams[rnd(dreams.length)] + `</div>`;
+  
+    let sleeps = [
+      "You got to sleep quickly.",
+      "You had a hard time getting to sleep.",
+      "You stayed up very late playing Skyrim and fall asleep at your desk."
+  
+    ];
+    let sleep = `<div>` + sleeps[rnd(sleeps.length)] + `</div>`
+    
+    let sow = fields.resowField();
+    let income = customers.getIncome();
+  
+    let content = `<div class="dialog-message-content">`;
+    content += `${income}${sleep}${dream}${sow}`;
+    content += `<div>`;
+    let title = "Home sweet home";
+    let footer = "";
+    footer += `<button class="buttonize" onclick="dialog.confirm();"> Get out of bed </button>`;
+    dialog.okButton = function () { home.wake(); };
+    dialog.cancelButton = function () { home.wake(); };
+    dialog.render(title, content, footer);
+  },
+
+  wake: function() {
+    let playerSprite = document.querySelector(`#playerSprite svg`);
+    svg.animate(playerSprite, `grow`, 1, () => {character.render();});
+    setPhase('field');
+    dialog.hide();
+    character.render();
+  }
   
 };
