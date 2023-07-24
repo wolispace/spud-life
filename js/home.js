@@ -1,11 +1,18 @@
 const home = {
   enter: function () {
+    character.hide();
     if (player.daytime) {
       home.day();
     } else {
       home.night();
     }
   },
+
+  exit: function () {
+    dialog.hide(); 
+    character.render();
+  },
+
   day: function () {
     let content = `<div class="dialog-message-content">`;
     let insides = [
@@ -27,7 +34,8 @@ const home = {
     let footer = `<button class="buttonize" onclick="character.customize()"> Customize </button>`;
     footer += `<button class="buttonize" onclick="sky.goDark(); dialog.hide();">Start night</button>`;
     footer += `<button class="buttonize" onclick="dialog.confirm()">Go outside</button>`;
-
+    dialog.okButton = function () { home.exit(); };
+    dialog.cancelButton = function () { home.exit(); };
     dialog.render(title, content, footer);
   },
   night: function () {

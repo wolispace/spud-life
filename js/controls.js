@@ -42,10 +42,10 @@ const controls = {
           svg.animate(thisBlock, `shrink`, 1, () => {home.enter()});
         } else if (player.pos == 3) {
           let thisBlock = document.querySelector(`#playerSprite svg`);
-          svg.animate(thisBlock, `shrink`, 1, () => {setPhase("hardware")});
+          svg.animate(thisBlock, `shrink`, 1, () => {hardware.enter()});
         } else if (player.pos == 6) {
           let thisBlock = document.querySelector(`#playerSprite svg`);
-          svg.animate(thisBlock, `shrink`, 1, () => {setPhase("allocate")});
+          svg.animate(thisBlock, `shrink`, 1, () => {shop.enter()});
         }
       }
 

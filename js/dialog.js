@@ -4,11 +4,12 @@ const dialog = {
   cancelKey: 'Escape',
   confirmKey: 'Enter',
   okButton: null,
+  cancelButton: null,
   
   render: function (title, content, footer) {
     let patch = getElementPos(`#patch_0`);
-    character.hide();
-    dialog.sprite.style.top = "1rem";
+    //character.hide();
+    dialog.sprite.style.top = "5rem";
     dialog.sprite.style.left = (patch.width/2) + 'px';
     dialog.sprite.style.width = ((patch.width * (player.cols - 1) )) + 'px';
     dialog.part(`.dialog .header .title`, title);
@@ -30,8 +31,13 @@ const dialog = {
     dialog.hide();
     dialog.okButton = null;
   },
+
   cancel: function () {
+    if (typeof dialog.cancelButton === "function") {
+      dialog.cancelButton();
+    }
     dialog.hide();
+    dialog.cancelButton = false;
   },
   
   hide: function () {
@@ -42,7 +48,7 @@ const dialog = {
     dialog.part(`.dialog .footer`, '');
     dialog.visible = false;
     dialog.okButton = null;
-    character.render();
+    //character.render();
     hint.hide();
   },
 

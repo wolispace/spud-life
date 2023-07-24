@@ -219,6 +219,8 @@ h2 {
 }
 
 .dialog .footer {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
   position: sticky;
   padding: 0.2rem;
   background-color:rgb(160, 160, 160);

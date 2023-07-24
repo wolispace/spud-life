@@ -220,7 +220,6 @@ function allocate() {
 
 // const phases = ["field", "hardware", "allocate", "sales", "night"];
 function setPhase(phase) {
-  dialog.hide();
   player.phase = phase;
   state.save();
   if (player.phase != "field") {
@@ -294,6 +293,7 @@ function wake() {
   svg.animate(playerSprite, `grow`, 1, () => {character.render();});
   setPhase('field');
   dialog.hide();
+  character.render();
 }
 
 

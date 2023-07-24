@@ -1,4 +1,12 @@
 const hardware = {
+  enter: function () {
+    hardware.render();
+    character.hide();
+  },
+  exit: function () {
+    dialog.hide();
+    character.render();
+  },
   // draw tools and machines for sale
   render: () => {
     // return to the field when the dialog closes
@@ -59,6 +67,9 @@ const hardware = {
 
     let title = "Hardware shop";
     let footer = "";
+    footer += `<button class="buttonize" onclick="dialog.confirm()">Go outside</button>`;
+    dialog.cancelButton = function () { hardware.exit(); };
+    dialog.okButton = function () { hardware.exit(); };
     dialog.render(title, content, footer);
     fields.renderField();
   },
