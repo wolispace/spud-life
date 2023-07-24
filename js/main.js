@@ -199,50 +199,12 @@ function getSelectValue(id) {
   return element.value;
 }
 
-
-// player chooses which spuds to put in what machines
-function allocate() {
-  // list all spuds in sack and all machines owned..
-  let content = '<div class="allocateContent">';
-  content += '<div class="machines"></div><div class="sack"></div></div>';
-
-  let title = "Load spuds into machines";
-  let footer = "";
-  footer += `<button class="buttonize" onclick="dialog.hide()"> Return to the field </button>`;
-  footer += `<button class="buttonize okButton" onclick="dialog.confirm()"> Open shop </button>`;
-  dialog.okButton = function () { setPhase('sales'); };
-  dialog.render(title, content, footer);
-
-  machines.render();
-  sack.render();
-  hint.chipper();
-}
-
-// const phases = ["field", "hardware", "allocate", "sales", "night"];
+// TODO: this is going..
 function setPhase(phase) {
   player.phase = phase;
   state.save();
   if (player.phase != "field") {
-    if (player.phase == "allocate") {
-      allocate();
-    } else if (player.phase == "hardware") {
-      hardware.render();
-    } else if (player.phase == "sales") {
-      spuds.sell();
-    } else if (player.phase == "night") {
-      dialog.hide();
-      tools.reset();
-      tools.render();
-      fields.rollPatches();
-      if (player.body) {
-        dream();
-        sky.goLight();
-        sky.darkDoor();
-        fields.resetPlayer();
-      } else {
-        defineCharacter();
-      }
-    }
+
   } else {
     // display the fields patches in their current state
     fields.renderField();
