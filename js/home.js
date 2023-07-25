@@ -32,11 +32,15 @@ const home = {
     content += `<div>Your scanner flashes when something is buried in the patches directly next to you and under you.<div>`;
     let title = "Home sweet home";
     let footer = `<button class="buttonize" onclick="character.customize()"> Customize </button>`;
-    footer += `<button class="buttonize" onclick="sky.goDark(); dialog.hide();">Start night</button>`;
+    footer += `<button class="buttonize" onclick="home.quickBed()">Start night</button>`;
     footer += `<button class="buttonize" onclick="dialog.confirm()">Go outside</button>`;
     dialog.okButton = function () { home.exit(); };
     dialog.cancelButton = function () { home.exit(); };
     dialog.render(title, content, footer);
+  },
+  quickBed: function () {
+    sky.goDark(true); 
+    dialog.hide();
   },
 
   night: function () {

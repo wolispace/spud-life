@@ -113,7 +113,7 @@ const sky = {
     return svg.wrap("", "", guts);
   },
 
-  goDark: () => {
+  goDark: (straightToBed) => {
     // nightime.. when it ends..wait for customers to finish parade
     let nightShade = document.querySelector(`#nightShade`);
      
@@ -122,7 +122,11 @@ const sky = {
       nightShade.style.opacity = 1;
       sky.lightDoor();
       player.daytime = false;
-      character.render();
+      if (straightToBed) {
+        home.enter();
+      } else {
+        character.render();
+      }
       state.save();
     });
     //element.style.animation = `${type} ${duration}s ease-in-out 0s 1 normal forwards`;
