@@ -3,14 +3,18 @@ const scanner = {
   show: function (scanState) {
     player.scanState = scanState;
     let scannerCheckbox = scanner.checkbox();
+    let resetCheckbox = dialog.makeCheckbox('resetHints', 'Reset hints. Do this if you have forgotten stuff', false);
+ 
     let content = `<div class="dialog-message-content">`;
     content += `<div>Your scanner blinks if there is something underground near you.</div>`;
     content += `<div>You have a basic level ${player.scanLevel} scanner. This detects all squares directly next to you and under you.</div>`;
+    content += `<div class="checkbox-list">`;
     content += `<div>${scannerCheckbox}</div>`;
-     content += `<div><div>`;
+    content += `<div>${resetCheckbox}</div>`;
+    content += `<div><div>`;
     let title = "Scanner";
     let footer = '';
-    footer += `<button class="buttonize" onclick="character.settings()"> Settings </button>`;
+    footer += `<button class="buttonize" onclick="character.reset()"> Reset! </button>`;
     footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
     dialog.okButton = function () { scanner.save(); };
     dialog.cancelButton = function () { dialog.hide(); };
@@ -18,11 +22,14 @@ const scanner = {
     scanner.check();
   },
   save: function () {
-    let chk = document.querySelector(`#scannerCheckbox`);
-    player.scanState = chk.checked;
+    player.scanState = dialog.isChecked(`#scannerCheckbox`);
+    if (dialog.isChecked(`#resetHints`)) {
+      player.hinted = {};
+    };
     state.save();
     dialog.hide();
   },
+
   checkbox: function () {
     let checked = player.scanState ? 'checked' : '';
     let scannerCheckbox = `<span class="checkboxSpan">`;

@@ -157,7 +157,7 @@ const character = {
 
   settings: function () {
     
-    let resetCheckbox = character.makeCheckbox('resetHints', 'Reset hints. Do this if you have forgotten stuff', false);
+    let resetCheckbox = dialog.makeCheckbox('resetHints', 'Reset hints. Do this if you have forgotten stuff', false);
     let content = `<div class="dialog-message-content">`;
     content += `<div>Your game is constantly saving.</div>`;
     content += `<div>Sadly there is no way to transfer this game to another device just yet.</div>`;
@@ -171,13 +171,7 @@ const character = {
     dialog.render(title, content, footer);
 
   },
-  makeCheckbox: function (id, text, checked) {
-    let checkbox = `<span class="checkboxSpan">`;
-    checkbox += `<input type="checkbox" id="${id}" ${checked} />`;
-    checkbox += `<label class="checkboxLabel" for="${id}">${text}</label></span>`;
 
-    return checkbox;
-  },
   saveSettings: function () {
     let chk = document.querySelector(`#resetHints`);
     if (chk.checked) {
