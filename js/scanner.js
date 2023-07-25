@@ -1,6 +1,7 @@
 const scanner = {
   // show scanner dialog.. could be used to show where things are
   show: function (scanState) {
+    character.hide();
     player.scanState = scanState;
     let scannerCheckbox = scanner.checkbox();
     let resetCheckbox = dialog.makeCheckbox('resetHints', 'Reset hints. Do this if you have forgotten stuff', false);
@@ -28,6 +29,7 @@ const scanner = {
     };
     state.save();
     dialog.hide();
+    character.render();
   },
 
   checkbox: function () {

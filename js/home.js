@@ -15,6 +15,23 @@ const home = {
 
   day: function () {
     let content = `<div class="dialog-message-content">`;
+    
+
+    content += `<div>${svg.inline('house')} ${home.lookInside()}.</div>`;
+    content += `<div>Go outside and use your spade to dig for potatoes.</div>`;
+    content += `<div>${hint.random()}.</div>`;
+    content += `<div>Check your scanner to adjust settings.</div>`;
+    content += `</div>`;
+    let title = "Home sweet home";
+    let footer = `<button class="buttonize" onclick="character.customize()">Wardrobe</button>`;
+    footer += `<button class="buttonize" onclick="home.quickBed()">Start night</button>`;
+    footer += `<button class="buttonize" onclick="dialog.confirm()">Go outside</button>`;
+    dialog.okButton = function () { home.exit(); };
+    dialog.cancelButton = function () { home.exit(); };
+    dialog.render(title, content, footer);
+  },
+
+  lookInside: function () {
     let insides = [
       "Your house is a little messy",
       "Your house looks so much nicer after that fresh coat of paint",
@@ -27,17 +44,9 @@ const home = {
       "Your house is cozy",
     ];
 
-    content += `<div>${svg.inline('house')} ${insides[rnd(insides.length)]}.</div>`;
-    content += `<div>Go outside and use your spade to dig for potatoes.<div>`;
-    content += `<div>Your scanner flashes when something is buried in the patches directly next to you and under you.<div>`;
-    let title = "Home sweet home";
-    let footer = `<button class="buttonize" onclick="character.customize()"> Customize </button>`;
-    footer += `<button class="buttonize" onclick="home.quickBed()">Start night</button>`;
-    footer += `<button class="buttonize" onclick="dialog.confirm()">Go outside</button>`;
-    dialog.okButton = function () { home.exit(); };
-    dialog.cancelButton = function () { home.exit(); };
-    dialog.render(title, content, footer);
+    return insides[rnd(insides.length)];
   },
+
   quickBed: function () {
     sky.goDark(true); 
     dialog.hide();
