@@ -124,7 +124,10 @@ const character = {
 
     let footer = "";
     footer += `<button class="buttonize" onclick="character.customize('random')"> Randomize </button>`;
-    footer += `<button class="buttonize" onclick="character.save()"> Ok </button>`;
+    footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
+    dialog.cancelButton = function () { character.save(); };
+    dialog.okButton = function () { character.save(); };
+    console.log(dialog);
     dialog.render("Character creator", `${content}`, footer);
     character.demoBody();
   },

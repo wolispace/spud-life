@@ -116,24 +116,12 @@ function gameIntro () {
   content += '</div>';
 
   let footer = "";
-  footer += `<button class="buttonize" onclick="hints.off(); character.customize()"> Skip tutorial </button>`;
-  footer += `<button class="buttonize" onclick="character.customize()"> Create your character </button>`;
+  footer += `<button class="buttonize" onclick="dialog.cancel()"> Skip tutorial </button>`;
+  footer += `<button class="buttonize" onclick="dialog.confirm()"> Create your character </button>`;
+  dialog.cancelButton = function () { hints.off(); character.customize(); };
+  dialog.okButton = function () { console.log('ok'); character.customize(); };
   dialog.render("Welcome to spud life", content, footer);
-  // toggle hints
-  // - these show you what to do next 
-  // 'Stand infront of your house and press UP to go into it and end the day'
-  // 'Stand infront of your food cart and press UP to open yur cart for the evening'
-  // 'Stand infront of the Hardware store to buy or upgrade equipment'
-  // 'You can but new machiens for making different potato-based foods of varying quality'
-  // 'Some potatoes are better in some machines and you get more from each meal'
-  // 'You need a pick to break rocks'
-  // 'You need an axe to clear logs'
-  // 'You have used up your {tool} for today. Sleep and rejuvenate it'
-  // 'Stand on the sign and press RIGHT to enter your new field'
-  // 'Click on the basket to view its contents'
-  // 'Click on your wallet to see how much money you have'
-  // 'Choose a machine on the left'
-  // 'Move all spuds (or one at a time) into, or out of, the machines hopper'
+
 }
 
 // the default
