@@ -13,6 +13,7 @@ const scanner = {
     footer += `<button class="buttonize" onclick="character.settings()"> Settings </button>`;
     footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
     dialog.okButton = function () { scanner.save(); };
+    dialog.cancelButton = function () { dialog.hide(); };
     dialog.render(title, content, footer);
     scanner.check();
   },
@@ -20,6 +21,7 @@ const scanner = {
     let chk = document.querySelector(`#scannerCheckbox`);
     player.scanState = chk.checked;
     state.save();
+    dialog.hide();
   },
   checkbox: function () {
     let checked = player.scanState ? 'checked' : '';

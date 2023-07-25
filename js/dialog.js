@@ -9,7 +9,7 @@ const dialog = {
   render: function (title, content, footer) {
     let patch = getElementPos(`#patch_0`);
     //character.hide();
-    dialog.sprite.style.top = "5rem";
+    dialog.sprite.style.top = "1rem";
     dialog.sprite.style.left = (patch.width/2) + 'px';
     dialog.sprite.style.width = ((patch.width * (player.cols - 1) )) + 'px';
     dialog.part(`.dialog .header .title`, title);
