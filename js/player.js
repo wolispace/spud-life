@@ -66,9 +66,15 @@ const character = {
       playerSprite.setAttribute("transform", "translate(0, 0) scale(-1, 1)");
     } else if (direction == "up") {
       playerHead.setAttribute("transform", "rotate(45, 51, 21.2)");
+      character.resetHead();
     } else if (direction == "down") {
       playerHead.setAttribute("transform", "rotate(-30, 51, 21.2)");
+      character.resetHead();
     }
+  },
+  resetHead: function () {
+    let playerHead = document.querySelector("#playerSprite .playerHead");
+    setTimeout( () => {playerHead.setAttribute("transform", "rotate(0, 51, 21.2)");}, 1000);
   },
 
   // make a random body
@@ -129,7 +135,6 @@ const character = {
     footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
     dialog.cancelButton = function () { character.save(); };
     dialog.okButton = function () { character.save(); };
-    console.log(dialog);
     dialog.render("Character creator", `${content}`, footer);
     character.demoBody();
   },
