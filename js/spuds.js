@@ -68,6 +68,7 @@ const spuds = {
   },
   // selling the meals from the machines
   sell: () => {
+    dialog.hide();
     let totalMeals = 0;
     let totalIncome = 0;
 

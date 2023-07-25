@@ -48,6 +48,8 @@ let player = {
 const character = {
   render: function () {
     svg.showElement("#playerSprite");
+    let thisBlock = document.querySelector(`#playerSprite svg`);
+          svg.animate(thisBlock, `grow`, 1);
   },
   hide: function () {
     svg.hideElement("#playerSprite");

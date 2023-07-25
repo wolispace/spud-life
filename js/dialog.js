@@ -16,7 +16,6 @@ const dialog = {
     dialog.part(`.dialog .content`, content);
     dialog.part(`.dialog .footer`, footer);
     dialog.visible = true;
-    console.trace('render', dialog);
   },
 
   part: function (partClass, content) {
@@ -29,16 +28,12 @@ const dialog = {
     if (typeof dialog.okButton === "function") {
       dialog.okButton();
     }
-    console.trace('clearing okButton');
-    //dialog.okButton = null;
   },
 
   cancel: function () {
     if (typeof dialog.cancelButton === "function") {
       dialog.cancelButton();
     }
-    dialog.hide();
-    //dialog.cancelButton = null;
   },
   
   hide: function () {
@@ -49,10 +44,6 @@ const dialog = {
     dialog.part(`.dialog .footer`, '');
     dialog.visible = false;
     dialog.okButton = null;
-    //character.render();
     hint.hide();
-    console.trace('hide');
   },
-
-  
 }
