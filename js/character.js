@@ -75,7 +75,7 @@ const character = {
     randomName: function () {
       let names = [
         "Ashley",
-        "Steve",
+        "Stevie",
         "Charlie",
       ];
 
