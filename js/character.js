@@ -46,6 +46,9 @@ const character = {
         if (",head,nose".indexOf(bodyPart) > 0) {
           colour = skinTone;
         }
+        if (bodyPart == "facial" && rnd(5) == 3) {
+          variation = "facial-none";
+        }
         newBody[bodyPart] = {
           type: variation,
           colour: colour,
@@ -56,6 +59,8 @@ const character = {
     },
   
     save: function () {
+      let dialogInput = document.querySelector(`#playerName`);
+      player.name = dialogInput.value;
       dialog.hide();
       state.save();
       tools.render();
@@ -66,15 +71,27 @@ const character = {
       hint.player();
       character.render();
     },
+
+    randomName: function () {
+      let names = [
+        "Ashley",
+        "Steve",
+        "Charlie",
+      ];
+
+      return names[rnd(names.length)];
+    },
   
     customize: function (mode) {
-      if (mode == "random") {
+      if (mode == "random" || !player.body ) {
         player.body = character.randomBody();
       }
   
       let content = "";
       content += '<div class="creator">';
       content += '<div class="left">';
+
+      content += character.editName();
   
       Object.entries(player.body).forEach(([key, part]) => {
         content += character.buildBodySelect(key);
@@ -92,6 +109,11 @@ const character = {
       dialog.okButton = function () { character.save(); };
       dialog.render("Character creator", `${content}`, footer);
       character.demoBody();
+    },
+
+    editName: function () {
+      return `<div><input type="text" id="playerName" value="${player.name}" /></div>`;
+
     },
   
     buildBodySelect: function (bodyPart) {

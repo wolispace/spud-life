@@ -2,6 +2,7 @@ const rows = 12;
 const cols = 10;
 
 let player = {
+  name: character.randomName(),
   hints: true,
   hinted: {},
   phase: "field",

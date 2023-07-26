@@ -104,20 +104,20 @@ function initGame() {
 }
 
 function gameIntro () {
-  let content = '<div class="dialog-content">';
-  content += '<p><i>You receive a letter from a distance aunt. ';
-  content += 'She is retiring from the food business and gives some things to see if you can make it into a thriving business</i></p>';
-  content += '<p><b>Welcome to Spud life!</b></p>';
-  content += '<p>During the day, you dig for potatoes (spuds).</p>';
-  content += '<p>At the end of the day you open your food cart and sell delicious potato meals.</p>';
-  content += '<p>Then you go to sleep and wake refreshed and ready to find more spuds!</p>';
-  content += '<p>Visit the hardware store to upgrade your equipment and sell any junk you found in your travels.</p>';
+  let content = `<div class="dialog-message-content">`;
+  content += '<div>You receive a letter from a distance aunt: <br/>';
+  content += '<i>I am retiring from the food business and and have no need for these things, maybe you have some use for them?</i></div>';
+  content += '<div><b>Welcome to Spud life!</b></div>';
+  content += '<div>During the day, you dig for potatoes (spuds).</div>';
+  content += '<div>At the end of the day you open your food cart and sell potato meals.</div>';
+  content += '<div>Then you go to sleep and wake refreshed and ready to find more spuds!</div>';
+  content += '<div>Visit the hardware store to upgrade your equipment and sell any junk you find in your travels.</div>';
   content += '</div>';
 
   let footer = "";
   footer += `<button class="buttonize" onclick="dialog.cancel()"> Skip tutorial </button>`;
   footer += `<button class="buttonize" onclick="dialog.confirm()"> Create your character </button>`;
-  dialog.cancelButton = function () { hints.off(); character.customize(); };
+  dialog.cancelButton = function () { hint.off(); character.customize(); };
   dialog.okButton = function () { console.log('ok'); character.customize(); };
   dialog.render("Welcome to spud life", content, footer);
 
