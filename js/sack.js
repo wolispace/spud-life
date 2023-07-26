@@ -33,7 +33,7 @@ const sack = {
           sackList += `<div class="spudListButton" >&gt;</div>`;
         }
         sackList += `</div>`;
-        sackList += `<div class="sackSpudDesc">This is a ${spudInfo.rareness} potato that is best for ${spudInfo.bestFor}</div>`;
+        sackList += `<div class="sackSpudDesc">This is a ${spuds.bits.rareNames[spudInfo.rareness]} potato that is best for ${spudInfo.bestFor}</div>`;
         sackList += `</div>`;
       }
     });

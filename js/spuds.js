@@ -1,48 +1,50 @@
 const spuds = {
   //generate the the complete random list of spuds for this session
+  bits: {
+    prefix: ["Bo", "Sa", "Ru", "Kri", "Ar"],
+    middle: ["sa", "cho", "ma", "nal", "sso", "li"],
+    suffix: ["lor", "ker", "pry", "ly", "der", "mid"],
+    bestFor: ["chips", "baked potatoes", "curly-fries", "soup"],
+    color: [
+      "white",
+      "brick",
+      "wheat",
+      "teal",
+      "orange",
+      "maroon",
+      "black",
+      "navy",
+      "pink",
+      "purple",
+      "red",
+    ],
+    showColors: ["white", "orange", "black", "pink", "purple", "red"],
+    rareness: [1,2,3,4],
+    rareNames: ["common", "standard", "fine", "rare"],
+  },
+  
   sprout: (qty) => {
     let counter = 0;
-    let spudBits = {
-      prefix: ["Bo", "Sa", "Ru", "Kri", "Ar"],
-      middle: ["sa", "cho", "ma", "nal", "sso", "li"],
-      suffix: ["lor", "ker", "pry", "ly", "der", "mid"],
-      bestFor: ["chips", "baked potatoes", "curly-fries", "soup"],
-      color: [
-        "white",
-        "brick",
-        "wheat",
-        "teal",
-        "orange",
-        "maroon",
-        "black",
-        "navy",
-        "pink",
-        "purple",
-        "red",
-      ],
-      showColors: ["white", "orange", "black", "pink", "purple", "red"],
-      rareness: ["common", "standard", "rare"],
-    };
     // used next element from array cycling back to the start so its not completely random.
-    let colorCycle = rnd(spudBits.color.length);
-    let rarityCycle = rnd(spudBits.rareness.length);
-    let bestForCycle = rnd(spudBits.bestFor.length);
+    let colorCycle = rnd(spuds.bits.color.length);
+    let rarityCycle = rnd(spuds.bits.rareness.length);
+    let bestForCycle = rnd(spuds.bits.bestFor.length);
     let namedSpuds = [];
     while (counter < qty) {
-      let name = spudBits.prefix[rnd(spudBits.prefix.length)];
-      name += spudBits.middle[rnd(spudBits.middle.length)];
+      let name = spuds.bits.prefix[rnd(spuds.bits.prefix.length)];
+      name += spuds.bits.middle[rnd(spuds.bits.middle.length)];
       while (namedSpuds.includes(name)) {
-        name += spudBits.middle[rnd(spudBits.middle.length)];
+        name += spuds.bits.middle[rnd(spuds.bits.middle.length)];
       }
       namedSpuds.push(name);
       if (rnd(3) > 1) {
-        name += spudBits.suffix[rnd(spudBits.suffix.length)];
+        name += spuds.bits.suffix[rnd(spuds.bits.suffix.length)];
       }
 
-      let colorName = spudBits.color[colorCycle];
-      let rarityName = spudBits.rareness[rarityCycle];
+      let colorName = spuds.bits.color[colorCycle];
+      let rarityName = spuds.bits.rareNames[rarityCycle];
       let fullName = rnd(3) > 1 ? `${rarityName} ` : "";
-      if (spudBits.showColors.includes(colorName)) {
+      if (spuds.bits.showColors.includes(colorName)) {
         fullName += `${colorName} `;
       }
       fullName += name;
@@ -55,15 +57,15 @@ const spuds = {
         name: name,
         fullName: fullName,
         color: colorName,
-        rareness: rarityName,
-        bestFor: spudBits.bestFor[bestForCycle],
+        rareness: rarityCycle,
+        bestFor: spuds.bits.bestFor[bestForCycle],
         path: svg.jiggle(svgInfo.paths[0].d, 3),
       };
       // roll on to next item in the list so everyone gets at least one of everything
-      colorCycle = ++colorCycle >= spudBits.color.length ? 0 : colorCycle;
-      rarityCycle = ++rarityCycle >= spudBits.rareness.length ? 0 : rarityCycle;
+      colorCycle = ++colorCycle >= spuds.bits.color.length ? 0 : colorCycle;
+      rarityCycle = ++rarityCycle >= spuds.bits.rareness.length ? 0 : rarityCycle;
       bestForCycle =
-        ++bestForCycle >= spudBits.bestFor.length ? 0 : bestForCycle;
+        ++bestForCycle >= spuds.bits.bestFor.length ? 0 : bestForCycle;
     }
   },
   // selling the meals from the machines
