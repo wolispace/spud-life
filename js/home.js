@@ -84,8 +84,9 @@ const home = {
     let sleeps = [
       "You got to sleep quickly.",
       "You had a hard time getting to sleep.",
-      "You stayed up very late playing Skyrim and fall asleep at your desk."
-  
+      "You stayed up very late playing Skyrim and fall asleep at your desk.",
+      "You appreciated your firm, yet soft, pillow",
+      "you noticed a rabbit-shaped crack on your ceiling",
     ];
     let sleep = `<div>` + sleeps[rnd(sleeps.length)] + `</div>`
     
