@@ -98,7 +98,7 @@ const fields = {
               break;
           }
           if (patch !== {}) {
-            let newSpud = player.spuds[rnd(player.spuds.length)];
+            let newSpud = spuds.byRareness(player.currentField + 1);
             patch.spud = { name: newSpud.name, qty: rnd(3) + 1 };
           }
         }

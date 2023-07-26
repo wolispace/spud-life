@@ -22,7 +22,7 @@ const spuds = {
     rareness: [1,2,3,4],
     rareNames: ["common", "standard", "fine", "rare"],
   },
-  
+
   sprout: (qty) => {
     let counter = 0;
     // used next element from array cycling back to the start so its not completely random.
@@ -139,6 +139,20 @@ const spuds = {
     });
 
     return svg.wrap(svgClass, style, `${paths}${highlight}`);
+  },
+  // find a spud that is within our rareness range for the field
+  // field 0 can have spuds 0 and 1
+  // field 1 can have spuds 0, 1 and 2 etc..
+  // since spud rareness is max 3, all fields > 2 have all rareness spuds
+  byRareness: function (rareness) {
+    console.log(player.spuds);
+    let spud = player.spuds[rnd(player.spuds.length)];
+    console.log(spud);
+    while (spud.rareness > rareness) {
+      console.log(`skipping ${spud.name} cos ${spud.rareness} > ${rareness}`);
+      spud =  player.spuds[rnd(player.spuds.length)];
+    }
+    return spud;
   },
 
   // animate an item being dug up into the basket
