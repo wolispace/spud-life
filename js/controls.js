@@ -5,6 +5,7 @@ const controls = {
   ArrowRight: (player.cols * player.rows) - player.cols + 2,
   ArrowUp: (player.cols * player.rows) - (player.cols*2) + 1,
   click: (indexId) => {
+    console.log(player);
     let controlIds = [controls.ArrowUp, controls.ArrowLeft, controls.ArrowRight, controls.ArrowDown];
     // user clicked a control to move up, down, left or right - interact with the patch we are moving into
     let bits = indexId.split("_");

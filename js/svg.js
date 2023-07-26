@@ -808,13 +808,14 @@ const svg = {
   },
 
   // TODO: returns different types of body parts
-  bodyPartOptions(type) {
+  bodyPartOptions(type, currentType) {
     let options = "";
 
     Object.entries(svg.imgList).forEach(([key, part]) => {
+      let selected = currentType == key ? 'selected="selected"' : '';
       if (`${key}-`.indexOf(type) > -1) {
         let bits = key.split("-");
-        options += `<option value="${key}">${bits[1]}</option>`;
+        options += `<option value="${key}" ${selected}>${bits[1]}</option>`;
       }
     });
 

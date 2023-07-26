@@ -68,9 +68,10 @@ const character = {
     },
   
     customize: function (mode) {
-      let newBody = mode == "random" ? character.randomBody() : character.defaultBody;
+      if (mode == "random") {
+        player.body = character.randomBody();
+      }
   
-      player.body = newBody;
       let content = "";
       content += '<div class="creator">';
       content += '<div class="left">';
@@ -95,7 +96,7 @@ const character = {
   
     buildBodySelect: function (bodyPart) {
       let colour = svg.colourOptions(player.body[bodyPart].colour);
-      let part = svg.bodyPartOptions(bodyPart);
+      let part = svg.bodyPartOptions(bodyPart, player.body[bodyPart].type); 
   
       return `<div>${bodyPart}<br/><select id="${bodyPart}" class="selectPart" onchange="character.demoBody()">${part}</select>
          <select id="${bodyPart}-colour" class="selectColour" onchange="character.demoBody()">${colour}</select></div>`;
