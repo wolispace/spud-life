@@ -67,7 +67,7 @@ const sack = {
   },
     // sell something
     sellItem: (itemName) => {
-      let item = player.hardware[itemName];
+      let item = hardware.items[itemName];
       let itemQty = player.sack[itemName] ?? 0;
 
       player.wallet = player.wallet + (item.price * itemQty);

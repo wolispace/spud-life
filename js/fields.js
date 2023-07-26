@@ -48,7 +48,7 @@ const fields = {
   // randomly fill the selected field (if empty) with rocks, logs and spuds - plus some random treasure!
   fillField: (fieldId) => {
     if (player.fields[fieldId].length < 1) {
-      let items = hardware.store();
+      let items = hardware.items;
       // first row
       let i = 0;
       do {
@@ -331,7 +331,7 @@ const fields = {
       // if there is an item defined, dig it up and add it to the sack
       if (patch.item) {
         spuds.animate(patch);
-        let item = player.hardware[patch.item];
+        let item = hardware.items[patch.item];
         if (item.type == 'tool') {
           // upgrade the tool
           player.tools[patch.item] = player.tools[patch.item] ?? {};

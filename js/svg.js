@@ -725,12 +725,10 @@ const svg = {
     if (element && element.style) {
       element.style.animation = `${type} ${duration}s ease-in-out 0s 1 normal forwards`;
       element.addEventListener("animationstart", function handler() {
-        player.animating = true;
         this.removeEventListener("animationstart", handler);
       });
       
       element.addEventListener("animationend", function handler() {
-        player.animating = false;
         element.style.animation = "";
         if (typeof onEnd == "function") {
           onEnd();

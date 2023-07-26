@@ -145,13 +145,11 @@ const spuds = {
   // field 1 can have spuds 0, 1 and 2 etc..
   // since spud rareness is max 3, all fields > 2 have all rareness spuds
   byRareness: function (rareness) {
-    console.log(player.spuds);
     let spud = player.spuds[rnd(player.spuds.length)];
-    console.log(spud);
     while (spud.rareness > rareness) {
-      console.log(`skipping ${spud.name} cos ${spud.rareness} > ${rareness}`);
       spud =  player.spuds[rnd(player.spuds.length)];
     }
+    
     return spud;
   },
 

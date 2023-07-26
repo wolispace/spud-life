@@ -47,7 +47,7 @@ const tools = {
   },
   // buy a tool or an upgrade to a tool or machine
   buyItem: (itemName) => {
-    let item = player.hardware[itemName];
+    let item = hardware.items[itemName];
     if (item.type == "tool") {
       if (player.tools[itemName] || itemName == 'scanner') {
         // upgrade

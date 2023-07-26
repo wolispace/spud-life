@@ -38,7 +38,7 @@ const machines = {
   },
 
   listHopper: (machineName) => {
-    let machine = player.hardware[machineName];
+    let machine = hardware.items[machineName];
     let hopper = `<div class="machineName">${machine.name}</div><div>`;
     Object.entries(player.shop.machines[machineName].hopper).forEach(([spudName, spudQty]) => {
       hopper += `<div>${spudName} = ${spudQty}</div > `;

@@ -97,9 +97,8 @@ function initGame() {
   fields.fillField(player.currentField);
   fields.rollPatches();
   // gift the first machine first off
-  player.hardware = hardware.store();
   let starter = "chipper";
-  player.shop.machines[starter] = player.hardware[starter].initial;
+  player.shop.machines[starter] = hardware.items[starter].initial;
   tools.reset();
   gameIntro();
 }

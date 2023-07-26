@@ -42,7 +42,6 @@ let player = {
     ArrowRight: cols + 1,
     ArrowDown: cols * 2,
   },
-  animating: false,
 };
 
 const character = {

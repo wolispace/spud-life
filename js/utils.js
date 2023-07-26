@@ -10,8 +10,6 @@ function halfRnd(num) {
 
 const state = {
   save: () => {
-    // remove these before saving
-    player.animating = false;
     let compressed = LZString.compressToUTF16(JSON.stringify(player));
     localStorage.setItem("state", compressed);
   },
