@@ -1,6 +1,9 @@
 const scanner = {
   // show scanner dialog.. could be used to show where things are
   show: function (scanState) {
+    if (hint.visible || dialog.visible) {
+      return;
+    }
     character.hide();
     player.scanState = scanState;
     let scannerCheckbox = scanner.checkbox();
@@ -93,8 +96,8 @@ const scanner = {
     // depending on player.scanLevel (scan level 0 is off, 1 is full area.)
     let scanLevels = [
       [],
-      [-cols-1, -cols, -cols+1, -1, 0, 1, cols-1, cols, cols+1],
-      [-cols, -1, 0, 1,  cols],
+      [-player.cols-1, -player.cols, -player.cols+1, -1, 0, 1, player.cols-1, player.cols, player.cols+1],
+      [-player.cols, -1, 0, 1,  player.cols],
       [-1, 0, 1],
       [0],
     ];

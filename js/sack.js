@@ -43,6 +43,9 @@ const sack = {
   },
   // show or hide the sack via a dialog
   show: () => {
+    if (hint.visible || dialog.visible) {
+      return;
+    }
     let content = "";
     let content2 = "";
     let style = `style="width:2rem;"`;

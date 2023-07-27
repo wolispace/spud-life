@@ -10,7 +10,7 @@ let player = {
   cols: cols,
   rows: rows,
   sack: {},
-  wallet: 999999,
+  wallet: 100,
   scanLevel: 1,
   scanState: true,
   pos: 0,

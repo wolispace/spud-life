@@ -308,6 +308,9 @@ const fields = {
   },
   // dig for a spud in the current patch
   digPatch: () => {
+    if (hint.visible || dialog.visible) {
+      return;
+    }
     let patch = player.fields[player.currentField][player.pos];
     let tool = player.tools["spade"];
     let thisTool = document.querySelector(`.tool-spade svg`);

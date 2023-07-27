@@ -66,6 +66,7 @@ const home = {
       character.customize();
     }
   },
+
   dream: function() {
     let dreams = [
       "You dreamt of living in a park, but were rudely awoken by the dustmen",
@@ -79,22 +80,30 @@ const home = {
       "You dreamt about the delivery man",
       "You dreamt you were baba",
     ];
-    let dream = `<div>` + dreams[rnd(dreams.length)] + `</div>`;
+    let dream = `<div>` + dreams[rnd(dreams.length)] + `.</div>`;
   
+    let games = [
+      "Portal",
+      "Baba is you",
+      "Skyrim",
+      "Sabatour",
+    ];
+
     let sleeps = [
       "You got to sleep quickly.",
       "You had a hard time getting to sleep.",
-      "You stayed up very late playing Skyrim and fall asleep at your desk.",
-      "You appreciated your firm, yet soft, pillow",
+      `You stayed up very late playing ` + games[rnd(games.length)] + ` and din't get much sleep.`,
+      "Your pillow was unusually lumpy, maybe its time for a new one?",
       "you noticed a rabbit-shaped crack on your ceiling",
     ];
-    let sleep = `<div>` + sleeps[rnd(sleeps.length)] + `</div>`
+    let sleep = `<div>` + sleeps[rnd(sleeps.length)] + `</div>`;
+    let reset = `<div>Your tools have all been refreshed.</div>`
     
     let sow = fields.resowField();
     let income = customers.getIncome();
   
     let content = `<div class="dialog-message-content">`;
-    content += `${income}${sleep}${dream}${sow}`;
+    content += `${income}${sleep}${dream}${reset}${sow}`;
     content += `<div>`;
     let title = "Home sweet home";
     let footer = "";
