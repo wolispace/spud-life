@@ -123,41 +123,6 @@ function gameIntro () {
 
 }
 
-// the default
-function defaultBody() {
-  return {
-    body: {
-      type: "body-big",
-      colour: "Navy",
-    },
-
-    head: {
-      type: "head-head",
-      colour: "Wheat",
-    },
-    nose: {
-      type: "nose-triangle",
-      colour: "Wheat",
-    },
-    brows: {
-      type: "brows-wave",
-      colour: "Black",
-    },
-    eye: {
-      type: "eye-eye",
-      colour: "DodgerBlue",
-    },
-    facial: {
-      type: "facial-mustache",
-      colour: "Brown",
-    },
-    hair: {
-      type: "hair-curly",
-      colour: "Brown",
-    },
-  };
-}
-
 // takes list of body parts from imgList and make easy-to-parse lists for each part
 function getBodySet() {
   let partOptions = [];
@@ -176,8 +141,6 @@ function getBodySet() {
 
   return partOptions;
 }
-
-
 
 // get the selected value from a select
 function getSelectValue(id) {
