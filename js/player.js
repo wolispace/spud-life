@@ -1,4 +1,4 @@
-const rows = 12;
+const rows = 14;
 const cols = 10;
 
 let player = {
@@ -37,6 +37,7 @@ let player = {
   shop: {
     machines: {},
   },
+  ctrlOffset: 30,
   controlPos: {
     ArrowUp: 0,
     ArrowLeft: cols,

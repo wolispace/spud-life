@@ -151,7 +151,7 @@ const hint = {
   },
   controls: function () {
     hint.isItSkipped();
-    hint.pointTo = getElementPos(`#patch_111`);
+    hint.pointTo = getElementPos(`#patch_${controls.ArrowUp}`);
     hint.message = `Use these to move around the field. [${hint.ok()}..]`;
     hint.okButton = 'hint.spade';
     hint.group = 'into',
