@@ -136,6 +136,7 @@ const hint = {
       "Your house looks a lot like my house",
       "Your house is your castle",
       "Your house is cozy",
+      "You can bring on the night any time, even if you have no spuds to sell",
     ];
 
     return randomHint[rnd(randomHint.length)];

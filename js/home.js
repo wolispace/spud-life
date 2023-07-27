@@ -24,7 +24,7 @@ const home = {
     content += `</div>`;
     let title = "Home sweet home";
     let footer = `<button class="buttonize" onclick="character.customize()">Wardrobe</button>`;
-    footer += `<button class="buttonize" onclick="home.quickBed()">Start night</button>`;
+    footer += `<button class="buttonize" onclick="home.quickBed()">Bring on the night</button>`;
     footer += `<button class="buttonize" onclick="dialog.confirm()">Go outside</button>`;
     dialog.okButton = function () { home.exit(); };
     dialog.cancelButton = function () { home.exit(); };
