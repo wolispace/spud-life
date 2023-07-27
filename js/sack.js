@@ -50,7 +50,7 @@ const sack = {
       let spudInfo = player.spuds.filter((spud) => spud.name == itemName)[0];
       if (spudInfo) {
         let icon = spuds.render(spudInfo.name, style);
-        let spudDesc = `These is a ${spuds.bits.rareNames[spudInfo.rareness]} potato that is best for ${spudInfo.bestFor}`;
+        let spudDesc = `These are a ${spuds.bits.rareNames[spudInfo.rareness]} potato that is best for ${spudInfo.bestFor}`;
         content += `<div class="buttonize">${icon} ${itemQty} <b>${itemName}.</b> ${spudDesc}</div>`;
       } else {
         let itemInfo = hardware.items[itemName];
