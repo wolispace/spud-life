@@ -309,14 +309,22 @@ button:hover {
 }
 
 .color-grid {
-  border: 2px solid black;
   display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  align-content: stretch;
+}
+
+.color-group {
+  display: flex;
+  align-items: stretch;
+  align-content: stretch;
 }
 
 .colour-square {
-  border: 2px solid white;
-  width: 2rem;
-  height: 2rem;
+  flex-grow:1;
+  width: 20px;
+  height: 20px;
 }
 
 .customer {
@@ -615,10 +623,6 @@ button:hover {
 .creator {
   display: flex;
   padding: 1rem;
-}
-
-.creator .left div {
-  padding-bottom: 0.75rem;
 }
 
 .demoBody {

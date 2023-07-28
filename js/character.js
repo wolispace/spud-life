@@ -92,16 +92,16 @@ const character = {
       content += '<div class="creator">';
       content += '<div class="left">';
       content += character.editName();
-      content += character.colourGrid();
-  
+      
       Object.entries(player.body).forEach(([key, part]) => {
         content += character.buildBodySelect(key);
       });
-  
+      
       content += "</div>";
       content += '<div class="demoBody">';
       content += "</div>";
       content += "</div>";
+      content += character.colourGrid();
   
       let footer = "";
       footer += `<button class="buttonize" onclick="character.customize('random')"> Randomize </button>`;
@@ -149,7 +149,7 @@ const character = {
       let colourGrid = `<div class="color-grid">`;
       
       Object.entries(CSS_COLOR_GROUPS).forEach(([groupName, colours]) => {
-        colourGrid += '<div class="colorGroup">';
+        colourGrid += '<div class="color-group">';
         colours.forEach( (colourName) => {
           colourGrid += character.colourSquare(colourName);
         });

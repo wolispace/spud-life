@@ -1025,6 +1025,7 @@ const CSS_COLOR_NAMES = {
   Yellow: "#FFFF00",
   YellowGreen: "#9ACD32",
 };
+// groups from: https://www.w3schools.com/colors/colors_groups.asp
 const CSS_COLOR_GROUPS = {
   red: [
     'LightSalmon',
@@ -1036,35 +1037,19 @@ const CSS_COLOR_GROUPS = {
     'Crimson',
     'FireBrick',
     'DarkRed',
-  ],
-  pink: [
-    'Pink',
+        'Pink',
     'LightPink',
     'HotPink',
     'DeepPink',
     'PaleVioletRed',
     'MediumVioletRed',
-  ],
-  orange: [
-    'Gold',
+        'Gold',
     'Orange',
     'DarkOrange',
     'LightSalmon',
     'Coral',
     'Tomato',
     'OrangeRed',
-  ],
-  yellow: [
-    'LightYellow',
-    'LemonChiffon',
-    'LightGoldenrodYellow',
-    'Yellow',
-    'PapayaWhip',
-    'Moccasin',
-    'PeachPuff',
-    'PaleGoldenrod',
-    'Khaki',
-    'DarkKhaki',
   ],
   green: [
     'GreenYellow',
@@ -1157,27 +1142,28 @@ const CSS_COLOR_GROUPS = {
     'DarkSlateBlue',
     
   ],
-  white: [
-    'White',
-    'Snow',
-    'FloralWhite',
-    'Ivory',
-    'HoneyDew',
-    'MintCream',
-    'Azure',
-    'AliceBlue',
-    'GhostWhite',
-    'WhiteSmoke',
-    'Beige',
-    'SeaShell',
-    'OldLace',
-    'AntiqueWhite',
-    'Linen',
-    'LavenderBlush',
-    'MistyRose',
-  ],
-  grey: [
 
+  grey: [
+    'LightYellow',
+    'LemonChiffon',
+    'LightGoldenrodYellow',
+    'Yellow',
+    'PapayaWhip',
+    'Moccasin',
+    'PeachPuff',
+    'PaleGoldenrod',
+    'Khaki',
+    'DarkKhaki',
+    'Gainsboro',
+    'LightGray',
+    'Silver',
+    'DarkGray',
+    'DimGray',
+    'Gray',
+    'LightSlateGray',
+    'SlateGray',
+    'DarkSlateGray',
+    'Black' ,
   ]
 
 }
