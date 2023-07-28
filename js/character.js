@@ -1,8 +1,9 @@
 const character = {
+  currentBodyPart: 'body',
     render: function () {
       svg.showElement("#playerSprite");
       let thisBlock = document.querySelector(`#playerSprite svg`);
-            svg.animate(thisBlock, `grow`, 1);
+      svg.animate(thisBlock, `grow`, 1);
     },
     hide: function () {
       svg.hideElement("#playerSprite");
@@ -90,8 +91,8 @@ const character = {
       let content = "";
       content += '<div class="creator">';
       content += '<div class="left">';
-
       content += character.editName();
+      content += character.colourGrid();
   
       Object.entries(player.body).forEach(([key, part]) => {
         content += character.buildBodySelect(key);
@@ -120,19 +121,19 @@ const character = {
       let colour = svg.colourOptions(player.body[bodyPart].colour);
       let part = svg.bodyPartOptions(bodyPart, player.body[bodyPart].type); 
   
-      return `<div>${bodyPart}<br/><select id="${bodyPart}" class="selectPart" onchange="character.demoBody()">${part}</select>
-         <select id="${bodyPart}-colour" class="selectColour" onchange="character.demoBody()">${colour}</select></div>`;
+      let selectBodyPart = `<div class="part_${bodyPart}" onclick="character.setBodyPart('${bodyPart}')">${bodyPart}<br/>`;
+      selectBodyPart += `<select id="${bodyPart}" class="selectPart" onchange="character.demoBody()">${part}</select>`;
+      selectBodyPart += `<select id="${bodyPart}-colour" class="selectColour" onchange="character.demoBody()">${colour}</select></div>`;
+
+      return selectBodyPart;
+    },
+
+    setBodyPart: function (bodyPart) {
+      character.currentBodyPart = bodyPart;
     },
   
     // redisplay character using current body parts
     demoBody: function () {
-      Object.entries(player.body).forEach(([key, part]) => {
-        player.body[key] = {
-          type: getSelectValue(`#${key}`),
-          colour: getSelectValue(`#${key}-colour`),
-        };
-      });
-  
       let element = document.querySelector(".demoBody");
       element.innerHTML = svg.renderPerson(player.body);
     },
@@ -142,6 +143,35 @@ const character = {
         state.clear(true);
       }
     },
+
+    colourGrid: function () {
+      // build a clickable grid of X * Y clickable squares that set a colour
+      let colourGrid = `<div class="color-grid">`;
+      
+      Object.entries(CSS_COLOR_GROUPS).forEach(([groupName, colours]) => {
+        colourGrid += '<div class="colorGroup">';
+        colours.forEach( (colourName) => {
+          colourGrid += character.colourSquare(colourName);
+        });
+        colourGrid += '</div>'; 
+      });
+
+
+      colourGrid += `</div>`;
+
+      return colourGrid;
+    },
+
+    setColour: function (colour) {
+      player.body[character.currentBodyPart].colour = colour;
+      character.demoBody();
+    },
+
+    colourSquare: function (colour) {
+      let style=`style="background-color: ${colour}"`;
+      return `<div class="colour-square" ${style} onclick="character.setColour('${colour}')"></div>`;
+    },
+
     // the default
     defaultBody: {
       body: {

@@ -308,6 +308,17 @@ button:hover {
   z-index: 4;
 }
 
+.color-grid {
+  border: 2px solid black;
+  display: flex;
+}
+
+.colour-square {
+  border: 2px solid white;
+  width: 2rem;
+  height: 2rem;
+}
+
 .customer {
   width: 3vh;
   position: absolute;
