@@ -20,6 +20,7 @@ const scanner = {
     let footer = '';
     footer += `<button class="buttonize" onclick="character.reset()"> Reset! </button>`;
     footer += `<button class="buttonize" onclick="aboutGame()"> About </button>`;
+    footer += `<button class="buttonize" onclick="loadSave()"> Load/Save </button>`;
     footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
     dialog.okButton = function () { scanner.save(); };
     dialog.cancelButton = function () { dialog.hide(); };

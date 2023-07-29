@@ -77,7 +77,7 @@ const home = {
       "You dreamt of spinning plates",
       "You didn't dream of anything, however you wake up, back to life, back to reality",
       "You dreamt you were a hero, just for one day",
-      "You dreamt a little dreamt of me",
+      "You dreamt a little dream of me",
       "You dreamt the cake is a lie",
       "You dreamt about the delivery man",
       "You dreamt you were baba",

@@ -26,9 +26,14 @@ const state = {
     localStorage.clear();
     if (reload) {
       window.location.reload();
-    }
-    
+    }    
   },
+  read: () => {
+    return localStorage.getItem("state");
+  },
+  write: (compressed) => {
+    localStorage.setItem("state", compressed);
+  }
 };
 
 // add animation then remove it after a timeout so it can be re-applied

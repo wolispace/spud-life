@@ -83,7 +83,7 @@ const customers = {
     if (customers.qty) {
       msg = `<div>You sold ${customers.qty} meals and made $${customers.income}.</div>`;
     } else {
-      msg = `<div>You didn't sell anything.</div>`;
+      msg = `<div>You didn't sell any meals last evening.</div>`;
     }
     // reset the customer numbers
     customers.qty = 0;

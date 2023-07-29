@@ -98,7 +98,7 @@ const hardware = {
       name: "Pick",
       desc: "A tool for breaking rocks",
       price: 100,
-      rareness: 100,
+      rareness: 1,
       upgradeCost: 100,
       maxUpgrades: 100,
       initial: {

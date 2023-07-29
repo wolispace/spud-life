@@ -10,7 +10,7 @@ if (urlParams.has('reset')) {
 player = state.load();
 bodySet = getBodySet();
 
-if (player.version && player.version != version) {
+if (player && player.version && player.version != version) {
   if (!confirm('Your game was saved within an older version. It might not be stable. Do you want to continue anyhow?')) {
     state.clear(true);
   }
@@ -156,6 +156,30 @@ function aboutGame () {
   dialog.okButton = function () { character.render(); dialog.hide(); };
   dialog.render("About spud life", content, footer);
 }
+
+function loadSave () {
+  let currentState = state.read();
+
+  let content = `<div class="dialog-message-content">`;
+  content += `<textarea id="compressed">${currentState}</textarea>`
+  content += `</div>`;
+
+  let footer = "";
+  footer += `<button class="buttonize" onclick="dialog.confirm()"> Save </button>`;
+  dialog.cancelButton = function () { character.render(); dialog.hide(); };
+  dialog.okButton = function () { writeState(); };
+  dialog.render("About spud life", content, footer);
+}
+
+function writeState () {
+  let compressed = document.querySelector('#compressed').value;
+  state.write(compressed);
+  player = state.load();
+
+
+}
+
+
 
 // takes list of body parts from imgList and make easy-to-parse lists for each part
 function getBodySet() {
