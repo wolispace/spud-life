@@ -29,7 +29,7 @@
 }
 
 .left {
-  width: 8rem;
+  width: 9rem;
 }
 
 .fill-red {
@@ -311,7 +311,7 @@ button:hover {
 #playerName {
   padding: var(--sl-padding);
   border-radius: 3px;
-  width: 7.5rem;
+  width: 8.5rem;
 }
 
 .part {
@@ -321,6 +321,7 @@ button:hover {
   min-height: 1.7rem;
   padding: .11rem !important;
   margin: 0 !important;
+  font-weight: bold;
 }
 
 .part:hover {
@@ -328,8 +329,13 @@ button:hover {
 }
 
 .part-name {
-  font-weight: bold;
   width: 8rem;
+  padding:.25rem;
+}
+
+.part .button {
+  padding: .11rem .5rem !important;
+  margin: 0.05rem !important;
 }
 
 
