@@ -19,8 +19,10 @@ const home = {
 
     content += `<div>${svg.inline('house')} ${home.lookInside()}.</div>`;
     content += `<div>Go outside and use your spade to dig for potatoes.</div>`;
+    content += `<div>You can change how you look any time in your wardrobe.</div>`;
+    content += `<div>Bring on the night any time, even if you have no spuds to sell.</div>`;
     content += `<div>${hint.random()}.</div>`;
-    content += `<div>Check your scanner to adjust settings.</div>`;
+    content += `<div>Click on your scanner to adjust settings.</div>`;
     content += `</div>`;
     let title = "Home sweet home";
     let footer = `<button class="buttonize" onclick="character.customize()">Wardrobe</button>`;

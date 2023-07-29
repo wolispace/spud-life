@@ -128,15 +128,11 @@ const hint = {
   random: function () {
     let randomHint = [
       "You may find things other than potatoes buried beneath you",
-      "There are 4 levels of scanner upgrade. The 4th shows whats directly under you",
-      "Everything is saved, all the time (in your browsers cache)",
+      "There are 4 levels of scanner upgrade. The 4th shows what's directly under you",
+      "Everything is saved, all the time (in your browser's local storage)",
       "If you have a keyboard, use cursor, space, enter and escape keys",
       "It takes 30 random white circles to make one cloud",
-      "You can change how you look any time in your wardrobe",
-      "Your house looks a lot like my house",
-      "Your house is your castle",
-      "Your house is cozy",
-      "You can bring on the night any time, even if you have no spuds to sell",
+      "The rarest potatoes are found on the furthest fields",
     ];
 
     return randomHint[rnd(randomHint.length)];
