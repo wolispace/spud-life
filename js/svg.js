@@ -1166,7 +1166,5 @@ const CSS_COLOR_GROUPS = {
     'Black' ,
   ]
 
-}
-
-
+};
 

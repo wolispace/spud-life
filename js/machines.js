@@ -48,6 +48,5 @@ const machines = {
 
     return hopper;
   },
+};
 
-
-}

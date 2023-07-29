@@ -62,4 +62,5 @@ const dialog = {
     return chk.checked;
   },
 
-}
+};
+

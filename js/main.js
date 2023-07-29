@@ -1,5 +1,6 @@
-// we have already defined things like player, spuds, controls, tools etc.. when including the js in html
+version = '1.0.0-beta';
 
+// start with ?reset to start a new game - link this to version of game != player.version
 const urlParams = new URLSearchParams(window.location.search);
 if (urlParams.has('reset')) {
   state.clear();
@@ -9,6 +10,13 @@ if (urlParams.has('reset')) {
 player = state.load();
 bodySet = getBodySet();
 
+if (player.version && player.version != version) {
+  if (!confirm('Your game was saved within an older version. It might not be stable. Do you want to continue anyhow?')) {
+    state.clear(true);
+  }
+}
+
+player.version = version;
 
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -120,10 +128,32 @@ function gameIntro () {
 
   let footer = "";
   footer += `<button class="buttonize" onclick="dialog.confirm()"> Create your character </button>`;
-  dialog.cancelButton = function () { hint.off(); character.customize(); };
-  dialog.okButton = function () { console.log('ok'); character.customize(); };
-  dialog.render("Welcome to spud life", content, footer);
+  dialog.cancelButton = function () { character.customize(); };
+  dialog.okButton = function () { character.customize(); };
+  dialog.render("Welcome to your spud life", content, footer);
+}
 
+function aboutGame () {
+  let content = `<div class="dialog-message-content">`;
+  content += `<div>This game was inspired by 'Man Eats Fish' by <a href="http://www.supermoof.com/">SuperMoof</a></div>`;
+  content += `<div>I wanted to make a browser-based game that:`;
+  content += `<li>has no dedicated server</li>`;
+  content += `<li>doesn't rely on third-party libraries or assets</li>`;
+  content += `<li>could be stopped and started quickly and easily</li>`;
+  content += ` I got close. The only thing I am relying on is <a href="https://github.com/pieroxy/lz-string">lz-string</a> to compress the game state that is stored in local storage.</div>`;
+
+  content += `<div>Things to do:`;
+  content += `</div>`;
+
+  content += `<div>No svg paths were harmed the making of this game.</div>`;
+  content += `<div>Version ${version}</div>`;
+  content += `</div>`;
+
+  let footer = "";
+  footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
+  dialog.cancelButton = function () { dialog.hide(); };
+  dialog.okButton = function () { dialog.hide(); };
+  dialog.render("About spud life", content, footer);
 }
 
 // takes list of body parts from imgList and make easy-to-parse lists for each part
@@ -164,9 +194,6 @@ function setPhase(phase) {
     fields.highlightCurrentPos();
     dialog.hide();
   }
-}
-
-
-
+};
 
 

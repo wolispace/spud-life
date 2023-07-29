@@ -26,3 +26,4 @@ const shop = {
     hint.chipper();
   }
 };
+

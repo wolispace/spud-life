@@ -88,18 +88,22 @@ const home = {
       "Portal",
       "Baba is you",
       "Skyrim",
-      "Sabatour",
+      "The Saboteur",
+      "The Stanley parable",
+      "Visual Pinball X",
+      "Tony Hawk's P_o__tater 2"
     ];
 
     let sleeps = [
       "You got to sleep quickly.",
       "You had a hard time getting to sleep.",
-      `You stayed up very late playing ` + games[rnd(games.length)] + ` and din't get much sleep.`,
+      `You stayed up very late playing ` + games[rnd(games.length)] + ` and didn't get much sleep.`,
+      `You were up late fixing your scanner, your handy like that.`,
       "Your pillow was unusually lumpy, maybe its time for a new one?",
-      "you noticed a rabbit-shaped crack on your ceiling",
+      "You noticed a rabbit-shaped crack on your ceiling.",
     ];
     let sleep = `<div>` + sleeps[rnd(sleeps.length)] + `</div>`;
-    let reset = `<div>Your tools have all been refreshed.</div>`
+    let reset = `<div>Your tools have been refreshed.</div>`
     
     let sow = fields.resowField();
     let income = customers.getIncome();
@@ -122,5 +126,5 @@ const home = {
     dialog.hide();
     character.render();
   }
-  
 };
+

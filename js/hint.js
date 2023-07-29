@@ -279,5 +279,6 @@ const hint = {
     hint.okButton = 'hint.close';
     hint.group = 'hardware';
     hint.render();
-  } ,
-}
+  },
+};
+

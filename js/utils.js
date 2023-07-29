@@ -65,3 +65,4 @@ function getElementPos(selector) {
   }
   return element.getBoundingClientRect();
 }
+

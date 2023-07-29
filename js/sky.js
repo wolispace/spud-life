@@ -152,3 +152,5 @@ const sky = {
     nightShade.style.fill = 'black';
   },
 };
+
+

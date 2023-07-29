@@ -90,3 +90,4 @@ const tools = {
     svg.animate(thisTool, `jiggle-up`, 0.25);
   }
 };
+
