@@ -98,7 +98,7 @@ const home = {
       "You got to sleep quickly.",
       "You had a hard time getting to sleep.",
       `You stayed up very late playing ` + games[rnd(games.length)] + ` and didn't get much sleep.`,
-      `You were up late fixing your scanner, your handy like that.`,
+      `You were up late fixing your scanner, you're handy like that.`,
       "Your pillow was unusually lumpy, maybe its time for a new one?",
       "You noticed a rabbit-shaped crack on your ceiling.",
     ];
