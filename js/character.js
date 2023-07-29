@@ -121,15 +121,46 @@ const character = {
       let colour = svg.colourOptions(player.body[bodyPart].colour);
       let part = svg.bodyPartOptions(bodyPart, player.body[bodyPart].type); 
   
-      let selectBodyPart = `<div class="part_${bodyPart}" onclick="character.setBodyPart('${bodyPart}')">${bodyPart}<br/>`;
-      selectBodyPart += `<select id="${bodyPart}" class="selectPart" onchange="character.demoBody()">${part}</select>`;
-      selectBodyPart += `<select id="${bodyPart}-colour" class="selectColour" onchange="character.demoBody()">${colour}</select></div>`;
+      let selectBodyPart = `<div class="part part_${bodyPart} buttonize" onclick="character.setBodyPart('${bodyPart}')">`;
+      selectBodyPart += `<div class="part-name">${bodyPart}</div>`;
+      if (bodySet[bodyPart].length > 1) {
+        selectBodyPart += `<div class="button buttonize" onclick="character.prevBodyPart('${bodyPart}')"><</div>`;
+        selectBodyPart += `<div class="button buttonize" onclick="character.nextBodyPart('${bodyPart}')">></div>`;
+      }
+      selectBodyPart += `</div>`;
 
       return selectBodyPart;
     },
 
     setBodyPart: function (bodyPart) {
       character.currentBodyPart = bodyPart;
+      let partsList = document.querySelectorAll(`.part`);
+      partsList.forEach( (element) => { element.classList.remove('selected'); });
+      
+      let element = document.querySelector(`.part_${bodyPart}`);
+      element.classList.add('selected');
+    },
+
+    nextBodyPart: function (bodyPart) {
+      character.setBodyPart(bodyPart);
+      let currentType = player.body[character.currentBodyPart].type;
+      let pos = bodySet[character.currentBodyPart].indexOf(currentType) + 1;
+      if (pos >= bodySet[character.currentBodyPart].length) {
+        pos = 0;
+      };
+      player.body[bodyPart].type = bodySet[character.currentBodyPart][pos];
+      character.demoBody();
+    },
+
+    prevBodyPart: function (bodyPart) {
+      character.setBodyPart(bodyPart);
+      let currentType = player.body[character.currentBodyPart].type;
+      let pos = bodySet[character.currentBodyPart].indexOf(currentType) - 1;
+      if (pos < 0) {
+        pos = bodySet[character.currentBodyPart].length - 1;
+      };
+      player.body[bodyPart].type = bodySet[character.currentBodyPart][pos];
+      character.demoBody();
     },
   
     // redisplay character using current body parts
@@ -155,8 +186,6 @@ const character = {
         });
         colourGrid += '</div>'; 
       });
-
-
       colourGrid += `</div>`;
 
       return colourGrid;
@@ -164,6 +193,12 @@ const character = {
 
     setColour: function (colour) {
       player.body[character.currentBodyPart].colour = colour;
+      if (character.currentBodyPart == 'nose') {
+        player.body['head'].colour = colour;
+      }
+      if (character.currentBodyPart == 'head') {
+        player.body['nose'].colour = colour;
+      }
       character.demoBody();
     },
 

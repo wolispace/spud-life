@@ -308,6 +308,29 @@ button:hover {
   z-index: 4;
 }
 
+#playerName {
+  padding: var(--sl-padding);
+  border-radius: 3px;
+  margin-left:5px;
+  width: 190px;
+}
+
+.part {
+  display: flex;
+  flex-direction: row;
+  align-content: stretch;
+}
+
+.part:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.part-name {
+  font-weight: bold;
+  width: 8rem;
+}
+
+
 .color-grid {
   display: flex;
   flex-direction: column;

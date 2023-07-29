@@ -1025,7 +1025,7 @@ const CSS_COLOR_NAMES = {
   Yellow: "#FFFF00",
   YellowGreen: "#9ACD32",
 };
-// groups from: https://www.w3schools.com/colors/colors_groups.asp
+// groups based on https://www.dofactory.com/css/color-names
 const CSS_COLOR_GROUPS = {
   red: [
     'LightSalmon',
