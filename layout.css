@@ -102,6 +102,7 @@ h2 {
   z-index: 5;
   flex-direction: column;
   justify-content: end;
+  filter: drop-shadow(0px 5px 5px black);
 }
 
 #playerSprite > svg {
@@ -322,6 +323,7 @@ button:hover {
   padding: .11rem !important;
   margin: 0 !important;
   font-weight: bold;
+  cursor: pointer;
 }
 
 .part:hover {

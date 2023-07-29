@@ -1,4 +1,5 @@
 const dialog = {
+  name: '',
   sprite: null,
   visible: false,
   cancelKey: 'Escape',
@@ -16,6 +17,7 @@ const dialog = {
     dialog.part(`.dialog .content`, content);
     dialog.part(`.dialog .footer`, footer);
     dialog.visible = true;
+    dialog.title = title;
   },
 
   part: function (partClass, content) {

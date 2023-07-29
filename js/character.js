@@ -113,7 +113,7 @@ const character = {
     },
 
     editName: function () {
-      return `<div><input type="text" id="playerName" value="${player.name}" /></div>`;
+      return `<div><input type="text" disabled="disabled" id="playerName" value="${player.name}" /></div>`;
 
     },
   
