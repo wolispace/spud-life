@@ -140,6 +140,7 @@ function aboutGame () {
   content += `<li>has no dedicated server</li>`;
   content += `<li>doesn't rely on third-party libraries or assets</li>`;
   content += `<li>could be stopped and started quickly and easily</li>`;
+  content += `<li>does not require quick reflexes</li>`;
   content += ` I got close. The only thing I am relying on is <a href="https://github.com/pieroxy/lz-string">lz-string</a> to compress the game state that is stored in local storage.</div>`;
 
   content += `<div>Things to do:`;
