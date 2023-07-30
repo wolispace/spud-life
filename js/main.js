@@ -163,14 +163,15 @@ function loadSave () {
   let currentState = state.read();
 
   let content = `<div class="dialog-message-content">`;
-  content += `<textarea id="compressed">${currentState}</textarea>`
+  content += `<textarea id="compressed" style="height:20rem">${currentState}</textarea>`
+  content += `<div>Copy the above text, and paste (replace) it into a new browser session of Spud life to transfer this game</div>`
   content += `</div>`;
 
   let footer = "";
   footer += `<button class="buttonize" onclick="dialog.confirm()"> Save </button>`;
   dialog.cancelButton = function () { character.render(); dialog.hide(); };
   dialog.okButton = function () { writeState(); };
-  dialog.render("About spud life", content, footer);
+  dialog.render("Load and save", content, footer);
 }
 
 function writeState () {
