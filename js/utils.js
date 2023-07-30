@@ -29,10 +29,19 @@ const state = {
     }    
   },
   read: () => {
-    return localStorage.getItem("state");
+    return LZString.compressToBase64(JSON.stringify(player));
   },
   write: (compressed) => {
-    localStorage.setItem("state", compressed);
+    let decompressed = LZString.decompressFromBase64(compressed);
+    player = JSON.parse(decompressed);
+    state.save();
+    // redraw field
+    tools.render();
+    setPhase(player.phase);
+    sky.render();
+    sky.clouds();
+    character.render();
+    resizeStuff();
   }
 };
 
