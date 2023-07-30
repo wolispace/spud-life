@@ -34,6 +34,8 @@ const state = {
   write: (compressed) => {
     let decompressed = LZString.decompressFromBase64(compressed);
     player = JSON.parse(decompressed);
+    let element = document.querySelector(`#playerSprite`);
+    element.innerHTML = svg.renderPerson(player.body);
     state.save();
     // redraw field
     tools.render();
