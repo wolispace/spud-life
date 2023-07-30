@@ -111,6 +111,8 @@ function initGame() {
   // gift the first machine first off
   let starter = "chipper";
   player.shop.machines[starter] = hardware.items[starter].initial;
+  starter = "spade";
+  player.tools[starter] = hardware.items[starter].initial;
   tools.reset();
   gameIntro();
 }

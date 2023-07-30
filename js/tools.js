@@ -54,8 +54,9 @@ const tools = {
         if (itemName == 'scanner') {
           player.scanLevel++;
         } else {
-          player.tools[itemName].maxUses++;
-          player.tools[itemName].uses++;
+          let moreUses = 2;
+          player.tools[itemName].maxUses += moreUses;
+          player.tools[itemName].uses += moreUses;
         }
         player.wallet = player.wallet - item.upgradeCost;
       } else {

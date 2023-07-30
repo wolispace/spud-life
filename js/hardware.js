@@ -50,11 +50,16 @@ const hardware = {
       if ('item,block'.indexOf(tool.type) > -1 && !player.sack[toolName]) {
         showItem = false;
       }
+      let showName = tool.name;
+      if (tool.type == 'block' || tool.type == 'item') {
+        let qty = (player.sack[toolName] > 1) ? `x ${player.sack[toolName]}` : '';
+        showName = `${tool.name} ${qty}.`;
+      } 
 
       if (showItem) {
         content += `<div class="hardware-button buttonize button_${tool.type} " id="hardware_${toolName}">`;
         content += ` <div class="hardware-button-icon">${svg.inline(toolName)}</div>`;
-        content += ` <div class="hardware-button-desc"><strong>${tool.name}. </strong> ${tool.desc}</div>`;
+        content += ` <div class="hardware-button-desc"><strong>${showName}. </strong> ${tool.desc}</div>`;
         if (!player.tools[toolName] && player.sack[toolName]) {
           content += ` <div class="hardware-button-sell buttonize button  ${canSellClass}" ${onClickSell}>Sell<br/>$${sellCost}</div>`;
         }
@@ -89,8 +94,8 @@ const hardware = {
       upgradeCost: 50,
       maxUpgrades: 100,
       initial: {
-        uses: 5,
-        maxUses: 5,
+        uses: 8,
+        maxUses: 8,
       },
     },
     pick: {
@@ -98,25 +103,25 @@ const hardware = {
       name: "Pick",
       desc: "A tool for breaking rocks",
       price: 100,
-      rareness: 1,
+      rareness: 100,
       upgradeCost: 100,
       maxUpgrades: 100,
       initial: {
-        uses: 5,
-        maxUses: 5,
+        uses: 8,
+        maxUses: 8,
       },
     },
     axe: {
       type: "tool",
       name: "Axe",
       desc: "A tool for clearing logs",
-      price: 150,
+      price: 100,
       rareness: 100,
       upgradeCost: 100,
       maxUpgrades: 100,
       initial: {
-        uses: 5,
-        maxUses: 5,
+        uses: 8,
+        maxUses: 8,
       },
     },
     scanner: {
@@ -263,14 +268,14 @@ const hardware = {
     rock: {        
       type: "block",
       name: "A rock",
-      desc: "It is one you cleared from the field. Its heavy, hard and doesn't taste nice",
+      desc: "Found while cleared the field. Rocks are heavy, hard and doesn't taste nice",
       price: 1,
       rareness: 20, 
     },
     log: {        
       type: "block",
       name: "A log",
-      desc: "It's old and splintered, however neatly cut on each end",
+      desc: "These logs are weathered and splintered, however neatly cut on each end",
       price: 1,
       rareness: 20, 
     },

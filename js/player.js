@@ -18,10 +18,6 @@ let player = {
   sowSeeds: 0,
   grassQty: 7,
   tools: {
-    spade: {
-      uses: 0,
-      maxUses: 5,
-    },
   },
   buildings: [
     [

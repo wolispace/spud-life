@@ -165,7 +165,7 @@ const hint = {
   field: function () {
     hint.isItSkipped();
     hint.pointTo = getElementPos(`#patch_53`);
-    hint.message = `Rocks and logs block your path. [Let's start digging!]`;
+    hint.message = `Rocks and logs block your path. You always find spuds under them. [Let's start digging!]`;
     hint.okButton = 'hint.close';
     hint.group = 'into',
     hint.render();

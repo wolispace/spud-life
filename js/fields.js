@@ -337,9 +337,13 @@ const fields = {
         let item = hardware.items[patch.item];
         if (item.type == 'tool') {
           // upgrade the tool
-          player.tools[patch.item] = player.tools[patch.item] ?? hardware.items[patch.item].initial;
-          player.tools[patch.item].maxUses++;
-          player.tools[patch.item].uses++;
+          let moreUses = hardware.items[patch.item].initial.maxUses;
+          if (player.tools[patch.item]) {
+            player.tools[patch.item].maxUses += moreUses;
+            player.tools[patch.item].uses += moreUses;
+          } else {
+            player.tools[patch.item] = hardware.items[patch.item].initial;
+          }
           delete patch.item;
           state.save();
           tools.render();
