@@ -334,7 +334,6 @@ const fields = {
       patch.id = `patch_${player.pos}`;
       // if there is an item defined, dig it up and add it to the sack
       if (patch.item) {
-        spuds.animate(patch);
         let item = hardware.items[patch.item];
         if (item.type == 'tool') {
           // upgrade the tool
@@ -345,25 +344,20 @@ const fields = {
           } else {
             player.tools[patch.item] = hardware.items[patch.item].initial;
           }
-          delete patch.item;
-          state.save();
-          tools.render();
 
         } else if (item.type == 'machine') {
           if (!player.shop.machines[patch.item]) {
             player.shop.machines[patch.item] = item.initial;
-            delete patch.item;
-            state.save();
-            tools.render();
           }
         } else {
           // increment the players count of this item
           let sackQty = player.sack[patch.item] || 0;
           player.sack[patch.item] = sackQty + 1;
-          delete patch.item;
-          state.save();
-          tools.render();
         }
+        state.save();
+        tools.render();
+        spuds.animate(patch);
+        delete patch.item;
       }
       
       // if no spuds then make sure we are quite clear there are no spuds

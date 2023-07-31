@@ -156,7 +156,18 @@ const spuds = {
     let startPatch = `#${patch.id}`;
     let endTool = `.tool-basket`;
     let itemSvg = fields.getPatchSvg(patch);
-    let onEnd = function () { hint.dugItem()};
+    let onEnd = function () { hint.dugItem(); };
+    let item = hardware.items[patch.item];
+    if (item) {
+      item.id = patch.item;
+      if (item.type == 'tool') {
+        onEnd = function () { hint.dugTool(item); };
+        endTool = `.tool-${patch.item}`;
+      } else if (item.type == 'machine') {
+        onEnd = function () { hint.dugMachine(item); };
+        endTool = `#patch_6`;
+      } 
+    }
     svg.animateArc(startPatch, endTool, itemSvg, onEnd);
   }
 };

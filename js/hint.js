@@ -273,6 +273,22 @@ const hint = {
     hint.render();
   },
 
+  dugTool: function (item) {
+    hint.pointTo = getElementPos(`.tool-${item.id}`);
+    hint.message = `You dug up a ${item.name} to add to your collection. [${hint.ok()}]`;
+    hint.okButton = 'hint.close';
+    hint.group = 'dugTool';
+    hint.render();
+  },
+
+  dugMachine: function (tool) {
+    hint.pointTo = getElementPos(`#patch_6`);
+    hint.message = `You dug up a ${tool.name}. It's going straight to work. [${hint.ok()}]`;
+    hint.okButton = 'hint.close';
+    hint.group = 'dugMachine';
+    hint.render();
+  },
+
   home: function () {
     hint.pointTo = getElementPos(`#patch_0`);
     hint.message = `Your home. Stand in front and press UP to go inside. [${hint.ok()}]`;
