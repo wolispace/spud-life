@@ -37,7 +37,7 @@ const customers = {
    * Wait some random time before running the animation on all playerSprites
    */
   animate: () => {
-    let patch = element.getBoundingClientRect();
+    let patch = getElementPos('#patch_0');
     let height = patch.height / 2 + "px";
     let width = patch.width / 2 + "px";
     
@@ -58,7 +58,7 @@ const customers = {
     customerSprite.style.width = width;
     customerSprite.style.height = height;
 
-    let duration = rnd(3) + 6 + 10;
+    let duration = rnd(3) + 6;
     customerSprite.style.animation = `move-customer ${duration}s ease-in-out`;
     customerSprite.addEventListener("animationend", function handler() {
       customers.meals++;
