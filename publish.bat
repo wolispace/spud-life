@@ -18,4 +18,4 @@ type "js\hint.js"      >> _js_files.js
 type "js\dialog.js"    >> _js_files.js
 type "js\main.js"      >> _js_files.js
 
-:: chrome https://www.toptal.com/developers/javascript-minifier
+start https://www.toptal.com/developers/javascript-minifier
