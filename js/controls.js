@@ -77,7 +77,7 @@ const controls = {
       }
       if (index == controls.ArrowDown) {
         newPos += player.cols;
-        if (player.pos < player.cols && newPos > player.cols) {
+        if (player.pos < player.cols && newPos >= player.cols) {
           hint.playerGrow(newPos);
         }
 

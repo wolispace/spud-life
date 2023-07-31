@@ -265,6 +265,14 @@ const hint = {
     hint.render();
   },
 
+  dugItem: function () {
+    hint.pointTo = getElementPos(`.tool-basket`);
+    hint.message = `You dug up something. Click your basket to see what you found. [${hint.ok()}]`;
+    hint.okButton = 'hint.close';
+    hint.group = 'dugItem';
+    hint.render();
+  },
+
   home: function () {
     hint.pointTo = getElementPos(`#patch_0`);
     hint.message = `Your home. Stand in front and press UP to go inside. [${hint.ok()}]`;

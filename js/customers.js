@@ -68,15 +68,17 @@ const customers = {
     character.render();
     player.phase = 'night';
     customers.showMoney();
-    tools.render();
-    // turn light on in house
-
   },
+
   showMoney: function () {
     let startPatch = `#patch_6`;
     let endTool = `.tool-wallet`;
     let itemSvg = svg.render('gold');
-    svg.animateArc(startPatch, endTool, itemSvg);
+    player.wallet += customers.income;
+    let onEnd = function () {
+      tools.render();
+    };
+    svg.animateArc(startPatch, endTool, itemSvg, onEnd);
   },
   getIncome: function () {
     let msg = '';

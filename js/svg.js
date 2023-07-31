@@ -855,7 +855,7 @@ const svg = {
     
     return itemSprite;
   },
-  animateArc: function (startPatch, endTool, itemSvg) {
+  animateArc: function (startPatch, endTool, itemSvg, onEnd) {
     let itemSprite = svg.setItemSprite(startPatch, itemSvg);
     let arc = svg.makeAcr(startPatch, endTool);
    // slow start fast middle
@@ -870,6 +870,9 @@ const svg = {
     itemSprite.addEventListener("animationend", function handler() {
       itemSprite.style.animation = 'none';
       itemSprite.style.display = 'none';
+      if (typeof onEnd == "function") {
+        onEnd();
+      }
       this.removeEventListener("animationend", handler);
     });
   },

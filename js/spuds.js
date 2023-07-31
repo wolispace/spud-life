@@ -95,10 +95,8 @@ const spuds = {
     customers.qty = totalMeals;
     customers.income = totalIncome;
 
-    player.wallet += totalIncome;
     customers.render();
     state.save();
-    tools.render();
 
   },
 
@@ -158,7 +156,8 @@ const spuds = {
     let startPatch = `#${patch.id}`;
     let endTool = `.tool-basket`;
     let itemSvg = fields.getPatchSvg(patch);
-    svg.animateArc(startPatch, endTool, itemSvg);
+    let onEnd = function () { hint.dugItem()};
+    svg.animateArc(startPatch, endTool, itemSvg, onEnd);
   }
 };
 
