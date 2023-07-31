@@ -291,14 +291,15 @@ const fields = {
         player.sowSeeds--;
         let index = blankPatches[rnd(blankPatches.length)];
         let patch = {};
-        switch (rnd(3)) {
-          case 0:
-            patch.block = { type: "rock", qty: rnd(5) + 1 };
-            break;
-          case 1:
-            patch.block = { type: "log", qty: rnd(5) + 1 };
-            break;
-        }
+        // no new blockers right now so its a scanner game
+        // switch (rnd(3)) {
+        //   case 0:
+        //     patch.block = { type: "rock", qty: rnd(5) + 1 };
+        //     break;
+        //   case 1:
+        //     patch.block = { type: "log", qty: rnd(5) + 1 };
+        //     break;
+        // }
         let newSpud = player.spuds[rnd(player.spuds.length)];
         patch.spud = { name: newSpud.name, qty: rnd(3) + 1 };
         player.fields[player.currentField][index] = patch;
