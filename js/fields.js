@@ -277,7 +277,8 @@ const fields = {
       let blankPatches = [];
       let i = player.cols;
       while (i < (player.cols * player.rows)) {
-        if (!player.fields[player.currentField][i]) {
+        let patch = player.fields[player.currentField][i];
+        if (!patch.spud || patch.spud.qty == 0) {
           // sow seed and set i to 99
           blankPatches.push(i);
         }

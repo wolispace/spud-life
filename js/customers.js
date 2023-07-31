@@ -53,7 +53,7 @@ const customers = {
   /**
    * Run the animation for the customerSprite for 5 to 7 seconds in duration
   */
- run: (id, width, height) => {
+  run: (id, width, height) => {
     let customerSprite = document.querySelector(`#customer_${id}`);
     customerSprite.style.width = width;
     customerSprite.style.height = height;

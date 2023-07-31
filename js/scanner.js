@@ -18,8 +18,6 @@ const scanner = {
     content += `<div><div>`;
     let title = "Scanner";
     let footer = '';
-    render: (qty = 0)
-    footer += `<button class="buttonize" onclick="dialog.hide(); customers.render(30)"> TEST </button>`;
     footer += `<button class="buttonize" onclick="character.reset()"> Reset! </button>`;
     footer += `<button class="buttonize" onclick="aboutGame()"> About </button>`;
     footer += `<button class="buttonize" onclick="loadSave()"> Load/Save </button>`;
