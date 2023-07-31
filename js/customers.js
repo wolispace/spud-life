@@ -37,21 +37,28 @@ const customers = {
    * Wait some random time before running the animation on all playerSprites
    */
   animate: () => {
+    let patch = element.getBoundingClientRect();
+    let height = patch.height / 2 + "px";
+    let width = patch.width / 2 + "px";
+    
     for (let id = 0; id < customers.qty; id++) {
       // start the customers animation a variation on their position in the queue
       let interval = (1 + id) * 200 + rnd(1000);
       setTimeout(function () {
-        customers.run(id);
+        customers.run(id, width, height);
       }, interval);
     }
   },
-
+  
   /**
    * Run the animation for the customerSprite for 5 to 7 seconds in duration
-   */
-  run: (id) => {
+  */
+ run: (id, width, height) => {
     let customerSprite = document.querySelector(`#customer_${id}`);
-    let duration = rnd(3) + 6;
+    customerSprite.style.width = width;
+    customerSprite.style.height = height;
+
+    let duration = rnd(3) + 6 + 10;
     customerSprite.style.animation = `move-customer ${duration}s ease-in-out`;
     customerSprite.addEventListener("animationend", function handler() {
       customers.meals++;
