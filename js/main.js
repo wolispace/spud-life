@@ -161,11 +161,15 @@ function aboutGame () {
 
 function loadSave () {
   let currentState = state.read();
+  let rndName = 'test';
 
   let content = `<div class="dialog-message-content">`;
-  content += `<textarea id="compressed" style="height:20rem">${currentState}</textarea>`
+  content += `<form method="post" action="localhost">`;
+  content += `<input type="text" name="id" value="${rndName}" />`
+  content += `<textarea id="compressed" name="data" style="height:20rem">${currentState}</textarea>`
   content += `<div>Copy the above text, and paste (replace) it into a new browser session of Spud life to transfer this game</div>`
-  content += `</div>`;
+  content += `<input type="submit" value="Set" />`;
+  content += `</form></div>`;
 
   let footer = "";
   footer += `<button class="buttonize" onclick="dialog.confirm()"> Save </button>`;
