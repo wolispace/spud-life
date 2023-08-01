@@ -18,4 +18,6 @@ type "js\hint.js"      >> _js_files.js
 type "js\dialog.js"    >> _js_files.js
 type "js\main.js"      >> _js_files.js
 
-start https://www.toptal.com/developers/javascript-minifier
+:: start https://www.toptal.com/developers/javascript-minifier
+:: https://www.digitalocean.com/community/tools/minify
+terser _js_files.js --output _js_files.min.js
