@@ -15,12 +15,20 @@ function isDevMode() {
 
 function saveLoad($id) {
   $data = $_REQUEST['data'];
-  if (empty($data)) {
-    // load up the save date matching this id
-  } else {
-    file_put_contents($id, $data);
+  if (!empty($data)) {
+    $jsDataFile = getJsDataFileName($id);
+    file_put_contents($jsDataFile, $data);
   }
-  outputGamePage();
+  outputGamePage($id);
+}
+
+function getJsDataFileName($id) {
+  return "{$id}_saved.js";
+}
+
+function getSaveScript($id) {
+  $jsDataFileName = getJsDataFileName($id);
+  return "<script src='{$jsDataFileName}?1' ></script>";
 }
 
 function getScripts() {
@@ -50,8 +58,9 @@ function getScripts() {
   return $scripts;
 }
 
-function outputGamePage() {
+function outputGamePage($id = '') {
   $scripts = getScripts();
+  $saveScript = empty($id) ? '' : getSaveScript($id);
   print "<!DOCTYPE html>
 <html dir='ltr' lang='en'>
   <head>
@@ -59,10 +68,10 @@ function outputGamePage() {
     <meta name='viewport' content='width=device-width, initial-scale=1.0' />
     <title>Spud life</title>
     <link rel='stylesheet' href='layout.css?1' />
-    <script src='js/lz-string.min.js'></script>
+    <script src='js/lz-string.min.js' />
     {$scripts}
+    {$saveScript}
   </head>
-
   <body>
     <div class='container'>
       <div class='field'></div>
