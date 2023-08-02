@@ -169,8 +169,8 @@ function loadSave () {
   let rndName = randomName();
 
   let content = `<div class="dialog-message-content">`;
-  content += `<form method="post" action="localhost">`;
-  content += `Your secret code will be <input type="text" disabled="disabled" name="id" value="${rndName}" />`
+  content += `<form method="post" action="?">`;
+  content += `Your secret code will be <input type="text" name="id" value="${rndName}" />`
   content += `<textarea id="compressed" name="data">${currentState}</textarea>`
   content += `<button type="submit" class="buttonize">Generate link</button>`;
   content += `</form></div>`;

@@ -1,76 +1,80 @@
 <?php
 
-$id = $_REQUEST['id'];
+$id = $_REQUEST['id'] ?? '';
 
+// unique code for js loading
+$v = rand(10,99999);
+
+file_put_contents('_request.txt', json_encode($_REQUEST));
 
 if (empty($id)) {
-  outputGamePage();
+  outputGamePage($v);
 } else {
-  saveLoad($id);
+  saveLoad($v, $id);
 }
 
 function isDevMode() {
   return isset($_REQUEST['dev']);
 }
 
-function saveLoad($id) {
+function saveLoad($v, $id) {
   $data = $_REQUEST['data'];
   if (!empty($data)) {
     $jsDataFile = getJsDataFileName($id);
     $saveData = "const saveData = '{$data}';";
     file_put_contents($jsDataFile, $saveData);
   }
-  outputGamePage($id);
+  outputGamePage($v, $id);
 }
 
 function getJsDataFileName($id) {
-  return "saved_{$id}.js";
+  return "_saved_{$id}.js";
 }
 
-function getSaveScript($id) {
+function getSaveScript($v, $id) {
   $jsDataFileName = getJsDataFileName($id);
-  return "<script src='{$jsDataFileName}?1' ></script>";
+  return "<script src='{$jsDataFileName}?{$v}' ></script>";
 }
 
-function getScripts() {
-  $scripts = "<script src='_js_files.min.js?1'></script>";
+function getScripts($v) {
+  $scripts = "<script src='_js_files.min.js?{$v}'></script>";
   if (isDevMode()) {
-    $scripts = "<script src='js/utils.js?1'></script>
-    <script src='js/scanner.js?1'></script>
-    <script src='js/sky.js?1'></script>
-    <script src='js/character.js?1'></script>
-    <script src='js/player.js?1'></script>
-    <script src='js/customers.js?1'></script>
-    <script src='js/sack.js?1'></script>
-    <script src='js/home.js?1'></script>
-    <script src='js/hardware.js?1'></script>
-    <script src='js/shop.js?1'></script>
-    <script src='js/machines.js?1'></script>
-    <script src='js/tools.js?1'></script>
-    <script src='js/spuds.js?1'></script>
-    <script src='js/controls.js?1'></script>
-    <script src='js/fields.js?1'></script>
-    <script src='js/svg.js?1'></script>
-    <script src='js/hint.js?1'></script>
-    <script src='js/dialog.js?1'></script>
-    <script src='js/main.js?1'></script>";
+    $scripts = "<script src='js/utils.js?{$v}'></script>
+    <script src='js/scanner.js?{$v}'></script>
+    <script src='js/sky.js?{$v}'></script>
+    <script src='js/character.js?{$v}'></script>
+    <script src='js/player.js?{$v}'></script>
+    <script src='js/customers.js?{$v}'></script>
+    <script src='js/sack.js?{$v}'></script>
+    <script src='js/home.js?{$v}'></script>
+    <script src='js/hardware.js?{$v}'></script>
+    <script src='js/shop.js?{$v}'></script>
+    <script src='js/machines.js?{$v}'></script>
+    <script src='js/tools.js?{$v}'></script>
+    <script src='js/spuds.js?{$v}'></script>
+    <script src='js/controls.js?{$v}'></script>
+    <script src='js/fields.js?{$v}'></script>
+    <script src='js/svg.js?{$v}'></script>
+    <script src='js/hint.js?{$v}'></script>
+    <script src='js/dialog.js?{$v}'></script>
+    <script src='js/main.js?{$v}'></script>";
   }
 
   return $scripts;
 }
 
-function outputGamePage($id = '') {
-  $scripts = getScripts();
-  $saveScript = empty($id) ? '' : getSaveScript($id);
+function outputGamePage($v, $id = '') {
+  $scripts = getScripts($v);
+  $saveScript = empty($id) ? '' : getSaveScript($v, $id);
   print "<!DOCTYPE html>
 <html dir='ltr' lang='en'>
   <head>
     <meta charset='utf-8' />
     <meta name='viewport' content='width=device-width, initial-scale=1.0' />
     <title>Spud life</title>
-    <link rel='stylesheet' href='layout.css?1' />
+    <link rel='stylesheet' href='layout.css?{$v}' />
     {$saveScript}
-    <script src='js/lz-string.min.js' ></script>
+    <script src='js/lz-string.min.js?{$v}' ></script>
     {$scripts}
   </head>
   <body>
