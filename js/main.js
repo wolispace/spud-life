@@ -1,5 +1,10 @@
 version = '1.0.0-beta';
 
+// if savedate injected (by referencing it with ?id={dataFileId} then load it.
+if (typeof saveData !== 'undefined') {
+  state.write(saveData);
+}
+
 // start with ?reset to start a new game - link this to version of game != player.version
 const urlParams = new URLSearchParams(window.location.search);
 if (urlParams.has('reset')) {

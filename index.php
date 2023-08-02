@@ -17,7 +17,8 @@ function saveLoad($id) {
   $data = $_REQUEST['data'];
   if (!empty($data)) {
     $jsDataFile = getJsDataFileName($id);
-    file_put_contents($jsDataFile, $data);
+    $saveData = "const saveData = '{$data}';";
+    file_put_contents($jsDataFile, $saveData);
   }
   outputGamePage($id);
 }
@@ -68,9 +69,9 @@ function outputGamePage($id = '') {
     <meta name='viewport' content='width=device-width, initial-scale=1.0' />
     <title>Spud life</title>
     <link rel='stylesheet' href='layout.css?1' />
-    <script src='js/lz-string.min.js' />
-    {$scripts}
     {$saveScript}
+    <script src='js/lz-string.min.js' ></script>
+    {$scripts}
   </head>
   <body>
     <div class='container'>

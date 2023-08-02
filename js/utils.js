@@ -13,6 +13,7 @@ const state = {
     let compressed = LZString.compressToUTF16(JSON.stringify(player));
     localStorage.setItem("state", compressed);
   },
+  
   load: () => {
     let compressed = localStorage.getItem("state");
     if (compressed) {
@@ -22,32 +23,24 @@ const state = {
       return player;
     }
   },
+
   clear: (reload = false) => {
     localStorage.clear();
     if (reload) {
       window.location.reload();
     }    
   },
+
   read: () => {
     return LZString.compressToBase64(JSON.stringify(player));
   },
+
   write: (compressed) => {
     let decompressed = LZString.decompressFromBase64(compressed);
     player = JSON.parse(decompressed);
-    let element = document.querySelector(`#playerSprite`);
-    element.innerHTML = svg.renderPerson(player.body);
     state.save();
-    // redraw field
-    tools.render();
-    setPhase(player.phase);
-    sky.render();
-    sky.clouds();
-    character.render();
-    resizeStuff();
   }
 };
-
-// add animation then remove it after a timeout so it can be re-applied
 
 function html(selector, text) {
   let elem = checkSelector(selector);
