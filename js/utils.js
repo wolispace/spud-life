@@ -13,7 +13,7 @@ const state = {
     let compressed = LZString.compressToUTF16(JSON.stringify(player));
     localStorage.setItem("state", compressed);
   },
-  
+
   load: () => {
     let compressed = localStorage.getItem("state");
     if (compressed) {
@@ -73,5 +73,19 @@ function getElementPos(selector) {
     element = document.querySelector('#patch_0');
   }
   return element.getBoundingClientRect();
+}
+
+function randomName (qty = 3) {
+  let vowels = 'aeiou'.split('');
+  let prefix = 'bdcfgjlnprsvwz'.split('');
+  let newName = '';
+  // random length names min/max based on qty passed in 
+  qty += rnd(qty);
+  for (let step = 0; step < qty; step++) {
+    newName += prefix[rnd(prefix.length)] + vowels[rnd(vowels.length)]
+  }
+
+  return newName;
+
 }
 

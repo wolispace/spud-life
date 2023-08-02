@@ -24,7 +24,7 @@ function saveLoad($id) {
 }
 
 function getJsDataFileName($id) {
-  return "{$id}_saved.js";
+  return "saved_{$id}.js";
 }
 
 function getSaveScript($id) {

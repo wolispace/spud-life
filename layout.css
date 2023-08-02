@@ -310,6 +310,11 @@ button:hover {
   z-index: 4;
 }
 
+#compressed {
+  width: 100%;
+  margin-top: 1rem;
+}
+
 #playerName {
   padding: var(--sl-padding);
   border-radius: 3px;

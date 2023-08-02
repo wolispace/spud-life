@@ -166,21 +166,20 @@ function aboutGame () {
 
 function loadSave () {
   let currentState = state.read();
-  let rndName = 'test';
+  let rndName = randomName();
 
   let content = `<div class="dialog-message-content">`;
   content += `<form method="post" action="localhost">`;
-  content += `<input type="text" name="id" value="${rndName}" />`
-  content += `<textarea id="compressed" name="data" style="height:20rem">${currentState}</textarea>`
-  content += `<div>Copy the above text, and paste (replace) it into a new browser session of Spud life to transfer this game</div>`
-  content += `<input type="submit" value="Set" />`;
+  content += `Your secret code will be <input type="text" disabled="disabled" name="id" value="${rndName}" />`
+  content += `<textarea id="compressed" name="data">${currentState}</textarea>`
+  content += `<button type="submit" class="buttonize">Generate link</button>`;
   content += `</form></div>`;
 
   let footer = "";
-  footer += `<button class="buttonize" onclick="dialog.confirm()"> Save </button>`;
+  footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
   dialog.cancelButton = function () { character.render(); dialog.hide(); };
-  dialog.okButton = function () { writeState(); };
-  dialog.render("Load and save", content, footer);
+  dialog.okButton = function () { character.render(); dialog.hide(); };
+  dialog.render("Transfer link", content, footer);
 }
 
 function writeState () {
