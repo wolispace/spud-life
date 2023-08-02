@@ -168,12 +168,13 @@ function loadSave () {
   let currentState = state.read();
   let rndName = randomName();
 
-  let content = `<div class="dialog-message-content">`;
-  content += `<form method="post" action="?">`;
-  content += `Your secret code will be <input type="text" name="id" value="${rndName}" />`
-  content += `<textarea id="compressed" name="data">${currentState}</textarea>`
-  content += `<button type="submit" class="buttonize">Generate link</button>`;
-  content += `</form></div>`;
+  let content = `<form method="post" action="?">`;
+  content += `<div class="dialog-message-content">`;
+  content += `<div>Generate a transfer link you can load up on another device</div>`;
+  content += `<div>Your secret code will be <input type="text" name="id" value="${rndName}" /></div>`
+  content += `<div><textarea id="compressed" name="data">${currentState}</textarea></div>`
+  content += `<div><button type="submit" class="buttonize">Generate link</button></div>`;
+  content += `</div></form>`;
 
   let footer = "";
   footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
