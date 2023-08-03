@@ -18,7 +18,7 @@ function isDevMode() {
 }
 
 function saveLoad($v, $id) {
-  $data = $_REQUEST['data'];
+  $data = isset($_REQUEST['data']) ? $_REQUEST['data'] : '';
   if (!empty($data)) {
     $jsDataFile = getJsDataFileName($id);
     $saveData = "const saveId = `{$id}`; const saveData = '{$data}';";
