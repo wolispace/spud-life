@@ -63,7 +63,7 @@ const hardware = {
         if (!player.tools[toolName] && player.sack[toolName]) {
           content += ` <div class="hardware-button-sell buttonize button  ${canSellClass}" ${onClickSell}>Sell<br/>$${sellCost}</div>`;
         }
-        if (tool.type != 'item') {
+        if (tool.type != 'item' && tool.type != 'block' ) {
           content += ` <div class="hardware-button-buy buttonize button ${canBuyClass}" ${onClickBuy}>${state}</br>$${buyCost}</div>`;
         }
         content += `</div>`;
