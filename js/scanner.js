@@ -9,9 +9,15 @@ const scanner = {
     let scannerCheckbox = scanner.checkbox();
     let resetCheckbox = dialog.makeCheckbox('resetHints', 'Reset hints. Do this if you have forgotten stuff', false);
  
+    let levelDesc = scanner.levelDesc();
+
     let content = `<div class="dialog-message-content">`;
     content += `<div>Your scanner blinks if there is something underground near you.</div>`;
-    content += `<div>You have a basic level ${player.scanLevel} scanner. This detects all squares directly next to you and under you.</div>`;
+    content += `<div>You level ${player.scanLevel} scanner detects ${levelDesc[player.scanLevel]}.</div>`;
+    content += `<div>The next upgrade will detect ${levelDesc[player.scanLevel+1]}.</div>`;
+    content += `<div>You can Reset and start a new game any time.</div>`;
+    content += `<div>You can Transfer your current progress to a new device.</div>`;
+    
     content += `<div class="checkbox-list">`;
     content += `<div>${scannerCheckbox}</div>`;
     content += `<div>${resetCheckbox}</div>`;
@@ -96,16 +102,33 @@ const scanner = {
   scope: function () {
     // cos is a global defined in player.js
     // depending on player.scanLevel (scan level 0 is off, 1 is full area.)
-    let scanLevels = [
+    let scanLevels = scanner.levels();
+
+    let squares = scanLevels[player.scanLevel];
+    return squares;
+  },
+
+  levels: function () {
+    return [
       [],
       [-player.cols-1, -player.cols, -player.cols+1, -1, 0, 1, player.cols-1, player.cols, player.cols+1],
       [-player.cols, -1, 0, 1,  player.cols],
       [-1, 0, 1],
       [0],
     ];
-    let squares = scanLevels[player.scanLevel];
-    return squares;
   },
+
+  levelDesc: function () {
+    return [
+      '',
+      'all 8 patches around you as well as the one you stand on',
+      'a plus shape: the patches above, below, left and right plus the one you stand on',
+      'just the patches left and right plus the one you stand on',
+      'just the patch you stand on',
+      '.. oh wait.. there are no more upgrades. Well done!'
+    ];
+  },
+
   // look at a patch and return true if its got something buried
   checkPatches: (field, patchId) => {
     if (field[patchId] && (field[patchId].item || (field[patchId].spud && field[patchId].spud.qty > 0))) {

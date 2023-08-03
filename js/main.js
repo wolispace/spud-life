@@ -150,14 +150,11 @@ function aboutGame () {
   content += `<div>I wanted to make a browser-based game that:`;
   content += `<li>has no dedicated server</li>`;
   content += `<li>doesn't rely on third-party libraries or assets</li>`;
-  content += `<li>could be stopped and started quickly and easily</li>`;
-  content += `<li>does not require quick reflexes</li>`;
+  content += `<li>can be stopped and started quickly and easily</li>`;
+  content += `<li>doesn't require quick reflexes or boss-fights</li>`;
   content += ` I got close. The only thing I am relying on is <a href="https://github.com/pieroxy/lz-string">lz-string</a> to compress the game state that is stored in local storage.</div>`;
 
-  content += `<div>Things to do:`;
-  content += `</div>`;
-
-  content += `<div>No svg paths were harmed the making of this game.</div>`;
+  content += `<div>No fish or svg paths were harmed during the making of this game.</div>`;
   content += `<div>Version ${version}</div>`;
   content += `</div>`;
 
