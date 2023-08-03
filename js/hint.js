@@ -182,8 +182,32 @@ const hint = {
   toolUsedUp: function (toolName) {
     hint.pointTo = getElementPos(`.tool-${toolName}`);
     hint.message = `Your ${toolName} is exhausted. Tomorrow morning it will be refreshed and you can use it again. [${hint.ok()}]`;
-    hint.okButton = 'hint.close';
+    hint.okButton = 'hint.toolCart';
     hint.group = 'toolUsedUp';
+    hint.render();
+  },
+
+  toolCart: function () {
+    hint.pointTo = getElementPos(`#patch_6`);
+    hint.message = `It's time to load your machines with spuds and open for the night. [${hint.ok()}]`;
+    hint.okButton = 'hint.toolHome';
+    hint.group = 'toolCart';
+    hint.render();
+  },
+
+  toolHome: function () {
+    hint.pointTo = getElementPos(`#patch_0`);
+    hint.message = `If you have no spuds, go home and bring on the night. [${hint.ok()}]`;
+    hint.okButton = 'hint.toolHardware';
+    hint.group = 'toolHome';
+    hint.render();
+  },
+
+  toolHardware: function () {
+    hint.pointTo = getElementPos(`#patch_3`);
+    hint.message = `Remember to check the hardware store for things to buy and sell. [${hint.ok()}]`;
+    hint.okButton = 'hint.close';
+    hint.group = 'toolHardware';
     hint.render();
   },
 
