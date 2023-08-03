@@ -5,7 +5,7 @@ $id = $_REQUEST['id'] ?? '';
 // unique code for js loading
 $v = rand(10,99999);
 
-file_put_contents('_request.txt', json_encode($_REQUEST));
+//file_put_contents('_request.txt', json_encode($_REQUEST));
 
 if (empty($id)) {
   outputGamePage($v);
@@ -21,14 +21,14 @@ function saveLoad($v, $id) {
   $data = $_REQUEST['data'];
   if (!empty($data)) {
     $jsDataFile = getJsDataFileName($id);
-    $saveData = "const saveData = '{$data}';";
+    $saveData = "const saveId = `{$id}`; const saveData = '{$data}';";
     file_put_contents($jsDataFile, $saveData);
   }
   outputGamePage($v, $id);
 }
 
 function getJsDataFileName($id) {
-  return "_saved_{$id}.js";
+  return "_saves/_save_{$id}.js";
 }
 
 function getSaveScript($v, $id) {
