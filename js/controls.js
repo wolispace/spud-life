@@ -106,8 +106,8 @@ const controls = {
 
           if (playerTool && playerTool.uses > 0) {
             // if the patch is blocked.. the click reduces until zero and the block is removed
-            player.sack[patch.block.type] = player.sack[patch.block.type] ?? 0;
-            player.sack[patch.block.type]++;
+            player.basket[patch.block.type] = player.basket[patch.block.type] ?? 0;
+            player.basket[patch.block.type]++;
             if (patch.block.qty > 1) {
               patch.block.qty--;
             } else {

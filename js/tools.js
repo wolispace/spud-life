@@ -17,15 +17,15 @@ const tools = {
       title="scanner=${player.scanLevel}">
       ${scannerImg}<div class="toolNum">${player.scanLevel}</div></div>`;
 
-    let basket = svg.render('basket') ?? dummyImg;
+    let basketImg = svg.render('basket') ?? dummyImg;
     tools += `<div class="tool-button tool-basket" 
-      onclick="sack.show()"
-      title="basket=${sack.count()}">
-      ${basket}<div class="toolNum">${sack.count()}</div></div>`;
+      onclick="basket.show()"
+      title="basket=${basket.count()}">
+      ${basketImg}<div class="toolNum">${basket.count()}</div></div>`;
 
     let wallet = svg.render('wallet') ?? dummyImg;
       tools += `<div class="tool-button tool-wallet" 
-        onclick="sack.show()"
+        onclick="basket.show()"
         title="wallet=${player.wallet}">
         ${wallet}<div class="toolNum">${player.wallet}</div></div>`;
 
@@ -65,8 +65,8 @@ const tools = {
         player.wallet = player.wallet - item.price;
       }
     } else if (item.type == "item" || item.type == "block") {
-      player.sack[itemName] = player.sack[itemName] || 0;
-      player.sack[itemName]++;
+      player.basket[itemName] = player.basket[itemName] || 0;
+      player.basket[itemName]++;
       player.wallet = player.wallet - item.price;
 
     } else if (item.type == "machine") {

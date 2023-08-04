@@ -1,4 +1,4 @@
-version = '1.0.0-beta';
+version = '2.0.0-beta';
 
 // if savedate injected (by referencing it with ?id={dataFileId} then load it.
 if (typeof saveData !== 'undefined') {
@@ -16,13 +16,10 @@ player = state.load();
 bodySet = getBodySet();
 
 if (player && player.version && player.version != version) {
-  if (!confirm('Your game was saved within an older version. It might not be stable. Do you want to continue anyhow?')) {
-    state.clear(true);
-  }
+  handleVersionChange(player.version, version);
 }
 
 player.version = version;
-
 
 document.addEventListener("DOMContentLoaded", function () {
   initModules();
@@ -234,6 +231,20 @@ function getSelectValue(id) {
   let element = document.querySelector(id);
 
   return element.value;
+}
+
+// breaking changes udate the players saved state if possible
+function handleVersionChange(oldVersion, newVersion) {
+  if (version == '2.0.0-beta') {
+    player.basket = player.sack;
+    delete player.sack;
+    console.log('updated player sack', player);
+  } else {
+    console.log(player);
+    if (!confirm('Your game was saved within an older version. It might not be stable. Do you want to continue anyhow?')) {
+      state.clear(true);
+    }
+  }
 }
 
 // TODO: this is going..

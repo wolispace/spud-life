@@ -333,7 +333,7 @@ const fields = {
       }
       // make sure every patch have an id referencing itself
       patch.id = `patch_${player.pos}`;
-      // if there is an item defined, dig it up and add it to the sack
+      // if there is an item defined, dig it up and add it to the basket
       if (patch.item) {
         let item = hardware.items[patch.item];
         if (item.type == 'tool') {
@@ -352,8 +352,8 @@ const fields = {
           }
         } else {
           // increment the players count of this item
-          let sackQty = player.sack[patch.item] || 0;
-          player.sack[patch.item] = sackQty + 1;
+          let basketQty = player.basket[patch.item] || 0;
+          player.basket[patch.item] = basketQty + 1;
         }
         state.save();
         tools.render();
@@ -367,9 +367,9 @@ const fields = {
       }
       // if there are spuds then dig them up
       if (patch.spud.qty > 0) {
-        // all spuds dug at once and moved to player sack
-        let sackQty = player.sack[patch.spud.name] || 0;
-        player.sack[patch.spud.name] = sackQty + patch.spud.qty;
+        // all spuds dug at once and moved to player basket
+        let basketQty = player.basket[patch.spud.name] || 0;
+        player.basket[patch.spud.name] = basketQty + patch.spud.qty;
         // spud qty in negative meaning it takes this many days to return to a fresh patch
         patch.spud.qty = player.spudRegen;
         patch.spudFound = true;

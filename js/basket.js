@@ -1,47 +1,48 @@
-const sack = {
-  // count how many items are in the sack, spuds or other stuff
+const basket = {
+  // count how many items are in the basket, spuds or other stuff
   count: () => {
     let spuds = 0;
-    Object.entries(player.sack).forEach(([spudName, spudQty]) => {
+    console.log(player);
+    Object.entries(player.basket).forEach(([spudName, spudQty]) => {
       spuds += spudQty;
     });
 
     return spuds;
   },
-  // show contents of the sack
+  // show contents of the basket
   render: () => {
-    let sackList = "";
+    let basketList = "";
     let style = `style="width:2rem;"`;
-    Object.entries(player.sack).forEach(([spudName, spudQty]) => {
+    Object.entries(player.basket).forEach(([spudName, spudQty]) => {
       let spudInfo = player.spuds.filter((spud) => spud.name == spudName)[0];
       if (spudInfo) {
         let icon = spuds.render(spudInfo.name, style);
         let machine = player.shop.machines[player.shop.selected];
-        sackList += `<div class="sackSpuds buttonize">`;
-        sackList += `<div class="sackSpudName">${icon} ${spudQty} ${spudInfo.fullName}</div>`;
-        sackList += `<div class="sackListButtons">`;
+        basketList += `<div class="basketSpuds buttonize">`;
+        basketList += `<div class="basketSpudName">${icon} ${spudQty} ${spudInfo.fullName}</div>`;
+        basketList += `<div class="basketListButtons">`;
         if (spudQty > 0) {
-          sackList += `<div class="spudListButton" onclick="spuds.move('${spudName}', ${spudQty})">&lt;&lt;</div>`;
-          sackList += `<div class="spudListButton" onclick="spuds.move('${spudName}', 1)">&lt;</div>`;
+          basketList += `<div class="spudListButton" onclick="spuds.move('${spudName}', ${spudQty})">&lt;&lt;</div>`;
+          basketList += `<div class="spudListButton" onclick="spuds.move('${spudName}', 1)">&lt;</div>`;
         } else {
-          sackList += `<div class="spudListButton" >&lt;&lt;</div>`;
-          sackList += `<div class="spudListButton" >&lt;</div>`;
+          basketList += `<div class="spudListButton" >&lt;&lt;</div>`;
+          basketList += `<div class="spudListButton" >&lt;</div>`;
         }
         if (machine && machine.hopper && machine.hopper[spudName] > 0) {
-          sackList += `<div class="spudListButton" onclick="spuds.move('${spudName}', -1)">&gt;</div>`;
+          basketList += `<div class="spudListButton" onclick="spuds.move('${spudName}', -1)">&gt;</div>`;
         } else {
-          sackList += `<div class="spudListButton" >&gt;</div>`;
+          basketList += `<div class="spudListButton" >&gt;</div>`;
         }
-        sackList += `</div>`;
-        sackList += `<div class="sackSpudDesc">These are ${spuds.bits.rareNames[spudInfo.rareness]} variety potatoes that are best for ${spudInfo.bestFor}</div>`;
-        sackList += `</div>`;
+        basketList += `</div>`;
+        basketList += `<div class="basketSpudDesc">These are ${spuds.bits.rareNames[spudInfo.rareness]} variety potatoes that are best for ${spudInfo.bestFor}</div>`;
+        basketList += `</div>`;
       }
     });
 
-    element = document.querySelector(".sack");
-    element.innerHTML = sackList;
+    element = document.querySelector(".basket");
+    element.innerHTML = basketList;
   },
-  // show or hide the sack via a dialog
+  // show or hide the basket via a dialog
   show: () => {
     if (hint.visible || dialog.visible) {
       return;
@@ -49,7 +50,7 @@ const sack = {
     let content = "";
     let content2 = "";
     let style = `style="width:2rem;"`;
-    Object.entries(player.sack).forEach(([itemName, itemQty]) => {
+    Object.entries(player.basket).forEach(([itemName, itemQty]) => {
       let spudInfo = player.spuds.filter((spud) => spud.name == itemName)[0];
       if (spudInfo) {
         let icon = spuds.render(spudInfo.name, style);
@@ -72,10 +73,10 @@ const sack = {
     // sell something
     sellItem: (itemName) => {
       let item = hardware.items[itemName];
-      let itemQty = player.sack[itemName] ?? 0;
+      let itemQty = player.basket[itemName] ?? 0;
 
       player.wallet = player.wallet + (item.price * itemQty);
-      delete player.sack[itemName];
+      delete player.basket[itemName];
       state.save();
       tools.render();
       hardware.render();

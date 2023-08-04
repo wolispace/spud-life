@@ -1,5 +1,5 @@
 const machines = {
-  // show the machines next to the contents of the sack
+  // show the machines next to the contents of the basket
   render: () => {
     let machineList = ``;
     player.shop.selected = '';
@@ -28,7 +28,7 @@ const machines = {
 
     let element = document.querySelector(`#machine_${machineName}`);
     element.classList.add(className);
-    sack.render();
+    basket.render();
   },
 
   // each machine has a hopper that is filled with spuds 

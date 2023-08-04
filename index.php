@@ -45,7 +45,7 @@ function getScripts($v) {
     <script src='js/character.js?{$v}'></script>
     <script src='js/player.js?{$v}'></script>
     <script src='js/customers.js?{$v}'></script>
-    <script src='js/sack.js?{$v}'></script>
+    <script src='js/basket.js?{$v}'></script>
     <script src='js/home.js?{$v}'></script>
     <script src='js/hardware.js?{$v}'></script>
     <script src='js/shop.js?{$v}'></script>

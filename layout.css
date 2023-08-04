@@ -568,7 +568,7 @@ button:hover {
   background-color: rgba(0, 0, 0, 0.2);
 }
 
-.sackListButtons {
+.basketListButtons {
   display: flex;
 }
 
@@ -580,7 +580,7 @@ button:hover {
   height: 98%;
 }
 
-.sack {
+.basket {
   border-radius: 5px;
   border: 3px solid rgb(75, 46, 26, 0.5);
   padding: var(--sl-padding);
@@ -588,12 +588,12 @@ button:hover {
   flex-grow: 1;
 }
 
-.sackSpuds {
+.basketSpuds {
   display: flex;
   flex-direction: column;
 }
 
-.sackSpudName {
+.basketSpudName {
   font-weight: bold;
 }
 

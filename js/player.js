@@ -9,7 +9,7 @@ let player = {
   daytime: true,
   cols: cols,
   rows: rows,
-  sack: {},
+  basket: {},
   wallet: 100,
   scanLevel: 1,
   scanState: true,

@@ -9,9 +9,9 @@ const shop = {
     character.render();
   },
   render: function () {
-    // list all spuds in sack and all machines owned..
+    // list all spuds in basket and all machines owned..
     let content = '<div class="allocateContent">';
-    content += '<div class="machines"></div><div class="sack"></div></div>';
+    content += '<div class="machines"></div><div class="basket"></div></div>';
 
     let title = "Load spuds into machines";
     let footer = "";
@@ -22,7 +22,7 @@ const shop = {
     dialog.render(title, content, footer);
 
     machines.render();
-    sack.render();
+    basket.render();
     hint.chipper();
   }
 };

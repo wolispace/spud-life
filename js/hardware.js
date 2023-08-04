@@ -35,9 +35,9 @@ const hardware = {
       let onClickSell = "";
       let canBuyClass = "tooMuch";
       let canSellClass = "tooMuch";
-      if (player.sack[toolName]) {
-        sellCost = sellCost * player.sack[toolName];
-        onClickSell = `onclick="sack.sellItem('${toolName}')"`;
+      if (player.basket[toolName]) {
+        sellCost = sellCost * player.basket[toolName];
+        onClickSell = `onclick="basket.sellItem('${toolName}')"`;
         canSellClass = '';
       }
       if (buyCost <= player.wallet) {
@@ -47,12 +47,12 @@ const hardware = {
       if (player.shop.machines[toolName]) {
         showItem = false;
       }
-      if ('item,block'.indexOf(tool.type) > -1 && !player.sack[toolName]) {
+      if ('item,block'.indexOf(tool.type) > -1 && !player.basket[toolName]) {
         showItem = false;
       }
       let showName = tool.name;
       if (tool.type == 'block' || tool.type == 'item') {
-        let qty = (player.sack[toolName] > 1) ? `x ${player.sack[toolName]}` : '';
+        let qty = (player.basket[toolName] > 1) ? `x ${player.basket[toolName]}` : '';
         showName = `${tool.name} ${qty}.`;
       } 
 
@@ -60,7 +60,7 @@ const hardware = {
         content += `<div class="hardware-button buttonize button_${tool.type} " id="hardware_${toolName}">`;
         content += ` <div class="hardware-button-icon">${svg.inline(toolName)}</div>`;
         content += ` <div class="hardware-button-desc"><strong>${showName}. </strong> ${tool.desc}</div>`;
-        if (!player.tools[toolName] && player.sack[toolName]) {
+        if (!player.tools[toolName] && player.basket[toolName]) {
           content += ` <div class="hardware-button-sell buttonize button  ${canSellClass}" ${onClickSell}>Sell<br/>$${sellCost}</div>`;
         }
         if (tool.type != 'item' && tool.type != 'block' ) {

@@ -236,7 +236,7 @@ const hint = {
 
   chipper: function () {
     hint.pointTo = getElementPos(`#machine_chipper`);
-    let spuds = document.querySelector('.sackSpuds');
+    let spuds = document.querySelector('.basketSpuds');
     if (spuds) {
       hint.message = `Choose a machine you want to load with spuds. [${hint.ok()}]`;
       hint.okButton = 'hint.moveSpuds';
@@ -266,7 +266,7 @@ const hint = {
   },
   moveSpuds: function () {
     hint.isItSkipped();
-    hint.pointTo = getElementPos(`.sackSpuds`);
+    hint.pointTo = getElementPos(`.basketSpuds`);
     hint.message = `Move all, or one at a time, to the selected machine. [${hint.ok()}]`;
     hint.okButton = 'hint.spudTypes';
     hint.group = 'allocate';
@@ -274,7 +274,7 @@ const hint = {
   },
   spudTypes: function () {
     hint.isItSkipped();
-    hint.pointTo = getElementPos(`.sackSpudDesc`);
+    hint.pointTo = getElementPos(`.basketSpudDesc`);
     hint.message = `Use the matching machine to make more money per meal. [${hint.ok()}]`;
     hint.okButton = 'hint.close';
     hint.group = 'allocate';

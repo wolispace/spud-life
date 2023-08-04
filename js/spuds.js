@@ -100,7 +100,7 @@ const spuds = {
 
   },
 
-  // move spuds from sack to machine hoppers
+  // move spuds from basket to machine hoppers
   move: (spudName, spudQty) => {
     let machine = player.shop.machines[player.shop.selected];
 
@@ -110,9 +110,9 @@ const spuds = {
     let existing = machine.hopper[spudName];
 
     machine.hopper[spudName] = spudQty + existing;
-    player.sack[spudName] -= spudQty;
+    player.basket[spudName] -= spudQty;
 
-    sack.render();
+    basket.render();
     machines.renderHopper(player.shop.selected);
   },
 
