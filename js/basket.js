@@ -65,21 +65,22 @@ const basket = {
     });
 
     let footer = "";
+    footer += `<button class="buttonize" onclick="potatadex.render()"> Potatádex </button>`;
     footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
     dialog.cancelButton = function () { dialog.hide(); };
     dialog.okButton = function () { dialog.hide(); };
     dialog.render("Inventory", `${content}${content2}`, footer);
   },
-    // sell something
-    sellItem: (itemName) => {
-      let item = hardware.items[itemName];
-      let itemQty = player.basket[itemName] ?? 0;
+  // sell something
+  sellItem: (itemName) => {
+    let item = hardware.items[itemName];
+    let itemQty = player.basket[itemName] ?? 0;
 
-      player.wallet = player.wallet + (item.price * itemQty);
-      delete player.basket[itemName];
-      state.save();
-      tools.render();
-      hardware.render();
-    },
+    player.wallet = player.wallet + (item.price * itemQty);
+    delete player.basket[itemName];
+    state.save();
+    tools.render();
+    hardware.render();
+  },
 };
 
