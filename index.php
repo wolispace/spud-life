@@ -14,7 +14,7 @@ if (empty($id)) {
 }
 
 function isDevMode() {
-  return isset($_REQUEST['dev']);
+  return file_exists('_dev.txt');
 }
 
 function saveLoad($v, $id) {
