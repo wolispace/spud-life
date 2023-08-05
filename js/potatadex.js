@@ -1,6 +1,6 @@
 const potatadex = {
   render: function () {
-		if (hint.visible || dialog.visible) {
+		if (hint.visible) {
       return;
     }
 		let style = `style="width:3rem;"`;
@@ -25,7 +25,7 @@ const potatadex = {
 			let icon = `<div class="unknown" ${style} > ???<br />??? </div>`;
 			let itemName = 'Unknown';
 			let itemDesc = '';
-			if (player.basket[itemKey] > -1 || player.shop.machines[itemKey] || player.tools[itemKey]) {
+			if (character.has(itemKey)) {
 				itemName = item.name;
 				itemDesc = item.desc;
 				icon = svg.inline(itemKey)

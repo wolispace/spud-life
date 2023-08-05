@@ -41,6 +41,13 @@ document.addEventListener("DOMContentLoaded", function () {
   character.render();
   resizeStuff();
 
+  if (!player.daytime) {
+    let nightShade = document.querySelector(`#nightShade`);
+    nightShade.style.opacity = 1;
+    sky.lightDoor();
+    hint.goHome();
+  }
+
   if (!urlParams.has('id') && typeof saveId !== 'undefined') {
     showTransferLink();
   }

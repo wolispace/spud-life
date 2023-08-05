@@ -111,6 +111,7 @@ const spuds = {
 
     machine.hopper[spudName] = spudQty + existing;
     player.basket[spudName] -= spudQty;
+    state.save();
 
     basket.render();
     machines.renderHopper(player.shop.selected);

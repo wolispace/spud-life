@@ -15,8 +15,8 @@ const basket = {
     let style = `style="width:2rem;"`;
     Object.entries(player.basket).forEach(([spudName, spudQty]) => {
       let spudInfo = player.spuds.filter((spud) => spud.name == spudName)[0];
-      let spudDesc = spuds.desc(spud);
       if (spudInfo) {
+        let spudDesc = spuds.desc(spudInfo);
         let icon = spuds.render(spudInfo.name, style);
         let machine = player.shop.machines[player.shop.selected];
         basketList += `<div class="basketSpuds buttonize">`;
@@ -56,7 +56,7 @@ const basket = {
         let spudInfo = player.spuds.filter((spud) => spud.name == itemName)[0];
         if (spudInfo) {
           let icon = spuds.render(spudInfo.name, style);
-          let spudDesc = `These are ${spuds.bits.rareNames[spudInfo.rareness]} variety potatoes that are best for ${spudInfo.bestFor}`;
+          let spudDesc = spuds.desc(spudInfo);
   
           content += `<div  class="hardware-button buttonize">`;
           content += ` <div class="hardware-button-icon">${icon}</div>`;

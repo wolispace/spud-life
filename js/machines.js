@@ -39,7 +39,8 @@ const machines = {
 
   listHopper: (machineName) => {
     let machine = hardware.items[machineName];
-    let hopper = `<div class="machineName">${machine.name}</div><div>`;
+    let icon = svg.inline(machineName);
+    let hopper = `<div class="machineName">${icon} ${machine.name}</div><div>`;
     Object.entries(player.shop.machines[machineName].hopper).forEach(([spudName, spudQty]) => {
       hopper += `<div>${spudName} = ${spudQty}</div > `;
     });

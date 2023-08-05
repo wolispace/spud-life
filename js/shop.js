@@ -16,14 +16,20 @@ const shop = {
     let title = "Load spuds into machines";
     let footer = "";
     footer += `<button class="buttonize" onclick="dialog.cancel()"> Return to the field </button>`;
-    footer += `<button class="buttonize okButton" onclick="dialog.confirm()"> Open shop </button>`;
-    dialog.okButton = function () { spuds.sell(); };
+    dialog.okButton = function () {  shop.exit(); };
+    if (player.daytime) {
+      footer += `<button class="buttonize okButton" onclick="dialog.confirm()"> Open shop </button>`;
+      dialog.okButton = function () { spuds.sell(); };
+    }
     dialog.cancelButton = function () { shop.exit(); };
     dialog.render(title, content, footer);
-
+    // fill the parts of the dialog..
     machines.render();
     basket.render();
     hint.chipper();
+    if (!player.daytime) {
+      hint.itsNight();
+    }
   }
 };
 

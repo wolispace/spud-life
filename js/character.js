@@ -30,6 +30,10 @@ const character = {
       let playerHead = document.querySelector("#playerSprite .playerHead");
       setTimeout( () => {playerHead.setAttribute("transform", "rotate(0, 51, 21.2)");}, 1000);
     },
+
+    has: function (itemKey) {
+      return player.basket[itemKey] > -1 || player.shop.machines[itemKey] || player.tools[itemKey];
+    },
   
     // make a random body
     randomBody: function () {

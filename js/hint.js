@@ -211,9 +211,18 @@ const hint = {
     hint.render();
   },
 
+  itsNight: function () {
+    console.log('its night');
+    hint.pointTo = getElementPos(`.close`);
+    hint.message = `It's night time and too late to open your shop. Go home and get some sleep. [${hint.ok()}]`;
+    hint.okButton = 'hint.close';
+    hint.group = 'itsNight';
+    hint.render();
+  },
+
   goHome: function () {
     hint.pointTo = getElementPos(`#patch_0`);
-    hint.message = `Its getting late. Go home and get some sleep. [${hint.ok()}]`;
+    hint.message = `It's getting late. Go home and get some sleep. [${hint.ok()}]`;
     hint.okButton = 'hint.close';
     hint.group = 'goHome';
     hint.render();
