@@ -51,16 +51,18 @@ const basket = {
     let content2 = "";
     let style = `style="width:2rem;"`;
     Object.entries(player.basket).forEach(([itemName, itemQty]) => {
-      let spudInfo = player.spuds.filter((spud) => spud.name == itemName)[0];
-      if (spudInfo) {
-        let icon = spuds.render(spudInfo.name, style);
-        let spudDesc = `These are ${spuds.bits.rareNames[spudInfo.rareness]} variety potatoes that are best for ${spudInfo.bestFor}`;
-
-        content += `<div class="buttonize">${icon} ${itemQty} <b>${itemName}.</b> ${spudDesc}</div>`;
-      } else {
-        let itemInfo = hardware.items[itemName];
-        let icon = svg.render(itemName, 1, style);
-        content2 += `<div class="buttonize">${icon} <b>${itemName}.</b> ${itemInfo.desc}</div>`;
+      if (itemQty > 0 ) {
+        let spudInfo = player.spuds.filter((spud) => spud.name == itemName)[0];
+        if (spudInfo) {
+          let icon = spuds.render(spudInfo.name, style);
+          let spudDesc = `These are ${spuds.bits.rareNames[spudInfo.rareness]} variety potatoes that are best for ${spudInfo.bestFor}`;
+  
+          content += `<div class="buttonize">${icon} ${itemQty} <b>${itemName}.</b> ${spudDesc}</div>`;
+        } else {
+          let itemInfo = hardware.items[itemName];
+          let icon = svg.render(itemName, 1, style);
+          content2 += `<div class="buttonize">${icon} <b>${itemName}.</b> ${itemInfo.desc}</div>`;
+        }
       }
     });
 
@@ -77,7 +79,7 @@ const basket = {
     let itemQty = player.basket[itemName] ?? 0;
 
     player.wallet = player.wallet + (item.price * itemQty);
-    delete player.basket[itemName];
+    player.basket[itemName] = 0;
     state.save();
     tools.render();
     hardware.render();
