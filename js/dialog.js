@@ -49,7 +49,8 @@ const dialog = {
     hint.hide();
   },
 
-  makeCheckbox: function (id, text, checked) {
+  makeCheckbox: function (id, text, isChecked) {
+    let checked = isChecked ? 'checked="checked"' : '';
     let checkbox = `<span class="checkboxSpan">`;
     checkbox += `<input type="checkbox" id="${id}" ${checked} />`;
     checkbox += `<label class="checkboxLabel" for="${id}">${text}</label></span>`;

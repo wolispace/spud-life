@@ -66,6 +66,7 @@ const character = {
     save: function () {
       let dialogInput = document.querySelector(`#playerName`);
       player.name = dialogInput.value;
+      player.hints = dialog.isChecked(`#showHints`);
       dialog.hide();
       state.save();
       tools.render();
@@ -91,7 +92,8 @@ const character = {
       if (mode == "random" || !player.body ) {
         player.body = character.randomBody();
       }
-  
+      let showHintCheckbox = dialog.makeCheckbox('showHints', 'Show hints. You are new to this world.', player.hints);
+
       let content = "";
       content += '<div class="creator">';
       content += '<div class="left">';
@@ -106,6 +108,8 @@ const character = {
       content += "</div>";
       content += "</div>";
       content += character.colourGrid();
+
+      content += `<div>${showHintCheckbox}</div>`;
   
       let footer = "";
       footer += `<button class="buttonize" onclick="character.customize('random')"> Randomize </button>`;

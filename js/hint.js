@@ -7,7 +7,7 @@ const hint = {
   group: '',
 
   render: function () {
-    if (player.hinted[hint.group]) {
+    if (player.hinted[hint.group] || !player.hints) {
       return;
     }
     hint.visible = true;
