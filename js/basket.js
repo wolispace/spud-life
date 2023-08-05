@@ -2,7 +2,6 @@ const basket = {
   // count how many items are in the basket, spuds or other stuff
   count: () => {
     let spuds = 0;
-    console.log(player);
     Object.entries(player.basket).forEach(([spudName, spudQty]) => {
       spuds += spudQty;
     });
