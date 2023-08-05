@@ -280,7 +280,11 @@ const fields = {
         let patch = player.fields[player.currentField][i];
         if (!patch.spud || patch.spud.qty == 0) {
           // sow seed and set i to 99
-          blankPatches.push(i);
+          if (patch.type.indexOf('control-icon') > -1) {
+            // skip control keys..
+          } else {
+            blankPatches.push(i);
+          }
         }
         i++;
       }
