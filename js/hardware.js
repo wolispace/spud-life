@@ -76,7 +76,6 @@ const hardware = {
     dialog.cancelButton = function () { hardware.exit(); };
     dialog.okButton = function () { hardware.exit(); };
     dialog.render(title, content, footer);
-    fields.renderField();
   },
   // loop through each tool on sale and change style if we can afford it or not
   refresh: () => {
