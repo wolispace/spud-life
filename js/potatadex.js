@@ -1,14 +1,15 @@
 const potatadex = {
   render: function () {
+		let style = `style="width:3rem;"`;
 		let content = 'The things you have found...';
 		Object.entries(player.spuds).forEach(([index, spud]) => {
-			let icon = ' ? ';
+			let icon = `<div class="unknown" ${style} > ???<br />??? </div>`;
 			let spudName = 'Unknown';
 			let spudDesc = '';
-console.log(spud);
 			if (player.basket[spud.name]) {
 				spudName = spud.fullName;
-				spudDesk = spud.bestFor;
+				spudDesc = spuds.desc(spud);
+				icon = spuds.render(spud.name, style);
 			}
 
 			content += `<div class="hardware-button buttonize">`;
@@ -17,7 +18,21 @@ console.log(spud);
 			content += `</div>`;
 		});
 
-		//{name: 'Arsso', fullName: 'Pink Arsso', color: 'pink', rareness: 3, bestFor: 'soup', …}
+		Object.entries(hardware.items).forEach(([itemKey, item]) => {
+			let icon = `<div class="unknown" ${style} > ???<br />??? </div>`;
+			let itemName = 'Unknown';
+			let itemDesc = '';
+			if (player.basket[itemKey] > -1 || player.shop.machines[itemKey] || player.tools[itemKey]) {
+				itemName = item.name;
+				itemDesc = item.desc;
+				icon = svg.inline(itemKey)
+			}
+
+			content += `<div class="hardware-button buttonize">`;
+			content += ` <div class="hardware-button-icon">${icon}</div>`;
+			content += ` <div class="hardware-button-desc"><strong>${itemName}. </strong> ${itemDesc}</div>`;
+			content += `</div>`;
+		});
 
 		let footer = "";
 

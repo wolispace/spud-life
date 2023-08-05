@@ -151,6 +151,10 @@ const spuds = {
     return spud;
   },
 
+  desc: function (spud) {
+    return `These are ${spuds.bits.rareNames[spud.rareness]} variety potatoes that are best for ${spud.bestFor}`;
+  },
+
   // animate an item being dug up into the basket
   animate: (patch) => {
     let startPatch = `#${patch.id}`;

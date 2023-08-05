@@ -15,6 +15,7 @@ const basket = {
     let style = `style="width:2rem;"`;
     Object.entries(player.basket).forEach(([spudName, spudQty]) => {
       let spudInfo = player.spuds.filter((spud) => spud.name == spudName)[0];
+      let spudDesc = spuds.desc(spud);
       if (spudInfo) {
         let icon = spuds.render(spudInfo.name, style);
         let machine = player.shop.machines[player.shop.selected];
@@ -34,7 +35,7 @@ const basket = {
           basketList += `<div class="spudListButton" >&gt;</div>`;
         }
         basketList += `</div>`;
-        basketList += `<div class="basketSpudDesc">These are ${spuds.bits.rareNames[spudInfo.rareness]} variety potatoes that are best for ${spudInfo.bestFor}</div>`;
+        basketList += `<div class="basketSpudDesc">${spudDesc}</div>`;
         basketList += `</div>`;
       }
     });
@@ -49,7 +50,7 @@ const basket = {
     }
     let content = "";
     let content2 = "";
-    let style = `style="width:2rem;"`;
+    let style = `style="width:3rem;"`;
     Object.entries(player.basket).forEach(([itemName, itemQty]) => {
       if (itemQty > 0 ) {
         let spudInfo = player.spuds.filter((spud) => spud.name == itemName)[0];
@@ -57,11 +58,17 @@ const basket = {
           let icon = spuds.render(spudInfo.name, style);
           let spudDesc = `These are ${spuds.bits.rareNames[spudInfo.rareness]} variety potatoes that are best for ${spudInfo.bestFor}`;
   
-          content += `<div class="buttonize">${icon} ${itemQty} <b>${itemName}.</b> ${spudDesc}</div>`;
+          content += `<div  class="hardware-button buttonize">`;
+          content += ` <div class="hardware-button-icon">${icon}</div>`;
+          content += ` <div class="hardware-button-desc"> ${itemQty} <b>${spudInfo.fullName}.</b> ${spudDesc}</div>`;
+          content += `</div>`;
         } else {
           let itemInfo = hardware.items[itemName];
           let icon = svg.render(itemName, 1, style);
-          content2 += `<div class="buttonize">${icon} <b>${itemName}.</b> ${itemInfo.desc}</div>`;
+          content2 += `<div  class="hardware-button buttonize">`;
+          content += ` <div class="hardware-button-icon">${icon}</div>`;
+          content2 += ` <div class="hardware-button-desc"> <b>${itemName}.</b> ${itemInfo.desc}</div>`;
+          content2 += `</div>`;
         }
       }
     });
