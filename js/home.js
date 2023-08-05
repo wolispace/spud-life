@@ -81,6 +81,7 @@ const home = {
       "You dreamt the cake is a lie",
       "You dreamt about the delivery man",
       "You dreamt you were baba",
+      "You dreamt you were in a boat on a river with tangerine trees and marmalade skies",
     ];
     let dream = `<div>` + dreams[rnd(dreams.length)] + `.</div>`;
   

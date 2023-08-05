@@ -1,5 +1,8 @@
 const potatadex = {
   render: function () {
+		if (hint.visible || dialog.visible) {
+      return;
+    }
 		let style = `style="width:3rem;"`;
 		let content = 'The things you have found...';
 		Object.entries(player.spuds).forEach(([index, spud]) => {
@@ -45,3 +48,4 @@ const potatadex = {
     dialog.render("Potatádex", content, footer);
 	},
 }
+
