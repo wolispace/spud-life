@@ -4,7 +4,7 @@ const spuds = {
     prefix: ["Bo", "Sa", "Ru", "Kri", "Ar"],
     middle: ["sa", "cho", "ma", "nal", "sso", "li"],
     suffix: ["lor", "ker", "pry", "ly", "der", "mid"],
-    bestFor: ["chips", "baked potatoes", "curly-fries", "soup"],
+    bestFor: machines.bestForList(),
     color: [
       "white",
       "brick",

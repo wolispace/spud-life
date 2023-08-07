@@ -5,14 +5,18 @@ const hint = {
   message: '',  
   okButton: null,
   group: '',
+  debug: '',
 
   render: function () {
     if (player.hinted[hint.group] || !player.hints) {
       return;
     }
     hint.visible = true;
+    console.log('hint pointTo', hint.debug, hint.pointTo, getElementPos(hint.debug));
 
     // if hint.pointTo is below player.cols / 2 arrow is on left else right
+    
+    // point to the middle of the element
     let posY = hint.pointTo.top + (hint.pointTo.height / 2);
     let posX = hint.pointTo.left + (hint.pointTo.width / 2);
 
@@ -139,6 +143,7 @@ const hint = {
   },
 
   player: function () {
+    hint.debug = `#patch_0`;
     hint.pointTo = getElementPos(`#patch_0`);
     hint.message = `This is you. In front of your house. [${hint.ok()}..]`;
     hint.okButton = 'hint.controls';
@@ -148,6 +153,7 @@ const hint = {
   },
   controls: function () {
     hint.isItSkipped();
+    hint.debug = `#patch_${controls.ArrowUp}`;
     hint.pointTo = getElementPos(`#patch_${controls.ArrowUp}`);
     hint.message = `Use these to move around the field. [${hint.ok()}..]`;
     hint.okButton = 'hint.spade';
@@ -156,6 +162,7 @@ const hint = {
   },
   spade: function () {
     hint.isItSkipped();
+    hint.debug = `.tool-spade`;
     hint.pointTo = getElementPos(`.tool-spade`);
     hint.message = `Use the spade to dig where you stand. [${hint.ok()}..]`;
     hint.okButton = 'hint.field';
@@ -164,6 +171,7 @@ const hint = {
   },
   field: function () {
     hint.isItSkipped();
+    hint.debug = `#patch_53`;
     hint.pointTo = getElementPos(`#patch_53`);
     hint.message = `Rocks and logs block your path. You always find spuds under them. [Let's start digging!]`;
     hint.okButton = 'hint.close';
@@ -172,6 +180,7 @@ const hint = {
   },   
 
   noDigHome: function () {
+    hint.debug = `#patch_${player.pos}`;
     hint.pointTo = getElementPos(`#patch_${player.pos}`);
     hint.message = `You can't dig on the top row. Move down onto an empty patch and dig there. [${hint.ok()}]`;
     hint.okButton = 'hint.close';
@@ -180,6 +189,7 @@ const hint = {
   },
 
   toolUsedUp: function (toolName) {
+    hint.debug = `.tool-${toolName}`;
     hint.pointTo = getElementPos(`.tool-${toolName}`);
     hint.message = `Your ${toolName} is exhausted. Tomorrow morning it will be refreshed and you can use it again. [${hint.ok()}]`;
     hint.okButton = 'hint.toolCart';
@@ -188,6 +198,7 @@ const hint = {
   },
 
   toolCart: function () {
+    hint.debug = `#patch_6`;
     hint.pointTo = getElementPos(`#patch_6`);
     hint.message = `It's time to load your machines with spuds and open for the night. [${hint.ok()}]`;
     hint.okButton = 'hint.toolHome';
@@ -196,6 +207,7 @@ const hint = {
   },
 
   toolHome: function () {
+    hint.debug = `#patch_0`;
     hint.pointTo = getElementPos(`#patch_0`);
     hint.message = `If you have no spuds, go home and bring on the night. [${hint.ok()}]`;
     hint.okButton = 'hint.toolHardware';
@@ -204,6 +216,7 @@ const hint = {
   },
 
   toolHardware: function () {
+    hint.debug = `#patch_3`;
     hint.pointTo = getElementPos(`#patch_3`);
     hint.message = `Remember to check the hardware store for things to buy and sell. [${hint.ok()}]`;
     hint.okButton = 'hint.close';
@@ -213,7 +226,8 @@ const hint = {
 
   itsNight: function () {
     console.log('its night');
-    hint.pointTo = getElementPos(`.close`);
+    hint.debug = `.dialog .close`;
+    hint.pointTo = getElementPos(`.dialog .close`);
     hint.message = `It's night time and too late to open your shop. Go home and get some sleep. [${hint.ok()}]`;
     hint.okButton = 'hint.close';
     hint.group = 'itsNight';
@@ -221,6 +235,7 @@ const hint = {
   },
 
   goHome: function () {
+    hint.debug = `#patch_0`;
     hint.pointTo = getElementPos(`#patch_0`);
     hint.message = `It's getting late. Go home and get some sleep. [${hint.ok()}]`;
     hint.okButton = 'hint.close';
@@ -229,6 +244,7 @@ const hint = {
   },
 
   playerGrow: function (newPos) {
+    hint.debug = `#patch_${newPos}`;
     hint.pointTo = getElementPos(`#patch_${newPos}`);
     hint.message = `Due to perspective you look larger when walking around the field. [${hint.ok()}]`;
     hint.okButton = 'hint.close';
@@ -236,6 +252,7 @@ const hint = {
     hint.render();
   },
   playerShrink: function (newPos) {
+    hint.debug = `#patch_${newPos}`;
     hint.pointTo = getElementPos(`#patch_${newPos}`);
     hint.message = `Due to perspective you look smaller when walking near buildings. [${hint.ok()}]`;
     hint.okButton = 'hint.close';
@@ -244,6 +261,7 @@ const hint = {
   },
 
   chipper: function () {
+    hint.debug = `#machine_chipper`;
     hint.pointTo = getElementPos(`#machine_chipper`);
     let spuds = document.querySelector('.basketSpuds');
     if (spuds) {
@@ -259,6 +277,7 @@ const hint = {
   },
   noSales: function () {
     hint.isItSkipped();
+    hint.debug = `.dialog .okButton`;
     hint.pointTo = getElementPos(`.dialog .okButton`);
     hint.message = `Your machines have no spuds.<p>Open for the night will not make any money but you will refresh your tools.</p> [${hint.ok()}]`;
     hint.okButton = 'hint.howToClose';
@@ -267,6 +286,7 @@ const hint = {
   },
   howToClose: function () {
     hint.isItSkipped();
+    hint.debug = `.dialog .close`;
     hint.pointTo = getElementPos(`.dialog .close`);
     hint.message = `You can also click this to return to the field. [${hint.ok()}]`;
     hint.okButton = 'hint.close';
@@ -275,6 +295,7 @@ const hint = {
   },
   moveSpuds: function () {
     hint.isItSkipped();
+    hint.debug = `.basketSpuds`;
     hint.pointTo = getElementPos(`.basketSpuds`);
     hint.message = `Move all, or one at a time, to the selected machine. [${hint.ok()}]`;
     hint.okButton = 'hint.spudTypes';
@@ -283,6 +304,7 @@ const hint = {
   },
   spudTypes: function () {
     hint.isItSkipped();
+    hint.debug = `.basketSpudDesc`;
     hint.pointTo = getElementPos(`.basketSpudDesc`);
     hint.message = `Use the matching machine to make more money per meal. [${hint.ok()}]`;
     hint.okButton = 'hint.close';
@@ -291,6 +313,7 @@ const hint = {
   },
   openShop: function () {
     hint.isItSkipped();
+    hint.debug = `.dialog .okButton`;
     hint.pointTo = getElementPos(`.dialog .okButton`);
     hint.message = `When your ready, open your shop and sell your potato-based meals. [${hint.ok()}]`;
     hint.okButton = 'hint.close';
@@ -299,6 +322,7 @@ const hint = {
   },
 
   dugItem: function () {
+    hint.debug = `.tool-basket`;
     hint.pointTo = getElementPos(`.tool-basket`);
     hint.message = `You dug up something. Click your basket to see what you found. [${hint.ok()}]`;
     hint.okButton = 'hint.close';
@@ -307,6 +331,7 @@ const hint = {
   },
 
   dugTool: function (item) {
+    hint.debug = `.tool-${item.id}`;
     hint.pointTo = getElementPos(`.tool-${item.id}`);
     hint.message = `You dug up a ${item.name} to add to your collection. [${hint.ok()}]`;
     hint.okButton = 'hint.close';
@@ -315,6 +340,7 @@ const hint = {
   },
 
   dugMachine: function (tool) {
+    hint.debug = `#patch_6`;
     hint.pointTo = getElementPos(`#patch_6`);
     hint.message = `You dug up a ${tool.name}. It's going straight to work. [${hint.ok()}]`;
     hint.okButton = 'hint.close';
@@ -323,6 +349,7 @@ const hint = {
   },
 
   scannerUpgrade: function (tool) {
+    hint.debug = `.tool-scanner`;
     hint.pointTo = getElementPos(`.tool-scanner`);
     hint.message = `You dug up a ${tool.name}. It's going straight to work. [${hint.ok()}]`;
     hint.okButton = 'hint.close';
@@ -330,20 +357,5 @@ const hint = {
     hint.render();
   },
 
-  home: function () {
-    hint.pointTo = getElementPos(`#patch_0`);
-    hint.message = `Your home. Stand in front and press UP to go inside. [${hint.ok()}]`;
-    hint.okButton = 'hint.hardware';
-    hint.group = 'home';
-    hint.render();
-  },
-
-  hardware: function () {
-    hint.pointTo = getElementPos(`#patch_3`);
-    hint.message = `Your local hardware shop. Stand in front and press UP to go inside. [${hint.ok()}]`;
-    hint.okButton = 'hint.close';
-    hint.group = 'hardware';
-    hint.render();
-  },
 };
 

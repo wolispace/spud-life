@@ -118,7 +118,7 @@ function resizeStuff() {
 // new game so generate
 function initGame() {
   // intro to game and initial settings (hints on/off)
-  spuds.sprout(6);
+  spuds.sprout(8);
   fields.fillField(player.currentField);
   fields.rollPatches();
   // gift the first machine first off

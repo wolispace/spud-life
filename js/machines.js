@@ -49,5 +49,19 @@ const machines = {
 
     return hopper;
   },
+
+  // ["chips", "baked potatoes", "curly-fries", "soup"]
+  bestForList: function () {
+    let bestForList = [];
+    Object.entries(hardware.items).forEach(([itemName, item]) => {
+      if (item.type == 'machine') {
+        if (!bestForList.includes(item.initial.makes)) {
+          bestForList.push(item.initial.makes);
+        }
+      }
+    });
+
+    return bestForList;
+  },
 };
 
