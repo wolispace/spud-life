@@ -322,6 +322,14 @@ const hint = {
     hint.render();
   },
 
+  scannerUpgrade: function (tool) {
+    hint.pointTo = getElementPos(`.tool-scanner`);
+    hint.message = `You dug up a ${tool.name}. It's going straight to work. [${hint.ok()}]`;
+    hint.okButton = 'hint.close';
+    hint.group = 'scannerUpgrade';
+    hint.render();
+  },
+
   home: function () {
     hint.pointTo = getElementPos(`#patch_0`);
     hint.message = `Your home. Stand in front and press UP to go inside. [${hint.ok()}]`;

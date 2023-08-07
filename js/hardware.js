@@ -131,6 +131,10 @@ const hardware = {
       rareness: 500,
       upgradeCost: 500,
       maxUpgrades: 4,
+      initial: {
+        uses: 1,
+        maxUses: 1,
+      },
     },
     chipper: {
       type: "machine",

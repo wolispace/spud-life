@@ -29,16 +29,21 @@ const scanner = {
     footer += `<button class="buttonize" onclick="loadSave()"> Transfer </button>`;
     footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
     dialog.okButton = function () { scanner.save(); };
-    dialog.cancelButton = function () { dialog.hide(); };
+    dialog.cancelButton = function () { scanner.close(); };
     dialog.render(title, content, footer);
     scanner.check();
   },
+
   save: function () {
     player.scanState = dialog.isChecked(`#scannerCheckbox`);
     if (dialog.isChecked(`#resetHints`)) {
       player.hinted = {};
     };
     state.save();
+    scanner.close();
+  },
+
+  close: function () {
     dialog.hide();
     character.render();
   },
@@ -50,6 +55,14 @@ const scanner = {
     scannerCheckbox += `<label class="checkboxLabel" for="scannerCheckbox">Enable scanner </label></span>`;
 
     return scannerCheckbox;
+  },
+
+  upgrade: function (item) {
+    console.log('upgrade', player, item);
+    if (player.scanLevel < item.maxUpgrades) {
+      player.scanLevel++;
+      hint.scannerUpgrade(item);
+    }
   },
   // show if spuds in range using current level spud diviner
   check: function () {

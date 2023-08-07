@@ -341,15 +341,18 @@ const fields = {
       if (patch.item) {
         let item = hardware.items[patch.item];
         if (item.type == 'tool') {
-          // upgrade the tool
-          let moreUses = hardware.items[patch.item].initial.maxUses;
-          if (player.tools[patch.item]) {
-            player.tools[patch.item].maxUses += moreUses;
-            player.tools[patch.item].uses += moreUses;
+          if (patch.item == 'scanner') {
+             scanner.upgrade(item);
           } else {
-            player.tools[patch.item] = hardware.items[patch.item].initial;
+            // upgrade the tool
+            let moreUses = hardware.items[patch.item].initial.maxUses;
+            if (player.tools[patch.item]) {
+              player.tools[patch.item].maxUses += moreUses;
+              player.tools[patch.item].uses += moreUses;
+            } else {
+              player.tools[patch.item] = hardware.items[patch.item].initial;
+            }
           }
-
         } else if (item.type == 'machine') {
           if (!player.shop.machines[patch.item]) {
             player.shop.machines[patch.item] = item.initial;
