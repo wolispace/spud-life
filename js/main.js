@@ -55,21 +55,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // hook into keys for movement and digging
 document.addEventListener("keydown", (event) => {
-
+  
   if (hint.visible) {
-      // if any key is pressed and hit is visible then close it
-      hint.confirm();
+    // if any key is pressed and hit is visible then close it
+    hint.confirm();
   } else if (dialog.visible) {
-    if (dialog.title == 'Character creator') {
-      // leave keys as is
+    if (dialog.hasInput.includes(dialog.title)) {
+      return;
+    } else if (dialog.confirmKey.includes(event.code)) {
+      dialog.confirm();
+    } else if (dialog.cancelKey.includes(event.code)) {
+      dialog.cancel();
     } else {
-      if (dialog.confirmKey.includes(event.code)) {
-        dialog.confirm();
-      } else if (dialog.cancelKey.includes(event.code)) {
-        dialog.cancel();
-      } else {
-        // all other keys go to dialog
-      }
+      // all other keys go to dialog
     }
   } else {
     // if the dig key was pressed then dig
