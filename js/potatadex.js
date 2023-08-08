@@ -47,7 +47,7 @@ const potatadex = {
     if (foundItems == maxItems) {
       footer += 'You found all of the things!';
     } else {
-      footer += `You have found ${foundItems} out of ${maxItems} things.`;
+      footer += `You have found ${foundItems} of the ${maxItems} things.`;
     }
     footer += `</span>`;
 
