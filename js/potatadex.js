@@ -1,15 +1,19 @@
 const potatadex = {
   render: function () {
-		if (hint.visible) {
+	  if (hint.visible) {
       return;
     }
+    let maxItems = 0;
+    let foundItems = 0;
 		let style = `style="width:3rem;"`;
-		let content = 'The things you have found...';
+		let content = `<div class="header-msg">The things you have found:</div>`;
 		Object.entries(player.spuds).forEach(([index, spud]) => {
+      maxItems++;
 			let icon = `<div class="unknown" ${style} > ???<br />??? </div>`;
 			let spudName = 'Unknown';
 			let spudDesc = '';
 			if (player.basket[spud.name]) {
+        foundItems++;
 				spudName = spud.fullName;
 				spudDesc = spuds.desc(spud);
 				icon = spuds.render(spud.name, style);
@@ -22,10 +26,12 @@ const potatadex = {
 		});
 
 		Object.entries(hardware.items).forEach(([itemKey, item]) => {
+      maxItems++;
 			let icon = `<div class="unknown" ${style} > ???<br />??? </div>`;
 			let itemName = 'Unknown';
 			let itemDesc = '';
 			if (character.has(itemKey)) {
+        foundItems++;
 				itemName = item.name;
 				itemDesc = item.desc;
 				icon = svg.inline(itemKey)
@@ -37,7 +43,14 @@ const potatadex = {
 			content += `</div>`;
 		});
 
-		let footer = "";
+		let footer = `<span class="footer-msg">`;
+    if (foundItems == maxItems) {
+      footer += 'You found all of the things!';
+    } else {
+      footer += `You have found ${foundItems} out of ${maxItems} things.`;
+    }
+    footer += `</span>`;
+
 
     // player.basket has everything the player has found.
 

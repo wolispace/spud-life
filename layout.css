@@ -228,6 +228,15 @@ h2 {
   background-color:rgb(160, 160, 160);
   text-align: right;
 }
+.header-msg {
+  font-weight: bold;
+  padding: 0.5rem;
+}
+
+.footer-msg {
+  font-weight: bold;
+  padding-right: 1rem;
+}
 
 .button {
   cursor: pointer;
