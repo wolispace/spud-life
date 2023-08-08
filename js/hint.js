@@ -12,7 +12,7 @@ const hint = {
       return;
     }
     hint.visible = true;
-    console.log('hint pointTo', hint.debug, hint.pointTo, getElementPos(hint.debug));
+    //console.log('hint pointTo', hint.debug, hint.pointTo, getElementPos(hint.debug));
 
     // if hint.pointTo is below player.cols / 2 arrow is on left else right
     
@@ -63,7 +63,7 @@ const hint = {
     hint.sprite.style.top = `${posY}px`;
     hint.sprite.style.left = `${posX}px`;
     let patch = getElementPos(`#patch_0`);
-    let hintWidth = patch.width * player.cols / 1.7;
+    let hintWidth = patch.width * player.cols / 1.4;
     hint.sprite.style.width = `${hintWidth}px`;
 
     let arrowObj = document.querySelector('.hintArrowRight');
@@ -82,9 +82,16 @@ const hint = {
     return skipCheckbox;
   },
 
+  hintClicked: function () {
+    let msg = `${hint.debug} ${JSON.stringify(getElementPos(hint.debug))}`;
+
+    console.log(msg);
+  },
+
   confirm: function () {
     eval(`${hint.okButton}()`);
   },
+
   isItSkipped: function () {
     let skipHint = document.querySelector('#hintSkip');
     if (skipHint && skipHint.checked) {
@@ -210,17 +217,17 @@ const hint = {
     hint.debug = `#patch_0`;
     hint.pointTo = getElementPos(`#patch_0`);
     hint.message = `If you have no spuds, go home and bring on the night. [${hint.ok()}]`;
-    hint.okButton = 'hint.toolHardware';
+    hint.okButton = 'hint.toolHW';
     hint.group = 'toolHome';
     hint.render();
   },
 
-  toolHardware: function () {
+  toolHW: function () {
     hint.debug = `#patch_3`;
     hint.pointTo = getElementPos(`#patch_3`);
     hint.message = `Remember to check the hardware store for things to buy and sell. [${hint.ok()}]`;
     hint.okButton = 'hint.close';
-    hint.group = 'toolHardware';
+    hint.group = 'toolHW';
     hint.render();
   },
 
