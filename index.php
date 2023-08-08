@@ -1,6 +1,6 @@
 <?php
 
-$id = $_REQUEST['id'] ?? '';
+$id = cleanString($_REQUEST['id']) ?? '';
 
 // unique code for js loading
 $v = rand(10,99999);
@@ -11,6 +11,12 @@ if (empty($id)) {
   outputGamePage($v);
 } else {
   saveLoad($v, $id);
+}
+
+function cleanString($str) {
+  $str = preg_replace('/[^a-z0-9]/i', '', $str);
+  
+  return substr($str, 0, 15);
 }
 
 function isDevMode() {

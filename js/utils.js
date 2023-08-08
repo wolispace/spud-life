@@ -86,6 +86,8 @@ function randomName (qty = 3) {
   }
 
   return newName;
-
 }
 
+function cleanString (userInput) {
+  return userInput.replace(/[^a-z0-9]/gi, '').slice(0, 14);
+}

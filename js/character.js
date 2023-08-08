@@ -65,7 +65,7 @@ const character = {
   
     save: function () {
       let dialogInput = document.querySelector(`#playerName`);
-      player.name = dialogInput.value;
+      player.name = cleanString(dialogInput.value);
       player.hints = dialog.isChecked(`#showHints`);
       dialog.hide();
       state.save();
