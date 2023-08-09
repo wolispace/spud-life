@@ -87,8 +87,8 @@ const basket = {
     player.wallet = player.wallet + (item.price * itemQty);
     player.basket[itemName] = 0;
     state.save();
-    tools.render();
-    hardware.render();
+    let thisBlock = document.querySelector(`#hardware_${itemName}`);
+    hardware.refresh(thisBlock);
   },
 };
 

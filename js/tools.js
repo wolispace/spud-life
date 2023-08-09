@@ -77,8 +77,8 @@ const tools = {
       player.wallet = player.wallet - item.price;
     }
     state.save();
-    tools.render();
-    hardware.render();
+    let itemButton = document.querySelector(`#hardware_${itemName}`);
+    hardware.refresh(itemButton);
   },
   // start of a new day reset tools to their max uses
   reset: () => {

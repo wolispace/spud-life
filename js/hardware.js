@@ -77,10 +77,13 @@ const hardware = {
     dialog.okButton = function () { hardware.exit(); };
     dialog.render(title, content, footer);
   },
-  // loop through each tool on sale and change style if we can afford it or not
-  refresh: () => {
-    let elements = document.querySelector(".hardware div");
-    elements.each((element) => {});
+  
+  // redisplay the hardware dialog after animating the item away
+  refresh: function (itemDiv) {
+    svg.animate(itemDiv, 'shrink', 0.6, function () {
+      tools.render();
+      hardware.render();
+    });
   },
 
   items: {
