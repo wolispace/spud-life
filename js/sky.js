@@ -122,7 +122,9 @@ const sky = {
     // nightime.. when it ends..wait for customers to finish parade
     let nightShade = document.querySelector(`#nightShade`);
     let starField = document.querySelector(`#starField`);
-    svg.animate(starField, "go-dark", 9);
+    svg.animate(starField, "go-dark", 9, function () {
+      starField.style.opacity = 1;
+    });
 
     svg.animate(nightShade, "go-dark", 8, function () { 
       let nightShade = document.querySelector(`#nightShade`);
@@ -142,7 +144,9 @@ const sky = {
     // daytime.. when it ends.. wake up
     let nightShade = document.querySelector(`#nightShade`);
     let starField = document.querySelector(`#starField`);
-    svg.animate(starField, "go-light", 4);
+    svg.animate(starField, "go-light", 4, function () {
+      starField.style.opacity = 0;
+    });
     svg.animate(nightShade, "go-light", 4, function () { 
       let nightShade = document.querySelector(`#nightShade`);
       nightShade.style.opacity = 0;

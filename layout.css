@@ -305,6 +305,7 @@ button:hover {
   height: 3rem;
   overflow: hidden;
   opacity: 0%;
+  animation-fill-mode: freeze;
 }
 
 .stars {

@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
     initGame();
   } else {
     tools.render();
-    if (player.phase == 'sales' || player.phase ==  'allocate') {
+    if (player.phase == 'sales' || player.phase ==  'allocate' || player.phase ==  'night') {
       player.phase = 'field';
     }
     setPhase(player.phase);
@@ -45,6 +45,8 @@ document.addEventListener("DOMContentLoaded", function () {
   if (!player.daytime) {
     let nightShade = document.querySelector(`#nightShade`);
     nightShade.style.opacity = 1;
+    let starField = document.querySelector(`#starField`);
+    starField.style.opacity = 1;
     sky.lightDoor();
     hint.goHome();
   }
