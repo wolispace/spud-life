@@ -14,7 +14,7 @@ const sky = {
   render: () => {
     // find patch_10
     let patch = getElementPos(`#patch_10`);
-    let width = patch.width * 10;
+    let width = patch.width * player.cols;
 
     let element = document.querySelector(`#cloudLine`);
     element.style.width = `${width}px`;
@@ -23,6 +23,11 @@ const sky = {
     element = document.querySelector(`#nightShade`);
     element.style.width = `${width}px`;
     element.style.height = `${patch.height}px`;
+
+    element = document.querySelector(`#starField`);
+    element.style.width = `${width}px`;
+    element.style.height = `${patch.height}px`;
+
   },
 
   clouds: () => {
@@ -116,7 +121,9 @@ const sky = {
   goDark: (straightToBed) => {
     // nightime.. when it ends..wait for customers to finish parade
     let nightShade = document.querySelector(`#nightShade`);
-     
+    let starField = document.querySelector(`#starField`);
+    svg.animate(starField, "go-dark", 9);
+
     svg.animate(nightShade, "go-dark", 8, function () { 
       let nightShade = document.querySelector(`#nightShade`);
       nightShade.style.opacity = 1;
@@ -134,6 +141,8 @@ const sky = {
   goLight: () => {
     // daytime.. when it ends.. wake up
     let nightShade = document.querySelector(`#nightShade`);
+    let starField = document.querySelector(`#starField`);
+    svg.animate(starField, "go-light", 4);
     svg.animate(nightShade, "go-light", 4, function () { 
       let nightShade = document.querySelector(`#nightShade`);
       nightShade.style.opacity = 0;
@@ -141,15 +150,53 @@ const sky = {
       state.save();
     });
   },
-
+  
   lightDoor: () => {
     let nightShade = document.querySelector(`#house-door`);
     nightShade.style.fill = 'yellow';
     hint.goHome();
   },
+  
   darkDoor: () => {
     let nightShade = document.querySelector(`#house-door`);
     nightShade.style.fill = 'black';
+  },
+  
+  stars: function () {
+    let patch = getElementPos(`#patch_0`);
+    let width = patch.width * player.cols;
+    let height = patch.height;
+    let guts = '';
+    let paths = [];
+
+    let i = 0;
+    
+    while (i++ < 100) {
+      paths.push({
+        s: "",
+        cx: rnd(width),
+        cy: rnd(height),
+        r: rnd(5) / 4,
+      });
+    }
+    
+    paths.forEach((path) => {
+      // path
+      if (path.d) {
+        guts += `<path d="${path.d}" style="${path.s}" />`;
+      }
+      // circle
+      if (path.r) {
+        guts += `<circle cx="${path.cx}" cy="${path.cy}" r="${path.r}"  style="${path.s}" />`;
+      }
+    });
+
+    let svgImg = `<svg class="stars" viewBox="0 0 ${width} ${height}" 
+    xmlns="http://www.w3.org/2000/svg">
+    ${guts}
+    </svg>`;
+    let starField = document.querySelector(`#starField`);
+    starField.innerHTML = svgImg;
   },
 };
 

@@ -40,6 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
   sky.clouds();
   character.render();
   resizeStuff();
+  sky.stars();
 
   if (!player.daytime) {
     let nightShade = document.querySelector(`#nightShade`);
