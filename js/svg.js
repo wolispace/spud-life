@@ -372,7 +372,33 @@ const svg = {
       <path d="m24.646 25.616 42.104 0.63388" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.8;stroke:#000"/>
       <ellipse cx="22.25" cy="44.375" rx="2.5" ry="8.625" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.41343;stroke-width:1.8;stroke:#000"/>
      </svg>
-     `,         
+     `,
+     masher: `<svg id="SVGRoot" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+     <defs>
+      <linearGradient id="linearGradient8" x1="61.502" x2="61.358" y1="24.837" y2="41.277" gradientUnits="userSpaceOnUse">
+       <stop style="stop-color:#1c3341;stop-opacity:.99216" offset="0"/>
+       <stop style="stop-color:#1b1b1b" offset="1"/>
+      </linearGradient>
+     </defs>
+     <path d="m42.681 26.51-27.218 8.327" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:7.7;stroke:#000"/>
+     <path d="m39.775 26.693-24.395 7.2478" style="fill-opacity:.99216;fill:#1c3341;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.21763;stroke-width:2;stroke:#fff"/>
+     <rect x="22.274" y="25.809" width="9.5459" height="45.078" style="fill-opacity:.99216;fill:#1c3341;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.8;stroke:#000"/>
+     <ellipse cx="59.734" cy="71.136" rx="28.638" ry="3.2704" style="fill-opacity:.99216;fill:#1c3341;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.8;stroke:#000"/>
+     <rect x="31.643" y="37.83" width="57.452" height="33.411" style="fill-opacity:.98898;fill:#1d3441"/>
+     <ellipse cx="61.165" cy="37.565" rx="28.638" ry="3.2704" style="fill-opacity:.99216;fill:url(#linearGradient8);stroke-linecap:round;stroke-linejoin:round;stroke-width:1.8;stroke:#000"/>
+     <path d="m31.82 38.714 0.35355 33.411" style="fill-opacity:.99216;fill:#1c3341;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.8;stroke:#000"/>
+     <path d="m89.272 38.361-0.53033 33.057" style="fill-opacity:.99216;fill:#1c3341;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.8;stroke:#000"/>
+     <ellipse transform="rotate(-16.299)" cx="49.635" cy="50.75" rx="15.026" ry="3.2704" style="fill-opacity:.99216;fill:#0f1e24;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.8;stroke:#000"/>
+     <rect transform="rotate(-16.299)" x="34.101" y="27.581" width="30.369" height="23.533" ry="0" style="fill-opacity:.99216;fill:#101f25"/>
+     <ellipse transform="rotate(-16.299)" cx="48.887" cy="26.523" rx="15.026" ry="3.2704" style="fill-opacity:.99216;fill:#1a343e;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.8;stroke:#000"/>
+     <path d="m47.199 39.421-7.2478-22.627" style="fill-opacity:.99216;fill:#0f1e24;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.8;stroke:#000"/>
+     <path d="m76.014 31.289-6.5407-22.981" style="fill-opacity:.99216;fill:#0f1e24;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.8;stroke:#000"/>
+     <path d="m61.165 15.556 6.1872 18.562" style="fill-opacity:.99216;fill:#0f1e24;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.2865;stroke-width:1.8;stroke:#fff"/>
+     <path d="m70.887 43.134v28.638" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.19008;stroke-width:1.8;stroke:#fff"/>
+     <circle cx="27.142" cy="44.129" r="2.9375" style="fill:#dd3d06;stroke-linecap:round;stroke-opacity:.99574;stroke-width:2.5;stroke:#000"/>
+     <circle cx="27.003" cy="32.847" r="2.9375" style="fill:#97dd06;stroke-linecap:round;stroke-opacity:.99574;stroke-width:2.5;stroke:#000"/>
+    </svg>
+     `,      
     scanner: `<svg id="SVGRoot" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
       <path d="m55.508 24.926-36.239 7.7782 27.577 48.967 37.83-10.607z" style="fill:#a9a8a6;stroke-linecap:round;stroke-width:2.5;stroke:#000"/>
       <path d="m18.915 32.704 0.35355 22.804 23.158 42.957 3.8891-16.087" style="fill:#4d4c4b;stroke-linecap:round;stroke-width:2.5;stroke:#000"/>

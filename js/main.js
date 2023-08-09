@@ -116,7 +116,7 @@ function resizeStuff() {
 // new game so generate
 function initGame() {
   // intro to game and initial settings (hints on/off)
-  spuds.sprout(8);
+  spuds.sprout(10);
   fields.fillField(player.currentField);
   fields.rollPatches();
   // gift the first machine first off
@@ -131,11 +131,11 @@ function initGame() {
 function gameIntro () {
   let content = `<div class="dialog-message-content">`;
   content += '<div>You receive a letter from a distance aunt: </div>';
-  content += '<div><i>"I am retiring from the food business and and have no need for these things, see what you can do with them?"</i></div>';
+  content += '<div><i>"I am retiring from the food business and have no need for these things. See what you can do with them"</i></div>';
   content += '<div><b>Welcome to Spud life!</b></div>';
   content += '<div>During the day, you dig for potatoes (spuds).</div>';
   content += '<div>At the end of the day you open your food cart and sell potato meals.</div>';
-  content += '<div>Then you go home to sleep and wake refreshed and ready to find more spuds!</div>';
+  content += '<div>Then you go home to sleep. Wake refreshed and ready to find more spuds!</div>';
   content += '<div>Visit the hardware store to upgrade your equipment and sell any junk you find in your travels.</div>';
   content += '</div>';
 
