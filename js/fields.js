@@ -31,6 +31,9 @@ const fields = {
     character.render();
     tools.render();
     state.save();
+    if (!player.daytime) {
+      sky.lightDoor();
+    }
   },
 
   buyField: () => {
@@ -73,7 +76,9 @@ const fields = {
           block: { type: "control-field--left", qty: 1 },
         };
       }
+      console.log(fieldId, player.fields[fieldId + 1]);
       if (player.fields[fieldId + 1]) {
+        console.log('next field');
         player.fields[fieldId][9] = {
           id: "patch_9",
           block: { type: "control-field--right", qty: 1 },

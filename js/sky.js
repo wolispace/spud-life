@@ -156,9 +156,11 @@ const sky = {
   },
   
   lightDoor: () => {
-    let nightShade = document.querySelector(`#house-door`);
-    nightShade.style.fill = 'yellow';
-    hint.goHome();
+    let houseDoor = document.querySelector(`#house-door`);
+    if (houseDoor) {
+      houseDoor.style.fill = 'yellow';
+      hint.goHome();
+    }
   },
   
   darkDoor: () => {
