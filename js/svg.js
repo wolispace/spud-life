@@ -393,11 +393,15 @@ const svg = {
      <ellipse transform="rotate(-16.299)" cx="48.887" cy="26.523" rx="15.026" ry="3.2704" style="fill-opacity:.99216;fill:#1a343e;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.8;stroke:#000"/>
      <path d="m47.199 39.421-7.2478-22.627" style="fill-opacity:.99216;fill:#0f1e24;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.8;stroke:#000"/>
      <path d="m76.014 31.289-6.5407-22.981" style="fill-opacity:.99216;fill:#0f1e24;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.8;stroke:#000"/>
-     <path d="m61.165 15.556 6.1872 18.562" style="fill-opacity:.99216;fill:#0f1e24;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.2865;stroke-width:1.8;stroke:#fff"/>
-     <path d="m70.887 43.134v28.638" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.19008;stroke-width:1.8;stroke:#fff"/>
+     <path d="m60.458 15.38 5.1265 15.733" style="fill-opacity:.99216;fill:#0f1e24;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.47107;stroke-width:6;stroke:#fff"/>
+     <path d="m71.064 44.371-0.17678 25.809" style="fill:none;stroke-linecap:square;stroke-linejoin:round;stroke-opacity:.36088;stroke-width:7.1;stroke:#fff"/>
      <circle cx="27.142" cy="44.129" r="2.9375" style="fill:#dd3d06;stroke-linecap:round;stroke-opacity:.99574;stroke-width:2.5;stroke:#000"/>
+     <path d="m41.189 17.324s7.1645 0.41284 15.733-2.6516c7.3481-2.628 11.449-5.5632 10.96-6.5407" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.53444;stroke-width:2;stroke:#fff"/>
+     <path d="m24.218 28.107h6.1872l0.17678 9.3692" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.48485;stroke-width:2;stroke:#fff"/>
      <circle cx="27.003" cy="32.847" r="2.9375" style="fill:#97dd06;stroke-linecap:round;stroke-opacity:.99574;stroke-width:2.5;stroke:#000"/>
-    </svg>
+     <path d="m35.532 42.426-0.35355 28.107" style="fill:none;stroke-linecap:square;stroke-linejoin:round;stroke-opacity:.4022;stroke-width:5.2;stroke:#000"/>
+     <path d="m36.062 40.128s15.372 2.5297 28.461 2.1213c15.906-0.4963 22.451-2.6516 22.451-2.6516" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.53444;stroke-width:2;stroke:#fff"/>
+    </svg>    
      `,      
     scanner: `<svg id="SVGRoot" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
       <path d="m55.508 24.926-36.239 7.7782 27.577 48.967 37.83-10.607z" style="fill:#a9a8a6;stroke-linecap:round;stroke-width:2.5;stroke:#000"/>
