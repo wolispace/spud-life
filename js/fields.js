@@ -69,21 +69,6 @@ const fields = {
           };
         });
       }
-      // first row 0 and 10 may contain links to other fields
-      if (player.fields[fieldId - 1]) {
-        player.fields[fieldId][0] = {
-          id: "patch_0",
-          block: { type: "control-field--left", qty: 1 },
-        };
-      }
-      console.log(fieldId, player.fields[fieldId + 1]);
-      if (player.fields[fieldId + 1]) {
-        console.log('next field');
-        player.fields[fieldId][9] = {
-          id: "patch_9",
-          block: { type: "control-field--right", qty: 1 },
-        };
-      }
 
       // skip the first row
       i = player.cols;
@@ -190,12 +175,29 @@ const fields = {
 
   // add an svg to each patch
   renderField: () => {
+    fields.addSigns(player.currentField);
     player.fields[player.currentField].forEach((patch, index) => {
       patch = patch ?? {};
       patch.id = `patch_${index}`;
       fields.renderPatch(patch, index);
     });
     fields.renderGrassLine();
+  },
+
+  addSigns: function (fieldId) {
+    // first row 0 and 10 may contain links to other fields
+    if (player.fields[fieldId - 1]) {
+      player.fields[fieldId][0] = {
+        id: "patch_0",
+        block: { type: "control-field--left", qty: 1 },
+      };
+    }
+    if (player.fields[fieldId + 1]) {
+      player.fields[fieldId][9] = {
+        id: "patch_9",
+        block: { type: "control-field--right", qty: 1 },
+      };
+    }
   },
 
   renderGrassLine: () => {
