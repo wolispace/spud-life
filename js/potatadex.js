@@ -12,13 +12,12 @@ const potatadex = {
 			let icon = `<div class="unknown" ${style} > ???<br />??? </div>`;
 			let spudName = 'Unknown';
 			let spudDesc = '';
-			if (player.basket[spud.name]) {
+			if (player.basket[spud.name] > -1) {
         foundItems++;
 				spudName = spud.fullName;
 				spudDesc = spuds.desc(spud);
 				icon = spuds.render(spud.name, style);
 			}
-
 			content += `<div class="hardware-button buttonize">`;
 			content += ` <div class="hardware-button-icon">${icon}</div>`;
 			content += ` <div class="hardware-button-desc"><strong>${spudName}. </strong> ${spudDesc}</div>`;
