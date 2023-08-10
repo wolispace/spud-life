@@ -1,6 +1,7 @@
 <?php
 
-$id = cleanString($_REQUEST['id']) ?? '';
+$id = $_REQUEST['id'] ?? '';
+$id = cleanString($id);
 
 // unique code for js loading
 $v = rand(10,99999);
