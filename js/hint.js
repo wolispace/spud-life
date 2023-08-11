@@ -93,9 +93,7 @@ const hint = {
 
   isItSkipped: function () {
     let skipHint = document.querySelector('#hintSkip');
-    console.trace(skipHint);
     if (skipHint && skipHint.checked) {
-      console.log(skipHint.dataset.hint, hint.group);
       player.hinted[skipHint.dataset.hint] = true;
       state.save();
       hint.hide();
