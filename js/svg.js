@@ -402,7 +402,17 @@ const svg = {
      <path d="m35.532 42.426-0.35355 28.107" style="fill:none;stroke-linecap:square;stroke-linejoin:round;stroke-opacity:.4022;stroke-width:5.2;stroke:#000"/>
      <path d="m36.062 40.128s15.372 2.5297 28.461 2.1213c15.906-0.4963 22.451-2.6516 22.451-2.6516" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.53444;stroke-width:2;stroke:#fff"/>
     </svg>    
-     `,      
+     `,
+    "pet-standing": `
+    <svg id="SVGRoot" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <path d="m25.456 66.645s2.8259-2.0175 18.562-2.8284c7.9982-0.41219 12.021 0.35355 12.905 6.364-1.229 9.6071-2.2598 8.3601-14.672 8.1317-13.608-0.4735-18.829 3.0873-19.799-6.5407-0.62056-6.1585 1.591-5.3033 1.591-5.3033" style="stroke-linecap:round;stroke-linejoin:round;stroke-width:4.8;stroke:#000"/>
+    <path d="m24.749 77.251-1.2374 20.506" style="stroke-linecap:round;stroke-linejoin:round;stroke-width:4.8;stroke:#000"/>
+    <path d="m56.038 75.837 3.3588 21.92" style="stroke-linecap:round;stroke-linejoin:round;stroke-width:4.8;stroke:#000"/>
+    <path d="m49.144 64.877 5.6569-18.562s5.1265-4.773 10.607-0.17678c5.4801 4.5962 10.43 7.7782 9.0156 12.198-1.4142 4.4194-6.5407 3.3588-10.43 1.9445-3.8891-1.4142-7.2478 10.607-7.2478 10.607" style="stroke-width:0"/>
+    <path d="m27.4 77.782s-8.1317-6.7175-8.1317-13.258c0-6.5407 0.35355-7.2478 1.7678-12.551 1.1921-4.4705-0.17678 6.7175 1.2374 10.783 1.4142 4.0659 9.3692 9.5459 9.3692 9.5459" style="stroke-width:0"/>
+    <ellipse cx="63.551" cy="51.442" rx="1.149" ry="1.0607" style="fill:#fff;stroke-width:0"/>
+    </svg>
+    `,     
     scanner: `<svg id="SVGRoot" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
       <path d="m55.508 24.926-36.239 7.7782 27.577 48.967 37.83-10.607z" style="fill:#a9a8a6;stroke-linecap:round;stroke-width:2.5;stroke:#000"/>
       <path d="m18.915 32.704 0.35355 22.804 23.158 42.957 3.8891-16.087" style="fill:#4d4c4b;stroke-linecap:round;stroke-width:2.5;stroke:#000"/>

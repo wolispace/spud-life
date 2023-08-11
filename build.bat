@@ -1,9 +1,14 @@
+cd js
+type utils.js
+cd ..
+
 
 type "js\utils.js"      > _js_files.js
 type "js\svg.js"       >> _js_files.js
 type "js\scanner.js"   >> _js_files.js
 type "js\sky.js"       >> _js_files.js
 type "js\character.js" >> _js_files.js
+type "js\pet.js"       >> _js_files.js
 type "js\player.js"    >> _js_files.js
 type "js\customers.js" >> _js_files.js
 type "js\basket.js"    >> _js_files.js

@@ -51,6 +51,7 @@ function getScripts($v) {
     <script src='js/sky.js?{$v}'></script>
     <script src='js/character.js?{$v}'></script>
     <script src='js/player.js?{$v}'></script>
+    <script src='js/pet.js?{$v}'></script>
     <script src='js/customers.js?{$v}'></script>
     <script src='js/basket.js?{$v}'></script>
     <script src='js/potatadex.js?{$v}'></script>
@@ -97,6 +98,7 @@ function outputGamePage($v, $id = '') {
       <div id='customerLine'></div>
     </div>
     <div id='itemSprite'></div>
+    <div id='petSprite'></div>
     <div id='playerSprite'></div>
     <div id='hintSprite' onclick='hint.hintClicked()'></div>
     <div id='void'></div>    

@@ -93,6 +93,7 @@ window.addEventListener("resize", (event) => {
 function initModules() {
   hint.sprite = document.querySelector('#hintSprite');
   dialog.sprite = document.querySelector(`.dialog`);
+  pet.sprite = document.querySelector('#petSprite');
   // set the grid column
   let wholeField = document.querySelector(`.field`);
   wholeField.style.gridTemplateColumns = `1fr `.repeat(player.cols);
