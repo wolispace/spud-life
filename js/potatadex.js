@@ -59,5 +59,5 @@ const potatadex = {
     dialog.okButton = function () { dialog.hide(); };
     dialog.render("Potatádex", content, footer);
 	},
-}
+};
 

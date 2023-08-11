@@ -148,6 +148,5 @@ const scanner = {
       return true;
     }
   },
-
 };
 

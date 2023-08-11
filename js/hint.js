@@ -9,11 +9,10 @@ const hint = {
 
   render: function () {
     if (player.hinted[hint.group] || !player.hints) {
+      hint.hide();
       return;
     }
     hint.visible = true;
-    //console.log('hint pointTo', hint.debug, hint.pointTo, getElementPos(hint.debug));
-
     // if hint.pointTo is below player.cols / 2 arrow is on left else right
     
     // point to the middle of the element
@@ -33,7 +32,7 @@ const hint = {
     let arrowSvg = svg.render('arrow', 1, style);
     let skipCheckbox = hint.buildSkip();
     let buttonStart = `<div class="hintButtons">${skipCheckbox}`;
-    buttonStart += ` <button class="button buttonize" onclick="${hint.okButton}()"> `;
+    buttonStart += ` <button class="button buttonize" onclick="hint.confirm()"> `;
     let buttonEnd = `</button></div>`;
     hint.message = hint.message.replace('[', buttonStart);
     hint.message = hint.message.replace(']', buttonEnd);
@@ -85,7 +84,7 @@ const hint = {
   hintClicked: function () {
     let msg = `${hint.debug} ${JSON.stringify(getElementPos(hint.debug))}`;
 
-    console.log(msg);
+    //console.log(msg);
   },
 
   confirm: function () {
@@ -232,7 +231,6 @@ const hint = {
   },
 
   itsNight: function () {
-    console.log('its night');
     hint.debug = `.dialog .close`;
     hint.pointTo = getElementPos(`.dialog .close`);
     hint.message = `It's night time and too late to open your shop. Go home and get some sleep. [${hint.ok()}]`;
