@@ -93,14 +93,16 @@ const hint = {
 
   isItSkipped: function () {
     let skipHint = document.querySelector('#hintSkip');
+    console.trace(skipHint);
     if (skipHint && skipHint.checked) {
+      console.log(skipHint.dataset.hint, hint.group);
       player.hinted[skipHint.dataset.hint] = true;
       state.save();
       hint.hide();
     }
   },
   close: function () {
-    // if they dont want to see this again, then mark it as hinted
+    // if they don't want to see this again, then mark it as hinted
     hint.isItSkipped();
     hint.hide();
   },
@@ -149,6 +151,7 @@ const hint = {
   },
 
   player: function () {
+    hint.isItSkipped();
     hint.debug = `#patch_0`;
     hint.pointTo = getElementPos(`#patch_0`);
     hint.message = `This is you. In front of your house. [${hint.ok()}..]`;
@@ -186,6 +189,7 @@ const hint = {
   },   
 
   noDigHome: function () {
+    hint.isItSkipped();
     hint.debug = `#patch_${player.pos}`;
     hint.pointTo = getElementPos(`#patch_${player.pos}`);
     hint.message = `You can't dig on the top row. Move down onto an empty patch and dig there. [${hint.ok()}]`;
@@ -195,6 +199,7 @@ const hint = {
   },
 
   toolUsedUp: function (toolName) {
+    hint.isItSkipped();
     hint.debug = `.tool-${toolName}`;
     hint.pointTo = getElementPos(`.tool-${toolName}`);
     hint.message = `Your ${toolName} is exhausted. Tomorrow morning it will be refreshed and you can use it again. [${hint.ok()}]`;
@@ -204,6 +209,7 @@ const hint = {
   },
 
   toolCart: function () {
+    hint.isItSkipped();
     hint.debug = `#patch_6`;
     hint.pointTo = getElementPos(`#patch_6`);
     hint.message = `It's time to load your machines with spuds and open for the night. [${hint.ok()}]`;
@@ -213,6 +219,7 @@ const hint = {
   },
 
   toolHome: function () {
+    hint.isItSkipped();
     hint.debug = `#patch_0`;
     hint.pointTo = getElementPos(`#patch_0`);
     hint.message = `If you have no spuds, go home and bring on the night. [${hint.ok()}]`;
@@ -222,6 +229,7 @@ const hint = {
   },
 
   toolHW: function () {
+    hint.isItSkipped();
     hint.debug = `#patch_3`;
     hint.pointTo = getElementPos(`#patch_3`);
     hint.message = `Remember to check the hardware store for things to buy and sell. [${hint.ok()}]`;
@@ -231,6 +239,7 @@ const hint = {
   },
 
   itsNight: function () {
+    hint.isItSkipped();
     hint.debug = `.dialog .close`;
     hint.pointTo = getElementPos(`.dialog .close`);
     hint.message = `It's night time and too late to open your shop. Go home and get some sleep. [${hint.ok()}]`;
@@ -240,6 +249,7 @@ const hint = {
   },
 
   goHome: function () {
+    hint.isItSkipped();
     hint.debug = `#patch_0`;
     hint.pointTo = getElementPos(`#patch_0`);
     hint.message = `It's getting late. Go home and get some sleep. [${hint.ok()}]`;
@@ -249,6 +259,7 @@ const hint = {
   },
 
   playerGrow: function (newPos) {
+    hint.isItSkipped();
     hint.debug = `#patch_${newPos}`;
     hint.pointTo = getElementPos(`#patch_${newPos}`);
     hint.message = `Due to perspective you look larger when walking around the field. [${hint.ok()}]`;
@@ -257,6 +268,7 @@ const hint = {
     hint.render();
   },
   playerShrink: function (newPos) {
+    hint.isItSkipped();
     hint.debug = `#patch_${newPos}`;
     hint.pointTo = getElementPos(`#patch_${newPos}`);
     hint.message = `Due to perspective you look smaller when walking near buildings. [${hint.ok()}]`;
@@ -266,6 +278,7 @@ const hint = {
   },
 
   chipper: function () {
+    hint.isItSkipped();
     hint.debug = `#machine_chipper`;
     hint.pointTo = getElementPos(`#machine_chipper`);
     let spuds = document.querySelector('.basketSpuds');
@@ -327,6 +340,7 @@ const hint = {
   },
 
   dugItem: function () {
+    hint.isItSkipped();
     hint.debug = `.tool-basket`;
     hint.pointTo = getElementPos(`.tool-basket`);
     hint.message = `You dug up something. Click your basket to see what you found. [${hint.ok()}]`;
@@ -336,6 +350,7 @@ const hint = {
   },
 
   dugTool: function (item) {
+    hint.isItSkipped();
     hint.debug = `.tool-${item.id}`;
     hint.pointTo = getElementPos(`.tool-${item.id}`);
     hint.message = `You dug up a ${item.name} to add to your collection. [${hint.ok()}]`;
@@ -345,6 +360,7 @@ const hint = {
   },
 
   dugMachine: function (tool) {
+    hint.isItSkipped();
     hint.debug = `#patch_6`;
     hint.pointTo = getElementPos(`#patch_6`);
     hint.message = `You dug up a ${tool.name}. It's going straight to work. [${hint.ok()}]`;
@@ -354,6 +370,7 @@ const hint = {
   },
 
   scannerUpgrade: function (tool) {
+    hint.isItSkipped();
     hint.debug = `.tool-scanner`;
     hint.pointTo = getElementPos(`.tool-scanner`);
     hint.message = `You dug up a ${tool.name}. It's going straight to work. [${hint.ok()}]`;
