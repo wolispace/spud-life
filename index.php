@@ -100,7 +100,7 @@ function outputGamePage($v, $id = '') {
     <div id='itemSprite'></div>
     <div id='petSprite'></div>
     <div id='playerSprite'></div>
-    <div id='hintSprite' onclick='hint.hintClicked()'></div>
+    <div id='hintSprite'></div>
     <div id='void'></div>    
     <div class='dialog'>
       <div class='header'>
