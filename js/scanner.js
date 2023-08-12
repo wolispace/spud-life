@@ -24,7 +24,7 @@ const scanner = {
     content += `<div><div>`;
     let title = "Scanner";
     let footer = '';
-    footer += `<button class="buttonize" onclick="character.reset()"> Reset! </button>`;
+    footer += `<button class="buttonize" onclick="character.reset()"> New game </button>`;
     footer += `<button class="buttonize" onclick="aboutGame()"> About </button>`;
     footer += `<button class="buttonize" onclick="loadSave()"> Transfer </button>`;
     footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;

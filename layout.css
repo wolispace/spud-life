@@ -337,6 +337,7 @@ button:hover {
   width: 120%;
   height: 1.2vh;
   z-index: 3;
+  overflow:hidden;
 }
 
 #grassLine {
