@@ -7,6 +7,7 @@ let player = {
   hinted: {},
   phase: "field",
   daytime: true,
+  days: 0,
   cols: cols,
   rows: rows,
   basket: {},

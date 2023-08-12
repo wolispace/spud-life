@@ -330,5 +330,13 @@ const hint = {
     hint.render();
   },
 
+  petIntro: function () {
+    hint.pointAt = `#petSprite`;
+    hint.message = `Oh look.. a small black fluffy animal. I think its a stray [${hint.ok()}]`;
+    hint.okButton = 'hint.close';
+    hint.group = 'petIntro';
+    hint.render();
+  },
+
 };
 

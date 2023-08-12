@@ -20,6 +20,9 @@ if (player && player.version && player.version != version) {
 }
 
 player.version = version;
+if (!player.days) {
+  player.days = 1;
+}
 
 document.addEventListener("DOMContentLoaded", function () {
   initModules();
@@ -41,6 +44,9 @@ document.addEventListener("DOMContentLoaded", function () {
   character.render();
   resizeStuff();
   sky.stars();
+  if (player.pet && player.pet.pos > -1) {
+    pet.start();
+  }
 
   if (!player.daytime) {
     let nightShade = document.querySelector(`#nightShade`);

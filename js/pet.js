@@ -4,9 +4,17 @@ const pet = {
   keyRight: 'KeyD',
   keyUp: 'KeyW',
   keyDown: 'KeyS',
+  dayDelay: 3,
+  initState: {
+    pos: 9,
+    state: 'standing',
+  },
+  introDelay: 5000,
+  moveTimer: 5000,
+  timer: null,
+
 
   render: function () {
-    console.trace();
     if (!player.pet || player.pet.pos < 0) {
       player.pet = {
         pos: player.cols-1, 
@@ -36,7 +44,26 @@ const pet = {
     pet.sprite.style.height = height;
   },
 
+  start: function () {
+    pet.timer = setInterval( pet.move, pet.moveTimer);
+  },
+
+  stop: function () {
+    clearInterval(pet.timer); 
+  },
+
+  move: function () {
+    if (rnd(2) == 1) {
+      pet.moveLeft();
+    } else {
+      pet.moveRight();
+    }
+  },
+
   moveLeft: function () {
+    pet.animateOff();
+    pet.sprite.style.transform = 'scale(-1,1)';
+    pet.animateOn();
     if (player.pet.pos % player.cols > 0) {
       player.pet.pos--;
     }
@@ -45,6 +72,9 @@ const pet = {
   },
 
   moveRight: function () {
+    pet.animateOff();
+    pet.sprite.style.transform = 'scale(1,1)';
+    pet.animateOn();
     if ((player.pet.pos % player.cols) - (player.cols - 1)) {
       player.pet.pos++;
     }
@@ -67,6 +97,14 @@ const pet = {
     state.save();
     pet.render();
   },
+   animateOn: function() {
+    pet.sprite.style.transition = "2s ease-in-out";
+  },
+  
+   animateOff: function() {
+    pet.sprite.style.transition = "";
+  },
+  
 
   show: function () {
     svg.showElement("#petSprite");
@@ -77,5 +115,21 @@ const pet = {
   hide: function () {
     svg.hideElement("#petSprite");
   },
+
+  check: function () {
+    if (player.days > pet.dayDelay) {
+      if (!player.pet) {
+        player.pet = pet.initState;
+        setTimeout( () => {pet.intro()}, pet.introDelay);
+      }
+    }
+  },
+
+  intro: function () {
+    pet.render();
+    hint.petIntro();
+  }
+
+
 };
 
