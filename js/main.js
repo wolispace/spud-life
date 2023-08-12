@@ -58,7 +58,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // hook into keys for movement and digging
 document.addEventListener("keydown", (event) => {
-  
   if (hint.visible) {
     // if any key is pressed and hit is visible then close it
     hint.confirm();
@@ -82,7 +81,20 @@ document.addEventListener("keydown", (event) => {
       controls.click(
         "patch_" + controls[event.code]
       );
-    }    
+    }
+
+    if (pet.keyLeft == event.code) {
+      pet.moveLeft();
+    }
+    if (pet.keyRight == event.code) {
+      pet.moveRight();
+    }
+    if (pet.keyUp == event.code) {
+      pet.moveUp();
+    }
+    if (pet.keyDown == event.code) {
+      pet.moveDown();
+    }
   }
 });
 
