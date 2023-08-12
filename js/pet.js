@@ -10,7 +10,7 @@ const pet = {
     state: 'standing',
   },
   introDelay: 5000,
-  moveTimer: 5000,
+  moveTimer: 3000,
   timer: null,
 
 
@@ -61,9 +61,8 @@ const pet = {
   },
 
   moveLeft: function () {
-    pet.animateOff();
-    pet.sprite.style.transform = 'scale(-1,1)';
-    pet.animateOn();
+    let petSvg = document.querySelector(`#petSprite svg`);
+    petSvg.style.transform = 'scale(-1,1)';
     if (player.pet.pos % player.cols > 0) {
       player.pet.pos--;
     }
@@ -72,9 +71,8 @@ const pet = {
   },
 
   moveRight: function () {
-    pet.animateOff();
-    pet.sprite.style.transform = 'scale(1,1)';
-    pet.animateOn();
+    let petSvg = document.querySelector(`#petSprite svg`);
+    petSvg.style.transform = 'scale(1,1)';
     if ((player.pet.pos % player.cols) - (player.cols - 1)) {
       player.pet.pos++;
     }
