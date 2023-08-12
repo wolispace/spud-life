@@ -19,7 +19,7 @@ const shop = {
     dialog.okButton = function () {  shop.exit(); };
     if (player.daytime) {
       footer += `<button class="buttonize okButton" onclick="dialog.confirm()"> Open shop </button>`;
-      dialog.okButton = function () { spuds.sell(); };
+      dialog.okButton = function () { shop.checkMachines() };
     }
     dialog.cancelButton = function () { shop.exit(); };
     dialog.render(title, content, footer);
@@ -29,6 +29,18 @@ const shop = {
     hint.chipper();
     if (!player.daytime) {
       hint.itsNight();
+    }
+  },
+  checkMachines: function () {
+    // if no machine has any spuds..
+    if (machines.areEmpty()) {
+      if (confirm("You have no spuds in your machines.\n\nClick 'Ok' to open your shop and sell nothing today?")) {
+        spuds.sell();
+      } else {
+        shop.render();
+      }
+    } else {
+      spuds.sell();
     }
   }
 };

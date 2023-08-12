@@ -50,6 +50,19 @@ const machines = {
     return hopper;
   },
 
+  areEmpty: function () {
+    let areEmpty = true;
+    Object.entries(player.shop.machines).forEach(([machineName, machine]) => {
+      console.log(Object.keys(machine.hopper).length, machine);
+      if (Object.keys(machine.hopper).length > 0) {
+        console.log('not empty');
+        areEmpty = false;
+      }
+    });
+
+    return areEmpty;
+  },
+
   // ["chips", "baked potatoes", "curly-fries", "soup"]
   bestForList: function () {
     let bestForList = [];
