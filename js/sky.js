@@ -133,8 +133,6 @@ const sky = {
       player.daytime = false;
       if (straightToBed) {
         home.enter();
-      } else {
-        character.render();
       }
       state.save();
     });
