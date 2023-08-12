@@ -152,6 +152,12 @@ const spuds = {
     return spud;
   },
 
+  // select a random spud based on rareness
+  select: function () {
+    let newSpud = spuds.byRareness(player.currentField + 1);
+    return { name: newSpud.name, qty: rnd(3) + 1 };
+  },
+
   desc: function (spud) {
     return `These are ${spuds.bits.rareNames[spud.rareness]} variety potatoes that are best for ${spud.bestFor}`;
   },

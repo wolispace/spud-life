@@ -88,21 +88,18 @@ const fields = {
               break;
           }
           if (patch !== {}) {
-            let newSpud = spuds.byRareness(player.currentField + 1);
-            patch.spud = { name: newSpud.name, qty: rnd(3) + 1 };
+            patch.spud = spuds.select();
           }
         }
 
         // if no spud then randomly add another item..
         if (!patch.spud) {
-          Object.entries(items).forEach(([itemName, item]) => {
-            if (!patch.item)  {
-              if (rnd(item.rareness) == 0) {
-                patch.item = itemName;
-              }
-            }
-          });
+          let itemName = hardware.select();
+          if (!patch.item && itemName != '') {
+            patch.item = itemName;
+          }
         }
+
         if (!player.fields[fieldId]) {
           player.fields[fieldId] = [];
         }
@@ -285,7 +282,7 @@ const fields = {
       let i = player.cols;
       while (i < (player.cols * player.rows)) {
         let patch = player.fields[player.currentField][i];
-        if (!patch.spud || patch.spud.qty == 0) {
+        if (!patch.spud || patch.spud.qty == 0 || !patch.item) {
           // sow seed and set i to 99
           if (patch.block && patch.block.type.indexOf("control") > -1) {
             // skip control keys..
@@ -301,18 +298,16 @@ const fields = {
       while (player.sowSeeds > 0) {
         player.sowSeeds--;
         let index = blankPatches[rnd(blankPatches.length)];
-        let patch = {};
-        // no new blockers right now so its a scanner game
-        // switch (rnd(3)) {
-        //   case 0:
-        //     patch.block = { type: "rock", qty: rnd(5) + 1 };
-        //     break;
-        //   case 1:
-        //     patch.block = { type: "log", qty: rnd(5) + 1 };
-        //     break;
-        // }
-        let newSpud = player.spuds[rnd(player.spuds.length)];
-        patch.spud = { name: newSpud.name, qty: rnd(3) + 1 };
+        let patch = {id: `patch_${index}`};
+        if (rnd(2) > 0) {
+          patch.spud = spuds.select();
+        } else {
+          let itemName = hardware.select();
+          if (itemName != '') {
+            patch.item = itemName;
+          }
+        }
+
         player.fields[player.currentField][index] = patch;
       }
     }

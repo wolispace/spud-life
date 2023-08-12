@@ -15,7 +15,7 @@ let player = {
   scanLevel: 1,
   scanState: true,
   pos: 0,
-  spudRegen: -5,
+  spudRegen: -1,
   sowSeeds: 0,
   grassQty: 7,
   tools: {

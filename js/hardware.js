@@ -86,6 +86,19 @@ const hardware = {
     });
   },
 
+  // select a random item based on rareness
+  select: function () {
+   let selectName = '';
+    Object.entries(hardware.items).forEach(([itemName, item]) => {
+      if (rnd(item.rareness) == 0) {
+        console.log('added', itemName);
+        selectName = itemName;
+      }
+    });
+
+    return selectName;
+  },
+
   items: {
     spade: {
       type: "tool",
@@ -262,7 +275,7 @@ const hardware = {
       name: "An old bone",
       desc: "I think a dog buried it",
       price: 5,
-      rareness: 20,        
+      rareness: 10,        
     },
     gold: {
       type: "item",

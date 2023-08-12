@@ -52,6 +52,13 @@ const pet = {
     clearInterval(pet.timer); 
   },
 
+  // return true is the player and the pet are on the same patch
+  player: function () {
+    if (player.pet) {
+      return (player.pos == player.pet.pos);
+    }
+  },
+
   move: function () {
     if (rnd(2) == 1) {
       pet.moveLeft();
