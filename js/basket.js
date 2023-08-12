@@ -73,6 +73,8 @@ const basket = {
     });
 
     let footer = "";
+
+    footer += `<button class="buttonize" onclick="pet.render(); dialog.hide();"> TEST pet </button>`;
     footer += `<button class="buttonize" onclick="potatadex.render()"> Potatádex </button>`;
     footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
     dialog.cancelButton = function () { dialog.hide(); };
