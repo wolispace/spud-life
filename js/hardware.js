@@ -91,7 +91,6 @@ const hardware = {
    let selectName = '';
     Object.entries(hardware.items).forEach(([itemName, item]) => {
       if (rnd(item.rareness) == 0) {
-        console.log('added', itemName);
         selectName = itemName;
       }
     });

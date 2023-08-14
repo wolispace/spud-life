@@ -58,7 +58,6 @@ const scanner = {
   },
 
   upgrade: function (item) {
-    console.log('upgrade', player, item);
     if (player.scanLevel < item.maxUpgrades) {
       player.scanLevel++;
       hint.scannerUpgrade(item);

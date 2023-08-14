@@ -167,6 +167,7 @@ const pet = {
   intro: function () {
     pet.render();
     hint.petIntro();
+    pet.start();
   },
 
   interact: function () {

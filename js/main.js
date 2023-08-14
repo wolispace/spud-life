@@ -265,9 +265,7 @@ function handleVersionChange(oldVersion, newVersion) {
   if (version == '2.0.0-beta') {
     player.basket = player.sack;
     delete player.sack;
-    console.log('updated player sack', player);
   } else {
-    console.log(player);
     if (!confirm('Your game was saved within an older version. It might not be stable. Do you want to continue anyhow?')) {
       state.clear(true);
     }
