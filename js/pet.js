@@ -171,17 +171,28 @@ const pet = {
 
   interact: function () {
     pet.interacting = true;
-    let content = '';
-    content += `<div>pet interaction</div>`;
+    player.pet.name = player.pet.name ?? '';
+    let title = 'The stray'; 
+    let content = `<div class="dialog-message-content">`;
+    if (player.pet.name == '') {
+      content += `<div>${svg.inline('pet-sitting')}Befriend this stray by naming it:</div>`;
+    } else {
+      title = `Your friend ${player.pet.name}`;
+      content += `<div>You can rename your furry friend if you like.</div>`;
+    }
+    content += pet.editName();
 
     let footer = "";
     footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
     dialog.cancelButton = pet.interactCancel;
     dialog.okButton = pet.interactOk;
-    dialog.render("Pet", content, footer);
+    dialog.render(title, content, footer);
   },
 
   interactOk: function () {
+    let dialogInput = document.querySelector(`#petName`);
+    player.pet.name = cleanString(dialogInput.value);
+    state.save();
     pet.interactEnd();
   },
 
@@ -195,7 +206,9 @@ const pet = {
     dialog.hide();
   },
 
-
+  editName: function () {
+    return `<div><input type="text" id="petName" value="${player.pet.name}" /></div>`;
+  },
 
 
 };
