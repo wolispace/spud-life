@@ -45,7 +45,6 @@ document.addEventListener("DOMContentLoaded", function () {
   resizeStuff();
   sky.stars();
   if (player.pet && player.pet.pos > -1) {
-    pet.render();
     pet.start();
   }
 

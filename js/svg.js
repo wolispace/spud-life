@@ -412,7 +412,20 @@ const svg = {
     <path d="m27.4 77.782s-8.1317-6.7175-8.1317-13.258c0-6.5407 0.35355-7.2478 1.7678-12.551 1.1921-4.4705-0.17678 6.7175 1.2374 10.783 1.4142 4.0659 9.3692 9.5459 9.3692 9.5459" style="stroke-width:0"/>
     <ellipse cx="63.551" cy="51.442" rx="1.149" ry="1.0607" style="fill:#fff;stroke-width:0"/>
     </svg>
-    `,     
+    `,    
+    "pet-sitting": `<svg id="SVGRoot" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <path d="m47.525 94.782s-8.1317-6.7175-8.1317-13.258c0-6.5407 0.35355-7.2478 1.7678-12.551 1.1921-4.4705-0.17678 6.7175 1.2374 10.783 1.4142 4.0659 9.3692 9.5459 9.3692 9.5459" style="stroke-width:0"/>
+    <ellipse cx="53.026" cy="53.262" rx="6.0104" ry="10.076" style="stroke-width:0"/>
+    <ellipse cx="45.875" cy="89.534" rx="6.0104" ry="10.076" style="stroke-width:0"/>
+    <ellipse cx="58.724" cy="89.36" rx="6.0104" ry="10.076" style="stroke-width:0"/>
+    <ellipse cx="55.353" cy="51.494" rx="1.149" ry="1.0607" style="fill-opacity:.5427;fill:#fff;stroke-width:0"/>
+    <ellipse cx="50.551" cy="51.405" rx="1.149" ry="1.0607" style="fill:#8a8a8a;stroke-width:0"/>
+    <ellipse cx="52.761" cy="77.48" rx="8.3969" ry="21.567" style="stroke-width:0"/>
+    <path d="m56.208 46.721s0.97227-5.3917 3.2704-2.5633 2.1213 4.9497 2.1213 4.9497h-3.9775" style="fill-opacity:.95041;stroke-linecap:round;stroke-linejoin:round;stroke:#000"/>
+    <path d="m50.007 46.713s-0.97227-5.3917-3.2704-2.5633-2.1213 4.9497-2.1213 4.9497h3.9775" style="fill-opacity:.95041;stroke-linecap:round;stroke-linejoin:round;stroke:#000"/>
+    <path transform="translate(-14.503 13.222)" d="m67.711 43.289-0.67839-1.1564 1.3407-0.0093z" style="fill:#8a8a8a;stroke-linecap:round;stroke-linejoin:round;stroke:#8a8a8a"/>
+    <path d="M 39.25,97.75 65,98.125" style="fill-opacity:.15152;stroke-linecap:round;stroke-linejoin:round;stroke-width:3.5;stroke:#010101"/>
+   </svg>`, 
     scanner: `<svg id="SVGRoot" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
       <path d="m55.508 24.926-36.239 7.7782 27.577 48.967 37.83-10.607z" style="fill:#a9a8a6;stroke-linecap:round;stroke-width:2.5;stroke:#000"/>
       <path d="m18.915 32.704 0.35355 22.804 23.158 42.957 3.8891-16.087" style="fill:#4d4c4b;stroke-linecap:round;stroke-width:2.5;stroke:#000"/>

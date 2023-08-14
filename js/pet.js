@@ -7,12 +7,14 @@ const pet = {
   dayDelay: 3,
   initState: {
     pos: 9,
-    state: 'standing',
+    state: 'sitting',
   },
   introDelay: 5000,
-  moveTimer: 3000,
+  moveTimer: 5000,
+  moveDelay: 10,
   timer: null,
-
+  lastPos: -1,
+  interacting: false,
 
   render: function () {
     if (!player.pet || player.pet.pos < 0) {
@@ -45,29 +47,48 @@ const pet = {
   },
 
   start: function () {
-    pet.timer = setInterval( pet.move, pet.moveTimer);
+    player.pet.state = 'sitting';
+    pet.render();
+    pet.timer = setInterval( pet.move, pet.moveTimer + (rnd(pet.moveDelay) * 1000));
   },
 
   stop: function () {
     clearInterval(pet.timer); 
   },
 
-  // return true is the player and the pet are on the same patch
-  player: function () {
-    if (player.pet) {
-      return (player.pos == player.pet.pos);
+  checkPos: function () {
+    if (player.pet && (player.pos == player.pet.pos && player.pet.state == 'sitting')) {
+      setTimeout(() => {pet.interact()}, 300);
     }
   },
 
   move: function () {
-    if (rnd(2) == 1) {
-      pet.moveLeft();
-    } else {
-      pet.moveRight();
+    if (pet.interacting) {
+      return;
     }
+    pet.stand();
+    // pet is befriended full range of movement
+    let r = rnd(4);
+    switch (r) {
+      case 0:
+        pet.moveLeft();
+        break;
+      case 1:
+        pet.moveRight();
+        break;
+      case 2:
+        pet.moveUp();
+        break;
+      case 3:
+        pet.moveDown();
+        break;
+    }
+    // always sit after moving
+    setTimeout( () => {pet.sit()}, 2100);
   },
 
   moveLeft: function () {
+    pet.lastPos = player.pet.pos;
     let petSvg = document.querySelector(`#petSprite svg`);
     petSvg.style.transform = 'scale(-1,1)';
     if (player.pet.pos % player.cols > 0) {
@@ -78,6 +99,7 @@ const pet = {
   },
 
   moveRight: function () {
+    pet.lastPos = player.pet.pos;
     let petSvg = document.querySelector(`#petSprite svg`);
     petSvg.style.transform = 'scale(1,1)';
     if ((player.pet.pos % player.cols) - (player.cols - 1)) {
@@ -88,6 +110,7 @@ const pet = {
   },
 
   moveUp: function () {
+    pet.lastPos = player.pet.pos;
     if (player.pet.pos > player.cols - 1) {
       player.pet.pos -= player.cols;
     }
@@ -96,20 +119,31 @@ const pet = {
   },
 
   moveDown: function () {
+    pet.lastPos = player.pet.pos;
     if (player.pet.pos < (player.cols * player.rows) - player.cols) {
       player.pet.pos += player.cols;
     }
     state.save();
     pet.render();
   },
-   animateOn: function() {
+
+  animateOn: function() {
     pet.sprite.style.transition = "2s ease-in-out";
   },
   
-   animateOff: function() {
+  animateOff: function() {
     pet.sprite.style.transition = "";
   },
   
+  stand: function () {
+    player.pet.state = 'standing';
+    pet.sprite.innerHTML = svg.render(`pet-${player.pet.state}`);
+  },
+
+  sit: function () {
+    player.pet.state = 'sitting';
+    pet.sprite.innerHTML = svg.render(`pet-${player.pet.state}`);
+  },
 
   show: function () {
     svg.showElement("#petSprite");
@@ -133,7 +167,35 @@ const pet = {
   intro: function () {
     pet.render();
     hint.petIntro();
-  }
+  },
+
+  interact: function () {
+    pet.interacting = true;
+    let content = '';
+    content += `<div>pet interaction</div>`;
+
+    let footer = "";
+    footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
+    dialog.cancelButton = pet.interactCancel;
+    dialog.okButton = pet.interactOk;
+    dialog.render("Pet", content, footer);
+  },
+
+  interactOk: function () {
+    pet.interactEnd();
+  },
+
+  interactCancel: function () {
+    pet.interactEnd();
+  },
+
+  interactEnd: function () {
+    pet.interacting = false;
+    character.show(); 
+    dialog.hide();
+  },
+
+
 
 
 };

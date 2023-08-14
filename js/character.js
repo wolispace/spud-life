@@ -8,6 +8,9 @@ const character = {
     hide: function () {
       svg.hideElement("#playerSprite");
     },
+    show: function () {
+      svg.showElement("#playerSprite");
+    },
   
     look: function (direction) {
       let playerSprite = document.querySelector("#playerSprite > svg");

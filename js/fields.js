@@ -439,7 +439,7 @@ const fields = {
     playerSprite.style.left = posX;
     playerSprite.style.width = width;
     playerSprite.style.height = height;
- 
+    pet.checkPos();
 
     scanner.check();
   },
