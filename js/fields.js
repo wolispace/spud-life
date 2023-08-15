@@ -386,11 +386,11 @@ const fields = {
         patch.spud.qty = player.spudRegen;
         tool.uses--;
         player.fields[player.currentField][player.pos] = patch;
+        tools.render();
       } else {
         // leave holes alone
         return;
       }
-      //tools.render();
       if (patch) {
         fields.renderPatch(patch);
       }
