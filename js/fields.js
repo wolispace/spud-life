@@ -341,30 +341,7 @@ const fields = {
       patch.id = `patch_${player.pos}`;
       // if there is an item defined, dig it up and add it to the basket
       if (patch.item) {
-        let item = hardware.items[patch.item];
-        if (item.type == 'tool') {
-          if (patch.item == 'scanner') {
-             scanner.upgrade(item);
-          } else {
-            // upgrade the tool
-            if (player.tools[patch.item]) {
-              player.tools[patch.item].maxUses += item.initial.maxUses;
-              player.tools[patch.item].uses += item.initial.maxUses;
-            } else {
-              // use spread to get a copy of the initial setting so we dont modify them!
-              player.tools[patch.item] = { ... item.initial };
-            }
-          }
-          tools.render();
-        } else if (item.type == 'machine') {
-          if (!player.shop.machines[patch.item]) {
-            player.shop.machines[patch.item] = item.initial;
-          }
-        } else {
-          // increment the players count of this item
-          let basketQty = player.basket[patch.item] || 0;
-          player.basket[patch.item] = basketQty + 1;
-        }
+        hardware.digItem(patch);
         spuds.animate(patch);
         delete patch.item;
       }
