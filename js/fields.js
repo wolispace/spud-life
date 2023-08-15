@@ -347,14 +347,15 @@ const fields = {
              scanner.upgrade(item);
           } else {
             // upgrade the tool
-            let moreUses = hardware.items[patch.item].initial.maxUses;
             if (player.tools[patch.item]) {
-              player.tools[patch.item].maxUses += moreUses;
-              player.tools[patch.item].uses += moreUses;
+              player.tools[patch.item].maxUses += item.initial.maxUses;
+              player.tools[patch.item].uses += item.initial.maxUses;
             } else {
-              player.tools[patch.item] = hardware.items[patch.item].initial;
+              // use spread to get a copy of the initial setting so we dont modify them!
+              player.tools[patch.item] = { ... item.initial };
             }
           }
+          tools.render();
         } else if (item.type == 'machine') {
           if (!player.shop.machines[patch.item]) {
             player.shop.machines[patch.item] = item.initial;
@@ -364,8 +365,6 @@ const fields = {
           let basketQty = player.basket[patch.item] || 0;
           player.basket[patch.item] = basketQty + 1;
         }
-        state.save();
-        tools.render();
         spuds.animate(patch);
         delete patch.item;
       }
@@ -391,10 +390,7 @@ const fields = {
         // leave holes alone
         return;
       }
-      tools.render();
-      // match duration of spuds.animate() which is 1.5s
-      setTimeout(() => {tools.jiggle('basket')}, 1500);
-
+      //tools.render();
       if (patch) {
         fields.renderPatch(patch);
       }

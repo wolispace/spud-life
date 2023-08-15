@@ -167,12 +167,12 @@ const spuds = {
     let startPatch = `#${patch.id}`;
     let endTool = `.tool-basket`;
     let itemSvg = fields.getPatchSvg(patch);
-    let onEnd = function () { hint.dugItem(); };
+    let onEnd = function () { hint.dugItem(); tools.jiggle('basket'); };
     let item = hardware.items[patch.item];
     if (item) {
       item.id = patch.item;
       if (item.type == 'tool') {
-        onEnd = function () { hint.dugTool(item); };
+        onEnd = function () { hint.dugTool(item);  tools.jiggle(item.id);};
         endTool = `.tool-${patch.item}`;
       } else if (item.type == 'machine') {
         onEnd = function () { hint.dugMachine(item); };
