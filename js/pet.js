@@ -68,7 +68,7 @@ const pet = {
     }
     pet.stand();
     // pet is befriended full range of movement
-    let r = rnd(4);
+    let r = rnd(5);
     switch (r) {
       case 0:
         pet.moveLeft();
@@ -82,9 +82,10 @@ const pet = {
       case 3:
         pet.moveDown();
         break;
+      case 4:
+        pet.maybeDig();
+        break;
     }
-    // always sit after moving
-    setTimeout( () => {pet.sit()}, 2100);
   },
 
   moveLeft: function () {
@@ -94,8 +95,7 @@ const pet = {
     if (player.pet.pos % player.cols > 0) {
       player.pet.pos--;
     }
-    state.save();
-    pet.render();
+    pet.moveEnd();
   },
 
   moveRight: function () {
@@ -105,8 +105,7 @@ const pet = {
     if ((player.pet.pos % player.cols) - (player.cols - 1)) {
       player.pet.pos++;
     }
-    state.save();
-    pet.render();
+    pet.moveEnd();
   },
 
   moveUp: function () {
@@ -114,8 +113,7 @@ const pet = {
     if (player.pet.pos > player.cols - 1) {
       player.pet.pos -= player.cols;
     }
-    state.save();
-    pet.render();
+    pet.moveEnd();
   },
 
   moveDown: function () {
@@ -123,8 +121,18 @@ const pet = {
     if (player.pet.pos < (player.cols * player.rows) - player.cols) {
       player.pet.pos += player.cols;
     }
+    pet.moveEnd();
+  },
+
+  moveEnd: function () {
+    // always sit after moving
+    setTimeout( () => {pet.sit()}, 2100);
     state.save();
     pet.render();
+  },
+
+  maybeDig: function () {
+
   },
 
   animateOn: function() {
