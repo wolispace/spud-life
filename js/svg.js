@@ -7,6 +7,30 @@ const svg = {
       scale: 90,
       rotate: 40,
     },
+    title: `<svg id="d" version="1.1" viewBox="0 0 100 66" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+     <linearGradient id="a" x1="47.927" x2="46.257" y1="43.946" y2="14.584" gradientTransform="matrix(1.2227 0 0 1.4112 -14.695 -38.822)" gradientUnits="userSpaceOnUse">
+      <stop style="stop-color:#cfab65" offset="0"/>
+      <stop style="stop-color:#fff" offset="1"/>
+     </linearGradient>
+     <linearGradient id="c" x1="50.531" x2="51.177" y1="38.413" y2="71.913" gradientTransform="translate(-1.1621 -2.6038)" gradientUnits="userSpaceOnUse">
+      <stop style="stop-color:#d3b272" offset="0"/>
+      <stop style="stop-color:#715522" offset="1"/>
+     </linearGradient>
+    </defs>
+    <path id="b" d="m10.033 36.24s9.9249-18.995 40.187-19.019c26.482-0.02109 36.405 18 36.405 18" style="fill:none;paint-order:stroke fill markers"/>
+    <g transform="matrix(1.0634 0 0 1.0806 -2.5377 -8.1549)">
+     <path d="m16.516 31.868c-4.2426 5.1265-9.197 15.62-6.8943 21.92 2.1937 6.0022 3.8625 8.8335 10.96 10.783 6.7368 1.8507 8.2562-0.6838 17.678-1.0607 8.8388-0.35355 6.6804 1.8764 19.445 2.2981 21.542 0.7116 25.956-5.5154 29.875-19.445 1.923-6.8341-5.7603-10.352-10.663-14.912-6.842-6.3643-18.507-5.1855-21.864-5.417-10.253-0.70711-22.451-0.70711-26.163 0-3.7123 0.70711-8.1317 1.2374-12.374 5.8336z" style="fill:url(#c);paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.8;stroke:#000"/>
+     <ellipse transform="rotate(33.958)" cx="95.59" cy="4.8248" rx=".7955" ry="1.7678" style="fill:#473716;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.10954;stroke-width:2.8;stroke:#c1943c"/>
+     <ellipse transform="rotate(34.077)" cx="83.635" cy="6.4376" rx=".7955" ry="1.7678" style="fill:#6b5222;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.095406;stroke-width:2.8;stroke:#c1943c"/>
+     <ellipse transform="rotate(-22.028)" cx="60.155" cy="68.807" rx=".7955" ry="1.7678" style="fill:#806228;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.19081;stroke-width:2.8;stroke:#c1943c"/>
+    </g>
+    <g transform="matrix(1.0634 0 0 1.0806 -.41097 -5.1833)">
+     <text transform="translate(-1.1551 3.1796)" style="fill:#000000;font-family:sans-serif;font-size:15.763px;font-weight:bold;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-width:3.678;stroke:#000000" xml:space="preserve"><textPath style="stroke-width:3.678" xlink:href="#b"><tspan style="fill:#000000;font-family:'Comic Sans MS';font-weight:normal;paint-order:stroke fill markers;stroke-width:3.678">SPUD LIFE</tspan></textPath></text>
+     <text transform="translate(-.21614 1.7463)" style="fill:url(#a);font-family:sans-serif;font-size:15.763px;font-weight:bold;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-width:3.678;stroke:#000000" xml:space="preserve"><textPath style="fill:url(#a);stroke-width:3.678" xlink:href="#b"><tspan style="fill:url(#a);font-family:'Comic Sans MS';font-weight:normal;paint-order:stroke fill markers;stroke-width:3.678">SPUD LIFE</tspan></textPath></text>
+    </g>
+    <text x="17.75" y="57.75" style="fill:#3c2f12;font-family:Tahoma;font-size:5.3333px;font-weight:bold;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.095406;stroke-width:2.8" xml:space="preserve"><tspan x="17.75" y="57.75" style="fill:#3c2f12;font-size:5.3333px">A chip shop simulator</tspan></text>
+   </svg>`,
     house: `<svg id="SVGRoot" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
       <rect x="13.125" y="55.375" width="70.75" height="43.75" style="fill:#aa6c2c"/>
       <rect id="house-door" x="40.375" y="69.625" width="16.625" height="29.625"/>
