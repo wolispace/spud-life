@@ -76,5 +76,13 @@ const machines = {
 
     return bestForList;
   },
+
+  arcInfo: function (patch, item) {
+    let startPatch = `#${patch.id}`;
+    let endTool = `#patch_6`;;
+    let itemSvg = fields.getPatchSvg(patch);
+    let onEnd = function () { hint.dugMachine(item); };
+    svg.animateArc(startPatch, endTool, itemSvg, onEnd);
+  },
 };
 

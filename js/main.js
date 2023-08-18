@@ -69,7 +69,7 @@ document.addEventListener("keydown", (event) => {
     hint.confirm();
   } else if (dialog.visible) {
     if (dialog.hasInput) {
-      console.log('has input');
+      alert('has input');
       return;
     } else if (dialog.confirmKey.includes(event.code)) {
       dialog.confirm();

@@ -258,7 +258,7 @@ const fields = {
       element.innerHTML = newPatch;
       if (patch.spudFound) {
         delete patch.spudFound;
-        spuds.animate(patch);
+        fields.foundItem(patch);
         state.save();
         tools.render();
       }
@@ -342,7 +342,7 @@ const fields = {
       // if there is an item defined, dig it up and add it to the basket
       if (patch.item) {
         hardware.digItem(patch);
-        spuds.animate(patch);
+        fields.foundItem(patch);
         delete patch.item;
       }
       
@@ -373,6 +373,19 @@ const fields = {
       }
     }
     state.save();
+  },
+  
+  foundItem: function (patch) {
+    let item = hardware.items[patch.item];
+    if (item) {
+      if (item.type == 'tool') {
+        tools.arcInto(patch, item);
+      } else if (item.type == 'machine') {
+        machines.arcInfo(patch, item);
+      } 
+    } else {
+      basket.arcInto(patch);
+    }
   },
   // based on a patch, what is the svg for the buried item
   getPatchSvg: function (patch) {

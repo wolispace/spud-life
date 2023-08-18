@@ -89,6 +89,14 @@ const tools = {
   jiggle: function (tool) {
     let thisTool = document.querySelector(`.tool-${tool} svg`);
     svg.animate(thisTool, `jiggle-up`, 0.25, () => { tools.render(); });
-  }
+  },
+
+  arcInfo: function (patch, item) {
+    let startPatch = `#${patch.id}`;
+    let endTool = `.tool-${patch.item}`;
+    let itemSvg = fields.getPatchSvg(patch);
+    let onEnd = function () { hint.dugTool(item);  tools.jiggle(item.id);};
+    svg.animateArc(startPatch, endTool, itemSvg, onEnd);
+  },
 };
 

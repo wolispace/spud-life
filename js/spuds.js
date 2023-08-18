@@ -162,24 +162,5 @@ const spuds = {
     return `These are ${spuds.bits.rareNames[spud.rareness]} variety potatoes that are best for ${spud.bestFor}`;
   },
 
-  // animate an item being dug up into the basket
-  animate: (patch) => {
-    let startPatch = `#${patch.id}`;
-    let endTool = `.tool-basket`;
-    let itemSvg = fields.getPatchSvg(patch);
-    let onEnd = function () { hint.dugItem(); tools.jiggle('basket'); };
-    let item = hardware.items[patch.item];
-    if (item) {
-      item.id = patch.item;
-      if (item.type == 'tool') {
-        onEnd = function () { hint.dugTool(item);  tools.jiggle(item.id);};
-        endTool = `.tool-${patch.item}`;
-      } else if (item.type == 'machine') {
-        onEnd = function () { hint.dugMachine(item); };
-        endTool = `#patch_6`;
-      } 
-    }
-    svg.animateArc(startPatch, endTool, itemSvg, onEnd);
-  }
 };
 

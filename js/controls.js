@@ -108,6 +108,7 @@ const controls = {
             // if the patch is blocked.. the click reduces until zero and the block is removed
             player.basket[patch.block.type] = player.basket[patch.block.type] ?? 0;
             player.basket[patch.block.type]++;
+            basket.blockInto(patch, patch.block.type);
             if (patch.block.qty > 1) {
               patch.block.qty--;
             } else {

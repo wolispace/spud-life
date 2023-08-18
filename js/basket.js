@@ -73,7 +73,8 @@ const basket = {
     });
 
     let footer = "";
-
+    footer += `<button class="buttonize" onclick="basket.addMoney();"> Add $1k </button>`;
+    
     footer += `<button class="buttonize" onclick="pet.render(); dialog.hide();"> TEST pet </button>`;
     footer += `<button class="buttonize" onclick="potatadex.render()"> Potatádex </button>`;
     footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
@@ -81,6 +82,13 @@ const basket = {
     dialog.okButton = function () { dialog.hide(); };
     dialog.render("Inventory", `${content}${content2}`, footer);
   },
+  
+  // debugging 
+  addMoney: function () {
+    player.wallet += 1000;
+    tools.render();
+  },
+
   // sell something
   sellItem: (itemName) => {
     let item = hardware.items[itemName];
@@ -91,6 +99,23 @@ const basket = {
     state.save();
     let thisBlock = document.querySelector(`#hardware_${itemName}`);
     hardware.refresh(thisBlock);
+  },
+  // animate an item being dug up into the basket
+  arcInto: (patch) => {
+    let startPatch = `#${patch.id}`;
+    let endTool = `.tool-basket`;
+    let itemSvg = fields.getPatchSvg(patch);
+    let onEnd = function () { hint.dugItem(); tools.jiggle('basket'); };
+    svg.animateArc(startPatch, endTool, itemSvg, onEnd);
+  },
+  // animate a log or a rock going into the basket..
+  blockInto: (patch, block) => {
+    let startPatch = `#${patch.id}`;
+    let endTool = `.tool-basket`;
+    let itemSvg = svg.render(block, 1);
+    let onEnd = function () { hint.dugItem(); tools.jiggle('basket'); };
+    let item = hardware.items[patch.item];
+    svg.animateArc(startPatch, endTool, itemSvg, onEnd);
   },
 };
 
