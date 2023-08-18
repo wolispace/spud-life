@@ -6,7 +6,7 @@ const dialog = {
   confirmKey: 'Enter',
   okButton: null,
   cancelButton: null,
-  hasInput: ['Transfer link','Character creator'],
+  hasInput: false,
   
   render: function (title, content, footer) {
     let patch = getElementPos(`#patch_0`);

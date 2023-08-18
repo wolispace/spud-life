@@ -68,7 +68,8 @@ document.addEventListener("keydown", (event) => {
     // if any key is pressed and hit is visible then close it
     hint.confirm();
   } else if (dialog.visible) {
-    if (dialog.hasInput.includes(dialog.title)) {
+    if (dialog.hasInput) {
+      console.log('has input');
       return;
     } else if (dialog.confirmKey.includes(event.code)) {
       dialog.confirm();
@@ -214,6 +215,7 @@ function loadSave () {
   footer += `<button class="buttonize" onclick="dialog.confirm()"> Cancel </button>`;
   dialog.cancelButton = function () { character.render(); dialog.hide(); };
   dialog.okButton = function () { character.render(); dialog.hide(); };
+  dialog.hasInput = true;
   dialog.render("Transfer link", content, footer);
 }
 

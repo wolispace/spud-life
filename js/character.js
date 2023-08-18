@@ -119,6 +119,7 @@ const character = {
       footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
       dialog.cancelButton = function () { character.save(); };
       dialog.okButton = function () { character.save(); };
+      dialog.hasInput = true;
       dialog.render("Character creator", `${content}`, footer);
       character.demoBody();
     },

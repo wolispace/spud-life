@@ -195,6 +195,7 @@ const pet = {
     footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
     dialog.cancelButton = pet.interactCancel;
     dialog.okButton = pet.interactOk;
+    dialog.hasInput = true;
     dialog.render(title, content, footer);
   },
 
