@@ -113,6 +113,7 @@ const hardware = {
           player.tools[patch.item] = { ... item.initial };
         }
       }
+      // make sure the new tool is shown
       tools.render();
     } else if (item.type == 'machine') {
       if (!player.shop.machines[patch.item]) {
@@ -301,7 +302,7 @@ const hardware = {
       name: "An old bone",
       desc: "I think a dog buried it",
       price: 5,
-      rareness: 10,        
+      rareness: 10,
     },
     gold: {
       type: "item",

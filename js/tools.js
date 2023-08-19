@@ -91,7 +91,7 @@ const tools = {
     svg.animate(thisTool, `jiggle-up`, 0.25, () => { tools.render(); });
   },
 
-  arcInfo: function (patch, item) {
+  arcInto: function (patch, item) {
     let startPatch = `#${patch.id}`;
     let endTool = `.tool-${patch.item}`;
     let itemSvg = fields.getPatchSvg(patch);

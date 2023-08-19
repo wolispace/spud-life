@@ -260,7 +260,7 @@ const fields = {
         delete patch.spudFound;
         fields.foundItem(patch);
         state.save();
-        tools.render();
+        //tools.render();
       }
 
       // if we drew a hole, make sure its opacity matches the spud qty -5 = 100%, 0 = 0%
@@ -341,7 +341,6 @@ const fields = {
       patch.id = `patch_${player.pos}`;
       // if there is an item defined, dig it up and add it to the basket
       if (patch.item) {
-        hardware.digItem(patch);
         fields.foundItem(patch);
         delete patch.item;
       }
@@ -363,7 +362,7 @@ const fields = {
         patch.spud.qty = player.spudRegen;
         tool.uses--;
         player.fields[player.currentField][player.pos] = patch;
-        tools.render();
+        //tools.render();
       } else {
         // leave holes alone
         return;
@@ -374,15 +373,18 @@ const fields = {
     }
     state.save();
   },
-  
+
   foundItem: function (patch) {
     let item = hardware.items[patch.item];
     if (item) {
+      hardware.digItem(patch);
       if (item.type == 'tool') {
         tools.arcInto(patch, item);
       } else if (item.type == 'machine') {
-        machines.arcInfo(patch, item);
-      } 
+        machines.arcInto(patch, item);
+      } else {
+        basket.arcInto(patch);
+      }
     } else {
       basket.arcInto(patch);
     }

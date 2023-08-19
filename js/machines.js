@@ -77,7 +77,7 @@ const machines = {
     return bestForList;
   },
 
-  arcInfo: function (patch, item) {
+  arcInto: function (patch, item) {
     let startPatch = `#${patch.id}`;
     let endTool = `#patch_6`;;
     let itemSvg = fields.getPatchSvg(patch);

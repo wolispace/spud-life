@@ -75,14 +75,14 @@ const basket = {
     let footer = "";
     footer += `<button class="buttonize" onclick="basket.addMoney();"> Add $1k </button>`;
     
-    footer += `<button class="buttonize" onclick="pet.render(); dialog.hide();"> TEST pet </button>`;
+    footer += `<button class="buttonize" onclick="pet.render(); pet.moveLeft(); dialog.hide();"> TEST pet </button>`;
     footer += `<button class="buttonize" onclick="potatadex.render()"> Potatádex </button>`;
     footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
     dialog.cancelButton = function () { dialog.hide(); };
     dialog.okButton = function () { dialog.hide(); };
     dialog.render("Inventory", `${content}${content2}`, footer);
   },
-  
+
   // debugging 
   addMoney: function () {
     player.wallet += 1000;

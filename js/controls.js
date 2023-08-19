@@ -100,9 +100,6 @@ const controls = {
 
           let tool = fields.whichTool(patch);
           let playerTool = player.tools[tool];
-          if (playerTool) {
-            tools.jiggle(tool);
-          }
 
           if (playerTool && playerTool.uses > 0) {
             // if the patch is blocked.. the click reduces until zero and the block is removed
@@ -124,7 +121,6 @@ const controls = {
                 );
               }
               playerTool.uses--;
-              tools.render();
 
             if (patch) {
               fields.updatePatch(patch);
@@ -133,6 +129,9 @@ const controls = {
               newPos = player.pos;
             }
           } else {
+            if (playerTool) {
+              tools.jiggle(tool);
+            }
             // not something we can chop or cut..
             if (patch.block.pos) {
             } else {
