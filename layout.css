@@ -266,14 +266,13 @@ button:hover {
   background-color: rgba(109, 160, 143, .75) !important;
 }
 
-.container {
-
+.field {
+ height: 100vh;
 }
 
 .field-grid {
   width: 100%; 
   height: 100%; 
-  border-collapse: separate;
   border-spacing: 0;
   table-layout:fixed;
 }
