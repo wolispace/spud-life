@@ -60,6 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (!urlParams.has('id') && typeof saveId !== 'undefined') {
     showTransferLink();
   }
+  tools.render();
 });
 
 // hook into keys for movement and digging
@@ -145,6 +146,7 @@ function initGame() {
   starter = "spade";
   player.tools[starter] = hardware.items[starter].initial;
   tools.reset();
+  tools.render();
   gameIntro();
 }
 

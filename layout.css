@@ -525,6 +525,7 @@ button:hover {
 .tool-button {
   display:flex;
   flex-direction: column;
+  width: 100%;
   padding: var(--sl-padding);
   border-radius: 5px;
   background-color: rgba(255, 255, 255, 0.1);
@@ -546,7 +547,9 @@ button:hover {
 
 .toolNum {
   position: relative;
-  bottom: 2rem;
+  bottom: 0rem;
+  font-weight: bold;
+  color:white;
 }
 
 .hardware div {

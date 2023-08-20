@@ -8,7 +8,7 @@ const fields = {
       patches += `<tr>`;
       let patchClass = row == 0 ? "sky" : "patch";
       for (let col = 0; col < player.cols; col++) {
-        patches += `<td><div class="${patchClass}" id="patch_${index}">0</div></td>`;
+        patches += `<td><div class="${patchClass}" id="patch_${index}"></div></td>`;
         index++;
       }
       patches += `</tr>`;

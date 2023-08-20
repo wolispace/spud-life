@@ -79,6 +79,7 @@ const character = {
       resizeStuff();
       hint.player();
       character.render();
+      tools.render();
     },
 
     randomName: function () {

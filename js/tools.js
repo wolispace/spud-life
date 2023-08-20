@@ -1,37 +1,43 @@
 const tools = {
   // draw the tools across the bottom
   render: () => {
-    return;
-    let tools = "";
-    let dummyImg = svg.render(`control-icon--up`);
+    let style = `style="width: 2rem;"`;
+    let dummyImg = svg.render(`control-icon--up`, 1, style);
+    let id = (player.rows * player.cols) - (player.cols * 3);
     Object.entries(player.tools).forEach(([toolName, tool]) => {
       tool = tool ?? {uses: 0, maxUses: 0};
-      let toolSvg = svg.render(toolName) ?? dummyImg;
-      tools += `<div class="tool-button tool-${toolName}" 
+      let toolSvg = svg.render(toolName, 1, style) ?? dummyImg;
+      let thisPatch = document.querySelector(`#patch_${id}`);
+      thisPatch.innerHTML = `<div class="tool-button tool-${toolName}" 
       onclick="fields.digPatch()"
       title="${toolName}=${tool.uses}">
        ${toolSvg}<div class="toolNum">${tool.uses}</div></div>`;
+      id++; 
     });
-    let scannerImg = svg.render('scanner') ?? dummyImg;
-    tools += `<div class="tool-button tool-scanner" 
-      onclick="scanner.show(player.scanState)"
-      title="scanner=${player.scanLevel}">
-      ${scannerImg}<div class="toolNum">${player.scanLevel}</div></div>`;
 
-    let basketImg = svg.render('basket') ?? dummyImg;
-    tools += `<div class="tool-button tool-basket" 
-      onclick="basket.show()"
-      title="basket=${basket.count()}">
-      ${basketImg}<div class="toolNum">${basket.count()}</div></div>`;
+    let scannerImg = svg.render('scanner', 1, style) ?? dummyImg;
+    let thisPatch = document.querySelector(`#patch_${id}`);
+    thisPatch.innerHTML = `<div class="tool-button tool-scanner" 
+    onclick="scanner.show(player.scanState)"
+    title="scanner=${player.scanLevel}">
+    ${scannerImg}<div class="toolNum">${player.scanLevel}</div></div>`;
+    id++; 
 
-    let wallet = svg.render('wallet') ?? dummyImg;
-      tools += `<div class="tool-button tool-wallet" 
-        onclick="basket.show()"
-        title="wallet=${player.wallet}">
-        ${wallet}<div class="toolNum">${player.wallet}</div></div>`;
+    let basketImg = svg.render('basket', 1, style) ?? dummyImg;
+    thisPatch = document.querySelector(`#patch_${id}`);
+    thisPatch.innerHTML = `<div class="tool-button tool-basket" 
+    onclick="basket.show()"
+    title="basket=${basket.count()}">
+    ${basketImg}<div class="toolNum">${basket.count()}</div></div>`;
+    id++; 
 
-    element = document.querySelector(".tools");
-    element.innerHTML = tools;
+    let wallet = svg.render('wallet', 1, style) ?? dummyImg;
+    thisPatch = document.querySelector(`#patch_${id}`);
+    thisPatch.innerHTML = `<div class="tool-button tool-wallet" 
+    onclick="basket.show()"
+    title="wallet=${player.wallet}">
+    ${wallet}<div class="toolNum">${player.wallet}</div></div>`;
+    
     scanner.check();   
   },
   // TODO: not used!?! returns the players tool
