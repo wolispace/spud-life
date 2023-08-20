@@ -189,7 +189,7 @@ const pet = {
       title = `Your friend ${player.pet.name}`;
       content += `<div>You can rename your furry friend if you like.</div>`;
     }
-    content += '... ' + pet.editName();
+    content += '.... ' + pet.editName();
 
     let footer = "";
     footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;

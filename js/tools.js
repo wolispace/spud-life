@@ -1,6 +1,7 @@
 const tools = {
   // draw the tools across the bottom
   render: () => {
+    return;
     let tools = "";
     let dummyImg = svg.render(`control-icon--up`);
     Object.entries(player.tools).forEach(([toolName, tool]) => {

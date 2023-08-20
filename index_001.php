@@ -89,6 +89,7 @@ function outputGamePage($v, $id = '') {
   <body>
     <div class='container'>
       <div class='field'></div>
+      <div class='tools'></div>
       <div id='nightShade'></div>
       <div id='starField'></div>
       <div id='cloudLine'></div>

@@ -47,6 +47,7 @@ const dialog = {
     dialog.part(`.dialog .footer`, '');
     dialog.visible = false;
     dialog.okButton = null;
+    dialog.hasInput = false;
     hint.hide();
   },
 

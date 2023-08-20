@@ -64,12 +64,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // hook into keys for movement and digging
 document.addEventListener("keydown", (event) => {
-  if (hint.visible) {
+  if (hint.visible == true) {
     // if any key is pressed and hit is visible then close it
     hint.confirm();
-  } else if (dialog.visible) {
-    if (dialog.hasInput) {
-      alert('has input');
+  } else if (dialog.visible == true) {
+    if (dialog.hasInput == true) {
       return;
     } else if (dialog.confirmKey.includes(event.code)) {
       dialog.confirm();
@@ -77,6 +76,7 @@ document.addEventListener("keydown", (event) => {
       dialog.cancel();
     } else {
       // all other keys go to dialog
+      return;
     }
   } else {
     // if the dig key was pressed then dig
@@ -113,9 +113,6 @@ function initModules() {
   hint.sprite = document.querySelector('#hintSprite');
   dialog.sprite = document.querySelector(`.dialog`);
   pet.sprite = document.querySelector('#petSprite');
-  // set the grid column
-  let wholeField = document.querySelector(`.field`);
-  wholeField.style.gridTemplateColumns = `1fr `.repeat(player.cols);
 }
 
 function animatePlayerOn() {

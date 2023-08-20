@@ -3,15 +3,17 @@ const fields = {
   // one off setup the grid of patches
   setupGrid() {
     let index = 0;
-    let patches = "";
-    while (index < (player.cols * player.rows)) {
-      let patchClass = index < player.cols ? "sky" : "patch";
-      patches += `<div class="${patchClass}" id="patch_${index}">${svg.render(
-        "blank",
-        player.grassQty
-      )}</div>`;
-      index++;
+    let patches = `<table class="field-grid">`;
+    for (let row = 0; row < player.rows; row++) {
+      patches += `<tr>`;
+      let patchClass = row == 0 ? "sky" : "patch";
+      for (let col = 0; col < player.cols; col++) {
+        patches += `<td><div class="${patchClass}" id="patch_${index}">0</div></td>`;
+        index++;
+      }
+      patches += `</tr>`;
     }
+    patches += `</table>`;
     element = document.querySelector(".field");
     element.innerHTML = patches;
   },

@@ -1,0 +1,201 @@
+<html dir='ltr' lang='en'>
+  <head>
+    <meta charset='utf-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, interactive-widget=resizes-visual' />
+    <title>Spud life TEST</title>
+    <style>
+      .grid {
+        outline: 1px solid red;
+        width: 100%;
+        height: 100%;
+      }
+      .tools .grid {
+        outline: 1px solid blue;
+      }
+      #sprite {
+        position: absolute;
+        top:1px;
+        left:1px;
+        width: 30px;
+        height: 30px;
+        background-color: aquamarine;
+      }
+    </style>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        let patch = document.querySelector('#patch_25');
+        if (patch) {
+          patch.style = 'background: wheat;';
+          patch.onclick = function () {
+            alert('hi');
+          };
+        }
+
+        button = document.querySelector('#tool_right');
+        button.onclick = function () {moveRight()};
+        button = document.querySelector('#tool_left');
+        button.onclick = function () {moveLeft()};
+        button = document.querySelector('#tool_up');
+        button.onclick = function () {moveUp()};
+        button = document.querySelector('#tool_down');
+        button.onclick = function () {moveDown()};
+      });
+      
+      function moveRight() {
+        let element = document.querySelector('#patch_25');
+        let patch = element.getBoundingClientRect();
+        let sprite = document.querySelector('#sprite');
+        let spriteBox = sprite.getBoundingClientRect();
+        sprite.style.left = spriteBox.left + 2 + patch.width + 'px';
+      }
+      function moveLeft() {
+        let element = document.querySelector('#patch_25');
+        let patch = element.getBoundingClientRect();
+        let sprite = document.querySelector('#sprite');
+        let spriteBox = sprite.getBoundingClientRect();
+        sprite.style.left = spriteBox.left - (2 + patch.width) + 'px';
+      }
+      function moveUp() {
+        let element = document.querySelector('#patch_25');
+        let patch = element.getBoundingClientRect();
+        let sprite = document.querySelector('#sprite');
+        let spriteBox = sprite.getBoundingClientRect();
+        sprite.style.top = spriteBox.top - (2 + patch.height) + 'px';
+      }
+      function moveDown() {
+        let element = document.querySelector('#patch_25');
+        let patch = element.getBoundingClientRect();
+        let sprite = document.querySelector('#sprite');
+        let spriteBox = sprite.getBoundingClientRect();
+        sprite.style.top = spriteBox.top + (2 + patch.height) + 'px';
+      }
+
+    </script>
+  </head>
+  <body style="margin: 0">
+    <table style="width: 100%; height: 100%; border-collapse: collapse; table-layout:fixed">
+       <tr>
+        <td><div class="grid">0</div></td>
+        <td><div class="grid">1</div></td>
+        <td><div class="grid">2</div></td>
+        <td><div class="grid">3</div></td>
+        <td><div class="grid">4</div></td>
+        <td><div class="grid">5</div></td>
+        <td><div class="grid">6</div></td>
+        <td><div class="grid">7</div></td>
+        <td><div class="grid">8</div></td>
+        <td><div class="grid">9</div></td>
+       </tr>
+       <tr>
+        <td><div class="grid">0</div></td>
+        <td><div class="grid">1</div></td>
+        <td><div class="grid">2</div></td>
+        <td><div class="grid">3</div></td>
+        <td><div class="grid">4</div></td>
+        <td><div class="grid">5</div></td>
+        <td><div class="grid">6</div></td>
+        <td><div class="grid">7</div></td>
+        <td><div class="grid">8</div></td>
+        <td><div class="grid">9</div></td>
+       </tr>
+       <tr>
+        <td><div class="grid" id="patch_20">0</div></td>
+        <td><div class="grid" id="patch_21">1</div></td>
+        <td><div class="grid" id="patch_22">2</div></td>
+        <td><div class="grid" id="patch_23">3</div></td>
+        <td><div class="grid" id="patch_24">4</div></td>
+        <td><div class="grid" id="patch_25">5</div></td>
+        <td><div class="grid" id="patch_26">6</div></td>
+        <td><div class="grid" id="patch_27">7</div></td>
+        <td><div class="grid" id="patch_28">8</div></td>
+        <td><div class="grid" id="patch_29">9</div></td>
+       </tr>
+       <tr>
+        <td><div class="grid" id="patch_30">0</div></td>
+        <td><div class="grid" id="patch_31">1</div></td>
+        <td><div class="grid" id="patch_32">2</div></td>
+        <td><div class="grid" id="patch_33">3</div></td>
+        <td><div class="grid" id="patch_34">4</div></td>
+        <td><div class="grid" id="patch_35">5</div></td>
+        <td><div class="grid" id="patch_36">6</div></td>
+        <td><div class="grid" id="patch_37">7</div></td>
+        <td><div class="grid" id="patch_38">8</div></td>
+        <td><div class="grid" id="patch_39">9</div></td>
+       </tr>
+       <tr>
+        <td><div class="grid">0</div></td>
+        <td><div class="grid">1</div></td>
+        <td><div class="grid">2</div></td>
+        <td><div class="grid">3</div></td>
+        <td><div class="grid">4</div></td>
+        <td><div class="grid">5</div></td>
+        <td><div class="grid">6</div></td>
+        <td><div class="grid">7</div></td>
+        <td><div class="grid">8</div></td>
+        <td><div class="grid">9</div></td>
+       </tr>
+       <tr>
+        <td><div class="grid">0</div></td>
+        <td><div class="grid">1</div></td>
+        <td><div class="grid">2</div></td>
+        <td><div class="grid">3</div></td>
+        <td><div class="grid">4</div></td>
+        <td><div class="grid">5</div></td>
+        <td><div class="grid">6</div></td>
+        <td><div class="grid">7</div></td>
+        <td><div class="grid">8</div></td>
+        <td><div class="grid">9</div></td>
+       </tr>
+       <tr>
+        <td><div class="grid">0</div></td>
+        <td><div class="grid">1</div></td>
+        <td><div class="grid">2</div></td>
+        <td><div class="grid">3</div></td>
+        <td><div class="grid">4</div></td>
+        <td><div class="grid">5</div></td>
+        <td><div class="grid">6</div></td>
+        <td><div class="grid">7</div></td>
+        <td><div class="grid">8</div></td>
+        <td><div class="grid">9</div></td>
+       </tr>
+       <tr>
+        <td><div class="grid">0</div></td>
+        <td><div class="grid">1</div></td>
+        <td><div class="grid">2</div></td>
+        <td><div class="grid">3</div></td>
+        <td><div class="grid">4</div></td>
+        <td><div class="grid">5</div></td>
+        <td><div class="grid">6</div></td>
+        <td><div class="grid">7</div></td>
+        <td><div class="grid">8</div></td>
+        <td><div class="grid">9</div></td>
+       </tr>
+       <tr>
+        <td><div class="grid">0</div></td>
+        <td><div class="grid">1</div></td>
+        <td><div class="grid">2</div></td>
+        <td><div class="grid">3</div></td>
+        <td><div class="grid">4</div></td>
+        <td><div class="grid">5</div></td>
+        <td><div class="grid">6</div></td>
+        <td><div class="grid">7</div></td>
+        <td><div class="grid">8</div></td>
+        <td><div class="grid">9</div></td>
+       </tr>
+       <tr class="tools">
+        <td><div class="grid" id="tool_spade"></div></td>
+        <td><div class="grid" id="tool_left">Left</div></td>
+        <td><div class="grid" id="tool_up">Up</div></td>
+        <td><div class="grid" id="tool_down">Down</div></td>
+        <td><div class="grid" id="tool_right">Right</div></td>
+        <td><div class="grid">5</div></td>
+        <td><div class="grid">6</div></td>
+        <td><div class="grid">7</div></td>
+        <td><div class="grid">8</div></td>
+        <td><div class="grid">9</div></td>
+       </tr>
+       
+    </table>
+    <div id="sprite"></div>
+  </body>
+ </html> 

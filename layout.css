@@ -267,19 +267,28 @@ button:hover {
 }
 
 .container {
-  width: 100vw;
-  max-width:540px;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
 }
 
-.field {
-  background-color: rgb(62, 122, 62);
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-auto-flow: row;
-
+.field-grid {
+  width: 100%; 
+  height: 100%; 
+  border-collapse: collapse; 
+  table-layout:fixed;
 }
 
+.patch {
+  background-color: seagreen;
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.patch > svg {
+  align-self: flex-end;
+}
 
 .sky {
   background: rgb(2, 0, 36);
@@ -290,6 +299,7 @@ button:hover {
     rgba(216, 248, 255, 1) 100%
   );
 }
+
 #cloudLine {
   position: absolute;
   left: 0;
@@ -413,16 +423,7 @@ button:hover {
   left: -10%;
 }
 
-.patch {
-  background-color: seagreen;
-  width: 100%;
-  height: 100%;
-  display: flex;
-}
 
-.patch > svg {
-  align-self: flex-end;
-}
 
 .sky {
   display: flex;
