@@ -66,7 +66,7 @@ const basket = {
           let icon = svg.render(itemName, 1, style);
           content2 += `<div  class="hardware-button buttonize">`;
           content2 += ` <div class="hardware-button-icon">${icon}</div>`;
-          content2 += ` <div class="hardware-button-desc"> <b>${itemName}.</b> ${itemInfo.desc}</div>`;
+          content2 += ` <div class="hardware-button-desc"> ${itemQty} <b>${itemName}.</b> ${itemInfo.desc}</div>`;
           content2 += `</div>`;
         }
       }

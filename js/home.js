@@ -128,6 +128,7 @@ const home = {
     setPhase('field');
     dialog.hide();
     character.render();
+    tools.render();
     player.days++;
     pet.check();
     state.save();
