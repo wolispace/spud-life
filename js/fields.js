@@ -341,11 +341,6 @@ const fields = {
       }
       // make sure every patch have an id referencing itself
       patch.id = `patch_${player.pos}`;
-      // if there is an item defined, dig it up and add it to the basket
-      if (patch.item) {
-        fields.foundItem(patch);
-        delete patch.item;
-      }
       
       // if no spuds then make sure we are quite clear there are no spuds
       if (!patch.spud) {
@@ -364,7 +359,14 @@ const fields = {
         patch.spud.qty = player.spudRegen;
         tool.uses--;
         player.fields[player.currentField][player.pos] = patch;
-        //tools.render();
+        // if there is an item defined, dig it up and add it to the basket
+        if (patch.item) {
+          fields.foundItem(patch);
+          delete patch.item;
+        } else {
+          tools.render();
+        }
+
       } else {
         // leave holes alone
         return;
