@@ -62,7 +62,7 @@ const hint = {
     hint.sprite.style.top = `${posY}px`;
     hint.sprite.style.left = `${posX}px`;
     let patch = getElementPos(`#patch_0`);
-    let hintWidth = patch.width * player.cols / 1.4;
+    let hintWidth = patch.width * player.cols / 1.6;
     hint.sprite.style.width = `${hintWidth}px`;
 
     let arrowObj = document.querySelector('.hintArrowRight');
