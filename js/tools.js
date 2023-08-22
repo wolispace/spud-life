@@ -3,7 +3,7 @@ const tools = {
   render: () => {
     let style = `style="width: 2rem;"`;
     let dummyImg = svg.render(`control-icon--up`, 1, style);
-    let id = (player.rows * player.cols) - (player.cols * 3);
+    let id = (player.rows * player.cols) - (player.cols * 7);
     Object.entries(player.tools).forEach(([toolName, tool]) => {
       tool = tool ?? {uses: 0, maxUses: 0};
       let toolSvg = svg.render(toolName, 1, style) ?? dummyImg;

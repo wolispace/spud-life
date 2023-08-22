@@ -34,7 +34,7 @@ let player = {
   shop: {
     machines: {},
   },
-  ctrlOffset: 30,
+  ctrlOffset: 70,
   controlPos: {
     ArrowUp: 0,
     ArrowLeft: cols,
