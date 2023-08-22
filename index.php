@@ -87,15 +87,14 @@ function outputGamePage($v, $id = '') {
     {$scripts}
   </head>
   <body>
-    <div class='container'>
-      <div class='field'></div>
-      <div id='nightShade'></div>
-      <div id='starField'></div>
-      <div id='cloudLine'></div>
-      <div id='buildingLine'></div>
-      <div id='grassLine'></div>
-      <div id='customerLine'></div>
-    </div>
+    <div class='container'>s</div>
+    <div class='field'></div>
+    <div id='nightShade'></div>
+    <div id='starField'></div>
+    <div id='cloudLine'></div>
+    <div id='buildingLine'></div>
+    <div id='grassLine'></div>
+    <div id='customerLine'></div>
     <div id='itemSprite'></div>
     <div id='petSprite'></div>
     <div id='playerSprite'></div>
