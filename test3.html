@@ -11,15 +11,15 @@
       height: 100%;
       outline: 1px solid red;
     }
-    
+
     .sprite {
       position: absolute;
       outline: 1px solid red;
       background: wheat;
     }
-    </style>
+  </style>
   <script>
-    
+
     let itemNumber = 0;
     let qty = 10;
     let sprite = { width: 50, height: 50 };
@@ -28,19 +28,40 @@
     let distanceY = 10;
     let distanceX = 10;
     // what is this!?! 
-    let scale = 7;
-    
+    let scale = 5;
+
 
     document.addEventListener("DOMContentLoaded", function () {
       setContainerBox();
       addSprites();
       addPlayer();
+      addControls();
     });
 
     function setContainerBox() {
       let containerElement = document.querySelector(".container");
       containerBox = containerElement.getBoundingClientRect();
       setSpriteSize();
+    }
+
+    function addControls() {
+      let controlId = addSprite(1, containerBox.height - sprite.height, 'Left', sprite.width, sprite.height);
+      let controlElement = document.querySelector(`#i${controlId}`);
+      controlElement.onclick = function () {moveLeft()};
+
+      let controlId2 = addSprite(sprite.width, containerBox.height - sprite.height, 'Down', sprite.width, sprite.height);
+
+
+      let controlElement2 = document.querySelector(`#i${controlId2}`);
+      controlElement2.onclick = function () {moveDown()};
+
+      let controlId3 = addSprite(sprite.width, containerBox.height - (sprite.height * 2), 'Up', sprite.width, sprite.height);
+      let controlElement3 = document.querySelector(`#i${controlId3}`);
+      controlElement3.onclick = function () {moveUp()};
+
+      let controlId4 = addSprite((sprite.width * 2), containerBox.height - sprite.height, 'Right', sprite.width, sprite.height);
+      let controlElement4 = document.querySelector(`#i${controlId4}`);
+      controlElement4.onclick = function () {moveRight()};
     }
 
     function addPlayer() {
@@ -75,7 +96,7 @@
       let newWidthPct = (containerBox.width - last.width) / 100;
       let newHeightPct = (containerBox.height - last.height) / 100;
 
-      console.log(last);
+      console.log(last, newWidthPct, newHeightPct);
 
       resizeSprites(newWidthPct, newHeightPct);
     });
@@ -94,9 +115,7 @@
         element.style.width = `${sprite.width}px`;
         element.style.height = `${sprite.height}px`
       });
-
     }
-
 
     function setSpriteSize() {
       sprite.width = containerBox.width / 10;
@@ -108,33 +127,55 @@
     }
 
     document.addEventListener("keydown", (event) => {
-      let playerSprite = getPlayerSprite();
-      let playerBox = playerSprite.getBoundingClientRect();
       if (event.code == 'ArrowUp') {
-        let newTop = playerBox.top - distanceY;
-        if (newTop > 0) {
-          playerSprite.style.top = `${newTop}px`;
-        }
+        moveUp();
       }
       if (event.code == 'ArrowDown') {
-        let newTop = playerBox.top + distanceY;
-        if (newTop < containerBox.height - sprite.height) {
-          playerSprite.style.top = `${newTop}px`;
-        }
+        moveDown();
       }
       if (event.code == 'ArrowLeft') {
-        let newLeft = playerBox.left - distanceX;
-        if (newLeft > 0) {
-          playerSprite.style.left = `${newLeft}px`;
-        }
+        moveLeft();
       }
       if (event.code == 'ArrowRight') {
-        let newLeft = playerBox.left + distanceX;
-        if (newLeft < containerBox.width - sprite.width) {
-          playerSprite.style.left = `${newLeft}px`;
-        }
+        moveRight();
       }
     });
+
+    function moveUp() {
+      let playerSprite = getPlayerSprite();
+      let playerBox = playerSprite.getBoundingClientRect();
+      let newTop = playerBox.top - distanceY;
+      if (newTop > 0) {
+        playerSprite.style.top = `${newTop}px`;
+      }
+    }
+
+    function moveDown() {
+      let playerSprite = getPlayerSprite();
+      let playerBox = playerSprite.getBoundingClientRect();
+      let newTop = playerBox.top + distanceY;
+      if (newTop < containerBox.height - sprite.height) {
+        playerSprite.style.top = `${newTop}px`;
+      }
+    }
+
+    function moveLeft() {
+      let playerSprite = getPlayerSprite();
+      let playerBox = playerSprite.getBoundingClientRect();
+      let newLeft = playerBox.left - distanceX;
+      if (newLeft > 0) {
+        playerSprite.style.left = `${newLeft}px`;
+      }
+    }
+
+    function moveRight() {
+      let playerSprite = getPlayerSprite();
+      let playerBox = playerSprite.getBoundingClientRect();
+      let newLeft = playerBox.left + distanceX;
+      if (newLeft < containerBox.width - sprite.width) {
+        playerSprite.style.left = `${newLeft}px`;
+      }
+    }
 
     function addSprite(x, y, content, w, h, classList = '') {
       itemNumber++;
