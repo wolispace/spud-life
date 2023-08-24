@@ -1,0 +1,159 @@
+<html dir='ltr' lang='en'>
+
+<head>
+  <meta charset='utf-8' />
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, interactive-widget=resizes-visual' />
+  <title>Spud life TEST 3</title>
+  <style>
+    .container {
+      display: grid;
+      width: 100%;
+      height: 100%;
+      outline: 1px solid red;
+    }
+    
+    .sprite {
+      position: absolute;
+      outline: 1px solid red;
+      background: wheat;
+    }
+    </style>
+  <script>
+    
+    let itemNumber = 0;
+    let qty = 10;
+    let sprite = { width: 50, height: 50 };
+    let containerBox = null;
+    let playerId = 0;
+    let distanceY = 10;
+    let distanceX = 10;
+    // what is this!?! 
+    let scale = 7;
+    
+
+    document.addEventListener("DOMContentLoaded", function () {
+      setContainerBox();
+      addSprites();
+      addPlayer();
+    });
+
+    function setContainerBox() {
+      let containerElement = document.querySelector(".container");
+      containerBox = containerElement.getBoundingClientRect();
+      setSpriteSize();
+    }
+
+    function addPlayer() {
+      playerId = addSprite(1, 1, 'P', sprite.width, sprite.height);
+    }
+
+    function getPlayerSprite() {
+      return document.querySelector(`#i${playerId}`);
+    }
+
+    function clearBody() {
+      let bodyElement = document.querySelector("body");
+      bodyElement.innerHTML = '<div class="container"></dv>';
+    }
+
+    function addSprites() {
+      clearBody();
+      for (let step = 0; step < qty; step++) {
+        let x = rnd(containerBox.width - sprite.width);
+        let y = rnd(containerBox.height - sprite.height);
+        addSprite(x, y, ``, sprite.width, sprite.height);
+      }
+    }
+
+    window.addEventListener("resize", (event) => {
+      let last = {
+        width: containerBox.width,
+        height: containerBox.height
+      }
+      setContainerBox();
+      //
+      let newWidthPct = (containerBox.width - last.width) / 100;
+      let newHeightPct = (containerBox.height - last.height) / 100;
+
+      console.log(last);
+
+      resizeSprites(newWidthPct, newHeightPct);
+    });
+
+    function resizeSprites(newWidthPct, newHeightPct) {
+      let spritesList = document.querySelectorAll('.sprite');
+      spritesList.forEach(element => {
+        let elementBox = element.getBoundingClientRect();
+
+
+        let newLeft = elementBox.left + ((elementBox.left * newWidthPct) / scale);
+        let newTop = elementBox.top + ((elementBox.top * newHeightPct) / scale);
+
+        element.style.left = `${newLeft}px`;
+        element.style.top = `${newTop}px`;
+        element.style.width = `${sprite.width}px`;
+        element.style.height = `${sprite.height}px`
+      });
+
+    }
+
+
+    function setSpriteSize() {
+      sprite.width = containerBox.width / 10;
+      sprite.height = containerBox.height / 10;
+    }
+
+    function rnd(max) {
+      return Math.floor(Math.random() * max);
+    }
+
+    document.addEventListener("keydown", (event) => {
+      let playerSprite = getPlayerSprite();
+      let playerBox = playerSprite.getBoundingClientRect();
+      if (event.code == 'ArrowUp') {
+        let newTop = playerBox.top - distanceY;
+        if (newTop > 0) {
+          playerSprite.style.top = `${newTop}px`;
+        }
+      }
+      if (event.code == 'ArrowDown') {
+        let newTop = playerBox.top + distanceY;
+        if (newTop < containerBox.height - sprite.height) {
+          playerSprite.style.top = `${newTop}px`;
+        }
+      }
+      if (event.code == 'ArrowLeft') {
+        let newLeft = playerBox.left - distanceX;
+        if (newLeft > 0) {
+          playerSprite.style.left = `${newLeft}px`;
+        }
+      }
+      if (event.code == 'ArrowRight') {
+        let newLeft = playerBox.left + distanceX;
+        if (newLeft < containerBox.width - sprite.width) {
+          playerSprite.style.left = `${newLeft}px`;
+        }
+      }
+    });
+
+    function addSprite(x, y, content, w, h, classList = '') {
+      itemNumber++;
+      let width = `${w}px`;
+      let height = `${h}px`;
+      let top = `${y}px`;
+      let left = `${x}px`;
+      let style = `width: ${width}; height:${height}; top:${top}; left:${left};`;
+      let newSprite = `<div id="i${itemNumber}" class="sprite ${classList}" style="${style}">${content}</div>`;
+      let bodyElement = document.querySelector("body");
+      bodyElement.insertAdjacentHTML('beforeend', newSprite);
+      return itemNumber;
+    }
+
+  </script>
+</head>
+
+<body style="margin: 0">
+  <div class="container"></div>
+</body>
+
+</html>

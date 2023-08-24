@@ -87,7 +87,6 @@ function outputGamePage($v, $id = '') {
     {$scripts}
   </head>
   <body>
-    <div class='container'>s</div>
     <div class='field'></div>
     <div id='nightShade'></div>
     <div id='starField'></div>
