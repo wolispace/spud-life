@@ -17,6 +17,15 @@
       outline: 1px solid red;
       background: wheat;
     }
+
+    .player {
+      background-color: white;
+    }
+
+    .control {
+      background-color: cornflowerblue;
+      color:white;
+    }
   </style>
   <script>
 
@@ -27,8 +36,10 @@
     let playerId = 0;
     let distanceY = 10;
     let distanceX = 10;
+    let grid = { x: 10, y: 10 };
     // what is this!?! 
     let scale = 5;
+    let timers = { duration: 50 };
 
 
     document.addEventListener("DOMContentLoaded", function () {
@@ -45,27 +56,37 @@
     }
 
     function addControls() {
-      let controlId = addSprite(1, containerBox.height - sprite.height, 'Left', sprite.width, sprite.height);
+      let controlId = addSprite(1, containerBox.height - (sprite.height * 5), '', sprite.width, sprite.height, 'control');
       let controlElement = document.querySelector(`#i${controlId}`);
-      controlElement.onclick = function () {moveLeft()};
+      controlElement.onmousedown = function () { moveLeft(); };
+      controlElement.onmouseup = function () { clearInterval(timers.moveLeft); timers.moving = false; };
+      controlElement.addEventListener("touchstart", moveLeft, false);
+      controlElement.addEventListener("touchend", function () { clearInterval(timers.moveLeft); timers.moving = false; }, false);
 
-      let controlId2 = addSprite(sprite.width, containerBox.height - sprite.height, 'Down', sprite.width, sprite.height);
-
-
+      let controlId2 = addSprite(sprite.width, containerBox.height - (sprite.height * 5), '', sprite.width, sprite.height, 'control');
       let controlElement2 = document.querySelector(`#i${controlId2}`);
-      controlElement2.onclick = function () {moveDown()};
+      controlElement2.onmousedown = function () { moveDown();};
+      controlElement2.onmouseup = function () { clearInterval(timers.moveDown); timers.moving = false;  };
+      controlElement2.addEventListener("touchstart", moveDown, false);
+      controlElement2.addEventListener("touchend", function () { clearInterval(timers.moveDown); timers.moving = false; }, false);
 
-      let controlId3 = addSprite(sprite.width, containerBox.height - (sprite.height * 2), 'Up', sprite.width, sprite.height);
+      let controlId3 = addSprite(sprite.width, containerBox.height - (sprite.height * 6), '', sprite.width, sprite.height, 'control');
       let controlElement3 = document.querySelector(`#i${controlId3}`);
-      controlElement3.onclick = function () {moveUp()};
+      controlElement3.onmousedown = function () { moveUp(); };
+      controlElement3.onmouseup = function () { clearInterval(timers.moveUp);timers.moving = false; };
+      controlElement3.addEventListener("touchstart", moveUp, false);
+      controlElement3.addEventListener("touchend", function () { clearInterval(timers.moveUp); timers.moving = false; }, false);
 
-      let controlId4 = addSprite((sprite.width * 2), containerBox.height - sprite.height, 'Right', sprite.width, sprite.height);
+      let controlId4 = addSprite((sprite.width * 2), containerBox.height - (sprite.height * 5), '', sprite.width, sprite.height, 'control');
       let controlElement4 = document.querySelector(`#i${controlId4}`);
-      controlElement4.onclick = function () {moveRight()};
+      controlElement4.onmousedown = function () { moveRight();  };
+      controlElement4.onmouseup = function () { clearInterval(timers.moveRight); timers.moving = false;};
+      controlElement4.addEventListener("touchstart", moveRight, false);
+      controlElement4.addEventListener("touchend", function () { clearInterval(timers.moveRight); timers.moving = false; }, false);
     }
 
     function addPlayer() {
-      playerId = addSprite(1, 1, 'P', sprite.width, sprite.height);
+      playerId = addSprite(1, 1, 'P', sprite.width, sprite.height, 'player');
     }
 
     function getPlayerSprite() {
@@ -77,12 +98,25 @@
       bodyElement.innerHTML = '<div class="container"></dv>';
     }
 
-    function addSprites() {
+    function addRandom() {
       clearBody();
       for (let step = 0; step < qty; step++) {
         let x = rnd(containerBox.width - sprite.width);
         let y = rnd(containerBox.height - sprite.height);
         addSprite(x, y, ``, sprite.width, sprite.height);
+      }
+    }
+
+    // adds a grid with no overlaps
+    function addSprites() {
+      clearBody();
+      let step = { x: 0, y: 0 };
+      for (step.y = 0; step.y < grid.y; step.y++) {
+        let y = sprite.height * step.y;
+        for (step.x = 0; step.x < grid.x; step.x++) {
+          let x = sprite.width * step.x;
+          addSprite(x, y, ``, sprite.width, sprite.height);
+        }
       }
     }
 
@@ -105,8 +139,6 @@
       let spritesList = document.querySelectorAll('.sprite');
       spritesList.forEach(element => {
         let elementBox = element.getBoundingClientRect();
-
-
         let newLeft = elementBox.left + ((elementBox.left * newWidthPct) / scale);
         let newTop = elementBox.top + ((elementBox.top * newHeightPct) / scale);
 
@@ -120,6 +152,14 @@
     function setSpriteSize() {
       sprite.width = containerBox.width / 10;
       sprite.height = containerBox.height / 10;
+      // make sure its square..
+      if (sprite.height > sprite.width) {
+        sprite.height = sprite.width;
+      } else {
+        sprite.width = sprite.height;
+      }
+      grid.x = parseInt(containerBox.width / sprite.width);
+      grid.y = parseInt(containerBox.height / sprite.height);
     }
 
     function rnd(max) {
@@ -141,39 +181,78 @@
       }
     });
 
+    document.addEventListener("keyup", (event) => {
+      if (event.code == 'ArrowUp') {
+        clearInterval(timers.moveUp);
+        timers.moving = false;
+      }
+      if (event.code == 'ArrowDown') {
+        clearInterval(timers.moveDown);
+        timers.moving = false;
+      }
+      if (event.code == 'ArrowLeft') {
+        clearInterval(timers.moveLeft);
+        timers.moving = false;
+      }
+      if (event.code == 'ArrowRight') {
+        clearInterval(timers.moveRight);
+        timers.moving = false;
+      }
+    });
+
     function moveUp() {
-      let playerSprite = getPlayerSprite();
-      let playerBox = playerSprite.getBoundingClientRect();
-      let newTop = playerBox.top - distanceY;
-      if (newTop > 0) {
-        playerSprite.style.top = `${newTop}px`;
+      if (!timers.moving) {
+        timers.moveUp = setInterval(() => {
+          let playerSprite = getPlayerSprite();
+          let playerBox = playerSprite.getBoundingClientRect();
+          let newTop = playerBox.top - distanceY;
+          if (newTop > 0) {
+            playerSprite.style.top = `${newTop}px`;
+          }
+          timers.moving = true;
+        }, timers.duration);
       }
     }
 
     function moveDown() {
-      let playerSprite = getPlayerSprite();
-      let playerBox = playerSprite.getBoundingClientRect();
-      let newTop = playerBox.top + distanceY;
-      if (newTop < containerBox.height - sprite.height) {
-        playerSprite.style.top = `${newTop}px`;
+      if (!timers.moving) {
+        timers.moveDown = setInterval(() => {
+          let playerSprite = getPlayerSprite();
+          let playerBox = playerSprite.getBoundingClientRect();
+          let newTop = playerBox.top + distanceY;
+          if (newTop < containerBox.height - sprite.height) {
+            playerSprite.style.top = `${newTop}px`;
+          }
+          timers.moving = true;
+        }, timers.duration);
       }
     }
 
     function moveLeft() {
-      let playerSprite = getPlayerSprite();
-      let playerBox = playerSprite.getBoundingClientRect();
-      let newLeft = playerBox.left - distanceX;
-      if (newLeft > 0) {
-        playerSprite.style.left = `${newLeft}px`;
+      if (!timers.moving) {
+        timers.moveLeft = setInterval(() => {
+          let playerSprite = getPlayerSprite();
+          let playerBox = playerSprite.getBoundingClientRect();
+          let newLeft = playerBox.left - distanceX;
+          if (newLeft > 0) {
+            playerSprite.style.left = `${newLeft}px`;
+          }
+          timers.moving = true;
+        }, timers.duration);
       }
     }
 
     function moveRight() {
-      let playerSprite = getPlayerSprite();
-      let playerBox = playerSprite.getBoundingClientRect();
-      let newLeft = playerBox.left + distanceX;
-      if (newLeft < containerBox.width - sprite.width) {
-        playerSprite.style.left = `${newLeft}px`;
+      if (!timers.moving) {
+        timers.moveRight = setInterval(() => {
+          let playerSprite = getPlayerSprite();
+          let playerBox = playerSprite.getBoundingClientRect();
+          let newLeft = playerBox.left + distanceX;
+          if (newLeft < containerBox.width - sprite.width) {
+            playerSprite.style.left = `${newLeft}px`;
+          }
+          timers.moving = true;
+        }, timers.duration);
       }
     }
 
