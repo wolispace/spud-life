@@ -24,7 +24,7 @@
 
     .control {
       background-color: cornflowerblue;
-      color:white;
+      color: white;
     }
   </style>
   <script>
@@ -44,7 +44,8 @@
 
     document.addEventListener("DOMContentLoaded", function () {
       setContainerBox();
-      addSprites();
+      //addSprites();
+      addRandom();
       addPlayer();
       addControls();
     });
@@ -65,22 +66,22 @@
 
       let controlId2 = addSprite(sprite.width, containerBox.height - (sprite.height * 5), '', sprite.width, sprite.height, 'control');
       let controlElement2 = document.querySelector(`#i${controlId2}`);
-      controlElement2.onmousedown = function () { moveDown();};
-      controlElement2.onmouseup = function () { clearInterval(timers.moveDown); timers.moving = false;  };
+      controlElement2.onmousedown = function () { moveDown(); };
+      controlElement2.onmouseup = function () { clearInterval(timers.moveDown); timers.moving = false; };
       controlElement2.addEventListener("touchstart", moveDown, false);
       controlElement2.addEventListener("touchend", function () { clearInterval(timers.moveDown); timers.moving = false; }, false);
 
       let controlId3 = addSprite(sprite.width, containerBox.height - (sprite.height * 6), '', sprite.width, sprite.height, 'control');
       let controlElement3 = document.querySelector(`#i${controlId3}`);
       controlElement3.onmousedown = function () { moveUp(); };
-      controlElement3.onmouseup = function () { clearInterval(timers.moveUp);timers.moving = false; };
+      controlElement3.onmouseup = function () { clearInterval(timers.moveUp); timers.moving = false; };
       controlElement3.addEventListener("touchstart", moveUp, false);
       controlElement3.addEventListener("touchend", function () { clearInterval(timers.moveUp); timers.moving = false; }, false);
 
       let controlId4 = addSprite((sprite.width * 2), containerBox.height - (sprite.height * 5), '', sprite.width, sprite.height, 'control');
       let controlElement4 = document.querySelector(`#i${controlId4}`);
-      controlElement4.onmousedown = function () { moveRight();  };
-      controlElement4.onmouseup = function () { clearInterval(timers.moveRight); timers.moving = false;};
+      controlElement4.onmousedown = function () { moveRight(); };
+      controlElement4.onmouseup = function () { clearInterval(timers.moveRight); timers.moving = false; };
       controlElement4.addEventListener("touchstart", moveRight, false);
       controlElement4.addEventListener("touchend", function () { clearInterval(timers.moveRight); timers.moving = false; }, false);
     }
@@ -105,6 +106,7 @@
         let y = rnd(containerBox.height - sprite.height);
         addSprite(x, y, ``, sprite.width, sprite.height);
       }
+      addSprite(110, 110, `B`, sprite.width, sprite.height);
     }
 
     // adds a grid with no overlaps
@@ -248,12 +250,56 @@
           let playerSprite = getPlayerSprite();
           let playerBox = playerSprite.getBoundingClientRect();
           let newLeft = playerBox.left + distanceX;
-          if (newLeft < containerBox.width - sprite.width) {
+          let collide = collisionRight();
+          console.log('collide', collide);
+          if (newLeft < containerBox.width - sprite.width && collide != true) {
             playerSprite.style.left = `${newLeft}px`;
           }
           timers.moving = true;
         }, timers.duration);
       }
+    }
+
+    // assume we are moving right.. we return true if something is directly on our right border
+    function collisionRight() {
+      let retValue = false;
+      let buffer = 5; // 5 pixel buffer
+      let playerSprite = getPlayerSprite();
+      let playerBox = playerSprite.getBoundingClientRect();
+      let playerTopRight = { x: playerBox.left + playerBox.width, y: playerBox.top };
+      let spritesList = document.querySelectorAll('.sprite');
+      spritesList.forEach(element => {
+        let spriteBox = element.getBoundingClientRect();
+        let topLeft = { x: spriteBox.left, y: spriteBox.top };
+        if (element.id == 'i11') {
+          console.log(element.id, spriteBox.x, spriteBox.y,',', playerTopRight.x, playerTopRight.y);
+        }
+        if (topLeft.x > playerTopRight.x) {
+          if (element.id == 'i11') {
+            console.log(topLeft.x, ' > ', playerTopRight.x);
+          }
+          if (topLeft.x < (playerTopRight.x + buffer)) {
+            if (element.id == 'i11') {
+              console.log(topLeft.x, ' < ', (playerTopRight.x + buffer));
+
+            }
+            // our X means we are potential collision..
+            if (topLeft.y > playerTopRight.y - spriteBox.height - buffer && topLeft.y < playerTopRight.y + playerBox.height - buffer) {
+              retValue = true;
+            }
+
+          } else {
+            if (element.id == 'i11') {
+              console.log('Z', topLeft.x, ' !< ', playerTopRight.x + buffer);
+
+            }
+          }
+        }
+
+      });
+      console.log('return', retValue);
+      return retValue;
+      
     }
 
     function addSprite(x, y, content, w, h, classList = '') {
