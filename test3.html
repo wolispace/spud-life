@@ -266,33 +266,33 @@
       let buffer = 10; // 5 pixel buffer
       let playerSprite = getPlayerSprite();
       let playerBox = playerSprite.getBoundingClientRect();
-      let playerTopRight = { 
-        x: playerBox.left + playerBox.width - buffer, 
+      let playerTopRight = {
+        x: playerBox.left + playerBox.width - buffer,
         y: playerBox.top + buffer,
       };
       let spritesList = document.querySelectorAll('.sprite');
       spritesList.forEach(element => {
-        let spriteBox = element.getBoundingClientRect();
-        let topLeft = { 
-          x: spriteBox.left + buffer, 
-          y: spriteBox.top + buffer,
-        };
-
-        if (playerTopRight.x <= topLeft.x ) {
-          if ((playerTopRight.x + buffer) > topLeft.x) {
-            // our X means we are potential collision..
-            if ((playerTopRight.y - spriteBox.height + buffer) <= topLeft.y) {
+        if (!retValue) {
+          let spriteBox = element.getBoundingClientRect();
+          let topLeft = {
+            x: spriteBox.left + buffer,
+            y: spriteBox.top + buffer,
+          };
+  
+          if (playerTopRight.x <= topLeft.x) {
+            if ((playerTopRight.x + buffer) > topLeft.x) {
+              // our X means we are potential collision..
               if ((playerTopRight.y + playerBox.height - buffer) > topLeft.y) {
-                retValue = true;
+                if ((playerTopRight.y + buffer) <= (topLeft.y + spriteBox.height)) {
+                  retValue = true;
+                }
               }
             }
           }
         }
-
       });
-      console.log('return', retValue);
+
       return retValue;
-      
     }
 
     function addSprite(x, y, content, w, h, classList = '') {
