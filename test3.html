@@ -263,35 +263,28 @@
     // assume we are moving right.. we return true if something is directly on our right border
     function collisionRight() {
       let retValue = false;
-      let buffer = 5; // 5 pixel buffer
+      let buffer = 10; // 5 pixel buffer
       let playerSprite = getPlayerSprite();
       let playerBox = playerSprite.getBoundingClientRect();
-      let playerTopRight = { x: playerBox.left + playerBox.width, y: playerBox.top };
+      let playerTopRight = { 
+        x: playerBox.left + playerBox.width - buffer, 
+        y: playerBox.top + buffer,
+      };
       let spritesList = document.querySelectorAll('.sprite');
       spritesList.forEach(element => {
         let spriteBox = element.getBoundingClientRect();
-        let topLeft = { x: spriteBox.left, y: spriteBox.top };
-        if (element.id == 'i11') {
-          console.log(element.id, spriteBox.x, spriteBox.y,',', playerTopRight.x, playerTopRight.y);
-        }
-        if (topLeft.x > playerTopRight.x) {
-          if (element.id == 'i11') {
-            console.log(topLeft.x, ' > ', playerTopRight.x);
-          }
-          if (topLeft.x < (playerTopRight.x + buffer)) {
-            if (element.id == 'i11') {
-              console.log(topLeft.x, ' < ', (playerTopRight.x + buffer));
+        let topLeft = { 
+          x: spriteBox.left + buffer, 
+          y: spriteBox.top + buffer,
+        };
 
-            }
+        if (playerTopRight.x <= topLeft.x ) {
+          if ((playerTopRight.x + buffer) > topLeft.x) {
             // our X means we are potential collision..
-            if (topLeft.y > playerTopRight.y - spriteBox.height - buffer && topLeft.y < playerTopRight.y + playerBox.height - buffer) {
-              retValue = true;
-            }
-
-          } else {
-            if (element.id == 'i11') {
-              console.log('Z', topLeft.x, ' !< ', playerTopRight.x + buffer);
-
+            if ((playerTopRight.y - spriteBox.height + buffer) <= topLeft.y) {
+              if ((playerTopRight.y + playerBox.height - buffer) > topLeft.y) {
+                retValue = true;
+              }
             }
           }
         }
