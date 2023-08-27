@@ -31,15 +31,16 @@
 
     let itemNumber = 0;
     let qty = 10;
-    let sprite = { width: 50, height: 50 };
+    let sprite = { width: 50, height: 50, buffer: { x: 5, y: 5 } };
     let containerBox = null;
     let playerId = 0;
-    let distanceY = 10;
-    let distanceX = 10;
+    let step = { x: 5, y: 5 };
     let grid = { x: 10, y: 10 };
+    let playerBuffer = { x: 10, y: 10 };
+
     // what is this!?! 
     let scale = 5;
-    let timers = { duration: 50 };
+    let timers = { duration: 30 };
 
 
     document.addEventListener("DOMContentLoaded", function () {
@@ -207,7 +208,7 @@
         timers.moveUp = setInterval(() => {
           let playerSprite = getPlayerSprite();
           let playerBox = playerSprite.getBoundingClientRect();
-          let newTop = playerBox.top - distanceY;
+          let newTop = playerBox.top - step.y;
           if (newTop > 0) {
             playerSprite.style.top = `${newTop}px`;
           }
@@ -221,7 +222,7 @@
         timers.moveDown = setInterval(() => {
           let playerSprite = getPlayerSprite();
           let playerBox = playerSprite.getBoundingClientRect();
-          let newTop = playerBox.top + distanceY;
+          let newTop = playerBox.top + step.y;
           if (newTop < containerBox.height - sprite.height) {
             playerSprite.style.top = `${newTop}px`;
           }
@@ -235,8 +236,8 @@
         timers.moveLeft = setInterval(() => {
           let playerSprite = getPlayerSprite();
           let playerBox = playerSprite.getBoundingClientRect();
-          let newLeft = playerBox.left - distanceX;
-          if (newLeft > 0) {
+          let newLeft = playerBox.left - step.x;
+          if (newLeft > 0 && collisionLeft() != true) {
             playerSprite.style.left = `${newLeft}px`;
           }
           timers.moving = true;
@@ -249,10 +250,8 @@
         timers.moveRight = setInterval(() => {
           let playerSprite = getPlayerSprite();
           let playerBox = playerSprite.getBoundingClientRect();
-          let newLeft = playerBox.left + distanceX;
-          let collide = collisionRight();
-          console.log('collide', collide);
-          if (newLeft < containerBox.width - sprite.width && collide != true) {
+          let newLeft = playerBox.left + step.x;
+          if (newLeft < containerBox.width - sprite.width && collisionRight() != true) {
             playerSprite.style.left = `${newLeft}px`;
           }
           timers.moving = true;
@@ -266,24 +265,56 @@
       let buffer = 10; // 5 pixel buffer
       let playerSprite = getPlayerSprite();
       let playerBox = playerSprite.getBoundingClientRect();
-      let playerTopRight = {
-        x: playerBox.left + playerBox.width - buffer,
-        y: playerBox.top + buffer,
+      let playerCorner = {
+        x: playerBox.left + playerBox.width - playerBuffer.x,
+        y: playerBox.top + playerBuffer.y,
       };
       let spritesList = document.querySelectorAll('.sprite');
       spritesList.forEach(element => {
         if (!retValue) {
           let spriteBox = element.getBoundingClientRect();
-          let topLeft = {
-            x: spriteBox.left + buffer,
-            y: spriteBox.top + buffer,
+          let checkCorner = {
+            x: spriteBox.left + sprite.buffer.x,
+            y: spriteBox.top + sprite.buffer.y,
           };
-  
-          if (playerTopRight.x <= topLeft.x) {
-            if ((playerTopRight.x + buffer) > topLeft.x) {
+          if (playerCorner.x <= checkCorner.x) {
+            if ((playerCorner.x + playerBuffer.x) > checkCorner.x) {
               // our X means we are potential collision..
-              if ((playerTopRight.y + playerBox.height - buffer) > topLeft.y) {
-                if ((playerTopRight.y + buffer) <= (topLeft.y + spriteBox.height)) {
+              if ((playerCorner.y + playerBox.height - playerBuffer.y) > checkCorner.y) {
+                if ((playerCorner.y + playerBuffer.y) <= (checkCorner.y + spriteBox.height)) {
+                  retValue = true;
+                }
+              }
+            }
+          }
+        }
+      });
+
+      return retValue;
+    }
+
+    function collisionLeft() {
+      let retValue = false;
+      let buffer = 10; // 5 pixel buffer
+      let playerSprite = getPlayerSprite();
+      let playerBox = playerSprite.getBoundingClientRect();
+      let playerCorner = {
+        x: playerBox.left + playerBuffer.x,
+        y: playerBox.top + playerBuffer.y,
+      };
+      let spritesList = document.querySelectorAll('.sprite');
+      spritesList.forEach(element => {
+        if (!retValue) {
+          let spriteBox = element.getBoundingClientRect();
+          let checkCorner = {
+            x: spriteBox.left + spriteBox.width + sprite.buffer.x,
+            y: spriteBox.top + sprite.buffer.y,
+          };
+          if (playerCorner.x >= checkCorner.x) {
+            if (playerCorner.x < checkCorner.x + sprite.buffer.x) {
+              // our X means we are potential collision..
+              if ((playerCorner.y + playerBox.height - playerBuffer.y) > checkCorner.y) {
+                if ((playerCorner.y + playerBuffer.y) <= (checkCorner.y + spriteBox.height)) {
                   retValue = true;
                 }
               }
