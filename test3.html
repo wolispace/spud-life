@@ -127,8 +127,8 @@
       }
       setContainerBox();
       //
-      let newWidthPct = (containerBox.width - last.width) / 100;
-      let newHeightPct = (containerBox.height - last.height) / 100;
+      let newWidthPct = containerBox.width / last.width;
+      let newHeightPct = containerBox.height / last.height;
 
       console.log(last, newWidthPct, newHeightPct);
 
@@ -139,15 +139,18 @@
       let spritesList = document.querySelectorAll('.block');
       spritesList.forEach(element => {
         let elementBox = element.getBoundingClientRect();
-        let newLeft = elementBox.left + ((elementBox.left * newWidthPct) / scale);
-        let newTop = elementBox.top + ((elementBox.top * newHeightPct) / scale);
+        let newLeft = elementBox.left * newWidthPct;
+        let newTop = elementBox.top * newHeightPct;
+        let newWidth = elementBox.width * newWidthPct;
+        let newHeight = elementBox.height * newHeightPct;
 
         element.style.left = `${newLeft}px`;
         element.style.top = `${newTop}px`;
-        element.style.width = `${sprite.width}px`;
-        element.style.height = `${sprite.height}px`
+        element.style.width = `${newWidth}px`;
+        element.style.height = `${newHeight}px`
       });
     }
+
 
     function setSpriteSize() {
       sprite.width = containerBox.width / 10;
@@ -260,21 +263,21 @@
       }
     }
 
-    function getPlayerBox () {
+    function getPlayerBox() {
       let playerSprite = getPlayerSprite();
       return playerSprite.getBoundingClientRect();
     }
 
-    function getPlayerCorner (playerBox, direction) {
+    function getPlayerCorner(playerBox, direction) {
       let playerCorner = {
         x: playerBox.left,
         y: playerBox.top,
       };
       if (direction === 'right') {
-        playerCorner.x += playerBox.width ;
+        playerCorner.x += playerBox.width;
       } else if (direction === 'down') {
         playerCorner.y += playerBox.height;
-      } 
+      }
 
       return playerCorner;
     }
@@ -325,7 +328,7 @@
 
       return retValue;
     }
-    
+
     function addSprite(x, y, content, w, h, classList = '') {
       itemNumber++;
       let width = `${w}px`;
