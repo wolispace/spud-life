@@ -36,7 +36,7 @@
     let playerId = 0;
     let step = { x: 5, y: 5 };
     let grid = { x: 10, y: 10 };
-    let playerBuffer = { x: 10, y: 10 };
+    let playerBuffer = { x: 10, y: 5 };
 
     // what is this!?! 
     let scale = 5;
@@ -58,33 +58,31 @@
     }
 
     function addControls() {
-      let controlId = addSprite(1, containerBox.height - (sprite.height * 5), '', sprite.width, sprite.height, 'control');
-      let controlElement = document.querySelector(`#i${controlId}`);
-      controlElement.onmousedown = function () { moveLeft(); };
-      controlElement.onmouseup = function () { clearInterval(timers.moveLeft); timers.moving = false; };
-      controlElement.addEventListener("touchstart", moveLeft, false);
-      controlElement.addEventListener("touchend", function () { clearInterval(timers.moveLeft); timers.moving = false; }, false);
+      const directions = ['left', 'down', 'up', 'right'];
+      const positions = [
+        [1, containerBox.height - (sprite.height * 5)],
+        [sprite.width, containerBox.height - (sprite.height * 5)],
+        [sprite.width, containerBox.height - (sprite.height * 6)],
+        [(sprite.width * 2), containerBox.height - (sprite.height * 5)]
+      ];
+      const moveFunctions = [moveLeft, moveDown, moveUp, moveRight];
+      const timerKeys = ['moveLeft', 'moveDown', 'moveUp', 'moveRight'];
 
-      let controlId2 = addSprite(sprite.width, containerBox.height - (sprite.height * 5), '', sprite.width, sprite.height, 'control');
-      let controlElement2 = document.querySelector(`#i${controlId2}`);
-      controlElement2.onmousedown = function () { moveDown(); };
-      controlElement2.onmouseup = function () { clearInterval(timers.moveDown); timers.moving = false; };
-      controlElement2.addEventListener("touchstart", moveDown, false);
-      controlElement2.addEventListener("touchend", function () { clearInterval(timers.moveDown); timers.moving = false; }, false);
-
-      let controlId3 = addSprite(sprite.width, containerBox.height - (sprite.height * 6), '', sprite.width, sprite.height, 'control');
-      let controlElement3 = document.querySelector(`#i${controlId3}`);
-      controlElement3.onmousedown = function () { moveUp(); };
-      controlElement3.onmouseup = function () { clearInterval(timers.moveUp); timers.moving = false; };
-      controlElement3.addEventListener("touchstart", moveUp, false);
-      controlElement3.addEventListener("touchend", function () { clearInterval(timers.moveUp); timers.moving = false; }, false);
-
-      let controlId4 = addSprite((sprite.width * 2), containerBox.height - (sprite.height * 5), '', sprite.width, sprite.height, 'control');
-      let controlElement4 = document.querySelector(`#i${controlId4}`);
-      controlElement4.onmousedown = function () { moveRight(); };
-      controlElement4.onmouseup = function () { clearInterval(timers.moveRight); timers.moving = false; };
-      controlElement4.addEventListener("touchstart", moveRight, false);
-      controlElement4.addEventListener("touchend", function () { clearInterval(timers.moveRight); timers.moving = false; }, false);
+      directions.forEach((direction, index) => {
+        let [x, y] = positions[index];
+        let controlId = addSprite(x, y, '', sprite.width, sprite.height, 'control');
+        let controlElement = document.querySelector(`#i${controlId}`);
+        controlElement.onmousedown = moveFunctions[index];
+        controlElement.onmouseup = function () {
+          clearInterval(timers[timerKeys[index]]);
+          timers.moving = false;
+        };
+        controlElement.addEventListener("touchstart", moveFunctions[index], false);
+        controlElement.addEventListener("touchend", function () {
+          clearInterval(timers[timerKeys[index]]);
+          timers.moving = false;
+        }, false);
+      });
     }
 
     function addPlayer() {
@@ -105,9 +103,8 @@
       for (let step = 0; step < qty; step++) {
         let x = rnd(containerBox.width - sprite.width);
         let y = rnd(containerBox.height - sprite.height);
-        addSprite(x, y, ``, sprite.width, sprite.height);
+        addSprite(x, y, ``, sprite.width, sprite.height, 'block');
       }
-      addSprite(110, 110, `B`, sprite.width, sprite.height);
     }
 
     // adds a grid with no overlaps
@@ -139,7 +136,7 @@
     });
 
     function resizeSprites(newWidthPct, newHeightPct) {
-      let spritesList = document.querySelectorAll('.sprite');
+      let spritesList = document.querySelectorAll('.block');
       spritesList.forEach(element => {
         let elementBox = element.getBoundingClientRect();
         let newLeft = elementBox.left + ((elementBox.left * newWidthPct) / scale);
@@ -170,36 +167,40 @@
     }
 
     document.addEventListener("keydown", (event) => {
-      if (event.code == 'ArrowUp') {
-        moveUp();
-      }
-      if (event.code == 'ArrowDown') {
-        moveDown();
-      }
-      if (event.code == 'ArrowLeft') {
-        moveLeft();
-      }
-      if (event.code == 'ArrowRight') {
-        moveRight();
+      switch (event.code) {
+        case 'ArrowUp':
+          moveUp();
+          break;
+        case 'ArrowDown':
+          moveDown();
+          break;
+        case 'ArrowLeft':
+          moveLeft();
+          break;
+        case 'ArrowRight':
+          moveRight();
+          break;
       }
     });
 
     document.addEventListener("keyup", (event) => {
-      if (event.code == 'ArrowUp') {
-        clearInterval(timers.moveUp);
-        timers.moving = false;
-      }
-      if (event.code == 'ArrowDown') {
-        clearInterval(timers.moveDown);
-        timers.moving = false;
-      }
-      if (event.code == 'ArrowLeft') {
-        clearInterval(timers.moveLeft);
-        timers.moving = false;
-      }
-      if (event.code == 'ArrowRight') {
-        clearInterval(timers.moveRight);
-        timers.moving = false;
+      switch (event.code) {
+        case 'ArrowUp':
+          clearInterval(timers.moveUp);
+          timers.moving = false;
+          break;
+        case 'ArrowDown':
+          clearInterval(timers.moveDown);
+          timers.moving = false;
+          break;
+        case 'ArrowLeft':
+          clearInterval(timers.moveLeft);
+          timers.moving = false;
+          break;
+        case 'ArrowRight':
+          clearInterval(timers.moveRight);
+          timers.moving = false;
+          break;
       }
     });
 
@@ -209,7 +210,7 @@
           let playerSprite = getPlayerSprite();
           let playerBox = playerSprite.getBoundingClientRect();
           let newTop = playerBox.top - step.y;
-          if (newTop > 0) {
+          if (newTop > 0 && collision('up') != true) {
             playerSprite.style.top = `${newTop}px`;
           }
           timers.moving = true;
@@ -223,7 +224,7 @@
           let playerSprite = getPlayerSprite();
           let playerBox = playerSprite.getBoundingClientRect();
           let newTop = playerBox.top + step.y;
-          if (newTop < containerBox.height - sprite.height) {
+          if (newTop < containerBox.height - sprite.height && collision('down') != true) {
             playerSprite.style.top = `${newTop}px`;
           }
           timers.moving = true;
@@ -237,7 +238,7 @@
           let playerSprite = getPlayerSprite();
           let playerBox = playerSprite.getBoundingClientRect();
           let newLeft = playerBox.left - step.x;
-          if (newLeft > 0 && collisionLeft() != true) {
+          if (newLeft > 0 && collision('left') != true) {
             playerSprite.style.left = `${newLeft}px`;
           }
           timers.moving = true;
@@ -251,12 +252,74 @@
           let playerSprite = getPlayerSprite();
           let playerBox = playerSprite.getBoundingClientRect();
           let newLeft = playerBox.left + step.x;
-          if (newLeft < containerBox.width - sprite.width && collisionRight() != true) {
+          if (newLeft < containerBox.width - sprite.width && collision('right') != true) {
             playerSprite.style.left = `${newLeft}px`;
           }
           timers.moving = true;
         }, timers.duration);
       }
+    }
+
+    function collision(direction) {
+      let retValue = false;
+      let playerSprite = getPlayerSprite();
+      let playerBox = playerSprite.getBoundingClientRect();
+      let playerCorner = {
+        x: playerBox.left + playerBuffer.x,
+        y: playerBox.top + playerBuffer.y,
+      };
+      if (direction === 'right') {
+        playerCorner.x += playerBox.width - playerBuffer.x;
+      } else if (direction === 'left') {
+        playerCorner.x += playerBuffer.x;
+      }
+      if (direction === 'down') {
+        playerCorner.y += playerBox.height - playerBuffer.y;
+      } else if (direction === 'up') {
+        playerCorner.y += playerBuffer.x;
+      }
+      let spritesList = document.querySelectorAll('.block');
+      spritesList.forEach(element => {
+        if (!retValue) {
+          let spriteBox = element.getBoundingClientRect();
+          let checkCorner = {
+            x: spriteBox.left + sprite.buffer.x,
+            y: spriteBox.top + sprite.buffer.y,
+          };
+          if (direction === 'right') {
+            checkCorner.x += sprite.buffer.x;
+          } else if (direction === 'left') {
+            checkCorner.x += spriteBox.width + sprite.buffer.x;
+          } else if (direction === 'up') {
+            checkCorner.y += spriteBox.height + sprite.buffer.y;
+          }
+          if (direction === 'right' || direction === 'left') {
+            if ((playerCorner.x >= checkCorner.x && direction === 'left') || (playerCorner.x <= checkCorner.x && direction === 'right')) {
+              if ((playerCorner.x < checkCorner.x + sprite.buffer.x && direction === 'left') || ((playerCorner.x + playerBuffer.x) > checkCorner.x && direction === 'right')) {
+                // our X means we are potential collision..
+                if ((playerCorner.y + playerBox.height - playerBuffer.y) > checkCorner.y) {
+                  if ((playerCorner.y + playerBuffer.y) <= (checkCorner.y + spriteBox.height)) {
+                    retValue = true;
+                  }
+                }
+              }
+            }
+          } else if (direction === 'up' || direction === 'down') {
+            if ((playerCorner.y >= checkCorner.y && direction === 'up') || (playerCorner.y <= checkCorner.y && direction === 'down')) {
+              if ((playerCorner.y < checkCorner.y + sprite.buffer.y && direction === 'up') || ((playerCorner.y + playerBuffer.y) > checkCorner.y && direction === 'down')) {
+                // our Y means we are potential collision..
+                if ((playerCorner.x + playerBox.width - playerBuffer.x) > checkCorner.x) {
+                  if ((playerCorner.x + playerBuffer.x) <= (checkCorner.x + spriteBox.width)) {
+                    retValue = true;
+                  }
+                }
+              }
+            }
+          }
+        }
+      });
+
+      return retValue;
     }
 
     // assume we are moving right.. we return true if something is directly on our right border
