@@ -38,20 +38,19 @@
     let step = { x: 5, y: 5 };
     let grid = { x: 10, y: 10 };
     let playerBuffer = { x: 5, y: 5 };
-
-    // what is this!?! 
-    let scale = 5;
     let timers = { duration: 20 };
-
-    let field = { log: [], rock: [] };
+    let field = { log: [], rock: [], spuds: [], };
 
     document.addEventListener("DOMContentLoaded", function () {
       setContainerBox();
-      //addSprites();
       addRandom();
-      addPlayer();
-      addControls();
+      setupThings();
     });
+
+    function setupThings() {
+      addPlayer();
+      addControls();      
+    }
 
     function setContainerBox() {
       let containerElement = document.querySelector(".container");
@@ -113,21 +112,7 @@
       field.log.forEach( (item) => {
         addSprite(item.x, item.y, ``, sprite.width, sprite.height, 'block');
       });
-      addPlayer();
-      addControls();
-    }
-
-    // adds a grid with no overlaps
-    function addSprites() {
-      clearBody();
-      let step = { x: 0, y: 0 };
-      for (step.y = 0; step.y < grid.y; step.y++) {
-        let y = sprite.height * step.y;
-        for (step.x = 0; step.x < grid.x; step.x++) {
-          let x = sprite.width * step.x;
-          addSprite(x, y, ``, sprite.width, sprite.height);
-        }
-      }
+      setupThings();
     }
 
     window.addEventListener("resize", (event) => {
@@ -162,7 +147,6 @@
       }
     }
 
-
     function setSpriteSize() {
       sprite.width = containerBox.width / 10;
       sprite.height = containerBox.height / 10;
@@ -180,41 +164,25 @@
       return Math.floor(Math.random() * max);
     }
 
+    function isDirection(direction) {
+      return ['up','down','left','right'].includes(direction);
+    }
+    function getDirection (event) {
+      return event.code.toLowerCase().replace('arrow', '');
+    }
+
     document.addEventListener("keydown", (event) => {
-      switch (event.code) {
-        case 'ArrowUp':
-          movePlayer('up');
-          break;
-        case 'ArrowDown':
-          movePlayer('down');
-          break;
-        case 'ArrowLeft':
-          movePlayer('left');
-          break;
-        case 'ArrowRight':
-          movePlayer('right');
-          break;
+      let direction = getDirection(event);
+      if (isDirection(direction)) {
+        movePlayer(direction);
       }
     });
 
     document.addEventListener("keyup", (event) => {
-      switch (event.code) {
-        case 'ArrowUp':
-          clearInterval(timers.up);
-          timers.moving = false;
-          break;
-        case 'ArrowDown':
-          clearInterval(timers.down);
-          timers.moving = false;
-          break;
-        case 'ArrowLeft':
-          clearInterval(timers.left);
-          timers.moving = false;
-          break;
-        case 'ArrowRight':
-          clearInterval(timers.right);
-          timers.moving = false;
-          break;
+      let direction = getDirection(event);
+      if (isDirection(direction)) {
+        clearInterval(timers[direction]);
+        timers.moving = false;
       }
     });
 
