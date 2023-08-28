@@ -4,7 +4,7 @@ $id = $_REQUEST['id'] ?? '';
 $id = cleanString($id);
 
 // unique code for js loading
-$v = rand(10,99999);
+$v = rand(10, 99999);
 
 //file_put_contents('_request.txt', json_encode($_REQUEST));
 
@@ -14,17 +14,20 @@ if (empty($id)) {
   saveLoad($v, $id);
 }
 
-function cleanString($str) {
+function cleanString($str)
+{
   $str = preg_replace('/[^a-z0-9]/i', '', $str);
-  
+
   return substr($str, 0, 15);
 }
 
-function isDevMode() {
+function isDevMode()
+{
   return file_exists('_dev.txt');
 }
 
-function saveLoad($v, $id) {
+function saveLoad($v, $id)
+{
   $data = isset($_REQUEST['data']) ? $_REQUEST['data'] : '';
   if (!empty($data)) {
     $jsDataFile = getJsDataFileName($id);
@@ -34,45 +37,33 @@ function saveLoad($v, $id) {
   outputGamePage($v, $id);
 }
 
-function getJsDataFileName($id) {
+function getJsDataFileName($id)
+{
   return "_saves/_save_{$id}.js";
 }
 
-function getSaveScript($v, $id) {
+function getSaveScript($v, $id)
+{
   $jsDataFileName = getJsDataFileName($id);
   return "<script src='{$jsDataFileName}?{$v}' ></script>";
 }
 
-function getScripts($v) {
+function getScripts($v)
+{
   $scripts = "<script src='_js_files.min.js?{$v}'></script>";
   if (isDevMode()) {
-    $scripts = "<script src='js/utils.js?{$v}'></script>
-    <script src='js/scanner.js?{$v}'></script>
-    <script src='js/sky.js?{$v}'></script>
-    <script src='js/character.js?{$v}'></script>
-    <script src='js/player.js?{$v}'></script>
-    <script src='js/pet.js?{$v}'></script>
-    <script src='js/customers.js?{$v}'></script>
-    <script src='js/basket.js?{$v}'></script>
-    <script src='js/potatadex.js?{$v}'></script>
-    <script src='js/home.js?{$v}'></script>
-    <script src='js/hardware.js?{$v}'></script>
-    <script src='js/shop.js?{$v}'></script>
-    <script src='js/machines.js?{$v}'></script>
-    <script src='js/tools.js?{$v}'></script>
-    <script src='js/spuds.js?{$v}'></script>
-    <script src='js/controls.js?{$v}'></script>
-    <script src='js/fields.js?{$v}'></script>
-    <script src='js/svg.js?{$v}'></script>
-    <script src='js/hint.js?{$v}'></script>
-    <script src='js/dialog.js?{$v}'></script>
-    <script src='js/main.js?{$v}'></script>";
+    $files = array('utils', 'svg', 'controls', 'main');
+    $scripts = '';
+    foreach ($files as $file) {
+      $scripts .= "<script src='src/{$file}.js?{$v}'></script>\n";
+    }
   }
 
   return $scripts;
 }
 
-function outputGamePage($v, $id = '') {
+function outputGamePage($v, $id = '')
+{
   $scripts = getScripts($v);
   $saveScript = empty($id) ? '' : getSaveScript($v, $id);
   print "<!DOCTYPE html>
@@ -86,27 +77,8 @@ function outputGamePage($v, $id = '') {
     <script src='js/lz-string.min.js?{$v}' ></script>
     {$scripts}
   </head>
-  <body>
-    <div class='field'></div>
-    <div id='nightShade'></div>
-    <div id='starField'></div>
-    <div id='cloudLine'></div>
-    <div id='buildingLine'></div>
-    <div id='grassLine'></div>
-    <div id='customerLine'></div>
-    <div id='itemSprite'></div>
-    <div id='petSprite'></div>
-    <div id='playerSprite'></div>
-    <div id='hintSprite'></div>
-    <div id='void'></div>    
-    <div class='dialog'>
-      <div class='header'>
-        <div class='title'>Title</div>
-        <div class='close buttonize' onclick='dialog.cancel()'>X</div>
-      </div>
-      <div class='content'></div>
-      <div class='footer'></div>
-    </div>
+  <body style='margin: 0'>
+    <div class='container'></div>
   </body>
 </html>";
 }
