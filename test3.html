@@ -126,17 +126,13 @@
         height: containerBox.height
       }
       setContainerBox();
-      //
       let newWidthPct = containerBox.width / last.width;
       let newHeightPct = containerBox.height / last.height;
-
-      console.log(last, newWidthPct, newHeightPct);
-
       resizeSprites(newWidthPct, newHeightPct);
     });
 
     function resizeSprites(newWidthPct, newHeightPct) {
-      let spritesList = document.querySelectorAll('.block');
+      let spritesList = document.querySelectorAll('.sprite');
       spritesList.forEach(element => {
         let elementBox = element.getBoundingClientRect();
         let newLeft = elementBox.left * newWidthPct;
