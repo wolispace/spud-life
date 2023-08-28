@@ -65,21 +65,19 @@
         [sprite.width, containerBox.height - (sprite.height * 6)],
         [(sprite.width * 2), containerBox.height - (sprite.height * 5)]
       ];
-      const moveFunctions = [moveLeft, moveDown, moveUp, moveRight];
-      const timerKeys = ['moveLeft', 'moveDown', 'moveUp', 'moveRight'];
 
       directions.forEach((direction, index) => {
         let [x, y] = positions[index];
         let controlId = addSprite(x, y, '', sprite.width, sprite.height, 'control');
         let controlElement = document.querySelector(`#i${controlId}`);
-        controlElement.onmousedown = moveFunctions[index];
+        controlElement.onmousedown = function () { movePlayer(direction) };
         controlElement.onmouseup = function () {
-          clearInterval(timers[timerKeys[index]]);
+          clearInterval(timers[direction]);
           timers.moving = false;
         };
-        controlElement.addEventListener("touchstart", moveFunctions[index], false);
+        controlElement.addEventListener("touchstart", function () { movePlayer(direction) }, false);
         controlElement.addEventListener("touchend", function () {
-          clearInterval(timers[timerKeys[index]]);
+          clearInterval(timers[direction]);
           timers.moving = false;
         }, false);
       });
@@ -145,6 +143,11 @@
         element.style.width = `${newWidth}px`;
         element.style.height = `${newHeight}px`
       });
+      // when we have sensible things to resize..
+      if (false) {
+        clearTimeout(timers.resize);
+        timers.resize = setTimeout(addRandom, 500);
+      }
     }
 
 
@@ -168,16 +171,16 @@
     document.addEventListener("keydown", (event) => {
       switch (event.code) {
         case 'ArrowUp':
-          moveUp();
+          movePlayer('up');
           break;
         case 'ArrowDown':
-          moveDown();
+        movePlayer('down');
           break;
         case 'ArrowLeft':
-          moveLeft();
+        movePlayer('left');
           break;
         case 'ArrowRight':
-          moveRight();
+        movePlayer('right');
           break;
       }
     });
@@ -185,78 +188,72 @@
     document.addEventListener("keyup", (event) => {
       switch (event.code) {
         case 'ArrowUp':
-          clearInterval(timers.moveUp);
+          clearInterval(timers.up);
           timers.moving = false;
           break;
         case 'ArrowDown':
-          clearInterval(timers.moveDown);
+          clearInterval(timers.down);
           timers.moving = false;
           break;
         case 'ArrowLeft':
-          clearInterval(timers.moveLeft);
+          clearInterval(timers.left);
           timers.moving = false;
           break;
         case 'ArrowRight':
-          clearInterval(timers.moveRight);
+          clearInterval(timers.right);
           timers.moving = false;
           break;
       }
     });
 
+    function movePlayer(direction) {
+      if (!timers.moving) {
+        timers[direction] = setInterval(() => {
+          let playerSprite = getPlayerSprite();
+          let playerBox = playerSprite.getBoundingClientRect();
+          let newTop, newLeft;
+          switch (direction) {
+            case 'up':
+              newTop = playerBox.top - step.y;
+              if (newTop > 0 && collision('up') != true) {
+                playerSprite.style.top = `${newTop}px`;
+              }
+              break;
+            case 'down':
+              newTop = playerBox.top + step.y;
+              if (newTop < containerBox.height - sprite.height && collision('down') != true) {
+                playerSprite.style.top = `${newTop}px`;
+              }
+              break;
+            case 'left':
+              newLeft = playerBox.left - step.x;
+              if (newLeft > 0 && collision('left') != true) {
+                playerSprite.style.left = `${newLeft}px`;
+              }
+              break;
+            case 'right':
+              newLeft = playerBox.left + step.x;
+              if (newLeft < containerBox.width - sprite.width && collision('right') != true) {
+                playerSprite.style.left = `${newLeft}px`;
+              }
+              break;
+          }
+          timers.moving = true;
+        }, timers.duration);
+      }
+    }
+
     function moveUp() {
-      if (!timers.moving) {
-        timers.moveUp = setInterval(() => {
-          let playerSprite = getPlayerSprite();
-          let playerBox = playerSprite.getBoundingClientRect();
-          let newTop = playerBox.top - step.y;
-          if (newTop > 0 && collision('up') != true) {
-            playerSprite.style.top = `${newTop}px`;
-          }
-          timers.moving = true;
-        }, timers.duration);
-      }
+      movePlayer('up');
     }
-
     function moveDown() {
-      if (!timers.moving) {
-        timers.moveDown = setInterval(() => {
-          let playerSprite = getPlayerSprite();
-          let playerBox = playerSprite.getBoundingClientRect();
-          let newTop = playerBox.top + step.y;
-          if (newTop < containerBox.height - sprite.height && collision('down') != true) {
-            playerSprite.style.top = `${newTop}px`;
-          }
-          timers.moving = true;
-        }, timers.duration);
-      }
+      movePlayer('down');
     }
-
     function moveLeft() {
-      if (!timers.moving) {
-        timers.moveLeft = setInterval(() => {
-          let playerSprite = getPlayerSprite();
-          let playerBox = playerSprite.getBoundingClientRect();
-          let newLeft = playerBox.left - step.x;
-          if (newLeft > 0 && collision('left') != true) {
-            playerSprite.style.left = `${newLeft}px`;
-          }
-          timers.moving = true;
-        }, timers.duration);
-      }
+      movePlayer('left');
     }
-
     function moveRight() {
-      if (!timers.moving) {
-        timers.moveRight = setInterval(() => {
-          let playerSprite = getPlayerSprite();
-          let playerBox = playerSprite.getBoundingClientRect();
-          let newLeft = playerBox.left + step.x;
-          if (newLeft < containerBox.width - sprite.width && collision('right') != true) {
-            playerSprite.style.left = `${newLeft}px`;
-          }
-          timers.moving = true;
-        }, timers.duration);
-      }
+      movePlayer('right');
     }
 
     function getPlayerBox() {
@@ -298,10 +295,10 @@
           }
           if (direction === 'right' || direction === 'left') {
             if ((playerCorner.x >= checkCorner.x && direction === 'left') || (playerCorner.x <= checkCorner.x && direction === 'right')) {
-              if ((playerCorner.x < checkCorner.x + step.x && direction === 'left') || ((playerCorner.x + step.x) > checkCorner.x && direction === 'right')) {
+              if ((playerCorner.x <= checkCorner.x + step.x && direction === 'left') || ((playerCorner.x + step.x) >= checkCorner.x && direction === 'right')) {
                 // our X means we are potential collision..
-                if ((playerCorner.y + playerBox.height - step.y) > checkCorner.y) {
-                  if ((playerCorner.y + step.y) <= (checkCorner.y + spriteBox.height)) {
+                if ((playerCorner.y + playerBox.height) >= checkCorner.y) {
+                  if ((playerCorner.y) <= (checkCorner.y + spriteBox.height)) {
                     retValue = true;
                   }
                 }
@@ -309,10 +306,10 @@
             }
           } else if (direction === 'up' || direction === 'down') {
             if ((playerCorner.y >= checkCorner.y && direction === 'up') || (playerCorner.y <= checkCorner.y && direction === 'down')) {
-              if ((playerCorner.y < checkCorner.y + step.y && direction === 'up') || ((playerCorner.y + step.y) > checkCorner.y && direction === 'down')) {
+              if ((playerCorner.y <= checkCorner.y + step.y && direction === 'up') || ((playerCorner.y + step.y) >= checkCorner.y && direction === 'down')) {
                 // our Y means we are potential collision..
-                if ((playerCorner.x + playerBox.width - step.x) > checkCorner.x) {
-                  if ((playerCorner.x + step.x) <= (checkCorner.x + spriteBox.width)) {
+                if ((playerCorner.x + playerBox.width) >= checkCorner.x) {
+                  if ((playerCorner.x) <= (checkCorner.x + spriteBox.width)) {
                     retValue = true;
                   }
                 }
