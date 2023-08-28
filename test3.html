@@ -25,6 +25,7 @@
     .control {
       background-color: cornflowerblue;
       color: white;
+      opacity: 50%;
     }
   </style>
   <script>
@@ -42,6 +43,7 @@
     let scale = 5;
     let timers = { duration: 20 };
 
+    let field = { log: [], rock: [] };
 
     document.addEventListener("DOMContentLoaded", function () {
       setContainerBox();
@@ -102,7 +104,17 @@
         let x = rnd(containerBox.width - sprite.width);
         let y = rnd(containerBox.height - sprite.height);
         addSprite(x, y, ``, sprite.width, sprite.height, 'block');
+        field.log[step] = { x: x, y: y };
       }
+    }
+
+    function redraw() {
+      clearBody();
+      field.log.forEach( (item) => {
+        addSprite(item.x, item.y, ``, sprite.width, sprite.height, 'block');
+      });
+      addPlayer();
+      addControls();
     }
 
     // adds a grid with no overlaps
@@ -144,9 +156,9 @@
         element.style.height = `${newHeight}px`
       });
       // when we have sensible things to resize..
-      if (false) {
+      if (true) {
         clearTimeout(timers.resize);
-        timers.resize = setTimeout(addRandom, 500);
+        timers.resize = setTimeout(redraw, 500);
       }
     }
 
@@ -174,13 +186,13 @@
           movePlayer('up');
           break;
         case 'ArrowDown':
-        movePlayer('down');
+          movePlayer('down');
           break;
         case 'ArrowLeft':
-        movePlayer('left');
+          movePlayer('left');
           break;
         case 'ArrowRight':
-        movePlayer('right');
+          movePlayer('right');
           break;
       }
     });
