@@ -17,3 +17,7 @@
     color: white;
     opacity: 50%;
   }
+
+  div > svg {
+    height: 100%;
+  }

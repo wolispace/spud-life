@@ -29,8 +29,9 @@ function setContainerBox() {
 
 
 function addPlayer() {
-    let itemSvg = svg.render('chipper2000', 1, ''); 
-  playerId = addSprite(1, 1, itemSvg, sprite.width, sprite.height, 'player');
+    let itemSvg = svg.render('bottle', 1, ''); 
+    // scale the width and height of the svg
+  playerId = addSprite(1, 1, itemSvg, 32, sprite.height, 'player');
 }
 
 function getPlayerSprite() {
