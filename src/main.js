@@ -1,7 +1,6 @@
 
 let itemNumber = 0;
 let qty = 10;
-let sprite = { width: 50, height: 50 };
 let containerBox = null;
 let playerId = 0;
 let step = { x: 5, y: 5 };
@@ -31,11 +30,7 @@ function setContainerBox() {
 function addPlayer() {
     let itemSvg = svg.render('bottle', 1, ''); 
     // scale the width and height of the svg
-  playerId = sprites.render(1, 1, itemSvg, 32, sprite.height, 'player');
-}
-
-function getPlayerSprite() {
-  return document.querySelector(`#i${playerId}`);
+  playerId = sprite.render(1, 1, itemSvg, 32, sprite.height, 'player');
 }
 
 function clearBody() {
@@ -49,7 +44,7 @@ function addRandom() {
     let x = rnd(containerBox.width - sprite.width);
     let y = rnd(containerBox.height - sprite.height);
     let itemSvg = svg.render('chipper', 5, ''); 
-    sprites.render(x, y, itemSvg, sprite.width, sprite.height, 'block');
+    sprite.render(x, y, itemSvg, sprite.width, sprite.height, 'block');
     field.log[step] = { x: x, y: y };
   }
 }
@@ -58,7 +53,7 @@ function redraw() {
   clearBody();
   let itemSvg = svg.render('chipper', 5, ''); 
   field.log.forEach( (item) => {
-    sprites.render(item.x, item.y, itemSvg, sprite.width, sprite.height, 'block');
+    sprite.render(item.x, item.y, itemSvg, sprite.width, sprite.height, 'block');
   });
   setupThings();
 }
@@ -133,7 +128,7 @@ document.addEventListener("keyup", (event) => {
 function movePlayer(direction) {
   if (!timers.moving) {
     timers[direction] = setInterval(() => {
-      let playerSprite = getPlayerSprite();
+      let playerSprite = sprite.get(playerId);
       let playerBox = playerSprite.getBoundingClientRect();
       let newTop, newLeft;
       switch (direction) {
@@ -181,7 +176,7 @@ function moveRight() {
 }
 
 function getPlayerBox() {
-  let playerSprite = getPlayerSprite();
+  let playerSprite = sprite.get(playerId);
   return playerSprite.getBoundingClientRect();
 }
 

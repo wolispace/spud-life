@@ -10,7 +10,7 @@ const controls = {
       
         directions.forEach((direction, index) => {
           let [x, y] = positions[index];
-          let controlId = addSprite(x, y, '', sprite.width, sprite.height, 'control');
+          let controlId = sprite.render(x, y, '', sprite.width, sprite.height, 'control');
           let controlElement = document.querySelector(`#i${controlId}`);
           controlElement.onmousedown = function () { movePlayer(direction) };
           controlElement.onmouseup = function () {
