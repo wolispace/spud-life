@@ -1,7 +1,11 @@
 
 type "src\utils.js"      > _js_files.js
-type "src\svg.js"       >> _js_files.js
-type "src\controls.js"  >> _js_files.js
+
+for %%r in (sprites, svg, controls) do ( 
+    type src\%%r.js >> _js_files.js
+)
+
+
 type "src\main.js"      >> _js_files.js
 
 :: start https://www.toptal.com/developers/javascript-minifier
