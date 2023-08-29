@@ -31,7 +31,7 @@ function setContainerBox() {
 function addPlayer() {
     let itemSvg = svg.render('bottle', 1, ''); 
     // scale the width and height of the svg
-  playerId = addSprite(1, 1, itemSvg, 32, sprite.height, 'player');
+  playerId = sprites.render(1, 1, itemSvg, 32, sprite.height, 'player');
 }
 
 function getPlayerSprite() {
@@ -49,7 +49,7 @@ function addRandom() {
     let x = rnd(containerBox.width - sprite.width);
     let y = rnd(containerBox.height - sprite.height);
     let itemSvg = svg.render('chipper', 5, ''); 
-    addSprite(x, y, itemSvg, sprite.width, sprite.height, 'block');
+    sprites.render(x, y, itemSvg, sprite.width, sprite.height, 'block');
     field.log[step] = { x: x, y: y };
   }
 }
@@ -58,7 +58,7 @@ function redraw() {
   clearBody();
   let itemSvg = svg.render('chipper', 5, ''); 
   field.log.forEach( (item) => {
-    addSprite(item.x, item.y, itemSvg, sprite.width, sprite.height, 'block');
+    sprites.render(item.x, item.y, itemSvg, sprite.width, sprite.height, 'block');
   });
   setupThings();
 }
@@ -246,16 +246,4 @@ function collision(direction) {
   return retValue;
 }
 
-function addSprite(x, y, content, w, h, classList = '') {
-  itemNumber++;
-  let width = `${w}px`;
-  let height = `${h}px`;
-  let top = `${y}px`;
-  let left = `${x}px`;
-  let style = `width: ${width}; height:${height}; top:${top}; left:${left};`;
-  let newSprite = `<div id="i${itemNumber}" class="sprite ${classList}" style="${style}">${content}</div>`;
-  let bodyElement = document.querySelector("body");
-  bodyElement.insertAdjacentHTML('beforeend', newSprite);
-  return itemNumber;
-}
 
