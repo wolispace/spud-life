@@ -498,6 +498,28 @@ const svg = {
       scale: 70,
       rotate: 360,
     },
+    log2: `<svg id="b" version="1.1" viewBox="0 0 97 64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+     <linearGradient id="a" x1="49.189" x2="45.981" y1="49.438" y2="35.066" gradientTransform="translate(2.1213 -1.0607)" gradientUnits="userSpaceOnUse">
+      <stop style="stop-color:#161616" offset="0"/>
+      <stop style="stop-color:#3c2f12" offset="1"/>
+     </linearGradient>
+    </defs>
+    <path d="m77.251 22.981s3.3438-5.034 8.3085-1.2374l3.0052 2.2981" style="fill:#eaddb9;stroke-linecap:round;stroke-opacity:.75115;stroke-width:2.5;stroke:#fff"/>
+    <path d="m14.142 39.068s4.097-4.7659 6.5407-3.3588c2.6607 1.5321 0.96008 3.0641 1.4142 4.5962" style="fill:#eaddb9;stroke-linecap:round;stroke-opacity:.6129;stroke-width:2.5;stroke:#fff"/>
+    <path d="m6.364 24.749s-6.5407 12.021-3.182 19.092c3.3588 7.0711 4.9497 17.678 9.3692 16.794 4.4194-0.88388 19.976-9.0156 33.588-12.374 13.612-3.3588 43.134-7.7782 43.134-7.7782s1.591 1.2374 3.7123-7.2478c2.1213-8.4853 1.591-16.263-1.0607-17.147-2.6516-0.88388-20.86-1.4142-28.638-0.70711s-10.253 1.591-10.253 1.591-0.17678-6.8943-2.4749-9.5459c-2.2981-2.6517-3.5355-3.182-3.5355-3.182s-12.728-2.6517-18.915 0.70711c-6.1872 3.3588-6.1872 6.364-6.1872 6.364l3.8891 9.5459z" style="fill:url(#a);paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-width:4.6;stroke:#000"/>
+    <path d="m6.8943 24.926s2.8136 2.3597 4.5536 6.3001c0.41617 0.94249 19.077-0.72973 19.077-0.72973 0.16348 0.12737-16.509 2.2345-16.382 5.213 0.14166 3.329 1.9789 3.1687 0.88048 11.709-0.7899 6.1416-3.7089 12.863-3.7089 12.863s-3.061-1.9327-5.2847-6.1248c-2.5603-4.8266-4.2985-12.245-3.7309-16.503 1.0607-7.955 4.5962-12.728 4.5962-12.728z" style="fill:#d5b36c;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-width:4.6;stroke:#000"/>
+    <path d="m22.097 10.783s4.5169 4.3853 12.551 2.2981c7.0138-1.8221 9.5644-1.6243 11.314-4.773l1.7678-3.182s-9.5459-4.0659-16.794-1.2374c-7.2478 2.8284-8.8388 6.8943-8.8388 6.8943z" style="fill:#e4cfa3;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-width:4.6;stroke:#000"/>
+    <path d="m53.205 22.054c10.546-1.9673 27.826-1.2577 38.366-0.13388" style="fill:none;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.2383;stroke-width:3.2;stroke:#fff"/>
+    <path d="m47.553 12.198s1.7678 2.1213 1.7678 5.3033v1.3033" style="fill:none;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.21277;stroke-width:3.2;stroke:#fff"/>
+    <path d="m11.314 24.572 2.6528 2.8593 15.025-0.38445" style="fill:none;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.24255;stroke-width:3.2;stroke:#fff"/>
+    <path d="m8.3085 39.775-0.53033-7.0711" style="fill:none;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.38723;stroke-width:1.5;stroke:#000"/>
+    <path d="m8.1317 39.598 2.6517-3.5355" style="fill:none;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.38723;stroke-width:1.5;stroke:#000"/>
+    <path d="m10.96 47.73-2.1213-8.3085-2.2981 3.7123" style="fill:none;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.38723;stroke-width:1.5;stroke:#000"/>
+    <path d="m8.1317 39.598-2.4749-0.88388" style="fill:none;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.38723;stroke-width:1.5;stroke:#000"/>
+    <path d="m38.184 6.5407-5.3033 1.2374 2.2981 1.7678" style="fill:none;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.38723;stroke-width:1.5;stroke:#000"/>
+    <path d="m28.461 10.96 3.3588-3.182 0.53033-2.4749" style="fill:none;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.38723;stroke-width:1.5;stroke:#000"/>
+   </svg>`,
     log: {
       class: "thick",
       paths: [

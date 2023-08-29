@@ -26,7 +26,6 @@ function setContainerBox() {
   sprite.setSize();
 }
 
-
 function addPlayer() {
     let itemSvg = svg.render('bottle', 1, ''); 
     // scale the width and height of the svg
@@ -43,15 +42,18 @@ function addRandom() {
   for (let step = 0; step < qty; step++) {
     let x = rnd(containerBox.width - sprite.width);
     let y = rnd(containerBox.height - sprite.height);
-    let itemSvg = svg.render('chipper', 5, ''); 
-    sprite.render(x, y, itemSvg, sprite.width, sprite.height, 'block');
+    let itemSvg = svg.render('log2', 1, ''); 
+    let log2 = {scale: 0.8};
+    sprite.render(x, y, itemSvg, sprite.width * log2.scale, sprite.heighth * log2.scale, 'block');
     field.log[step] = { x: x, y: y };
   }
 }
 
 function redraw() {
+  setContainerBox();
+  sprite.setSize();
   clearBody();
-  let itemSvg = svg.render('chipper', 5, ''); 
+  let itemSvg = svg.render('log2', 1, ''); 
   field.log.forEach( (item) => {
     sprite.render(item.x, item.y, itemSvg, sprite.width, sprite.height, 'block');
   });
@@ -63,7 +65,7 @@ window.addEventListener("resize", (event) => {
     width: containerBox.width,
     height: containerBox.height
   }
-  setContainerBox();
+  //setContainerBox();
   let newWidthPct = containerBox.width / last.width;
   let newHeightPct = containerBox.height / last.height;
   resizeSprites(newWidthPct, newHeightPct);

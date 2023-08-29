@@ -43,6 +43,7 @@ const sprite = {
     } else {
       sprite.width = sprite.height;
     }
+    console.log(sprite);
     grid.x = parseInt(containerBox.width / sprite.width);
     grid.y = parseInt(containerBox.height / sprite.height);
   }
