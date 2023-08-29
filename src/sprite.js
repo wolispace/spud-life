@@ -32,6 +32,19 @@ const sprite = {
 
   get: function(itemNumber) {
     return document.querySelector(`#i${itemNumber}`);
+  },
+
+  setSize: function () {
+    sprite.width = containerBox.width / 10;
+    sprite.height = containerBox.height / 10;
+    // make sure its square..
+    if (sprite.height > sprite.width) {
+      sprite.height = sprite.width;
+    } else {
+      sprite.width = sprite.height;
+    }
+    grid.x = parseInt(containerBox.width / sprite.width);
+    grid.y = parseInt(containerBox.height / sprite.height);
   }
 
   

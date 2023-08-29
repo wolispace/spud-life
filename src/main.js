@@ -23,7 +23,7 @@ function setupThings() {
 function setContainerBox() {
   let containerElement = document.querySelector(".container");
   containerBox = containerElement.getBoundingClientRect();
-  setSpriteSize();
+  sprite.setSize();
 }
 
 
@@ -88,19 +88,6 @@ function resizeSprites(newWidthPct, newHeightPct) {
     clearTimeout(timers.resize);
     timers.resize = setTimeout(redraw, 500);
   }
-}
-
-function setSpriteSize() {
-  sprite.width = containerBox.width / 10;
-  sprite.height = containerBox.height / 10;
-  // make sure its square..
-  if (sprite.height > sprite.width) {
-    sprite.height = sprite.width;
-  } else {
-    sprite.width = sprite.height;
-  }
-  grid.x = parseInt(containerBox.width / sprite.width);
-  grid.y = parseInt(containerBox.height / sprite.height);
 }
 
 function isDirection(direction) {
