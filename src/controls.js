@@ -1,11 +1,12 @@
 const controls = {
     render: function () {
         const directions = ['left', 'down', 'up', 'right'];
+        let padding = 10;
         const positions = [
           [1, containerBox.height - (sprite.height * 5)],
-          [sprite.width, containerBox.height - (sprite.height * 5)],
-          [sprite.width, containerBox.height - (sprite.height * 6)],
-          [(sprite.width * 2), containerBox.height - (sprite.height * 5)]
+          [sprite.width + padding, containerBox.height - (sprite.height * 5)],
+          [sprite.width + padding, containerBox.height - (sprite.height * 6 + padding)],
+          [((sprite.width + padding) * 2), containerBox.height - (sprite.height * 5)]
         ];
       
         directions.forEach((direction, index) => {

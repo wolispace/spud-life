@@ -46,8 +46,55 @@ const sprite = {
     console.log(sprite);
     grid.x = parseInt(containerBox.width / sprite.width);
     grid.y = parseInt(containerBox.height / sprite.height);
-  }
+  },
 
+  collision: function (direction) {
+    let retValue = false;
+    let playerBox = getPlayerBox();
+    let playerCorner = getPlayerCorner(playerBox, direction);
+  
+    let spritesList = document.querySelectorAll('.block');
+    spritesList.forEach(element => {
+      if (!retValue) {
+        let spriteBox = element.getBoundingClientRect();
+        let checkCorner = {
+          x: spriteBox.left,
+          y: spriteBox.top,
+        };
+        if (direction === 'left') {
+          checkCorner.x += spriteBox.width;
+        } else if (direction === 'up') {
+          checkCorner.y += spriteBox.height;
+        }
+        if (direction === 'right' || direction === 'left') {
+          if ((playerCorner.x >= checkCorner.x && direction === 'left') || (playerCorner.x <= checkCorner.x && direction === 'right')) {
+            if ((playerCorner.x <= checkCorner.x + step.x && direction === 'left') || ((playerCorner.x + step.x) >= checkCorner.x && direction === 'right')) {
+              // our X means we are potential collision..
+              if ((playerCorner.y + playerBox.height) >= checkCorner.y) {
+                if ((playerCorner.y) <= (checkCorner.y + spriteBox.height)) {
+                  retValue = true;
+                }
+              }
+            }
+          }
+        } else if (direction === 'up' || direction === 'down') {
+          if ((playerCorner.y >= checkCorner.y && direction === 'up') || (playerCorner.y <= checkCorner.y && direction === 'down')) {
+            if ((playerCorner.y <= checkCorner.y + step.y && direction === 'up') || ((playerCorner.y + step.y) >= checkCorner.y && direction === 'down')) {
+              // our Y means we are potential collision..
+              if ((playerCorner.x + playerBox.width) >= checkCorner.x) {
+                if ((playerCorner.x) <= (checkCorner.x + spriteBox.width)) {
+                  retValue = true;
+                }
+              }
+            }
+          }
+        }
+      }
+    });
+  
+    return retValue;
+  },
+  
   
 };
 

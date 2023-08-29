@@ -1,21 +1,21 @@
 .container {
     width: 100%;
     height: 100vh;
-    outline: 1px solid blue;
+    background-color: seagreen;
   }
 
   .sprite {
     position: absolute;
-  }
-
-  .player {
-    background-color: white;
+   
   }
 
   .control {
-    background-color: cornflowerblue;
+    background-color: navy;
     color: white;
     opacity: 50%;
+    border:3px solid white;
+    border-radius: 5px;
+    margin: 5px;
   }
 
   div > svg {
