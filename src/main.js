@@ -8,6 +8,7 @@ let step = { x: 5 * pixelScale, y: 5 * pixelScale};
 let grid = { x: 10, y: 10 };
 let timers = { duration: 20 };
 let field = { log: [], rock: [], spuds: [], };
+let bodySet = getBodySet();
 
 document.addEventListener("DOMContentLoaded", function () {
   introGame();
@@ -36,9 +37,30 @@ function setContainerBox() {
 }
 
 function addPlayer() {
-    let itemSvg = svg.render('bottle', 1, ''); 
+  
+  let body = character.randomBody();
+    let itemSvg = svg.renderPerson(body);
     // scale the width and height of the svg
   playerId = sprite.render(1, 1, itemSvg, 32, sprite.height, 'player');
+}
+
+// takes list of body parts from imgList and make easy-to-parse lists for each part
+function getBodySet() {
+  let partOptions = [];
+  // extract body bits
+  let baseBody = character.defaultBody;
+
+  Object.keys(baseBody).forEach((bodyPart) => {
+    partOptions[bodyPart] = [];
+    Object.entries(svg.imgList).forEach(([key, part]) => {
+      if (`${key}-`.indexOf(bodyPart) > -1) {
+        let bits = key.split("-");
+        partOptions[bodyPart].push(key);
+      }
+    });
+  });
+
+  return partOptions;
 }
 
 function clearBody() {
@@ -128,6 +150,7 @@ document.addEventListener("keyup", (event) => {
 
 function movePlayer(direction) {
   if (!timers.moving) {
+    character.look(direction);
     timers[direction] = setInterval(() => {
       let playerSprite = sprite.get(playerId);
       let playerBox = playerSprite.getBoundingClientRect();

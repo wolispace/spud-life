@@ -1,20 +1,20 @@
 const character = {
   currentBodyPart: 'body',
     render: function () {
-      svg.showElement("#playerSprite");
-      let thisBlock = document.querySelector(`#playerSprite svg`);
+      svg.showElement(".player");
+      let thisBlock = document.querySelector(`.player svg`);
       svg.animate(thisBlock, `grow`, 1);
     },
     hide: function () {
-      svg.hideElement("#playerSprite");
+      svg.hideElement(".player");
     },
     show: function () {
-      svg.showElement("#playerSprite");
+      svg.showElement(".player");
     },
   
     look: function (direction) {
-      let playerSprite = document.querySelector("#playerSprite > svg");
-      let playerHead = document.querySelector("#playerSprite .playerHead");
+      let playerSprite = document.querySelector(".player > svg");
+      let playerHead = document.querySelector(".player .playerHead");
       if (direction == "left") {
         playerHead.setAttribute("transform", "rotate(0, 51, 21.2)");
         playerSprite.setAttribute("transform", "translate(0, 0) scale(1, 1)");
@@ -30,7 +30,7 @@ const character = {
       }
     },
     resetHead: function () {
-      let playerHead = document.querySelector("#playerSprite .playerHead");
+      let playerHead = document.querySelector(".player .playerHead");
       setTimeout( () => {playerHead.setAttribute("transform", "rotate(0, 51, 21.2)");}, 1000);
     },
 
@@ -74,7 +74,7 @@ const character = {
       state.save();
       tools.render();
       setPhase(player.phase);
-      let element = document.querySelector(`#playerSprite`);
+      let element = document.querySelector(`.player`);
       element.innerHTML = svg.renderPerson(player.body);
       resizeStuff();
       hint.player();
