@@ -154,32 +154,37 @@ function movePlayer(direction) {
     timers[direction] = setInterval(() => {
       let playerSprite = sprite.get(playerId);
       let playerBox = playerSprite.getBoundingClientRect();
+      let old = {x: playerBox.x, y: playerBox.y};
       let newTop, newLeft;
       switch (direction) {
         case 'up':
           newTop = playerBox.top - step.y;
-          if (newTop > 0 && sprite.collision('up') != true) {
+          if (newTop > 0) {
             playerSprite.style.top = `${newTop}px`;
           }
           break;
         case 'down':
           newTop = playerBox.top + step.y;
-          if (newTop < containerBox.height - sprite.height && sprite.collision('down') != true) {
+          if (newTop < containerBox.height - playerBox.height) {
             playerSprite.style.top = `${newTop}px`;
           }
           break;
         case 'left':
           newLeft = playerBox.left - step.x;
-          if (newLeft > 0 && sprite.collision('left') != true) {
+          if (newLeft > 0) {
             playerSprite.style.left = `${newLeft}px`;
           }
           break;
         case 'right':
           newLeft = playerBox.left + step.x;
-          if (newLeft < containerBox.width - sprite.width && sprite.collision('right') != true) {
+          if (newLeft < containerBox.width - playerBox.width) {
             playerSprite.style.left = `${newLeft}px`;
           }
           break;
+      }
+      if (sprite.collision(direction)) {
+        playerSprite.style.left = `${old.x}px`;
+        playerSprite.style.top = `${old.y}px`;
       }
       timers.moving = true;
     }, timers.duration);

@@ -13,12 +13,12 @@ const sprite = {
     let newSprite = `<div id="i${sprite.number}" class="sprite ${classList}" style="${style}">${content}</div>`;
     let bodyElement = document.querySelector("body");
     bodyElement.insertAdjacentHTML('beforeend', newSprite);
-  
+
     sprite.shrinkWrap(sprite.number);
-  
-    return sprite.number;    
+
+    return sprite.number;
   },
-  
+
   // shrink holding div around the svg 
   shrinkWrap: function (itemNumber) {
     let itemDiv = document.querySelector(`#i${itemNumber}`);
@@ -30,7 +30,7 @@ const sprite = {
     }
   },
 
-  get: function(itemNumber) {
+  get: function (itemNumber) {
     return document.querySelector(`#i${itemNumber}`);
   },
 
@@ -50,54 +50,23 @@ const sprite = {
   collision: function (direction) {
     let retValue = false;
     let playerBox = getPlayerBox();
-    let playerCorner = getPlayerCorner(playerBox, direction);
-  
     let spritesList = document.querySelectorAll('.block');
     spritesList.forEach(element => {
-      if (!retValue) {
-        let spriteBox = element.getBoundingClientRect();    
-        let checkCorner = {
-          x: spriteBox.left,
-          y: spriteBox.top,
-        };
-        if (direction === 'left') {
-          checkCorner.x += spriteBox.width;
-        } else if (direction === 'up') {
-          checkCorner.y += spriteBox.height;
-        }
-        if (direction === 'right' || direction === 'left') {
-          if ((playerCorner.x >= checkCorner.x && direction === 'left') || (playerCorner.x <= checkCorner.x && direction === 'right')) {
-            if ((playerCorner.x <= checkCorner.x + step.x && direction === 'left') || ((playerCorner.x + step.x) >= checkCorner.x && direction === 'right')) {
-              // our X means we are potential collision..
-              if ((playerCorner.y + playerBox.height) >= checkCorner.y) {
-                if ((playerCorner.y) <= (checkCorner.y + spriteBox.height)) {
-                  let thisBlock = document.querySelector(`#${element.id} svg`);
-                  svg.animate(thisBlock, `jiggle-${direction}`, 0.25);
-                  retValue = true;
-                }
-              }
-            }
-          }
-        } else if (direction === 'up' || direction === 'down') {
-          if ((playerCorner.y >= checkCorner.y && direction === 'up') || (playerCorner.y <= checkCorner.y && direction === 'down')) {
-            if ((playerCorner.y <= checkCorner.y + step.y && direction === 'up') || ((playerCorner.y + step.y) >= checkCorner.y && direction === 'down')) {
-              // our Y means we are potential collision..
-              if ((playerCorner.x + playerBox.width) >= checkCorner.x) {
-                if ((playerCorner.x) <= (checkCorner.x + spriteBox.width)) {
-                  let thisBlock = document.querySelector(`#${element.id} svg`);
-                  svg.animate(thisBlock, `jiggle-${direction}`, 0.25);
-                  retValue = true;
-                }
-              }
-            }
-          }
-        }
+      let spriteBox = element.getBoundingClientRect();
+      if (((spriteBox.x < playerBox.x + playerBox.width)
+        && (spriteBox.x + spriteBox.width > playerBox.x)
+        && (spriteBox.y < playerBox.y + playerBox.height)
+        && (spriteBox.y + spriteBox.height > playerBox.y)
+      )) {
+        let thisBlock = document.querySelector(`#${element.id} svg`);
+        svg.animate(thisBlock, `jiggle-${direction}`, 0.25);
+        retValue = true;
       }
+
     });
-  
     return retValue;
   },
-  
-  
+
+
 };
 
