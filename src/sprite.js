@@ -43,7 +43,6 @@ const sprite = {
     } else {
       sprite.width = sprite.height;
     }
-    console.log(sprite);
     grid.x = parseInt(containerBox.width / sprite.width);
     grid.y = parseInt(containerBox.height / sprite.height);
   },
@@ -56,7 +55,7 @@ const sprite = {
     let spritesList = document.querySelectorAll('.block');
     spritesList.forEach(element => {
       if (!retValue) {
-        let spriteBox = element.getBoundingClientRect();
+        let spriteBox = element.getBoundingClientRect();    
         let checkCorner = {
           x: spriteBox.left,
           y: spriteBox.top,
@@ -72,6 +71,8 @@ const sprite = {
               // our X means we are potential collision..
               if ((playerCorner.y + playerBox.height) >= checkCorner.y) {
                 if ((playerCorner.y) <= (checkCorner.y + spriteBox.height)) {
+                  let thisBlock = document.querySelector(`#${element.id} svg`);
+                  svg.animate(thisBlock, `jiggle-${direction}`, 0.25);
                   retValue = true;
                 }
               }
@@ -83,6 +84,8 @@ const sprite = {
               // our Y means we are potential collision..
               if ((playerCorner.x + playerBox.width) >= checkCorner.x) {
                 if ((playerCorner.x) <= (checkCorner.x + spriteBox.width)) {
+                  let thisBlock = document.querySelector(`#${element.id} svg`);
+                  svg.animate(thisBlock, `jiggle-${direction}`, 0.25);
                   retValue = true;
                 }
               }
