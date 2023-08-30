@@ -10,10 +10,19 @@ let timers = { duration: 20 };
 let field = { log: [], rock: [], spuds: [], };
 
 document.addEventListener("DOMContentLoaded", function () {
-  setContainerBox();
-  addRandom();
-  setupThings();
+  introGame();
 });
+
+function introGame() {
+  let containerElement = document.querySelector(".container");
+  let titleSvg = svg.render('title', 1, 'style="width:100%;"');
+  containerElement.innerHTML = titleSvg;
+  svg.animate(containerElement, 'goInvisible', 2, function () {
+    setContainerBox();
+    addRandom();
+    setupThings();
+  });
+}
 
 function setupThings() {
   addPlayer();
@@ -44,7 +53,7 @@ function addRandom() {
     let y = rnd(containerBox.height - sprite.height);
     let itemSvg = svg.render('log2', 1, ''); 
     let log2 = {scale: 0.8};
-    sprite.render(x, y, itemSvg, sprite.width * log2.scale, sprite.heighth * log2.scale, 'block');
+    sprite.render(x, y, itemSvg, sprite.width * log2.scale, sprite.height * log2.scale, 'block');
     field.log[step] = { x: x, y: y };
   }
 }
@@ -54,8 +63,9 @@ function redraw() {
   sprite.setSize();
   clearBody();
   let itemSvg = svg.render('log2', 1, ''); 
+  let log2 = {scale: 0.8};
   field.log.forEach( (item) => {
-    sprite.render(item.x, item.y, itemSvg, sprite.width, sprite.height, 'block');
+    sprite.render(item.x, item.y, itemSvg, sprite.width * log2.scale, sprite.height * log2.scale, 'block');
   });
   setupThings();
 }
@@ -100,6 +110,7 @@ function getDirection (event) {
 }
 
 document.addEventListener("keydown", (event) => {
+  event.preventDefault();
   let direction = getDirection(event);
   if (isDirection(direction)) {
     movePlayer(direction);
@@ -107,6 +118,7 @@ document.addEventListener("keydown", (event) => {
 });
 
 document.addEventListener("keyup", (event) => {
+  event.preventDefault();
   let direction = getDirection(event);
   if (isDirection(direction)) {
     clearInterval(timers[direction]);

@@ -52,7 +52,7 @@ function getScripts($v)
 {
   $scripts = "<script src='_js_files.min.js?{$v}'></script>";
   if (isDevMode()) {
-    $files = array('utils', 'svg', 'sprite', 'controls', 'main');
+    $files = array('utils', 'svg', 'sprite', 'controls', 'character', 'main');
     $scripts = '';
     foreach ($files as $file) {
       $scripts .= "<script src='src/{$file}.js?{$v}'></script>\n";
