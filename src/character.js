@@ -226,6 +226,25 @@ const character = {
     playerId = sprite.render(1, 1, itemSvg, 32, sprite.height, 'player');
   },
 
+  getBodySet: function () {
+    let partOptions = [];
+    // extract body bits
+    let baseBody = character.defaultBody;
+  
+    Object.keys(baseBody).forEach((bodyPart) => {
+      partOptions[bodyPart] = [];
+      Object.entries(svg.imgList).forEach(([key, part]) => {
+        if (`${key}-`.indexOf(bodyPart) > -1) {
+          let bits = key.split("-");
+          partOptions[bodyPart].push(key);
+        }
+      });
+    });
+  
+    return partOptions;
+  },
+  
+
   // the default
   defaultBody: {
     body: {

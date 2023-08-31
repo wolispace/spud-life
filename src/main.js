@@ -8,7 +8,7 @@ let step = { x: 5 * pixelScale, y: 5 * pixelScale};
 let grid = { x: 10, y: 10 };
 let timers = { duration: 20 };
 let field = { log: [], rock: [], spuds: [], };
-let bodySet = getBodySet();
+let bodySet = character.getBodySet();
 
 document.addEventListener("DOMContentLoaded", function () {
   introGame();
@@ -36,24 +36,6 @@ function setContainerBox() {
   sprite.setSize();
 }
 
-// takes list of body parts from imgList and make easy-to-parse lists for each part
-function getBodySet() {
-  let partOptions = [];
-  // extract body bits
-  let baseBody = character.defaultBody;
-
-  Object.keys(baseBody).forEach((bodyPart) => {
-    partOptions[bodyPart] = [];
-    Object.entries(svg.imgList).forEach(([key, part]) => {
-      if (`${key}-`.indexOf(bodyPart) > -1) {
-        let bits = key.split("-");
-        partOptions[bodyPart].push(key);
-      }
-    });
-  });
-
-  return partOptions;
-}
 
 function clearBody() {
   let bodyElement = document.querySelector("body");
