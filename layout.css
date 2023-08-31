@@ -26,9 +26,8 @@ body {
   }
 
   .control {
-    background-color: navy;
+    background-color: rgba(0,0,128,.5);
     color: white;
-    opacity: 50%;
     border:3px solid white;
     border-radius: 5px;
     margin: 5px;

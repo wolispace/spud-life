@@ -12,7 +12,11 @@ const controls = {
 
     directions.forEach((direction, index) => {
       let [x, y] = positions[index];
-      let controlId = sprite.render(x, y, '', sprite.width, sprite.height, 'control');
+      let iconSvg = svg.render(`control-icon--${direction}`);
+      if (['dig'].includes(direction)) {
+        iconSvg = svg.render(`spade`);
+      }
+      let controlId = sprite.render(x, y, iconSvg, sprite.width, sprite.height, 'control');
       let controlElement = document.querySelector(`#i${controlId}`);
 
       controls.stopDefaults(controlElement);
