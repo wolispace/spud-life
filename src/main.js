@@ -76,18 +76,11 @@ window.addEventListener("resize", (event) => {
   sprite.resize(newWidthPct, newHeightPct);
 });
 
-function isDirection(direction) {
-  return ['up','down','left','right'].includes(direction);
-}
-function getDirection (event) {
-  return event.code.toLowerCase().replace('arrow', '');
-}
-
 document.addEventListener("keydown", (event) => {
   event.preventDefault();
   let direction = getDirection(event);
   if (isDirection(direction)) {
-    movePlayer(direction);
+    character.movePlayer(direction);
   }
 });
 
@@ -142,38 +135,4 @@ function movePlayer(direction) {
     }, timers.duration);
   }
 }
-
-function moveUp() {
-  movePlayer('up');
-}
-function moveDown() {
-  movePlayer('down');
-}
-function moveLeft() {
-  movePlayer('left');
-}
-function moveRight() {
-  movePlayer('right');
-}
-
-function getPlayerBox() {
-  let playerSprite = sprite.get(playerId);
-  return playerSprite.getBoundingClientRect();
-}
-
-function getPlayerCorner(playerBox, direction) {
-  let playerCorner = {
-    x: playerBox.left,
-    y: playerBox.top,
-  };
-  if (direction === 'right') {
-    playerCorner.x += playerBox.width;
-  } else if (direction === 'down') {
-    playerCorner.y += playerBox.height;
-  }
-
-  return playerCorner;
-}
-
-
 

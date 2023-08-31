@@ -49,7 +49,7 @@ const sprite = {
 
   collision: function (direction) {
     let retValue = false;
-    let playerBox = getPlayerBox();
+    let playerBox = character.getPlayerBox();
     let spritesList = document.querySelectorAll('.block');
     spritesList.forEach(element => {
       let spriteBox = element.getBoundingClientRect();

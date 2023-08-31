@@ -243,8 +243,57 @@ const character = {
   
     return partOptions;
   },
-  
 
+  getPlayerBox: function () {
+    let playerSprite = sprite.get(playerId);
+    return playerSprite.getBoundingClientRect();
+  },
+
+  movePlayer: function (direction) {
+    if (!timers.moving) {
+      character.look(direction);
+      timers[direction] = setInterval(() => {
+        let playerSprite = sprite.get(playerId);
+        let playerBox = playerSprite.getBoundingClientRect();
+        let old = {x: playerBox.x, y: playerBox.y};
+        let newTop, newLeft;
+        switch (direction) {
+          case 'up':
+            newTop = playerBox.top - step.y;
+            if (newTop > 0) {
+              playerSprite.style.top = `${newTop}px`;
+            }
+            break;
+          case 'down':
+            newTop = playerBox.top + step.y;
+            if (newTop < containerBox.height - playerBox.height) {
+              playerSprite.style.top = `${newTop}px`;
+            }
+            break;
+          case 'left':
+            newLeft = playerBox.left - step.x;
+            if (newLeft > 0) {
+              playerSprite.style.left = `${newLeft}px`;
+            }
+            break;
+          case 'right':
+            newLeft = playerBox.left + step.x;
+            if (newLeft < containerBox.width - playerBox.width) {
+              playerSprite.style.left = `${newLeft}px`;
+            }
+            break;
+        }
+        if (sprite.collision(direction)) {
+          playerSprite.style.left = `${old.x}px`;
+          playerSprite.style.top = `${old.y}px`;
+        }
+        timers.moving = true;
+      }, timers.duration);
+    }
+  },
+  
+  
+  
   // the default
   defaultBody: {
     body: {

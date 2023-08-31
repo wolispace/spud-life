@@ -8,6 +8,13 @@ function halfRnd(num) {
   return rnd(num * 2) - num;
 }
 
+function isDirection(direction) {
+  return ['up','down','left','right'].includes(direction);
+}
+function getDirection (event) {
+  return event.code.toLowerCase().replace('arrow', '');
+}
+
 const state = {
   save: () => {
     let compressed = LZString.compressToUTF16(JSON.stringify(player));

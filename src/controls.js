@@ -17,9 +17,9 @@ const controls = {
       controls.stopDefaults(controlElement);
 
 
-      controlElement.onmousedown = function () { movePlayer(direction); };
+      controlElement.onmousedown = function () { character.movePlayer(direction); };
       controlElement.onmouseup = function () { controls.endInput(direction); };
-      controlElement.addEventListener("touchstart", function () { movePlayer(direction); }, false);
+      controlElement.addEventListener("touchstart", function () { character.movePlayer(direction); }, false);
       controlElement.addEventListener("touchend", function () { controls.endInput(direction); });
     });
   },
