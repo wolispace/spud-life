@@ -26,7 +26,7 @@ function introGame() {
 }
 
 function setupThings() {
-  addPlayer();
+  character.addPlayer();
   controls.render();      
 }
 
@@ -34,14 +34,6 @@ function setContainerBox() {
   let containerElement = document.querySelector(".container");
   containerBox = containerElement.getBoundingClientRect();
   sprite.setSize();
-}
-
-function addPlayer() {
-  
-  let body = character.randomBody();
-    let itemSvg = svg.renderPerson(body);
-    // scale the width and height of the svg
-  playerId = sprite.render(1, 1, itemSvg, 32, sprite.height, 'player');
 }
 
 // takes list of body parts from imgList and make easy-to-parse lists for each part
