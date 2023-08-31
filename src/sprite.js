@@ -67,6 +67,26 @@ const sprite = {
     return retValue;
   },
 
+  resize: function (newWidthPct, newHeightPct) {
+    let spritesList = document.querySelectorAll('.sprite');
+    spritesList.forEach(element => {
+      let elementBox = element.getBoundingClientRect();
+      let newLeft = elementBox.left * newWidthPct;
+      let newTop = elementBox.top * newHeightPct;
+      let newWidth = elementBox.width * newWidthPct;
+      let newHeight = elementBox.height * newHeightPct;
+  
+      element.style.left = `${newLeft}px`;
+      element.style.top = `${newTop}px`;
+      element.style.width = `${newWidth}px`;
+      element.style.height = `${newHeight}px`
+    });
+    // when we have sensible things to resize..
+    if (true) {
+      clearTimeout(timers.resize);
+      timers.resize = setTimeout(redraw, 500);
+    }
+  },
 
 };
 
