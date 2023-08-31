@@ -1,6 +1,6 @@
 const controls = {
   render: function () {
-    const directions = ['left', 'dig', 'down', 'up', 'right'];
+    const directions = ['left', 'spade', 'down', 'up', 'right'];
     let padding = 10;
     const positions = [
       [1, containerBox.height - (sprite.height * 5)],
@@ -13,14 +13,14 @@ const controls = {
     directions.forEach((direction, index) => {
       let [x, y] = positions[index];
       let iconSvg = svg.render(`control-icon--${direction}`);
-      if (['dig'].includes(direction)) {
+      if (['spade'].includes(direction)) {
         iconSvg = svg.render(`spade`);
       }
-      let controlId = sprite.render(x, y, iconSvg, sprite.width, sprite.height, 'control');
+      let controlId = sprite.render(x, y, iconSvg, sprite.width, sprite.height, `control ${direction}`);
       let controlElement = document.querySelector(`#i${controlId}`);
 
       controls.stopDefaults(controlElement);
-      if (['dig'].includes(direction)) {
+      if (['spade'].includes(direction)) {
         controls.onDig(controlElement);
       } else {
         controls.onMove(controlElement, direction);
@@ -40,15 +40,31 @@ const controls = {
     controlElement.addEventListener("touchstart", function () { controls.dig(); }, false);
   },
 
+  buttonDown: function (direction) {
+    let buttonDiv = document.querySelector(`.${direction}`);
+    svg.animate(buttonDiv, 'buttonDown', 0.15);
+    console.log('button down - why not stopping', direction);
+  },
+
+  buttonUp: function (direction) {
+    //let buttonDiv = document.querySelector(`.${direction}`);
+    //svg.animate(buttonDiv, 'buttonUp', 0.25);
+    console.log('button up', direction);
+  },
+
+
   dig: function () {
+    controls.buttonDown('spade');
     let itemSvg = svg.render("hole", 5);
     let hole = {scale: 1};
     let playerBox = character.getPlayerBox();
     sprite.render(playerBox.x, playerBox.y, itemSvg, sprite.width * hole.scale, sprite.height * hole.scale, 'hole');
-  
   },
 
   stopDefaults: function (controlElement) {
+    if (isDev) {
+      return;
+    }
     // stop things like text selection and RMB menu
     controlElement.oncontextmenu = function (event) {
       event.preventDefault();
@@ -59,6 +75,7 @@ const controls = {
   },
 
   endInput: function (direction) {
+    controls.buttonUp(direction);
     clearInterval(timers[direction]);
     timers.moving = false;
   },

@@ -251,6 +251,7 @@ const character = {
 
   movePlayer: function (direction) {
     if (!timers.moving) {
+      controls.buttonDown(direction);
       character.look(direction);
       timers[direction] = setInterval(() => {
         let playerSprite = sprite.get(playerId);

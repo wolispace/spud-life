@@ -26,12 +26,13 @@ body {
   }
 
   .control {
-    background-color: rgba(0,0,128,.5);
+    background-color: rgba(0,0,128,.25);
     color: white;
     border:3px solid white;
     border-radius: 5px;
     margin: 5px;
     cursor:pointer;
+    box-shadow: 0px 5px 5px black;
   }
 
   div > svg {
@@ -60,6 +61,25 @@ body {
     }
     100% {
       opacity: 0%;
+    }
+  }
+
+  @keyframes buttonDown {
+    0% {
+      box-shadow: 0px 5px 5px black;
+    }
+    100% {
+      box-shadow: 0px 0px 0px black;
+      transform: translateY(3px);
+    }
+  }
+
+  @keyframes buttonUp {
+    0% {
+      box-shadow: 0px 0px 0px black;
+    }
+    100% {
+      box-shadow: 0px 5px 5px black;
     }
   }
 
