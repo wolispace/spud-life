@@ -1,7 +1,7 @@
 
 type "src\utils.js" > _js_files.js
 
-for %%r in (sprite, svg, controls, character, player) do ( 
+for %%r in (sprite, svg, controls, character, field, player) do ( 
     type src\%%r.js >> _js_files.js
 )
 

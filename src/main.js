@@ -7,63 +7,13 @@ let playerId = 0;
 let step = { x: 5 * pixelScale, y: 5 * pixelScale};
 let grid = { x: 10, y: 10 };
 let timers = { duration: 20 };
-let field = { log: [], rock: [], spuds: [], };
+
 let bodySet = character.getBodySet();
 
+// all of the events..
 document.addEventListener("DOMContentLoaded", function () {
   introGame();
 });
-
-function introGame() {
-  let containerElement = document.querySelector(".container");
-  let titleSvg = svg.render('title', 1, 'style="width:100%;"');
-  containerElement.innerHTML = titleSvg;
-  svg.animate(containerElement, 'goInvisible', 1, function () {
-    setContainerBox();
-    addRandom();
-    setupThings();
-  });
-}
-
-function setupThings() {
-  character.addPlayer();
-  controls.render();      
-}
-
-function setContainerBox() {
-  let containerElement = document.querySelector(".container");
-  containerBox = containerElement.getBoundingClientRect();
-  sprite.setSize();
-}
-
-function clearBody() {
-  let bodyElement = document.querySelector("body");
-  bodyElement.innerHTML = '<div class="container"></dv>';
-}
-
-function addRandom() {
-  clearBody();
-  for (let step = 0; step < qty; step++) {
-    let x = rnd(containerBox.width - sprite.width);
-    let y = rnd(containerBox.height - sprite.height);
-    let itemSvg = svg.render('log2', 1, ''); 
-    let log2 = {scale: 0.8};
-    sprite.render(x, y, itemSvg, sprite.width * log2.scale, sprite.height * log2.scale, 'block');
-    field.log[step] = { x: x, y: y };
-  }
-}
-
-function redraw() {
-  setContainerBox();
-  sprite.setSize();
-  clearBody();
-  let itemSvg = svg.render('log2', 1, ''); 
-  let log2 = {scale: 0.8};
-  field.log.forEach( (item) => {
-    sprite.render(item.x, item.y, itemSvg, sprite.width * log2.scale, sprite.height * log2.scale, 'block');
-  });
-  setupThings();
-}
 
 window.addEventListener("resize", (event) => {
   let last = {
@@ -93,54 +43,31 @@ document.addEventListener("keyup", (event) => {
   }
 });
 
-function dig() {
-  let itemSvg = svg.render("hole", 5);
-  let hole = {scale: 1};
-  let playerBox = character.getPlayerBox();
-  sprite.render(playerBox.x, playerBox.y, itemSvg, sprite.width * hole.scale, sprite.height * hole.scale, 'hole');
-
+function introGame() {
+  let containerElement = document.querySelector(".container");
+  let titleSvg = svg.render('title', 1, 'style="width:100%;"');
+  containerElement.innerHTML = titleSvg;
+  svg.animate(containerElement, 'goInvisible', 1, function () {
+    setContainerBox();
+    field.addRandom();
+    setupThings();
+  });
 }
 
-function movePlayer(direction) {
-  if (!timers.moving) {
-    character.look(direction);
-    timers[direction] = setInterval(() => {
-      let playerSprite = sprite.get(playerId);
-      let playerBox = playerSprite.getBoundingClientRect();
-      let old = {x: playerBox.x, y: playerBox.y};
-      let newTop, newLeft;
-      switch (direction) {
-        case 'up':
-          newTop = playerBox.top - step.y;
-          if (newTop > 0) {
-            playerSprite.style.top = `${newTop}px`;
-          }
-          break;
-        case 'down':
-          newTop = playerBox.top + step.y;
-          if (newTop < containerBox.height - playerBox.height) {
-            playerSprite.style.top = `${newTop}px`;
-          }
-          break;
-        case 'left':
-          newLeft = playerBox.left - step.x;
-          if (newLeft > 0) {
-            playerSprite.style.left = `${newLeft}px`;
-          }
-          break;
-        case 'right':
-          newLeft = playerBox.left + step.x;
-          if (newLeft < containerBox.width - playerBox.width) {
-            playerSprite.style.left = `${newLeft}px`;
-          }
-          break;
-      }
-      if (sprite.collision(direction)) {
-        playerSprite.style.left = `${old.x}px`;
-        playerSprite.style.top = `${old.y}px`;
-      }
-      timers.moving = true;
-    }, timers.duration);
-  }
+function setupThings() {
+  character.addPlayer();
+  controls.render();      
 }
+
+function setContainerBox() {
+  let containerElement = document.querySelector(".container");
+  containerBox = containerElement.getBoundingClientRect();
+  sprite.setSize();
+}
+
+function clearBody() {
+  let bodyElement = document.querySelector("body");
+  bodyElement.innerHTML = '<div class="container"></dv>';
+}
+
 

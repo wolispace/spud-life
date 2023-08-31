@@ -48,8 +48,6 @@ const controls = {
   
   },
 
-  
-
   stopDefaults: function (controlElement) {
     // stop things like text selection and RMB menu
     controlElement.oncontextmenu = function (event) {
@@ -61,7 +59,6 @@ const controls = {
   },
 
   endInput: function (direction) {
-
     clearInterval(timers[direction]);
     timers.moving = false;
   },
