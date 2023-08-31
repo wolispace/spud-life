@@ -137,19 +137,19 @@ const svg = {
       <path d="m86.832 27.807-65.166 15.865s-4.0942 1.5353-4.2648 8.1884c-0.17059 6.6531-0.68237 41.454-0.68237 41.454v0" style="fill:#4b3d2c;stroke-linecap:round;stroke-opacity:.38249;stroke-width:2.5;stroke:#fff"/>
       <path d="m93.338 47.023s-18.031 2.2981-20.153 5.1265c-5.6133 6.1229-4.5169 11.492-0.53033 13.612" style="fill:#4b3d2c;stroke-linecap:round;stroke-opacity:.38249;stroke-width:2.5;stroke:#fff"/>
       </svg>`,
-    "control-icon--up": {
+    up: {
       class: "thick control-icon",
       paths: [{ c: "", d: "m 20,80 30,-60 30,60" }],
     },
-    "control-icon--right": {
+    right: {
       class: "thick control-icon",
       paths: [{ c: "", d: "m 20,20 60,30 -60,30" }],
     },
-    "control-icon--down": {
+    down: {
       class: "thick control-icon",
       paths: [{ c: "", d: "m 20,20 30,60 30,-60" }],
     },
-    "control-icon--left": {
+    left: {
       class: "thick control-icon",
       paths: [{ c: "", d: "m 80,20 -60,30 60,30" }],
     },

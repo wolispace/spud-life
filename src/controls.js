@@ -1,22 +1,25 @@
 const controls = {
   render: function () {
-    const directions = ['left', 'spade', 'down', 'up', 'right'];
-    let padding = 10;
-    const positions = [
-      [1, containerBox.height - (sprite.height * 5)],
-      [sprite.width + padding, containerBox.height - (sprite.height * 5)],
-      [sprite.width + padding, containerBox.height - (sprite.height * 4 - padding)],
-      [sprite.width + padding, containerBox.height - (sprite.height * 6 + padding)],
-      [((sprite.width + padding) * 2), containerBox.height - (sprite.height * 5)]
-    ];
+    let padding = 15;
+    let buttons = {
+      up: { x: 1, y: 0, px: padding, py: -padding },
+      left: { x: 0, y: 1, px: 0, py: 0 },
+      spade: { x: 1, y: 1, px: padding, py: 0 },
+      right: { x: 2, y: 1 , px: padding * 2, py: 0},
+      down: { x: 1, y: 2 , px: padding, py: padding},
+    }
+    let start = { x: 0, y: sprite.height * 4 };
 
-    directions.forEach((direction, index) => {
-      let [x, y] = positions[index];
-      let iconSvg = svg.render(`control-icon--${direction}`);
-      if (['spade'].includes(direction)) {
-        iconSvg = svg.render(`spade`);
-      }
-      let controlId = sprite.render(x, y, iconSvg, sprite.width, sprite.height, `control ${direction}`);
+    
+    Object.entries(buttons).forEach(([direction, coords]) => {
+      let newPos = {
+        x: start.x + sprite.width * coords.x + coords.px,
+        y: start.y + sprite.height * coords.y + coords.py,
+      };
+      let iconSvg = svg.render(direction);
+      console.log(direction, iconSvg);
+
+      let controlId = sprite.render(newPos.x, newPos.y, iconSvg, sprite.width, sprite.height, `control ${direction}`);
       let controlElement = document.querySelector(`#i${controlId}`);
 
       controls.stopDefaults(controlElement);
@@ -63,6 +66,7 @@ const controls = {
   },
 
   stopDefaults: function (controlElement) {
+    return;
     // stop things like text selection and RMB menu
     controlElement.oncontextmenu = function (event) {
       event.preventDefault();
