@@ -36,9 +36,19 @@ const controls = {
   },
 
   onDig: function (controlElement) {
-    controlElement.onmousedown = function () { dig(); };
-    controlElement.addEventListener("touchstart", function () { dig(); }, false);
+    controlElement.onmousedown = function () { controls.dig(); };
+    controlElement.addEventListener("touchstart", function () { controls.dig(); }, false);
   },
+
+  dig: function () {
+    let itemSvg = svg.render("hole", 5);
+    let hole = {scale: 1};
+    let playerBox = character.getPlayerBox();
+    sprite.render(playerBox.x, playerBox.y, itemSvg, sprite.width * hole.scale, sprite.height * hole.scale, 'hole');
+  
+  },
+
+  
 
   stopDefaults: function (controlElement) {
     // stop things like text selection and RMB menu
