@@ -18,7 +18,7 @@ function introGame() {
   let containerElement = document.querySelector(".container");
   let titleSvg = svg.render('title', 1, 'style="width:100%;"');
   containerElement.innerHTML = titleSvg;
-  svg.animate(containerElement, 'goInvisible', 2, function () {
+  svg.animate(containerElement, 'goInvisible', 1, function () {
     setContainerBox();
     addRandom();
     setupThings();
@@ -92,6 +92,14 @@ document.addEventListener("keyup", (event) => {
     timers.moving = false;
   }
 });
+
+function dig() {
+  let itemSvg = svg.render("hole", 5);
+  let hole = {scale: 1};
+  let playerBox = character.getPlayerBox();
+  sprite.render(playerBox.x, playerBox.y, itemSvg, sprite.width * hole.scale, sprite.height * hole.scale, 'hole');
+
+}
 
 function movePlayer(direction) {
   if (!timers.moving) {

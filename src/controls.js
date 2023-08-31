@@ -1,10 +1,11 @@
 const controls = {
   render: function () {
-    const directions = ['left', 'down', 'up', 'right'];
+    const directions = ['left', 'dig', 'down', 'up', 'right'];
     let padding = 10;
     const positions = [
       [1, containerBox.height - (sprite.height * 5)],
       [sprite.width + padding, containerBox.height - (sprite.height * 5)],
+      [sprite.width + padding, containerBox.height - (sprite.height * 4 - padding)],
       [sprite.width + padding, containerBox.height - (sprite.height * 6 + padding)],
       [((sprite.width + padding) * 2), containerBox.height - (sprite.height * 5)]
     ];
@@ -15,13 +16,24 @@ const controls = {
       let controlElement = document.querySelector(`#i${controlId}`);
 
       controls.stopDefaults(controlElement);
-
-
-      controlElement.onmousedown = function () { character.movePlayer(direction); };
-      controlElement.onmouseup = function () { controls.endInput(direction); };
-      controlElement.addEventListener("touchstart", function () { character.movePlayer(direction); }, false);
-      controlElement.addEventListener("touchend", function () { controls.endInput(direction); });
+      if (['dig'].includes(direction)) {
+        controls.onDig(controlElement);
+      } else {
+        controls.onMove(controlElement, direction);
+      }
     });
+  },
+
+  onMove: function (controlElement, direction) {
+    controlElement.onmousedown = function () { character.movePlayer(direction); };
+    controlElement.onmouseup = function () { controls.endInput(direction); };
+    controlElement.addEventListener("touchstart", function () { character.movePlayer(direction); }, false);
+    controlElement.addEventListener("touchend", function () { controls.endInput(direction); });
+  },
+
+  onDig: function (controlElement) {
+    controlElement.onmousedown = function () { dig(); };
+    controlElement.addEventListener("touchstart", function () { dig(); }, false);
   },
 
   stopDefaults: function (controlElement) {
