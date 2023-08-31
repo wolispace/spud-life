@@ -31,6 +31,7 @@ const controls = {
   onMove: function (controlElement, direction) {
     controlElement.onmousedown = function () { character.movePlayer(direction); };
     controlElement.onmouseup = function () { controls.endInput(direction); };
+    //controlElement.onmouseout = function () { controls.endInput(direction); };
     controlElement.addEventListener("touchstart", function () { character.movePlayer(direction); }, false);
     controlElement.addEventListener("touchend", function () { controls.endInput(direction); });
   },
@@ -56,15 +57,12 @@ const controls = {
   dig: function () {
     controls.buttonDown('spade');
     let itemSvg = svg.render("hole", 5);
-    let hole = {scale: 1};
+    let hole = { scale: 1 };
     let playerBox = character.getPlayerBox();
     sprite.render(playerBox.x, playerBox.y, itemSvg, sprite.width * hole.scale, sprite.height * hole.scale, 'hole');
   },
 
   stopDefaults: function (controlElement) {
-    if (isDev) {
-      return;
-    }
     // stop things like text selection and RMB menu
     controlElement.oncontextmenu = function (event) {
       event.preventDefault();

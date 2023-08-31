@@ -2,7 +2,7 @@ const field = {
   log: [], 
   rock: [], 
   spuds: [],
-   
+
   addRandom: function () {
     clearBody();
     for (let step = 0; step < qty; step++) {
@@ -26,4 +26,5 @@ const field = {
     });
     setupThings();
   }
-}
+};
+
