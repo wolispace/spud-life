@@ -70,10 +70,10 @@ function clearBody() {
 }
 
 function makeLists() {
-  items.forEach((item, index) => {
-    list[item.type] = list[item.type] ?? {byName: {}, byId: []};
-    list[item.type]['byName'][item.svg] = item;
-    list[item.type]['byId'].push(item); 
+  Object.entries(items).forEach(([itemName, item]) => {
+    list[item.type] = list[item.type] ?? {byName: {}, list: []};
+    list[item.type]['byName'][itemName] = item;
+    list[item.type]['list'].push(item); 
   });
 }
 

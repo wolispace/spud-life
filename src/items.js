@@ -1,6 +1,5 @@
-const items = [
-  {
-    svg: "spade",
+const items = {
+  spade: {
     type: "tool",
     name: "Spade",
     desc: "A useful tool for digging up spuds",
@@ -13,8 +12,7 @@ const items = [
       maxUses: 8,
     },
   },
-  {
-    svg: "pick",
+  pick: {
     type: "tool",
     name: "Pick",
     desc: "A tool for breaking rocks",
@@ -27,8 +25,7 @@ const items = [
       maxUses: 8,
     },
   },
-  {
-    svg: "axe",
+  axe: {
     type: "tool",
     name: "Axe",
     desc: "A tool for clearing logs",
@@ -41,8 +38,7 @@ const items = [
       maxUses: 8,
     },
   },
-  {
-    svg: "scanner",
+  scanner: {
     type: "tool",
     name: "Scanner",
     desc: "Scans the patches around you for buried items",
@@ -55,8 +51,7 @@ const items = [
       maxUses: 1,
     },
   },
-  {
-    svg: "chipper",
+  chipper: {
     type: "machine",
     name: "Humble Chipper",
     desc: "A basic heavy-duty chip-maker",
@@ -70,8 +65,7 @@ const items = [
       hopper: {},
     },
   },
-  {
-    svg: "masher",
+  masher: {
     type: "machine",
     name: "Monster masher",
     desc: "Makes light and fluffy mashed potato",
@@ -85,8 +79,7 @@ const items = [
       hopper: {},
     },
   },
-  {
-    svg: "soup",
+  soup: {
     type: "machine",
     name: "Soup spinner",
     desc: "Makes a hearty potato soup",
@@ -100,8 +93,7 @@ const items = [
       hopper: {},
     },
   },
-  {
-    svg: "bake",
+  bake: {
     type: "machine",
     name: "Bake-o-matic",
     desc: "Makes an excellent baked potato",
@@ -115,8 +107,7 @@ const items = [
       hopper: {},
     },
   },
-  {
-    svg: "curly",
+  curly: {
     type: "machine",
     name: "Curly cooker",
     desc: "Cooks a potato into a curly-fry",
@@ -130,8 +121,7 @@ const items = [
       hopper: {},
     },
   },
-  {
-    svg: "chipper2000",
+  chipper2000: {
     type: "machine",
     name: "Chipper 2000",
     desc: "The latest upgrade of the tried-and-tested chip maker",
@@ -145,8 +135,7 @@ const items = [
       hopper: {},
     },
   },
-  {
-    svg: "rosti",
+  rosti: {
     type: "machine",
     name: "Rösti squasher",
     desc: "A fancy machine for making crispy rösti",
@@ -160,8 +149,7 @@ const items = [
       hopper: {},
     },
   },
-  {
-    svg: "croquette",
+  croquette: {
     type: "machine",
     name: "Croquette roller",
     desc: "Makes small golden balls of potato croquettes",
@@ -175,94 +163,81 @@ const items = [
       hopper: {},
     },
   },
-
-  {
-    svg: "field-right",
+  land: {
     type: "field",
     name: "A field for sale",
     desc: "Next to your plot of land is another, you can expand your digging activities and maybe find rarer potatoes",
     price: 1000,
   },
-  {
-    svg: "bone",
+  bone: {
     type: "item",
     name: "An old bone",
     desc: "I think a dog buried it",
     price: 5,
     rareness: 10,
   },
-  {
-    svg: "gold",
+  gold: {
     type: "item",
     name: "A few gold coins",
     desc: "A small hoard of old gold coins maybe dating back to Anglo-Saxon times",
     price: 100,
     rareness: 150,
   },
-  {
-    svg: "diamond",
+  diamond: {
     type: "item",
     name: "A small diamond",
     desc: "Maybe it fell out of someones wedding ring",
     price: 50,
     rareness: 150,
   },
-  {
-    svg: "tin",
+  tin: {
     type: "item",
     name: "A rusty tin",
     desc: "Looks like it once stored baked beans",
     price: 1,
     rareness: 20,
   },
-  {
-    svg: "pottery",
+  pottery: {
     type: "item",
     name: "A piece of pottery",
     desc: "Possibly from a broken terracotta flowerpot",
     price: 1,
     rareness: 20,
   },
-  {
-    svg: "bottle",
+  bottle: {
     type: "item",
     name: "A glass bottle",
     desc: "it has mud inside and looks rather old and maybe medicinal",
     price: 10,
     rareness: 30,
   },
-  {
-    svg: "marble",
+  marble: {
     type: "item",
     name: "A small marble",
     desc: "Wipe the dirt off and it has an almost magical glow",
     price: 20,
     rareness: 50,
   },
-  {
-    svg: "caps",
+  caps: {
     type: "item",
     name: "A few bottle caps",
     desc: "They are rusty and bent, but you can make out some letters: Nuka..",
     price: 50,
     rareness: 50,
   },
-  {
-    svg: "rock",
+  rock: {
     type: "block",
     name: "A rock",
     desc: "Found while cleared the field. Rocks are heavy, hard and doesn't taste nice",
     price: 1,
     rareness: 20,
   },
-  {
-    svg: "log",
+  log: {
     type: "block",
     name: "A log",
     desc: "These logs are weathered and splintered, however neatly cut on each end",
     price: 1,
     rareness: 20,
   },
-];
-
+};
 
