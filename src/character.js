@@ -284,7 +284,12 @@ const character = {
             }
             break;
         }
-        if (sprite.collision(direction)) {
+        let collideId = sprite.collision(direction);
+        if (collideId) {
+          console.log(collideId);
+          let controlElement = document.querySelector(`#${collideId}`);
+          controlElement.style.width = '20px';
+          controlElement.style.height = '20px';
           playerSprite.style.left = `${old.x}px`;
           playerSprite.style.top = `${old.y}px`;
         }

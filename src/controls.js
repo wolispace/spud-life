@@ -17,7 +17,7 @@ const controls = {
         y: start.y + sprite.height * coords.y + coords.py,
       };
       let iconSvg = svg.render(direction);
-      console.log(direction, iconSvg);
+      //console.log(direction, iconSvg);
 
       let controlId = sprite.render(newPos.x, newPos.y, iconSvg, sprite.width, sprite.height, `control ${direction}`);
       let controlElement = document.querySelector(`#i${controlId}`);
@@ -47,13 +47,13 @@ const controls = {
   buttonDown: function (direction) {
     let buttonDiv = document.querySelector(`.${direction}`);
     svg.animate(buttonDiv, 'buttonDown', 0.15);
-    console.log('button down - why not stopping', direction);
+    //console.log('button down - why not stopping', direction);
   },
 
   buttonUp: function (direction) {
     //let buttonDiv = document.querySelector(`.${direction}`);
     //svg.animate(buttonDiv, 'buttonUp', 0.25);
-    console.log('button up', direction);
+    //console.log('button up', direction);
   },
 
 

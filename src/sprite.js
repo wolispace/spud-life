@@ -60,7 +60,7 @@ const sprite = {
       )) {
         let thisBlock = document.querySelector(`#${element.id} svg`);
         svg.animate(thisBlock, `jiggle-${direction}`, 0.25);
-        retValue = true;
+        retValue = element.id;
       }
 
     });
