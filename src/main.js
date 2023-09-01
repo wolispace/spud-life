@@ -20,10 +20,7 @@ window.addEventListener("resize", (event) => {
     width: containerBox.width,
     height: containerBox.height
   }
-  //setContainerBox();
-  let newWidthPct = containerBox.width / last.width;
-  let newHeightPct = containerBox.height / last.height;
-  sprite.resize(newWidthPct, newHeightPct);
+  sprite.resize();
 });
 
 document.addEventListener("keydown", (event) => {
