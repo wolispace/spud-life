@@ -551,6 +551,16 @@ const svg = {
     <path d="m38.184 6.5407-5.3033 1.2374 2.2981 1.7678" style="fill:none;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.38723;stroke-width:1.5;stroke:#000"/>
     <path d="m28.461 10.96 3.3588-3.182 0.53033-2.4749" style="fill:none;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.38723;stroke-width:1.5;stroke:#000"/>
    </svg>`,
+   rock2: `<svg id="b" version="1.1" viewBox="0 0 97 64" xmlns="http://www.w3.org/2000/svg">
+   <path d="m19.208 62.032-14.8-14.485-2.5191-9.7614 5.9828-23.931 11.651-7.2423 38.416-4.0935 22.357 0.62977 12.595 10.391 2.5191 23.301-2.2042 15.744-32.118 8.8167z" style="fill-opacity:.79275;fill:#d0bfbf;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.6;stroke:#000"/>
+   <path d="m19.05 61.875-3.6212-24.718 2.2042-10.706-1.2595-10.076-8.5018 0.31488-6.1402 21.097 2.8339 10.076z" style="fill-opacity:.60104;fill:#192050;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.3;stroke:#050505"/>
+   <path d="m18.578 26.765 42.824 5.0381 8.187 15.429-6.9274 13.225" style="fill-opacity:.39378;fill:#313238;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.3;stroke:#000"/>
+   <path d="m93.048 14.17-31.016 17.319 32.433 5.6679-23.931 9.7614-7.8721 14.012 30.544-8.187 2.2042-17.476" style="fill-opacity:.57513;fill:#080a18;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.3;stroke:#000"/>
+   <path d="m19.68 24.718 41.722 5.5105 29.442-17.319" style="fill:none;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.3;stroke:#fff"/>
+   <path d="m62.977 32.748 7.2423 13.54 21.727-8.9742z" style="fill:#fff;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.3;stroke:#000"/>
+   <path d="m2.6765 38.258 12.123-0.62977 3.1488 22.042-12.753-11.808z" style="fill-opacity:.70466;fill:#2e2e2e;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.3;stroke:#000"/>
+  </svg>
+  `,
     log: {
       class: "thick",
       paths: [
