@@ -7,6 +7,7 @@ let playerId = 0;
 let step = { x: 5 * pixelScale, y: 5 * pixelScale};
 let grid = { x: 10, y: 10 };
 let timers = { duration: 20 };
+let list = {};
 
 let bodySet = character.getBodySet();
 
@@ -44,7 +45,7 @@ function introGame() {
   let containerElement = document.querySelector(".container");
   let titleSvg = svg.render('title', 1, 'style="width:100%;"');
   containerElement.innerHTML = titleSvg;
-  svg.animate(containerElement, 'goInvisible', 1, function () {
+  svg.animate(containerElement, 'goInvisible', 0.1, function () {
     setContainerBox();
     field.addRandom();
     setupThings();
@@ -53,7 +54,8 @@ function introGame() {
 
 function setupThings() {
   character.addPlayer();
-  controls.render();      
+  controls.render();
+  makeLists();
 }
 
 function setContainerBox() {
@@ -67,4 +69,11 @@ function clearBody() {
   bodyElement.innerHTML = '<div class="container"></dv>';
 }
 
+function makeLists() {
+  items.forEach((item, index) => {
+    list[item.type] = list[item.type] ?? {byName: {}, byId: []};
+    list[item.type]['byName'][item.svg] = item;
+    list[item.type]['byId'].push(item); 
+  });
+}
 
