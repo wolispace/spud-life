@@ -1,4 +1,4 @@
-const items = {
+let items = {
   spade: {
     type: "tool",
     name: "Spade",

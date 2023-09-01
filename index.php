@@ -52,7 +52,8 @@ function getScripts($v)
 {
   $scripts = "<script src='_js_files.min.js?{$v}'></script>";
   if (isDevMode()) {
-    $files = explode(' ', 'utils sprite svg items controls character field player main');
+    $jsFiles = "sprite svg spuds items controls character field player";
+    $files = explode(' ', "utils {$jsFiles} main");
     $scripts = '<script>const isDev = true</script>';
     foreach ($files as $file) {
       $scripts .= "<script src='src/{$file}.js?{$v}'></script>\n";
