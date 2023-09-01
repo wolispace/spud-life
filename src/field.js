@@ -11,7 +11,8 @@ const field = {
       let itemSvg = svg.render('log2', 1, ''); 
       let log2 = {scale: 0.8};
       sprite.render(x, y, itemSvg, sprite.width * log2.scale, sprite.height * log2.scale, 'block');
-      field.log[step] = { x: x, y: y };
+      let item = 'log';
+      field[item][step] = { x: x, y: y, q: 5};
     }
   },
   

@@ -286,7 +286,9 @@ const character = {
         }
         let collideId = sprite.collision(direction);
         if (collideId) {
-          console.log(collideId);
+          let itemIndex = collideId.substring(1);
+          let itemInfo = field[itemIndex];
+          console.log(itemInfo);
           let controlElement = document.querySelector(`#${collideId}`);
           controlElement.style.width = '20px';
           controlElement.style.height = '20px';
