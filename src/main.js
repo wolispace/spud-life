@@ -55,7 +55,9 @@ function introGame() {
 function setupThings() {
   character.addPlayer();
   controls.render();
-  spuds.sprout();
+  makeLists();
+  spuds.bestForList();
+  spuds.sprout(6);
   makeLists();
 }
 
