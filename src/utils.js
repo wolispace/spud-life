@@ -1,6 +1,7 @@
-// random number between 0 and max
-function rnd(max) {
-  return Math.floor(Math.random() * max);
+// randoms a random number like a dice roll, with side being the number of sides: rnd(2) is a flip of a coin, rnd(6) is a six sided dice.
+// this a zero based number do rnd(2) gives us 0 or 1, rnd(6) gives us 0...5
+function rnd(sides) {
+  return Math.floor(Math.random() * sides);
 }
 
 // returns a random number equally half plus or minus the number eg 3 = -1 to 1
