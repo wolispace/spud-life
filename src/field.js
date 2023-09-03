@@ -34,10 +34,11 @@ const field = {
   },
 
   addRandom: function () {
+    console.trace('random');
     clearBody();
     // reset field data..
     player.fields[player.currentField] = [[], []];
-    let surface = 0; // 0 =  top, 1 to below
+    let layer = SURFACE; // 0 =  top, 1 to below
     for (let step = 0; step < qty; step++) {
       let x = rnd(containerBox.width - sprite.width);
       let y = rnd(containerBox.height - sprite.height);
@@ -48,16 +49,16 @@ const field = {
       sprite.render(x, y, itemSvg, sprite.width * log2.scale, sprite.height * log2.scale, 'block');
       let itemInfo = { x: x, y: y, item: item, qty: qty};
       field[item][step] = itemInfo;
-      player.fields[player.currentField][surface].push(itemInfo);
+      player.fields[player.currentField][layer].push(itemInfo);
     }
   },
   
   redraw: function () {
+    console.trace('redraw');
     setContainerBox();
-    sprite.setSize();
     clearBody();
-    let surface = 0;
-    player.fields[player.currentField][surface].forEach((item) => {
+    let layer = SURFACE;
+    player.fields[player.currentField][layer].forEach((item) => {
       let log2 = {scale: 0.8};
       let itemSvg = svg.render(`${item.item}2`, 1, ''); 
       sprite.render(item.x, item.y, itemSvg, sprite.width * log2.scale, sprite.height * log2.scale, 'block');

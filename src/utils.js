@@ -32,8 +32,6 @@ const state = {
       let newPlayer = JSON.parse(decompressed);
       newPlayer.fields = field.encodeAll(newPlayer.fields, false);
       player = newPlayer;
-    } else {
-      return player;
     }
   },
 

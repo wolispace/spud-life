@@ -37,11 +37,13 @@ const controls = {
     //controlElement.onmouseout = function () { controls.endInput(direction); };
     controlElement.addEventListener("touchstart", function () { character.movePlayer(direction); }, false);
     controlElement.addEventListener("touchend", function () { controls.endInput(direction); });
+    state.load();
   },
 
   onDig: function (controlElement) {
     controlElement.onmousedown = function () { controls.dig(); };
     controlElement.addEventListener("touchstart", function () { controls.dig(); }, false);
+    state.load();
   },
 
   buttonDown: function (direction) {
@@ -80,6 +82,7 @@ const controls = {
     controls.buttonUp(direction);
     clearInterval(timers[direction]);
     timers.moving = false;
+    state.save();
   },
 
 };

@@ -223,14 +223,14 @@ const character = {
     let body = character.randomBody();
     let itemSvg = svg.renderPerson(body);
     // scale the width and height of the svg
-    playerId = sprite.render(1, 1, itemSvg, 32, sprite.height, 'player');
+    playerId = sprite.render(player.x, player.y, itemSvg, 32, sprite.height, 'player');
   },
 
   getBodySet: function () {
     let partOptions = [];
     // extract body bits
     let baseBody = character.defaultBody;
-  
+
     Object.keys(baseBody).forEach((bodyPart) => {
       partOptions[bodyPart] = [];
       Object.entries(svg.imgList).forEach(([key, part]) => {
@@ -240,7 +240,7 @@ const character = {
         }
       });
     });
-  
+
     return partOptions;
   },
 
@@ -256,31 +256,35 @@ const character = {
       timers[direction] = setInterval(() => {
         let playerSprite = sprite.get(playerId);
         let playerBox = playerSprite.getBoundingClientRect();
-        let old = {x: playerBox.x, y: playerBox.y};
+        let old = { x: playerBox.x, y: playerBox.y };
         let newTop, newLeft;
         switch (direction) {
           case 'up':
             newTop = playerBox.top - step.y;
             if (newTop > 0) {
               playerSprite.style.top = `${newTop}px`;
+              player.y = newTop;
             }
             break;
           case 'down':
             newTop = playerBox.top + step.y;
             if (newTop < containerBox.height - playerBox.height) {
               playerSprite.style.top = `${newTop}px`;
+              player.y = newTop;
             }
             break;
           case 'left':
             newLeft = playerBox.left - step.x;
             if (newLeft > 0) {
               playerSprite.style.left = `${newLeft}px`;
+              player.x = newLeft;
             }
             break;
           case 'right':
             newLeft = playerBox.left + step.x;
             if (newLeft < containerBox.width - playerBox.width) {
               playerSprite.style.left = `${newLeft}px`;
+              player.x = newLeft;
             }
             break;
         }
@@ -299,9 +303,9 @@ const character = {
       }, timers.duration);
     }
   },
-  
-  
-  
+
+
+
   // the default
   defaultBody: {
     body: {

@@ -9,6 +9,9 @@ let grid = { x: 10, y: 10 };
 let timers = { duration: 20 };
 let list = {};
 
+const SURFACE = 0;
+const UNDERGROUND = 1;
+
 let bodySet = character.getBodySet();
 
 // all of the events..
@@ -47,13 +50,14 @@ function introGame() {
   containerElement.innerHTML = titleSvg;
   svg.animate(containerElement, 'goInvisible', 0.1, function () {
     setContainerBox();
-    let loadSavedState = true;
-    if (loadSavedState) {
-      state.load();
+    // loads previously save state from localStorage if found
+    state.load();
+    if (player.days && player.days > 0) {
       field.redraw();
     } else {
       field.addRandom();
       setupThings();
+      player.days = 1;
       state.save();
     }
   });
