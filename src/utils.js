@@ -18,15 +18,20 @@ function getDirection (event) {
 
 const state = {
   save: () => {
+    let fields = player.fields;
+    player.fields = field.encodeAll(player.fields, true);
     let compressed = LZString.compressToUTF16(JSON.stringify(player));
     localStorage.setItem("state", compressed);
+    player.fields = fields;
   },
 
   load: () => {
     let compressed = localStorage.getItem("state");
     if (compressed) {
       let decompressed = LZString.decompressFromUTF16(compressed);
-      return JSON.parse(decompressed);
+      let newPlayer = JSON.parse(decompressed);
+      newPlayer.fields = field.encodeAll(newPlayer.fields, false);
+      player = newPlayer;
     } else {
       return player;
     }

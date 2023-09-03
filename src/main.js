@@ -47,8 +47,15 @@ function introGame() {
   containerElement.innerHTML = titleSvg;
   svg.animate(containerElement, 'goInvisible', 0.1, function () {
     setContainerBox();
-    field.addRandom();
-    setupThings();
+    let loadSavedState = true;
+    if (loadSavedState) {
+      state.load();
+      field.redraw();
+    } else {
+      field.addRandom();
+      setupThings();
+      state.save();
+    }
   });
 }
 
