@@ -9,8 +9,9 @@ let grid = { x: 10, y: 10 };
 let timers = { duration: 20 };
 let list = {};
 
-const SURFACE = 0;
-const UNDERGROUND = 1;
+const ABOVEGROUND = 0;
+const SURFACE = 1;
+const UNDERGROUND = 2;
 
 let bodySet = character.getBodySet();
 
