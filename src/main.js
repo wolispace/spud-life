@@ -9,9 +9,7 @@ let grid = { x: 10, y: 10 };
 let timers = { duration: 20 };
 let list = {};
 
-const ABOVEGROUND = 0;
-const SURFACE = 1;
-const UNDERGROUND = 2;
+
 
 let bodySet = character.getBodySet();
 
@@ -53,6 +51,7 @@ function introGame() {
     setContainerBox();
     // loads previously save state from localStorage if found
     state.load();
+
     if (player.days && player.days > 0) {
       field.redraw();
     } else {

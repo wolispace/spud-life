@@ -30,7 +30,7 @@ let player = {
   ],
   spuds: [],
   currentField: 0,
-  fields: [],
+  fields: [[], [], []],
   shop: {
     machines: {},
   },

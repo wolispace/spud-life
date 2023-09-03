@@ -31,6 +31,7 @@ const state = {
       let decompressed = LZString.decompressFromUTF16(compressed);
       let newPlayer = JSON.parse(decompressed);
       newPlayer.fields = field.encodeAll(newPlayer.fields, false);
+      if (player.pos > -1)
       player = newPlayer;
     }
   },

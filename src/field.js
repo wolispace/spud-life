@@ -34,11 +34,10 @@ const field = {
   },
 
   addRandom: function () {
-    console.trace('random');
     clearBody();
     // reset field data..
-    player.fields[player.currentField] = [[], []];
-    let layer = ABOVEGROUND; // 0 =  top, 1 to below
+    player.fields[player.currentField] = [[], [], []];
+    let layer = game.ABOVEGROUND; // 0 =  top, 1 to below
     for (let step = 0; step < qty; step++) {
       let x = rnd(containerBox.width - sprite.width);
       let y = rnd(containerBox.height - sprite.height);
@@ -54,10 +53,9 @@ const field = {
   },
   
   redraw: function () {
-    console.trace('redraw');
     setContainerBox();
     clearBody();
-    let layer = ABOVEGROUND;
+    let layer = game.ABOVEGROUND;
     player.fields[player.currentField][layer].forEach((item) => {
       let log2 = {scale: 0.8};
       let itemSvg = svg.render(`${item.item}2`, 1, ''); 
