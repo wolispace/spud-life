@@ -33,6 +33,14 @@ body {
     z-index: 1;
   }
 
+  .playerBody {
+    transform: translateX(-50%);
+  }
+
+  .playerHead {
+    transform: translateX(-50%);
+  }
+
   .control {
     background-color: rgba(0,0,128,.25);
     color: white;

@@ -3,15 +3,15 @@ const sprite = {
   width: 50,
   height: 50,
 
-  render: function (x, y, content, w, h, classList = '') {
+  render: function (x, y, itemSvg, w, h, classList = '') {
     sprite.number++;
     let width = `${w}px`;
     let height = `${h}px`;
     let top = `${y}px`;
     let left = `${x}px`;
     let style = `width: ${width}; height:${height}; top:${top}; left:${left};`;
-    content = sprite.orientSvg(content);
-    let newSprite = `<div id="i${sprite.number}" class="sprite ${classList}" style="${style}">${content}</div>`;
+    itemSvg = sprite.orientSvg(itemSvg);
+    let newSprite = `<div id="i${sprite.number}" class="sprite ${classList}" style="${style}">${itemSvg}</div>`;
     let bodyElement = document.querySelector("body");
     bodyElement.insertAdjacentHTML('beforeend', newSprite);
 
@@ -23,10 +23,9 @@ const sprite = {
   orientSvg: function (itemSvg) {
     // get width and height from viewbox to decide if its a wide or high image
     let bits = itemSvg.match(/viewBox=\"(\d+) (\d+) (\d+) (\d+)\"/);
-    let orientation = (bits[3] > bits[4]) ? 'wide' : 'high';
-
-    return itemSvg.replace(/ viewBox=\"/, `class=\"${orientation}\" viewBox=\"`);
-
+    let orientation = (parseInt(bits[3]) > parseInt(bits[4])) ? 'wide' : 'high';
+    let newSvg = itemSvg.replace(/ viewBox=\"/, ` class=\"${orientation}\" viewBox=\"`);
+     return newSvg;
   },
 
   // shrink holding div around the svg 

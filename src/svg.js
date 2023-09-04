@@ -862,6 +862,15 @@ const svg = {
     </svg>`;
   },
 
+  wrapPlayer: (guts) => {
+    return `<svg
+    viewBox="0 0 50 100" 
+    xmlns="http://www.w3.org/2000/svg">
+      ${guts}
+    </svg>`;
+  },
+
+
   // adds a highlight to the spuds to make them a bit 3D
   highlight: () => {
     return `
@@ -941,7 +950,7 @@ const svg = {
 
     let guts = `<g class="playerBody"><path style="${body.s}" d="${body.d}"></g><g class="playerHead">${head}</g>`;
 
-    return svg.wrap("", "", guts);
+    return svg.wrapPlayer(guts);
   },
 
   // puts the bits of a human together
