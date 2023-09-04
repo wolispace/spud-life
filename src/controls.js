@@ -72,8 +72,10 @@ const controls = {
   },
 
   stopDefaults: function (controlElement) {
-    // DEBUG: so i can inspect things
-    return;
+    if (devMode) {
+      return;
+    }
+
     // stop things like text selection and RMB menu
     controlElement.oncontextmenu = function (event) {
       event.preventDefault();
