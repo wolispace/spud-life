@@ -10,9 +10,9 @@ function halfRnd(num) {
 }
 
 function isDirection(direction) {
-  return ['up','down','left','right'].includes(direction);
+  return ['up', 'down', 'left', 'right'].includes(direction);
 }
-function getDirection (event) {
+function getDirection(event) {
   return event.code.toLowerCase().replace('arrow', '');
 }
 
@@ -31,8 +31,9 @@ const state = {
       let decompressed = LZString.decompressFromUTF16(compressed);
       let newPlayer = JSON.parse(decompressed);
       newPlayer.fields = field.encodeAll(newPlayer.fields, false);
-      if (player.pos > -1)
-      player = newPlayer;
+      if (!player.pos) {
+        player = newPlayer;
+      }
     }
   },
 
@@ -40,7 +41,7 @@ const state = {
     localStorage.clear();
     if (reload) {
       window.location.reload();
-    }    
+    }
   },
 
   read: () => {
@@ -87,7 +88,7 @@ function getElementPos(selector) {
   return element.getBoundingClientRect();
 }
 
-function randomName (qty = 3) {
+function randomName(qty = 3) {
   let vowels = 'aeiou'.split('');
   let prefix = 'bdcfgjlnprsvwz'.split('');
   let newName = '';
@@ -100,7 +101,7 @@ function randomName (qty = 3) {
   return newName;
 }
 
-function cleanString (userInput) {
+function cleanString(userInput) {
   return userInput.replace(/[^a-z0-9]/gi, '').slice(0, 14);
 }
 

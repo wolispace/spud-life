@@ -37,13 +37,13 @@ const controls = {
     //controlElement.onmouseout = function () { controls.endInput(direction); };
     controlElement.addEventListener("touchstart", function () { character.movePlayer(direction); }, false);
     controlElement.addEventListener("touchend", function () { controls.endInput(direction); });
-    state.load();
+    state.save();
   },
 
   onDig: function (controlElement) {
     controlElement.onmousedown = function () { controls.dig(); };
     controlElement.addEventListener("touchstart", function () { controls.dig(); }, false);
-    state.load();
+    state.save();
   },
 
   buttonDown: function (direction) {
