@@ -63,11 +63,16 @@ const controls = {
     controls.buttonDown('spade');
     let itemSvg = svg.render("hole", 5);
     let hole = { scale: 1 };
+    let item = 'hole';
+    let qty = 5;
     let playerBox = character.getPlayerBox();
-    sprite.render(playerBox.x, playerBox.y, itemSvg, sprite.width * hole.scale, sprite.height * hole.scale, 'hole');
+    sprite.render(playerBox.x, playerBox.y, itemSvg, sprite.width * hole.scale, sprite.height * hole.scale, item);
+    field.addItem(game.SURFACE, playerBox.x, playerBox.y, item, qty);
+    state.save();
   },
 
   stopDefaults: function (controlElement) {
+    // DEBUG: so i can inspect things
     return;
     // stop things like text selection and RMB menu
     controlElement.oncontextmenu = function (event) {
