@@ -223,7 +223,7 @@ const character = {
     let body = character.randomBody();
     let itemSvg = svg.renderPerson(body);
     // scale the width and height of the svg
-    playerId = sprite.render(player.x, player.y, itemSvg, 32, sprite.height, 'player');
+    playerId = sprite.render(player.x, player.y, itemSvg, sprite.width, sprite.height, 'player');
   },
 
   getBodySet: function () {

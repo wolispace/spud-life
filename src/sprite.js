@@ -10,6 +10,7 @@ const sprite = {
     let top = `${y}px`;
     let left = `${x}px`;
     let style = `width: ${width}; height:${height}; top:${top}; left:${left};`;
+    content = sprite.orientSvg(content);
     let newSprite = `<div id="i${sprite.number}" class="sprite ${classList}" style="${style}">${content}</div>`;
     let bodyElement = document.querySelector("body");
     bodyElement.insertAdjacentHTML('beforeend', newSprite);
@@ -17,6 +18,15 @@ const sprite = {
     sprite.shrinkWrap(sprite.number);
 
     return sprite.number;
+  },
+
+  orientSvg: function (itemSvg) {
+    // get width and height from viewbox to decide if its a wide or high image
+    let bits = itemSvg.match(/viewBox=\"(\d+) (\d+) (\d+) (\d+)\"/);
+    let orientation = (bits[3] > bits[4]) ? 'wide' : 'high';
+
+    return itemSvg.replace(/ viewBox=\"/, `class=\"${orientation}\" viewBox=\"`);
+
   },
 
   // shrink holding div around the svg 

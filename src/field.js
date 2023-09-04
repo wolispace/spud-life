@@ -45,7 +45,8 @@ const field = {
       let item = rnd(2) == 1 ? 'log': 'rock';
       let log2 = {scale: 0.8};
       let itemSvg = svg.render(`${item}2`, 1, ''); 
-      sprite.render(x, y, itemSvg, sprite.width * log2.scale, sprite.height * log2.scale, 'block');
+      console.log(itemSvg);
+      sprite.render(x, y, itemSvg, sprite.width, sprite.height, 'block');
       let itemInfo = { x: x, y: y, item: item, qty: qty};
       field[item][step] = itemInfo;
       player.fields[player.currentField][layer].push(itemInfo);
@@ -59,9 +60,11 @@ const field = {
     player.fields[player.currentField][layer].forEach((item) => {
       let log2 = {scale: 0.8};
       let itemSvg = svg.render(`${item.item}2`, 1, ''); 
+      
       sprite.render(item.x, item.y, itemSvg, sprite.width * log2.scale, sprite.height * log2.scale, 'block');
     });
     setupThings();
-  }
+  },
+
 };
 

@@ -20,6 +20,14 @@ body {
     position: absolute;
   }
 
+  svg.wide {
+    width: 100%;
+  }
+
+  svg.high {
+    height: 100%;
+  }
+
   .player {
     filter: drop-shadow(0px 5px 5px black);
     z-index: 1;
@@ -40,10 +48,6 @@ body {
     stroke-linecap: round;
     stroke-linejoin: round;
     fill: none;
-  }
-
-  div > svg {
-    height: 100%;
   }
 
   .hole {
