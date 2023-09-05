@@ -51,12 +51,12 @@ function introGame() {
     // loads previously save state from localStorage if found
     state.load();
 
-    if (player.days && player.days > 0) {
+    if (player.day && player.day > 0) {
       field.redraw();
     } else {
       field.addRandom();
       setupThings();
-      player.days = 1;
+      player.day = 1;
       state.save();
     }
   });

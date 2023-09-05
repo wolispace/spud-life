@@ -8,7 +8,7 @@ let player = {
   x: 1,
   y: 1,
   daytime: true,
-  days: 0,
+  day: 0,
   cols: cols,
   rows: rows,
   basket: {},
