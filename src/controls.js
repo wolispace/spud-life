@@ -19,8 +19,9 @@ const controls = {
       let iconSvg = svg.render(direction);
       //console.log(direction, iconSvg);
 
-      let controlId = sprite.render(newPos.x, newPos.y, iconSvg, sprite.width, sprite.height, `control ${direction}`);
-      let controlElement = document.querySelector(`#i${controlId}`);
+      let newSprite = sprite.render(player.uid++, newPos.x, newPos.y, iconSvg, sprite.width, sprite.height, `control ${direction}`);
+      
+      let controlElement = document.querySelector(`#i${newSprite.uid}`);
 
       controls.stopDefaults(controlElement);
       if (['spade'].includes(direction)) {
@@ -66,7 +67,7 @@ const controls = {
     let item = 'hole';
     let qty = 5;
     let playerBox = character.getPlayerBox();
-    sprite.render(playerBox.x, playerBox.y, itemSvg, sprite.width * hole.scale, sprite.height * hole.scale, item);
+    let newBox = sprite.render(player.uid++, playerBox.x, playerBox.y, itemSvg, sprite.width * hole.scale, sprite.height * hole.scale, item);
     field.addItem(game.SURFACE, playerBox.x, playerBox.y, item, qty);
     state.save();
   },

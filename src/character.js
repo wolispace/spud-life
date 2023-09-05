@@ -222,7 +222,8 @@ const character = {
   addPlayer: function () {
     let body = character.randomBody();
     let itemSvg = svg.renderPerson(body);
-    playerId = sprite.render(player.x, player.y, itemSvg, sprite.width, sprite.height, 'player');
+    newSprite = sprite.render(player.uid++, player.x, player.y, itemSvg, sprite.width, sprite.height, 'player');
+    playerId = newSprite.uid;
   },
 
   getBodySet: function () {
@@ -289,10 +290,7 @@ const character = {
         }
         let collideId = sprite.collision(direction);
         if (collideId) {
-          let itemIndex = collideId.substring(1);
-          let itemInfo = field[itemIndex];
-          console.log(itemInfo);
-          let controlElement = document.querySelector(`#${collideId}`);
+          let controlElement = document.querySelector(`#i${collideId}`);
           controlElement.style.width = '20px';
           controlElement.style.height = '20px';
           playerSprite.style.left = `${old.x}px`;

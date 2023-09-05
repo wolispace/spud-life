@@ -1,23 +1,19 @@
 const sprite = {
-  number: 0,
   width: 50,
   height: 50,
 
-  render: function (x, y, itemSvg, w, h, classList = '') {
-    sprite.number++;
+  render: function (uid, x, y, itemSvg, w, h, classList = '') {
     let width = `${w}px`;
     let height = `${h}px`;
     let top = `${y}px`;
     let left = `${x}px`;
     let style = `width: ${width}; height:${height}; top:${top}; left:${left};`;
     itemSvg = sprite.orientSvg(itemSvg);
-    let newSprite = `<div id="i${sprite.number}" class="sprite ${classList}" style="${style}">${itemSvg}</div>`;
+    let newSprite = `<div id="i${uid}" class="sprite ${classList}" style="${style}">${itemSvg}</div>`;
     let bodyElement = document.querySelector("body");
     bodyElement.insertAdjacentHTML('beforeend', newSprite);
 
-    sprite.shrinkWrap(sprite.number);
-
-    return sprite.number;
+    return sprite.shrinkWrap(uid);
   },
 
   orientSvg: function (itemSvg) {
@@ -25,22 +21,24 @@ const sprite = {
     let bits = itemSvg.match(/viewBox=\"(\d+) (\d+) (\d+) (\d+)\"/);
     let orientation = (parseInt(bits[3]) > parseInt(bits[4])) ? 'wide' : 'high';
     let newSvg = itemSvg.replace(/ viewBox=\"/, ` class=\"${orientation}\" viewBox=\"`);
-     return newSvg;
+    return newSvg;
   },
 
-  // shrink holding div around the svg 
-  shrinkWrap: function (itemNumber) {
-    let itemDiv = document.querySelector(`#i${itemNumber}`);
-    let itemSvg = document.querySelector(`#i${itemNumber} > svg`);
+  // shrink holding div around the svg and return its box
+  shrinkWrap: function (uid) {
+    let itemDiv = document.querySelector(`#i${uid}`);
+    let itemSvg = document.querySelector(`#i${uid} > svg`);
     if (itemSvg) {
       let itemSvgBox = itemSvg.getBoundingClientRect();
       itemDiv.style.width = `${itemSvgBox.width}px`;
       itemDiv.style.height = `${itemSvgBox.height}px`;
+      itemSvgBox.uid = uid;
+      return itemSvgBox;
     }
   },
 
-  get: function (itemNumber) {
-    return document.querySelector(`#i${itemNumber}`);
+  get: function (uid) {
+    return document.querySelector(`#i${uid}`);
   },
 
   setSize: function () {
@@ -59,24 +57,25 @@ const sprite = {
   collision: function (direction) {
     let retValue = false;
     let playerBox = character.getPlayerBox();
-    let spritesList = document.querySelectorAll('.block');
-    spritesList.forEach(element => {
-      let spriteBox = element.getBoundingClientRect();
-      if ((spriteBox.x < playerBox.x + playerBox.width)
-        && (spriteBox.x + spriteBox.width > playerBox.x)
-        && (spriteBox.y < playerBox.y + playerBox.height)
-        && (spriteBox.y + spriteBox.height > playerBox.y)
-      ) {
-        let thisBlock = document.querySelector(`#${element.id} svg`);
-        svg.animate(thisBlock, `jiggle-${direction}`, 0.25);
-        retValue = element.id;
-      }
+    let spritesList = player.fields[player.currentField][game.ABOVEGROUND];
 
+    spritesList.forEach(spriteBox => {
+      if (sprite.collides(playerBox, spriteBox)) {
+        let thisBlock = document.querySelector(`#i${spriteBox.uid} svg`);
+        svg.animate(thisBlock, `jiggle-${direction}`, 0.25);
+        retValue = spriteBox.uid;
+      }
     });
     return retValue;
   },
 
-
+  // do these collide? objects with (x,y,width,height}
+  collides: function (item1, item2) {
+    return (item1.x < item2.x + item2.width)
+      && (item1.x + item1.width > item2.x)
+      && (item1.y < item2.y + item2.height)
+      && (item1.y + item1.height > item2.y);
+  },
 
   resize: function () {
     if (true) {
