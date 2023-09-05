@@ -47,14 +47,26 @@ const field = {
       let qty = rnd(5) + 1;
       let item = rnd(2) == 1 ? 'log' : 'rock';
       let itemSvg = svg.render(`${item}2`, 1, '');
-      sprite.render(player.uid++, x, y, itemSvg, sprite.width, sprite.height, 'block');
-      field.addItem(layer, x, y, item, qty);
+      let newBox = sprite.render(player.uid++, x, y, itemSvg, sprite.width, sprite.height, 'block');
+      field.addItem(layer, x, y, newBox.width, newBox.height, item, qty, newBox.uid);
     }
   },
 
-  addItem: function (layer, x, y, item, qty) {
-    let itemInfo = { x: x, y: y, item: item, qty: qty, uid: player.uid++ };
+  addItem: function (layer, x, y, width, height, item, qty, uid) {
+    let itemInfo = { x: x, y: y, width: width, height: height, item: item, qty: qty, uid: uid };
     player.fields[player.currentField][layer].push(itemInfo);
+  },
+
+  updateItem: function (layer, x, y, width, height, qty, uid) {
+    player.fields[player.currentField][layer].forEach((item) => {
+      if (item.uid == uid) {
+        item.x = x;
+        item.y = y;
+        item.width = width;
+        item.height = height;
+        item.qty = qty;
+      }
+    });
   },
 
   redraw: function () {
