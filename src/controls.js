@@ -68,7 +68,7 @@ const controls = {
     let qty = 5;
     let playerBox = character.getPlayerBox();
     let newBox = sprite.render(player.uid++, playerBox.x, playerBox.y, itemSvg, sprite.width * hole.scale, sprite.height * hole.scale, item);
-    field.addItem(game.SURFACE, playerBox.x, playerBox.y, item, qty);
+    field.addItem(game.SURFACE, playerBox.x, playerBox.y, newBox.width, newBox.height, item, qty, newBox.uid);
     state.save();
   },
 
