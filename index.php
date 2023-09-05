@@ -50,7 +50,7 @@ function getSaveScript($v, $id)
 
 function getScripts($v)
 {
-  $scripts = "<script src='_js_files.min.js?{$v}'></script>";
+  $scripts = "<script src='_js_files.min.js?{$v}'></script><script>const isDev = false</script>";
   if (isDevMode()) {
     $jsFiles = "game sprite svg spuds items controls character field player";
     $files = explode(' ', "utils {$jsFiles} main");

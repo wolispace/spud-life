@@ -9,9 +9,6 @@ let grid = { x: 10, y: 10 };
 let timers = { duration: 20 };
 let list = {};
 
-let devMode = false;
-
-
 let bodySet = character.getBodySet();
 
 // all of the events..
@@ -48,7 +45,7 @@ function introGame() {
   let containerElement = document.querySelector(".container");
   let titleSvg = svg.render('title', 1, 'style="width:100%;"');
   containerElement.innerHTML = titleSvg;
-  let introDelay = devMode ? 0.1 : 4;
+  let introDelay = isDev ? 0.1 : 4;
   svg.animate(containerElement, 'goInvisible', introDelay, function () {
     setContainerBox();
     // loads previously save state from localStorage if found

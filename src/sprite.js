@@ -62,11 +62,11 @@ const sprite = {
     let spritesList = document.querySelectorAll('.block');
     spritesList.forEach(element => {
       let spriteBox = element.getBoundingClientRect();
-      if (((spriteBox.x < playerBox.x + playerBox.width)
+      if ((spriteBox.x < playerBox.x + playerBox.width)
         && (spriteBox.x + spriteBox.width > playerBox.x)
         && (spriteBox.y < playerBox.y + playerBox.height)
         && (spriteBox.y + spriteBox.height > playerBox.y)
-      )) {
+      ) {
         let thisBlock = document.querySelector(`#${element.id} svg`);
         svg.animate(thisBlock, `jiggle-${direction}`, 0.25);
         retValue = element.id;
@@ -75,6 +75,8 @@ const sprite = {
     });
     return retValue;
   },
+
+
 
   resize: function () {
     if (true) {

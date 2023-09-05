@@ -72,7 +72,7 @@ const controls = {
   },
 
   stopDefaults: function (controlElement) {
-    if (devMode) {
+    if (isDev) {
       return;
     }
 
