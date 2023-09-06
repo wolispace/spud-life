@@ -261,7 +261,8 @@ const character = {
         switch (direction) {
           case 'up':
             newTop = playerBox.top - step.y;
-            if (newTop > 0) {
+            let skyBottom = (sprite.height * sky.height) - playerBox.height;
+            if (newTop > skyBottom) {
               playerSprite.style.top = `${newTop}px`;
               player.y = newTop;
             }

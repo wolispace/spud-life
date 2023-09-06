@@ -10,8 +10,7 @@ const sprite = {
     let style = `width: ${width}; height:${height}; top:${top}; left:${left};`;
     itemSvg = sprite.orientSvg(itemSvg);
     let newSprite = `<div id="i${uid}" class="sprite ${classList}" style="${style}">${itemSvg}</div>`;
-    let bodyElement = document.querySelector("body");
-    bodyElement.insertAdjacentHTML('beforeend', newSprite);
+    addToBody(newSprite);
 
     return sprite.shrinkWrap(uid);
   },

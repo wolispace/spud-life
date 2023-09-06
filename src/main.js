@@ -22,6 +22,7 @@ window.addEventListener("resize", (event) => {
     height: containerBox.height
   }
   sprite.resize();
+
 });
 
 document.addEventListener("keydown", (event) => {
@@ -48,6 +49,7 @@ function introGame() {
   let introDelay = isDev ? 0.1 : 4;
   svg.animate(containerElement, 'goInvisible', introDelay, function () {
     setContainerBox();
+    sky.render();
     // loads previously save state from localStorage if found
     state.load();
 
@@ -79,7 +81,8 @@ function setContainerBox() {
 
 function clearBody() {
   let bodyElement = document.querySelector("body");
-  bodyElement.innerHTML = '<div class="container"></dv>';
+  bodyElement.innerHTML = `<div class="container"></dv><div class="skyBox"></dv>`;
+  sky.render();
 }
 
 function makeLists() {

@@ -72,6 +72,7 @@ const field = {
   redraw: function () {
     setContainerBox();
     clearBody();
+
     let layer = game.ABOVEGROUND;
     player.fields[player.currentField][layer].forEach((item) => {
       let itemSvg = svg.render(`${item.item}2`, item.qty, '');

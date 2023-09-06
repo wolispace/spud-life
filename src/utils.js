@@ -16,6 +16,11 @@ function getDirection(event) {
   return event.code.toLowerCase().replace('arrow', '');
 }
 
+function addToBody(html) {
+  let bodyElement = document.querySelector("body");
+  bodyElement.insertAdjacentHTML('beforeend', html);
+}
+
 const state = {
   save: () => {
     let fields = player.fields;
