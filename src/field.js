@@ -38,12 +38,16 @@ const field = {
 
   addRandom: function () {
     clearBody();
+    let skyBottom = (sprite.height * sky.height);
     // reset field data..
     player.fields[player.currentField] = [[], [], []];
     let layer = game.ABOVEGROUND; // 0 =  top, 1 to below
+    let fieldHeight = containerBox.height - sprite.height - skyBottom;
+    let fieldWidth = containerBox.width - sprite.width;
+    console.log(fieldHeight, fieldWidth);
     for (let step = 0; step < qty; step++) {
-      let x = rnd(containerBox.width - sprite.width);
-      let y = rnd(containerBox.height - sprite.height);
+      let x = rnd(fieldWidth);
+      let y = rnd(fieldHeight) + skyBottom;
       let qty = rnd(5) + 1;
       let item = rnd(2) == 1 ? 'log' : 'rock';
       let itemSvg = svg.render(`${item}2`, 1, '');

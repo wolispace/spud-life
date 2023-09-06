@@ -10,9 +10,7 @@ const sky = {
     }
     skyBox = document.querySelector(`.${sky.id}`);
     skyBox.style.height = `${sprite.height * sky.height}px`;
-
   },
-
-
+  
 };
 

@@ -21,7 +21,11 @@ window.addEventListener("resize", (event) => {
     width: containerBox.width,
     height: containerBox.height
   }
-  sprite.resize();
+  setContainerBox();
+  let newWidthPct = containerBox.width / last.width;
+  let newHeightPct = containerBox.height / last.height;
+
+  sprite.resize(newWidthPct, newHeightPct);
 
 });
 
@@ -52,7 +56,7 @@ function introGame() {
     sky.render();
     // loads previously save state from localStorage if found
     state.load();
-
+    player.day = 0;
     if (player.day && player.day > 0) {
       field.redraw();
     } else {
