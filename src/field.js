@@ -44,7 +44,6 @@ const field = {
     let layer = game.ABOVEGROUND; // 0 =  top, 1 to below
     let fieldHeight = containerBox.height - sprite.height - skyBottom;
     let fieldWidth = containerBox.width - sprite.width;
-    console.log(fieldHeight, fieldWidth);
     for (let step = 0; step < qty; step++) {
       let x = rnd(fieldWidth);
       let y = rnd(fieldHeight) + skyBottom;

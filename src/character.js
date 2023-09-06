@@ -255,7 +255,7 @@ const character = {
       character.look(direction);
       timers[direction] = setInterval(() => {
         let playerSprite = sprite.get(playerId);
-        let playerBox = playerSprite.getBoundingClientRect();
+        let playerBox = character.getPlayerBox();
         let old = { x: playerBox.x, y: playerBox.y };
         let newTop, newLeft;
         switch (direction) {
