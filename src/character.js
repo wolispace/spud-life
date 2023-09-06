@@ -224,6 +224,14 @@ const character = {
     let itemSvg = svg.renderPerson(body);
     newSprite = sprite.render(player.uid++, player.x, player.y, itemSvg, sprite.width, sprite.height, 'player');
     playerId = newSprite.uid;
+    if (player.y == 1) {
+      let playerSprite = sprite.get(playerId);
+      let playerBox = character.getPlayerBox();
+      player.x = sprite.width / 2;
+      player.y = (sprite.height * sky.height) - playerBox.height;
+      playerSprite.style.top = `${player.y}px`;
+      playerSprite.style.left = `${player.x}px`;
+    }
   },
 
   getBodySet: function () {

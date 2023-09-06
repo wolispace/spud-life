@@ -11,6 +11,19 @@ let list = {};
 
 let bodySet = character.getBodySet();
 
+// if savedate injected (by referencing it with ?id={dataFileId} then load it.
+if (typeof saveData !== 'undefined') {
+  state.write(saveData);
+}
+
+// start with ?reset to start a new game - link this to version of game != player.version
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.has('reset')) {
+  state.clear();
+}
+
+
+
 // all of the events..
 document.addEventListener("DOMContentLoaded", function () {
   introGame();
@@ -56,13 +69,12 @@ function introGame() {
     sky.render();
     // loads previously save state from localStorage if found
     state.load();
-    player.day = 0;
     if (player.day && player.day > 0) {
       field.redraw();
     } else {
+      player.day = 1;
       field.addRandom();
       setupThings();
-      player.day = 1;
       state.save();
     }
   });
