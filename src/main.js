@@ -84,6 +84,7 @@ function setupThings() {
   character.addPlayer();
   home.render();
   hardware.render();
+  cart.render();
   controls.render();
   makeLists();
   spuds.bestForList();

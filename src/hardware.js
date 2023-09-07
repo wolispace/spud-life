@@ -4,7 +4,7 @@ const hardware = {
 	y: 0,
 	render: function () {
 		hardware.itemSvg = svg.render('hardware');
-		hardware.x = sprite.width * 6;
+		hardware.x = sprite.width * 5;
 		hardware.y = 1;
 		hardware.w = sprite.width * 2;
 		hardware.h = sprite.height * 2;
