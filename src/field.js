@@ -72,6 +72,17 @@ const field = {
     });
   },
 
+  addGrid: function () {
+    let itemSvg = svg.render('blank');
+    for(let x = 0; x < game.grid.x; x++) {
+      for(let y = 0; y < game.grid.y; y++) {
+        let xx = x * sprite.width;
+        let yy = y * sprite.height;
+        sprite.render(`grid_${x}_${y}`, xx, yy, itemSvg, sprite.width, sprite.height, 'grid');
+      }
+    }
+  },
+
   redraw: function () {
     setContainerBox();
     clearBody();

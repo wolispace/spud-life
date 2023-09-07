@@ -49,8 +49,8 @@ const sprite = {
     } else {
       sprite.width = sprite.height;
     }
-    grid.x = parseInt(containerBox.width / sprite.width);
-    grid.y = parseInt(containerBox.height / sprite.height);
+    game.grid.x = parseInt(containerBox.width / sprite.width);
+    game.grid.y = parseInt(containerBox.height / sprite.height);
   },
 
   collision: function (direction) {

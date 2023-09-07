@@ -31,6 +31,13 @@ body {
     );
   }
 
+  .grid {
+    border: 1px solid white;
+  }
+  .icart {
+    border:1px solid blue;
+  }
+
   .sprite {
     position: absolute;
   }

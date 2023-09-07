@@ -5,7 +5,6 @@ let qty = 10;
 let containerBox = null;
 let playerId = 0;
 let step = { x: 5 * pixelScale, y: 5 * pixelScale};
-let grid = { x: 10, y: 10 };
 let timers = { duration: 20 };
 let list = {};
 
@@ -90,6 +89,7 @@ function setupThings() {
   spuds.bestForList();
   spuds.sprout(6);
   makeLists();
+  //field.addGrid();
 }
 
 function setContainerBox() {
