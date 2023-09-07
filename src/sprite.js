@@ -92,7 +92,7 @@ const sprite = {
     // when we have sensible things to resize..
     if (true) {
       clearTimeout(timers.resize);
-      timers.resize = setTimeout(redraw, 500);
+      timers.resize = setTimeout(field.redraw, 500);
     }
   },
 

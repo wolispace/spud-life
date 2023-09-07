@@ -82,6 +82,8 @@ function introGame() {
 
 function setupThings() {
   character.addPlayer();
+  home.render();
+  hardware.render();
   controls.render();
   makeLists();
   spuds.bestForList();

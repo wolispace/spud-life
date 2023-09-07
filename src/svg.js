@@ -31,7 +31,7 @@ const svg = {
     </g>
     <text x="17.75" y="57.75" style="fill:#3c2f12;font-family:Tahoma;font-size:5.3333px;font-weight:bold;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.095406;stroke-width:2.8" xml:space="preserve"><tspan x="17.75" y="57.75" style="fill:#3c2f12;font-size:5.3333px">A chip shop simulator</tspan></text>
    </svg>`,
-    house: `<svg id="SVGRoot" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    home: `<svg id="SVGRoot" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
       <rect x="13.125" y="55.375" width="70.75" height="43.75" style="fill:#aa6c2c"/>
       <rect id="house-door" x="40.375" y="69.625" width="16.625" height="29.625"/>
       <g transform="rotate(89.312 -5.5718 57.246)">
@@ -53,7 +53,7 @@ const svg = {
       <path d="m8.25 51.75h15.5" style="fill:#aae1e4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-width:1.7764;stroke:#001700"/>
       </g>
     </svg>`,
-    shop: `<svg id="SVGRoot" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    hardware: `<svg id="SVGRoot" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
       <rect x="21.625" y="14.625" width="54.5" height="11.375" style="fill:#fffafa;stroke-width:.96918"/>
       <text x="25" y="23.25" style="fill:#800000;font-family:'Comic Sans MS';font-size:8px;font-weight:bold">HARDWARE</text>
       <rect x="13.125" y="55.375" width="70.75" height="43.75" style="fill:#542b16"/>
