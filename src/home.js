@@ -10,4 +10,4 @@ const home = {
 		home.h = sprite.height * 2;
 		sprite.render(home.id, home.x, home.y, home.itemSvg, home.w, home.h);
 	}
-}
+};

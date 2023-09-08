@@ -28,6 +28,13 @@ document.addEventListener("DOMContentLoaded", function () {
   introGame();
 });
 
+// prent context menus - does thi prevent mobile selecting text
+// ot so we need the user-select: none; css?
+document.addEventListener('contextmenu', event => {
+  event.preventDefault()
+});
+
+
 window.addEventListener("resize", (event) => {
   let last = {
     width: containerBox.width,

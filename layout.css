@@ -5,6 +5,7 @@
 body {
   background-color: seagreen;
   overflow: hidden;
+  user-select: none;
 }
 
 .container {

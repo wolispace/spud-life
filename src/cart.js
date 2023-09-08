@@ -10,4 +10,4 @@ const cart = {
 		cart.h = sprite.height * 2;
 		sprite.render(cart.id, cart.x, cart.y, cart.itemSvg, cart.w, cart.h);
 	}
-}
+};
