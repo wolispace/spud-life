@@ -5,7 +5,6 @@
 body {
   background-color: seagreen;
   overflow: hidden;
-  user-select: none;
 }
 
 .container {
@@ -35,12 +34,21 @@ body {
   .grid {
     border: 1px solid white;
   }
-  .icart {
-    border:1px solid blue;
-  }
 
   .sprite {
     position: absolute;
+  }
+
+  .dialog {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    height: 40px;
+    width: 40%;
+    border: 3px solid darkslategrey;
+    background-color: slategrey;
+    padding: 5px;
+    border-radius: 5px;
   }
 
   svg.wide {

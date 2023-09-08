@@ -31,11 +31,13 @@ document.addEventListener("DOMContentLoaded", function () {
 // prent context menus - does thi prevent mobile selecting text
 // ot so we need the user-select: none; css?
 document.addEventListener('contextmenu', event => {
-  event.preventDefault()
+  if (!isDev) {
+    event.preventDefault();
+  }
 });
 
-
 window.addEventListener("resize", (event) => {
+  return;
   let last = {
     width: containerBox.width,
     height: containerBox.height
@@ -49,7 +51,7 @@ window.addEventListener("resize", (event) => {
 });
 
 document.addEventListener("keydown", (event) => {
-  event.preventDefault();
+  //event.preventDefault();
   let direction = getDirection(event);
   if (isDirection(direction)) {
     character.movePlayer(direction);
@@ -57,7 +59,7 @@ document.addEventListener("keydown", (event) => {
 });
 
 document.addEventListener("keyup", (event) => {
-  event.preventDefault();
+  //event.preventDefault();
   let direction = getDirection(event);
   if (isDirection(direction)) {
     clearInterval(timers[direction]);
@@ -69,7 +71,7 @@ function introGame() {
   let containerElement = document.querySelector(".container");
   let titleSvg = svg.render('title', 1, 'style="width:100%;"');
   containerElement.innerHTML = titleSvg;
-  let introDelay = isDev ? 0.1 : 4;
+  let introDelay = isDev ? 0.1 : 1;
   svg.animate(containerElement, 'goInvisible', introDelay, function () {
     setContainerBox();
     sky.render();
@@ -97,6 +99,7 @@ function setupThings() {
   spuds.sprout(6);
   makeLists();
   //field.addGrid();
+  dialog.render();
 }
 
 function setContainerBox() {
