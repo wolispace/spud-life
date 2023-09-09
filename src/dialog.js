@@ -81,7 +81,6 @@ const dialog = {
       `);
     }
     dialog.dialogBox = document.querySelector(`.${dialog.id}`);
-    console.log(dialog);
   },
 
 };

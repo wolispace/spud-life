@@ -77,8 +77,7 @@ function introGame() {
     sky.render();
     // loads previously save state from localStorage if found
     state.load();
-    hint.setup();
-    dialog.setup();
+
     if (player.day && player.day > 0) {
       field.redraw();
       testDialog();
@@ -111,6 +110,9 @@ function setupThings() {
   hardware.render();
   cart.render();
   controls.render();
+  hint.setup();
+  dialog.setup();
+  tools.setup();
   makeLists();
   spuds.bestForList();
   spuds.sprout(6);

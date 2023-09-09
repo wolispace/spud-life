@@ -262,6 +262,7 @@ button {
   border-radius: 3px;
   cursor: pointer;
 }
+
 button:hover {
   background-color: rgba(109, 160, 143, .75) !important;
 }
