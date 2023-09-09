@@ -24,6 +24,11 @@ if (urlParams.has('reset')) {
 
 // all of the events..
 document.addEventListener("DOMContentLoaded", function () {
+
+  let cat = new Cat(22,33, 'black');
+  console.log(cat);
+  cat.render();
+  cat.bingo();
   introGame();
 });
 

@@ -21,6 +21,21 @@ function addToBody(html) {
   bodyElement.insertAdjacentHTML('beforeend', html);
 }
 
+// returns a complete copy of an object
+function deepCopy (object) {
+  return JSON.parse(JSON.stringify(object));
+}
+
+positional = {
+  x: 1,
+  y: 1,
+  w: 10,
+  h: 10,
+  render: function () {
+    console.log('hi');
+  }
+}
+
 const state = {
   save: () => {
     let fields = player.fields;
