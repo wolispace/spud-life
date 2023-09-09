@@ -1,139 +1,217 @@
 :root {
   --sl-mud: rgb(34, 19, 13);
+  --sl-padding: 0.25em;
 }
 
 body {
   background-color: seagreen;
   overflow: hidden;
+  font-family: Tahoma, sans-serif;
 }
 
 .container {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: seagreen;
-  }
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: seagreen;
+}
 
-  .skyBox {
-    position:absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100px;
-    background: rgb(2, 0, 36);
-    background: linear-gradient(
-      180deg,
+.skyBox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(180deg,
       rgba(2, 0, 36, 1) 0%,
       rgba(82, 82, 246, 1) 0%,
-      rgba(216, 248, 255, 1) 100%
-    );
+      rgba(216, 248, 255, 1) 100%);
+}
+
+.grid {
+  border: 1px solid white;
+}
+
+.sprite {
+  position: absolute;
+}
+
+.buttonize {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-top: 2px solid white;
+  border-left: 2px solid white;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.5);
+  border-right: 2px solid rgba(0, 0, 0, 0.4);
+  border-radius: 3px;
+  padding: var(--sl-padding);
+  margin: var(--sl-padding);
+  text-shadow: 0px 0px 5px rgba(0,0,0,0.25);
+}
+
+
+svg.wide {
+  width: 100%;
+}
+
+svg.high {
+  height: 100%;
+}
+
+.player {
+  filter: drop-shadow(0px 5px 5px black);
+  z-index: 1;
+}
+
+.playerBody {
+  transform: translateX(-50%);
+}
+
+.playerHead {
+  transform: translateX(-50%);
+}
+
+.control {
+  background-color: rgba(0, 0, 128, .25);
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0px 5px 5px black;
+  z-index: 2;
+}
+
+.control>svg {
+  stroke: dodgerblue;
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
+
+.hole {
+  stroke: var(--sl-mud);
+  fill: var(--sl-mud);
+  opacity: 0.85;
+}
+
+.dialog {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+  height: auto;
+  overflow: hidden;
+  background-color: silver;
+  border-radius: 10px;
+  border-top: 2px solid white;
+  border-left: 2px solid white;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.5);
+  border-right: 2px solid rgba(0, 0, 0, 0.5);
+  overflow-y: auto;
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  text-shadow: 0px 0px 4px rgba(0,0,0,0.45);
+  box-shadow: 0px 0px 4px rgba(0,0,0,0.45);
+}
+
+.dialog .header {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  border-right: 2px solid rgba(0, 0, 0, 0.6);
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(0, 0, 0, 0.6);
+  position: sticky;
+  top: 0;
+}
+
+.dialog .close {
+  cursor: pointer;
+  background-color: brown;
+}
+
+.dialog .header .title {
+  padding: 0.4rem 0 0 0.8rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+  text-align: left;
+  width: 100%;
+}
+
+.dialog .content {
+  flex: auto;
+  overflow-y: auto;
+}
+
+.dialog-message-content {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  line-height: 1.5rem;
+}
+
+.dialog-content {
+  padding: 2rem;
+}
+
+.dialog .footer {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  position: sticky;
+  padding: 0.2rem;
+  background-color:rgb(160, 160, 160);
+  text-align: right;
+}
+
+@keyframes shrink {
+  0% {
+    transform: scale(1, 1);
   }
 
-  .grid {
-    border: 1px solid white;
+  100% {
+    transform: scale(0, 0);
+  }
+}
+
+@keyframes goInvisible {
+  0% {
+    opacity: 100%;
   }
 
-  .sprite {
-    position: absolute;
+  100% {
+    opacity: 0%;
   }
+}
 
-  .dialog {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    height: 40px;
-    width: 40%;
-    border: 3px solid darkslategrey;
-    background-color: slategrey;
-    padding: 5px;
-    border-radius: 5px;
-  }
-
-  svg.wide {
-    width: 100%;
-  }
-
-  svg.high {
-    height: 100%;
-  }
-
-  .player {
-    filter: drop-shadow(0px 5px 5px black);
-    z-index: 1;
-  }
-
-  .playerBody {
-    transform: translateX(-50%);
-  }
-
-  .playerHead {
-    transform: translateX(-50%);
-  }
-
-  .control {
-    background-color: rgba(0,0,128,.25);
-    color: white;
-    border-radius: 5px;
-    cursor:pointer;
+@keyframes buttonDown {
+  0% {
     box-shadow: 0px 5px 5px black;
-    z-index: 2;
   }
 
-  .control > svg {
-    stroke: dodgerblue;
-    stroke-width: 10;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    fill: none;
+  100% {
+    box-shadow: 0px 0px 0px black;
+    transform: translateY(3px);
+  }
+}
+
+@keyframes buttonUp {
+  0% {
+    box-shadow: 0px 0px 0px black;
   }
 
-  .hole {
-    stroke: var(--sl-mud);
-    fill: var(--sl-mud);
-    opacity: 0.85;
+  100% {
+    box-shadow: 0px 5px 5px black;
   }
+}
 
-  @keyframes shrink {
-    0% {
-      transform: scale(1, 1);
-    }
-  
-    100% {
-      transform: scale(0, 0);
-    }
-  }
 
-  @keyframes goInvisible {
-    0% {
-      opacity: 100%;
-    }
-    100% {
-      opacity: 0%;
-    }
-  }
-
-  @keyframes buttonDown {
-    0% {
-      box-shadow: 0px 5px 5px black;
-    }
-    100% {
-      box-shadow: 0px 0px 0px black;
-      transform: translateY(3px);
-    }
-  }
-
-  @keyframes buttonUp {
-    0% {
-      box-shadow: 0px 0px 0px black;
-    }
-    100% {
-      box-shadow: 0px 5px 5px black;
-    }
-  }
-
-  
 @keyframes jiggle-down {
   35% {
     transform: translateY(0.2rem) scale(1, 1);
