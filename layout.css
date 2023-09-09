@@ -9,6 +9,12 @@ body {
   font-family: Tahoma, sans-serif;
 }
 
+@media (max-width: 480px) {
+  .dialog, button, #hintSprite {
+    font-size: 1.25rem;
+  }
+}
+
 .container {
   position: absolute;
   top: 0;

@@ -77,8 +77,11 @@ function introGame() {
     sky.render();
     // loads previously save state from localStorage if found
     state.load();
+    hint.setup();
+    dialog.setup();
     if (player.day && player.day > 0) {
       field.redraw();
+      testDialog();
     } else {
       player.day = 1;
       field.addRandom();
@@ -86,6 +89,20 @@ function introGame() {
       state.save();
     }
   });
+}
+
+function testDialog() {
+  let title = "TEST dialog";
+  let content = `<div class="dialog-message-content">`;
+  content += `This is but a simple test<br/>to see what we can see.`;
+  let footer = "";
+  footer += `<button class="buttonize" onclick="basket.addMoney();"> Add $1k </button>`;
+  footer += `<button class="buttonize" onclick="pet.render(); pet.moveLeft(); dialog.hide();"> TEST pet </button>`;
+  footer += `<button class="buttonize" onclick="potatadex.render()"> Potatádex </button>`;
+  footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
+  dialog.cancelButton = function () { dialog.hide(); };
+  dialog.okButton = function () { dialog.hide(); };
+  dialog.render(title, content, footer);
 }
 
 function setupThings() {

@@ -1,7 +1,7 @@
 
 type "src\utils.js" > _js_files.js
 
-for %%r in (game, sprite, svg, spuds items, controls, character, field, player sky home hardware cart dialog) do ( 
+for %%r in (game, sprite, svg, spuds items, controls, character, field, player sky home hardware cart dialog hint) do ( 
     type src\%%r.js >> _js_files.js
 )
 

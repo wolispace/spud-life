@@ -221,7 +221,6 @@ const character = {
 
   addPlayer: function () {
     let body = character.randomBody();
-    console.trace('addBody');
     let itemSvg = svg.renderPerson(body);
     newSprite = sprite.render(player.uid++, player.x, player.y, itemSvg, sprite.width, sprite.height, 'player');
     playerId = newSprite.uid;
