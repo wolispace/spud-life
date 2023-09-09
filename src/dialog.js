@@ -6,10 +6,18 @@ const dialog = {
     let dialogBox = document.querySelector(`.${dialog.id}`);
 
     if (!dialogBox) {
-      addToBody(`<div class="${dialog.id}" ><input type="text"></input></div>`);
+      addToBody(`
+      <div class='dialog'>
+      <div class='header'>
+        <div class='title'>Title</div>
+        <div class='close buttonize' onclick='dialog.cancel()'>X</div>
+      </div>
+      <div class='content'></div>
+      <div class='footer'></div>
+    </div>
+`);
     }
     dialogBox = document.querySelector(`.${dialog.id}`);
-    dialogBox.style.height = `${sprite.height * sky.height}px`;
   },
 
 };
