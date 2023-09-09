@@ -8,7 +8,6 @@ let step = { x: 5 * pixelScale, y: 5 * pixelScale};
 let timers = { duration: 20 };
 let list = {};
 
-let bodySet = character.getBodySet();
 
 // if savedate injected (by referencing it with ?id={dataFileId} then load it.
 if (typeof saveData !== 'undefined') {
@@ -47,7 +46,7 @@ window.addEventListener("resize", (event) => {
   let newHeightPct = containerBox.height / last.height;
 
   sprite.resize(newWidthPct, newHeightPct);
-
+  
 });
 
 document.addEventListener("keydown", (event) => {
@@ -68,6 +67,7 @@ document.addEventListener("keyup", (event) => {
 });
 
 function introGame() {
+  character.bodySet = character.getBodySet();
   let containerElement = document.querySelector(".container");
   let titleSvg = svg.render('title', 1, 'style="width:100%;"');
   containerElement.innerHTML = titleSvg;

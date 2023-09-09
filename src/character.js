@@ -1,5 +1,7 @@
 const character = {
   currentBodyPart: 'body',
+  bodySet: null,
+
   render: function () {
     svg.showElement(".player");
     let thisBlock = document.querySelector(`.player svg`);
@@ -47,8 +49,8 @@ const character = {
     let colourNames = Object.keys(CSS_COLOR_NAMES);
     let skinTone = skinTones[rnd(skinTones.length)];
 
-    Object.keys(bodySet).forEach((bodyPart) => {
-      let variations = bodySet[bodyPart];
+    Object.keys(character.bodySet).forEach((bodyPart) => {
+      let variations = character.bodySet[bodyPart];
       let variation = variations[rnd(variations.length)];
       let colour = colourNames[rnd(colourNames.length)];
       if (",head,nose".indexOf(bodyPart) > 0) {
@@ -135,7 +137,7 @@ const character = {
 
     let selectBodyPart = `<div class="part part_${bodyPart} buttonize" onclick="character.setBodyPart('${bodyPart}')">`;
     selectBodyPart += `<div class="part-name">${bodyPart}</div>`;
-    if (bodySet[bodyPart].length > 1) {
+    if (character.bodySet[bodyPart].length > 1) {
       selectBodyPart += `<div class="button buttonize" onclick="character.prevBodyPart('${bodyPart}')"><</div>`;
       selectBodyPart += `<div class="button buttonize" onclick="character.nextBodyPart('${bodyPart}')">></div>`;
     }
@@ -156,22 +158,22 @@ const character = {
   nextBodyPart: function (bodyPart) {
     character.setBodyPart(bodyPart);
     let currentType = player.body[character.currentBodyPart].type;
-    let pos = bodySet[character.currentBodyPart].indexOf(currentType) + 1;
-    if (pos >= bodySet[character.currentBodyPart].length) {
+    let pos = character.bodySet[character.currentBodyPart].indexOf(currentType) + 1;
+    if (pos >= character.bodySet[character.currentBodyPart].length) {
       pos = 0;
     };
-    player.body[bodyPart].type = bodySet[character.currentBodyPart][pos];
+    player.body[bodyPart].type = character.bodySet[character.currentBodyPart][pos];
     character.demoBody();
   },
 
   prevBodyPart: function (bodyPart) {
     character.setBodyPart(bodyPart);
     let currentType = player.body[character.currentBodyPart].type;
-    let pos = bodySet[character.currentBodyPart].indexOf(currentType) - 1;
+    let pos = character.bodySet[character.currentBodyPart].indexOf(currentType) - 1;
     if (pos < 0) {
-      pos = bodySet[character.currentBodyPart].length - 1;
+      pos = character.bodySet[character.currentBodyPart].length - 1;
     };
-    player.body[bodyPart].type = bodySet[character.currentBodyPart][pos];
+    player.body[bodyPart].type = character.bodySet[character.currentBodyPart][pos];
     character.demoBody();
   },
 

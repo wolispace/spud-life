@@ -1,13 +1,9 @@
-
-type "src\utils.js" > _js_files.js
-
-for %%r in (game, sprite, svg, spuds items, controls, character, field, player sky home hardware cart tools dialog hint) do ( 
-    type src\%%r.js >> _js_files.js
-)
-
-type "src\main.js" >> _js_files.js
-
 :: start https://www.toptal.com/developers/javascript-minifier
 :: https://www.digitalocean.com/community/tools/minify
 
-terser _js_files.js --output _js_files.min.js -c -m toplevel
+set ALLFILES=_js_files.js
+echo "" > %ALLFILES%
+
+for /R "src" %%f in (*.js) do type "%%f" >> %ALLFILES%
+
+terser %ALLFILES% --output _js_files.min.js -c -m toplevel

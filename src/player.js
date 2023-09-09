@@ -2,7 +2,7 @@ const rows = 14;
 const cols = 10;
 
 let player = {
-  name: character.randomName(),
+  name: 'Ashley',
   hints: true,
   hinted: {},
   x: 1,
