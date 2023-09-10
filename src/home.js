@@ -1,4 +1,8 @@
-const home = {
+
+
+
+
+const OLDhome = {
 	id: 'home',
 	x: 0,
 	y: 0,

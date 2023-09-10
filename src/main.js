@@ -111,6 +111,7 @@ function testDialog() {
 
 function setupThings() {
   character.addPlayer();
+  let home = new game.Item('home', sprite.width, 1, sprite.width * 2,sprite.height * 2);
   home.render();
   hardware.render();
   cart.render();
