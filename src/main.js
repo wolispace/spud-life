@@ -20,15 +20,8 @@ if (urlParams.has('reset')) {
   state.clear();
 }
 
-
-
 // all of the events..
 document.addEventListener("DOMContentLoaded", function () {
-
-  let cat = new Cat(22,33, 'black');
-  console.log(cat);
-  cat.render();
-  cat.bingo();
   introGame();
 });
 
@@ -56,16 +49,16 @@ window.addEventListener("resize", (event) => {
 
 document.addEventListener("keydown", (event) => {
   //event.preventDefault();
-  let direction = getDirection(event);
-  if (isDirection(direction)) {
+  let direction = game.getDirection(event);
+  if (game.isDirection(direction)) {
     character.movePlayer(direction);
   }
 });
 
 document.addEventListener("keyup", (event) => {
   //event.preventDefault();
-  let direction = getDirection(event);
-  if (isDirection(direction)) {
+  let direction = game.getDirection(event);
+  if (game.isDirection(direction)) {
     clearInterval(timers[direction]);
     timers.moving = false;
   }
@@ -96,6 +89,7 @@ function introGame() {
 }
 
 function testDialog() {
+  return;
   let title = "TEST dialog";
   let content = `<div class="dialog-message-content">`;
   content += `This is but a simple test<br/>to see what we can see.`;
@@ -110,11 +104,23 @@ function testDialog() {
 }
 
 function setupThings() {
+
+    game.home = new building.Home();
+    game.hardware = new building.Hardware();
+    game.cart = new building.Cart();
+
   character.addPlayer();
-  let home = new game.Item('home', sprite.width, 1, sprite.width * 2,sprite.height * 2);
-  home.render();
-  hardware.render();
-  cart.render();
+
+  game.home.render();
+  game.home.enter();
+  game.home.exit();
+
+  
+
+  game.hardware.render();
+
+  game.cart.render();
+
   controls.render();
   hint.setup();
   dialog.setup();
