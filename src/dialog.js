@@ -12,10 +12,12 @@ const dialog = {
     dialog.visible = true;
     dialog.title = title;
     dialog.dialogBox.style.opacity = 1;
-    dialog.dialogBox.style.display = 'auto';
+    dialog.dialogBox.style.top = '20px';
+    dialog.dialogBox.style.bottom = '20px';
     dialog.part(`.dialog .header .title`, title);
     dialog.part(`.dialog .content`, content);
     dialog.part(`.dialog .footer`, footer);
+    console.log(dialog);
   },
 
   part: function (partClass, content) {
@@ -39,7 +41,8 @@ const dialog = {
 
   hide: function () {
     dialog.dialogBox.style.opacity = 0;
-    dialog.dialogBox.style.display = 'none';
+    dialog.dialogBox.style.top = '-10000px';
+    dialog.dialogBox.style.bottom = 'auto';
     dialog.part(`.dialog .header .title`, '');
     dialog.part(`.dialog .content`, '');
     dialog.part(`.dialog .footer`, '');
@@ -72,7 +75,7 @@ const dialog = {
       addToBody(`
       <div class='dialog'>
         <div class='header'>
-          <div class='title'>Title</div>
+          <div class='title'></div>
           <div class='close buttonize' onclick='dialog.cancel()'>X</div>
         </div>
         <div class='content'></div>
@@ -81,6 +84,7 @@ const dialog = {
       `);
     }
     dialog.dialogBox = document.querySelector(`.${dialog.id}`);
+    dialog.hide();
   },
 
 };

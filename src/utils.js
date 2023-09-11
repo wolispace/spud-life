@@ -14,21 +14,6 @@ function addToBody(html) {
   bodyElement.insertAdjacentHTML('beforeend', html);
 }
 
-// returns a complete copy of an object
-function deepCopy (object) {
-  return JSON.parse(JSON.stringify(object));
-}
-
-positional = {
-  x: 1,
-  y: 1,
-  w: 10,
-  h: 10,
-  render: function () {
-    console.log('hi');
-  }
-}
-
 const state = {
   save: () => {
     let fields = player.fields;
@@ -99,6 +84,20 @@ function getElementPos(selector) {
     element = document.querySelector('#patch_0');
   }
   return element.getBoundingClientRect();
+}
+
+// returns the bounding box.. and simplify w & h
+function getBoundingBox(element) {
+  if (typeof element === 'string') {
+    element = document.querySelector(element);
+    element = element.getBoundingClientRect();
+  } else {
+  }
+
+  element.w = element.width;
+  element.h = element.height;
+
+  return element;
 }
 
 function randomName(qty = 3) {

@@ -33,6 +33,9 @@ const controls = {
   },
 
   onMove: function (controlElement, direction) {
+    if (dialog.visible) {
+      return;
+    }
     controlElement.onmousedown = function () { character.movePlayer(direction); };
     controlElement.onmouseup = function () { controls.endInput(direction); };
     //controlElement.onmouseout = function () { controls.endInput(direction); };

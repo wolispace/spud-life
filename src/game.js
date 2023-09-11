@@ -3,8 +3,7 @@ const game = {
   SURFACE: 1,
   UNDERGROUND: 2,
   grid: { x: 10, y: 10 },
-  home: null,
-  cart: null,
+
 
   // everything show on the page is n Item with coords and an svg
   Item: class {
@@ -27,7 +26,6 @@ const game = {
 
     render() {
       this.svg = svg.render(this.id);
-      console.log(this);
       sprite.render(this.id, this.x, this.y, this.svg, this.w, this.h, this.classes);
     }
   },
@@ -44,6 +42,7 @@ const game = {
 };
 
 const building = {
+  list: {},
   Home: class extends game.Item {
     constructor() {
       super('home', sprite.width, 1, sprite.width * 2, sprite.height * 2);
@@ -62,28 +61,44 @@ const building = {
       console.log('exiting the house');
     }
   },
+
   Hardware: class extends game.Item {
     constructor() {
       super('hardware', ((game.grid.x - 4) * sprite.width) / 2, 1, sprite.width * 2, sprite.height * 2);
     }
     enter() {
-
-      console.log('Entering the hardware store');
+      let title = "Hardware store";
+      let content = `<div class="dialog-message-content">`;
+      content += `Buy and sell.`;
+      let footer = "";
+      footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
+      dialog.cancelButton = function () { dialog.hide(); };
+      dialog.okButton = function () { dialog.hide(); };
+      dialog.render(title, content, footer);
     }
     exit() {
       console.log('exiting the hardware store');
     }
   },
+
   Cart: class extends game.Item {
     constructor() {
       super('cart', (sprite.width * game.grid.x) - (sprite.width * 5), 1, sprite.width * 2, sprite.height * 2);
     }
     enter() {
-      console.log('Entering the cart');
+      let title = "Your food cart";
+      let content = `<div class="dialog-message-content">`;
+      content += `Sell meals`;
+      let footer = "";
+      footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
+      dialog.cancelButton = function () { dialog.hide(); };
+      dialog.okButton = function () { dialog.hide(); };
+      dialog.render(title, content, footer);
     }
     exit() {
       console.log('exiting the cart');
     }
   },
+  //
 }
 

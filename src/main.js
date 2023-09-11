@@ -78,7 +78,6 @@ function introGame() {
 
     if (player.day && player.day > 0) {
       field.redraw();
-      testDialog();
     } else {
       player.day = 1;
       field.addRandom();
@@ -105,21 +104,15 @@ function testDialog() {
 
 function setupThings() {
 
-    game.home = new building.Home();
-    game.hardware = new building.Hardware();
-    game.cart = new building.Cart();
+  building.list.home = new building.Home();
+  building.list.hardware = new building.Hardware();
+  building.list.cart = new building.Cart();
 
   character.addPlayer();
 
-  game.home.render();
-  game.home.enter();
-  game.home.exit();
-
-  
-
-  game.hardware.render();
-
-  game.cart.render();
+  building.list.home.render();
+  building.list.hardware.render();
+  building.list.cart.render();
 
   controls.render();
   hint.setup();
@@ -130,7 +123,7 @@ function setupThings() {
   spuds.sprout(6);
   makeLists();
   //field.addGrid();
-  dialog.render();
+  //dialog.render();
 }
 
 function setContainerBox() {

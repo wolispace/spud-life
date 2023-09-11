@@ -256,7 +256,7 @@ const character = {
 
   getPlayerBox: function () {
     let playerSprite = sprite.get(playerId);
-    return playerSprite.getBoundingClientRect();
+    return getBoundingBox(`#i${playerId}`);
   },
 
   movePlayer: function (direction) {
@@ -265,7 +265,7 @@ const character = {
       character.look(direction);
       timers[direction] = setInterval(() => {
         let playerSprite = sprite.get(playerId);
-        let playerBox = character.getPlayerBox();
+        let playerBox = getBoundingBox(`#i${playerId}`);;
         let old = { x: playerBox.x, y: playerBox.y };
         let newTop, newLeft;
         switch (direction) {
@@ -275,6 +275,17 @@ const character = {
             if (newTop > skyBottom) {
               playerSprite.style.top = `${newTop}px`;
               player.y = newTop;
+            } else {
+              // are we conflicting with a building?
+              Object.entries(building.list).forEach(([itemName, item]) => {
+                let buildingBox = getBoundingBox(`#i${item.id}`);
+                if (sprite.collides(buildingBox, playerBox)) {
+                  item.enter();
+                }
+
+              });
+
+
             }
             break;
           case 'down':
