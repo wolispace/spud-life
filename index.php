@@ -52,14 +52,22 @@ function getScripts($v)
 {
   $scripts = "<script src='_js_files.min.js?{$v}'></script><script>const isDev = false</script>";
   if (isDevMode()) {
-    $files = scandir("src");
     //$jsFiles = "game sprite svg spuds items controls character field player sky home hardware cart tools dialog hint";
     //$files = explode(' ', "utils {$jsFiles} main");
     $scripts = '<script>const isDev = true</script>';
-    foreach ($files as $file) {
-      if ($file[0] != '.') {
-        $scripts .= "<script src='src/{$file}?{$v}'></script>\n";
-      }
+    $scripts .= readFolder("src1", $v);
+    $scripts .= readFolder("src2", $v);
+  }
+  
+  return $scripts;
+}
+
+function readFolder ($folder, $v) {
+  $scripts = '';
+  $files = scandir($folder);
+  foreach ($files as $file) {
+    if ($file[0] != '.') {
+      $scripts .= "<script src='{$folder}/{$file}?{$v}'></script>\n";
     }
   }
 

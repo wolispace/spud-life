@@ -103,16 +103,9 @@ function testDialog() {
 }
 
 function setupThings() {
-
-  building.list.home = new building.Home();
-  building.list.hardware = new building.Hardware();
-  building.list.cart = new building.Cart();
-
   character.addPlayer();
+  buildings.setup();
 
-  building.list.home.render();
-  building.list.hardware.render();
-  building.list.cart.render();
 
   controls.render();
   hint.setup();

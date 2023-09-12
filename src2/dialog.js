@@ -9,6 +9,7 @@ const dialog = {
 
   render: function (title, content, footer) {
     dialog.setup();
+    controls.endInput();
     dialog.visible = true;
     dialog.title = title;
     dialog.dialogBox.style.opacity = 1;
@@ -17,7 +18,6 @@ const dialog = {
     dialog.part(`.dialog .header .title`, title);
     dialog.part(`.dialog .content`, content);
     dialog.part(`.dialog .footer`, footer);
-    console.log(dialog);
   },
 
   part: function (partClass, content) {

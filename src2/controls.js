@@ -34,13 +34,14 @@ const controls = {
 
   onMove: function (controlElement, direction) {
     if (dialog.visible) {
+      console.log('no moving as we have a dialog!');
       return;
     }
     controlElement.onmousedown = function () { character.movePlayer(direction); };
-    controlElement.onmouseup = function () { controls.endInput(direction); };
+    controlElement.onmouseup = function () { controls.endInput(); };
     //controlElement.onmouseout = function () { controls.endInput(direction); };
     controlElement.addEventListener("touchstart", function () { character.movePlayer(direction); }, false);
-    controlElement.addEventListener("touchend", function () { controls.endInput(direction); });
+    controlElement.addEventListener("touchend", function () { controls.endInput(); });
     state.save();
   },
 
@@ -51,15 +52,14 @@ const controls = {
   },
 
   buttonDown: function (direction) {
+    controls.direction = direction;
     let buttonDiv = document.querySelector(`.${direction}`);
     svg.animate(buttonDiv, 'buttonDown', 0.15);
     //console.log('button down - why not stopping', direction);
   },
 
-  buttonUp: function (direction) {
-    //let buttonDiv = document.querySelector(`.${direction}`);
-    //svg.animate(buttonDiv, 'buttonUp', 0.25);
-    //console.log('button up', direction);
+  buttonUp: function () {
+    //
   },
 
 
@@ -93,9 +93,10 @@ const controls = {
     };
   },
 
-  endInput: function (direction) {
-    controls.buttonUp(direction);
-    clearInterval(timers[direction]);
+  endInput: function () {
+    
+    controls.buttonUp(controls.direction);
+    clearInterval(timers[controls.direction]);
     timers.moving = false;
     state.save();
   },

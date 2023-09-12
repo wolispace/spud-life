@@ -277,7 +277,7 @@ const character = {
               player.y = newTop;
             } else {
               // are we conflicting with a building?
-              Object.entries(building.list).forEach(([itemName, item]) => {
+              Object.entries(buildings.list).forEach(([itemName, item]) => {
                 let buildingBox = getBoundingBox(`#i${item.id}`);
                 if (sprite.collides(buildingBox, playerBox)) {
                   item.enter();
