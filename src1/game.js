@@ -4,7 +4,6 @@ const game = {
   UNDERGROUND: 2,
   grid: { x: 10, y: 10 },
 
-
   // everything show on the page is n Item with coords and an svg
   Item: class {
     id = '';

@@ -1,6 +1,7 @@
 class Hardware extends game.Item {
     constructor() {
-      super('hardware', ((game.grid.x - 4) * sprite.width) / 2, 1, sprite.width * 2, sprite.height * 2);
+      let newX = (game.grid.x * sprite.width / 2) - sprite.width;
+      super('hardware', newX, 1, sprite.width * 2, sprite.height * 2);
     }
     enter() {
       let title = "Hardware store";

@@ -282,10 +282,7 @@ const character = {
                 if (sprite.collides(buildingBox, playerBox)) {
                   item.enter();
                 }
-
               });
-
-
             }
             break;
           case 'down':
@@ -318,8 +315,10 @@ const character = {
           playerSprite.style.left = `${old.x}px`;
           playerSprite.style.top = `${old.y}px`;
           // update player.fields[]
+          timers.moving = false;
+        } else {
+          timers.moving = true;
         }
-        timers.moving = true;
       }, timers.duration);
     }
   },

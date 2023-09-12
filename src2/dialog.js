@@ -50,6 +50,7 @@ const dialog = {
     dialog.okButton = null;
     dialog.hasInput = false;
     hint.hide();
+    timers.moving = false;
   },
 
   makeCheckbox: function (id, text, isChecked) {

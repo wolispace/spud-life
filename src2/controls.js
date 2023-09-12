@@ -34,7 +34,6 @@ const controls = {
 
   onMove: function (controlElement, direction) {
     if (dialog.visible) {
-      console.log('no moving as we have a dialog!');
       return;
     }
     controlElement.onmousedown = function () { character.movePlayer(direction); };
@@ -59,7 +58,7 @@ const controls = {
   },
 
   buttonUp: function () {
-    //
+    timers.moving = false;
   },
 
 
@@ -93,11 +92,9 @@ const controls = {
     };
   },
 
-  endInput: function () {
-    
+  endInput: function () {    
     controls.buttonUp(controls.direction);
     clearInterval(timers[controls.direction]);
-    timers.moving = false;
     state.save();
   },
 
