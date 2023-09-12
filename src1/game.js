@@ -26,6 +26,7 @@ const game = {
     render() {
       this.svg = svg.render(this.id);
       sprite.render(this.id, this.x, this.y, this.svg, this.w, this.h, this.classes);
+      console.log(this);
     }
   },
   
