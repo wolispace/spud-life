@@ -117,6 +117,15 @@ function setupThings() {
   makeLists();
   //field.addGrid();
   //dialog.render();
+
+  let ele = document.querySelector('.control');
+  ele.style.border = "1px solid red"; // = "1px solid red;"
+
+  ele.addEventListener("click", function(){
+    //console.log('clicked');
+    tools.list['pick'].onClick;
+  });
+
 }
 
 function setContainerBox() {

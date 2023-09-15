@@ -1,18 +1,34 @@
 class Tool extends game.Item {
   constructor(toolName, x, y) {
     super(toolName, x, y, sprite.width, sprite.height, 'control');
-    //this.setup();
+    this.setup();
   }
 
   setup () {
     //this.sprite = this.getSprite();
     this.render();
-    this.sprite = document.querySelector(`#i${this.id}`);
-    this.onClick = function () {alert('hi')};
-    console.log(`#i${this.id}`);
-    document.getElementById(`#i${this.id}`).addEventListener("click", function(){
-      console.log('clicked');
+
+    document.querySelector(`#i${this.id}`).addEventListener("click", () => {
+      this.onClick();
     });
+
+    return;
+    
+    let idx = `#i${this.id}`;
+    let pick = document.querySelector("#ipick");
+    console.log('pick', pick);
+    this.thing.addEventListener("click", function(){
+      console.log('clicked');
+      tools.list['pick'].onClick;
+    });
+    console.log('tool setop', this, idx);
+    
+
+    let id = `#i${this.id}`;
+    this.sprite = document.querySelector(id);
+                  
+    this.onClick = function () {alert('hi')};
+
 
     console.trace('setup', this);
     if (true) {

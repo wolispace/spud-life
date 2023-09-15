@@ -3,22 +3,18 @@ const tools = {
   list: {},
 
   setup: function () {
-    let itemName = 'pick';
-    tools.list[itemName] = new Tool(itemName, 100, 100);
-    tools.list[itemName].render();
-    tools.list[itemName].onClick = function () {
-      console.log('Clicked ', this.id);
-    }
-    //setTimeout(tools.list[itemName].setup(), 1000);
 
+    let toolList = ['pick', 'spade', 'axe', 'wallet'];
 
-    itemName = 'wallet';
-    tools.list[itemName] = new Tool(itemName, 200, 200);
-    tools.list[itemName].render();
-    tools.list[itemName].onClick = function () {
-      console.log('Clicked ', this.id);
-    }
-    //tools.list[itemName].setup();
+    let leftX = 6;
+
+    toolList.forEach((itemName) => {
+      tools.list[itemName] = new Tool(itemName, sprite.width * leftX++ , sprite.height * 8);
+      tools.list[itemName].onClick = function () {
+        console.log('Clicked ', this.id);
+      }
+    });
+
 
   },
 
