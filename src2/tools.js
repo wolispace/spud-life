@@ -3,20 +3,18 @@ const tools = {
   list: {},
 
   setup: function () {
+    let toolList = ['pick', 'spade', 'axe', 'scanner', 'wallet'];
 
-    let toolList = ['pick', 'spade', 'axe', 'wallet'];
-
-    let leftX = 6;
+    let leftX = 0.8;
+    let leftY = 8.2;
 
     toolList.forEach((itemName) => {
-      tools.list[itemName] = new Tool(itemName, sprite.width * leftX++ , sprite.height * 8);
+      tools.list[itemName] = new Tool(itemName, sprite.width * leftX , sprite.height * leftY);
       tools.list[itemName].onClick = function () {
         console.log('Clicked ', this.id);
       }
+      leftX = leftX + 2;
     });
-
-
   },
-
 };
 
