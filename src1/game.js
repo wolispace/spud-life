@@ -11,16 +11,18 @@ const game = {
     y = 1;
     w = 1;
     h = 1;
+    qty = 1;
     svg = '';
     classes = '';
     sprite = null;
 
-    constructor(id, x, y, w, h, classes = '') {
+    constructor(id, x, y, w, h, qty = 1, classes = '') {
       this.id = id;
       this.x = x;
       this.y = y;
       this.w = w;
       this.h = h;
+      this.qty = qty;
       this.classes = classes;
     }
 

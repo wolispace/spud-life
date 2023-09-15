@@ -3,16 +3,29 @@ const tools = {
   list: {},
 
   setup: function () {
-    let toolList = ['pick', 'spade', 'axe', 'scanner', 'wallet'];
+    let toolList = ['wallet', 'scanner', 'basket','axe', 'spade','pick' ];
 
-    let leftX = 0.8;
-    let leftY = 8.2;
+    let qty = 1;
+
+    let padding = 20;
+    let newLeft = (game.grid.x * sprite.width) - sprite.width - padding;
+    let newTop = (game.grid.y * sprite.height) - sprite.height - padding;
+
 
     toolList.forEach((itemName) => {
-      tools.list[itemName] = new Tool(itemName, sprite.width * leftX , sprite.height * leftY);
+      tools.list[itemName] = new Tool(itemName, newLeft , newTop, qty);
       tools.list[itemName].onClick = tools.clicks[itemName];
-      leftX = leftX + 2;
+      newLeft = newLeft - tools.list[itemName].w - padding;
+      qty++;
     });
+  },
+
+  show: function () {
+
+  },
+
+  hide: function () {
+
   },
 
   clicks: {

@@ -69,7 +69,7 @@ function introGame() {
   let containerElement = document.querySelector(".container");
   let titleSvg = svg.render('title', 1, 'style="width:100%;"');
   containerElement.innerHTML = titleSvg;
-  let introDelay = isDev ? 0.1 : 1;
+  let introDelay = isDev ? 0.1 : 5;
   svg.animate(containerElement, 'goInvisible', introDelay, function () {
     setContainerBox();
     sky.render();
