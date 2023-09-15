@@ -21,7 +21,7 @@ const tools = {
       let content = `<div class="dialog-message-content">`;
       content += `This is your pick.`;
       let footer = "";
-      footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
+      footer += `<button class="buttonize" onclick="dialog.okButton()"> Ok </button>`;
       dialog.cancelButton = function () { dialog.hide(); };
       dialog.okButton = function () { dialog.hide(); };
       dialog.render(title, content, footer);
@@ -63,7 +63,7 @@ const tools = {
       let footer = "";
       footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
       dialog.cancelButton = function () { dialog.hide(); };
-      dialog.okButton = function () { dialog.hide(); };
+      dialog.okButton = function () { console.log('wallet OK'); dialog.hide(); };
       dialog.render(title, content, footer);
     },
   }

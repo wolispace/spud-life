@@ -5,24 +5,10 @@ class Tool extends game.Item {
   }
 
   setup() {
-    //this.sprite = this.getSprite();
     this.render();
 
     document.querySelector(`#i${this.id}`).addEventListener("click", () => {
       this.onClick();
-    });
-
-    return;
-
-    this.sprite.addEventListener("keydown", (event) => {
-      console.trace('setup?');
-      //event.preventDefault();
-      this.onClick();
-    });
-
-    this.sprite.addEventListener("keyup", (event) => {
-      //event.preventDefault();
-      this.onClickEnd();
     });
   }
 

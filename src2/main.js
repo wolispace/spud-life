@@ -105,8 +105,6 @@ function testDialog() {
 function setupThings() {
   character.addPlayer();
   buildings.setup();
-
-
   controls.render();
   hint.setup();
   dialog.setup();
@@ -114,18 +112,9 @@ function setupThings() {
   makeLists();
   spuds.bestForList();
   spuds.sprout(6);
+  // run a second time once we have other lists to work from..
   makeLists();
   //field.addGrid();
-  //dialog.render();
-
-  let ele = document.querySelector('.control');
-  ele.style.border = "1px solid red"; // = "1px solid red;"
-
-  ele.addEventListener("click", function(){
-    //console.log('clicked');
-    tools.list['pick'].onClick;
-  });
-
 }
 
 function setContainerBox() {

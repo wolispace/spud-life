@@ -27,17 +27,8 @@ const game = {
     render() {
       this.svg = svg.render(this.id);
       this.sprite = sprite.render(this.id, this.x, this.y, this.svg, this.w, this.h, this.classes);
-      //console.trace(this.sprite);
-      this.thing = document.querySelector(`#i${this.id}`);
     }
-
-    getSprite() {
-      this.sprite2 = document.querySelector(`.i${this.id}`);
-    }
-
-    
   },
-  
 
   getDirection: function (event) {
     return event.code.toLowerCase().replace('arrow', '');

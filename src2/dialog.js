@@ -18,6 +18,7 @@ const dialog = {
     dialog.part(`.dialog .header .title`, title);
     dialog.part(`.dialog .content`, content);
     dialog.part(`.dialog .footer`, footer);
+    console.log(dialog);
   },
 
   part: function (partClass, content) {
@@ -26,17 +27,22 @@ const dialog = {
   },
 
   confirm: function () {
+    console.log('confirm', dialog);
     // do whatever is in the OkButton
     if (typeof dialog.okButton === "function") {
       dialog.okButton();
+    } else {
+      dialog.hide();
     }
   },
 
   cancel: function () {
+    console.log('cancel', dialog);
     if (typeof dialog.cancelButton === "function") {
       dialog.cancelButton();
+    } else {
+      dialog.hide();
     }
-    dialog.hide();
   },
 
   hide: function () {
@@ -47,7 +53,6 @@ const dialog = {
     dialog.part(`.dialog .content`, '');
     dialog.part(`.dialog .footer`, '');
     dialog.visible = false;
-    dialog.okButton = null;
     dialog.hasInput = false;
     hint.hide();
     timers.moving = false;
