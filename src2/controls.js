@@ -102,16 +102,18 @@ const controls = {
     }
   },
 
-
   collision: function (playerBox) {
     let retValue = false;
     let spritesList = player.fields[player.currentField][game.UNDERGROUND];
-
-    spritesList.forEach(spriteBox => {
-      if (sprite.collides(playerBox, spriteBox)) {
-        retValue = spriteBox.item;
+  
+    for (let i = 0; i < spritesList.length; i++) {
+      if (sprite.collides(playerBox, spritesList[i])) {
+        retValue = spritesList[i].item;
+        spritesList.splice(i, 1); // This will remove the item from the list
+        break; // This will stop checking for collisions after the first one is found
       }
-    });
+    }
+  
     return retValue;
   },
 
