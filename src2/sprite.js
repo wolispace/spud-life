@@ -70,10 +70,10 @@ const sprite = {
 
   // do these collide? objects with (x,y,width,height}
   collides: function (item1, item2) {
-    return (item1.x < item2.x + item2.width)
-      && (item1.x + item1.width > item2.x)
-      && (item1.y < item2.y + item2.height)
-      && (item1.y + item1.height > item2.y);
+    return (item1.x < item2.x + item2.w)
+      && (item1.x + item1.w > item2.x)
+      && (item1.y < item2.y + item2.h)
+      && (item1.y + item1.h > item2.y);
   },
 
   resize: function (newWidthPct, newHeightPct) {

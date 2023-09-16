@@ -9,7 +9,9 @@ const field = {
     let bits = infoString.split(',');
     return { 
       x: parseInt(bits[0]),
-      y: parseInt(bits[1]), 
+      y: parseInt(bits[1]),
+      w: sprite.width,
+      h: sprite.height, 
       item: bits[2], 
       qty: parseInt(bits[3]), 
       uid: parseInt(bits[4]) };
@@ -41,10 +43,10 @@ const field = {
     let skyBottom = (sprite.height * sky.height);
     // reset field data..
     player.fields[player.currentField] = [[], [], []];
-    let layer = game.ABOVEGROUND; // 0 =  top, 1 to below
+    let layer = game.ABOVEGROUND;
     let fieldHeight = containerBox.height - sprite.height - skyBottom;
     let fieldWidth = containerBox.width - sprite.width;
-    for (let step = 0; step < qty; step++) {
+    for (let step = 0; step < 15; step++) {
       let x = rnd(fieldWidth);
       let y = rnd(fieldHeight) + skyBottom;
       let qty = rnd(5) + 1;
@@ -53,10 +55,35 @@ const field = {
       let newBox = sprite.render(game.uid++, x, y, itemSvg, sprite.width, sprite.height, 'block');
       field.addItem(layer, x, y, newBox.width, newBox.height, item, qty, newBox.uid);
     }
+    layer = game.UNDERGROUND;
+    let maxSpuds = list.spuds.list.length;
+    let maxItems = list.items.list.length;
+    for (let step = 0; step < 30; step++) {
+      let x = rnd(fieldWidth);
+      let y = rnd(fieldHeight) + skyBottom;
+      let qty = 1; 
+      let item = '';
+      // player.currentField dictates how rare we get
+      if (rnd(3) == 1 ) {
+        qty = rnd(4) + 2;
+        // TODO take rarity into account
+        let itemInfo = list.spuds.list[rnd(maxSpuds)];
+        item = itemInfo.name;
+      } else {
+        itemInfo = list.items.list[rnd(maxItems)];
+        item = itemInfo.name;
+      }
+      let newBox = {
+        width: sprite.width,
+        height: sprite.height,
+        uid: game.uid++,
+      }
+      field.addItem(layer, x, y, newBox.width, newBox.height, item, qty, newBox.uid);
+    }
   },
 
   addItem: function (layer, x, y, width, height, item, qty, uid) {
-    let itemInfo = { x: x, y: y, width: width, height: height, item: item, qty: qty, uid: uid };
+    let itemInfo = { z: 0, x: x, y: y, w: width, h: height, width: width, height: height, item: item, qty: qty, uid: uid };
     player.fields[player.currentField][layer].push(itemInfo);
   },
 

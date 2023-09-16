@@ -1,12 +1,10 @@
 
 let pixelScale = 1; //window.devicePixelRatio;
 let itemNumber = 0;
-let qty = 10;
 let containerBox = null;
 let step = { x: 5 * pixelScale, y: 5 * pixelScale};
 let timers = { duration: 20 };
 let list = {};
-
 
 // if savedate injected (by referencing it with ?id={dataFileId} then load it.
 if (typeof saveData !== 'undefined') {
@@ -24,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
   introGame();
 });
 
-// prent context menus - does thi prevent mobile selecting text
+// prevent context menus - does this prevent mobile selecting text
 // ot so we need the user-select: none; css?
 document.addEventListener('contextmenu', event => {
   if (!isDev) {
@@ -79,8 +77,9 @@ function introGame() {
       field.redraw();
     } else {
       player.day = 1;
-      field.addRandom();
       setupThings();
+      field.addRandom();
+      field.redraw();
       state.save();
     }
   });

@@ -18,7 +18,6 @@ const dialog = {
     dialog.part(`.dialog .header .title`, title);
     dialog.part(`.dialog .content`, content);
     dialog.part(`.dialog .footer`, footer);
-    console.log(dialog);
   },
 
   part: function (partClass, content) {
@@ -27,7 +26,6 @@ const dialog = {
   },
 
   confirm: function () {
-    console.log('confirm', dialog);
     // do whatever is in the OkButton
     if (typeof dialog.okButton === "function") {
       dialog.okButton();
@@ -37,7 +35,6 @@ const dialog = {
   },
 
   cancel: function () {
-    console.log('cancel', dialog);
     if (typeof dialog.cancelButton === "function") {
       dialog.cancelButton();
     } else {

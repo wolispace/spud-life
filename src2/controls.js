@@ -78,12 +78,29 @@ const controls = {
     let qty = 5;
     let playerBox = character.getPlayerBox();
     if (playerBox.top > skyBottom && player.tools.spade > 0) {
+      let foundItem = controls.collision(playerBox);
+      if (foundItem) {
+        console.log(foundItem);
+      }
       let newBox = sprite.render(game.uid++, playerBox.x, playerBox.y, itemSvg, sprite.width * hole.scale, sprite.height * hole.scale, item);
       field.addItem(game.SURFACE, playerBox.x, playerBox.y, newBox.width, newBox.height, item, qty, newBox.uid);
       player.tools.spade--;
       controls.list['spade'].updateQty(player.tools.spade);
       state.save();
     }
+  },
+
+
+  collision: function (playerBox) {
+    let retValue = false;
+    let spritesList = player.fields[player.currentField][game.UNDERGROUND];
+
+    spritesList.forEach(spriteBox => {
+      if (sprite.collides(playerBox, spriteBox)) {
+        retValue = spriteBox.item;
+      }
+    });
+    return retValue;
   },
 
   stopDefaults: function (controlElement) {
