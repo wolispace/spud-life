@@ -3,7 +3,7 @@ const game = {
   SURFACE: 1,
   UNDERGROUND: 2,
   grid: { x: 10, y: 10 },
-  uid: 0, // as we add elements to the page they get an incremental id
+  uid: 1, // as we add elements to the page they get an incremental id
   directions: ['up', 'down', 'left', 'right'],
 
   // everything show on the page is n Item with coords and an svg
@@ -31,6 +31,12 @@ const game = {
     render() {
       this.svg = svg.render(this.id);
       this.sprite = sprite.render(this.id, this.x, this.y, this.svg, this.w, this.h, this.classes);
+    }
+  },
+
+  setUid(itemUid) {
+    if (itemUid >= game.uid) {
+      game.uid = itemUid + 1;
     }
   },
 

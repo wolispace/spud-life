@@ -7,12 +7,12 @@ const controls = {
       up: { x: 1, y: 0, qty: '', px: padding, py: -padding },
       left: { x: 0, y: 1, qty: '', px: 0, py: 0 },
       spade: { x: 1, y: 1, qty: 10, px: padding, py: 0 },
-      right: { x: 2, y: 1, qty: '' , px: padding * 2, py: 0},
-      down: { x: 1, y: 2, qty: '' , px: padding, py: padding},
+      right: { x: 2, y: 1, qty: '', px: padding * 2, py: 0 },
+      down: { x: 1, y: 2, qty: '', px: padding, py: padding },
     }
     let start = { x: 0, y: sprite.height * 4 };
 
-    
+
     Object.entries(buttons).forEach(([direction, coords]) => {
       let newPos = {
         x: start.x + sprite.width * coords.x + coords.px,
@@ -24,7 +24,7 @@ const controls = {
       controls.list[direction] = new Tool(direction, newPos.x, newPos.y, coords.qty);
       //controls.list[itemName].onClick = tools.clicks[itemName];
       //let newSprite = sprite.render(direction, newPos.x, newPos.y, iconSvg, sprite.width, sprite.height, `control ${direction}`);
-      
+
       let controlElement = document.querySelector(`#i${direction}`);
 
       controls.stopDefaults(controlElement);
@@ -34,6 +34,8 @@ const controls = {
         controls.onMove(controlElement, direction);
       }
     });
+
+    controls.list['spade'].updateQty(player.tools.spade);
   },
 
   onMove: function (controlElement, direction) {
@@ -49,9 +51,9 @@ const controls = {
   },
 
   onDig: function (controlElement) {
-    controlElement.onmousedown = function () { controls.dig(); };
-    controlElement.addEventListener("touchstart", function () { controls.dig(); }, false);
-    state.save();
+      controlElement.onmousedown = function () { controls.dig(); };
+      controlElement.addEventListener("touchstart", function () { controls.dig(); }, false);
+
   },
 
   buttonDown: function (direction) {
@@ -68,16 +70,18 @@ const controls = {
 
   dig: function () {
     let skyBottom = (sprite.height * sky.height);
-    
+
     controls.buttonDown('spade');
     let itemSvg = svg.render("hole", 5);
     let hole = { scale: 1 };
     let item = 'hole';
     let qty = 5;
     let playerBox = character.getPlayerBox();
-    if (playerBox.top > skyBottom) {
+    if (playerBox.top > skyBottom && player.tools.spade > 0) {
       let newBox = sprite.render(game.uid++, playerBox.x, playerBox.y, itemSvg, sprite.width * hole.scale, sprite.height * hole.scale, item);
       field.addItem(game.SURFACE, playerBox.x, playerBox.y, newBox.width, newBox.height, item, qty, newBox.uid);
+      player.tools.spade--;
+      controls.list['spade'].updateQty(player.tools.spade);
       state.save();
     }
   },
@@ -96,7 +100,7 @@ const controls = {
     };
   },
 
-  endInput: function () {    
+  endInput: function () {
     controls.buttonUp(controls.direction);
     clearInterval(timers[controls.direction]);
     state.save();

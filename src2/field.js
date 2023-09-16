@@ -90,16 +90,18 @@ const field = {
     let layer = game.ABOVEGROUND;
     player.fields[player.currentField][layer].forEach((item) => {
       let itemSvg = svg.render(`${item.item}2`, item.qty, '');
-      let newBox = sprite.render(game.uid++, item.x, item.y, itemSvg, sprite.width, sprite.height, 'block');
+      let newBox = sprite.render(item.uid, item.x, item.y, itemSvg, sprite.width, sprite.height, 'block');
       item.width = newBox.width;
       item.height = newBox.height;
+      game.setUid(item.uid);
     });
     layer = game.SURFACE;
     player.fields[player.currentField][layer].forEach((item) => {
       let itemSvg = svg.render(`hole`, item.qty, '');
-      let newBox = sprite.render(game.uid++, item.x, item.y, itemSvg, sprite.width, sprite.height, 'hole');
+      let newBox = sprite.render(item.uid, item.x, item.y, itemSvg, sprite.width, sprite.height, 'hole');
       item.width = newBox.width;
       item.height = newBox.height;
+      game.setUid(item.uid);
     });
     setupThings();
   },

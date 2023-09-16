@@ -19,6 +19,7 @@ let player = {
   sowSeeds: 0,
   grassQty: 7,
   tools: {
+    spade: 8,
   },
   currentField: 0,
   fields: [[[], [], []]],

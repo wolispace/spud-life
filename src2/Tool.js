@@ -23,7 +23,7 @@ class Tool extends game.Item {
   }
   updateQty(qty) {
     this.qty = qty;
-    document.querySelector(`#i${this.id}`).innerHTML(this.qty);
+    document.querySelector(`#i${this.id} .qty`).innerHTML = this.qty;
   }
 
   onClick = function () {
