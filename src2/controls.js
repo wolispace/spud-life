@@ -1,33 +1,14 @@
 const controls = {
-
   list: {},
 
-  setup: function () {
-    let toolList = ['wallet', 'scanner', 'basket','axe', 'pick' ];
-
-    let qty = 1;
-
-    let padding = 20;
-    let newLeft = (game.grid.x * sprite.width) - sprite.width - padding;
-    let newTop = (game.grid.y * sprite.height) - sprite.height - padding;
-
-
-    toolList.forEach((itemName) => {
-      tools.list[itemName] = new Tool(itemName, newLeft , newTop, qty);
-      tools.list[itemName].onClick = tools.clicks[itemName];
-      newLeft = newLeft - tools.list[itemName].w - padding;
-      qty++;
-    });
-  },
-  
   render: function () {
     let padding = 15;
     let buttons = {
-      up: { x: 1, y: 0, px: padding, py: -padding },
-      left: { x: 0, y: 1, px: 0, py: 0 },
-      spade: { x: 1, y: 1, px: padding, py: 0 },
-      right: { x: 2, y: 1 , px: padding * 2, py: 0},
-      down: { x: 1, y: 2 , px: padding, py: padding},
+      up: { x: 1, y: 0, qty: '', px: padding, py: -padding },
+      left: { x: 0, y: 1, qty: '', px: 0, py: 0 },
+      spade: { x: 1, y: 1, qty: 10, px: padding, py: 0 },
+      right: { x: 2, y: 1, qty: '' , px: padding * 2, py: 0},
+      down: { x: 1, y: 2, qty: '' , px: padding, py: padding},
     }
     let start = { x: 0, y: sprite.height * 4 };
 
@@ -40,9 +21,11 @@ const controls = {
       let iconSvg = svg.render(direction);
       //console.log(direction, iconSvg);
 
-      let newSprite = sprite.render(direction, newPos.x, newPos.y, iconSvg, sprite.width, sprite.height, `control ${direction}`);
+      controls.list[direction] = new Tool(direction, newPos.x, newPos.y, coords.qty);
+      //controls.list[itemName].onClick = tools.clicks[itemName];
+      //let newSprite = sprite.render(direction, newPos.x, newPos.y, iconSvg, sprite.width, sprite.height, `control ${direction}`);
       
-      let controlElement = document.querySelector(`#i${newSprite.uid}`);
+      let controlElement = document.querySelector(`#i${direction}`);
 
       controls.stopDefaults(controlElement);
       if (['spade'].includes(direction)) {

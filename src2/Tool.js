@@ -8,17 +8,22 @@ class Tool extends game.Item {
 
   setup() {
     this.render();
-    this.addQty();
-
+    if (this.qty !== '') {
+      this.addQty();
+    }
 
     document.querySelector(`#i${this.id}`).addEventListener("click", () => {
       this.onClick();
     });
   }
 
-  addQty = function () {
+  addQty() {
     let html = `<div class="qty">${this.qty}</div>`;
     document.querySelector(`#i${this.id}`).insertAdjacentHTML('beforeend', html);
+  }
+  updateQty(qty) {
+    this.qty = qty;
+    document.querySelector(`#i${this.id}`).innerHTML(this.qty);
   }
 
   onClick = function () {

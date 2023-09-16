@@ -18,6 +18,8 @@ const tools = {
       newLeft = newLeft - tools.list[itemName].w - padding;
       qty++;
     });
+
+    tools.list['spade'].updateQty(33);
   },
 
   show: function () {
