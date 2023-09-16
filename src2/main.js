@@ -3,7 +3,6 @@ let pixelScale = 1; //window.devicePixelRatio;
 let itemNumber = 0;
 let qty = 10;
 let containerBox = null;
-let playerId = 0;
 let step = { x: 5 * pixelScale, y: 5 * pixelScale};
 let timers = { duration: 20 };
 let list = {};

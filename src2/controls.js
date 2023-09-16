@@ -1,4 +1,25 @@
 const controls = {
+
+  list: {},
+
+  setup: function () {
+    let toolList = ['wallet', 'scanner', 'basket','axe', 'pick' ];
+
+    let qty = 1;
+
+    let padding = 20;
+    let newLeft = (game.grid.x * sprite.width) - sprite.width - padding;
+    let newTop = (game.grid.y * sprite.height) - sprite.height - padding;
+
+
+    toolList.forEach((itemName) => {
+      tools.list[itemName] = new Tool(itemName, newLeft , newTop, qty);
+      tools.list[itemName].onClick = tools.clicks[itemName];
+      newLeft = newLeft - tools.list[itemName].w - padding;
+      qty++;
+    });
+  },
+  
   render: function () {
     let padding = 15;
     let buttons = {
@@ -19,7 +40,7 @@ const controls = {
       let iconSvg = svg.render(direction);
       //console.log(direction, iconSvg);
 
-      let newSprite = sprite.render(player.uid++, newPos.x, newPos.y, iconSvg, sprite.width, sprite.height, `control ${direction}`);
+      let newSprite = sprite.render(direction, newPos.x, newPos.y, iconSvg, sprite.width, sprite.height, `control ${direction}`);
       
       let controlElement = document.querySelector(`#i${newSprite.uid}`);
 
@@ -72,7 +93,7 @@ const controls = {
     let qty = 5;
     let playerBox = character.getPlayerBox();
     if (playerBox.top > skyBottom) {
-      let newBox = sprite.render(player.uid++, playerBox.x, playerBox.y, itemSvg, sprite.width * hole.scale, sprite.height * hole.scale, item);
+      let newBox = sprite.render(game.uid++, playerBox.x, playerBox.y, itemSvg, sprite.width * hole.scale, sprite.height * hole.scale, item);
       field.addItem(game.SURFACE, playerBox.x, playerBox.y, newBox.width, newBox.height, item, qty, newBox.uid);
       state.save();
     }

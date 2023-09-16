@@ -22,7 +22,6 @@ let player = {
   },
   currentField: 0,
   fields: [[[], [], []]],
-  uid: 1,
   shop: {
     machines: {},
   },

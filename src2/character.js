@@ -224,10 +224,9 @@ const character = {
   addPlayer: function () {
     let body = character.randomBody();
     let itemSvg = svg.renderPerson(body);
-    newSprite = sprite.render(player.uid++, player.x, player.y, itemSvg, sprite.width, sprite.height, 'player');
-    playerId = newSprite.uid;
+    newSprite = sprite.render('player', player.x, player.y, itemSvg, sprite.width, sprite.height, 'player');
     if (player.y == 1) {
-      let playerSprite = sprite.get(playerId);
+      let playerSprite = sprite.get('player');
       let playerBox = character.getPlayerBox();
       player.x = sprite.width / 2;
       player.y = (sprite.height * sky.height) - playerBox.height;
@@ -255,8 +254,7 @@ const character = {
   },
 
   getPlayerBox: function () {
-    let playerSprite = sprite.get(playerId);
-    return getBoundingBox(`#i${playerId}`);
+    return getBoundingBox('#iplayer');
   },
 
   movePlayer: function (direction) {
@@ -264,8 +262,8 @@ const character = {
       controls.buttonDown(direction);
       character.look(direction);
       timers[direction] = setInterval(() => {
-        let playerSprite = sprite.get(playerId);
-        let playerBox = getBoundingBox(`#i${playerId}`);;
+        let playerSprite = sprite.get('player');
+        let playerBox = getBoundingBox('#iplayer');
         let old = { x: playerBox.x, y: playerBox.y };
         let newTop, newLeft;
         switch (direction) {

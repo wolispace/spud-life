@@ -22,7 +22,7 @@ const state = {
     localStorage.setItem("state", compressed);
     player.fields = fields;
   },
-
+  
   load: () => {
     let compressed = localStorage.getItem("state");
     if (compressed) {

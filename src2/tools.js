@@ -3,7 +3,7 @@ const tools = {
   list: {},
 
   setup: function () {
-    let toolList = ['wallet', 'scanner', 'basket','axe', 'spade','pick' ];
+    let toolList = ['wallet', 'scanner', 'basket','axe', 'pick' ];
 
     let qty = 1;
 
@@ -35,16 +35,6 @@ const tools = {
       content += `This is your pick.`;
       let footer = "";
       footer += `<button class="buttonize" onclick="dialog.okButton()"> Ok </button>`;
-      dialog.cancelButton = function () { dialog.hide(); };
-      dialog.okButton = function () { dialog.hide(); };
-      dialog.render(title, content, footer);
-    },
-    spade: function () {
-      let title = "Spade";
-      let content = `<div class="dialog-message-content">`;
-      content += `This is your spade.`;
-      let footer = "";
-      footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
       dialog.cancelButton = function () { dialog.hide(); };
       dialog.okButton = function () { dialog.hide(); };
       dialog.render(title, content, footer);
