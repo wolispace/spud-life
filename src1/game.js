@@ -31,7 +31,8 @@ const game = {
 
     render() {
       this.svg = svg.render(this.id);
-      this.sprite = sprite.render(this.id, this.x, this.y, this.svg, this.w, this.h, this.classes);
+       sprite.render(this.id, this.x, this.y, this.svg, this.w, this.h, this.classes);
+       this.sprite = sprite.get(this.id);
     }
   },
 

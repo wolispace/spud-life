@@ -29,16 +29,16 @@ const controls = {
 
       controls.stopDefaults(controlElement);
       if (['spade'].includes(direction)) {
-        controls.onDig(controlElement);
+        controls.addDigEvent(controlElement);
       } else {
-        controls.onMove(controlElement, direction);
+        controls.addMoveEvent(controlElement, direction);
       }
     });
 
     controls.list['spade'].updateQty(player.tools.spade);
   },
 
-  onMove: function (controlElement, direction) {
+  addMoveEvent: function (controlElement, direction) {
     if (dialog.visible) {
       return;
     }
@@ -50,7 +50,7 @@ const controls = {
     state.save();
   },
 
-  onDig: function (controlElement) {
+  addDigEvent: function (controlElement) {
       controlElement.onmousedown = function () { controls.dig(); };
       controlElement.addEventListener("touchstart", function () { controls.dig(); }, false);
 
@@ -80,7 +80,19 @@ const controls = {
     if (playerBox.top > skyBottom && player.tools.spade > 0) {
       let foundItem = controls.collision(playerBox);
       if (foundItem) {
-        console.log(foundItem);
+        console.log('found something', foundItem);
+        let foundSvg = svg.render(foundItem, 1);
+        if (!foundSvg) {
+          // TODO: this needs to be a spud
+          foundSvg = svg.render('rock', 1);
+        }
+        let itemSprite = new game.Item (foundItem, playerBox.x, playerBox.y,sprite.width, sprite.height);
+        itemSprite.render();
+        let endItem = tools.list.basket;
+        onEnd = function () { console.log('end end arc')};
+        sprite.animateArc(itemSprite, endItem, onEnd)
+        // remove from field
+
       }
       let newBox = sprite.render(game.uid++, playerBox.x, playerBox.y, itemSvg, sprite.width * hole.scale, sprite.height * hole.scale, item);
       field.addItem(game.SURFACE, playerBox.x, playerBox.y, newBox.width, newBox.height, item, qty, newBox.uid);

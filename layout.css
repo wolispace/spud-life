@@ -305,3 +305,10 @@ svg.high {
     transform: translateX(0.15rem) scale(1.02, 1);
   }
 }
+
+@keyframes into-basket {
+  100% { 
+    motion-offset: 100%;
+    offset-distance: 100%; 
+  }
+}
