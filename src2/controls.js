@@ -18,8 +18,6 @@ const controls = {
         x: start.x + sprite.width * coords.x + coords.px,
         y: start.y + sprite.height * coords.y + coords.py,
       };
-      let iconSvg = svg.render(direction);
-      //console.log(direction, iconSvg);
 
       controls.list[direction] = new Tool(direction, newPos.x, newPos.y, coords.qty);
       let controlElement = sprite.get(direction);

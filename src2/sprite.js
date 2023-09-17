@@ -25,8 +25,8 @@ const sprite = {
 
   // shrink holding div around the svg and return its box
   shrinkWrap: function (uid) {
-    let itemDiv = document.querySelector(`#i${uid}`);
-    let itemSvg = document.querySelector(`#i${uid} > svg`);
+    let itemDiv = sprite.get(uid);
+    let itemSvg = sprite.get(`${uid} > svg`);
     if (itemSvg) {
       let itemSvgBox = itemSvg.getBoundingClientRect();
       itemDiv.style.width = `${itemSvgBox.width}px`;
@@ -60,7 +60,7 @@ const sprite = {
 
     spritesList.forEach(spriteBox => {
       if (sprite.collides(playerBox, spriteBox)) {
-        let thisBlock = document.querySelector(`#i${spriteBox.uid} svg`);
+        let thisBlock = sprite.get(`${spriteBox.uid} svg`);
         svg.animate(thisBlock, `jiggle-${direction}`, 0.25);
         retValue = spriteBox.uid;
       }
