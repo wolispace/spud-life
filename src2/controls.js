@@ -22,9 +22,6 @@ const controls = {
       //console.log(direction, iconSvg);
 
       controls.list[direction] = new Tool(direction, newPos.x, newPos.y, coords.qty);
-      //controls.list[itemName].onClick = tools.clicks[itemName];
-      //let newSprite = sprite.render(direction, newPos.x, newPos.y, iconSvg, sprite.width, sprite.height, `control ${direction}`);
-
       let controlElement = document.querySelector(`#i${direction}`);
 
       controls.stopDefaults(controlElement);
@@ -92,12 +89,12 @@ const controls = {
         onEnd = function () { 
           itemSprite.remove();
           delete itemSprite;
+          // jiggle the basket.
+          // update the basked qty
         };
-        sprite.animateArc(itemSprite, endItem, onEnd)
-        // remove from field
+        sprite.animateArc(itemSprite, endItem, onEnd);
 
       }
-      //let newBox = sprite.render(game.uid++, playerBox.x, playerBox.y, itemSvg, sprite.width * hole.scale, sprite.height * hole.scale, item);
       let newHole = new game.Item(game.uid++, player.x, player.y, sprite.width, sprite.height, 1, 'hole');
       newHole.render(itemSvg);
 

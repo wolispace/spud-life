@@ -4,6 +4,7 @@ const field = {
   player.fields[0][0]["10,10,croquette,1", "100,200,log,1", "120,120,hole,4" 
 
   */
+ list: [],
 
   decode: function (infoString) {
     let bits = infoString.split(',');
@@ -52,8 +53,12 @@ const field = {
       let qty = rnd(5) + 1;
       let item = rnd(2) == 1 ? 'log' : 'rock';
       let itemSvg = svg.render(`${item}2`, 1, '');
-      let newBox = sprite.render(game.uid++, x, y, itemSvg, sprite.width, sprite.height, 'block');
-      field.addItem(layer, x, y, newBox.width, newBox.height, item, qty, newBox.uid);
+      let id = game.uid++;
+      field.list[id] = new game.Item(id, x, y, sprite.width, sprite.height, qty, 'block');
+      field.list[id].render(itemSvg);
+      console.log(field);
+
+      field.addItem(layer, x, y, sprite.width, sprite.height, item, qty, id);
     }
     layer = game.UNDERGROUND;
     let maxSpuds = list.spuds.list.length;
