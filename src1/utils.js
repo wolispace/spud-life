@@ -29,6 +29,7 @@ const state = {
       let decompressed = LZString.decompressFromUTF16(compressed);
       let newPlayer = JSON.parse(decompressed);
       newPlayer.fields = field.encodeAll(newPlayer.fields, false);
+      console.log(newPlayer.fields);
       if (!player.pos) {
         player = newPlayer;
       }
@@ -52,6 +53,17 @@ const state = {
     state.save();
   }
 };
+
+function html(selector, text) {
+  let elem = checkSelector(selector);
+
+  if (text) {
+    elem.innerHTML = text;
+  } else {
+    return elem.innerHTML;
+  }
+  return elem;
+}
 
 function checkSelector(selector) {
   let elem = selector;

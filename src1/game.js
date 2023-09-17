@@ -7,8 +7,9 @@ const game = {
   directions: ['up', 'down', 'left', 'right'],
   qty: [0, 20, 30],
   playerItem: null,
+  digging: false,
 
-  // everything show on the page is n Item with coords and an svg
+  // everything show on the page is an Item with coords and an svg
   Item: class {
     id = '';
     x = 1;
@@ -19,7 +20,6 @@ const game = {
     svg = '';
     classes = '';
     sprite = null;
-    digging = false;
 
     constructor(id, x, y, w, h, qty = 1, classes = '') {
       this.id = id;
@@ -33,8 +33,30 @@ const game = {
 
     render(itemSvg) {
       this.svg = itemSvg ?? svg.render(this.id);
-       sprite.render(this.id, this.x, this.y, this.svg, this.w, this.h, this.classes);
-       this.sprite = sprite.get(this.id);
+      this.svg = sprite.orientSvg(this.svg);
+
+      let newSprite = `<div id="i${this.id}" class="sprite ${this.classes}">${this.svg}</div>`;
+      addToBody(newSprite);
+      this.position();
+      this.shrinkWrap();
+      this.position();
+    }
+
+    shrinkWrap() {
+      let itemSvg = sprite.get(`${this.id} > svg`);
+      if (itemSvg) {
+        let itemSvgBox = itemSvg.getBoundingClientRect();
+        this.w = itemSvgBox.width;
+        this.h = itemSvgBox.height;
+      }
+    }
+
+    position() {
+      this.sprite = sprite.get(this.id);
+      this.sprite.style.width =`${this.w}px`;
+      this.sprite.style.height =`${this.h}px`;
+      this.sprite.style.top =`${this.y}px`;
+      this.sprite.style.left =`${this.x}px`;
     }
 
     remove() {
@@ -45,6 +67,8 @@ const game = {
       svg.animate(this.sprite, `jiggle-${direction}`, 0.25);
     }
   },
+
+  // ---------------------------------
 
   setUid(itemUid) {
     if (itemUid >= game.uid) {
