@@ -74,16 +74,16 @@ const controls = {
     let hole = { scale: 1 };
     let item = 'hole';
     let qty = 5;
-    if (playerItem.y > skyBottom && player.tools.spade > 0) {
+    if (game.playerItem.y > skyBottom && player.tools.spade > 0) {
       game.digging = true;
-      let foundItem = controls.collision(playerItem);
+      let foundItem = controls.collision(game.playerItem);
       if (foundItem) {
         let foundSvg = svg.render(foundItem, 1);
         if (!foundSvg) {
           // TODO: this needs to be a spud
           foundItem = 'rock2';
         }
-        let itemSprite = new game.Item (foundItem, playerItem.x, playerItem.y,sprite.width, sprite.height);
+        let itemSprite = new game.Item (foundItem, game.playerItem.x, game.playerItem.y,sprite.width, sprite.height);
         itemSprite.render();
         let endItem = tools.list.basket;
         onEnd = function () { 
