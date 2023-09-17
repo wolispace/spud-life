@@ -74,17 +74,16 @@ const controls = {
     let hole = { scale: 1 };
     let item = 'hole';
     let qty = 5;
-    let playerBox = character.getPlayerBox();
-    if (playerBox.top > skyBottom && player.tools.spade > 0) {
+    if (playerItem.y > skyBottom && player.tools.spade > 0) {
       game.digging = true;
-      let foundItem = controls.collision(playerBox);
+      let foundItem = controls.collision(playerItem);
       if (foundItem) {
         let foundSvg = svg.render(foundItem, 1);
         if (!foundSvg) {
           // TODO: this needs to be a spud
           foundItem = 'rock2';
         }
-        let itemSprite = new game.Item (foundItem, playerBox.x, playerBox.y,sprite.width, sprite.height);
+        let itemSprite = new game.Item (foundItem, playerItem.x, playerItem.y,sprite.width, sprite.height);
         itemSprite.render();
         let endItem = tools.list.basket;
         onEnd = function () { 
@@ -114,12 +113,12 @@ const controls = {
     }
   },
 
-  collision: function (playerBox) {
+  collision: function (playerItem) {
     let retValue = false;
     let spritesList = player.fields[player.currentField][game.UNDERGROUND];
   
     for (let i = 0; i < spritesList.length; i++) {
-      if (sprite.collides(playerBox, spritesList[i])) {
+      if (sprite.collides(playerItem, spritesList[i])) {
         retValue = spritesList[i].item;
         spritesList.splice(i, 1); // This will remove the item from the list
         break; // This will stop checking for collisions after the first one is found
