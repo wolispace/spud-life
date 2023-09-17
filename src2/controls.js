@@ -77,11 +77,10 @@ const controls = {
     if (playerBox.top > skyBottom && player.tools.spade > 0) {
       let foundItem = controls.collision(playerBox);
       if (foundItem) {
-        console.log('found something', foundItem);
         let foundSvg = svg.render(foundItem, 1);
         if (!foundSvg) {
           // TODO: this needs to be a spud
-          foundSvg = svg.render('rock', 1);
+          foundItem = 'rock2';
         }
         let itemSprite = new game.Item (foundItem, playerBox.x, playerBox.y,sprite.width, sprite.height);
         itemSprite.render();

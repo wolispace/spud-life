@@ -12,26 +12,22 @@ class Tool extends game.Item {
       this.addQty();
     }
 
-    document.querySelector(`#i${this.id}`).addEventListener("click", () => {
+    this.sprite.addEventListener("click", () => {
       this.onClick();
     });
   }
 
   addQty() {
     let html = `<div class="qty">${this.qty}</div>`;
-    document.querySelector(`#i${this.id}`).insertAdjacentHTML('beforeend', html);
+    this.sprite.insertAdjacentHTML('beforeend', html);
   }
   updateQty(qty) {
     this.qty = qty;
-    document.querySelector(`#i${this.id} .qty`).innerHTML = this.qty;
+    sprite.get(`${this.id} .qty`).innerHTML = this.qty;
   }
 
   onClick = function () {
-    console.log('default onclick');
-  }
-
-  onClickEnd = function () {
-    console.log('default onclickEnd');
+    // this gets overridden
   }
 
 };
