@@ -22,7 +22,7 @@ const controls = {
       //console.log(direction, iconSvg);
 
       controls.list[direction] = new Tool(direction, newPos.x, newPos.y, coords.qty);
-      let controlElement = document.querySelector(`#i${direction}`);
+      let controlElement = sprite.get(direction);
 
       controls.stopDefaults(controlElement);
       if (['spade'].includes(direction)) {

@@ -308,9 +308,6 @@ const character = {
         }
         let collideId = sprite.collision(direction);
         if (collideId) {
-          // let controlElement = document.querySelector(`#i${collideId}`);
-          // controlElement.style.width = '20px';
-          // controlElement.style.height = '20px';
           playerSprite.style.left = `${old.x}px`;
           playerSprite.style.top = `${old.y}px`;
           // update player.fields[]

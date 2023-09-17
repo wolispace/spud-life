@@ -78,13 +78,6 @@ function css(selector, styles) {
   return selector;
 }
 
-function getElementPos(selector) {
-  let element = document.querySelector(selector);
-  if (!element) {
-    element = document.querySelector('#patch_0');
-  }
-  return element.getBoundingClientRect();
-}
 
 // returns the bounding box.. and simplify w & h
 function getBoundingBox(element) {
