@@ -19,6 +19,7 @@ const game = {
     svg = '';
     classes = '';
     sprite = null;
+    digging = false;
 
     constructor(id, x, y, w, h, qty = 1, classes = '') {
       this.id = id;

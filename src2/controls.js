@@ -64,8 +64,11 @@ const controls = {
 
 
   dig: function () {
+    if (game.digging) {
+      return;
+    }
     let skyBottom = (sprite.height * sky.height);
-
+    
     controls.buttonDown('spade');
     let itemSvg = svg.render("hole", 5);
     let hole = { scale: 1 };
@@ -73,6 +76,7 @@ const controls = {
     let qty = 5;
     let playerBox = character.getPlayerBox();
     if (playerBox.top > skyBottom && player.tools.spade > 0) {
+      game.digging = true;
       let foundItem = controls.collision(playerBox);
       if (foundItem) {
         let foundSvg = svg.render(foundItem, 1);
@@ -87,6 +91,7 @@ const controls = {
           itemSprite.remove();
           delete itemSprite;
           setTimeout( () => {
+            game.digging = false;
             endItem.jiggle('down');
             setTimeout( () => {
               endItem.updateQty(endItem.qty + 1);
@@ -96,6 +101,8 @@ const controls = {
         };
         sprite.animateArc(itemSprite, endItem, onEnd);
 
+      } else {
+        game.digging = false;
       }
       let newHole = new game.Item(game.uid++, player.x, player.y, sprite.width, sprite.height, 1, 'hole');
       newHole.render(itemSvg);
