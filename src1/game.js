@@ -34,6 +34,10 @@ const game = {
        sprite.render(this.id, this.x, this.y, this.svg, this.w, this.h, this.classes);
        this.sprite = sprite.get(this.id);
     }
+    
+    remove() {
+      this.sprite.remove();
+    }
   },
 
   setUid(itemUid) {

@@ -89,7 +89,10 @@ const controls = {
         let itemSprite = new game.Item (foundItem, playerBox.x, playerBox.y,sprite.width, sprite.height);
         itemSprite.render();
         let endItem = tools.list.basket;
-        onEnd = function () { console.log('end end arc')};
+        onEnd = function () { 
+          itemSprite.remove();
+          delete itemSprite;
+        };
         sprite.animateArc(itemSprite, endItem, onEnd)
         // remove from field
 
