@@ -6,6 +6,7 @@ const game = {
   uid: 1, // as we add elements to the page they get an incremental id
   directions: ['up', 'down', 'left', 'right'],
   qty: [0, 20, 30],
+  playerItem: null,
 
   // everything show on the page is n Item with coords and an svg
   Item: class {
@@ -37,6 +38,10 @@ const game = {
 
     remove() {
       this.sprite.remove();
+    }
+
+    jiggle(direction) {
+      svg.animate(this.sprite, `jiggle-${direction}`, 0.25);
     }
   },
 

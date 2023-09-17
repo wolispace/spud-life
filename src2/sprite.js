@@ -101,7 +101,6 @@ const sprite = {
     easing = 'cubic-bezier(0.3, 0, 1, 1)';
     easing = 'ease-in';
     itemSprite = foundItem.sprite;
-    console.log(itemSprite, arc);
     itemSprite.style.display = 'block';
     itemSprite.style.offsetPath = arc;
     itemSprite.style.offsetRotate = `0deg`;

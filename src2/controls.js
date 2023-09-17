@@ -89,8 +89,13 @@ const controls = {
         onEnd = function () { 
           itemSprite.remove();
           delete itemSprite;
-          // jiggle the basket.
-          // update the basked qty
+          setTimeout( () => {
+            endItem.jiggle('down');
+            setTimeout( () => {
+              endItem.updateQty(endItem.qty + 1);
+            }, 200);
+          }, 1);
+
         };
         sprite.animateArc(itemSprite, endItem, onEnd);
 
