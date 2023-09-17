@@ -29,12 +29,12 @@ const game = {
       this.classes = classes;
     }
 
-    render() {
-      this.svg = svg.render(this.id);
+    render(itemSvg) {
+      this.svg = itemSvg ?? svg.render(this.id);
        sprite.render(this.id, this.x, this.y, this.svg, this.w, this.h, this.classes);
        this.sprite = sprite.get(this.id);
     }
-    
+
     remove() {
       this.sprite.remove();
     }

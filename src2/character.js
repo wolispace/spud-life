@@ -223,13 +223,14 @@ const character = {
 
   addPlayer: function () {
     let body = character.randomBody();
-    let itemSvg = svg.renderPerson(body);
-    newSprite = sprite.render('player', player.x, player.y, itemSvg, sprite.width, sprite.height, 'player');
+    let playerSvg = svg.renderPerson(body);
+    let playerItem = new game.Item('player', player.x, player.y, sprite.width, sprite.height, 1, 'player');
+    playerItem.render(playerSvg);
+
     if (player.y == 1) {
-      let playerSprite = sprite.get('player');
-      let playerBox = character.getPlayerBox();
-      player.x = sprite.width / 2;
-      player.y = (sprite.height * sky.height) - playerBox.height;
+      let playerSprite = playerItem.sprite(); //sprite.get('player');
+      player.x = playerItem.w / 2;
+      player.y = (playerItem.h * sky.height) - playerItem.h;
       playerSprite.style.top = `${player.y}px`;
       playerSprite.style.left = `${player.x}px`;
     }
