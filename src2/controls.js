@@ -97,8 +97,11 @@ const controls = {
         // remove from field
 
       }
-      let newBox = sprite.render(game.uid++, playerBox.x, playerBox.y, itemSvg, sprite.width * hole.scale, sprite.height * hole.scale, item);
-      field.addItem(game.SURFACE, playerBox.x, playerBox.y, newBox.width, newBox.height, item, qty, newBox.uid);
+      //let newBox = sprite.render(game.uid++, playerBox.x, playerBox.y, itemSvg, sprite.width * hole.scale, sprite.height * hole.scale, item);
+      let newHole = new game.Item(game.uid++, player.x, player.y, sprite.width, sprite.height, 1, 'hole');
+      newHole.render(itemSvg);
+
+      field.addItem(game.SURFACE, newHole.x, newHole.y, newHole.y, newHole.h, item, qty, newHole.id);
       player.tools.spade--;
       controls.list['spade'].updateQty(player.tools.spade);
       state.save();

@@ -228,7 +228,7 @@ const character = {
     playerItem.render(playerSvg);
 
     if (player.y == 1) {
-      let playerSprite = playerItem.sprite(); //sprite.get('player');
+      let playerSprite = playerItem.sprite; //sprite.get('player');
       player.x = playerItem.w / 2;
       player.y = (playerItem.h * sky.height) - playerItem.h;
       playerSprite.style.top = `${player.y}px`;
