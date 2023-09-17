@@ -5,6 +5,7 @@ const field = {
 
   */
  list: [],
+ gridList: [],
 
   decode: function (infoString) {
     let bits = infoString.split(',');
@@ -56,8 +57,6 @@ const field = {
       let id = game.uid++;
       field.list[id] = new game.Item(id, x, y, sprite.width, sprite.height, qty, 'block');
       field.list[id].render(itemSvg);
-      console.log(field);
-
       field.addItem(layer, x, y, sprite.width, sprite.height, item, qty, id);
     }
     layer = game.UNDERGROUND;
@@ -106,13 +105,21 @@ const field = {
 
   addGrid: function () {
     let itemSvg = svg.render('blank');
+    let index = 0;
     for(let x = 0; x < game.grid.x; x++) {
       for(let y = 0; y < game.grid.y; y++) {
         let xx = x * sprite.width;
         let yy = y * sprite.height;
-        sprite.render(`grid_${x}_${y}`, xx, yy, itemSvg, sprite.width, sprite.height, 'grid');
+        index++;
+        //sprite.render(`grid_${x}_${y}`, xx, yy, itemSvg, sprite.width, sprite.height, 'grid');
+        field.gridList[index] = new game.Item(index, xx, yy, sprite.width, sprite.height, 1, 'grid');
+        field.gridList[index].render();
       }
     }
+  },
+
+  removeGrid() {
+   // TODO move elements from dom and classes from field.gridList[]
   },
 
   redraw: function () {

@@ -75,6 +75,8 @@ const tools = {
       let content = `<div class="dialog-message-content">`;
       content += `This is your wallet.`;
       let footer = "";
+      footer += `<button class="buttonize" onclick="field.addGrid()"> Show grid </button>`;
+      //footer += `<button class="buttonize" onclick="field.removeGrid()">Off </button>`;
       footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
       dialog.cancelButton = function () { dialog.hide(); };
       dialog.okButton = function () { console.log('wallet OK'); dialog.hide(); };
