@@ -65,8 +65,8 @@ const game = {
       this.sprite.remove();
     }
 
-    jiggle(direction) {
-      svg.animate(this.sprite, `jiggle-${direction}`, 0.25);
+    jiggle(direction, onEnd) {
+      svg.animate(this.sprite, `jiggle-${direction}`, 0.25, onEnd);
     }
   },
 

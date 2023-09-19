@@ -100,7 +100,7 @@ const controls = {
       } else {
         game.digging = false;
       }
-      let newHole = new game.Item(game.uid++, player.x, player.y, sprite.width, sprite.height, 1, '', 'hole');
+      let newHole = new game.Item(game.uid++, player.x, player.y, sprite.width, sprite.height, 5, '', 'hole');
       let itemSvg = svg.render("hole", 5);
       newHole.render(itemSvg);
       console.log(game.uid, newHole);

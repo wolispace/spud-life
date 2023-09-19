@@ -54,29 +54,29 @@ const sprite = {
   },
 
   collision: function (direction) {
-    let retValue = false;
+    let retValue;
     let playerBox = character.getPlayerBox();
     let spritesList = player.fields[player.currentField][game.ABOVEGROUND];
 
-    spritesList.forEach(spriteBox => {
+    spritesList.forEach((spriteBox, index) => {
       if (!retValue && sprite.collides(playerBox, spriteBox)) {
         controls.endInput();
-        let thisBlock = sprite.get(`${spriteBox.uid} svg`);
         function onEnd () {
-          let hitItem = field.list[spriteBox.uid]
-          console.log("reduce", spriteBox, hitItem);
-          hitItem.qty--;
-          if (hitItem.qty > 0) {
+          spriteBox.qty--;
+          if (spriteBox.qty > 0) {
 
           } else {
-            hitItem.remove();
-            delete hitItem;
+            spriteBox.remove();
+            delete spriteBox;
+            delete player.fields[player.currentField][game.ABOVEGROUND][index];
           }
         }
-        svg.animate(thisBlock, `jiggle-${direction}`, 0.25, onEnd);
-        retValue = spriteBox.uid;
+        retValue = spriteBox;
+        spriteBox.jiggle(direction, onEnd);
+        return spriteBox;
       }
     });
+
     return retValue;
   },
 
