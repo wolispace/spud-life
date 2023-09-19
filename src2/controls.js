@@ -70,10 +70,7 @@ const controls = {
     let skyBottom = (sprite.height * sky.height);
     
     controls.buttonDown('spade');
-    let itemSvg = svg.render("hole", 5);
-    let hole = { scale: 1 };
-    let item = 'hole';
-    let qty = 5;
+    
     if (game.playerItem.y > skyBottom && player.tools.spade > 0) {
       game.digging = true;
       let foundItem = controls.collision(game.playerItem);
@@ -103,10 +100,11 @@ const controls = {
       } else {
         game.digging = false;
       }
-      let newHole = new game.Item(game.uid++, player.x, player.y, sprite.width, sprite.height, 1, 'hole');
+      let newHole = new game.Item(game.uid++, player.x, player.y, sprite.width, sprite.height, 1, '', 'hole');
+      let itemSvg = svg.render("hole", 5);
       newHole.render(itemSvg);
-
-      field.addItem(game.SURFACE, newHole.x, newHole.y, newHole.y, newHole.h, item, qty, newHole.id);
+      console.log(game.uid, newHole);
+      player.fields[player.currentField][game.SURFACE][game.uid] = newHole;
       player.tools.spade--;
       controls.list['spade'].updateQty(player.tools.spade);
       state.save();

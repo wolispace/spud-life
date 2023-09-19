@@ -59,9 +59,21 @@ const sprite = {
     let spritesList = player.fields[player.currentField][game.ABOVEGROUND];
 
     spritesList.forEach(spriteBox => {
-      if (sprite.collides(playerBox, spriteBox)) {
+      if (!retValue && sprite.collides(playerBox, spriteBox)) {
+        controls.endInput();
         let thisBlock = sprite.get(`${spriteBox.uid} svg`);
-        svg.animate(thisBlock, `jiggle-${direction}`, 0.25);
+        function onEnd () {
+          let hitItem = field.list[spriteBox.uid]
+          console.log("reduce", spriteBox, hitItem);
+          hitItem.qty--;
+          if (hitItem.qty > 0) {
+
+          } else {
+            hitItem.remove();
+            delete hitItem;
+          }
+        }
+        svg.animate(thisBlock, `jiggle-${direction}`, 0.25, onEnd);
         retValue = spriteBox.uid;
       }
     });

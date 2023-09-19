@@ -12,6 +12,7 @@ const game = {
   // everything show on the page is an Item with coords and an svg
   Item: class {
     id = '';
+    item = ''; // match the item[item]
     x = 1;
     y = 1;
     w = 1;
@@ -21,7 +22,7 @@ const game = {
     classes = '';
     sprite = null;
 
-    constructor(id, x, y, w, h, qty = 1, classes = '') {
+    constructor(id, x, y, w, h, qty = 1, classes = '', item = '') {
       this.id = id;
       this.x = x;
       this.y = y;
@@ -29,6 +30,7 @@ const game = {
       this.h = h;
       this.qty = qty;
       this.classes = classes;
+      this.item = item;
     }
 
     render(itemSvg) {

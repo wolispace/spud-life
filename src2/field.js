@@ -4,23 +4,28 @@ const field = {
   player.fields[0][0]["10,10,croquette,1", "100,200,log,1", "120,120,hole,4" 
 
   */
- list: [],
- gridList: [],
+  list: [],
+  gridList: [],
 
   decode: function (infoString) {
     let bits = infoString.split(',');
-    return { 
+
+    let temp = {
       x: parseInt(bits[0]),
       y: parseInt(bits[1]),
       w: sprite.width,
-      h: sprite.height, 
-      item: bits[2], 
-      qty: parseInt(bits[3]), 
-      uid: parseInt(bits[4]) };
+      h: sprite.height,
+      item: bits[2],
+      qty: parseInt(bits[3]),
+      id: parseInt(bits[4])
+    };
+
+    return new game.Item(temp.id, temp.x, temp.y, temp.w, temp.h, temp.qty, '', temp.item);
   },
 
+
   encode: function (itemInfo) {
-    return `${itemInfo.x},${itemInfo.y},${itemInfo.item},${itemInfo.qty},${itemInfo.uid}`;
+    return `${itemInfo.x},${itemInfo.y},${itemInfo.item},${itemInfo.qty},${itemInfo.id}`;
   },
 
   encodeAll: function (fieldList, encode = true) {
@@ -55,9 +60,11 @@ const field = {
       let item = rnd(2) == 1 ? 'log' : 'rock';
       let itemSvg = svg.render(`${item}2`, 1, '');
       let id = game.uid++;
-      field.list[id] = new game.Item(id, x, y, sprite.width, sprite.height, qty, 'block');
-      field.list[id].render(itemSvg);
-      field.addItem(layer, x, y, sprite.width, sprite.height, item, qty, id);
+      game.setUid(item.uid);
+      let newItem = new game.Item(id, x, y, sprite.width, sprite.height, qty, 'block', item);
+      player.fields[player.currentField][layer][id] = newItem;
+      newItem.render(itemSvg);
+      //field.addItem(layer, x, y, sprite.width, sprite.height, item, qty, id);
     }
     layer = game.UNDERGROUND;
     let maxSpuds = list.spuds.list.length;
@@ -65,49 +72,34 @@ const field = {
     for (let step = 0; step < 30; step++) {
       let x = rnd(fieldWidth);
       let y = rnd(fieldHeight) + skyBottom;
-      let qty = 1; 
-      let item = '';
+      let qty = 1;
+      let itemName = '';
       // player.currentField dictates how rare we get
-      if (rnd(3) == 1 ) {
+      if (rnd(3) == 1) {
         qty = rnd(4) + 2;
         // TODO take rarity into account
         let itemInfo = list.spuds.list[rnd(maxSpuds)];
-        item = itemInfo.name;
+        itemName = itemInfo.name;
       } else {
         itemInfo = list.items.list[rnd(maxItems)];
-        item = itemInfo.name;
+        itemName = itemInfo.name;
       }
       let newBox = {
-        width: sprite.width,
-        height: sprite.height,
-        uid: game.uid++,
+        w: sprite.width,
+        h: sprite.height,
+        id: game.uid++,
       }
-      field.addItem(layer, x, y, newBox.width, newBox.height, item, qty, newBox.uid);
+      game.setUid(newBox.id);
+      let newItem = new game.Item(newBox.id, x, y, newBox.w, newBox.h, qty, '', itemName);
+      player.fields[player.currentField][layer][newBox.id] = newItem;
     }
-  },
-
-  addItem: function (layer, x, y, width, height, item, qty, uid) {
-    let itemInfo = { z: 0, x: x, y: y, w: width, h: height, width: width, height: height, item: item, qty: qty, uid: uid };
-    player.fields[player.currentField][layer].push(itemInfo);
-  },
-
-  updateItem: function (layer, x, y, width, height, qty, uid) {
-    player.fields[player.currentField][layer].forEach((item) => {
-      if (item.uid == uid) {
-        item.x = x;
-        item.y = y;
-        item.width = width;
-        item.height = height;
-        item.qty = qty;
-      }
-    });
   },
 
   addGrid: function () {
     let itemSvg = svg.render('blank');
     let index = 0;
-    for(let x = 0; x < game.grid.x; x++) {
-      for(let y = 0; y < game.grid.y; y++) {
+    for (let x = 0; x < game.grid.x; x++) {
+      for (let y = 0; y < game.grid.y; y++) {
         let xx = x * sprite.width;
         let yy = y * sprite.height;
         index++;
@@ -119,7 +111,7 @@ const field = {
   },
 
   removeGrid() {
-   // TODO move elements from dom and classes from field.gridList[]
+    // TODO move elements from dom and classes from field.gridList[]
   },
 
   redraw: function () {
@@ -128,22 +120,21 @@ const field = {
 
     let layer = game.ABOVEGROUND;
     player.fields[player.currentField][layer].forEach((item) => {
-      let itemSvg = svg.render(`${item.item}2`, item.qty, '');
-      let newBox = sprite.render(item.uid, item.x, item.y, itemSvg, sprite.width, sprite.height, 'block');
-      item.width = newBox.width;
-      item.height = newBox.height;
-      game.setUid(item.uid);
+      let itemType = item.item;
+      let itemKey = `${itemType}2`;
+      let itemSvg = svg.render(itemKey);
+      item.render(itemSvg);
+      game.setUid(item.id);
     });
     layer = game.SURFACE;
     player.fields[player.currentField][layer].forEach((item) => {
-      let itemSvg = svg.render(`hole`, item.qty, '');
-      let newBox = sprite.render(item.uid, item.x, item.y, itemSvg, sprite.width, sprite.height, 'hole');
-      item.width = newBox.width;
-      item.height = newBox.height;
-      game.setUid(item.uid);
+      let itemSvg = svg.render('hole');
+      item.render(itemSvg);
+      game.setUid(item.id);
     });
     setupThings();
   },
+
 
 };
 
