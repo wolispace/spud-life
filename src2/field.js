@@ -64,7 +64,6 @@ const field = {
       let newItem = new game.Item(id, x, y, sprite.width, sprite.height, qty, '', item);
       player.fields[player.currentField][layer][id] = newItem;
       newItem.render(itemSvg);
-      //field.addItem(layer, x, y, sprite.width, sprite.height, item, qty, id);
     }
     layer = game.UNDERGROUND;
     let maxSpuds = list.spuds.list.length;
@@ -121,14 +120,13 @@ const field = {
     let layer = game.ABOVEGROUND;
     player.fields[player.currentField][layer].forEach((item) => {
       let itemType = item.item;
-      let itemKey = `${itemType}2`;
-      let itemSvg = svg.render(itemKey);
+      let itemSvg = svg.render(`${itemType}2`);
       item.render(itemSvg);
       game.setUid(item.id);
     });
     layer = game.SURFACE;
     player.fields[player.currentField][layer].forEach((item) => {
-      let itemSvg = svg.render('hole');
+      let itemSvg = svg.render('hole', item.qty);
       item.render(itemSvg);
       game.setUid(item.id);
     });
