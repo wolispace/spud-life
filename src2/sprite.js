@@ -64,6 +64,7 @@ const sprite = {
         function onEnd () {
           spriteBox.qty--;
           if (spriteBox.qty > 0) {
+            spriteBox.reduce();
 
           } else {
             spriteBox.remove();

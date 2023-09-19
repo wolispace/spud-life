@@ -61,6 +61,17 @@ const game = {
       this.sprite.style.left =`${this.x}px`;
     }
 
+    reduce() {
+      // reduce by 20%
+      let less = {w: this.w * .2, h: this.h * .2};
+      this.w = this.w - less.w;
+      this.h = this.h - less.h;
+      this.y = this.y + less.h / 2;
+      this.x = this.x + less.w / 2;
+      this.position();
+
+    }
+
     remove() {
       this.sprite.remove();
     }

@@ -56,12 +56,12 @@ const field = {
     for (let step = 0; step < 15; step++) {
       let x = rnd(fieldWidth);
       let y = rnd(fieldHeight) + skyBottom;
-      let qty = rnd(5) + 1;
+      let qty = 5;
       let item = rnd(2) == 1 ? 'log' : 'rock';
       let itemSvg = svg.render(`${item}2`, 1, '');
       let id = game.uid++;
       game.setUid(item.uid);
-      let newItem = new game.Item(id, x, y, sprite.width, sprite.height, qty, 'block', item);
+      let newItem = new game.Item(id, x, y, sprite.width, sprite.height, qty, '', item);
       player.fields[player.currentField][layer][id] = newItem;
       newItem.render(itemSvg);
       //field.addItem(layer, x, y, sprite.width, sprite.height, item, qty, id);
