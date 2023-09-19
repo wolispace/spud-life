@@ -42,7 +42,6 @@ const controls = {
     //controlElement.onmouseout = function () { controls.endInput(direction); };
     controlElement.addEventListener("touchstart", function () { character.movePlayer(direction); }, false);
     controlElement.addEventListener("touchend", function () { controls.endInput(); });
-    state.save();
   },
 
   addDigEvent: function (controlElement) {
@@ -103,7 +102,6 @@ const controls = {
       let newHole = new game.Item(game.uid++, player.x, player.y, sprite.width, sprite.height, 5, '', 'hole');
       let itemSvg = svg.render("hole", 5);
       newHole.render(itemSvg);
-      console.log(game.uid, newHole);
       player.fields[player.currentField][game.SURFACE][game.uid] = newHole;
       player.tools.spade--;
       controls.list['spade'].updateQty(player.tools.spade);
