@@ -65,6 +65,19 @@ const field = {
       player.fields[player.currentField][layer][id] = newItem;
       newItem.render(itemSvg);
     }
+    layer = game.SURFACE;
+    for (let step = 0; step < 315; step++) {
+      let x = rnd(fieldWidth);
+      let y = rnd(fieldHeight) + skyBottom;
+      let qty = 5;
+      let item = 'hole';
+      let itemSvg = svg.render(item, qty, '');
+      let id = game.uid++;
+      game.setUid(item.uid);
+      let newItem = new game.Item(id, x, y, sprite.width, sprite.height, qty, '', item);
+      player.fields[player.currentField][layer].push(newItem);
+      newItem.render(itemSvg);
+    }
     layer = game.UNDERGROUND;
     let maxSpuds = list.spuds.list.length;
     let maxItems = list.items.list.length;
@@ -116,7 +129,12 @@ const field = {
   redraw: function () {
     setContainerBox();
     clearBody();
+    field.refresh();
 
+    setupThings();
+  },
+
+  refresh: function () {
     let layer = game.ABOVEGROUND;
     player.fields[player.currentField][layer].forEach((item) => {
       let itemType = item.item;
@@ -130,7 +148,12 @@ const field = {
       item.render(itemSvg);
       game.setUid(item.id);
     });
-    setupThings();
+  },
+
+  clear: function () {
+    player.fields[player.currentField][game.SURFACE] = [];
+    state.save();
+    field.refresh();
   },
 
 

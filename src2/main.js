@@ -3,7 +3,7 @@ let pixelScale = 1; //window.devicePixelRatio;
 let itemNumber = 0;
 let containerBox = null;
 let step = { x: 5 * pixelScale, y: 5 * pixelScale};
-let timers = { duration: 20 };
+let timers = { duration: 30 };
 let list = {};
 
 // if savedate injected (by referencing it with ?id={dataFileId} then load it.

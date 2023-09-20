@@ -37,6 +37,9 @@ const controls = {
     if (dialog.visible) {
       return;
     }
+    // possibly use eventStreams to filter out excessive mousedown events
+    // https://stackoverflow.com/questions/20775530/move-box-with-the-mouse-cursor
+
     controlElement.onmousedown = function () { character.movePlayer(direction); };
     controlElement.onmouseup = function () { controls.endInput(); };
     //controlElement.onmouseout = function () { controls.endInput(direction); };
@@ -102,7 +105,7 @@ const controls = {
       let newHole = new game.Item(game.uid++, player.x, player.y, sprite.width, sprite.height, 5, '', 'hole');
       let itemSvg = svg.render("hole", 5);
       newHole.render(itemSvg);
-      player.fields[player.currentField][game.SURFACE][game.uid] = newHole;
+      player.fields[player.currentField][game.SURFACE].push(newHole);
       player.tools.spade--;
       controls.list['spade'].updateQty(player.tools.spade);
       state.save();

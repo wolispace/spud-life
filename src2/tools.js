@@ -64,6 +64,7 @@ const tools = {
       let content = `<div class="dialog-message-content">`;
       content += `This is your scanner.`;
       let footer = "";
+      footer += `<button class="buttonize" onclick="field.clear()"> Clear </button>`;
       footer += `<button class="buttonize" onclick="state.clear(true)"> Reset </button>`;
       footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
       dialog.cancelButton = function () { dialog.hide(); };
