@@ -19,7 +19,10 @@ const controls = {
         y: start.y + sprite.height * coords.y + coords.py,
       };
 
-      controls.list[direction] = new Tool(direction, newPos.x, newPos.y, coords.qty);
+      let params = {
+        id: direction, x: newPos.x, y: newPos.y, qty: coords.qty
+      }
+      controls.list[direction] = new Tool(params);
       let controlElement = sprite.get(direction);
 
       controls.stopDefaults(controlElement);
@@ -82,7 +85,10 @@ const controls = {
           // TODO: this needs to be a spud
           foundItem = 'rock2';
         }
-        let itemSprite = new game.Item (foundItem, game.playerItem.x, game.playerItem.y,sprite.width, sprite.height);
+        let params = {
+          id: foundItem, x: game.playerItem.x, y: game.playerItem.y, w: sprite.width, h: sprite.height
+        }
+        let itemSprite = new game.Item (params);
         itemSprite.render();
         let endItem = tools.list.basket;
         onEnd = function () { 
@@ -102,7 +108,10 @@ const controls = {
       } else {
         game.digging = false;
       }
-      let newHole = new game.Item(game.uid++, player.x, player.y, sprite.width, sprite.height, 5, '', 'hole');
+      let params = {
+        id: game.uid++, x: player.x, y: player.y, w: sprite.width, h: sprite.height, qty: 5, classes: '', item: 'hole'
+      }
+      let newHole = new game.Item(params);
       let itemSvg = svg.render("hole", 5);
       newHole.render(itemSvg);
       player.fields[player.currentField][game.SURFACE].push(newHole);

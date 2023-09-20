@@ -10,7 +10,7 @@ const field = {
   decode: function (infoString) {
     let bits = infoString.split(',');
 
-    let temp = {
+    let params = {
       x: parseInt(bits[0]),
       y: parseInt(bits[1]),
       w: sprite.width,
@@ -20,7 +20,7 @@ const field = {
       id: parseInt(bits[4])
     };
 
-    return new game.Item(temp.id, temp.x, temp.y, temp.w, temp.h, temp.qty, '', temp.item);
+    return new game.Item(params);
   },
 
 
@@ -61,7 +61,10 @@ const field = {
       let itemSvg = svg.render(`${item}2`, 1, '');
       let id = game.uid++;
       game.setUid(item.uid);
-      let newItem = new game.Item(id, x, y, sprite.width, sprite.height, qty, '', item);
+      let params = {
+        id: id, x: x, y: y, w: sprite.width, h: sprite.height, qty: qty, classes: '', item: item
+      }
+      let newItem = new game.Item(params);
       player.fields[player.currentField][layer][id] = newItem;
       newItem.render(itemSvg);
     }
@@ -74,7 +77,10 @@ const field = {
       let itemSvg = svg.render(item, qty, '');
       let id = game.uid++;
       game.setUid(item.uid);
-      let newItem = new game.Item(id, x, y, sprite.width, sprite.height, qty, '', item);
+      let params = {
+        id: id, x: x, y: y, w: sprite.width, h: sprite.height, qty: qty, classes: '', item: item
+      }
+      let newItem = new game.Item(params);
       player.fields[player.currentField][layer].push(newItem);
       newItem.render(itemSvg);
     }
@@ -102,7 +108,10 @@ const field = {
         id: game.uid++,
       }
       game.setUid(newBox.id);
-      let newItem = new game.Item(newBox.id, x, y, newBox.w, newBox.h, qty, '', itemName);
+      let params = {
+        id: newBox.id, x: x, y: y, w: newBox.w, h: newBox.h, qty: qty, classes: '', item: itemName
+      }
+      let newItem = new game.Item(params);
       player.fields[player.currentField][layer][newBox.id] = newItem;
     }
   },
@@ -116,7 +125,10 @@ const field = {
         let yy = y * sprite.height;
         index++;
         //sprite.render(`grid_${x}_${y}`, xx, yy, itemSvg, sprite.width, sprite.height, 'grid');
-        field.gridList[index] = new game.Item(index, xx, yy, sprite.width, sprite.height, 1, 'grid');
+        let params = {
+          id: index, x: xx, y: yy, w: sprite.width, h: sprite.height, qty: 1, classes: 'grid'
+        }
+        field.gridList[index] = new game.Item(params);
         field.gridList[index].render();
       }
     }

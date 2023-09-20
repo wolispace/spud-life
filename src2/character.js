@@ -224,7 +224,10 @@ const character = {
   addPlayer: function () {
     let body = character.randomBody();
     let playerSvg = svg.renderPerson(body);
-    game.playerItem = new game.Item('player', player.x, player.y, sprite.width, sprite.height, 1, 'player');
+    let params = {
+      id: 'player', x: player.x, y: player.y, w: sprite.width, h: sprite.height, qty: 1, classes: 'player'
+    }
+    game.playerItem = new game.Item(params);
     game.playerItem.render(playerSvg);
 
     if (player.y == 1) {

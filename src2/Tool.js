@@ -1,8 +1,9 @@
 class Tool extends game.Item {
-  constructor(toolName, x, y, qty) {
-    let toolWidth = sprite.width ;
-    
-    super(toolName, x, y, toolWidth, toolWidth, qty, 'control');
+  constructor(params) {
+    params.w = sprite.width;
+    params.h = sprite.width;
+    params.classes = 'control';
+    super(params);
     this.setup();
   }
 

@@ -3,20 +3,20 @@ const tools = {
   list: {},
 
   setup: function () {
-    let toolList = ['wallet', 'scanner', 'basket','axe', 'pick' ];
-
-    let qty = 1;
+    let toolList = ['wallet', 'scanner', 'basket', 'axe', 'pick'];
 
     let padding = 20;
-    let newLeft = (game.grid.x * sprite.width) - sprite.width - padding;
-    let newTop = (game.grid.y * sprite.height) - sprite.height - padding;
+    let params = {
+      x: (game.grid.x * sprite.width) - sprite.width - padding,
+      y: (game.grid.y * sprite.height) - sprite.height - padding,
+    }
 
 
     toolList.forEach((itemName) => {
-      tools.list[itemName] = new Tool(itemName, newLeft , newTop, qty);
+      params.id = itemName;
+      tools.list[itemName] = new Tool(params);
       tools.list[itemName].onClick = tools.clicks[itemName];
-      newLeft = newLeft - tools.list[itemName].w - padding;
-      qty++;
+      params.x = params.x - tools.list[itemName].w - padding;
     });
   },
 
@@ -58,7 +58,7 @@ const tools = {
       dialog.cancelButton = function () { dialog.hide(); };
       dialog.okButton = function () { dialog.hide(); };
       dialog.render(title, content, footer);
-    },    
+    },
     scanner: function () {
       let title = "Scanner";
       let content = `<div class="dialog-message-content">`;

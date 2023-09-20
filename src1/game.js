@@ -22,15 +22,16 @@ const game = {
     classes = '';
     sprite = null;
 
-    constructor(id, x, y, w, h, qty = 1, classes = '', item = '') {
-      this.id = id;
-      this.x = x;
-      this.y = y;
-      this.w = w;
-      this.h = h;
-      this.qty = qty;
-      this.classes = classes;
-      this.item = item;
+    constructor(params) {
+      // id, x, y, w, h, qty = 1, classes = '', item = ''
+      this.id = params.id;
+      this.x = params.x;
+      this.y = params.y;
+      this.w = params.w;
+      this.h = params.h;
+      this.qty = params.qty ?? 1;
+      this.classes = params.classes ?? '';
+      this.item = params.item ?? '';
     }
 
     render(itemSvg) {
