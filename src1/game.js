@@ -23,12 +23,11 @@ const game = {
     sprite = null;
 
     constructor(params) {
-      // id, x, y, w, h, qty = 1, classes = '', item = ''
       this.id = params.id;
       this.x = params.x;
       this.y = params.y;
-      this.w = params.w;
-      this.h = params.h;
+      this.w = params.w ?? sprite.width;
+      this.h = params.h ?? sprite.width;
       this.qty = params.qty ?? 1;
       this.classes = params.classes ?? '';
       this.item = params.item ?? '';

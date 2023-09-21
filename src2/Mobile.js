@@ -1,10 +1,11 @@
 class Mobile extends game.Item {
-    constructor(itemName, x, y, qty, classList) {
-      let itemWidth = sprite.width ;
-      
-      super(itemName, x, y, itemWidth, itemWidth, qty, `mobile ${classList}`);
-      this.setup();
-    }
+  constructor(params) {
+    params.w = sprite.width;
+    params.h = sprite.width;
+    params.classes = 'control';
+    super(params);
+    this.setup();
+  }
   
     setup() {
       this.render();
