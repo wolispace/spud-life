@@ -8,6 +8,7 @@ const game = {
   qty: [0, 20, 30],
   playerItem: null,
   digging: false,
+  step: {x: 5, y: 5},
 
   // everything show on the page is an Item with coords and an svg
   Item: class {

@@ -48,7 +48,9 @@ document.addEventListener("keydown", (event) => {
   //event.preventDefault();
   let direction = game.getDirection(event);
   if (game.isDirection(direction)) {
-    character.movePlayer(direction);
+    //character.movePlayer(direction);
+
+    game.playerItem.move(direction);
   }
 });
 
