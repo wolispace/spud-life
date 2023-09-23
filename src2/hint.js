@@ -103,7 +103,7 @@ const hint = {
     let skipHint = document.querySelector('#hintSkip');
     if (skipHint && skipHint.checked) {
       player.hinted[hint.group] = true;
-      state.save();
+      game.save();
       hint.hide();
     }
   },
@@ -121,7 +121,7 @@ const hint = {
 
   off: function () {
     hint.close();
-    state.save();
+    game.save();
   },
   // a random OK message
   ok: function () {

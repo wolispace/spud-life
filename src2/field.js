@@ -162,7 +162,7 @@ const field = {
 
   clear: function () {
     player.fields[player.currentField][game.SURFACE] = [];
-    state.save();
+    game.save();
     field.refresh();
   },
 

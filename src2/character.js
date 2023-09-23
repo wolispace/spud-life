@@ -3,24 +3,22 @@ const character = {
   bodySet: null,
 
   render: function () {
-    svg.showElement(".player");
-    let thisBlock = document.querySelector(`.player svg`);
+    svg.showElement("#player");
+    let thisBlock = document.querySelector(`#lplayer svg`);
     svg.animate(thisBlock, `grow`, 1);
   },
   hide: function () {
-    svg.hideElement(".player");
+    svg.hideElement("#iplayer");
   },
   show: function () {
-    svg.showElement(".player");
+    svg.showElement("#iplayer");
   },
 
   look: function (direction) {
-    let playerSprite = document.querySelector(".player > svg");
-    let playerHead = document.querySelector(".player .playerHead");
-    console.log(game);
-    if (!playerHead) {
-      return;
-    }
+    let playerSprite = document.querySelector("#iplayer > svg");
+    let playerHead = document.querySelector(".playerHead");
+    console.log(playerSprite, playerHead);
+
     if (direction == "left") {
       playerHead.setAttribute("transform", "rotate(0, 51, 21.2)");
       playerSprite.setAttribute("transform", "translate(0, 0) scale(1, 1)");
@@ -36,7 +34,7 @@ const character = {
     }
   },
   resetHead: function () {
-    let playerHead = document.querySelector(".player .playerHead");
+    let playerHead = document.querySelector("#iplayer .playerHead");
     setTimeout(() => { playerHead.setAttribute("transform", "rotate(0, 51, 21.2)"); }, 1000);
   },
 
@@ -77,7 +75,7 @@ const character = {
     player.name = cleanString(dialogInput.value);
     player.hints = dialog.isChecked(`#showHints`);
     dialog.hide();
-    state.save();
+    game.save();
     tools.render();
     setPhase(player.phase);
     let element = document.querySelector(`.player`);
@@ -189,7 +187,7 @@ const character = {
 
   reset: function () {
     if (confirm('Are you really sure you want to wipe your progress and start from scratch?')) {
-      state.clear(true);
+      game.clear(true);
     }
   },
 

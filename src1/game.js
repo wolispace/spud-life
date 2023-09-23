@@ -95,6 +95,46 @@ const game = {
 
   // ---------------------------------
 
+  save: () => {
+    let fields = player.fields;
+    player.fields = field.encodeAll(player.fields, true);
+    //let compressed = LZString.compressToUTF16(JSON.stringify(player));
+    let compressed = JSON.stringify(player);
+    localStorage.setItem("state", compressed);
+    player.fields = fields;
+  },
+  
+  load: () => {
+    let compressed = localStorage.getItem("state");
+    if (compressed) {
+      //let decompressed = LZString.decompressFromUTF16(compressed);
+      let decompressed = compressed;
+      let newPlayer = JSON.parse(decompressed);
+      newPlayer.fields = field.encodeAll(newPlayer.fields, false);
+      if (!player.pos) {
+        player = newPlayer;
+      }
+    }
+  },
+
+  clear: (reload = false) => {
+    localStorage.clear();
+    if (reload) {
+      window.location.reload();
+    }
+  },
+
+  read: () => {
+    return LZString.compressToBase64(JSON.stringify(player));
+  },
+
+  write: (compressed) => {
+    let decompressed = LZString.decompressFromBase64(compressed);
+    player = JSON.parse(decompressed);
+    game.save();
+  },
+
+  // ------------------------------
   setUid(itemUid) {
     if (itemUid >= game.uid) {
       game.uid = itemUid + 1;

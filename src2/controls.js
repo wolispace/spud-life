@@ -117,7 +117,7 @@ const controls = {
       player.fields[player.currentField][game.SURFACE].push(newHole);
       player.tools.spade--;
       controls.list['spade'].updateQty(player.tools.spade);
-      state.save();
+      game.save();
     }
   },
 
@@ -153,7 +153,7 @@ const controls = {
   endInput: function () {
     controls.buttonUp(controls.direction);
     clearInterval(timers[controls.direction]);
-    state.save();
+    game.save();
   },
 
 };

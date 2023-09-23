@@ -65,7 +65,7 @@ const tools = {
       content += `This is your scanner.`;
       let footer = "";
       footer += `<button class="buttonize" onclick="field.clear()"> Clear </button>`;
-      footer += `<button class="buttonize" onclick="state.clear(true)"> Reset </button>`;
+      footer += `<button class="buttonize" onclick="game.clear(true)"> Reset </button>`;
       footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
       dialog.cancelButton = function () { dialog.hide(); };
       dialog.okButton = function () { dialog.hide(); };

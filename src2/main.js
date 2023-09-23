@@ -8,13 +8,13 @@ let list = {};
 
 // if savedate injected (by referencing it with ?id={dataFileId} then load it.
 if (typeof saveData !== 'undefined') {
-  state.write(saveData);
+  game.write(saveData);
 }
 
 // start with ?reset to start a new game - link this to version of game != player.version
 const urlParams = new URLSearchParams(window.location.search);
 if (urlParams.has('reset')) {
-  state.clear();
+  game.clear();
 }
 
 // all of the events..
@@ -71,7 +71,7 @@ function introGame() {
     setContainerBox();
     sky.render();
     // loads previously save state from localStorage if found
-    state.load();
+    game.load();
 
     if (player.day && player.day > 0) {
       field.redraw();
@@ -80,7 +80,7 @@ function introGame() {
       setupThings();
       field.addRandom();
       field.redraw();
-      state.save();
+      game.save();
     }
   });
 }
