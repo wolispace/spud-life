@@ -17,7 +17,6 @@ const character = {
   look: function (direction) {
     let playerSprite = document.querySelector("#iplayer > svg");
     let playerHead = document.querySelector(".playerHead");
-    console.log(playerSprite, playerHead);
 
     if (direction == "left") {
       playerHead.setAttribute("transform", "rotate(0, 51, 21.2)");

@@ -56,11 +56,7 @@ document.addEventListener("keydown", (event) => {
 
 document.addEventListener("keyup", (event) => {
   //event.preventDefault();
-  let direction = game.getDirection(event);
-  if (game.isDirection(direction)) {
-    clearInterval(timers[direction]);
-    timers.moving = false;
-  }
+  controls.endInput();
 });
 
 function introGame() {

@@ -11,24 +11,37 @@ class Mobile extends game.Item {
 
   move(direction) {
     if (!timers.moving) {
-      let dirInfo = {
-        'left': { axis: 'x', 'dir': -1 },
-        'right': { axis: 'x', 'dir': 1 },
-        'up': { axis: 'y', 'dir': -1 },
-        'down': { axis: 'y', 'dir': 1 },
-      }
-      let oldPos = this[dirInfo[direction].axis];
-      // update object to new position so we can check for collisions.. revert to oldPos if collide
-      this[dirInfo[direction].axis] = this[dirInfo[direction].axis] + (dirInfo[direction].dir * game.step[dirInfo[direction].axis]);
-      let hitItem = this.checkCollisions(game.ABOVEGROUND, direction);
-
-      console.log(this.withinBounds());
-
-      if (hitItem || !this.withinBounds()) {
-        this[dirInfo[direction].axis] = oldPos;
-      } else {
+      this.direction = direction;
+      character.look(direction);
+      timers[direction] = setInterval(() => {
+        let dirInfo = {
+          'left': { axis: 'x', 'dir': -1 },
+          'right': { axis: 'x', 'dir': 1 },
+          'up': { axis: 'y', 'dir': -1 },
+          'down': { axis: 'y', 'dir': 1 },
+        }
+        let oldPos = this[dirInfo[direction].axis];
+        // update object to new position so we can check for collisions.. revert to oldPos if collide
+        this[dirInfo[direction].axis] = this[dirInfo[direction].axis] + (dirInfo[direction].dir * game.step[dirInfo[direction].axis]);
+        let hitItem = this.checkCollisions(game.ABOVEGROUND);
+  
+        if (hitItem || !this.withinBounds()) {
+          timers.moving = false;
+          if (direction == 'up') {
+            // are we conflicting with a building?
+            Object.entries(buildings.list).forEach(([itemName, item]) => {
+              if (this.collides(item)) {
+                item.enter();
+              }
+            });
+          }
+          this[dirInfo[direction].axis] = oldPos;
+        } else {
+          timers.moving = true;
           this.position();
-      }
+        }
+        
+      },timers.duration);
     }
   }
 
@@ -45,14 +58,14 @@ class Mobile extends game.Item {
       this.x <= bounds.w &&
       this.y <= bounds.h)
   }
-  
-  checkCollisions(layer, direction) {
+
+  checkCollisions(layer) {
     let spritesList = player.fields[player.currentField][layer];
-    
+
     spritesList.forEach((spriteBox, index) => {
       if (this.collides(spriteBox)) {
         controls.endInput();
-        function onEnd () {
+        function onEnd() {
           spriteBox.qty--;
           if (spriteBox.qty > 0) {
             spriteBox.reduce();
@@ -62,7 +75,7 @@ class Mobile extends game.Item {
             delete player.fields[player.currentField][layer][index];
           }
         }
-        spriteBox.jiggle(direction, onEnd);
+        spriteBox.jiggle(this.direction, onEnd);
         return spriteBox;
       }
     }

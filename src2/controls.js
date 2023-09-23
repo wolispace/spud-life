@@ -43,10 +43,10 @@ const controls = {
     // possibly use eventStreams to filter out excessive mousedown events
     // https://stackoverflow.com/questions/20775530/move-box-with-the-mouse-cursor
 
-    controlElement.onmousedown = function () { character.movePlayer(direction); };
+    controlElement.onmousedown = function () { game.playerItem.move(direction); };
     controlElement.onmouseup = function () { controls.endInput(); };
     //controlElement.onmouseout = function () { controls.endInput(direction); };
-    controlElement.addEventListener("touchstart", function () { character.movePlayer(direction); }, false);
+    controlElement.addEventListener("touchstart", function () { game.playerItem.move(direction); }, false);
     controlElement.addEventListener("touchend", function () { controls.endInput(); });
   },
 
@@ -151,9 +151,10 @@ const controls = {
   },
 
   endInput: function () {
-    controls.buttonUp(controls.direction);
-    clearInterval(timers[controls.direction]);
+    controls.buttonUp(game.playerItem.direction);
+    clearInterval(timers[game.playerItem.direction]);
     game.save();
+    timers.moving = false;
   },
 
 };

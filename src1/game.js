@@ -82,7 +82,6 @@ const game = {
       this.y = this.y + less.h / 2;
       this.x = this.x + less.w / 2;
       this.position();
-
     }
 
     remove() {
@@ -98,6 +97,9 @@ const game = {
 
   save: () => {
     let fields = player.fields;
+    player.x = game.playerItem.x;
+    player.y = game.playerItem.y;
+    
     player.fields = field.encodeAll(player.fields, true);
     //let compressed = LZString.compressToUTF16(JSON.stringify(player));
     let compressed = JSON.stringify(player);

@@ -127,10 +127,9 @@ const field = {
         let params = {
           id: index, x: xx, y: yy, w: sprite.width, h: 
           sprite.height, qty: 1, classes: 'grid',
-          svg: 'blank',
+          item: 'blank',
         }
         field.gridList[index] = new game.Item(params);
-        field.gridList[index].render();
       }
     }
   },
