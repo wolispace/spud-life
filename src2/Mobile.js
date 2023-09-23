@@ -21,19 +21,29 @@ class Mobile extends game.Item {
       // update object to new position so we can check for collisions.. revert to oldPos if collide
       this[dirInfo[direction].axis] = this[dirInfo[direction].axis] + (dirInfo[direction].dir * game.step[dirInfo[direction].axis]);
       let hitItem = this.checkCollisions(game.ABOVEGROUND, direction);
-      if (hitItem) {
+
+      console.log(this.withinBounds());
+
+      if (hitItem || !this.withinBounds()) {
         this[dirInfo[direction].axis] = oldPos;
       } else {
-        // check if this is colliding with a bounding box.
-        // make a box with is a less that the field area.
-        let skyBottom = (sprite.height * sky.height) - this.h;
-        let boundingBox = {
-          x: this.w,
-          y: skyBottom,
-        }
-        this.position();
+          this.position();
       }
     }
+  }
+
+  withinBounds() {
+    let bounds = {
+      x: 1,
+      y: (sprite.height * sky.height) - this.h,
+      w: game.grid.x * sprite.width,
+      h: game.grid.y * sprite.height - this.h,
+    }
+
+    return (this.x >= bounds.x &&
+      this.y >= bounds.y &&
+      this.x <= bounds.w &&
+      this.y <= bounds.h)
   }
   
   checkCollisions(layer, direction) {

@@ -231,7 +231,6 @@ const character = {
       qty: 1, classes: 'player',
       svg: svg.renderPerson(body),
     }
-    console.log('params',params);
     game.playerItem = new Mobile(params);
 
     if (player.y == 1) {
