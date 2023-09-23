@@ -15,14 +15,6 @@ const sprite = {
     return sprite.shrinkWrap(uid);
   },
 
-  orientSvg: function (itemSvg) {
-    // get width and height from viewbox to decide if its a wide or high image
-    let bits = itemSvg.match(/viewBox=\"(\d+) (\d+) (\d+) (\d+)\"/);
-    let orientation = (parseInt(bits[3]) > parseInt(bits[4])) ? 'wide' : 'high';
-    let newSvg = itemSvg.replace(/ viewBox=\"/, ` class=\"${orientation}\" viewBox=\"`);
-    return newSvg;
-  },
-
   // shrink holding div around the svg and return its box
   shrinkWrap: function (uid) {
     let itemDiv = sprite.get(uid);

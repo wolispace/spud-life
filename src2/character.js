@@ -17,6 +17,10 @@ const character = {
   look: function (direction) {
     let playerSprite = document.querySelector(".player > svg");
     let playerHead = document.querySelector(".player .playerHead");
+    console.log(game);
+    if (!playerHead) {
+      return;
+    }
     if (direction == "left") {
       playerHead.setAttribute("transform", "rotate(0, 51, 21.2)");
       playerSprite.setAttribute("transform", "translate(0, 0) scale(1, 1)");
@@ -223,12 +227,15 @@ const character = {
 
   addPlayer: function () {
     let body = character.randomBody();
-    let playerSvg = svg.renderPerson(body);
     let params = {
-      id: 'player', x: player.x, y: player.y, w: sprite.width, h: sprite.height, qty: 1, classes: 'player'
+      id: 'player', x: player.x, y: player.y, 
+      w: sprite.width, h: sprite.height, 
+      qty: 1, classes: 'player',
+      svg: svg.renderPerson(body),
     }
-    game.playerItem = new game.Item(params);
-    game.playerItem.render(playerSvg);
+    console.log('params',params);
+    game.playerItem = new Mobile(params);
+    game.playerItem.render();
 
     if (player.y == 1) {
       let playerSprite = game.playerItem.sprite; //sprite.get('player');

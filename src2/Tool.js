@@ -3,8 +3,8 @@ class Tool extends game.Item {
     params.w = sprite.width;
     params.h = sprite.width;
     params.classes = 'control';
+    params.item = params.id;
     super(params);
-    this.setup();
   }
 
   setup() {

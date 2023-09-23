@@ -18,7 +18,7 @@ const game = {
     w = 1;
     h = 1;
     qty = 1;
-    svg = '';
+    svg = null;
     classes = '';
     sprite = null;
 
@@ -31,18 +31,29 @@ const game = {
       this.qty = params.qty ?? 1;
       this.classes = params.classes ?? '';
       this.item = params.item ?? '';
+      this.svg = params.svg ?? svg.render(params.item);
+      this.setup();
     }
 
-    render(itemSvg) {
-      this.svg = itemSvg ?? svg.render(this.id);
-      this.svg = sprite.orientSvg(this.svg);
+    setup() {
+      this.orientSvg();
+    }
 
+    render() {
       let newSprite = `<div id="i${this.id}" class="sprite ${this.classes}">${this.svg}</div>`;
       addToBody(newSprite);
       this.position();
       this.shrinkWrap();
       this.position();
     }
+
+    orientSvg() {
+      // get width and height from viewbox to decide if its a wide or high image
+      let bits = this.svg.match(/viewBox=\"(\d+) (\d+) (\d+) (\d+)\"/);
+      let orientation = (parseInt(bits[3]) > parseInt(bits[4])) ? 'wide' : 'high';
+      this.svg = this.svg.replace(/ viewBox=\"/, ` class=\"${orientation}\" viewBox=\"`);
+    }
+
 
     shrinkWrap() {
       let itemSvg = sprite.get(`${this.id} > svg`);

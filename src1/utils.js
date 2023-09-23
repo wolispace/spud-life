@@ -31,7 +31,6 @@ const state = {
       let decompressed = compressed;
       let newPlayer = JSON.parse(decompressed);
       newPlayer.fields = field.encodeAll(newPlayer.fields, false);
-      console.log(newPlayer.fields);
       if (!player.pos) {
         player = newPlayer;
       }

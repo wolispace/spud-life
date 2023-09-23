@@ -5,11 +5,17 @@ class Cart extends game.Item {
       x: (sprite.width * game.grid.x) - (sprite.width * 3),
       y: 1,
       w: sprite.width * 2,
-      h: sprite.width * 2
+      h: sprite.width * 2,
+      item: 'cart',
     };
-
     super(params);
   }
+  
+  setup() {
+    this.render();
+  }
+
+  
   enter() {
     let title = "Your food cart";
     let content = `<div class="dialog-message-content">`;
@@ -20,6 +26,7 @@ class Cart extends game.Item {
     dialog.okButton = function () { dialog.hide(); };
     dialog.render(title, content, footer);
   }
+
   exit() {
     console.log('exiting the cart');
   }
