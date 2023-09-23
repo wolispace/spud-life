@@ -20,7 +20,7 @@ class Mobile extends game.Item {
       let oldPos = this[dirInfo[direction].axis];
       // update object to new position so we can check for collisions.. revert to oldPos if collide
       this[dirInfo[direction].axis] = this[dirInfo[direction].axis] + (dirInfo[direction].dir * game.step[dirInfo[direction].axis]);
-      let hitItem = this.checkCollisions(game.ABOVEGROUND);
+      let hitItem = this.checkCollisions(game.ABOVEGROUND, direction);
       if (hitItem) {
         this[dirInfo[direction].axis] = oldPos;
       } else {
@@ -36,7 +36,7 @@ class Mobile extends game.Item {
     }
   }
   
-  checkCollisions(layer) {
+  checkCollisions(layer, direction) {
     let spritesList = player.fields[player.currentField][layer];
     
     spritesList.forEach((spriteBox, index) => {
