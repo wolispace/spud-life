@@ -32,11 +32,12 @@ const game = {
       this.classes = params.classes ?? '';
       this.item = params.item ?? '';
       this.svg = params.svg ?? svg.render(params.item);
+      this.orientSvg();
       this.setup();
     }
 
     setup() {
-      this.orientSvg();
+      this.render();
     }
 
     render() {

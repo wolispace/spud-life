@@ -12,11 +12,6 @@ class Home extends game.Item {
     super(params);
   }
 
-  setup() {
-    this.render();
-  }
-
-
   enter() {
     let title = "Welcome home";
     let content = `<div class="dialog-message-content">`;

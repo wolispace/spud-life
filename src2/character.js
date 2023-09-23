@@ -235,7 +235,6 @@ const character = {
     }
     console.log('params',params);
     game.playerItem = new Mobile(params);
-    game.playerItem.render();
 
     if (player.y == 1) {
       let playerSprite = game.playerItem.sprite; //sprite.get('player');

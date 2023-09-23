@@ -149,16 +149,13 @@ const field = {
 
   refresh: function () {
     player.fields[player.currentField][game.SURFACE].forEach((item) => {
-      let itemSvg = svg.render('hole', item.qty);
-      item.svg = itemSvg;
-      item.render(itemSvg);
+      item.svg = svg.render('hole', item.qty);
+      item.render();
       game.setUid(item.id);
     });
     player.fields[player.currentField][game.ABOVEGROUND].forEach((item) => {
-      let itemType = item.item;
-      let itemSvg = svg.render(`${itemType}2`);
-      item.svg = itemSvg;
-      item.render(itemSvg);
+      item.svg = svg.render(item.item);
+      item.render();
       game.setUid(item.id);
     });
   },

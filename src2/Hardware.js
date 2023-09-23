@@ -12,10 +12,6 @@ class Hardware extends game.Item {
     super(params);
   }
 
-  setup() {
-    this.render();
-  }
-
   enter() {
     let title = "Hardware store";
     let content = `<div class="dialog-message-content">`;

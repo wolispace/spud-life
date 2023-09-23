@@ -11,11 +11,6 @@ class Cart extends game.Item {
     super(params);
   }
   
-  setup() {
-    this.render();
-  }
-
-  
   enter() {
     let title = "Your food cart";
     let content = `<div class="dialog-message-content">`;
