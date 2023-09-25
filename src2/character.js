@@ -233,11 +233,8 @@ const character = {
     game.playerItem = new Mobile(params);
 
     if (player.y == 1) {
-      let playerSprite = game.playerItem.sprite; //sprite.get('player');
       player.x = game.playerItem.w / 2;
-      player.y = (game.playerItem.h * sky.height) - game.playerItem.h;
-      playerSprite.style.top = `${player.y}px`;
-      playerSprite.style.left = `${player.x}px`;
+      player.y = (game.playerItem.h * sky.height) - game.playerItem.h + 5;
     }
   },
 

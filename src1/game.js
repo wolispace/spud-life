@@ -72,6 +72,7 @@ const game = {
       this.sprite.style.height = `${this.h}px`;
       // this.sprite.style.top = `${this.y}px`;
       // this.sprite.style.left = `${this.x}px`;
+      console.log(this.id, `translate3d(${this.x}px, ${this.y}px, 0)`);
       this.sprite.style.transform = `translate3d(${this.x}px, ${this.y}px, 0)`;
     }
 
