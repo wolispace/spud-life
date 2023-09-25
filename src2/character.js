@@ -263,67 +263,6 @@ const character = {
     return getBoundingBox('#iplayer');
   },
 
-  movePlayer: function (direction) {
-    if (!timers.moving) {
-      controls.buttonDown(direction);
-      character.look(direction);
-      timers[direction] = setInterval(() => {
-        let playerSprite = sprite.get('player');
-        let playerBox = getBoundingBox('#iplayer');
-        let old = { x: playerBox.x, y: playerBox.y };
-        let newTop, newLeft;
-        switch (direction) {
-          case 'up':
-            newTop = playerBox.top - step.y;
-            let skyBottom = (sprite.height * sky.height) - playerBox.height;
-            if (newTop > skyBottom) {
-              playerSprite.style.top = `${newTop}px`;
-              player.y = newTop;
-            } else {
-              // are we conflicting with a building?
-              Object.entries(buildings.list).forEach(([itemName, item]) => {
-                let buildingBox = getBoundingBox(`#i${item.id}`);
-                if (sprite.collides(buildingBox, playerBox)) {
-                  item.enter();
-                }
-              });
-            }
-            break;
-          case 'down':
-            newTop = playerBox.top + step.y;
-            if (newTop < containerBox.height - playerBox.height) {
-              playerSprite.style.top = `${newTop}px`;
-              player.y = newTop;
-            }
-            break;
-          case 'left':
-            newLeft = playerBox.left - step.x;
-            if (newLeft > 0) {
-              playerSprite.style.left = `${newLeft}px`;
-              player.x = newLeft;
-            }
-            break;
-          case 'right':
-            newLeft = playerBox.left + step.x;
-            if (newLeft < containerBox.width - playerBox.width) {
-              playerSprite.style.left = `${newLeft}px`;
-              player.x = newLeft;
-            }
-            break;
-        }
-        let collideId = sprite.collision(direction);
-        if (collideId) {
-          playerSprite.style.left = `${old.x}px`;
-          playerSprite.style.top = `${old.y}px`;
-          // update player.fields[]
-          timers.moving = false;
-        } else {
-          timers.moving = true;
-        }
-      }, timers.duration);
-    }
-  },
-
 
 
   // the default

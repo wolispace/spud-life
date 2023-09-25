@@ -48,8 +48,6 @@ document.addEventListener("keydown", (event) => {
   //event.preventDefault();
   let direction = game.getDirection(event);
   if (game.isDirection(direction)) {
-    //character.movePlayer(direction);
-
     game.playerItem.move(direction);
   }
 });
@@ -110,7 +108,6 @@ function setupThings() {
   spuds.sprout(6);
   // run a second time once we have other lists to work from..
   makeLists();
-  //field.addGrid();
 }
 
 function setContainerBox() {

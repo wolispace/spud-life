@@ -1,7 +1,5 @@
 class Mobile extends game.Item {
   constructor(params) {
-    params.w = sprite.width;
-    params.h = sprite.width;
     super(params);
   }
 
@@ -49,7 +47,7 @@ class Mobile extends game.Item {
     let bounds = {
       x: 1,
       y: (sprite.height * sky.height) - this.h,
-      w: game.grid.x * sprite.width,
+      w: game.grid.x * sprite.width - this.w,
       h: game.grid.y * sprite.height - this.h,
     }
 
@@ -65,17 +63,44 @@ class Mobile extends game.Item {
     spritesList.forEach((spriteBox, index) => {
       if (this.collides(spriteBox)) {
         controls.endInput();
-        function onEnd() {
-          spriteBox.qty--;
-          if (spriteBox.qty > 0) {
-            spriteBox.reduce();
+        if (layer == game.ABOVEGROUND) {
+          function onEnd() {
+            spriteBox.qty--;
+            if (spriteBox.qty > 0) {
+              spriteBox.reduce();
+            } else {
+              spriteBox.remove();
+              delete player.fields[player.currentField][layer][index];
+            }
+          }
+          spriteBox.jiggle(this.direction, onEnd);
 
-          } else {
+        } else {
+          // dig it up.. animate the arc. then remove it..
+          let params = {
+            id: foundItem, 
+            x: game.playerItem.x, 
+            y: game.playerItem.y, 
+            w: sprite.width, h: sprite.height
+          }
+          let itemSprite = new game.Item (params);
+          spriteBox.render();
+          let endItem = tools.list.basket;
+          onEnd = function () { 
             spriteBox.remove();
             delete player.fields[player.currentField][layer][index];
-          }
+            setTimeout( () => {
+              game.digging = false;
+              endItem.jiggle('down');
+              setTimeout( () => {
+                endItem.updateQty(endItem.qty + 1);
+              }, 200);
+            }, 1);
+
+          };
+          spriteBox.animateArc(endItem, onEnd);
+          sprite.animateArc(spriteBox, endItem, onEnd);
         }
-        spriteBox.jiggle(this.direction, onEnd);
         return spriteBox;
       }
     }

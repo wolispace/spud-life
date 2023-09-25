@@ -45,41 +45,7 @@ const sprite = {
     game.grid.y = parseInt(containerBox.height / sprite.height);
   },
 
-  collision: function (direction) {
-    let retValue;
-    let playerBox = character.getPlayerBox();
-    let spritesList = player.fields[player.currentField][game.ABOVEGROUND];
-
-    spritesList.forEach((spriteBox, index) => {
-      if (!retValue && sprite.collides(playerBox, spriteBox)) {
-        controls.endInput();
-        function onEnd () {
-          spriteBox.qty--;
-          if (spriteBox.qty > 0) {
-            spriteBox.reduce();
-
-          } else {
-            spriteBox.remove();
-            delete spriteBox;
-            delete player.fields[player.currentField][game.ABOVEGROUND][index];
-          }
-        }
-        retValue = spriteBox;
-        spriteBox.jiggle(direction, onEnd);
-        return spriteBox;
-      }
-    });
-
-    return retValue;
-  },
-
-  // do these collide? objects with (x,y,width,height}
-  collides: function (item1, item2) {
-    return (item1.x < item2.x + item2.w)
-      && (item1.x + item1.w > item2.x)
-      && (item1.y < item2.y + item2.h)
-      && (item1.y + item1.h > item2.y);
-  },
+  
     // build an svg arv from the starting path to the ending tool
     makeAcr: function (startItem, endTool) {
       let startX = 0 + (startItem.w / 2);

@@ -78,7 +78,9 @@ const controls = {
     
     if (game.playerItem.y > skyBottom && player.tools.spade > 0) {
       game.digging = true;
-      let foundItem = controls.collision(game.playerItem);
+
+      let foundItem = game.playerItem.checkCollisions(game.UNDERGROUND);
+
       if (foundItem) {
         let foundSvg = svg.render(foundItem, 1);
         if (!foundSvg) {
@@ -122,18 +124,7 @@ const controls = {
   },
 
   collision: function (playerItem) {
-    let retValue = false;
-    let spritesList = player.fields[player.currentField][game.UNDERGROUND];
-  
-    for (let i = 0; i < spritesList.length; i++) {
-      if (sprite.collides(playerItem, spritesList[i])) {
-        retValue = spritesList[i].item;
-        spritesList.splice(i, 1); // This will remove the item from the list
-        break; // This will stop checking for collisions after the first one is found
-      }
-    }
-  
-    return retValue;
+    return game.playerItem.checkCollisions(game.UNDERGROUND);
   },
 
   stopDefaults: function (controlElement) {

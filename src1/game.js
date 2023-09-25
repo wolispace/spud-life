@@ -8,7 +8,7 @@ const game = {
   qty: [0, 20, 30],
   playerItem: null,
   digging: false,
-  step: {x: 5, y: 5},
+  step: { x: 5, y: 5 },
 
   // everything show on the page is an Item with coords and an svg
   Item: class {
@@ -68,15 +68,16 @@ const game = {
 
     position() {
       this.sprite = sprite.get(this.id);
-      this.sprite.style.width =`${this.w}px`;
-      this.sprite.style.height =`${this.h}px`;
-      this.sprite.style.top =`${this.y}px`;
-      this.sprite.style.left =`${this.x}px`;
+      this.sprite.style.width = `${this.w}px`;
+      this.sprite.style.height = `${this.h}px`;
+      // this.sprite.style.top = `${this.y}px`;
+      // this.sprite.style.left = `${this.x}px`;
+      this.sprite.style.transform = `translate3d(${this.x}px, ${this.y}px, 0)`;
     }
 
     reduce() {
       // reduce by 20%
-      let less = {w: this.w * .2, h: this.h * .2};
+      let less = { w: this.w * .2, h: this.h * .2 };
       this.w = this.w - less.w;
       this.h = this.h - less.h;
       this.y = this.y + less.h / 2;
@@ -91,22 +92,59 @@ const game = {
     jiggle(direction, onEnd) {
       svg.animate(this.sprite, `jiggle-${direction}`, 0.25, onEnd);
     }
+
+    animateArc(endItem, onEnd) {
+      // slow start fast middle
+      var easing = 'cubic-bezier(0, 0, .25, 0)';
+      // slow and get faster
+      easing = 'cubic-bezier(0.3, 0, 1, 1)';
+      easing = 'ease-in';
+      this.sprite.style.display = 'block';
+      this.sprite.style.offsetPath = this.makeAcr(endItem);
+      this.sprite.style.offsetRotate = `0deg`;
+      this.sprite.style.animation = `into-basket 1.5s ${easing} 0s 1 normal forwards`;
+      this.sprite.addEventListener("animationend", function handler() {
+        this.sprite.style.animation = 'none';
+        this.sprite.style.display = 'none';
+        if (typeof onEnd == "function") {
+          onEnd();
+        }
+        this.removeEventListener("animationend", handler);
+      });
+    }
+
+    makeAcr(endItem) {
+      let startX = 0 + (this.w / 2);
+      let startY = 0 + (this.h / 2);
+      let top = 0 - (this.y / 2);
+      let endX = endItem.x - this.x + (this.w / 2);
+      let endY = endItem.y - this.y + (this.h / 2);
+
+      // everything must be relative to the patch - it is 0,0
+      // calculate x2,y2 from the middle of the basket tool
+      // calculate top.. or just use zero?
+      // calculate offset for beizer control points (in a little from vertical based on distance between x1 and x2)
+      // Mx1,y1 Cx1+(x2-x1/5),top x2-(x2-x1/5),top x2,y2
+      let bit = (endX - startX) / 5;
+
+      return `path('M ${startX},${startY} C ${startX + bit},${top} ${endX - bit},${top} ${endX},${endY}')`;
+    }
   },
 
-  // ---------------------------------
+  // ---end of Item class ------------------------------
 
   save: () => {
     let fields = player.fields;
     player.x = game.playerItem.x;
     player.y = game.playerItem.y;
-    
+
     player.fields = field.encodeAll(player.fields, true);
     //let compressed = LZString.compressToUTF16(JSON.stringify(player));
     let compressed = JSON.stringify(player);
     localStorage.setItem("state", compressed);
     player.fields = fields;
   },
-  
+
   load: () => {
     let compressed = localStorage.getItem("state");
     if (compressed) {

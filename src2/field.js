@@ -69,7 +69,7 @@ const field = {
       newItem.render(itemSvg);
     }
     layer = game.SURFACE;
-    for (let step = 0; step < 315; step++) {
+    for (let step = 0; step < 10; step++) {
       let x = rnd(fieldWidth);
       let y = rnd(fieldHeight) + skyBottom;
       let qty = 5;
@@ -121,11 +121,12 @@ const field = {
     let index = 0;
     for (let x = 0; x < game.grid.x; x++) {
       for (let y = 0; y < game.grid.y; y++) {
-        let xx = x * sprite.width;
-        let yy = y * sprite.height;
         index++;
         let params = {
-          id: index, x: xx, y: yy, w: sprite.width, h: 
+          id: `grid${index}`, 
+          x: x * sprite.width, 
+          y: y * sprite.height, 
+          w: sprite.width, h: 
           sprite.height, qty: 1, classes: 'grid',
           item: 'blank',
         }
