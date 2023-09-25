@@ -78,16 +78,9 @@ class Mobile extends game.Item {
 
         } else {
           // dig it up.. animate the arc. then remove it..
-          let params = {
-            id: foundItem, 
-            x: game.playerItem.x, 
-            y: game.playerItem.y, 
-            w: sprite.width, h: sprite.height
-          }
-          let itemSprite = new game.Item (params);
           spriteBox.render();
           let endItem = tools.list.basket;
-          onEnd = function () { 
+          let onEnd = function () { 
             spriteBox.remove();
             delete player.fields[player.currentField][layer][index];
             setTimeout( () => {
