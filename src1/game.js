@@ -66,14 +66,24 @@ const game = {
       }
     }
 
+    setPos() {
+      this.sprite = sprite.get(this.id);
+      this.sprite.style.width = `${this.w}px`;
+      this.sprite.style.height = `${this.h}px`;
+      this.sprite.style.top = `${this.y}px`;
+      this.sprite.style.left = `${this.x}px`; 
+      this.sprite.style.transform = '';     
+    }
+
     position() {
       this.sprite = sprite.get(this.id);
       this.sprite.style.width = `${this.w}px`;
       this.sprite.style.height = `${this.h}px`;
       // this.sprite.style.top = `${this.y}px`;
       // this.sprite.style.left = `${this.x}px`;
-      console.log(this.id, `translate3d(${this.x}px, ${this.y}px, 0)`);
+    
       this.sprite.style.transform = `translate3d(${this.x}px, ${this.y}px, 0)`;
+      //this.sprite.style.transform = `translate(${this.x}px, ${this.y}px)`;
     }
 
     reduce() {
@@ -83,7 +93,7 @@ const game = {
       this.h = this.h - less.h;
       this.y = this.y + less.h / 2;
       this.x = this.x + less.w / 2;
-      this.position();
+      this.setPos();
     }
 
     remove() {
@@ -91,6 +101,7 @@ const game = {
     }
 
     jiggle(direction, onEnd) {
+      this.setPos();
       svg.animate(this.sprite, `jiggle-${direction}`, 0.25, onEnd);
     }
 

@@ -65,6 +65,7 @@ class Mobile extends game.Item {
         controls.endInput();
         if (layer == game.ABOVEGROUND) {
           function onEnd() {
+            spriteBox.setPos();
             spriteBox.qty--;
             if (spriteBox.qty > 0) {
               spriteBox.reduce();

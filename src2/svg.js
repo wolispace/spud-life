@@ -896,7 +896,7 @@ const svg = {
     return svgClass;
   },
 
-  // skightly move the path points +/- the amp(litude)
+  // slightly move the path points +/- the amp(litude)
   jiggle: (path, amp) => {
     let bits = path.split(/( |,)/);
     let res = "";
