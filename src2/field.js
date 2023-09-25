@@ -69,7 +69,7 @@ const field = {
       newItem.render(itemSvg);
     }
     layer = game.SURFACE;
-    for (let step = 0; step < 20; step++) {
+    for (let step = 0; step < 1; step++) {
       let x = rnd(fieldWidth);
       let y = rnd(fieldHeight) + skyBottom;
       let qty = 5;
@@ -88,7 +88,7 @@ const field = {
     layer = game.UNDERGROUND;
     let maxSpuds = list.spuds.list.length;
     let maxItems = list.items.list.length;
-    for (let step = 0; step < 30; step++) {
+    for (let step = 0; step < 50; step++) {
       let x = rnd(fieldWidth);
       let y = rnd(fieldHeight) + skyBottom;
       let qty = 1;

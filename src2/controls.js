@@ -78,6 +78,12 @@ const controls = {
     
     if (game.playerItem.y > skyBottom && player.tools.spade > 0) {
       game.digging = true;
+      // add the hole first
+      let params = {
+        id: game.uid++, x: player.x, y: player.y, w: sprite.width, h: sprite.height, qty: 5, classes: '', item: 'hole'
+      }
+      let newHole = new game.Item(params);
+      player.fields[player.currentField][game.SURFACE].push(newHole);
 
       let foundItem = game.playerItem.checkCollisions(game.UNDERGROUND);
 
@@ -110,13 +116,8 @@ const controls = {
       } else {
         game.digging = false;
       }
-      let params = {
-        id: game.uid++, x: player.x, y: player.y, w: sprite.width, h: sprite.height, qty: 5, classes: '', item: 'hole'
-      }
-      let newHole = new game.Item(params);
-      let itemSvg = svg.render("hole", 5);
-      newHole.render(itemSvg);
-      player.fields[player.currentField][game.SURFACE].push(newHole);
+      // TODO: z-index should be above hole
+
       player.tools.spade--;
       controls.list['spade'].updateQty(player.tools.spade);
       game.save();

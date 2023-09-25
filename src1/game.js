@@ -32,7 +32,7 @@ const game = {
       this.qty = params.qty ?? 1;
       this.classes = params.classes ?? '';
       this.item = params.item ?? '';
-      this.svg = params.svg ?? svg.render(params.item);
+      this.svg = params.svg ?? svg.render(params.item, params.qty);
       this.orientSvg();
       this.setup();
     }
@@ -66,6 +66,7 @@ const game = {
       }
     }
 
+    // sets the divs X and Y
     setPos() {
       this.sprite = sprite.get(this.id);
       this.sprite.style.width = `${this.w}px`;
@@ -75,6 +76,7 @@ const game = {
       this.sprite.style.transform = '';     
     }
 
+    // shifts the div from starting 1,1 x.y to improve animation speeds
     position() {
       this.sprite = sprite.get(this.id);
       this.sprite.style.width = `${this.w}px`;

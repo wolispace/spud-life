@@ -78,6 +78,10 @@ class Mobile extends game.Item {
 
         } else {
           // dig it up.. animate the arc. then remove it..
+          // shift to the players pos
+          spriteBox.x = game.playerItem.x;
+          spriteBox.y = game.playerItem.y;
+          
           spriteBox.render();
           let endItem = tools.list.basket;
           let onEnd = function () { 
