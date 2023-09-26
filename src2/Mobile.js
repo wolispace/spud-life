@@ -83,6 +83,7 @@ class Mobile extends game.Item {
           spriteBox.y = game.playerItem.y;
           
           spriteBox.render();
+          basket.add(spriteBox);
           let endItem = tools.list.basket;
           delete player.fields[player.currentField][layer][index];
           scanner.scan();
