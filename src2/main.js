@@ -5,6 +5,7 @@ let containerBox = null;
 let step = { x: 5 * pixelScale, y: 5 * pixelScale};
 let timers = { duration: 30 };
 let list = {};
+let scanner = null;
 
 // if savedate injected (by referencing it with ?id={dataFileId} then load it.
 if (typeof saveData !== 'undefined') {
@@ -100,6 +101,7 @@ function setupThings() {
   character.addPlayer();
   buildings.setup();
   controls.render();
+  scanner = new Scanner();
   hint.setup();
   dialog.setup();
   tools.setup();
@@ -108,6 +110,7 @@ function setupThings() {
   spuds.sprout(6);
   // run a second time once we have other lists to work from..
   makeLists();
+  scanner.scan();
 }
 
 function setContainerBox() {

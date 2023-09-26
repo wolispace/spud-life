@@ -84,9 +84,10 @@ class Mobile extends game.Item {
           
           spriteBox.render();
           let endItem = tools.list.basket;
+          delete player.fields[player.currentField][layer][index];
+          scanner.scan();
           let onEnd = function () { 
             spriteBox.remove();
-            delete player.fields[player.currentField][layer][index];
             setTimeout( () => {
               game.digging = false;
               endItem.jiggle('down');
@@ -101,15 +102,10 @@ class Mobile extends game.Item {
         }
         return spriteBox;
       }
+      game.digging = false;
     }
     );
   }
-  // do these collide? objects with (x,y,width,height}
-  collides(spriteBox) {
-    return (spriteBox.x < this.x + this.w)
-      && (spriteBox.x + spriteBox.w > this.x)
-      && (spriteBox.y < this.y + this.h)
-      && (spriteBox.y + spriteBox.h > this.y);
-  }
+
 
 } 

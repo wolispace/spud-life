@@ -24,17 +24,19 @@ const game = {
     sprite = null;
 
     constructor(params) {
-      this.id = params.id;
-      this.x = params.x;
-      this.y = params.y;
-      this.w = params.w ?? sprite.width;
-      this.h = params.h ?? sprite.width;
-      this.qty = params.qty ?? 1;
-      this.classes = params.classes ?? '';
-      this.item = params.item ?? '';
-      this.svg = params.svg ?? svg.render(params.item, params.qty);
-      this.orientSvg();
-      this.setup();
+      if (params) {
+        this.id = params.id;
+        this.x = params.x;
+        this.y = params.y;
+        this.w = params.w ?? sprite.width;
+        this.h = params.h ?? sprite.width;
+        this.qty = params.qty ?? 1;
+        this.classes = params.classes ?? '';
+        this.item = params.item ?? '';
+        this.svg = params.svg ?? svg.render(params.item, params.qty);
+        this.orientSvg();
+        this.setup();
+      }
     }
 
     setup() {
@@ -65,6 +67,13 @@ const game = {
         this.h = itemSvgBox.height;
       }
     }
+    // do these collide? objects with (x,y,width,height}
+    collides(spriteBox) {
+      return (spriteBox.x < this.x + this.w)
+        && (spriteBox.x + spriteBox.w > this.x)
+        && (spriteBox.y < this.y + this.h)
+        && (spriteBox.y + spriteBox.h > this.y);
+    }
 
     // sets the divs X and Y
     setPos() {
@@ -72,8 +81,8 @@ const game = {
       this.sprite.style.width = `${this.w}px`;
       this.sprite.style.height = `${this.h}px`;
       this.sprite.style.top = `${this.y}px`;
-      this.sprite.style.left = `${this.x}px`; 
-      this.sprite.style.transform = '';     
+      this.sprite.style.left = `${this.x}px`;
+      this.sprite.style.transform = '';
     }
 
     // shifts the div from starting 1,1 x.y to improve animation speeds
@@ -83,7 +92,7 @@ const game = {
       this.sprite.style.height = `${this.h}px`;
       // this.sprite.style.top = `${this.y}px`;
       // this.sprite.style.left = `${this.x}px`;
-    
+
       this.sprite.style.transform = `translate3d(${this.x}px, ${this.y}px, 0)`;
       //this.sprite.style.transform = `translate(${this.x}px, ${this.y}px)`;
     }
@@ -118,7 +127,7 @@ const game = {
       this.sprite.style.offsetRotate = `0deg`;
       this.sprite.style.animation = `into-basket 1.5s ${easing} 0s 1 normal forwards`;
       this.sprite.addEventListener("animationend", function handler() {
-        if ( this.sprite) {
+        if (this.sprite) {
           this.sprite.style.animation = 'none';
           this.sprite.style.display = 'none';
           if (typeof onEnd == "function") {

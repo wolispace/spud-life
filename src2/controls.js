@@ -106,6 +106,7 @@ const controls = {
   endInput: function () {
     controls.buttonUp(game.playerItem.direction);
     clearInterval(timers[game.playerItem.direction]);
+    scanner.scan();
     game.save();
     timers.moving = false;
   },

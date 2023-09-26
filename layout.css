@@ -314,3 +314,15 @@ svg.high {
     offset-distance: 100%; 
   }
 }
+
+@keyframes glow {
+  from {
+    fill: rgb(0,0,0);
+  }
+  50% {
+    fill: rgb(255, 255, 255);
+  }
+  to {
+    fill: rgb(0,0,0);
+  }
+}
