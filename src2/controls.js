@@ -12,7 +12,6 @@ const controls = {
     }
     let start = { x: 0, y: sprite.height * 4 };
 
-
     Object.entries(buttons).forEach(([direction, coords]) => {
       let newPos = {
         x: start.x + sprite.width * coords.x + coords.px,
@@ -40,9 +39,6 @@ const controls = {
     if (dialog.visible) {
       return;
     }
-    // possibly use eventStreams to filter out excessive mousedown events
-    // https://stackoverflow.com/questions/20775530/move-box-with-the-mouse-cursor
-
     controlElement.onmousedown = function () { game.playerItem.move(direction); };
     controlElement.onmouseup = function () { controls.endInput(); };
     //controlElement.onmouseout = function () { controls.endInput(direction); };
@@ -51,81 +47,46 @@ const controls = {
   },
 
   addDigEvent: function (controlElement) {
-      controlElement.onmousedown = function () { controls.dig(); };
-      controlElement.addEventListener("touchstart", function () { controls.dig(); }, false);
-
+    controlElement.onmousedown = function () { controls.dig(); };
+    controlElement.addEventListener("touchstart", function () { controls.dig(); }, false);
   },
 
   buttonDown: function (direction) {
     controls.direction = direction;
     let buttonDiv = document.querySelector(`.${direction}`);
     svg.animate(buttonDiv, 'buttonDown', 0.15);
-    //console.log('button down - why not stopping', direction);
   },
 
   buttonUp: function () {
     timers.moving = false;
   },
 
-
   dig: function () {
     if (game.digging) {
       return;
     }
     let skyBottom = (sprite.height * sky.height);
-    
     controls.buttonDown('spade');
-    
     if (game.playerItem.y > skyBottom && player.tools.spade > 0) {
       game.digging = true;
       // add the hole first
       let params = {
-        id: game.uid++, x: player.x, y: player.y, w: sprite.width, h: sprite.height, qty: 5, classes: '', item: 'hole'
+        id: game.uid++,
+        x: player.x,
+        y: player.y,
+        w: sprite.width,
+        h: sprite.height,
+        qty: 5,
+        classes: '',
+        item: 'hole'
       }
       let newHole = new game.Item(params);
       player.fields[player.currentField][game.SURFACE].push(newHole);
-
-      let foundItem = game.playerItem.checkCollisions(game.UNDERGROUND);
-
-      if (foundItem) {
-        let foundSvg = svg.render(foundItem, 1);
-        if (!foundSvg) {
-          // TODO: this needs to be a spud
-          foundItem = 'rock2';
-        }
-        let params = {
-          id: foundItem, x: game.playerItem.x, y: game.playerItem.y, w: sprite.width, h: sprite.height
-        }
-        let itemSprite = new game.Item (params);
-        itemSprite.render();
-        let endItem = tools.list.basket;
-        onEnd = function () { 
-          itemSprite.remove();
-          delete itemSprite;
-          setTimeout( () => {
-            game.digging = false;
-            endItem.jiggle('down');
-            setTimeout( () => {
-              endItem.updateQty(endItem.qty + 1);
-            }, 200);
-          }, 1);
-
-        };
-        sprite.animateArc(itemSprite, endItem, onEnd);
-
-      } else {
-        game.digging = false;
-      }
-      // TODO: z-index should be above hole
-
+      game.playerItem.checkCollisions(game.UNDERGROUND);
       player.tools.spade--;
       controls.list['spade'].updateQty(player.tools.spade);
       game.save();
     }
-  },
-
-  collision: function (playerItem) {
-    return game.playerItem.checkCollisions(game.UNDERGROUND);
   },
 
   stopDefaults: function (controlElement) {
