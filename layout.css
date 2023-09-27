@@ -206,6 +206,32 @@ svg.high {
   text-align: right;
 }
 
+.hardware {
+  background-color: salmon;
+  display: none;
+}
+
+.hardware-button {
+  display: flex;
+  align-items: center;
+}
+
+.hardware-button-buy  {
+  font-weight: bold;
+  color: white;
+  background-color: rgb(181 79 79) !important; 
+}
+
+.hardware-button-desc  {
+  flex: auto;
+}
+
+.hardware-button-sell {
+  background-color: rgba(40, 117, 53, 0.76) !important;
+  color: white;
+  font-weight: bold;
+}
+
 @keyframes shrink {
   0% {
     transform: scale(1, 1);

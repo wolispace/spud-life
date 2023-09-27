@@ -9,20 +9,14 @@ const basket = {
 
   show: function () {
     let title = "Basket";
-    let content = `<div class="dialog-message-content">`;
-    content += `This is your basket.`;
+    let content = ''; //`<div class="dialog-message-content">`;
 
     Object.entries(player.basket).forEach(([itemName, qty]) => {
-      let itemInfo = list.items.byName[itemName];
-      if(!itemInfo) {
-       itemInfo = list.spuds.byName[itemName];
+      let params = {
+        qty: qty,
+        item: itemName,
       }
-      console.log(itemInfo);
-      if (itemInfo) {
-        content += `<div>${itemInfo.fullName} qty=${qty}</div>`;
-      } else {
-        content += `<div> where is ${itemName} qty=${qty}</div>`;
-      }
+      content += basket.makeButton(params);
 
     });
     let footer = "";
@@ -30,6 +24,23 @@ const basket = {
     dialog.cancelButton = function () { dialog.hide(); };
     dialog.okButton = function () { dialog.hide(); };
     dialog.render(title, content, footer);
+    },
+
+  makeButton: function (params) {
+    let style = `style="width: 2rem;"`;
+    let icon = svg.render(params.item, 11, style);
+    let itemInfo = items[params.item];
+    if (!itemInfo) {
+     itemInfo = {fullName: "A spud"};
+    }
+    console.log(params);
+
+    let content = `<div  class="hardware-button buttonize">`;
+    content += ` <div class="hardware-button-icon">${icon}</div>`;
+    content += ` <div class="hardware-button-desc"> ${params.qty} <b>${itemInfo.fullName}.</b> ${itemInfo.desc}</div>`;
+    content += `</div>`;
+
+    return content;
   }
 
 }

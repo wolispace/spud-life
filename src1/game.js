@@ -154,6 +154,8 @@ const game = {
 
       return `path('M ${startX},${startY} C ${startX + bit},${top} ${endX - bit},${top} ${endX},${endY}')`;
     }
+
+
   },
 
   // ---end of Item class ------------------------------
