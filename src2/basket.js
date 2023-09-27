@@ -37,7 +37,7 @@ const basket = {
 
     let content = `<div  class="hardware-button buttonize">`;
     content += ` <div class="hardware-button-icon">${icon}</div>`;
-    content += ` <div class="hardware-button-desc"> ${params.qty} <b>${itemInfo.fullName}.</b> ${itemInfo.desc}</div>`;
+    content += ` <div class="hardware-button-desc"> ${params.qty} <b>${itemInfo.fullName}.</b> ${itemInfo.desc} (x ${params.qty}) </div>`;
     content += `</div>`;
 
     return content;

@@ -214,6 +214,7 @@ svg.high {
 .hardware-button {
   display: flex;
   align-items: center;
+  gap: 0.75rem;
 }
 
 .hardware-button-buy  {
