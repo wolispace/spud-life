@@ -82,21 +82,6 @@ function introGame() {
   });
 }
 
-function testDialog() {
-  return;
-  let title = "TEST dialog";
-  let content = `<div class="dialog-message-content">`;
-  content += `This is but a simple test<br/>to see what we can see.`;
-  let footer = "";
-  footer += `<button class="buttonize" onclick="basket.addMoney();"> Add $1k </button>`;
-  footer += `<button class="buttonize" onclick="pet.render(); pet.moveLeft(); dialog.hide();"> TEST pet </button>`;
-  footer += `<button class="buttonize" onclick="potatadex.render()"> Potatádex </button>`;
-  footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
-  dialog.cancelButton = function () { dialog.hide(); };
-  dialog.okButton = function () { dialog.hide(); };
-  dialog.render(title, content, footer);
-}
-
 function setupThings() {
   character.addPlayer();
   buildings.setup();
@@ -106,8 +91,12 @@ function setupThings() {
   dialog.setup();
   tools.setup();
   makeLists();
-  spuds.bestForList();
-  spuds.sprout(6);
+  if (Object.keys(player.spuds).length === 0 ) {
+    spuds.bestForList();
+    spuds.sprout(6);
+  } else {
+    spuds.addToItems();
+  }
   // run a second time once we have other lists to work from..
   makeLists();
   scanner.scan();

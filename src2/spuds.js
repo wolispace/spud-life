@@ -1,4 +1,7 @@
 const spuds = {
+  recordDelim: '^',
+  fieldDelim: '|',
+
   //generate the the complete random list of spuds for this session
   bits: {
     prefix: ["Bo", "Sa", "Ru", "Kri", "Ar"],
@@ -63,6 +66,8 @@ const spuds = {
         bestFor: spuds.bits.bestFor[bestForCycle],
         path: svg.jiggle(svgInfo.paths[0].d, 3),
       };
+      // add to player data so these are consistent for this player
+      player.spuds[name] = items[name];
       // roll on to next item in the list so everyone gets at least one of everything
       colorCycle = ++colorCycle >= spuds.bits.color.length ? 0 : colorCycle;
       rarityCycle = ++rarityCycle >= spuds.bits.rareness.length ? 0 : rarityCycle;
@@ -75,6 +80,58 @@ const spuds = {
     let bestForAll = list.machines.list.map((item) => { return item.initial.makes });
 
     return bestForAll.filter((value, index, array) => array.indexOf(value) === index);
+  },
+
+  // cant use ^ or | in spud descriptions!
+  decode: function (encodedString) {
+    let spudList = {};
+    let records = encodedString.split(spuds.recordDelim);
+    records.forEach((thisSpud) => {
+      let bit = thisSpud.split(spuds.fieldDelim);
+      spudList[bit[0]] = {
+        name: bit[0],
+        bestFor: bit[1],
+        color: bit[2],
+        fullName: bit[3],
+        rareness: parseInt(bit[4]),
+        type: 'spuds',
+      }
+    });
+
+    return spudList;
+  },
+
+  encode: function (spudList) {
+    let encodedString = '';
+    let r = '';
+    let d = spuds.fieldDelim;
+
+    Object.entries(spudList).forEach(([spudName, spudInfo]) => {
+      encodedString += `${r}${spudName}${d}`;
+      encodedString += `${spudInfo.bestFor}${d}`;
+      encodedString += `${spudInfo.color}${d}`;
+      encodedString += `${spudInfo.fullName}${d}`;
+      encodedString += `${spudInfo.rareness}${d}`;
+      r = spuds.recordDelim;
+    });
+  
+    return encodedString;
+  },
+
+  addToItems: function () {
+    Object.entries(player.spuds).forEach(([spudName, spudInfo]) => {
+      if (!items[spudName]) {
+        items[spudName] = {
+          type: 'spuds',
+          name: spudName,
+          fullName: spudInfo.fullName,
+          color: spudInfo.color,
+          rareness: spudInfo.rareness,
+          bestFor: spudInfo.bestFor,
+        };
+      }
+        
+    });
   },
 
 };

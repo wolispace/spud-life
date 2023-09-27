@@ -33,7 +33,6 @@ const basket = {
     if (!itemInfo) {
      itemInfo = {fullName: "A spud"};
     }
-    console.log(params);
 
     let content = `<div  class="hardware-button buttonize">`;
     content += ` <div class="hardware-button-icon">${icon}</div>`;
@@ -41,6 +40,8 @@ const basket = {
     content += `</div>`;
 
     return content;
-  }
+  },
+  
 
 }
+

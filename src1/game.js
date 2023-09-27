@@ -161,15 +161,18 @@ const game = {
   // ---end of Item class ------------------------------
 
   save: () => {
-    let fields = player.fields;
+    let saveFields = player.fields;
+    let saveSpuds = player.spuds;
     player.x = game.playerItem.x;
     player.y = game.playerItem.y;
 
     player.fields = field.encodeAll(player.fields, true);
+    player.spuds = spuds.encode(player.spuds);
     //let compressed = LZString.compressToUTF16(JSON.stringify(player));
     let compressed = JSON.stringify(player);
     localStorage.setItem("state", compressed);
-    player.fields = fields;
+    player.fields = saveFields;
+    player.spuds = saveSpuds;
   },
 
   load: () => {
@@ -179,6 +182,7 @@ const game = {
       let decompressed = compressed;
       let newPlayer = JSON.parse(decompressed);
       newPlayer.fields = field.encodeAll(newPlayer.fields, false);
+      newPlayer.spuds = spuds.decode(newPlayer.spuds);
       if (!player.pos) {
         player = newPlayer;
       }

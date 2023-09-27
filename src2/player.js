@@ -13,6 +13,7 @@ let player = {
   rows: rows,
   basket: {},
   wallet: 100,
+  spuds: {},
   scanLevel: 1,
   scanState: true,
   spudRegen: -5,
