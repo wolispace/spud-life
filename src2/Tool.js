@@ -23,7 +23,7 @@ class Tool extends game.Item {
     this.sprite.insertAdjacentHTML('beforeend', html);
   }
   updateQty(qty) {
-    this.qty = qty;
+    this.qty = qty ?? 0;
     sprite.get(`${this.id} .qty`).innerHTML = this.qty;
   }
 

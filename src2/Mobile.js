@@ -74,6 +74,15 @@ class Mobile extends game.Item {
               delete player.fields[player.currentField][layer][index];
             }
           }
+          let toolName = spriteBox.type == 'rock' ? 'pick': 'axe';
+          if (player.tools[toolName] > 0) {
+            player.tools[toolName]--;
+            tools.list[toolName].updateQty(player.tools[toolName]);
+          } else {
+            onEnd = null;
+          }
+
+          console.log(spriteBox);
           spriteBox.jiggle(this.direction, onEnd);
 
         } else {

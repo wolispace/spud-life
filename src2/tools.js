@@ -17,6 +17,7 @@ const tools = {
       tools.list[itemName] = new Tool(params);
       tools.list[itemName].onClick = tools.clicks[itemName];
       params.x = params.x - tools.list[itemName].w - padding;
+        tools.list[itemName].updateQty(player.tools[itemName]);
     });
   },
 

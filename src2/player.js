@@ -21,6 +21,8 @@ let player = {
   grassQty: 7,
   tools: {
     spade: 999,
+    axe: 20,
+    pick: 20,
   },
   currentField: 0,
   fields: [[[], [], []]],
