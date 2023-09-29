@@ -89,31 +89,27 @@ const field = {
     let maxSpuds = list.spuds.list.length;
     let maxItems = list.items.list.length;
     for (let step = 0; step < 50; step++) {
-      let x = rnd(fieldWidth);
-      let y = rnd(fieldHeight) + skyBottom;
-      let qty = 1;
-      let itemName = '';
+      let params = {
+        id: game.uid++, 
+        x: rnd(fieldWidth), 
+        y:  rnd(fieldHeight) + skyBottom, 
+        w: sprite.width, 
+        h: sprite.height,
+        qty: 1,
+      }
       // player.currentField dictates how rare we get
-      if (rnd(3) == 1) {
-        qty = rnd(4) + 2;
+      if (rnd(3) > 0) {
+        params.qty = rnd(4) + 2;
         // TODO take rarity into account
         let itemInfo = list.spuds.list[rnd(maxSpuds)];
-        itemName = itemInfo.name;
+        params.item = itemInfo.name;
+        params.svg = svg.render('spud1');
       } else {
         itemInfo = list.items.list[rnd(maxItems)];
-        itemName = itemInfo.name;
+        params.item = itemInfo.name;
       }
-      let newBox = {
-        w: sprite.width,
-        h: sprite.height,
-        id: game.uid++,
-      }
-      game.setUid(newBox.id);
-      let params = {
-        id: newBox.id, x: x, y: y, w: newBox.w, h: newBox.h, qty: qty, classes: '', item: itemName
-      }
-      let newItem = new game.Item(params);
-      player.fields[player.currentField][layer][newBox.id] = newItem;
+      game.setUid(params.id);
+      player.fields[player.currentField][layer][params.id] = new game.Item(params);
     }
   },
 

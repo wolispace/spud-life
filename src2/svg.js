@@ -583,6 +583,18 @@ const svg = {
         { c: "hi thin", d: "m 50,30 1,1 m 10,-5 1,1 m 6,11 1,1 " },
       ],
     },
+    spud1: `<svg width="82.142" height="43.52" version="1.1" viewBox="0 0 28 12" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+     <linearGradient id="a" x1="50.531" x2="51.177" y1="38.413" y2="71.913" gradientTransform="matrix(.26458 0 0 .26458 -2.2084 -6.9635)" gradientUnits="userSpaceOnUse">
+      <stop style="stop-color:#d8af73" offset="0"/>
+      <stop style="stop-color:#715522" offset="1"/>
+     </linearGradient>
+    </defs>
+    <path d="m2.4688 2.1571c-1.1225 1.3564-2.4334 4.1327-1.8241 5.7997 0.58041 1.5881 1.022 2.3372 2.8999 2.8531 1.7824 0.48967 2.1845-0.18092 4.6772-0.28063 2.3386-0.09354 1.7675 0.49647 5.1449 0.60804 5.6995 0.18828 6.8674-1.4593 7.9045-5.1449 0.5088-1.8082-1.5241-2.7389-2.8213-3.9456-1.8103-1.6839-4.8966-1.372-5.7848-1.4332-2.7128-0.18709-5.9401-0.18709-6.9223 0-0.98222 0.18709-2.1515 0.3274-3.2741 1.5435z" style="fill:url(#a);paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-width:.74083;stroke:#000"/>
+    <ellipse transform="rotate(33.958)" cx="20.21" cy="-2.8661" rx=".21047" ry=".46772" style="fill:#473716;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.10954;stroke-width:.74083;stroke:#c1943c"/>
+    <ellipse transform="rotate(34.077)" cx="17.038" cy="-2.4288" rx=".21047" ry=".46772" style="fill:#6b5222;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.095406;stroke-width:.74083;stroke:#c1943c"/>
+    <ellipse transform="rotate(-22.028)" cx="16.507" cy="11.676" rx=".21047" ry=".46772" style="fill:#806228;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.19081;stroke-width:.74083;stroke:#c1943c"/>
+   </svg>`,
     "body-one": {
       paths: [
         {

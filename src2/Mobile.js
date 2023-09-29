@@ -65,7 +65,7 @@ class Mobile extends game.Item {
       if (this.collides(spriteBox)) {
         controls.endInput();
         if (layer == game.ABOVEGROUND) {
-          // close the object..
+          // clone the object..
           this.hitItem = Object.assign(Object.create(Object.getPrototypeOf(spriteBox)), spriteBox);
           function onEnd() {
             spriteBox.setPos();
