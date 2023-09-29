@@ -21,9 +21,9 @@ class Mobile extends game.Item {
         let oldPos = this[dirInfo[direction].axis];
         // update object to new position so we can check for collisions.. revert to oldPos if collide
         this[dirInfo[direction].axis] = this[dirInfo[direction].axis] + (dirInfo[direction].dir * game.step[dirInfo[direction].axis]);
-        let hitItem = this.checkCollisions(game.ABOVEGROUND);
+        this.checkCollisions(game.ABOVEGROUND);
   
-        if (hitItem || !this.withinBounds()) {
+        if (this.hitItem || !this.withinBounds()) {
           timers.moving = false;
           if (direction == 'up') {
             // are we conflicting with a building?
@@ -58,12 +58,15 @@ class Mobile extends game.Item {
   }
 
   checkCollisions(layer) {
+    this.hitItem = null;
     let spritesList = player.fields[player.currentField][layer];
 
     spritesList.forEach((spriteBox, index) => {
       if (this.collides(spriteBox)) {
         controls.endInput();
         if (layer == game.ABOVEGROUND) {
+          // close the object..
+          this.hitItem = Object.assign(Object.create(Object.getPrototypeOf(spriteBox)), spriteBox);
           function onEnd() {
             spriteBox.setPos();
             spriteBox.qty--;
@@ -78,12 +81,13 @@ class Mobile extends game.Item {
           if (player.tools[toolName] > 0) {
             player.tools[toolName]--;
             tools.list[toolName].updateQty(player.tools[toolName]);
+            spriteBox.jiggle(this.direction, onEnd);
+            return true;
           } else {
-            onEnd = null;
+            spriteBox.jiggle(this.direction);
+            return false;
           }
 
-          console.log(spriteBox);
-          spriteBox.jiggle(this.direction, onEnd);
 
         } else {
           // dig it up.. animate the arc. then remove it..

@@ -20,7 +20,7 @@ let player = {
   sowSeeds: 0,
   grassQty: 7,
   tools: {
-    spade: 999,
+    spade: 20,
     axe: 20,
     pick: 20,
   },
