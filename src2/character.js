@@ -38,7 +38,7 @@ const character = {
   },
 
   has: function (itemKey) {
-    return player.basket[itemKey] > -1 || player.shop.machines[itemKey] || player.tools[itemKey];
+    return tools.list.basket.list[itemKey] > -1 || player.cart[itemKey] || tools.list[itemKey];
   },
 
   // make a random body

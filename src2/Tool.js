@@ -31,14 +31,6 @@ class Tool extends game.Item {
     });
   }
 
-  updatePlayer() {
-    player.tools[this.item].qty = this.qty;
-    player.tools[this.item].max = this.max;
-    player.tools[this.item].list = this.list;
-    player.tools[this.item].state = this.state;
-    console.log('updated player', player.tools);
-  }
-
   setQty(newQty) {
     this.qty = newQty;
     this.updateQty();
@@ -51,7 +43,6 @@ class Tool extends game.Item {
 
   updateMax() {
     this.max = (this.qty >= this.max) ? this.qty : this.max;
-    console.log('set max', this.max);
   }
 
   incrQty() {
@@ -78,7 +69,6 @@ class Tool extends game.Item {
   updateQty() {
     this.updateMax();
     sprite.get(`${this.id} .qty`).innerHTML = this.qty;
-    this.updatePlayer();
   }
 
   onClick = function () {

@@ -11,7 +11,6 @@ let player = {
   day: 0,
   cols: cols,
   rows: rows,
-  basket: {},
   spuds: {},
   scanLevel: 1,
   scanState: true,

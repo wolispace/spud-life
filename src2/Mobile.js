@@ -106,6 +106,7 @@ class Mobile extends game.Item {
               endItem.jiggle('down');
               setTimeout( () => {
                 basket.add(spriteBox);
+                game.save();
               }, 200);
             }, 1);
 

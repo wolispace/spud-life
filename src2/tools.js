@@ -1,9 +1,11 @@
 const tools = {
 
+  recordDelim: '^',
+  fieldDelim: '|',
   list: {},
 
   setup: function () {
-    let toolList = ['wallet', 'scanner', 'basket', 'axe', 'pick'];
+    let toolList = ['wallet', 'scanner', 'basket', 'axe', 'pick', 'spade'];
 
     let padding = 20;
     let params = {
@@ -11,12 +13,13 @@ const tools = {
       y: (game.grid.y * sprite.height) - sprite.height - padding,
     }
 
-
     toolList.forEach((itemName) => {
-      params.id = itemName;
-      tools.list[itemName] = new Tool(params);
-      tools.list[itemName].onClick = tools.clicks[itemName];
-      params.x = params.x - tools.list[itemName].w - padding;
+      if (itemName != 'spade') {
+        params.id = itemName;
+        tools.list[itemName] = new Tool(params);
+        tools.list[itemName].onClick = tools.clicks[itemName];
+        params.x = params.x - tools.list[itemName].w - padding;
+      }
     });
   },
 
@@ -27,6 +30,41 @@ const tools = {
   hide: function () {
 
   },
+
+  // cant use ^ or | in spud descriptions!
+  decode: function (encodedString) {
+    let decoded = {};
+    let records = encodedString.split(tools.recordDelim);
+    records.forEach((thisSpud) => {
+      let bit = thisSpud.split(tools.fieldDelim);
+      decoded[bit[0]] = {
+        qty: parseInt(bit[1]),
+        max: bit[2],
+        list: JSON.parse(bit[3]),
+        state: bit[4],
+      };
+    });
+
+    return decoded;
+  },
+
+  encode: function () {
+    let encodedString = '';
+    let r = '';
+    let d = tools.fieldDelim;
+    Object.entries(tools.list).forEach(([toolName, toolInfo]) => {
+      let stringOfList = JSON.stringify(toolInfo.list) || '{}';
+      encodedString += `${r}${toolName}${d}`;
+      encodedString += `${toolInfo.qty || 0}${d}`;
+      encodedString += `${toolInfo.max || 0}${d}`;
+      encodedString += `${stringOfList}${d}`;
+      encodedString += `${toolInfo.state || true}${d}`;
+      r = tools.recordDelim;
+    });
+
+    return encodedString;
+  },
+
 
   clicks: {
     pick: function () {

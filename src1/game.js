@@ -174,12 +174,14 @@ const game = {
 
     player.fields = field.encodeAll(player.fields, true);
     player.spuds = spuds.encode(player.spuds);
+    player.tools = tools.encode();
     
     //let compressed = LZString.compressToUTF16(JSON.stringify(player));
     let compressed = JSON.stringify(player);
     localStorage.setItem("state", compressed);
     player.fields = saveFields;
     player.spuds = saveSpuds;
+
   },
 
   load: () => {
@@ -190,6 +192,7 @@ const game = {
       let newPlayer = JSON.parse(decompressed);
       newPlayer.fields = field.encodeAll(newPlayer.fields, false);
       newPlayer.spuds = spuds.decode(newPlayer.spuds);
+      newPlayer.tools = tools.decode(newPlayer.tools);
       if (!player.pos) {
         player = newPlayer;
       }
