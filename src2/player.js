@@ -12,7 +12,6 @@ let player = {
   cols: cols,
   rows: rows,
   basket: {},
-  wallet: 100,
   spuds: {},
   scanLevel: 1,
   scanState: true,
@@ -20,14 +19,15 @@ let player = {
   sowSeeds: 0,
   grassQty: 7,
   tools: {
-    spade: 20,
-    axe: 20,
-    pick: 20,
+    spade: { qty: 20, max: 20 },
+    axe: { qty: 20, max: 20 },
+    pick: { qty: 20, max: 20 },
+    basket: { qty: 0, list: {} },
+    scanner: { qty: 0, on: true },
+    wallet: { qty: 1000 },
   },
   currentField: 0,
   fields: [[[], [], []]],
-  shop: {
-    machines: {},
-  },
+  cart: {},
 };
 

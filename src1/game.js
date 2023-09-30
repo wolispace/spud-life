@@ -9,6 +9,7 @@ const game = {
   playerItem: null,
   digging: false,
   step: { x: 5, y: 5 },
+  incrementQty: 2,
 
   // everything show on the page is an Item with coords and an svg
   Item: class {
@@ -169,6 +170,7 @@ const game = {
 
     player.fields = field.encodeAll(player.fields, true);
     player.spuds = spuds.encode(player.spuds);
+    
     //let compressed = LZString.compressToUTF16(JSON.stringify(player));
     let compressed = JSON.stringify(player);
     localStorage.setItem("state", compressed);
