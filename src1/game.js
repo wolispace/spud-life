@@ -29,12 +29,12 @@ const game = {
         this.id = params.id;
         this.x = params.x;
         this.y = params.y;
-        this.w = params.w ?? sprite.width;
-        this.h = params.h ?? sprite.width;
-        this.qty = params.qty ?? 1;
-        this.classes = params.classes ?? '';
-        this.item = params.item ?? '';
-        this.svg = params.svg ?? svg.render(params.item, params.qty);
+        this.w = params.w || sprite.width;
+        this.h = params.h || sprite.width;
+        this.qty = params.qty || 1;
+        this.classes = params.classes || '';
+        this.item = params.item || '';
+        this.svg = params.svg || svg.render(params.item, params.qty);
         this.orientSvg();
         this.setup();
       }
@@ -123,6 +123,7 @@ const game = {
     }
 
     animateArc(endItem, onEnd) {
+      console.trace('dug', this);
       // slow start fast middle
       var easing = 'cubic-bezier(0, 0, .25, 0)';
       // slow and get faster
