@@ -53,6 +53,7 @@ const game = {
 
     orientSvg() {
       // get width and height from viewbox to decide if its a wide or high image
+      // NOTE: for simplicity viewbox should be integers!!!
       let bits = this.svg.match(/viewBox=\"(\d+) (\d+) (\d+) (\d+)\"/);
       let orientation = (parseInt(bits[3]) > parseInt(bits[4])) ? 'wide' : 'high';
       this.svg = this.svg.replace(/ viewBox=\"/, ` class=\"${orientation}\" viewBox=\"`);
