@@ -66,7 +66,6 @@ const controls = {
       return;
     }
     let skyBottom = (sprite.height * sky.height);
-    controls.buttonDown('spade');
     if (game.playerItem.y > skyBottom && controls.list['spade'].qty > 0) {
       game.digging = true;
       // add the hole first

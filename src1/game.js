@@ -80,11 +80,15 @@ const game = {
     // sets the divs X and Y
     setPos() {
       this.sprite = sprite.get(this.id);
-      this.sprite.style.width = `${this.w}px`;
-      this.sprite.style.height = `${this.h}px`;
-      this.sprite.style.top = `${this.y}px`;
-      this.sprite.style.left = `${this.x}px`;
-      this.sprite.style.transform = '';
+      if (this.sprite) {
+        this.sprite.style.width = `${this.w}px`;
+        this.sprite.style.height = `${this.h}px`;
+        this.sprite.style.top = `${this.y}px`;
+        this.sprite.style.left = `${this.x}px`;
+        this.sprite.style.transform = '';
+      } else {
+        console.log('where is this?', this);
+      }
     }
 
     // shifts the div from starting 1,1 x.y to improve animation speeds

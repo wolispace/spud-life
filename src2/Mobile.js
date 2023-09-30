@@ -96,7 +96,6 @@ class Mobile extends game.Item {
           spriteBox.y = game.playerItem.y;
           
           spriteBox.render();
-          basket.add(spriteBox);
           let endItem = tools.list.basket;
           delete player.fields[player.currentField][layer][index];
           scanner.scan();
@@ -106,7 +105,7 @@ class Mobile extends game.Item {
               game.digging = false;
               endItem.jiggle('down');
               setTimeout( () => {
-                endItem.updateQty(endItem.qty + 1);
+                basket.add(spriteBox);
               }, 200);
             }, 1);
 

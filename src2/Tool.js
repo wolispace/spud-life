@@ -1,6 +1,6 @@
 class Tool extends game.Item {
 
-  maxQty = 0;
+  max = 0;
   list = {};
   state = true;
 
@@ -10,30 +10,33 @@ class Tool extends game.Item {
     params.classes = 'control';
     params.item = params.id;
     super(params);
+
+    // setup always uses players values of current use and max uses, lists (for basket) and state (for scanner).
+    if (player.tools[this.item]) {
+      this.qty = player.tools[this.item].qty;
+      this.max = player.tools[this.item].max;
+      this.list = player.tools[this.item].list;
+      this.state = player.tools[this.item].state;
+    }
+    this.updateMax();
+    if (this.qty !== '') {
+      this.renderQty();
+    }
   }
 
   setup() {
     this.render();
-    // setup always uses players values of current use and max uses and other stuff (deciphered per tool like basket).
-    if (player.tools[this.item]) {
-      this.qty = player.tools[this.item].qty;
-      this.maxQty = player.tools[this.item].max;
-      this.list = player.tools[this.item].list;
-      this.state = player.tools[this.item].state;
-    }
-
-    if (this.qty !== '') {
-      this.addQty();
-    }
-
     this.sprite.addEventListener("click", () => {
       this.onClick();
     });
   }
 
   updatePlayer() {
-    player.tools[this.item][0] = this.qty ;
-    player.tools[this.item][1] = this.maxQty;
+    player.tools[this.item].qty = this.qty;
+    player.tools[this.item].max = this.max;
+    player.tools[this.item].list = this.list;
+    player.tools[this.item].state = this.state;
+    console.log('updated player', player.tools);
   }
 
   setQty(newQty) {
@@ -41,33 +44,43 @@ class Tool extends game.Item {
     this.updateQty();
   }
 
+  addQty(newQty) {
+    this.qty = this.qty + newQty;
+    this.updateQty();
+  }
+
+  updateMax() {
+    this.max = (this.qty >= this.max) ? this.qty : this.max;
+    console.log('set max', this.max);
+  }
+
   incrQty() {
     this.qty = this.qty + game.tool.incrementQty;
     this.updateQty();
   }
-  
+
   decrQty() {
     this.jiggle('up');
     this.qty = this.qty > 0 ? this.qty = this.qty - 1 : 0;
     this.updateQty();
   }
-  
+
   resetQty() {
-    this.qty = this.maxQty;
+    this.qty = this.max;
     this.updateQty();
   }
-  
-  addQty() {
+
+  renderQty() {
     let html = `<div class="qty">${this.qty}</div>`;
     this.sprite.insertAdjacentHTML('beforeend', html);
   }
-  
+
   updateQty() {
-    this.maxQty = this.qty > this.maxQty ? this.qty : this.maxQty;
+    this.updateMax();
     sprite.get(`${this.id} .qty`).innerHTML = this.qty;
     this.updatePlayer();
   }
-  
+
   onClick = function () {
     // this gets overridden
   }
