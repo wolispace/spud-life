@@ -50,6 +50,8 @@ document.addEventListener("keydown", (event) => {
   let direction = game.getDirection(event);
   if (game.isDirection(direction)) {
     game.playerItem.move(direction);
+  } else if (event.code == 'Space') {
+    controls.dig();
   }
 });
 
