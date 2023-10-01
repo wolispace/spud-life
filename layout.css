@@ -1,12 +1,18 @@
 :root {
   --sl-mud: rgb(34, 19, 13);
   --sl-padding: 0.25em;
+  --sl-font-color: black;
 }
 
 body {
   background-color: black;
   overflow: hidden;
   font-family: Tahoma, sans-serif;
+  color: var(--sl-font-color);
+}
+
+button {
+  color: var(--sl-font-color);
 }
 
 @media (max-width: 480px) {
