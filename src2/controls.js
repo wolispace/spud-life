@@ -31,8 +31,6 @@ const controls = {
         controls.addMoveEvent(controlElement, direction);
       }
     });
-
-    //controls.list['spade'].updateQty();
   },
 
   addMoveEvent: function (controlElement, direction) {

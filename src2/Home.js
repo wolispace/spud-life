@@ -17,13 +17,22 @@ class Home extends game.Item {
     let content = `<div class="dialog-message-content">`;
     content += `This is your home.`;
     let footer = "";
-    footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
+    footer += `<button class="buttonize" onclick="dialog.hide()"> Return to the field </button>`;
+    footer += `<button class="buttonize" onclick="dialog.confirm()"> Wake </button>`;
     dialog.cancelButton = function () { dialog.hide(); };
-    dialog.okButton = function () { dialog.hide(); };
+    dialog.okButton = function () { buildings.list.home.morning(); };
     dialog.render(title, content, footer);
   }
 
   exit() {
     console.log('exiting the house');
   }
+
+  morning() {
+    dialog.hide();
+    // sky.goLight();
+    // home.darkDoor();
+    tools.reset();
+  }
+
 };

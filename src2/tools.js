@@ -105,6 +105,16 @@ const tools = {
       dialog.okButton = function () { console.log('wallet OK'); dialog.hide(); };
       dialog.render(title, content, footer);
     },
-  }
+  },
+
+  reset: function () {
+    Object.entries(tools.list).forEach(([toolName, toolInfo]) => {
+      toolInfo.resetQty();
+    });
+
+    controls.list.spade.resetQty();
+
+  },
+
 };
 
