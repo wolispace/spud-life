@@ -53,11 +53,8 @@ const game = {
     }
 
     orientSvg() {
-      let orientation = svg.orientation(this.svg);
-      this.svg = svg.addOrientationClass(this.svg, orientation);
-      
+      this.svg = svg.addOrientationClass(this.svg);
     }
-
 
     shrinkWrap() {
       let itemSvg = sprite.get(`${this.id} > svg`);
@@ -67,6 +64,7 @@ const game = {
         this.h = itemSvgBox.height;
       }
     }
+
     // do these collide? objects with (x,y,width,height}
     collides(spriteBox) {
       return (spriteBox.x < this.x + this.w)
@@ -174,7 +172,7 @@ const game = {
     player.fields = field.encodeAll(player.fields, true);
     player.spuds = spuds.encode(player.spuds);
     player.tools = tools.encode();
-    
+
     //let compressed = LZString.compressToUTF16(JSON.stringify(player));
     let compressed = JSON.stringify(player);
     localStorage.setItem("state", compressed);

@@ -35,6 +35,7 @@ const basket = {
     if (itemInfo.type == 'spuds') {
       icon = svg.render('spud1', 1, style);
     }
+    icon = svg.addOrientationClass(icon);
 
     let content = `<div  class="hardware-button buttonize">`;
     content += ` <div class="hardware-button-icon">${icon}</div>`;

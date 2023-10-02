@@ -1031,7 +1031,8 @@ const svg = {
     return (parseInt(bits[3]) > parseInt(bits[4])) ? 'wide' : 'high';
   },
 
-  addOrientationClass: function(svgSrc, orientation) {
+  addOrientationClass: function(svgSrc) {
+    let orientation = svg.orientation(svgSrc);
     return svgSrc.replace(/ viewBox=\"/, ` class=\"${orientation}\" viewBox=\"`);
   },
 
