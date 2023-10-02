@@ -7,7 +7,7 @@ const svg = {
       scale: 90,
       rotate: 40,
     },
-    title: `<svg id="d" version="1.1" viewBox="0 0 100 66" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    title: `<svg id="d" viewBox="0 0 100 66">
     <defs>
      <linearGradient id="a" x1="47.927" x2="46.257" y1="43.946" y2="14.584" gradientTransform="matrix(1.2227 0 0 1.4112 -14.695 -38.822)" gradientUnits="userSpaceOnUse">
       <stop style="stop-color:#cfab65" offset="0"/>
@@ -31,7 +31,7 @@ const svg = {
     </g>
     <text x="17.75" y="57.75" style="fill:#3c2f12;font-family:Tahoma;font-size:5.3333px;font-weight:bold;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.095406;stroke-width:2.8" xml:space="preserve"><tspan x="17.75" y="57.75" style="fill:#3c2f12;font-size:5.3333px">A chip shop simulator</tspan></text>
    </svg>`,
-    home: `<svg id="SVGRoot" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    home: `<svg viewBox="0 0 100 100">
       <rect x="13.125" y="55.375" width="70.75" height="43.75" style="fill:#aa6c2c"/>
       <rect id="house-door" x="40.375" y="69.625" width="16.625" height="29.625"/>
       <g transform="rotate(89.312 -5.5718 57.246)">
@@ -53,7 +53,7 @@ const svg = {
       <path d="m8.25 51.75h15.5" style="fill:#aae1e4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-width:1.7764;stroke:#001700"/>
       </g>
     </svg>`,
-    hardware: `<svg id="SVGRoot" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    hardware: `<svg viewBox="0 0 100 100">
       <rect x="21.625" y="14.625" width="54.5" height="11.375" style="fill:#fffafa;stroke-width:.96918"/>
       <text x="25" y="23.25" style="fill:#800000;font-family:'Comic Sans MS';font-size:8px;font-weight:bold">HARDWARE</text>
       <rect x="13.125" y="55.375" width="70.75" height="43.75" style="fill:#542b16"/>
@@ -64,7 +64,7 @@ const svg = {
       <path d="m68.125 32.25 4.5 28.375h10.125l-7-28.375" style="fill:#fff"/>
       <rect x="40.375" y="69.625" width="16.625" height="29.625"/>
     </svg>`,
-    cart: `<svg id="SVGRoot" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    cart: `<svg viewBox="0 0 100 100">
       <defs>
       <radialGradient id="radialGradient38744" cx="38.305" cy="36.087" r="15.233" gradientTransform="matrix(1.8761 -.0041976 .0020613 .90458 -28.747 19.661)" gradientUnits="userSpaceOnUse">
         <stop style="stop-color:#efe9e7" offset=".086817"/>
@@ -93,14 +93,14 @@ const svg = {
       <path d="m17.828 46.075c10.09-3.3942 21.301-5.6569 33.632-7.9197" style="stroke-linecap:round;stroke-width:2.2524;stroke:#2f4f4f"/>
       <path d="m19.229 37.553c10.609 3.8741 22.344 4.0826 33.808 7.6427" style="stroke-linecap:round;stroke-width:2.2524;stroke:#2f4f4f"/>
     </svg>`,
-    pick: `<svg id="SVGRoot" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    pick: `<svg viewBox="0 0 100 100">
     <rect x="46.321" y="2.4125" width="7.7201" height="76.236" style="fill:#693f1d;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-width:2.5323;stroke:#000"/>
     <path d="m90.591 21.351s-10.433-15.456-40.652-15.44c-30.22 0.015776-39.685 16.164-39.685 16.164s26.713-7.2747 40.169-7.367c13.455-0.09226 40.169 6.6432 40.169 6.6432z" style="fill:#929292;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-width:2.1543;stroke:#000"/>
     <path d="m52.543 8.359s7.5656 0.095383 14.671 2.0471c7.1054 1.9517 9.8944 3.9236 9.8944 3.9236" style="fill:#929292;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-opacity:.67925;stroke-width:2.1543;stroke:#fff"/>
     <path d="m51.69 17.742 0.17059 57.66" style="fill:#929292;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-opacity:.47642;stroke-width:2.1543;stroke:#fff"/>
    </svg>
    `,
-    spade: `<svg version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    spade: `<svg viewBox="0 0 100 100">
     <rect x="47.174" y="12.307" width="7.7201" height="76.236" style="fill:#693f1d;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-width:2.5323;stroke:#000"/>
     <path d="m37.707 15.38s0.34797 11.595 0.9585 19.647c0.33027 4.3558 0.73737 7.6747 1.2078 7.5605 0 0 19.406 0.54822 21.323 0.39623 2.0259-0.16058 1.812 3.6801 3.7034-9.55 1.478-10.338 1.8194-18.524 1.8194-18.524s-5.3581-3.0099-14.08-2.9315c-8.7216 0.07833-14.932 3.4019-14.932 3.4019z" style="fill:#929292;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-width:2.1543;stroke:#000"/>
     <path d="m40.601 17.742s7.0538-2.8047 13.306-2.5589 10.065 2.2177 10.065 2.2177" style="fill:#929292;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-opacity:.67924;stroke-width:2.1543;stroke:#fff"/>
@@ -110,13 +110,13 @@ const svg = {
     <path d="m48.448 39.919 2.7295-10.236" style="fill:#693f1d;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-opacity:.48746;stroke-width:2.1543;stroke:#000"/>
     <path d="m52.713 29.171 1.8765 10.747v0.17059" style="fill:#693f1d;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-opacity:.48746;stroke-width:2.1543;stroke:#fff"/>
    </svg>`,
-    axe: `<svg id="SVGRoot" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    axe: `<svg viewBox="0 0 100 100">
         <rect x="46.321" y="2.4125" width="7.7201" height="76.236" style="fill:#693f1d;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-width:2.5323;stroke:#000"/>
         <path d="m75.92 2.5858s-27.492 1.7738-33.317 1.619c-2.1577-0.057349-2.2597 14.878-0.34224 14.726 9.5515-0.75711 26.335 13.721 26.335 13.721s9.654 4.4962 13.215-12.826c3.5611-17.322-5.8911-17.24-5.8911-17.24z" style="fill:#929292;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-width:2.1543;stroke:#000"/>
         <path d="m74.549 5.6296s3.8125 0.77775 4.0942 6.4825c0.28171 5.7048-2.7295 13.306-2.7295 13.306" style="fill:#929292;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-opacity:.67924;stroke-width:2.1543;stroke:#fff"/>
         <path d="m52.031 30.195-0.17059 45.207" style="fill:#929292;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-opacity:.47642;stroke-width:2.1543;stroke:#fff"/>
       </svg>`,
-    basket: `<svg id="SVGRoot" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    basket: `<svg viewBox="0 0 100 100">
       <defs>
         <linearGradient id="linearGradient9688" x1="38.573" x2="36.244" y1="72.154" y2="34.795" gradientUnits="userSpaceOnUse">
         <stop style="stop-color:#1e1612" offset="0"/>
@@ -128,7 +128,7 @@ const svg = {
       <path d="m57.149 64.484 2.2177-24.907s1e-6 -5.459-4.4354-12.453c-4.1666-6.5705-13.136-3.4119-15.012 3.9236-1.8765 7.3355-1.3647 17.571-1.3647 17.571l6.8237-0.34118s-1.6774-10.172 0.34118-16.889c2.8269-9.4054 8.7672-8.9921 13.477-6.3119 2.4698 1.4055 5.8002 5.6296 6.8237 10.065l0.51178 7.3355-1.5353 21.153" style="fill:#4b3d2c;stroke-linecap:round;stroke-width:2.5;stroke:#000"/>
       <path d="m56.978 26.271s2.3835 0.22338 4.9472 5.1178c1.8765 3.5824 2.0471 9.0414 2.0471 9.0414" style="fill:none;stroke-linecap:round;stroke-opacity:.43404;stroke-width:2.5;stroke:#fff"/>
       </svg>`,
-    wallet: `<svg id="SVGRoot" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    wallet: `<svg viewBox="0 0 100 100">
       <path d="m82.396 23.712 0.17059-8.1884s1.8765-8.1885-4.9472-5.2884c-6.8237 2.9001-54.248 12.112-60.049 16.036-6.8237 1.0236-15.012 16.206 3.753 13.136 18.765-3.0707 65.337-15.695 65.337-15.695s5.1178-2.0471 4.9472 7.6767c-0.16203 9.2358-2.0471 44.013-2.0471 44.013s1.7059 7.5061-6.6531 10.236c-8.4886 2.7718-58.684 11.941-58.684 11.941s-16.889 4.0942-15.865-7.8473c1.0236-11.941 0-52.713 0-52.713" style="fill:#4b3d2c;stroke-linecap:round;stroke-width:2.5;stroke:#000"/>
       <path d="m13.647 33.948 66.361-16.078" style="fill:none;stroke-linecap:round;stroke-width:2.5;stroke:#e9e8e1"/>
       <path d="m15.609 35.91 65.252-15.737" style="fill:none;stroke-linecap:round;stroke-width:2.5;stroke:#fbfbfb"/>
@@ -137,7 +137,7 @@ const svg = {
       <path d="m86.832 27.807-65.166 15.865s-4.0942 1.5353-4.2648 8.1884c-0.17059 6.6531-0.68237 41.454-0.68237 41.454v0" style="fill:#4b3d2c;stroke-linecap:round;stroke-opacity:.38249;stroke-width:2.5;stroke:#fff"/>
       <path d="m93.338 47.023s-18.031 2.2981-20.153 5.1265c-5.6133 6.1229-4.5169 11.492-0.53033 13.612" style="fill:#4b3d2c;stroke-linecap:round;stroke-opacity:.38249;stroke-width:2.5;stroke:#fff"/>
       </svg>`,
-    up: `<svg id="a" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    up: `<svg viewBox="0 0 100 100">s
     <path d="m25.248 50.495 25.077-38.042 23.542 37.701" style="fill:none;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-width:9.1;stroke:#060d41"/>
     <path d="m50.495 16.889-0.34118 68.578" style="fill:none;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-width:9.1;stroke:#060d41"/>
     <path d="m51.86 11.771 23.712 36.848" style="fill:#797a94;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.36742;stroke-width:2.3;stroke:#fff"/>
@@ -145,14 +145,14 @@ const svg = {
     <path d="m51.178 27.977v54.931" style="fill-opacity:.011765;fill:#11184a;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.3;stroke:#626687"/>
    </svg>
    `,
-   down: `<svg id="a" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+   down: `<svg viewBox="0 0 100 100">
    <path d="m25.248 47.425 25.077 38.042 23.542-37.701" style="fill:none;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-width:9.1;stroke:#060d41"/>
    <path d="m50.495 81.032-0.34118-68.578" style="fill:none;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-width:9.1;stroke:#060d41"/>
    <path d="m56.637 73.696 17.571-27.636" style="fill:#797a94;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.36742;stroke-width:2.3;stroke:#fff"/>
    <path d="m42.819 70.796-16.889-24.395" style="fill:none;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.3;stroke:#626687"/>
    <path d="m51.519 65.849v-54.931" style="fill-opacity:.066667;fill:#192050;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.3;stroke:#626687"/>
   </svg>`,
-  left: `<svg id="a" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  left: `<svg viewBox="0 0 100 100">
   <path d="m51.092 24.651-38.042 25.077 37.701 23.542" style="fill:none;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-width:9.1;stroke:#060d41"/>
   <path d="m17.486 49.899 68.578-0.34118" style="fill:none;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-width:9.1;stroke:#060d41"/>
   <path d="m21.58 53.31 30.366 18.595" style="fill:#797a94;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.36742;stroke-width:2.3;stroke:#fff"/>
@@ -160,7 +160,7 @@ const svg = {
   <path d="m18.509 48.193 67.555-0.34118" style="fill-opacity:.066667;fill:#192050;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.3;stroke:#626687"/>
  </svg>
  `,
-  right: `<svg id="a" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  right: `<svg viewBox="0 0 100 100">
   <path d="m48.022 24.651 38.042 25.077-37.701 23.542" style="fill:none;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-width:9.1;stroke:#060d41"/>
   <path d="m81.629 49.899-68.578-0.34118" style="fill:none;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-width:9.1;stroke:#060d41"/>
   <path d="m75.829 55.699-27.636 17.23" style="fill:#797a94;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.36742;stroke-width:2.3;stroke:#fff"/>
@@ -184,7 +184,7 @@ const svg = {
       class: "thick control-icon",
       paths: [{ c: "", d: "m 80,20 -60,30 60,30" }],
     },
-    "control-field--left": `<svg id="SVGRoot" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    "control-field--left": `<svg viewBox="0 0 100 100">
       <path d="m11.5 17.75c0.70711-1.591 74.631-6.6062 75.25-4.75 0.7955 1.149 1.3107 44.674 0.25 46-1.9507 1.256-70.571 2.0026-72.25 0.5s-3.1616-38.303-3.25-41.75z" style="fill:#4b3d2c;stroke-linecap:round;stroke-width:2.5;stroke:#000"/>
       <path d="m12.75 31.5 9-1" style="fill:#0f0c09;stroke-linecap:round;stroke-opacity:.51915;stroke-width:2.5;stroke:#000"/>
       <path d="m86 41-10.5 1.25" style="fill:#140f0b;stroke-linecap:round;stroke-opacity:.53617;stroke-width:2.5;stroke:#000"/>
@@ -194,7 +194,7 @@ const svg = {
       <path d="m15.026 19.092s67.175-4.773 69.473-2.4749c1.591 2.1213 0.53033 20.86 0.53033 20.86" style="fill:none;stroke-linecap:round;stroke-opacity:.28511;stroke-width:2.5;stroke:#fff"/>
       <path d="m85.206 43.487-0.17678 13.081" style="fill:none;stroke-linecap:round;stroke-opacity:.28511;stroke-width:2.5;stroke:#fff"/>
       </svg>`,
-    "control-field--right": `<svg id="SVGRoot" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    "control-field--right": `<svg viewBox="0 0 100 100">
       <path d="m11.5 17.75c0.70711-1.591 74.631-6.6062 75.25-4.75 0.7955 1.149 1.3107 44.674 0.25 46-1.9507 1.256-70.571 2.0026-72.25 0.5s-3.1616-38.303-3.25-41.75z" style="fill:#4b3d2c;stroke-linecap:round;stroke-width:2.5;stroke:#000"/>
       <path d="m12.75 31.5 9-1" style="fill:#0f0c09;stroke-linecap:round;stroke-opacity:.51915;stroke-width:2.5;stroke:#000"/>
       <path d="m86 41-10.5 1.25" style="fill:#140f0b;stroke-linecap:round;stroke-opacity:.53617;stroke-width:2.5;stroke:#000"/>
@@ -204,13 +204,13 @@ const svg = {
       <path d="m15.026 19.092s67.175-4.773 69.473-2.4749c1.591 2.1213 0.53033 20.86 0.53033 20.86" style="fill:none;stroke-linecap:round;stroke-opacity:.28511;stroke-width:2.5;stroke:#fff"/>
       <path d="m85.206 43.487-0.17678 13.081" style="fill:none;stroke-linecap:round;stroke-opacity:.28511;stroke-width:2.5;stroke:#fff"/>
       </svg>`,
-    bone: `<svg id="SVGRoot" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    bone: `<svg viewBox="0 0 100 100">
       <path d="m23.335 41.189 48.437-12.374s-1.3465-4.7873 4.4194-9.0156c2.6517-1.9445 16.794 0.17678 13.081 7.6014-3.7123 7.4246-7.4246 3.7123-1.7678 7.7782 5.6569 4.0659 1.2924 9.2949-5.4801 13.258-6.6768 0.36558-11.501-1.9087-10.783-9.7227l-44.725 11.49s6.7109 2.463-3.0052 11.844c-5.1265 4.9497-12.162-1.2001-10.96-5.3033 3.045-10.394 0.54355 0.31744-4.4194-9.3692-3.04-5.9334 3.3588-11.314 6.0104-12.905 5.5603-1.2481 8.954-3.9928 9.1924 6.7175z" style="fill:#eaddb9;stroke-linecap:round;stroke-width:2.5;stroke:#000"/>
       <path d="m22.981 44.194 48.437-12.374" style="fill:#eaddb9;stroke-linecap:round;stroke-opacity:.65899;stroke-width:2.5;stroke:#fff"/>
       <path d="m75.13 24.042s3.3438-5.034 8.3085-1.2374l3.0052 2.2981" style="fill:#eaddb9;stroke-linecap:round;stroke-opacity:.75115;stroke-width:2.5;stroke:#fff"/>
       <path d="m12.021 40.128s4.097-4.7659 6.5407-3.3588c2.6607 1.5321 0.96008 3.0641 1.4142 4.5962" style="fill:#eaddb9;stroke-linecap:round;stroke-opacity:.6129;stroke-width:2.5;stroke:#fff"/>
       </svg>`,
-    gold: `<svg id="SVGRoot" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    gold: `<svg viewBox="0 0 100 100">
       <ellipse cx="26.605" cy="50.205" rx="17.766" ry="4.9497" style="fill:#e9ec6d;stroke-linecap:round;stroke-width:2.5;stroke:#4e3e10"/>
       <ellipse cx="26.87" cy="45.962" rx="17.766" ry="4.9497" style="fill:#e9ec6d;stroke-linecap:round;stroke-width:2.5;stroke:#4e3e10"/>
       <path d="m9.1094 48.031c1.8971 0.12704 1.6698 1.324 2.2473 2.4019 0.48792 0.91074 1.8349 1.2045 2.7527 1.3794l1.6406 0.3125" style="fill:none;stroke-linecap:square;stroke-width:2.5;stroke:#4e3e10"/>
@@ -229,7 +229,7 @@ const svg = {
       </g>
     </svg>
     `,
-    diamond: `<svg id="SVGRoot" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    diamond: `<svg viewBox="0 0 100 100">
       <path d="m25.25 30.25 12.305-5.1342 14.771-3.403 15.924-0.96284 17 15.25-28.25 44.5-43.75-29z" style="fill:#c9f0e4;stroke-linecap:square;stroke-width:2.5;stroke:#000"/>
       <path d="m14.25 51.25 19 1 22.75-4 15-4.25 13.25-8.5" style="fill:none;stroke-linecap:square;stroke-width:2.5;stroke:#000"/>
       <path d="m28.5 34 7 0.75 10-1.5 11.5-3.25 7-4.25" style="fill:none;stroke-linecap:square;stroke-width:2.5;stroke:#000"/>
@@ -239,19 +239,19 @@ const svg = {
       <path d="m47.75 34.25 9.75-3.5 10 13-14 3.75" style="fill:#fbfefd"/>
       <path d="m17.75 52.75 15.5 0.75 17.25 21.25" style="fill:#93cfe4"/>
       </svg>`,
-    tin: `<svg id="SVGRoot" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    tin: `<svg viewBox="0 0 100 100">
       <path d="m48.25 37.75c5.867-3.9673 3.2423-2.1522 12-7l8.25-7s2.9634-3.7874 11.375 0.125c5.375 2.5 8.2818 3.7428 12.375 14.25 5.5492 14.245-4 28.25-4 28.25s-1.25 1.875-19.75 13.625-40.25 10.25-40.25 10.25-10-6.25-11.75-18.25-2.2329-15.386-0.5-23.75c1.5433-7.4486 5.25-18.5 14.875-12.75 6.6349 1.0223 10.455 1.9967 16 2.25" style="fill:#5e3226;stroke-linecap:square;stroke-width:2.5;stroke:#000"/>
       <path d="m26.5 34.875s8.3428 4.4364 10.125 14.875c1.75 10.25 0.5 9.875-1.25 20.375s-7.125 19.75-7.125 19.75-8.375-3.75-11.875-18.125c-3.3593-13.797-2.125-18.25 0.125-26s1.25-6.75 4.875-9.875 5.125-1 5.125-1z" style="fill:#321b15;stroke-linecap:square;stroke-width:2.5;stroke:#000"/>
       <path d="m47.625 38.125 6.875 2.375s5.1966 3.0906 11.25 2.5l5.125-0.5" style="fill:none;stroke-linecap:round;stroke-width:2.5;stroke:#000"/>
       <path d="m36.375 40.375 7.375 1.375s5.0352 1.0901 11.125 3.125" style="fill:none;stroke-linecap:round;stroke-opacity:.35751;stroke-width:2.5;stroke:#fff"/>
       <path d="m74.375 26.25s7.5 1 10.375 7.5 4.125 6.25 3.875 12-0.75 8.5-0.75 8.5" style="fill:none;stroke-linecap:round;stroke-opacity:.28497;stroke-width:2.5;stroke:#fff"/>
     </svg>`,
-    pottery: `<svg id="SVGRoot" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    pottery: `<svg viewBox="0 0 100 100">
       <path d="m9.75 69.25s5.75-7.5 16.25-7.75 18.921 5.1711 24.5 11.25c6.275 6.8374 3.75 11.5 3.75 11.5s5.75 4.25 9 0 1.5-3.5 1.5-3.5 2 1.25 10.75-3.25 10-9.25 13-15c2.2454-4.3036 0-10.25 0-10.25s-3.75-14.25-17-16-30-3.25-41.5 4.5-9.75 10.5-9.75 10.5-7.25-0.25-10.5 4.75 0 13.25 0 13.25z" style="fill:#934e3b;stroke-linecap:round;stroke-width:2.5;stroke:#000"/>
       <path d="m16 52s5.2381-1.6457 14.25 0.5c5.25 1.25 12 4.5 12 4.5" style="fill:#934e3b;stroke-linecap:round;stroke-width:2.5;stroke:#000"/>
       <path d="m63.75 83.5s1.5-4.25-0.5-8.5c-0.5-6.25-5.25-7.75-5.25-7.75" style="fill:#934e3b;stroke-linecap:round;stroke-width:2.5;stroke:#000"/>
       </svg>`,
-    bottle: `<svg version="1.1" viewBox="0 0 55 94" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    bottle: `<svg viewBox="0 0 55 94">
     <path d="m21.729 5.7877s3.4969-4.4239 8.75-4.25c3.1287 0.10355 5.9046 0.87164 8.3358 3.0429 1.1866 1.0597 3.7678 2.8232 3.7678 2.8232l0.39645 9.3839-2.5 2.25s-1.25 3.909 0.75 8.909 6 4.4497 8.5 12.457c3.7261 11.934 4.75 21.634 1.25 34.134s-6 15.5-6 15.5-9 3.25-16.25 2.5-13-2.5-13-2.5-10.116-15.427-9.1464-32.177c0.97192-16.789 4.2932-19.072 7.9697-23.598 3.5858-4.4142 3.4268-2.2249 5.1768-6.4749s2.75-10.25 2.75-10.25l-2.0126-1.9268z" style="fill:#adffdb;stroke-linecap:round;stroke-width:2.5;stroke:#000"/>
     <path d="m25.424 8.6287s1.3661 1.9822 5.3661 1.9822 5.9519-1.5429 5.9519-1.5429" style="fill:none;stroke-linecap:round;stroke-width:2.5;stroke:#2b512b"/>
     <path d="m21.229 17.038 5.25 2.5h0.25" style="fill:#fff;stroke-linecap:round;stroke-width:2.5;stroke:#000"/>
@@ -261,7 +261,7 @@ const svg = {
     <path d="m39.57 8.636-0.60355 6.9016" style="fill:none;stroke-linecap:round;stroke-width:2.5;stroke:#fff"/>
     <path d="m34.729 5.5377-3.2929-0.79289s-2.2071-0.70711-3.2071-0.45711-2 1.75-2 1.75" style="fill:none;stroke-linecap:round;stroke-width:2.5;stroke:#fff"/>
    </svg>`,
-    marble: `<svg id="SVGRoot" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    marble: `<svg viewBox="0 0 100 100">
       <defs>
       <radialGradient id="radialGradient31709" cx="46.05" cy="53.121" r="37.047" gradientUnits="userSpaceOnUse">
         <stop style="stop-color:#1b1835;stop-opacity:.98742" offset="0"/>
@@ -275,7 +275,7 @@ const svg = {
       <circle cx="46.05" cy="53.121" r="35.797" style="fill:url(#radialGradient31709);stroke-linecap:round;stroke-width:2.5;stroke:#000"/>
       <ellipse cx="55.154" cy="34.295" rx="10.253" ry="10.076" style="fill:url(#radialGradient37584)"/>
     </svg>`,
-    caps: `<svg id="SVGRoot" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    caps: `<svg viewBox="0 0 100 100">
       <g transform="translate(5.5)">
       <path d="m6.0988 49.851s4.2426-4.8614 13.7-6.364c9.0415-1.4365 13.081-0.17678 17.678 1.591 4.5962 1.7678 8.3085 4.9497 9.0156 6.8943l0.70711 1.9445 1.2374 6.2756-2.2981 2.3865c-5.5941-0.58995-0.25094 2.6692-5.1265 1.9445-4.2426 0-0.61872 3.3588-5.922 2.2981-5.3033-1.0607-3.1663 3.0932-7.6898 1.2374-1.4006-0.57459-4.6476 2.3406-5.5821 0.2197-1.0338-2.3461-5.2972 1.384-6.7922-0.48486-2.4749-3.0936-6.1318 0.30211-6.8059-2.9168-1.0383-4.9576-7.1595-1.2374-5.3033-7.8666 1.0077-4.9067-0.60504-3.5893 3.182-7.1595z" style="fill:#8f3432;stroke-linecap:round;stroke-width:2.5;stroke:#000"/>
       <path d="m10.694 54.945s1.8642 1.362 8.3093 2.5078c3.9775 0.70711 7.0711 0.97227 12.64 0.08839 6.5431-1.0386 10.361-5.0551 10.361-5.0551" style="fill:#8f3432;stroke-linecap:round;stroke-opacity:.49362;stroke-width:2.5;stroke:#fff"/>
@@ -307,7 +307,7 @@ const svg = {
       <path d="m23.397 59.654-0.15089 6.5489" style="fill:#8f3432;stroke-linecap:round;stroke-opacity:.49362;stroke-width:2.5;stroke:#fff"/>
       </g>
     </svg>`,
-    chipper: `<svg viewBox="0 0 90 93" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    chipper: `<svg viewBox="0 0 90 93">
     <g transform="translate(-3.0052 -1.7678)">
      <path d="m18.75 8.5 44.25-0.5s-1.75 9.5-8.25 14.5c-13.424 10.326-18.009 5.0148-26.25-0.25-9-5.75-9.75-13.75-9.75-13.75z" style="fill:#b0b0a9;stroke-linecap:round;stroke-width:2.5;stroke:#000"/>
      <path d="m52 11.25s0.39175 5.7877-1.75 8.25c-4.3347 4.9835-5.5 5.25-5.5 5.25" style="fill:none;stroke-linecap:round;stroke-opacity:.6;stroke-width:2.5;stroke:#fff"/>
@@ -325,7 +325,7 @@ const svg = {
     <ellipse cx="38.057" cy="5.7947" rx="22.043" ry="3.7927" style="fill:#76766c;stroke-linecap:round;stroke-opacity:.99574;stroke-width:2.5396;stroke:#000"/>
    </svg>
    `,
-    chipper2000: `<svg id="SVGRoot" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    chipper2000: `<svg viewBox="0 0 100 100">
       <path d="m18.75 8.5 44.25-0.5s-1.75 9.5-8.25 14.5c-13.424 10.326-18.009 5.0148-26.25-0.25-9-5.75-9.75-13.75-9.75-13.75z" style="fill:#ddad06;stroke-linecap:round;stroke-width:2.5;stroke:#000"/>
       <path d="m52 11.25s0.39175 5.7877-1.75 8.25c-4.3347 4.9835-5.5 5.25-5.5 5.25" style="fill:none;stroke-linecap:round;stroke-opacity:.6;stroke-width:2.5;stroke:#fff"/>
       <path d="m4.5 93.5 0.14638-8.755 6.1036 0.005048 0.25-53.75s0.25-4.5 6-4.75 60 0 60 0 7.5-1.75 7.25 6.75-0.5 51-0.5 51h6s1.75 0.5 1.75 3.25-0.25 6.5-0.25 6.5z" style="fill:#8f3432;stroke-linecap:round;stroke-width:2.5;stroke:#000"/>
@@ -341,7 +341,7 @@ const svg = {
       <circle cx="72.75" cy="46.25" r="2.9375" style="fill:#dd3d06;stroke-linecap:round;stroke-opacity:.99574;stroke-width:2.5;stroke:#000"/>
       <ellipse cx="41.062" cy="7.5625" rx="22.043" ry="3.7927" style="fill:#dd7f06;stroke-linecap:round;stroke-opacity:.99574;stroke-width:2.5396;stroke:#000"/>
     </svg>`,
-    curly: `<svg id="SVGRoot" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    curly: `<svg viewBox="0 0 100 100">
       <path d="m18.75 8.5 44.25-0.5s2.3159 11.621-4.1841 16.621c-13.424 10.326-26.141 6.429-34.382 1.1642-9-5.75-5.6841-17.286-5.6841-17.286z" style="fill:#b0b0a9;stroke-linecap:round;stroke-width:2.5;stroke:#000"/>
       <path d="m52 11.25s0.39175 5.7877-1.75 8.25c-4.3347 4.9835-5.5 5.25-5.5 5.25" style="fill:none;stroke-linecap:round;stroke-opacity:.6;stroke-width:2.5;stroke:#fff"/>
       <path d="m4.5 93.5 0.14638-8.755 6.1036 0.005048 0.25-53.75s0.25-4.5 6-4.75 60 0 60 0 7.5-1.75 7.25 6.75-0.5 51-0.5 51h6s1.75 0.5 1.75 3.25-0.25 6.5-0.25 6.5z" style="fill:#4e734f;stroke-linecap:round;stroke-width:2.5;stroke:#000"/>
@@ -362,7 +362,7 @@ const svg = {
       <circle cx="76.639" cy="52.614" r="2.9375" style="fill:#dd3d06;stroke-linecap:round;stroke-opacity:.99574;stroke-width:2.5;stroke:#000"/>
       <ellipse cx="41.062" cy="7.5625" rx="22.043" ry="3.7927" style="fill:#76766c;stroke-linecap:round;stroke-opacity:.99574;stroke-width:2.5396;stroke:#000"/>
     </svg>`,
-    soup: `<svg id="SVGRoot" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    soup: `<svg viewBox="0 0 100 100">
       <path d="m23.893 69.698 35.355 1.0607 2.2981 3.182v17.501l-5.3033 0.70711s0.70711-12.905-8.8388-12.905c-9.5459 0-14.319 0.17678-14.319 0.17678s-6.5407 1.0607-6.7175 6.8943c-0.17678 5.8336-1.0607 5.1265-1.0607 5.1265l-4.0659 0.53033-0.63596-18.215z" style="fill:#3b3655;stroke-linecap:round;stroke-opacity:.99149;stroke-width:2.5;stroke:#010101"/>
       <path d="m25.861 24.178-0.22376 38.355s1.1188 12.316 15.887 12.492c14.768 0.17594 16.334-12.14 16.334-12.14l-0.22376-39.059s1.8816-13.196-15.663-13.196c-18.124 0-16.11 13.547-16.11 13.547z" style="fill:#3b3655;stroke-linecap:round;stroke-opacity:.99574;stroke-width:2.806;stroke:#000"/>
       <path d="m30.081 21.084s4.0702 2.8441 10.607 3.0052c5.8559 0.14432 11.137-2.6517 11.137-2.6517" style="fill:none;stroke-linecap:round;stroke-opacity:.52766;stroke-width:2.5;stroke:#fff"/>
@@ -376,7 +376,7 @@ const svg = {
       <path d="m54.447 74.423 2.6517-0.35355s2.1977 0.53136 2.1213 3.3588l-0.17678 6.5407" style="fill:none;stroke-linecap:round;stroke-opacity:.53617;stroke-width:2.5;stroke:#fff"/>
     </svg>
     `,
-    bake: `<svg id="SVGRoot" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    bake: `<svg viewBox="0 0 100 100">
     <defs>
      <radialGradient id="radialGradient8309" cx="48.083" cy="60.844" r="16.63" gradientTransform="matrix(1 0 0 .65726 0 17.166)" gradientUnits="userSpaceOnUse">
       <stop style="stop-color:#f7b643" offset="0"/>
@@ -393,7 +393,7 @@ const svg = {
     <circle cx="26.081" cy="72.413" r="2.9375" style="fill:#dd3d06;stroke-linecap:round;stroke-opacity:.99574;stroke-width:2.5;stroke:#000"/>
    </svg>
     `,
-    rosti: `<svg id="SVGRoot" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    rosti: `<svg viewBox="0 0 100 100">
       <path d="m15.91 25.102 55.263-0.70711 20.349 8.8085-0.67678 38.525-62.208 0.75-13.612-16.971z" style="fill:#ffe7ae;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.5;stroke:#000"/>
       <path d="m89.858 53.137-59.099 0.95711-14.672-13.612" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.5;stroke:#000"/>
       <circle cx="56.171" cy="62.546" r="2.9375" style="fill:#97dd06;stroke-linecap:round;stroke-opacity:.99574;stroke-width:2.5;stroke:#000"/>
@@ -408,7 +408,7 @@ const svg = {
       <path d="m31.113 50.558 0.17678-13.965" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.85778;stroke-width:2.5;stroke:#fefefe"/>
       <path d="m18.385 27.047 12.551 8.8388 55.861-1.7678" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.85778;stroke-width:2.5;stroke:#fefefe"/>
     </svg>`,
-      croquette: `<svg id="SVGRoot" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+      croquette: `<svg viewBox="0 0 100 100">
       <ellipse cx="23" cy="44" rx="8" ry="18.5" style="fill-opacity:.98039;fill:#28543a"/>
       <ellipse cx="67.75" cy="44.75" rx="8" ry="18.5" style="fill-opacity:.98039;fill:#28543a;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.8;stroke:#000"/>
       <rect x="23.25" y="26.25" width="46.25" height="37.25" ry="4" style="fill-opacity:.98039;fill:#28543a"/>
@@ -431,7 +431,7 @@ const svg = {
       <ellipse cx="22.25" cy="44.375" rx="2.5" ry="8.625" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.41343;stroke-width:1.8;stroke:#000"/>
      </svg>
      `,
-     masher: `<svg id="SVGRoot" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+     masher: `<svg viewBox="0 0 100 100">
      <defs>
       <linearGradient id="linearGradient8" x1="61.502" x2="61.358" y1="24.837" y2="41.277" gradientUnits="userSpaceOnUse">
        <stop style="stop-color:#1c3341;stop-opacity:.99216" offset="0"/>
@@ -462,7 +462,7 @@ const svg = {
     </svg>    
      `,
     "pet-standing": `
-    <svg id="SVGRoot" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <svg viewBox="0 0 100 100">
     <path d="m25.456 66.645s2.8259-2.0175 18.562-2.8284c7.9982-0.41219 12.021 0.35355 12.905 6.364-1.229 9.6071-2.2598 8.3601-14.672 8.1317-13.608-0.4735-18.829 3.0873-19.799-6.5407-0.62056-6.1585 1.591-5.3033 1.591-5.3033" style="stroke-linecap:round;stroke-linejoin:round;stroke-width:4.8;stroke:#000"/>
     <path d="m24.749 77.251-1.2374 20.506" style="stroke-linecap:round;stroke-linejoin:round;stroke-width:4.8;stroke:#000"/>
     <path d="m56.038 75.837 3.3588 21.92" style="stroke-linecap:round;stroke-linejoin:round;stroke-width:4.8;stroke:#000"/>
@@ -471,7 +471,7 @@ const svg = {
     <ellipse cx="63.551" cy="51.442" rx="1.149" ry="1.0607" style="fill:#fff;stroke-width:0"/>
     </svg>
     `,    
-    "pet-sitting": `<svg id="SVGRoot" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    "pet-sitting": `<svg viewBox="0 0 100 100">
     <path d="m47.525 94.782s-8.1317-6.7175-8.1317-13.258c0-6.5407 0.35355-7.2478 1.7678-12.551 1.1921-4.4705-0.17678 6.7175 1.2374 10.783 1.4142 4.0659 9.3692 9.5459 9.3692 9.5459" style="stroke-width:0"/>
     <ellipse cx="53.026" cy="53.262" rx="6.0104" ry="10.076" style="stroke-width:0"/>
     <ellipse cx="45.875" cy="89.534" rx="6.0104" ry="10.076" style="stroke-width:0"/>
@@ -484,7 +484,7 @@ const svg = {
     <path transform="translate(-14.503 13.222)" d="m67.711 43.289-0.67839-1.1564 1.3407-0.0093z" style="fill:#8a8a8a;stroke-linecap:round;stroke-linejoin:round;stroke:#8a8a8a"/>
     <path d="M 39.25,97.75 65,98.125" style="fill-opacity:.15152;stroke-linecap:round;stroke-linejoin:round;stroke-width:3.5;stroke:#010101"/>
    </svg>`, 
-    scanner: `<svg id="SVGRoot" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    scanner: `<svg viewBox="0 0 100 100">
       <path d="m55.508 24.926-36.239 7.7782 27.577 48.967 37.83-10.607z" style="fill:#a9a8a6;stroke-linecap:round;stroke-width:2.5;stroke:#000"/>
       <path d="m18.915 32.704 0.35355 22.804 23.158 42.957 3.8891-16.087" style="fill:#4d4c4b;stroke-linecap:round;stroke-width:2.5;stroke:#000"/>
       <path d="m43.31 99.879 38.007-10.607 3.5355-17.147-37.83 10.253" style="fill:#646361;stroke-linecap:round;stroke-width:2.5;stroke:#000"/>
@@ -497,7 +497,7 @@ const svg = {
       <path d="m23.688 17.324 6.8943 11.667v0" style="fill:#a9a8a6;stroke-linecap:round;stroke-opacity:.58222;stroke-width:2.5;stroke:#000"/>
       <path d="m24.572 33.941 30.229-6.5407 25.809 41.719" style="fill:none;stroke-linecap:round;stroke-opacity:.85778;stroke-width:2.5;stroke:#fff"/>
     </svg>`,
-    arrow: `<svg id="SVGRoot" width="49.183" height="56.179" version="1.1" viewBox="0 0 49.183 56.179" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
+    arrow: `<svg width="49.183" height="56.179" viewBox="0 0 49.183 56.179" xml:space="preserve">
     <path d="m1.1293 2.6975 5.187 29.554 7.5995-5.3076 20.024 27.986 14.113-10.615-21.954-24.367 10.374-7.7201z" style="fill:yellow"/>
     <path d="m33.337 54.929-19.059-28.589-7.7201 7.2376-5.3076-32.328 34.258 11.701-10.615 5.9107 23.04 25.09" style="fill:yellow;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.85778;stroke-width:2.5;stroke:#000"/>
     </svg>
@@ -529,7 +529,7 @@ const svg = {
       scale: 70,
       rotate: 360,
     },
-    log: `<svg id="b" version="1.1" viewBox="0 0 97 64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    log: `<svg viewBox="0 0 97 64">
     <defs>
      <linearGradient id="a" x1="49.189" x2="45.981" y1="49.438" y2="35.066" gradientTransform="translate(2.1213 -1.0607)" gradientUnits="userSpaceOnUse">
       <stop style="stop-color:#161616" offset="0"/>
@@ -551,7 +551,7 @@ const svg = {
     <path d="m38.184 6.5407-5.3033 1.2374 2.2981 1.7678" style="fill:none;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.38723;stroke-width:1.5;stroke:#000"/>
     <path d="m28.461 10.96 3.3588-3.182 0.53033-2.4749" style="fill:none;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.38723;stroke-width:1.5;stroke:#000"/>
    </svg>`,
-   rock: `<svg id="b" version="1.1" viewBox="0 0 97 64" xmlns="http://www.w3.org/2000/svg">
+   rock: `<svg viewBox="0 0 97 64">
    <path d="m19.208 62.032-14.8-14.485-2.5191-9.7614 5.9828-23.931 11.651-7.2423 38.416-4.0935 22.357 0.62977 12.595 10.391 2.5191 23.301-2.2042 15.744-32.118 8.8167z" style="fill-opacity:.79275;fill:#d0bfbf;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.6;stroke:#000"/>
    <path d="m19.05 61.875-3.6212-24.718 2.2042-10.706-1.2595-10.076-8.5018 0.31488-6.1402 21.097 2.8339 10.076z" style="fill-opacity:.60104;fill:#192050;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.3;stroke:#050505"/>
    <path d="m18.578 26.765 42.824 5.0381 8.187 15.429-6.9274 13.225" style="fill-opacity:.39378;fill:#313238;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.3;stroke:#000"/>
@@ -583,7 +583,7 @@ const svg = {
         { c: "hi thin", d: "m 50,30 1,1 m 10,-5 1,1 m 6,11 1,1 " },
       ],
     },
-    spud1: `<svg width="82.142" height="43.52" version="1.1" viewBox="0 0 28 12" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    spud1: `<svg width="82.142" height="43.52" viewBox="0 0 28 12">
     <defs>
      <linearGradient id="a" x1="50.531" x2="51.177" y1="38.413" y2="71.913" gradientTransform="matrix(.26458 0 0 .26458 -2.2084 -6.9635)" gradientUnits="userSpaceOnUse">
       <stop style="stop-color:#d8af73" offset="0"/>
@@ -812,7 +812,7 @@ const svg = {
 
       // add the images name into the class list
       svgClass = svg.setClass(svgClass, svgName);
-      while (repeat > 0) {
+      while (repeat> 0) {
         if (svgInfo.shift) {
           let shiftX = svgInfo.shift.x
             ? halfRnd(svgInfo.shift.x) + svgInfo.shift.x / 2
@@ -834,7 +834,7 @@ const svg = {
           thisRotate = `rotate(${rotate}, 50, 50)`;
         }
 
-        paths += `<g transform="${thisShift} ${thisScale} ${thisRotate}" >`;
+        paths += `<g transform="${thisShift} ${thisScale} ${thisRotate}">`;
 
         svgInfo.paths.forEach((path) => {
           let svgCls = path.c ? `${svgClass}-${path.c}` : svgClass;
@@ -869,7 +869,7 @@ const svg = {
   wrap: (svgClass, style, guts) => {
     return `<svg class="${svgClass}" ${style}
     viewBox="0 0 100 100" 
-    xmlns="http://www.w3.org/2000/svg">
+   >
       ${guts}
     </svg>`;
   },
@@ -877,7 +877,7 @@ const svg = {
   wrapPlayer: (guts) => {
     return `<svg
     viewBox="0 0 50 100" 
-    xmlns="http://www.w3.org/2000/svg">
+   >
       ${guts}
     </svg>`;
   },
@@ -913,7 +913,7 @@ const svg = {
     let bits = path.split(/( |,)/);
     let res = "";
     bits.forEach((bit) => {
-      if (parseInt(bit) > 0) {
+      if (parseInt(bit)> 0) {
         bit = parseInt(bit) + halfRnd(amp);
       }
       res += bit;
@@ -956,7 +956,7 @@ const svg = {
       }
       // circle
       if (path.r) {
-        head += `<circle cx="${path.cx}" cy="${path.cy}" r="${path.r}"  style="${path.s}" />`;
+        head += `<circle cx="${path.cx}" cy="${path.cy}" r="${path.r}" style="${path.s}" />`;
       }
     });
 
@@ -1015,7 +1015,7 @@ const svg = {
 
     Object.entries(svg.imgList).forEach(([key, part]) => {
       let selected = currentType == key ? 'selected="selected"' : '';
-      if (`${key}-`.indexOf(type) > -1) {
+      if (`${key}-`.indexOf(type)> -1) {
         let bits = key.split("-");
         options += `<option value="${key}" ${selected}>${bits[1]}</option>`;
       }
@@ -1024,7 +1024,16 @@ const svg = {
     return options;
   },
 
+  orientation(svgSrc) {
+    // return width and height from viewbox to decide if its a wide or high image
+    // NOTE: for simplicity viewbox should be integers!!!
+    let bits = svgSrc.match(/viewBox=\"(\d+) (\d+) (\d+) (\d+)\"/);
+    return (parseInt(bits[3]) > parseInt(bits[4])) ? 'wide' : 'high';
+  },
 
+  addOrientationClass: function(svgSrc, orientation) {
+    return svgSrc.replace(/ viewBox=\"/, ` class=\"${orientation}\" viewBox=\"`);
+  },
 
 };
 
