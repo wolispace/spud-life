@@ -1028,7 +1028,7 @@ const svg = {
     // return width and height from viewbox to decide if its a wide or high image
     // NOTE: for simplicity viewbox should be integers!!!
     let bits = svgSrc.match(/viewBox=\"(\d+) (\d+) (\d+) (\d+)\"/);
-    return (parseInt(bits[3]) > parseInt(bits[4])) ? 'wide' : 'high';
+    return (parseInt(bits[3]) > parseInt(bits[4])) ? 'wide' : 'height';
   },
 
   addOrientationClass: function(svgSrc) {

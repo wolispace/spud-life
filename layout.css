@@ -84,7 +84,7 @@ svg.wide {
   width: 100%;
 }
 
-svg.high {
+svg.height {
   height: 100%;
 }
 
@@ -221,6 +221,11 @@ svg.high {
   display: flex;
   align-items: center;
   gap: 0.75rem;
+}
+
+.hardware-button-icon {
+  width: 2rem;
+  height: 2rem;
 }
 
 .hardware-button-buy  {
