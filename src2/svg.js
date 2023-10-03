@@ -798,6 +798,7 @@ const svg = {
     let svgHtml = "";
     svgInfo = svgInfo ?? svg.imgList[svgName];
     if(!svgInfo) {
+      console.trace('could not find ', svgName);
       svgInfo = svg.imgList['blank'];
     }
     

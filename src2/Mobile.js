@@ -62,15 +62,15 @@ class Mobile extends game.Item {
     let spritesList = player.fields[player.currentField][layer];
 
     spritesList.forEach((spriteBox, index) => {
-      if (this.collides(spriteBox)) {
+      if (!this.hitItem && this.collides(spriteBox)) {
         controls.endInput();
+        this.hitItem = Object.assign(Object.create(Object.getPrototypeOf(spriteBox)), spriteBox);
         if (layer == game.ABOVEGROUND) {
           // clone the object..
-          this.hitItem = Object.assign(Object.create(Object.getPrototypeOf(spriteBox)), spriteBox);
           function onEnd() {
+            if (spriteBox.qty > 0) {
             spriteBox.setPos();
             spriteBox.qty--;
-            if (spriteBox.qty > 0) {
               spriteBox.reduce();
             } else {
               spriteBox.remove();

@@ -19,6 +19,9 @@ const field = {
       qty: parseInt(bits[3]),
       id: parseInt(bits[4])
     };
+    if (!svg.imgList[params.item]) {
+      params.svg = svg.render('spud1');
+    }
 
     return new game.Item(params);
   },
@@ -58,7 +61,7 @@ const field = {
       let y = rnd(fieldHeight) + skyBottom;
       let qty = 5;
       let item = rnd(2) == 1 ? 'log' : 'rock';
-      let itemSvg = svg.render(`${item}2`, 1, '');
+      let itemSvg = svg.render(item, 1, '');
       let id = game.uid++;
       game.setUid(item.uid);
       let params = {
@@ -86,7 +89,6 @@ const field = {
       newItem.render();
     }
     layer = game.UNDERGROUND;
-    let maxSpuds = list.spuds.list.length;
     let maxItems = list.items.list.length;
     for (let step = 0; step < 50; step++) {
       let params = {

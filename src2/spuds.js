@@ -134,7 +134,7 @@ const spuds = {
     });
   },
 
-    // find a spud that is within our rareness range for the field
+  // find a spud that is within our rareness range for the field
   // field 0 can have spuds 0 and 1
   // field 1 can have spuds 0, 1 and 2 etc..
   // since spud rareness is max 3, all fields > 2 have all rareness spuds

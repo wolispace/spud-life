@@ -119,7 +119,6 @@ const game = {
     }
 
     animateArc(endItem, onEnd) {
-      console.trace('dug', this);
       // slow start fast middle
       var easing = 'cubic-bezier(0, 0, .25, 0)';
       // slow and get faster
