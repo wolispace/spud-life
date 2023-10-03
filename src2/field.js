@@ -68,7 +68,7 @@ const field = {
         id: id, x: x, y: y, w: sprite.width, h: sprite.height, qty: qty, classes: '', item: item
       }
       let newItem = new game.Item(params);
-      player.fields[player.currentField][layer][id] = newItem;
+      player.fields[player.currentField][layer].push(newItem);
       newItem.render(itemSvg);
     }
     layer = game.SURFACE;
@@ -111,7 +111,8 @@ const field = {
         params.item = itemInfo.name;
       }
       game.setUid(params.id);
-      player.fields[player.currentField][layer][params.id] = new game.Item(params);
+      let newItem = new game.Item(params);
+      player.fields[player.currentField][layer].push(newItem);
     }
   },
 
