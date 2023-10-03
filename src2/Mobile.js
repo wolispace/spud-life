@@ -22,7 +22,7 @@ class Mobile extends game.Item {
         // update object to new position so we can check for collisions.. revert to oldPos if collide
         this[dirInfo[direction].axis] = this[dirInfo[direction].axis] + (dirInfo[direction].dir * game.step[dirInfo[direction].axis]);
         this.checkCollisions(game.ABOVEGROUND);
-  
+        game.save();
         if (this.hitItem || !this.withinBounds()) {
           timers.moving = false;
           if (direction == 'up') {
@@ -71,7 +71,7 @@ class Mobile extends game.Item {
             if (spriteBox.qty > 0) {
             spriteBox.setPos();
             spriteBox.qty--;
-              spriteBox.reduce();
+              spriteBox.reduceAndPosition();
             } else {
               spriteBox.remove();
               delete player.fields[player.currentField][layer][index];
@@ -87,7 +87,6 @@ class Mobile extends game.Item {
             spriteBox.jiggle(this.direction);
             return false;
           }
-
 
         } else {
           // dig it up.. animate the arc. then remove it..
