@@ -92,7 +92,7 @@ const field = {
       let params = {
         id: game.uid++, 
         x: rnd(fieldWidth), 
-        y:  rnd(fieldHeight) + skyBottom, 
+        y: rnd(fieldHeight) + skyBottom, 
         w: sprite.width, 
         h: sprite.height,
         qty: 1,
@@ -101,7 +101,7 @@ const field = {
       if (rnd(3) > 0) {
         params.qty = rnd(4) + 2;
         // TODO take rarity into account
-        let itemInfo = list.spuds.list[rnd(maxSpuds)];
+        let itemInfo = spuds.select(); //list.spuds.list[rnd(maxSpuds)];
         params.item = itemInfo.name;
         params.svg = svg.render('spud1');
       } else {

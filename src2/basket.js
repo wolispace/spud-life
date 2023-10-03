@@ -28,12 +28,11 @@ const basket = {
     },
 
   makeButton: function (params) {
-    let style = `style="width: 2rem;"`;
     let itemInfo = items[params.item];
-    console.log(itemInfo);
-    let icon = svg.render(params.item, 1, style);
+    let icon = svg.render(params.item);
     if (itemInfo.type == 'spuds') {
-      icon = svg.render('spud1', 1, style);
+      icon = svg.render('spud1');
+      itemInfo.desc = spuds.desc(itemInfo);
     }
 
     icon = svg.addOrientationClass(icon);

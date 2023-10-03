@@ -134,4 +134,28 @@ const spuds = {
     });
   },
 
+    // find a spud that is within our rareness range for the field
+  // field 0 can have spuds 0 and 1
+  // field 1 can have spuds 0, 1 and 2 etc..
+  // since spud rareness is max 3, all fields > 2 have all rareness spuds
+  byRareness: function (rareness) {
+    let spud = list.spuds.list[rnd(list.spuds.list.length)];
+    while (spud.rareness > rareness) {
+      spud = list.spuds.list[rnd(list.spuds.list.length)];
+    }
+    
+    return spud;
+  },
+
+  // select a random spud based on rareness
+  select: function () {
+    let newSpud = spuds.byRareness(player.currentField + 1);
+    return { name: newSpud.name, qty: rnd(3) + 1 };
+  },
+
+  desc: function (spud) {
+    return `These are ${spuds.bits.rareNames[spud.rareness]} variety potatoes that are best for ${spud.bestFor}`;
+  },
+
+
 };
