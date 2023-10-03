@@ -99,22 +99,23 @@ const game = {
       //this.sprite.style.transform = `translate(${this.x}px, ${this.y}px)`;
     }
 
-    // 49.9796875 93.225
     reduceAndPosition() {
       this.reduce();
       this.setPos();
     }
 
     reduceSize() {
+      // reduce by 20%
       let less = { w: this.w * .2, h: this.h * .2 };
       this.w = this.w - less.w;
       this.h = this.h - less.h;
     }
 
     reducePosition() {
+      // reduce by 20%
       let less = { w: this.w * .2, h: this.h * .2 };
-      this.y = this.y + less.h / 2;
-      this.x = this.x + less.w / 2;
+      this.y = parseInt(this.y + less.h / 2);
+      this.x = parseInt(this.x + less.w / 2);
     }
 
     reduce() {

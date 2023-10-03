@@ -157,17 +157,12 @@ const field = {
       item.render();
       // scale down if not 5
       let itemQty = 5;
-      let i = 0;
-      if (item.qty < 5) {  
-        console.log(item.x, item.y);      
+      if (item.qty < 5) {     
         while (itemQty > item.qty) {
-          i++;
-          console.log(item.item, i, item.qty);
           item.reduceSize();
           itemQty--;
         }
         item.render();
-        console.log(item.x, item.y);
       }
       game.setUid(item.id);
     });

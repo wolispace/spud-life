@@ -38,8 +38,8 @@ class Mobile extends game.Item {
           timers.moving = true;
           this.position();
         }
-        
-      },timers.duration);
+
+      }, timers.duration);
     }
   }
 
@@ -69,16 +69,18 @@ class Mobile extends game.Item {
           // clone the object..
           function onEnd() {
             if (spriteBox.qty > 0) {
-            spriteBox.setPos();
-            spriteBox.qty--;
+              spriteBox.setPos();
+              spriteBox.qty--;
               spriteBox.reduceAndPosition();
-            } else {
+            } 
+            if (spriteBox.qty < 1) {
               spriteBox.remove();
               delete player.fields[player.currentField][layer][index];
             }
+            game.save();
           }
-          let toolName = spriteBox.item == 'rock' ? 'pick': 'axe';
-          
+          let toolName = spriteBox.item == 'rock' ? 'pick' : 'axe';
+
           if (tools.list[toolName].qty > 0) {
             tools.list[toolName].decrQty();
             spriteBox.jiggle(this.direction, onEnd);
@@ -93,17 +95,17 @@ class Mobile extends game.Item {
           // shift to the players pos
           spriteBox.x = game.playerItem.x;
           spriteBox.y = game.playerItem.y;
-          
+
           spriteBox.render();
           let endItem = tools.list.basket;
           delete player.fields[player.currentField][layer][index];
           scanner.scan();
-          let onEnd = function () { 
+          let onEnd = function () {
             spriteBox.remove();
-            setTimeout( () => {
+            setTimeout(() => {
               game.digging = false;
               endItem.jiggle('down');
-              setTimeout( () => {
+              setTimeout(() => {
                 basket.add(spriteBox);
                 game.save();
               }, 200);
