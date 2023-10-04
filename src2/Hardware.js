@@ -14,8 +14,12 @@ class Hardware extends game.Item {
 
   enter() {
     let title = "Hardware store";
-    let content = `<div class="dialog-message-content">`;
-    content += `Buy and sell.`;
+    let content = ''; //`<div class="dialog-message-content">`;
+
+    Object.keys(list.all).forEach((itemName) => {
+      content += this.makeButton(itemName);
+    });
+
     let footer = "";
     footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
     dialog.cancelButton = function () { dialog.hide(); };
@@ -25,5 +29,25 @@ class Hardware extends game.Item {
 
   exit() {
     console.log('exiting the hardware store');
+  }
+
+  makeButton(itemName) {
+    let itemInfo = items[itemName];
+    let icon;
+    if (itemInfo.type == 'spuds') {
+      icon = svg.render('spud1');
+      itemInfo.desc = spuds.desc(itemInfo);
+    } else {
+      icon = svg.render(itemName);
+    }
+
+    icon = svg.addOrientationClass(icon);
+
+    let content = `<div  class="hardware-button buttonize">`;
+    content += ` <div class="hardware-button-icon">${icon}</div>`;
+    content += ` <div class="hardware-button-desc"><b>${itemInfo.fullName}.</b> ${itemInfo.desc} </div>`;
+    content += `</div>`;
+
+    return content;
   }
 };

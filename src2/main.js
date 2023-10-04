@@ -4,7 +4,7 @@ let itemNumber = 0;
 let containerBox = null;
 let step = { x: 5 * pixelScale, y: 5 * pixelScale};
 let timers = { duration: 30 };
-let list = {};
+let list = {all: {}};
 let scanner = null;
 
 // if savedate injected (by referencing it with ?id={dataFileId} then load it.
@@ -118,6 +118,7 @@ function clearBody() {
 
 function makeLists() {
   Object.entries(items).forEach(([itemName, item]) => {
+    list['all'][itemName] = item;
     list[item.type] = list[item.type] ?? {byName: {}, list: []};
     list[item.type]['byName'][itemName] = item;
     list[item.type]['list'].push(item); 
