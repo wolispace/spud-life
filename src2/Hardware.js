@@ -58,8 +58,19 @@ class Hardware extends game.Item {
     let content = `<div  class="hardware-button buttonize button-${itemInfo.type}">`;
     content += ` <div class="hardware-button-icon">${icon}</div>`;
     content += ` <div class="hardware-button-desc"><b>${itemInfo.fullName}.</b> ${itemInfo.desc} </div>`;
+    content += this.saleButton(itemName, 'buy', 'Upgrade', itemInfo.price);
+
+
     content += `</div>`;
 
     return content;
+  }
+
+  saleButton(itemName, buy, msg, price) {
+    let html = ` <div class="hardware-button-${buy} buttonize button "
+     onclick="tools.buyItem('spade')">
+     ${msg}<br>${price}
+   </div>`;
+    return html;
   }
 };
