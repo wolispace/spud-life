@@ -29,6 +29,7 @@ class Mobile extends game.Item {
             // are we conflicting with a building?
             Object.entries(buildings.list).forEach(([itemName, item]) => {
               if (this.collides(item)) {
+                this[dirInfo[direction].axis] = oldPos;
                 item.enter();
               }
             });
