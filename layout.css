@@ -244,6 +244,27 @@ svg.height {
   font-weight: bold;
 }
 
+.button-tools {
+  background-color: wheat;
+}
+
+.button-machines {
+  background-color: lightblue;
+}
+
+.button-field {
+  background-color: rgb(145, 182, 161);
+}
+
+.button-block {
+  background-color: rgb(177, 155, 169);
+}
+
+.button-items {
+  background-color: rgb(199, 176, 169);
+}
+
+
 @keyframes shrink {
   0% {
     transform: scale(1, 1);

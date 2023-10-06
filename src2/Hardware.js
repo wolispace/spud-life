@@ -33,17 +33,29 @@ class Hardware extends game.Item {
 
   makeButton(itemName) {
     let itemInfo = items[itemName];
+
     let icon;
-    if (itemInfo.type == 'spuds') {
-      icon = svg.render('spud1');
-      itemInfo.desc = spuds.desc(itemInfo);
-    } else {
+    let qty = 0;
+    if (itemInfo.type == "tools") {
+      let itemClass = tools.list[itemName];
+      if (!itemClass) {
+        itemClass = controls.list[itemName];
+      }
+      qty = 0 + itemClass.qty;
+      icon = itemClass.svg;
+    }
+    if (['machines', 'land'].includes(itemInfo.type)) {
       icon = svg.render(itemName);
+      icon = svg.addOrientationClass(icon);
+      qty = player.cart[itemName] ? 0 : 1;
     }
 
-    icon = svg.addOrientationClass(icon);
+    // if there is nothing then return so no button
+    if (qty == 0) {
+      return '';
+    }
 
-    let content = `<div  class="hardware-button buttonize">`;
+    let content = `<div  class="hardware-button buttonize button-${itemInfo.type}">`;
     content += ` <div class="hardware-button-icon">${icon}</div>`;
     content += ` <div class="hardware-button-desc"><b>${itemInfo.fullName}.</b> ${itemInfo.desc} </div>`;
     content += `</div>`;
