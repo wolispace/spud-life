@@ -184,7 +184,7 @@ const svg = {
       class: "thick control-icon",
       paths: [{ c: "", d: "m 80,20 -60,30 60,30" }],
     },
-    "control-field--left": `<svg viewBox="0 0 100 100">
+    "land-back": `<svg viewBox="0 0 100 100">
       <path d="m11.5 17.75c0.70711-1.591 74.631-6.6062 75.25-4.75 0.7955 1.149 1.3107 44.674 0.25 46-1.9507 1.256-70.571 2.0026-72.25 0.5s-3.1616-38.303-3.25-41.75z" style="fill:#4b3d2c;stroke-linecap:round;stroke-width:2.5;stroke:#000"/>
       <path d="m12.75 31.5 9-1" style="fill:#0f0c09;stroke-linecap:round;stroke-opacity:.51915;stroke-width:2.5;stroke:#000"/>
       <path d="m86 41-10.5 1.25" style="fill:#140f0b;stroke-linecap:round;stroke-opacity:.53617;stroke-width:2.5;stroke:#000"/>
@@ -194,7 +194,7 @@ const svg = {
       <path d="m15.026 19.092s67.175-4.773 69.473-2.4749c1.591 2.1213 0.53033 20.86 0.53033 20.86" style="fill:none;stroke-linecap:round;stroke-opacity:.28511;stroke-width:2.5;stroke:#fff"/>
       <path d="m85.206 43.487-0.17678 13.081" style="fill:none;stroke-linecap:round;stroke-opacity:.28511;stroke-width:2.5;stroke:#fff"/>
       </svg>`,
-    "control-field--right": `<svg viewBox="0 0 100 100">
+    "land": `<svg viewBox="0 0 100 100">
       <path d="m11.5 17.75c0.70711-1.591 74.631-6.6062 75.25-4.75 0.7955 1.149 1.3107 44.674 0.25 46-1.9507 1.256-70.571 2.0026-72.25 0.5s-3.1616-38.303-3.25-41.75z" style="fill:#4b3d2c;stroke-linecap:round;stroke-width:2.5;stroke:#000"/>
       <path d="m12.75 31.5 9-1" style="fill:#0f0c09;stroke-linecap:round;stroke-opacity:.51915;stroke-width:2.5;stroke:#000"/>
       <path d="m86 41-10.5 1.25" style="fill:#140f0b;stroke-linecap:round;stroke-opacity:.53617;stroke-width:2.5;stroke:#000"/>
