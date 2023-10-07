@@ -34,28 +34,28 @@ class Hardware extends game.Item {
   makeButton(itemName) {
     let itemInfo = items[itemName];
     let icon;
-    let qty = 0;
+    itemInfo.qty = 0;
     if (itemInfo.type == "tools") {
       let itemClass = tools.list[itemName];
       if (!itemClass) {
         itemClass = controls.list[itemName];
       }
-      qty = 0 + itemClass.qty;
+      itemInfo.qty = 0 + itemClass.qty;
       icon = itemClass.svg;
     }
     if (['machines', 'land', 'items'].includes(itemInfo.type)) {
       icon = svg.render(itemName);
       icon = svg.addOrientationClass(icon);
-      qty = player.cart[itemName] ? 0 : 1;
+      itemInfo.qty = player.cart[itemName] ? 0 : 1;
     }
     if (['items'].includes(itemInfo.type)) {
       icon = svg.render(itemName);
       icon = svg.addOrientationClass(icon);
       let basket = tools.list.basket.list;
-      qty = basket[itemName] ?? 0; 
+      itemInfo.qty = basket[itemName] ?? 0; 
     }
     // if there is nothing then return so no button
-    if (qty < 1) {
+    if (itemInfo.qty < 1) {
       return '';
     }
 
@@ -81,7 +81,7 @@ class Hardware extends game.Item {
 
     let html = ` <div class="hardware-button-${buy} buttonize button "
      onclick="tools.buyItem('${itemInfo.name}')">
-     ${caption}<br>${itemInfo.price}
+     ${caption}<br>${itemInfo.price * itemInfo.qty}
    </div>`;
     return html;
   }
