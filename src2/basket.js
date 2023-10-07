@@ -47,6 +47,27 @@ const basket = {
     return content;
   },
   
+  buyItem: function (itemName, qty, cost) {
+    let itemInfo = items[itemName];
+    if (itemInfo.type == 'machines') {
+      player.cart[itemName] = {};
+    } else {
+      // its a tool.. increment
+      let itemClass = tools.list[itemName];
+      if (!itemClass) {
+        itemClass = controls.list[itemName];
+      }
+      qty = (itemClass.qty == 0) ? 8 : 2;
+      itemClass.addQty(qty);
+    }
 
+    tools.list.wallet.addQty(0-cost);
+  },
+
+  sellItem: function (itemName, qty, cost) {
+    tools.list.basket.list[itemName].qty = 0;
+    tools.list.basket.addQty(0-qty);
+    tools.list.wallet.addQty(cost);
+  },
 }
 

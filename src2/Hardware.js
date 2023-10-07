@@ -35,12 +35,13 @@ class Hardware extends game.Item {
     let itemInfo = items[itemName];
     let icon;
     itemInfo.qty = 0;
+    itemInfo.name = itemName;
     if (itemInfo.type == "tools") {
       let itemClass = tools.list[itemName];
       if (!itemClass) {
         itemClass = controls.list[itemName];
       }
-      itemInfo.qty = 0 + itemClass.qty;
+      itemInfo.qty = 1;
       icon = itemClass.svg;
     }
     if (['machines', 'land', 'items'].includes(itemInfo.type)) {
@@ -77,11 +78,12 @@ class Hardware extends game.Item {
       buy = 'sell';
       caption = 'Sell';
     }
+    let cost = itemInfo.price * itemInfo.qty;
     // if they already have some then this becomes 'upgrade'
 
     let html = ` <div class="hardware-button-${buy} buttonize button "
-     onclick="tools.buyItem('${itemInfo.name}')">
-     ${caption}<br>${itemInfo.price * itemInfo.qty}
+     onclick="basket.${buy}Item('${itemInfo.name}', ${itemInfo.qty}, ${cost})">
+     ${caption}<br>${cost}
    </div>`;
     return html;
   }
