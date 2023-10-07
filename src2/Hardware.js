@@ -33,7 +33,6 @@ class Hardware extends game.Item {
 
   makeButton(itemName) {
     let itemInfo = items[itemName];
-
     let icon;
     let qty = 0;
     if (itemInfo.type == "tools") {
@@ -44,21 +43,26 @@ class Hardware extends game.Item {
       qty = 0 + itemClass.qty;
       icon = itemClass.svg;
     }
-    if (['machines', 'land'].includes(itemInfo.type)) {
+    if (['machines', 'land', 'items'].includes(itemInfo.type)) {
       icon = svg.render(itemName);
       icon = svg.addOrientationClass(icon);
       qty = player.cart[itemName] ? 0 : 1;
     }
-
+    if (['items'].includes(itemInfo.type)) {
+      icon = svg.render(itemName);
+      icon = svg.addOrientationClass(icon);
+      let basket = tools.list.basket.list;
+      qty = basket[itemName] ?? 0; 
+    }
     // if there is nothing then return so no button
-    if (qty == 0) {
+    if (qty < 1) {
       return '';
     }
 
     let content = `<div  class="hardware-button buttonize button-${itemInfo.type}">`;
     content += ` <div class="hardware-button-icon">${icon}</div>`;
     content += ` <div class="hardware-button-desc"><b>${itemInfo.fullName}.</b> ${itemInfo.desc} </div>`;
-    content += this.saleButton(itemName, 'buy', 'Upgrade', itemInfo.price);
+    content += this.saleButton(itemInfo);
 
 
     content += `</div>`;
@@ -66,10 +70,18 @@ class Hardware extends game.Item {
     return content;
   }
 
-  saleButton(itemName, buy, msg, price) {
+  saleButton(itemInfo) {
+    let buy = 'buy';
+    let caption = 'Buy';
+    if (itemInfo.type == "items") {
+      buy = 'sell';
+      caption = 'Sell';
+    }
+    // if they already have some then this becomes 'upgrade'
+
     let html = ` <div class="hardware-button-${buy} buttonize button "
-     onclick="tools.buyItem('spade')">
-     ${msg}<br>${price}
+     onclick="tools.buyItem('${itemInfo.name}')">
+     ${caption}<br>${itemInfo.price}
    </div>`;
     return html;
   }
