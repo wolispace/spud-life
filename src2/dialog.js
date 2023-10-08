@@ -13,8 +13,8 @@ const dialog = {
     dialog.visible = true;
     dialog.title = title;
     dialog.dialogBox.style.opacity = 1;
-    dialog.dialogBox.style.top = '20px';
-    dialog.dialogBox.style.bottom = '20px';
+    dialog.dialogBox.style.top = '1rem';
+    dialog.dialogBox.style.bottom = '4rem';
     dialog.part(`.dialog .header .title`, title);
     dialog.part(`.dialog .content`, content);
     dialog.part(`.dialog .footer`, footer);

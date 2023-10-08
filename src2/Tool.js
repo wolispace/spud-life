@@ -69,6 +69,7 @@ class Tool extends game.Item {
   updateQty() {
     this.updateMax();
     sprite.get(`${this.id} .qty`).innerHTML = this.qty;
+    this.jiggle('down');
   }
 
   onClick = function () {

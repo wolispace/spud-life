@@ -140,11 +140,10 @@ svg.height {
 
 .dialog {
   position: absolute;
-  top: 20px;
-  left: 20px;
-  right: 20px;
-  bottom: 20px;
-  height: auto;
+  top: 1rem;
+  left: 1rem;
+  right: 1rem;
+  bottom: 4rem;
   overflow: hidden;
   background-color: silver;
   border-radius: 10px;
