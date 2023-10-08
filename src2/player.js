@@ -22,11 +22,11 @@ let player = {
     axe: { qty: 20, max: 20 },
     pick: { qty: 20, max: 20 },
     basket: { qty: 0, list: {} },
-    scanner: { qty: 0, on: true },
+    scanner: { qty: 1, on: true },
     wallet: { qty: 1000 },
   },
   currentField: 0,
   fields: [[[], [], []]],
-  cart: {},
+  cart: {'chipper': {}},
 };
 

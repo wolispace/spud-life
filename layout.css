@@ -264,6 +264,15 @@ svg.height {
   background-color: rgb(199, 176, 169);
 }
 
+.tooMuch {
+  opacity: 50%;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.tooMuch:hover {
+  opacity: 50%;
+  background-color: rgba(0, 0, 0, 0.05);
+}
 
 @keyframes shrink {
   0% {
@@ -383,5 +392,25 @@ svg.height {
   }
   to {
     fill: rgb(0,0,0);
+  }
+}
+
+@keyframes shrink {
+  0% {
+    transform: scale(1, 1);
+  }
+
+  100% {
+    transform: scale(0, 0);
+  }
+}
+
+@keyframes grow {
+  0% {
+    transform: scale(0, 0);
+  }
+
+  100% {
+    transform: scale(1, 1);
   }
 }

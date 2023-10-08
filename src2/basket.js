@@ -62,12 +62,15 @@ const basket = {
     }
 
     tools.list.wallet.addQty(0-cost);
+    game.save();
+    buildings.list.hardware.refresh(itemName);
   },
 
   sellItem: function (itemName, qty, cost) {
     tools.list.basket.list[itemName].qty = 0;
     tools.list.basket.addQty(0-qty);
     tools.list.wallet.addQty(cost);
+    game.save();
   },
 }
 

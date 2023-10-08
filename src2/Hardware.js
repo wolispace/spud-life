@@ -53,14 +53,14 @@ class Hardware extends game.Item {
       icon = svg.render(itemName);
       icon = svg.addOrientationClass(icon);
       let basket = tools.list.basket.list;
-      itemInfo.qty = basket[itemName] ?? 0; 
+      itemInfo.qty = basket[itemName] ?? 0;
     }
     // if there is nothing then return so no button
     if (itemInfo.qty < 1) {
       return '';
     }
 
-    let content = `<div  class="hardware-button buttonize button-${itemInfo.type}">`;
+    let content = `<div id="hardware-${itemName}" class="hardware-button buttonize button-${itemInfo.type}">`;
     content += ` <div class="hardware-button-icon">${icon}</div>`;
     content += ` <div class="hardware-button-desc"><b>${itemInfo.fullName}.</b> ${itemInfo.desc} </div>`;
     content += this.saleButton(itemInfo);
@@ -79,12 +79,30 @@ class Hardware extends game.Item {
       caption = 'Sell';
     }
     let cost = itemInfo.price * itemInfo.qty;
+    let tooMuch = '';
+    let onClick = `onclick="basket.${buy}Item('${itemInfo.name}', ${itemInfo.qty}, ${cost})"`;
+    
+    if (cost > tools.list.wallet.qty) {
+      tooMuch = 'tooMuch';
+      onClick = '';
+
+    } 
+
+    
     // if they already have some then this becomes 'upgrade'
 
-    let html = ` <div class="hardware-button-${buy} buttonize button "
-     onclick="basket.${buy}Item('${itemInfo.name}', ${itemInfo.qty}, ${cost})">
+    let html = ` <div class="hardware-button-${buy} buttonize button ${tooMuch}"
+     ${onClick}>
      ${caption}<br>${cost}
    </div>`;
     return html;
+  }
+
+  // redisplay the hardware dialog after animating the item away
+  refresh(itemName) {
+    let thisElement = document.querySelector(`#hardware-${itemName}`);
+    svg.animate(thisElement, 'shrink', 0.6, function () {
+      buildings.list.hardware.enter();
+    });
   }
 };
