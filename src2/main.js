@@ -63,9 +63,10 @@ document.addEventListener("keyup", (event) => {
 function introGame() {
   character.bodySet = character.getBodySet();
   let containerElement = document.querySelector(".container");
-  let titleSvg = svg.render('title', 1, 'style="width:100%;"');
+  let titleSvg = svg.render('title');
+  titleSvg = svg.addOrientationClass(titleSvg);
   containerElement.innerHTML = titleSvg;
-  let introDelay = isDev ? 0.1 : 5;
+  let introDelay = isDev ? 0.1 : 3;
   svg.animate(containerElement, 'goInvisible', introDelay, function () {
     setContainerBox();
     sky.render();

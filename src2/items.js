@@ -59,11 +59,8 @@ let items = {
     rareness: 300,
     upgradeCost: 100,
     maxUpgrades: 100,
-    initial: {
-      pricePerItem: 5,
-      makes: "chips",
-      hopper: {},
-    },
+    pricePerItem: 5,
+    makes: "chips",
   },
   masher: {
     type: "machines",
@@ -73,11 +70,8 @@ let items = {
     rareness: 300,
     upgradeCost: 100,
     maxUpgrades: 100,
-    initial: {
-      pricePerItem: 15,
-      makes: "mashed potato",
-      hopper: {},
-    },
+    pricePerItem: 15,
+    makes: "mashed potato",
   },
   soup: {
     type: "machines",
@@ -87,11 +81,8 @@ let items = {
     rareness: 300,
     upgradeCost: 100,
     maxUpgrades: 100,
-    initial: {
-      pricePerItem: 15,
-      makes: "soup",
-      hopper: {},
-    },
+    pricePerItem: 15,
+    makes: "soup",
   },
   bake: {
     type: "machines",
@@ -101,11 +92,8 @@ let items = {
     rareness: 300,
     upgradeCost: 100,
     maxUpgrades: 100,
-    initial: {
-      pricePerItem: 20,
-      makes: "baked potatoes",
-      hopper: {},
-    },
+    pricePerItem: 20,
+    makes: "baked potatoes",
   },
   curly: {
     type: "machines",
@@ -115,11 +103,8 @@ let items = {
     rareness: 300,
     upgradeCost: 100,
     maxUpgrades: 100,
-    initial: {
-      pricePerItem: 20,
-      makes: "curly-fries",
-      hopper: {},
-    },
+    pricePerItem: 20,
+    makes: "curly-fries",
   },
   chipper2000: {
     type: "machines",
@@ -129,11 +114,8 @@ let items = {
     rareness: 300,
     upgradeCost: 100,
     maxUpgrades: 100,
-    initial: {
-      pricePerItem: 30,
-      makes: "chips",
-      hopper: {},
-    },
+    pricePerItem: 30,
+    makes: "chips",
   },
   rosti: {
     type: "machines",
@@ -143,11 +125,8 @@ let items = {
     rareness: 400,
     upgradeCost: 100,
     maxUpgrades: 100,
-    initial: {
-      pricePerItem: 30,
-      makes: "rosti",
-      hopper: {},
-    },
+    pricePerItem: 30,
+    makes: "rosti",
   },
   croquette: {
     type: "machines",
@@ -157,11 +136,8 @@ let items = {
     rareness: 400,
     upgradeCost: 100,
     maxUpgrades: 100,
-    initial: {
-      pricePerItem: 40,
-      makes: "croquette",
-      hopper: {},
-    },
+    pricePerItem: 40,
+    makes: "croquette",
   },
   land: {
     type: "land",
