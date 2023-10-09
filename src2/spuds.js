@@ -77,7 +77,7 @@ const spuds = {
   },
 
   bestForList: function () {
-    let bestForAll = list.machines.list.map((item) => { return item.initial.makes });
+    let bestForAll = list.machines.list.map((item) => { return item.makes });
 
     return bestForAll.filter((value, index, array) => array.indexOf(value) === index);
   },

@@ -13,13 +13,15 @@ const basket = {
     let content = ''; //`<div class="dialog-message-content">`;
 
     Object.entries(tools.list.basket.list).forEach(([itemName, qty]) => {
-      let params = {
-        qty: qty,
-        item: itemName,
+      if (qty > 0) {
+        let params = {
+          qty: qty,
+          item: itemName,
+        }
+        content += basket.makeButton(params);
       }
-      content += basket.makeButton(params);
-
     });
+    
     let footer = "";
     footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
     dialog.cancelButton = function () { dialog.hide(); };

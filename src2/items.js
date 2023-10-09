@@ -71,7 +71,7 @@ let items = {
     upgradeCost: 100,
     maxUpgrades: 100,
     pricePerItem: 15,
-    makes: "mashed potato",
+    makes: "mash",
   },
   soup: {
     type: "machines",
@@ -93,7 +93,7 @@ let items = {
     upgradeCost: 100,
     maxUpgrades: 100,
     pricePerItem: 20,
-    makes: "baked potatoes",
+    makes: "baked",
   },
   curly: {
     type: "machines",
