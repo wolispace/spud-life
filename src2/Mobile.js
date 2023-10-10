@@ -75,6 +75,10 @@ class Mobile extends game.Item {
               spriteBox.reduceAndPosition();
             } 
             if (spriteBox.qty < 1) {
+              // add the rock or log to the basket.. no arc for now
+              // TODO: arc the item into the basket
+              tools.list.basket.addQty(1);
+              tools.list.basket.jiggle('down');
               spriteBox.remove();
               delete player.fields[player.currentField][layer][index];
             }
@@ -98,23 +102,23 @@ class Mobile extends game.Item {
           spriteBox.y = game.playerItem.y;
 
           spriteBox.render();
+          game.spriteBox = spriteBox;
           let endItem = tools.list.basket;
           delete player.fields[player.currentField][layer][index];
           scanner.scan();
           let onEnd = function () {
-            spriteBox.remove();
+            game.spriteBox.remove();
             setTimeout(() => {
               game.digging = false;
               endItem.jiggle('down');
               setTimeout(() => {
-                basket.add(spriteBox);
+                basket.add(game.spriteBox);
                 game.save();
               }, 200);
             }, 1);
 
           };
           spriteBox.animateArc(endItem, onEnd);
-          sprite.animateArc(spriteBox, endItem, onEnd);
         }
         return spriteBox;
       }

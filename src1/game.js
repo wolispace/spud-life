@@ -144,9 +144,10 @@ const game = {
       this.sprite.style.offsetRotate = `0deg`;
       this.sprite.style.animation = `into-basket 1.5s ${easing} 0s 1 normal forwards`;
       this.sprite.addEventListener("animationend", function handler() {
-        if (this.sprite) {
-          this.sprite.style.animation = 'none';
-          this.sprite.style.display = 'none';
+        // this is the spriteBox
+        if (this) {
+          this.style.animation = 'none';
+          this.style.display = 'none';
           if (typeof onEnd == "function") {
             onEnd();
           }
