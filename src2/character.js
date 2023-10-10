@@ -76,14 +76,8 @@ const character = {
     player.hints = dialog.isChecked(`#showHints`);
     dialog.hide();
     game.save();
-    tools.render();
-    setPhase(player.phase);
-    let element = document.querySelector(`.player`);
-    element.innerHTML = svg.renderPerson(player.body);
-    resizeStuff();
-    hint.player();
+    //hint.player();
     character.render();
-    tools.render();
   },
 
   randomName: function () {
