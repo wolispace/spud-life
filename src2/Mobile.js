@@ -77,8 +77,8 @@ class Mobile extends game.Item {
             if (spriteBox.qty < 1) {
               // add the rock or log to the basket.. no arc for now
               // TODO: arc the item into the basket
-              tools.list.basket.addQty(1);
-              tools.list.basket.jiggle('down');
+              spriteBox.qty = 1;
+              basket.add(spriteBox);
               spriteBox.remove();
               delete player.fields[player.currentField][layer][index];
             }
