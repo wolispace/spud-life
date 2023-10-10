@@ -11,7 +11,7 @@ const potatadex = {
       itemInfo.name = itemName;
       maxItems++;
       // work out if we have seen this.. check basket..
-      itemInfo.found = tools.list.basket.list[itemName];
+      itemInfo.found = character.has(itemName);
       content += potatadex.makeButton(itemInfo);
       if (itemInfo.found) {
         foundItems++;

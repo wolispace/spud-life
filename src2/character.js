@@ -37,8 +37,9 @@ const character = {
     setTimeout(() => { playerHead.setAttribute("transform", "rotate(0, 51, 21.2)"); }, 1000);
   },
 
-  has: function (itemKey) {
-    return tools.list.basket.list[itemKey] > -1 || player.cart[itemKey] || tools.list[itemKey];
+  // has he player interacted with this item
+  has: function (itemName) {
+    return tools.list.basket.list[itemName] || player.cart[itemName] || tools.list[itemName];
   },
 
   // make a random body
