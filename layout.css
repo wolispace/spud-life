@@ -102,6 +102,10 @@ svg.height {
   transform: translateX(-50%);
 }
 
+#playerName {
+  width: 100%;
+}
+
 .control {
   background-color: rgba(0, 0, 128, .25);
   color: white;
@@ -323,6 +327,7 @@ svg.height {
 
 .creator {
   display: flex;
+  justify-content: space-around;
   padding: 1rem;
 }
 
