@@ -106,7 +106,9 @@ const character = {
     });
 
     content += "</div>";
+    content += '<div class="right">';
     content += '<div class="demoBody">';
+    content += "</div>";    
     content += "</div>";
     content += "</div>";
     content += character.colourGrid();

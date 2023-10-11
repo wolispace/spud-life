@@ -285,6 +285,10 @@ svg.height {
   width: 9rem;
 }
 
+.right {
+  width: 9rem;
+}
+
 .brows {
   stroke: black;
   stroke-linecap: round;
@@ -317,6 +321,15 @@ svg.height {
   margin: 0.05rem !important;
 }
 
+.creator {
+  display: flex;
+  padding: 1rem;
+}
+
+
+.demoBody {
+  width: 100%;
+}
 
 .color-grid {
   display: flex;
@@ -335,6 +348,25 @@ svg.height {
   flex-grow:1;
   width: 20px;
   height: 20px;
+}
+
+.checkbox-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.checkboxSpan {
+  padding: 3px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.checkboxSpan > label {
+  cursor: pointer;
+}
+
+.checkboxSpan:hover {
+  background-color:rgb(248, 189, 117);
 }
 
 
