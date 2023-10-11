@@ -76,8 +76,8 @@ const character = {
     player.hints = dialog.isChecked(`#showHints`);
     dialog.hide();
     game.save();
-    //hint.player();
-    character.render();
+
+    game.playerItem.refresh(svg.renderPerson(player.body));
   },
 
   randomName: function () {
@@ -220,12 +220,12 @@ const character = {
   },
 
   addPlayer: function () {
-    let body = character.randomBody();
     let params = {
       id: 'player', x: player.x, y: player.y, 
       w: sprite.width, h: sprite.height, 
       qty: 1, classes: 'player',
-      svg: svg.renderPerson(body),
+      svg: svg.renderPerson(player.body),
+      
     }
     game.playerItem = new Mobile(params);
 

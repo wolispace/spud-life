@@ -52,6 +52,12 @@ const game = {
       this.position();
     }
 
+    refresh(newSvg) {
+      this.svg = newSvg;
+      this.sprite.innerHTML = this.svg;
+
+    }
+
     orientSvg() {
       this.svg = svg.addOrientationClass(this.svg);
     }
