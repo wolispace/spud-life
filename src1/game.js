@@ -134,6 +134,10 @@ const game = {
       this.sprite.remove();
     }
 
+    hide() {
+      this.sprite.style.display = 'none';
+    }
+
     jiggle(direction, onEnd) {
       this.setPos();
       svg.animate(this.sprite, `jiggle-${direction}`, 0.25, onEnd);

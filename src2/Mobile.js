@@ -33,7 +33,22 @@ class Mobile extends game.Item {
                 item.enter();
               }
             });
-          }
+          } else if (direction == 'right' && player.fields.length > 1 && player.currentField < 1) {
+            if (this.x > (sprite.width * game.grid.x) - sprite.width) {
+              // change fields
+              player.currentField++;
+              this.x = 1;
+              setupThings();
+
+            }
+          } else if (direction == 'left' && player.fields.length > 1 && player.currentField > 0) {
+            if (this.x < 1) {
+              // change fields
+              player.currentField--;
+              this.x = (sprite.width * game.grid.x) - sprite.width;
+              setupThings();
+            }
+          } 
           this[dirInfo[direction].axis] = oldPos;
         } else {
           timers.moving = true;

@@ -89,6 +89,7 @@ function introGame() {
 function setupThings() {
   character.addPlayer();
   buildings.setup();
+  buildings.render();
   controls.render();
   scanner = new Scanner();
   hint.setup();
