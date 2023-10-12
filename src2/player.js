@@ -23,7 +23,7 @@ let player = {
     pick: { qty: 20, max: 20 },
     basket: { qty: 0, list: {} },
     scanner: { qty: 1, on: true },
-    wallet: { qty: 1000 },
+    wallet: { qty: 5000 },
   },
   currentField: 0,
   fields: [[[], [], []]],

@@ -44,14 +44,12 @@ class Hardware extends game.Item {
       itemInfo.qty = 1;
       icon = itemClass.svg;
     }
-    if (['machines', 'land', 'items'].includes(itemInfo.type)) {
+    if (['machines', 'land', 'items', 'blocker'].includes(itemInfo.type)) {
       icon = svg.render(itemName);
       icon = svg.addOrientationClass(icon);
       itemInfo.qty = player.cart[itemName] ? 0 : 1;
     }
-    if (['items'].includes(itemInfo.type)) {
-      icon = svg.render(itemName);
-      icon = svg.addOrientationClass(icon);
+    if (['items', 'blocker'].includes(itemInfo.type)) {
       let basket = tools.list.basket.list;
       itemInfo.qty = basket[itemName] ?? 0;
     }
@@ -64,8 +62,6 @@ class Hardware extends game.Item {
     content += ` <div class="hardware-button-icon">${icon}</div>`;
     content += ` <div class="hardware-button-desc"><b>${itemInfo.fullName}.</b> ${itemInfo.desc} </div>`;
     content += this.saleButton(itemInfo);
-
-
     content += `</div>`;
 
     return content;
@@ -74,7 +70,7 @@ class Hardware extends game.Item {
   saleButton(itemInfo) {
     let buy = 'buy';
     let caption = 'Buy';
-    if (itemInfo.type == "items") {
+    if (['items', 'blocker'].includes(itemInfo.type)) {
       buy = 'sell';
       caption = 'Sell';
     }

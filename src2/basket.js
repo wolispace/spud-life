@@ -53,6 +53,8 @@ const basket = {
     let itemInfo = items[itemName];
     if (itemInfo.type == 'machines') {
       player.cart[itemName] = {};
+    } else if (itemInfo.type == 'land') {
+      player.fields.push([[], [], []]);
     } else {
       // its a tool.. increment
       let itemClass = tools.list[itemName];
@@ -69,10 +71,11 @@ const basket = {
   },
 
   sellItem: function (itemName, qty, cost) {
-    tools.list.basket.list[itemName].qty = 0;
+    tools.list.basket.list[itemName] = 0;
     tools.list.basket.addQty(0-qty);
     tools.list.wallet.addQty(cost);
     game.save();
+    buildings.list.hardware.refresh(itemName);
   },
 }
 
