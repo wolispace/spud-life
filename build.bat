@@ -1,6 +1,8 @@
 :: start https://www.toptal.com/developers/javascript-minifier
 :: https://www.digitalocean.com/community/tools/minify
 
+:: npm install terser -g
+
 set ALLFILES=_js_files.js
 echo "" > %ALLFILES%
 

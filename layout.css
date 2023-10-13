@@ -516,6 +516,14 @@ svg.height {
   }
 }
 
+@keyframes parade {
+  100% { 
+    motion-offset: 100%;
+    offset-distance: 100%; 
+  }
+}
+
+
 @keyframes glow {
   from {
     fill: rgb(0,0,0);
