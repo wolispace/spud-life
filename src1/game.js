@@ -105,6 +105,14 @@ const game = {
       //this.sprite.style.transform = `translate(${this.x}px, ${this.y}px)`;
     }
 
+    fixPos() {
+      this.sprite = sprite.get(this.id);
+      this.sprite.style.width = `${this.w}px`;
+      this.sprite.style.height = `${this.h}px`;
+      this.sprite.style.top = `${this.y}px`;
+      this.sprite.style.left = `${this.x}px`;
+    }
+
     reduceAndPosition() {
       this.reduce();
       this.setPos();

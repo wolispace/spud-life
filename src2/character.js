@@ -32,6 +32,7 @@ const character = {
       character.resetHead();
     }
   },
+  
   resetHead: function () {
     let playerHead = document.querySelector("#iplayer .playerHead");
     setTimeout(() => { playerHead.setAttribute("transform", "rotate(0, 51, 21.2)"); }, 1000);

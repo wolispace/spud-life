@@ -100,12 +100,13 @@ const controls = {
   },
 
   endInput: function () {
-    controls.buttonUp(game.playerItem.direction);
-    clearInterval(timers[game.playerItem.direction]);
-    scanner.scan();
-    game.save();
-    timers.moving = false;
+    if (game.playerItem && game.playerItem.direction) {
+      controls.buttonUp(game.playerItem.direction);
+      clearInterval(timers[game.playerItem.direction]);
+      scanner.scan();
+      game.save();
+      timers.moving = false;
+    }
   },
-
 };
 

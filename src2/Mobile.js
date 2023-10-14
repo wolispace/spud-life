@@ -7,10 +7,44 @@ class Mobile extends game.Item {
     this.render();
   }
 
+  look(direction) {
+    let playerSprite = document.querySelector(`#i${this.id} > svg`);
+    let playerHead = document.querySelector(`#i${this.id} .playerHead`);
+
+    if (direction == "left") {
+      playerHead.setAttribute("transform", "rotate(0, 51, 21.2)");
+      playerSprite.setAttribute("transform", "translate(0, 0) scale(1, 1)");
+    } else if (direction == "right") {
+      playerHead.setAttribute("transform", "rotate(0, 51, 21.2)");
+      playerSprite.setAttribute("transform", "translate(0, 0) scale(-1, 1)");
+    } else if (direction == "up") {
+      playerHead.setAttribute("transform", "rotate(45, 51, 21.2)");
+      character.resetHead();
+    } else if (direction == "down") {
+      playerHead.setAttribute("transform", "rotate(-30, 51, 21.2)");
+      character.resetHead();
+    }
+  }
+
+  moveStep(direction, thisStep) {
+    this.direction = direction;
+    this.look(direction);
+    console.log(direction, thisStep);
+    let dirInfo = {
+      'left': { axis: 'x', 'dir': -1 },
+      'right': { axis: 'x', 'dir': 1 },
+      'up': { axis: 'y', 'dir': -1 },
+      'down': { axis: 'y', 'dir': 1 },
+    }
+    // update object to new position, n steps away, regardless of collision
+    this[dirInfo[direction].axis] = this[dirInfo[direction].axis] + (dirInfo[direction].dir * thisStep);
+    this.position();
+  }
+
   move(direction) {
     if (!timers.moving) {
       this.direction = direction;
-      character.look(direction);
+      this.look(direction);
       timers[direction] = setInterval(() => {
         let dirInfo = {
           'left': { axis: 'x', 'dir': -1 },
@@ -48,7 +82,7 @@ class Mobile extends game.Item {
               this.x = (sprite.width * game.grid.x) - sprite.width;
               setupThings();
             }
-          } 
+          }
           this[dirInfo[direction].axis] = oldPos;
         } else {
           timers.moving = true;
@@ -88,7 +122,7 @@ class Mobile extends game.Item {
               spriteBox.setPos();
               spriteBox.qty--;
               spriteBox.reduceAndPosition();
-            } 
+            }
             if (spriteBox.qty < 1) {
               // add the rock or log to the basket.. no arc for now
               // TODO: arc the item into the basket

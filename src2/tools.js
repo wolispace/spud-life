@@ -99,7 +99,7 @@ const tools = {
       content += `This is your wallet.`;
       let footer = "";
       footer += `<button class="buttonize" onclick="field.addGrid()"> Show grid </button>`;
-      footer += `<button class="buttonize" onclick="customers.find(5)">Customers </button>`;
+      footer += `<button class="buttonize" onclick="customers.find(30)">Customers </button>`;
 //      footer += `<button class="buttonize" onclick="customers.parade()">Parade </button>`;
       
       footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
