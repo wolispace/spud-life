@@ -35,10 +35,13 @@ const customers = {
 	},
 
   paradeEnd: function () {
-    console.log('end of customers');
+    customers.list.forEach(customer => {
+      customer.remove();
+		});
     customers.list = [];
     customers.qty = 0;
     customers.done = 0;
+    // animate coins into basket
   },
 
 	makePath: function (startItem, endItem) {
@@ -52,6 +55,7 @@ const customers = {
 	},
 
 	animatePath(startItem, endItem, onEnd) {
+    console.log('animating path ', startItem, endItem);
 		// slow start fast middle
 		var easing = 'cubic-bezier(0, 0, .25, 0)';
 		// slow and get faster
