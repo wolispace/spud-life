@@ -57,8 +57,10 @@ class Tool extends game.Item {
   }
 
   resetQty() {
-    this.qty = this.max;
-    this.updateQty();
+    if (this.max > 0) {
+      this.qty = this.max;
+      this.updateQty();
+    }
   }
 
   renderQty() {
