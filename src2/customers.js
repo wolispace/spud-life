@@ -2,10 +2,10 @@ const customers = {
   list: [],
   qty: 0,
   done: 0,
-  income: 100,
+  duration: 3,
+  gap: 100,
 
   find: function (qty) {
-    dialog.hide();
     customers.qty = qty;
     // add as many customers as we have qty
     let counter = 0;
@@ -30,7 +30,7 @@ const customers = {
   parade: function () {
     customers.list.forEach(customer => {
       let endItem = { x: buildings.list.cart.x - rnd(sprite.width / 2), y: customer.y };
-      let delay = (customer.qty * 200) + rnd(800);
+      let delay = (customer.qty * customers.gap) + rnd(customers.gap);
       setTimeout(customers.animatePath, delay, customer, endItem);
     });
   },
@@ -39,13 +39,16 @@ const customers = {
     customers.list.forEach(customer => {
       customer.remove();
     });
+    customers.coins();
+  },
+  
+  reset: function () {
     customers.list = [];
     customers.qty = 0;
     customers.done = 0;
-    // animate coins into basket
-    customers.coins();
   },
-
+  
+  // animate coins into basket
   coins: function () {
     let params = {
       x: buildings.list.cart.x,
@@ -57,9 +60,9 @@ const customers = {
     let endItem = tools.list.wallet;
     let onEnd = function () {
       game.spriteBox.remove();
-      endItem.addQty(customers.income);
+      endItem.addQty(buildings.list.cart.income);
       game.save();
-      customers.income = 0;
+      buildings.list.cart.income = 0;
     };
     game.spriteBox.animateArc(endItem, onEnd);
   },
@@ -75,21 +78,13 @@ const customers = {
   },
 
   animatePath(startItem, endItem) {
-    let duration = 3;
-    // slow start fast middle
     var easing = 'cubic-bezier(0, 0, .25, 0)';
-    // slow and get faster
-    //easing = 'cubic-bezier(0.3, 0, 1, 1)';
-    //easing = 'ease-in';
-    //easing = 'linear';
     startItem.sprite.style.display = 'block';
     startItem.sprite.style.offsetPath = customers.makePath(startItem, endItem);
     startItem.sprite.style.offsetRotate = `0deg`;
-    startItem.sprite.style.animation = `parade2 ${duration}s ${easing} 0s 1 normal forwards`;
+    startItem.sprite.style.animation = `parade2 ${customers.duration}s ${easing} 0s 1 normal forwards`;
     startItem.sprite.addEventListener("animationend", function handler() {
-      let id = this.getAttribute('id').split('_')[1] - 1;
       customers.done++;
-
       if (customers.qty == customers.done) {
         customers.paradeEnd();
       }

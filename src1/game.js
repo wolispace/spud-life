@@ -11,6 +11,7 @@ const game = {
   step: { x: 5, y: 5 },
   incrementQty: 2,
 
+
   // everything show on the page is an Item with coords and an svg
   Item: class {
     id = '';
@@ -139,7 +140,9 @@ const game = {
     }
 
     remove() {
-      this.sprite.remove();
+      if (this.sprite) {
+        this.sprite.remove();
+      }
     }
 
     hide() {

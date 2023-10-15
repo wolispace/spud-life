@@ -45,12 +45,14 @@ class Cart extends game.Item {
   }
 
   cook() {
-
+    this.reset();
+    dialog.hide();
     this.allocate();
     Object.entries(this.machines).forEach(([key, machine]) => {
       if (machine.qty > 0) {
-        this.meals += machine.qty;
         let income = machine.qty * machine.pricePerItem;
+        this.meals += machine.qty;
+        this.income += income;
         if (!this.list[machine.makes]) {
           this.list[machine.makes] = { meals: 0, income: 0 };
         }
@@ -58,8 +60,6 @@ class Cart extends game.Item {
         this.list[machine.makes].income += income;
       }
     });
-
-    console.log(this);
     customers.find(this.meals);
   }
 
@@ -86,7 +86,6 @@ class Cart extends game.Item {
   // {max: {pricePerItem: 20, qty: 0}, chips: {pricePerItem: 15, qty: 0}, soup: {pricePerItem:20, qty: 0}}
 
   machineList() {
-
     Object.entries(player.cart).forEach(([itemName]) => {
       let itemInfo = items[itemName];
       if (!this.machines[itemInfo.makes]
@@ -106,5 +105,14 @@ class Cart extends game.Item {
         this.machines['max'].makes = itemInfo.makes;
       }
     });
+  }
+
+  summarise() {
+    let html = '';
+    Object.entries(this.list).forEach(([machineName, itemInfo]) => {
+      html += `<div>${itemInfo.meals} meals of ${machineName} is ${itemInfo.income}<//div>`;
+    });
+    html += `<div>${this.meals} total meals is ${this.income}</div>`;
+    return html;
   }
 };

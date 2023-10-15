@@ -96,12 +96,10 @@ const tools = {
     wallet: function () {
       let title = "Wallet";
       let content = `<div class="dialog-message-content">`;
-      content += `This is your wallet.`;
+      content += `Summary of your last sale`;
+      content += buildings.list.cart.summarise();
       let footer = "";
       footer += `<button class="buttonize" onclick="field.addGrid()"> Show grid </button>`;
-      footer += `<button class="buttonize" onclick="customers.find(3)">Customers </button>`;
-//      footer += `<button class="buttonize" onclick="customers.parade()">Parade </button>`;
-      
       footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
       dialog.cancelButton = function () { dialog.hide(); };
       dialog.okButton = function () { console.log('wallet OK'); dialog.hide(); };
