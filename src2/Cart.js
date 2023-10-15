@@ -2,10 +2,13 @@ class Cart extends game.Item {
   machines = {
     max: {
       pricePerItem: 0,
-      name: 'unknown', 
+      name: 'unknown',
       qty: 0,
     }
   };
+  meals = 0;
+  income = 0;
+  list = {};
 
   constructor() {
     let params = {
@@ -18,7 +21,7 @@ class Cart extends game.Item {
     };
     super(params);
   }
-  
+
   enter() {
     let title = "Your food cart";
     let content = `<div class="dialog-message-content">`;
@@ -35,13 +38,29 @@ class Cart extends game.Item {
     console.log('exiting the cart');
   }
 
+  reset() {
+    this.meals = 0;
+    this.income = 0;
+    this.list = {};
+  }
+
   cook() {
+
     this.allocate();
-    console.log(this.machines);
     Object.entries(this.machines).forEach(([key, machine]) => {
-      let saleAmount = machine.qty * machine.pricePerItem;
-      tools.list.wallet.addQty(saleAmount);
+      if (machine.qty > 0) {
+        this.meals += machine.qty;
+        let income = machine.qty * machine.pricePerItem;
+        if (!this.list[machine.makes]) {
+          this.list[machine.makes] = { meals: 0, income: 0 };
+        }
+        this.list[machine.makes].meals += machine.qty;
+        this.list[machine.makes].income += income;
+      }
     });
+
+    console.log(this);
+    customers.find(this.meals);
   }
 
   allocate() {
@@ -52,13 +71,13 @@ class Cart extends game.Item {
     Object.entries(tools.list.basket.list).forEach(([itemName, qty]) => {
       let itemInfo = items[itemName];
       if (itemInfo.type == "spuds") {
-        //we we dont have a machine for this spuds bestfor then dumpt it into the max machine
+        //we we dont have a machine for this spuds bestfor then dump it into the max machine
         let bestFor = this.machines[itemInfo.bestFor] ? itemInfo.bestFor : 'max';
         this.machines[bestFor].qty += qty;
         // remove item from basket (ie se its to zero)
         tools.list.basket.list[itemName] = 0;
-        tools.list.basket.addQty(0-qty);
-       
+        tools.list.basket.addQty(0 - qty);
+
       }
     });
   }
@@ -67,22 +86,24 @@ class Cart extends game.Item {
   // {max: {pricePerItem: 20, qty: 0}, chips: {pricePerItem: 15, qty: 0}, soup: {pricePerItem:20, qty: 0}}
 
   machineList() {
-    
+
     Object.entries(player.cart).forEach(([itemName]) => {
       let itemInfo = items[itemName];
-      if (!this.machines[itemInfo.makes] 
-        || (this.machines[itemInfo.makes] 
-            && this.machines[itemInfo.makes].pricePerItem < itemInfo.pricePerItem)) {
+      if (!this.machines[itemInfo.makes]
+        || (this.machines[itemInfo.makes]
+          && this.machines[itemInfo.makes].pricePerItem < itemInfo.pricePerItem)) {
         this.machines[itemInfo.makes] = {
-          pricePerItem: itemInfo.pricePerItem, 
-          name: itemName, 
+          pricePerItem: itemInfo.pricePerItem,
+          name: itemName,
+          makes: itemInfo.makes,
           qty: 0
         };
       }
       // record the max if there are no bestfors that match each spud
       if (this.machines['max'].pricePerItem < itemInfo.pricePerItem) {
-        this.machines['max'].pricePerItem  = itemInfo.pricePerItem;
+        this.machines['max'].pricePerItem = itemInfo.pricePerItem;
         this.machines['max'].name = itemName;
+        this.machines['max'].makes = itemInfo.makes;
       }
     });
   }

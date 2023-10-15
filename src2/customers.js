@@ -75,6 +75,7 @@ const customers = {
   },
 
   animatePath(startItem, endItem) {
+    let duration = 3;
     // slow start fast middle
     var easing = 'cubic-bezier(0, 0, .25, 0)';
     // slow and get faster
@@ -84,7 +85,7 @@ const customers = {
     startItem.sprite.style.display = 'block';
     startItem.sprite.style.offsetPath = customers.makePath(startItem, endItem);
     startItem.sprite.style.offsetRotate = `0deg`;
-    startItem.sprite.style.animation = `parade2 8s ${easing} 0s 1 normal forwards`;
+    startItem.sprite.style.animation = `parade2 ${duration}s ${easing} 0s 1 normal forwards`;
     startItem.sprite.addEventListener("animationend", function handler() {
       let id = this.getAttribute('id').split('_')[1] - 1;
       customers.done++;
