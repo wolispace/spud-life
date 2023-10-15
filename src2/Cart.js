@@ -110,9 +110,9 @@ class Cart extends game.Item {
   summarise() {
     let html = '';
     Object.entries(this.list).forEach(([machineName, itemInfo]) => {
-      html += `<div>${itemInfo.meals} meals of ${machineName} is ${itemInfo.income}<//div>`;
+      html += `<div>${itemInfo.meals} meals of ${machineName} is $${itemInfo.income}<//div>`;
     });
-    html += `<div>${this.meals} total meals is ${this.income}</div>`;
+    html += `<div><br/><strong>${this.meals} total meals is $${this.income}</string></div>`;
     return html;
   }
 };

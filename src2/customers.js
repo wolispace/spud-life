@@ -62,7 +62,6 @@ const customers = {
       game.spriteBox.remove();
       endItem.addQty(buildings.list.cart.income);
       game.save();
-      buildings.list.cart.income = 0;
     };
     game.spriteBox.animateArc(endItem, onEnd);
   },
