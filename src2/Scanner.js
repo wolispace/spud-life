@@ -12,7 +12,7 @@ class Scanner extends game.Item {
   setup() {
     // the bigger the player.scanLevel the smaller the distance from the player
     // 50 * 2 / 1
-    this.scanDepth = (sprite.width * 2) / player.scanLevel;
+    this.scanDepth = sprite.width / player.scanLevel;
     this.setRange();
   }
 
@@ -38,8 +38,14 @@ class Scanner extends game.Item {
       });
 
       if (foundItem) {
+        if (isDev) {
+          this.showRange(foundItem);
+        }
         this.on();
       } else {
+        if (isDev) {
+          this.hideRange();
+        }
         this.off();
       }
     }
@@ -70,6 +76,28 @@ class Scanner extends game.Item {
     dialog.cancelButton = function () { dialog.hide(); };
     dialog.okButton = function () { dialog.hide(); };
     dialog.render(title, content, footer);
+  }
+
+  showRange(itemInfo) {
+    let scannerRange = document.querySelector(`#scanner-range`);
+    if (!scannerRange) {
+      addToBody(`<div id="scanner-range"></div>`);
+      scannerRange = document.querySelector(`#scanner-range`);
+    }
+    scannerRange.style.display = "block";
+    scannerRange.style.top = `${itemInfo.y}px`;
+    scannerRange.style.left = `${itemInfo.x}px`;
+    scannerRange.style.width = `${itemInfo.w}px`;
+    scannerRange.style.height = `${itemInfo.h}px`;
+  }
+
+  hideRange() {
+    let scannerRange = document.querySelector(`#scanner-range`);
+    if (!scannerRange) {
+      addToBody(`<div id="scanner-range"></div>`);
+      scannerRange = document.querySelector(`#scanner-range`);
+    }
+    scannerRange.style.display = "none";
   }
 }
   

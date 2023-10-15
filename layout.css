@@ -15,6 +15,11 @@ button {
   color: var(--sl-font-color);
 }
 
+#scanner-range {
+  position: absolute;
+  border:2px solid white;
+}
+
 @media (max-width: 480px) {
 
   .dialog,
