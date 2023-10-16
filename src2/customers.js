@@ -2,19 +2,24 @@ const customers = {
   list: [],
   qty: 0,
   done: 0,
-  duration: 6,
-  gap: 4000,
+  duration: 3,
+  gap: 2000,
+
 
   find: function (qty) {
     dialog.hide();
     customers.qty = qty;
+    customers.endItem = { 
+      x: buildings.list.cart.x - rnd(sprite.width / 2), 
+      y: (game.playerItem.h * sky.height) - game.playerItem.h
+     };
     // add as many customers as we have qty
     let counter = 0;
     while (counter++ < qty) {
       let params = {
         id: `customer_${counter}`,
         x: sprite.width * (game.grid.x + 1),
-        y: (game.playerItem.h * sky.height) - game.playerItem.h,
+        y: customers.endItem.y,
         w: sprite.width,
         h: sprite.height,
         qty: 1,
@@ -30,10 +35,19 @@ const customers = {
 
   parade: function () {
     customers.list.forEach(customer => {
-      let endItem = { x: buildings.list.cart.x - rnd(sprite.width / 2), y: customer.y };
       let delay = (customer.qty * customers.gap) + rnd(customers.gap);
-      setTimeout(customers.animatePath, delay, customer, endItem);
+      setTimeout(customers.animateCustomer, delay, customer);
     });
+  },
+
+  animateCustomer: function(customer) {
+    let onEnd = function () {
+      customers.done++;
+      if (customers.qty == customers.done) {
+        customers.paradeEnd();
+      }
+    };
+    customer.animatePath(customers.endItem, customers.duration, onEnd);
   },
 
   paradeEnd: function () {
