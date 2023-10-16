@@ -27,6 +27,7 @@ class Cart extends game.Item {
     let content = `<div class="dialog-message-content">`;
     content += `Sell meals`;
     let footer = "";
+    footer += `<button class="buttonize" onclick="customers.find(10)"> Find 10 </button>`;
     footer += `<button class="buttonize" onclick="buildings.list.cart.cook()"> Cook </button>`;
     footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
     dialog.cancelButton = function () { dialog.hide(); };
