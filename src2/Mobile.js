@@ -183,23 +183,21 @@ class Mobile extends game.Item {
     let startY = 0 + (this.h / 2);
     let endX = endItem.x - this.x + (this.w / 2);
     return `path('M ${startX},${startY} ${endX},${startY}')`;
-   }
+  }
 
-  animatePath(endItem, duration, onEnd) {
+  animatePath(params) {
     var easing = 'cubic-bezier(0, 0, .25, 0)';
     easing = 'linear';
     this.sprite.style.display = 'block';
-    this.sprite.style.offsetPath = this.makePath(endItem);
+    this.sprite.style.offsetPath = this.makePath(params.endItem);
     this.sprite.style.offsetRotate = `0deg`;
-    this.sprite.style.animation = `parade2 ${duration}s ${easing} 0s 1 normal forwards`;
+    this.sprite.style.animation = `parade2 ${params.duration}s ${easing} 0s 1 normal forwards`;
     this.sprite.addEventListener("animationend", function handler() {
-      if (onEnd) {
-        onEnd();
+      if (params.onEnd) {
+        params.onEnd();
       }
       this.removeEventListener("animationend", handler);
     });
   }
-
-
 
 } 
