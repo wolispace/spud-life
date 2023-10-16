@@ -64,7 +64,9 @@ class Mobile extends game.Item {
             Object.entries(buildings.list).forEach(([itemName, item]) => {
               if (this.collides(item)) {
                 this[dirInfo[direction].axis] = oldPos;
-                item.enter();
+                if (item.enter) {
+                  item.enter();
+                }
               }
             });
           } else if (direction == 'right' && player.fields.length > 1 && player.currentField < 1) {

@@ -2,8 +2,8 @@ const customers = {
   list: [],
   qty: 0,
   done: 0,
-  duration: 8,
-  gap: 3000,
+  duration: 6,
+  gap: 4000,
 
   find: function (qty) {
     dialog.hide();
@@ -71,8 +71,7 @@ const customers = {
     let startX = 0 + (startItem.w / 2);
     let startY = 0 + (startItem.h / 2);
     let endX = endItem.x - startItem.x + (startItem.w / 2);
-    let endY = endItem.y - startItem.y + (startItem.h / 2);
-    return `path('M ${startX},${startY} ${endX},${endY}')`;
+    return `path('M ${startX},${startY} ${endX},${startY}')`;
     // TODO: we could add some jiggle to the path
     //return `path('M ${startX},${startY} ${endX+5},${endY} ${endX-3},${endY} ${endX+6},${endY} ${endX-4},${endY} ${endX},${endY} ${startX},${startY}')`;
   },
