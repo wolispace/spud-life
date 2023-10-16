@@ -2,10 +2,11 @@ const customers = {
   list: [],
   qty: 0,
   done: 0,
-  duration: 3,
-  gap: 100,
+  duration: 8,
+  gap: 3000,
 
   find: function (qty) {
+    dialog.hide();
     customers.qty = qty;
     // add as many customers as we have qty
     let counter = 0;
@@ -78,6 +79,7 @@ const customers = {
 
   animatePath(startItem, endItem) {
     var easing = 'cubic-bezier(0, 0, .25, 0)';
+    easing = 'linear';
     startItem.sprite.style.display = 'block';
     startItem.sprite.style.offsetPath = customers.makePath(startItem, endItem);
     startItem.sprite.style.offsetRotate = `0deg`;
