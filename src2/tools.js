@@ -109,7 +109,9 @@ const tools = {
 
   reset: function () {
     Object.entries(tools.list).forEach(([toolName, toolInfo]) => {
-      toolInfo.resetQty();
+      if (!['basket'].includes(toolName)) {
+        toolInfo.resetQty();
+      }
     });
 
     controls.list.spade.resetQty();
