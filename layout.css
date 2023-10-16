@@ -531,16 +531,26 @@ svg.height {
 @keyframes parade {
   50% {
     offset-distance: 100%;
+    transform: scale(1, 1);
   }
-
   50.1%,
-  80% {
+  70% {
     offset-distance: 100%;
+    transform: scale(1, 1);
     animation-play-state: paused;
   }
-
+  70.1% {
+    offset-distance: 100%;
+    transform: scale(-1, 1);
+  }
+  70.2%, 90% {
+    offset-distance: 100%;
+    transform: scale(-1, 1);
+    animation-play-state: paused;
+  }
   100% {
     offset-distance: 0%;
+    transform: scale(-1, 1);
   }
 }
 
