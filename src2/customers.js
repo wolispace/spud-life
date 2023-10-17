@@ -4,7 +4,8 @@ const customers = {
   done: 0,
   duration: 3,
   gap: 2000,
-
+  easing: 'linear',
+  keyFrame: 'parade2',
 
   find: function (qty) {
     dialog.hide();

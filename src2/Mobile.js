@@ -186,12 +186,10 @@ class Mobile extends game.Item {
   }
 
   animatePath(params) {
-    var easing = 'cubic-bezier(0, 0, .25, 0)';
-    easing = 'linear';
     this.sprite.style.display = 'block';
-    this.sprite.style.offsetPath = this.makePath(params.endItem);
     this.sprite.style.offsetRotate = `0deg`;
-    this.sprite.style.animation = `parade2 ${params.duration}s ${easing} 0s 1 normal forwards`;
+    this.sprite.style.offsetPath = this.makePath(params.endItem);
+    this.sprite.style.animation = `${params.keyFrame} ${params.duration}s ${params.easing} 0s 1 normal forwards`;
     this.sprite.addEventListener("animationend", function handler() {
       if (params.onEnd) {
         params.onEnd();
