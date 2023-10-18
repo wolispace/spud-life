@@ -65,10 +65,7 @@ class Mobile extends game.Item {
               if (this.collides(item)) {
                 this[dirInfo[direction].axis] = oldPos;
                 if (item.enter) {
-                  game.playerItem.fixPos();
-                  svg.animate(game.playerItem.sprite, 'shrink', 0.6, function (item) {
-                    buildings.list[itemName].enter();
-                  });
+                  buildings.enter(itemName);
                 }
               }
             });

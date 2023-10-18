@@ -429,26 +429,6 @@ svg.height {
 }
 
 
-@keyframes shrink {
-  0% {
-    transform: scale(1, 1);
-  }
-
-  100% {
-    transform: scale(0, 0);
-  }
-}
-
-@keyframes goInvisible {
-  0% {
-    opacity: 100%;
-  }
-
-  100% {
-    opacity: 0%;
-  }
-}
-
 @keyframes buttonDown {
   0% {
     box-shadow: 0px 5px 5px black;
@@ -645,19 +625,38 @@ svg.height {
 @keyframes shrink {
   0% {
     transform: scale(1, 1);
+    opacity: 1;
   }
-
+  50% {
+    opacity: 1;
+  }
   100% {
-    transform: scale(0, 0);
+    transform: scale(0.5, 0.5);
+    opacity: 0;
   }
 }
 
 @keyframes grow {
   0% {
-    transform: scale(0, 0);
+    transform: scale(0.5, 0.5);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
   }
 
   100% {
     transform: scale(1, 1);
+    opacity: 1;
+  }
+}
+
+@keyframes goInvisible {
+  0% {
+    opacity: 100%;
+  }
+
+  100% {
+    opacity: 0%;
   }
 }
