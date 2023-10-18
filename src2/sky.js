@@ -17,16 +17,16 @@ const sky = {
   seedClouds: function () {
     let cloudCount = 10;
     let params = {
-      x: sprite.width,
-      y: sprite.height,
+      x: sprite.width /2,
+      y: sprite.height / 2,
       w: sprite.width,
       h: sprite.height,
+      item: 'blank',
     };
 
     while (cloudCount-- > 0) {
-      params.id = cloudCount;
+      params.id = `cloud_${cloudCount}`;
       let cloud = new Cloud(params);
-      cloud.setup();
       sky.clouds.push(cloud);
     }
 

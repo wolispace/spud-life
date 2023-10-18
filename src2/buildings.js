@@ -37,13 +37,16 @@ const buildings = {
     buildings.entering = itemName;
     game.playerItem.fixPos();
     svg.animate(game.playerItem.sprite, 'shrink', 0.6, function () {
+      game.playerItem.hide();
       buildings.list[buildings.entering ].enter();
     });
   },
 
   exit: function () {
-    game.playerItem.restorePos();
+    game.playerItem.show();
     svg.animate(game.playerItem.sprite, 'grow', 0.6, function () {
+      game.playerItem.show();
+      game.playerItem.restorePos();
     });
   },
 

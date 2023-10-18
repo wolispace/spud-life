@@ -37,7 +37,7 @@ class Cart extends game.Item {
 
   exit() {
     dialog.hide();
-    game.playerItem.restorePos();
+    buildings.exit();
   }
 
   reset() {

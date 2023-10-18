@@ -82,6 +82,8 @@ const tools = {
       let content = `<div class="dialog-message-content">`;
       content += `This is your axe.`;
       let footer = "";
+      footer += `<button class="buttonize" onclick="dialog.hide(); game.playerItem.hide()"> Hide </button>`;
+      footer += `<button class="buttonize" onclick="dialog.hide(); game.playerItem.show()"> Show </button>`;
       footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
       dialog.cancelButton = function () { dialog.hide(); };
       dialog.okButton = function () { dialog.hide(); };

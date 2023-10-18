@@ -11,14 +11,8 @@ class Hardware extends game.Item {
     };
     super(params);
   }
-  enter() {
-    game.playerItem.fixPos();
-    svg.animate(game.playerItem.sprite, 'shrink', 0.6, function (item) {
-      buildings.list[itemName].enter();
-    });
-  }
 
-  show() {
+  enter() {
     let title = "Hardware store";
     let content = ''; //`<div class="dialog-message-content">`;
 
@@ -35,7 +29,7 @@ class Hardware extends game.Item {
 
   exit() {
     dialog.hide();
-    game.playerItem.restorePos();
+    buildings.exit();
   }
 
   makeButton(itemName) {

@@ -162,6 +162,10 @@ const game = {
     hide() {
       this.sprite.style.display = 'none';
     }
+    
+    show() {
+      this.sprite.style.display = 'block';
+    }
 
     jiggle(direction, onEnd) {
       this.setPos();
