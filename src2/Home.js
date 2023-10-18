@@ -19,15 +19,16 @@ class Home extends game.Item {
     let footer = "";
     
     footer += `<button class="buttonize" onclick="character.customize()"> Wardrobe </button>`;
-    footer += `<button class="buttonize" onclick="dialog.hide()"> Exit </button>`;
+    footer += `<button class="buttonize" onclick="dialog.cancel()"> Exit </button>`;
     footer += `<button class="buttonize" onclick="dialog.confirm()"> Wake </button>`;
-    dialog.cancelButton = function () { dialog.hide(); };
+    dialog.cancelButton = function () { buildings.list.home.exit();; };
     dialog.okButton = function () { buildings.list.home.morning(); };
     dialog.render(title, content, footer);
   }
 
   exit() {
-    console.log('exiting the house');
+    dialog.hide();
+    game.playerItem.restorePos();
   }
 
   morning() {

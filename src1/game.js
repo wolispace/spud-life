@@ -48,6 +48,7 @@ const game = {
     render() {
       let newSprite = `<div id="i${this.id}" class="sprite ${this.classes}">${this.svg}</div>`;
       addToBody(newSprite);
+      this.sprite = sprite.get(this.id);
       this.position();
       this.shrinkWrap();
       this.position();
@@ -82,7 +83,6 @@ const game = {
 
     // sets the divs X and Y
     setPos() {
-      this.sprite = sprite.get(this.id);
       if (this.sprite) {
         this.sprite.style.width = `${this.w}px`;
         this.sprite.style.height = `${this.h}px`;
@@ -96,17 +96,30 @@ const game = {
 
     // shifts the div from starting 1,1 x.y to improve animation speeds
     position() {
-      this.sprite = sprite.get(this.id);
       this.sprite.style.width = `${this.w}px`;
       this.sprite.style.height = `${this.h}px`;
-      // this.sprite.style.top = `${this.y}px`;
-      // this.sprite.style.left = `${this.x}px`;
-
       this.sprite.style.transform = `translate3d(${this.x}px, ${this.y}px, 0)`;
-      //this.sprite.style.transform = `translate(${this.x}px, ${this.y}px)`;
     }
 
+    // restore item to its transform3d position
+    restorePos() {
+      if (this.oldPos.y > 1) {
+        this.sprite.style.top = '1px';
+        this.sprite.style.left = '1px';
+        this.x = this.oldPos.x;
+        this.y = this.oldPos.y;
+        this.position();
+      }
+      this.oldPos = {};
+    }
+
+    // fix the item at this position.. its not translated into this position
     fixPos() {
+      this.oldPos = {
+        x: this.x,
+        y: this.y,
+      };
+      this.sprite.style.transform
       this.sprite = sprite.get(this.id);
       this.sprite.style.width = `${this.w}px`;
       this.sprite.style.height = `${this.h}px`;

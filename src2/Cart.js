@@ -30,13 +30,14 @@ class Cart extends game.Item {
     footer += `<button class="buttonize" onclick="customers.find(10)"> Find 10 </button>`;
     footer += `<button class="buttonize" onclick="buildings.list.cart.cook()"> Cook </button>`;
     footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
-    dialog.cancelButton = function () { dialog.hide(); };
-    dialog.okButton = function () { dialog.hide(); };
+    dialog.cancelButton = function () { buildings.list.cart.exit(); };
+    dialog.okButton = function () { buildings.list.cart.exit(); };
     dialog.render(title, content, footer);
   }
 
   exit() {
-    console.log('exiting the cart');
+    dialog.hide();
+    game.playerItem.restorePos();
   }
 
   reset() {

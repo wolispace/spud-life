@@ -22,13 +22,14 @@ class Hardware extends game.Item {
 
     let footer = "";
     footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
-    dialog.cancelButton = function () { dialog.hide(); };
-    dialog.okButton = function () { dialog.hide(); };
+    dialog.cancelButton = function () { buildings.list.hardware.exit(); };
+    dialog.okButton = function () { buildings.list.hardware.exit(); };
     dialog.render(title, content, footer);
   }
 
   exit() {
-    console.log('exiting the hardware store');
+    dialog.hide();
+    game.playerItem.restorePos();
   }
 
   makeButton(itemName) {
