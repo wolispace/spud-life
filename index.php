@@ -57,6 +57,7 @@ function getScripts($v)
     $scripts = '<script>const isDev = true</script>';
     $scripts .= readFolder("src1", $v);
     $scripts .= readFolder("src2", $v);
+    $scripts .= readFolder("src3", $v);
   }
   
   return $scripts;

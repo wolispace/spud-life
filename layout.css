@@ -51,6 +51,15 @@ button {
       rgba(216, 248, 255, 1) 100%);
 }
 
+.cloud {
+  position: absolute;
+  left: 0;
+  top: 0;
+  fill: white;
+  opacity: 75%;
+  animation-fill-mode: freeze;
+}
+
 .grid {
   border: 1px solid white;
 }
