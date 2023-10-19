@@ -6,6 +6,7 @@ const customers = {
   gap: 2000,
   easing: 'linear',
   keyFrame: 'parade2',
+  repeat: 1,
 
   find: function (qty) {
     dialog.hide();
@@ -82,4 +83,5 @@ const customers = {
     game.spriteBox.animateArc(endItem, onEnd);
   },
 
-}
+};
+

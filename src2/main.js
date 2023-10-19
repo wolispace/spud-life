@@ -69,7 +69,6 @@ function introGame() {
   let introDelay = isDev ? 0.1 : 3;
   svg.animate(containerElement, 'goInvisible', introDelay, function () {
     setContainerBox();
-    sky.render();
     // loads previously save state from localStorage if found
     game.load();
 

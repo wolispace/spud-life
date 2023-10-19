@@ -17,7 +17,7 @@ button {
 
 #scanner-range {
   position: absolute;
-  border:2px solid white;
+  border: 2px solid white;
 }
 
 @media (max-width: 480px) {
@@ -517,90 +517,51 @@ svg.height {
   }
 }
 
-@keyframes parade {
-  50% {
-    offset-distance: 100%;
-    transform: scale(1, 1);
-  }
-  50.1%,
-  70% {
-    offset-distance: 100%;
-    transform: scale(1, 1);
-    animation-play-state: paused;
-  }
-  70.1% {
-    offset-distance: 100%;
-    transform: scale(-1, 1);
-  }
-  70.2%, 90% {
-    offset-distance: 100%;
-    transform: scale(-1, 1);
-    animation-play-state: paused;
-  }
-  100% {
-    offset-distance: 0%;
-    transform: scale(-1, 1);
-  }
-}
-
-@keyframes parade1 {
-  50% {
-    offset-distance: 100%;
-    transform: scale(1, 1);
-  }
-
-  50.1% ,
-  80% {
-    offset-distance: 100%;
-    animation-play-state: paused;
-    transform: scale(1, 1);
-  }
-
-  80.1% {
-    transform: scale(-1, 1);
-  }
-
-  100% {
-    offset-distance: 0%;
-    transform: scale(-1, 1);
-  }
-}
-
 @keyframes parade2 {
   30% {
     offset-distance: 70%;
     transform: scale(1, 1);
     z-index: 1;
   }
-  30.1%, 45% {
+
+  30.1%,
+  45% {
     offset-distance: 70%;
     transform: scale(1, 1);
     animation-play-state: paused;
   }
+
   60% {
     offset-distance: 100%;
     transform: scale(1, 1);
     z-index: 2;
   }
+
   60.1% {
     offset-distance: 100%;
-    transform: scale(-1, 1);  
+    transform: scale(-1, 1);
   }
-  60.2%, 70% {
+
+  60.2%,
+  70% {
     offset-distance: 100%;
     transform: scale(-1, 1);
-    animation-play-state: paused; 
+    animation-play-state: paused;
   }
+
   80% {
     offset-distance: 80%;
     transform: scale(-1, 1);
     z-index: 1;
   }
-  80.1%, 90% {
+
+  80.1%,
+  90% {
     offset-distance: 80%;
     transform: scale(-1, 1);
-    animation-play-state: paused; 
+    animation-play-state: paused;
   }
+
   100% {
     offset-distance: 0%;
     transform: scale(-1, 1);
@@ -627,9 +588,11 @@ svg.height {
     transform: scale(1, 1);
     opacity: 1;
   }
+
   50% {
     opacity: 1;
   }
+
   100% {
     transform: scale(0.5, 0.5);
     opacity: 0;
@@ -641,6 +604,7 @@ svg.height {
     transform: scale(0.5, 0.5);
     opacity: 0;
   }
+
   50% {
     opacity: 1;
   }
@@ -658,5 +622,15 @@ svg.height {
 
   100% {
     opacity: 0%;
+  }
+}
+
+@keyframes drift {
+  0% {
+    offset-distance: 0%;
+  }
+
+  100% {
+    offset-distance: 100%;
   }
 }

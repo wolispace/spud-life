@@ -186,14 +186,17 @@ class Mobile extends game.Item {
   }
 
   animatePath(params) {
+    //void this.sprite.offsetWidth;
     this.sprite.style.display = 'block';
     this.sprite.style.offsetRotate = `0deg`;
     this.sprite.style.offsetPath = this.makePath(params.endItem);
-    this.sprite.style.animation = `${params.keyFrame} ${params.duration}s ${params.easing} 0s 1 normal forwards`;
+    //this.sprite.style.animationPlayState = 'running'; 
+    this.sprite.style.animation = `${params.keyFrame} ${params.duration}s ${params.easing} 0s ${params.repeat} normal forwards`;
     this.sprite.addEventListener("animationend", function handler() {
       if (params.onEnd) {
         params.onEnd();
       }
+      //this.animation = 'none';
       this.removeEventListener("animationend", handler);
     });
   }

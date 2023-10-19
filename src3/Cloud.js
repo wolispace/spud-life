@@ -53,4 +53,5 @@ class Cloud extends Mobile {
 
     return svg.wrap("", "", guts);
   }
-}
+};
+

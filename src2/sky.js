@@ -12,29 +12,48 @@ const sky = {
     skyBox = document.querySelector(`.${sky.id}`);
     skyBox.style.height = `${sprite.height * sky.height}px`;
     sky.seedClouds();
+    sky.moveClouds();
   },
 
   seedClouds: function () {
     let cloudCount = 10;
     let params = {
-      x: sprite.width /2,
-      y: sprite.height / 2,
       w: sprite.width,
       h: sprite.height,
       item: 'blank',
     };
-
     while (cloudCount-- > 0) {
       params.id = `cloud_${cloudCount}`;
+      params.x = - (sprite.width + rnd(sprite.height * 2));
+      params.y = 1 + rnd(sprite.height);
       let cloud = new Cloud(params);
       sky.clouds.push(cloud);
     }
+  },
+
+  moveClouds: function () {
+    let params = {
+      easing: 'linear',
+      keyFrame: 'drift',
+      duration: 10,
+      repeat: 'infinite',
+      endItem: {
+        x: sprite.width * (game.grid.x + 2),
+        y: sprite.height / 2,
+
+      },
+      onEnd: function () {
+        // fluff
+        sky.moveClouds();
+      }
+    };
+    sky.clouds.forEach(function (cloud) {
+      cloud.animatePath(params);
+    });
 
   },
 
 
-
-  
 
   goDark: (straightToBed) => {
     // nightime.. when it ends..wait for customers to finish parade
@@ -44,7 +63,7 @@ const sky = {
       starField.style.opacity = 1;
     });
 
-    svg.animate(nightShade, "go-dark", 8, function () { 
+    svg.animate(nightShade, "go-dark", 8, function () {
       let nightShade = document.querySelector(`#nightShade`);
       nightShade.style.opacity = 1;
       sky.lightDoor();
@@ -63,14 +82,14 @@ const sky = {
     svg.animate(starField, "go-light", 4, function () {
       starField.style.opacity = 0;
     });
-    svg.animate(nightShade, "go-light", 4, function () { 
+    svg.animate(nightShade, "go-light", 4, function () {
       let nightShade = document.querySelector(`#nightShade`);
       nightShade.style.opacity = 0;
       player.daytime = true;
       state.save();
     });
   },
-  
+
   lightDoor: () => {
     let houseDoor = document.querySelector(`#house-door`);
     if (houseDoor) {
@@ -78,12 +97,12 @@ const sky = {
       hint.goHome();
     }
   },
-  
+
   darkDoor: () => {
     let nightShade = document.querySelector(`#house-door`);
     nightShade.style.fill = 'black';
   },
-  
+
   stars: function () {
     let patch = getElementPos(`#patch_0`);
     let width = patch.width * player.cols;
@@ -92,7 +111,7 @@ const sky = {
     let paths = [];
 
     let i = 0;
-    
+
     while (i++ < 100) {
       paths.push({
         s: "",
@@ -101,7 +120,7 @@ const sky = {
         r: rnd(5) / 4,
       });
     }
-    
+
     paths.forEach((path) => {
       // path
       if (path.d) {
