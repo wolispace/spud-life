@@ -24,7 +24,7 @@ const sky = {
     };
     while (cloudCount-- > 0) {
       params.id = `cloud_${cloudCount}`;
-      params.x = - (sprite.width + rnd(sprite.height * 2));
+      params.x = - (rnd(sprite.height * 5));
       params.y = 1 + rnd(sprite.height);
       let cloud = new Cloud(params);
       sky.clouds.push(cloud);
@@ -35,10 +35,10 @@ const sky = {
     let params = {
       easing: 'linear',
       keyFrame: 'drift',
-      duration: 10,
+      duration: 200,
       repeat: 'infinite',
       endItem: {
-        x: sprite.width * (game.grid.x + 2),
+        x: sprite.width * (game.grid.x + rnd(10)),
         y: sprite.height / 2,
 
       },
