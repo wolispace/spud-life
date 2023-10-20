@@ -24,21 +24,20 @@ const sky = {
     };
     while (cloudCount-- > 0) {
       params.id = `cloud_${cloudCount}`;
-      params.x = - (rnd(sprite.height * 5));
-      params.y = 1 + rnd(sprite.height);
+      params.x = - (sprite.width + rnd(sprite.width * 10));
+      params.y = rnd(sprite.height/2);
       let cloud = new Cloud(params);
       sky.clouds.push(cloud);
     }
   },
 
   moveClouds: function () {
+    let speed = 100;
     let params = {
       easing: 'linear',
       keyFrame: 'drift',
-      duration: 200,
       repeat: 'infinite',
       endItem: {
-        x: sprite.width * (game.grid.x + rnd(10)),
         y: sprite.height / 2,
 
       },
@@ -48,6 +47,9 @@ const sky = {
       }
     };
     sky.clouds.forEach(function (cloud) {
+      params.endItem.x = sprite.width * (game.grid.x + rnd(2));
+      params.duration = speed + cloud.y;
+      
       cloud.animatePath(params);
     });
 
