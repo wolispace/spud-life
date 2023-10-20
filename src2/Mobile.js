@@ -73,16 +73,19 @@ class Mobile extends game.Item {
             if (this.x > (sprite.width * game.grid.x) - sprite.width) {
               // change fields
               player.currentField++;
-              this.x = 1;
+              console.log(this);
               setupThings();
+              this.x = 1;
+              this.position();
 
             }
           } else if (direction == 'left' && player.fields.length > 1 && player.currentField > 0) {
             if (this.x < 1) {
               // change fields
               player.currentField--;
-              this.x = (sprite.width * game.grid.x) - sprite.width;
               setupThings();
+              this.x = (sprite.width * game.grid.x) - sprite.width;
+              this.position();
             }
           }
           this[dirInfo[direction].axis] = oldPos;
