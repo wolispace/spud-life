@@ -55,6 +55,7 @@ const basket = {
       player.cart[itemName] = {};
     } else if (itemInfo.type == 'land') {
       player.fields.push([[], [], []]);
+        buildings.list.land.show();
     } else {
       // its a tool.. increment
       let itemClass = tools.list[itemName];
