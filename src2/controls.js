@@ -100,9 +100,9 @@ const controls = {
   },
 
   endInput: function () {
-    if (game.playerItem && game.playerItem.direction) {
-      controls.buttonUp(game.playerItem.direction);
-      clearInterval(timers[game.playerItem.direction]);
+    if (game.direction) {
+      controls.buttonUp(game.direction);
+      clearInterval(timers[game.direction]);
       scanner.scan();
       game.save();
       timers.moving = false;

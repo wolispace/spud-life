@@ -48,11 +48,17 @@ const field = {
     return newFields;
   },
 
-  addRandom: function () {
-    clearBody();
+  addField: function () {
+    buildings.list.land.show();
+    let newField = player.fields.length++;
+    field.addRandom(newField);
+  },
+
+  addRandom: function (fieldId) {
+    console.log('adding to a new field', fieldId);
     let skyBottom = (sprite.height * sky.height);
     // reset field data..
-    player.fields[player.currentField] = [[], [], []];
+    player.fields[fieldId] = [[], [], []];
     let layer = game.ABOVEGROUND;
     let fieldHeight = containerBox.height - sprite.height - skyBottom;
     let fieldWidth = containerBox.width - sprite.width;
@@ -61,15 +67,21 @@ const field = {
       let y = rnd(fieldHeight) + skyBottom;
       let qty = 5;
       let item = rnd(2) == 1 ? 'log' : 'rock';
-      let itemSvg = svg.render(item, 1, '');
       let id = game.uid++;
       game.setUid(item.uid);
       let params = {
-        id: id, x: x, y: y, w: sprite.width, h: sprite.height, qty: qty, classes: '', item: item
+        id: id, 
+        x: x, 
+        y: y, 
+        w: sprite.width, 
+        h: sprite.height, 
+        qty: qty, 
+        classes: '', 
+        item: item,
+        autoRender: false,
       }
       let newItem = new game.Item(params);
-      player.fields[player.currentField][layer].push(newItem);
-      newItem.render(itemSvg);
+      player.fields[fieldId][layer].push(newItem);
     }
     layer = game.SURFACE;
     for (let step = 0; step < 1; step++) {
@@ -83,10 +95,10 @@ const field = {
         id: id, x: x, y: y, 
         w: sprite.width, h: sprite.height, 
         qty: qty, classes: '', item: item,
+        autoRender: false,
       }
       let newItem = new game.Item(params);
-      player.fields[player.currentField][layer].push(newItem);
-      newItem.render();
+      player.fields[fieldId][layer].push(newItem);
     }
     layer = game.UNDERGROUND;
     let maxItems = list.items.list.length;
@@ -98,8 +110,9 @@ const field = {
         w: sprite.width, 
         h: sprite.height,
         qty: 1,
+        autoRender: false,
       }
-      // player.currentField dictates how rare we get
+      // fieldId dictates how rare we get
       if (rnd(3) > 0) {
         params.qty = rnd(4) + 2;
         // TODO take rarity into account
@@ -112,7 +125,7 @@ const field = {
       }
       game.setUid(params.id);
       let newItem = new game.Item(params);
-      player.fields[player.currentField][layer].push(newItem);
+      player.fields[fieldId][layer].push(newItem);
     }
   },
 
@@ -147,6 +160,7 @@ const field = {
   },
 
   refresh: function () {
+    console.log('refresh field');
     player.fields[player.currentField][game.SURFACE].forEach((item) => {
       item.svg = svg.render('hole', item.qty);
       item.render();

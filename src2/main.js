@@ -78,7 +78,7 @@ function introGame() {
       player.day = 1;
       player.body = character.randomBody();
       setupThings();
-      field.addRandom();
+      field.addRandom(player.currentField);
       field.redraw();
       game.save();
     }

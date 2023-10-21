@@ -36,13 +36,16 @@ const game = {
         this.classes = params.classes || '';
         this.item = params.item || '';
         this.svg = params.svg || svg.render(params.item, params.qty);
+        this.autoRender = params.autoRender ?? true;
         this.orientSvg();
         this.setup();
       }
     }
 
     setup() {
-      this.render();
+      if (this.autoRender) {
+        this.render();
+      }
     }
 
     render() {

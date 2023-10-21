@@ -27,7 +27,7 @@ class Mobile extends game.Item {
   }
 
   moveStep(direction, thisStep) {
-    this.direction = direction;
+    game.direction = direction;
     this.look(direction);
     console.log(direction, thisStep);
     let dirInfo = {
@@ -42,8 +42,10 @@ class Mobile extends game.Item {
   }
 
   move(direction) {
+    console.log('move',direction);
     if (!timers.moving) {
-      this.direction = direction;
+      game.direction = direction;
+
       this.look(direction);
       timers[direction] = setInterval(() => {
         let dirInfo = {
@@ -59,7 +61,7 @@ class Mobile extends game.Item {
         game.save();
         if (this.hitItem || !this.withinBounds()) {
           timers.moving = false;
-          if (direction == 'up') {
+          if (direction == 'up' && player.currentField == 0) {
             // are we conflicting with a building?
             Object.entries(buildings.list).forEach(([itemName, item]) => {
               if (this.collides(item)) {
@@ -71,21 +73,29 @@ class Mobile extends game.Item {
             });
           } else if (direction == 'right' && player.fields.length > 1 && player.currentField < 1) {
             if (this.x > (sprite.width * game.grid.x) - sprite.width) {
+              console.log('move right');
               // change fields
               player.currentField++;
               console.log(this);
-              setupThings();
-              this.x = 1;
-              this.position();
-
+              player.x = 5;
+              field.redraw();
+              //this.position();
+              controls.endInput();
+              timers.moving = true;
+              return; 
             }
           } else if (direction == 'left' && player.fields.length > 1 && player.currentField > 0) {
             if (this.x < 1) {
+              console.log('move left');
               // change fields
               player.currentField--;
-              setupThings();
-              this.x = (sprite.width * game.grid.x) - sprite.width;
-              this.position();
+              player.x = (sprite.width * game.grid.x) - sprite.width - 6;
+              field.redraw();
+              //this.position();
+              controls.endInput();
+              timers.moving = true;
+
+              return;
             }
           }
           this[dirInfo[direction].axis] = oldPos;
