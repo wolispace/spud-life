@@ -9,7 +9,10 @@ class Tool extends game.Item {
     params.h = sprite.width;
     params.classes = 'control';
     params.item = params.id;
+    params.autoRender = false;
     super(params);
+
+    controls.renderControl(this);
 
     // setup always uses players values of current use and max uses, lists (for basket) and state (for scanner).
     if (player.tools[this.item]) {
@@ -25,10 +28,9 @@ class Tool extends game.Item {
   }
 
   setup() {
-    this.render();
-    this.sprite.addEventListener("click", () => {
-      this.onClick();
-    });
+    if (this.autoRender) {
+      this.render();
+    }
   }
 
   setQty(newQty) {

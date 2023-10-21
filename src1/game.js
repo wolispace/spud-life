@@ -49,8 +49,9 @@ const game = {
     }
 
     render() {
+      console.trace('rendering', this.id);
       let newSprite = `<div id="i${this.id}" class="sprite ${this.classes}">${this.svg}</div>`;
-      addToBody(newSprite);
+      addToWorld(newSprite);
       this.sprite = sprite.get(this.id);
       this.position();
       this.shrinkWrap();

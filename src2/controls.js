@@ -1,6 +1,16 @@
 const controls = {
   list: {},
 
+  renderControl: function (item) {
+    let newSprite = `<div id="i${item.id}" class="sprite ${item.classes}">${item.svg}</div>`;
+    addToControls(newSprite);
+    item.sprite = sprite.get(item.id);
+    item.position();
+    item.shrinkWrap();
+    item.position();
+  },
+
+
   render: function () {
     let padding = 15;
     let buttons = {
@@ -19,7 +29,8 @@ const controls = {
       };
 
       let params = {
-        id: direction, x: newPos.x, y: newPos.y, qty: coords.qty
+        id: direction, x: newPos.x, y: newPos.y, qty: coords.qty,
+        autoRender: false,
       }
       controls.list[direction] = new Tool(params);
       let controlElement = sprite.get(direction);

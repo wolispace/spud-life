@@ -62,12 +62,12 @@ document.addEventListener("keyup", (event) => {
 
 function introGame() {
   character.bodySet = character.getBodySet();
-  let containerElement = document.querySelector(".container");
   let titleSvg = svg.render('title');
   titleSvg = svg.addOrientationClass(titleSvg);
-  containerElement.innerHTML = titleSvg;
+  addToWorld(titleSvg);
   let introDelay = isDev ? 0.1 : 3;
-  svg.animate(containerElement, 'goInvisible', introDelay, function () {
+  let worldElement = document.querySelector('.world');
+  svg.animate(worldElement, 'goInvisible', introDelay, function () {
     setContainerBox();
     // loads previously save state from localStorage if found
     game.load();
@@ -107,14 +107,14 @@ function setupThings() {
 }
 
 function setContainerBox() {
-  let containerElement = document.querySelector(".container");
+  let containerElement = document.querySelector(".world");
   containerBox = containerElement.getBoundingClientRect();
   sprite.setSize();
 }
 
-function clearBody() {
-  let bodyElement = document.querySelector("body");
-  bodyElement.innerHTML = `<div class="container"></dv><div class="skyBox"></dv>`;
+function clearWorld() {
+  let bodyElement = document.querySelector(".world");
+  bodyElement.innerHTML = `<div class="skyBox"></dv>`;
   sky.render();
 }
 

@@ -14,6 +14,16 @@ function addToBody(html) {
   bodyElement.insertAdjacentHTML('beforeend', html);
 }
 
+function addToWorld(html) {
+  let bodyElement = document.querySelector(".world");
+  bodyElement.insertAdjacentHTML('beforeend', html);
+}
+
+function addToControls(html) {
+  let bodyElement = document.querySelector(".controls");
+  bodyElement.insertAdjacentHTML('beforeend', html);
+}
+
 const state = {
  };
 

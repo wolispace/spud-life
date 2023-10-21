@@ -153,7 +153,7 @@ const field = {
 
   redraw: function () {
     setContainerBox();
-    clearBody();
+    clearWorld();
     field.refresh();
 
     setupThings();

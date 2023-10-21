@@ -91,7 +91,8 @@ function outputGamePage($v, $id = '')
     {$scripts}
   </head>
   <body style='margin: 0'>
-    <div class='container'></div>
+    <div class='world'></div>
+    <div class='controls'></div>
   </body>
 </html>";
 }
