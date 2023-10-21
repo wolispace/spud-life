@@ -8,6 +8,7 @@ class LandBack extends game.Item {
       w: sprite.width,
       h: sprite.width,
       item: 'land-back',
+      autoRender: false,
     };
     super(params);
   }

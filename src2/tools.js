@@ -23,14 +23,6 @@ const tools = {
     });
   },
 
-  show: function () {
-
-  },
-
-  hide: function () {
-
-  },
-
   // cant use ^ or | in spud descriptions!
   decode: function (encodedString) {
     let decoded = {};

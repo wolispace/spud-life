@@ -164,11 +164,17 @@ const game = {
     }
 
     hide() {
-      this.sprite.style.display = 'none';
+      if (this.sprite) {
+        this.sprite.style.display = 'none';
+      }
     }
     
     show() {
-      this.sprite.style.display = 'block';
+      if (!this.sprite) {
+        this.render();
+      } else {
+        this.sprite.style.display = 'block';
+      }
     }
 
     jiggle(direction, onEnd) {
