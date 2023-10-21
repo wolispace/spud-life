@@ -42,10 +42,8 @@ class Mobile extends game.Item {
   }
 
   move(direction) {
-    console.log('move',direction);
     if (!timers.moving) {
       game.direction = direction;
-
       this.look(direction);
       timers[direction] = setInterval(() => {
         let dirInfo = {
@@ -73,7 +71,6 @@ class Mobile extends game.Item {
             });
           } else if (direction == 'right' && player.fields.length > 1 && player.currentField < 1) {
             if (this.x > (sprite.width * game.grid.x) - sprite.width) {
-              console.log('move right');
               // change fields
               player.currentField++;
               console.log(this);
@@ -86,7 +83,6 @@ class Mobile extends game.Item {
             }
           } else if (direction == 'left' && player.fields.length > 1 && player.currentField > 0) {
             if (this.x < 1) {
-              console.log('move left');
               // change fields
               player.currentField--;
               player.x = (sprite.width * game.grid.x) - sprite.width - 6;
@@ -129,9 +125,9 @@ class Mobile extends game.Item {
     spritesList.forEach((spriteBox, index) => {
       if (!this.hitItem && this.collides(spriteBox)) {
         controls.endInput();
+        // clone the object..
         this.hitItem = Object.assign(Object.create(Object.getPrototypeOf(spriteBox)), spriteBox);
         if (layer == game.ABOVEGROUND) {
-          // clone the object..
           function onEnd() {
             if (spriteBox.qty > 0) {
               spriteBox.setPos();
@@ -152,10 +148,10 @@ class Mobile extends game.Item {
 
           if (tools.list[toolName].qty > 0) {
             tools.list[toolName].decrQty();
-            spriteBox.jiggle(this.direction, onEnd);
+            spriteBox.jiggle(game.direction, onEnd);
             return true;
           } else {
-            spriteBox.jiggle(this.direction);
+            spriteBox.jiggle(game.direction);
             return false;
           }
 

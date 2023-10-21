@@ -1,8 +1,8 @@
 const controls = {
   list: {},
 
+  // render control into the controls div not the world div
   renderControl: function (item) {
-    console.log('render control', item);
     let newSprite = `<div id="i${item.id}" class="sprite ${item.classes}">${item.svg}</div>`;
     addToControls(newSprite);
     item.sprite = sprite.get(item.id);
@@ -10,7 +10,6 @@ const controls = {
     item.shrinkWrap();
     item.position();
   },
-
 
   render: function () {
     let padding = 15;
