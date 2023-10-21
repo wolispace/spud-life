@@ -78,6 +78,7 @@ class Tool extends game.Item {
 
   onClick = function () {
     // this gets overridden
+    console.log('generic click');
   }
 
 };

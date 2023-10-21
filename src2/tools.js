@@ -11,13 +11,14 @@ const tools = {
     let params = {
       x: (game.grid.x * sprite.width) - sprite.width - padding,
       y: (game.grid.y * sprite.height) - sprite.height - padding,
+      autoRender: false,
     }
 
     toolList.forEach((itemName) => {
       if (itemName != 'spade') {
         params.id = itemName;
         tools.list[itemName] = new Tool(params);
-        tools.list[itemName].onClick = tools.clicks[itemName];
+        tools.list[itemName].sprite.onclick = tools.clicks[itemName];
         params.x = params.x - tools.list[itemName].w - padding;
       }
     });

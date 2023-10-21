@@ -71,7 +71,9 @@ function introGame() {
     setContainerBox();
     // loads previously save state from localStorage if found
     game.load();
-
+    
+    controls.render();
+    tools.setup();
     if (player.day && player.day > 0) {
       field.redraw();
     } else {
@@ -89,11 +91,10 @@ function setupThings() {
   character.addPlayer();
   buildings.setup();
   buildings.render();
-  controls.render();
   scanner = new Scanner();
   hint.setup();
   dialog.setup();
-  tools.setup();
+
   makeLists();
   if (Object.keys(player.spuds).length === 0 ) {
     spuds.bestForList();

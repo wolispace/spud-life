@@ -2,6 +2,7 @@ const controls = {
   list: {},
 
   renderControl: function (item) {
+    console.log('render control', item);
     let newSprite = `<div id="i${item.id}" class="sprite ${item.classes}">${item.svg}</div>`;
     addToControls(newSprite);
     item.sprite = sprite.get(item.id);

@@ -49,7 +49,6 @@ const game = {
     }
 
     render() {
-      console.trace('rendering', this.id);
       let newSprite = `<div id="i${this.id}" class="sprite ${this.classes}">${this.svg}</div>`;
       addToWorld(newSprite);
       this.sprite = sprite.get(this.id);
