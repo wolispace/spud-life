@@ -103,8 +103,9 @@ const tools = {
   },
 
   reset: function () {
+    let skipTools = ['basket', 'wallet', 'scanner'];
     Object.entries(tools.list).forEach(([toolName, toolInfo]) => {
-      if (!['basket'].includes(toolName)) {
+      if (!skipTools.includes(toolName)) {
         toolInfo.resetQty();
       }
     });
