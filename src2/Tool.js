@@ -39,7 +39,7 @@ class Tool extends game.Item {
   }
 
   addQty(newQty) {
-    this.qty = this.qty + newQty;
+    this.qty = this.qty + parseInt(newQty);
     this.updateQty();
   }
 

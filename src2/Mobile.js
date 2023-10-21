@@ -73,12 +73,10 @@ class Mobile extends game.Item {
             if (this.x > (sprite.width * game.grid.x) - sprite.width) {
               // change fields
               player.currentField++;
-              console.log(this);
               player.x = 5;
               field.redraw();
-              //this.position();
               controls.endInput();
-              timers.moving = true;
+              this.look(direction);
               return; 
             }
           } else if (direction == 'left' && player.fields.length > 1 && player.currentField > 0) {
@@ -87,10 +85,8 @@ class Mobile extends game.Item {
               player.currentField--;
               player.x = (sprite.width * game.grid.x) - sprite.width - 6;
               field.redraw();
-              //this.position();
               controls.endInput();
-              timers.moving = true;
-
+              this.look(direction);
               return;
             }
           }
