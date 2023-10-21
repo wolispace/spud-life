@@ -57,6 +57,7 @@ const customers = {
       customer.remove();
     });
     customers.coins();
+    buildings.exit();
   },
 
   reset: function () {

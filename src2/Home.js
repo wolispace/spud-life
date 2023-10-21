@@ -33,7 +33,7 @@ class Home extends game.Item {
   }
 
   morning() {
-    dialog.hide();
+    buildings.list.home.exit();
     // sky.goLight();
     // home.darkDoor();
     tools.reset();
