@@ -36,6 +36,7 @@ const customers = {
   },
 
   parade: function () {
+    sky.goDark();
     customers.list.forEach(customer => {
       let delay = (customer.qty * customers.gap) + rnd(customers.gap);
       setTimeout(customers.animateCustomer, delay, customer);

@@ -84,6 +84,7 @@ const sky = {
     });
     //element.style.animation = `${type} ${duration}s ease-in-out 0s 1 normal forwards`;
   },
+
   goLight: () => {
     // daytime.. when it ends.. wake up
     let nightShade = document.querySelector(`.nightShade`);
@@ -114,9 +115,9 @@ const sky = {
   },
 
   stars: function () {
-    let patch = getElementPos(`#patch_0`);
-    let width = sprite.width * game.grid.x;
-    let height = sprite.height * 2;
+    let starField = document.querySelector(`.starField`);
+    let width = starField.offsetWidth;
+    let height = starField.offsetHeight;
     let guts = '';
     let paths = [];
 
@@ -145,7 +146,7 @@ const sky = {
     let svgImg = `<svg class="stars" viewBox="0 0 ${width} ${height}">
     ${guts}
     </svg>`;
-    let starField = document.querySelector(`.starField`);
+
     starField.innerHTML = svgImg;
   },
 

@@ -80,15 +80,22 @@ button {
   animation-fill-mode: freeze;
 }
 
-.starfield {
+.starField {
   position: absolute;
   left: 0;
   top: 0;
   width: 100%;
   height: 100px;
-  fill: transparent;
-  opacity: 75%;
+  fill: white;
+  opacity: 0;
   animation-fill-mode: freeze;
+}
+
+.stars {
+  position: absolute;
+  left: 0;
+  top: 0;
+  fill: white;
 }
 
 

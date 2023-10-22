@@ -115,12 +115,9 @@ function setContainerBox() {
 
 function clearWorld() {
   let bodyElement = document.querySelector(".world");
-  let bits = ['skyBox', 'nightShade', 'starField'];
-  bits.forEach((bit) => {
-
-  });
   bodyElement.innerHTML = `<div class="skyBox"><div class="nightShade"></div><div class="starField"></div></dv>`;
   sky.render();
+  sky.stars();
 }
 
 function makeLists() {

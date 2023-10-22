@@ -160,7 +160,6 @@ const field = {
   },
 
   refresh: function () {
-    console.log('refresh field');
     player.fields[player.currentField][game.SURFACE].forEach((item) => {
       item.svg = svg.render('hole', item.qty);
       item.render();
