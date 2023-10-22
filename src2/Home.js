@@ -28,6 +28,7 @@ class Home extends game.Item {
     let footer = "";
     
     footer += `<button class="buttonize" onclick="character.customize()"> Wardrobe </button>`;
+    footer += `<button class="buttonize" onclick="buildings.list.home.evening()"> Sleep </button>`;
     footer += `<button class="buttonize" onclick="dialog.cancel()"> Exit </button>`;
     dialog.cancelButton = function () { buildings.list.home.exit(); };
     dialog.render(title, content, footer);
@@ -51,6 +52,11 @@ class Home extends game.Item {
   exit() {
     dialog.hide();
     buildings.exit();
+  }
+
+  evening() {
+    sky.goDark();
+    buildings.list.home.sleep();
   }
 
   sleep() {
