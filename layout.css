@@ -69,6 +69,29 @@ button {
   animation-fill-mode: freeze;
 }
 
+.nightShade {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100px;
+  background: black;
+  opacity: 0%;
+  animation-fill-mode: freeze;
+}
+
+.starfield {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100px;
+  fill: transparent;
+  opacity: 75%;
+  animation-fill-mode: freeze;
+}
+
+
 .grid {
   border: 1px solid white;
 }
@@ -577,6 +600,24 @@ svg.height {
     z-index: 2;
   }
 }
+
+@keyframes go-dark {
+  from {
+    opacity: 0%;
+  }
+  to {
+    opacity: 100%;
+  }
+}
+
+@keyframes go-light {
+  from {
+    opacity: 100%;
+  }
+  to {
+    opacity: 0%;
+  }
+} 
 
 @keyframes glow {
   from {

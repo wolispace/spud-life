@@ -115,7 +115,11 @@ function setContainerBox() {
 
 function clearWorld() {
   let bodyElement = document.querySelector(".world");
-  bodyElement.innerHTML = `<div class="skyBox"></dv>`;
+  let bits = ['skyBox', 'nightShade', 'starField'];
+  bits.forEach((bit) => {
+
+  });
+  bodyElement.innerHTML = `<div class="skyBox"><div class="nightShade"></div><div class="starField"></div></dv>`;
   sky.render();
 }
 
