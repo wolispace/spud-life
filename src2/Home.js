@@ -71,6 +71,7 @@ class Home extends game.Item {
   
   morning() {
     tools.reset();
+    player.day++;
     let title = "Morning";
     let content = `<div class="dialog-message-content">`;
     content += `It's morning. All of your tools have been refreshed!`;

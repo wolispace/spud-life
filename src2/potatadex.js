@@ -5,7 +5,7 @@ const potatadex = {
     }
     let maxItems = 0;
     let foundItems = 0;
-    let content = `<div class="header-msg">The things you have found:</div>`;
+    let content = `<div class="header-msg">In ${player.day} days, you have found:</div>`;
 
     Object.entries(items).forEach(([itemName, itemInfo]) => {
       itemInfo.name = itemName;
@@ -42,14 +42,18 @@ const potatadex = {
     }
 
     icon = svg.addOrientationClass(icon);
+    let itemName = itemInfo.fullName;
+    let itemDesc = itemInfo.desc;
 
     if (!itemInfo.found) {
-      icon = '???';
+      icon = '<br/> &nbsp; ???';
+      itemName = '????';
+      itemDesc = '??? ?????? ???? ?????? ?? ????';
     }
 
     let content = `<div  class="hardware-button buttonize">`;
     content += ` <div class="hardware-button-icon">${icon}</div>`;
-    content += ` <div class="hardware-button-desc"><b>${itemInfo.fullName}.</b> ${itemInfo.desc}</div>`;
+    content += ` <div class="hardware-button-desc"><b>${itemName}.</b> ${itemDesc}</div>`;
     content += `</div>`;
 
     return content;
