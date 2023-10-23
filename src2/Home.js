@@ -71,6 +71,7 @@ class Home extends game.Item {
   
   morning() {
     tools.reset();
+    field.roll();
     player.day++;
     let title = "Morning";
     let content = `<div class="dialog-message-content">`;

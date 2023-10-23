@@ -1,4 +1,5 @@
 const game = {
+  version: '0.1.0',
   ABOVEGROUND: 0,
   SURFACE: 1,
   UNDERGROUND: 2,
@@ -10,6 +11,7 @@ const game = {
   digging: false,
   step: { x: 5, y: 5 },
   incrementQty: 2,
+  holeLife: 5, // how long until a hole dissapears
 
 
   // everything show on the page is an Item with coords and an svg

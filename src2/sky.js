@@ -62,7 +62,22 @@ const sky = {
 
   },
 
+  setOpacity: function (elementClass, state = 0) {
+    let starField = document.querySelector(elementClass);
+    starField.style.opacity = state;    
+  },
 
+  itsDay: function () {
+    sky.setOpacity(`.nightShade`, 0);
+    sky.setOpacity(`.starField`, 0);
+    sky.darkDoor();
+  },
+
+  itsNight: function() {
+    sky.setOpacity(`.nightShade`, 1);
+    sky.setOpacity(`.starField`, 1);
+    sky.lightDoor();
+  },
 
   goDark: (straightToBed) => {
     // nightime.. when it ends..wait for customers to finish parade

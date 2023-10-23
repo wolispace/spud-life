@@ -24,12 +24,37 @@ class Cart extends game.Item {
   }
 
   enter() {
+    if (player.daytime) {
+      buildings.list.cart.dayDialog();
+    } else {
+      buildings.list.cart.nightDialog();
+    }
+  }
+
+  dayDialog() {
     let title = "Your food cart";
     let content = `<div class="dialog-message-content">`;
-    content += `Sell meals`;
     let footer = "";
-    footer += `<button class="buttonize" onclick="buildings.list.cart.cook()"> Cook </button>`;
-    footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
+    if (basket.hasSpuds()) {
+      content += `Sell meals`;
+      footer += `<button class="buttonize" onclick="buildings.list.cart.cook()"> Cook </button>`;
+    } else {
+      content += `<div>You haven't found any potatoes yet.</div>`;
+      content += `<div>Go out and dig for some or sleep till tomorrow to refresh your tools.</div>`;
+    }
+    footer += `<button class="buttonize" onclick="dialog.confirm()"> Exit </button>`;
+    dialog.cancelButton = function () { buildings.list.cart.exit(); };
+    dialog.okButton = function () { buildings.list.cart.exit(); };
+    dialog.render(title, content, footer);
+  }
+
+  nightDialog() {
+    let title = "Your food cart";
+    let content = `<div class="dialog-message-content">`;
+    content += `<div>It's nighttime and everyone has gone to sleep.</div>`;
+    content += `<div>Go home and get some sleep.</div>`;   
+    let footer = "";
+    footer += `<button class="buttonize" onclick="dialog.confirm()"> Exit </button>`;
     dialog.cancelButton = function () { buildings.list.cart.exit(); };
     dialog.okButton = function () { buildings.list.cart.exit(); };
     dialog.render(title, content, footer);

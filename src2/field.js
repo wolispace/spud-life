@@ -161,8 +161,9 @@ const field = {
 
   refresh: function () {
     player.fields[player.currentField][game.SURFACE].forEach((item) => {
-      item.svg = svg.render('hole', item.qty);
+      item.svg = svg.render('hole', 5);
       item.render();
+      item.sprite.style.opacity = field.holeState(item);
       game.setUid(item.id);
     });
     player.fields[player.currentField][game.ABOVEGROUND].forEach((item) => {
@@ -187,6 +188,26 @@ const field = {
     field.refresh();
   },
 
+  holeState: function (item) {
+    return item.qty / game.holeLife;
+  },
+
+  roll: function () {
+    player.fields.forEach((fieldSpace, fieldId) => {
+      fieldSpace[game.SURFACE].forEach((item, index) => {
+        item.qty--;
+        if (item.qty <= 0) {
+          item.remove();
+          delete fieldSpace[game.SURFACE][index];
+          console.log('removing blank hole', fieldId, index);
+          console.log('add a new spud or item underground in field ', player);
+        } else {
+          item.sprite.style.opacity = field.holeState(item);
+        }
+      });
+    });
+    game.save();
+  }
 
 };
 
