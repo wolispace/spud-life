@@ -67,6 +67,14 @@ const sky = {
     starField.style.opacity = state;    
   },
 
+  refresh: function () {
+    if (player.daytime) {
+      sky.itsDay();
+    } else {
+      sky.itsNight();
+    }
+  },
+
   itsDay: function () {
     sky.setOpacity(`.nightShade`, 0);
     sky.setOpacity(`.starField`, 0);
@@ -126,7 +134,9 @@ const sky = {
 
   darkDoor: () => {
     let houseDoor = document.querySelector(`#house-door`);
-    houseDoor.style.fill = 'black';
+    if (houseDoor) {
+      houseDoor.style.fill = 'black';
+    }
   },
 
   stars: function () {

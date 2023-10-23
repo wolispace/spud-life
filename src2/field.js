@@ -155,8 +155,9 @@ const field = {
     setContainerBox();
     clearWorld();
     field.refresh();
-
+    
     setupThings();
+    sky.refresh();
   },
 
   refresh: function () {
