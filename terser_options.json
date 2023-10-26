@@ -1,0 +1,7 @@
+{
+    "mangle": {
+      "properties": {
+        "reserved": ["game", "machines"]
+      }
+    }
+  }
