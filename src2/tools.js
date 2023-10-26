@@ -96,7 +96,7 @@ const tools = {
       content += `Summary of your last sale`;
       content += buildings.list.cart.summarise();
       let footer = "";
-      footer += `<button class="buttonize" onclick="field.addGrid()"> Show grid </button>`;
+      footer += `<button class="buttonize" onclick="hint.test()"> Hint </button>`;
       footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
       dialog.cancelButton = function () { dialog.hide(); };
       dialog.okButton = function () { console.log('wallet OK'); dialog.hide(); };

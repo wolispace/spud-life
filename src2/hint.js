@@ -1,25 +1,37 @@
 const hint = {
-  pointAt: null,
-  body: null,
+  target: null,
   arrow: null,
+  msg: null,
   message: '',
   okButton: '',
   group: '',
+  visible: false,
+  
   defaultParams: {
     autoRender: false,
   },
-  visible: false,
 
   setup: function () {
     // make two objects.. the body and the arrow
-    if (!hint.body) {
-      hint.defaultParams.svg = svg.render('blank', 1, '');
-      hint.body = new game.Item(hint.defaultParams);
+    let hintBox = document.querySelector(`.hintArrow`);
+
+    if (!hintBox) {
+      addToBody(`
+        <div class='hintArrow'></div>
+        <div class='hintMsg'></div>
+      `);
     }
-    if (!hint.arrow) {
-      hint.defaultParams.svg = svg.render('arrow', 1, '');
-      hint.arrow = new game.Item(hint.defaultParams);
-    }
+    hint.arrow = document.querySelector(`.hintArrow`);
+    hint.msg = document.querySelector(`.hintMsg`);
+    hint.hide();
+  },
+
+  test: function () {
+    dialog.hide();
+    hint.target = buildings.list.home;
+    hint.target = buildings.list.cart;
+    //hint.target = tools.list.scanner;
+    hint.render();
   },
 
   render: function () {
@@ -27,12 +39,52 @@ const hint = {
       hint.hide();
       return;
     }
-    hint.visible = true;
+    hint.pointAt();
+    hint.show();
+  },
+
+  pointAt: function () {
+    let orient = hint.orient();
+    let tCtr = hint.target.centre();
+    console.log('orient', orient);
+    let newPos = {
+      x: tCtr.x,
+      y: tCtr.y,
+    }
+    if (orient.x < 1) {
+      newPos.x = newPos.x + hint.arrow.w;
+    }
+    if (orient.y > 1) {
+      newPos.y = newPos.y - hint.arrow.h;
+    }
+    console.log(`newPos`, newPos);
+    hint.arrow.style.left = `${newPos.x}px`;
+    hint.arrow.style.top = `${newPos.y}px`;
+
+  },
+  
+  // is the target < or > the centre of the world
+  orient: function () {
+    let worldCentre = {
+      x: sprite.width * game.grid.x / 2,
+      y: sprite.height * game.grid.y / 2,
+    }
+    console.log('ctr', worldCentre, hint.target.centre());
+
+    return {
+      x: (hint.target.centre.x < worldCentre.x) ? -1 : 1,
+      y: (hint.target.centre.y < worldCentre.y) ? -1 : 1,
+    }
   },
 
   hide: function () {
-    hint.body.hide();
-    hint.arrow.hide();
+    hint.msg.style.display = 'none';
+    hint.arrow.style.display = 'none';
+  },
+
+  show: function () {
+    hint.msg.style.display = 'block';
+    hint.arrow.style.display = 'block';
   },
 
   // a random OK message

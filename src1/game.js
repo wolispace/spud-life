@@ -178,6 +178,13 @@ const game = {
       }
     }
 
+    centre() {
+      return {
+        x: this.x + (this.w / 2),
+        y: this.y + (this.h / 2),
+      }
+    }
+
     jiggle(direction, onEnd) {
       this.setPos();
       svg.animate(this.sprite, `jiggle-${direction}`, 0.25, onEnd);

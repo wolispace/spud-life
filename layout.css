@@ -435,6 +435,13 @@ svg.height {
   background-color: rgb(248, 189, 117);
 }
 
+.hintArrow {
+  border:2px solid black;
+  width: 2rem;
+  height: 2rem;
+  position: absolute;
+  background: yellow;
+}
 
 #hintArrow {
   position: relative;
