@@ -30,6 +30,7 @@ const hint = {
 
   test: function () {
     dialog.hide();
+    hint.text = 'This is not a pipe. This is not a pipe. This is not a pipe. This is not a pipe. This is not a pipe. ';
     hint.render(game.playerItem);
   },
 
@@ -39,8 +40,9 @@ const hint = {
       hint.hide();
       return;
     }
+    hint.msg.innerHTML = hint.text;
     hint.pointAt();
-    hint.show();
+    hint.showMsg();
   },
 
   pointAt: function () {
@@ -81,47 +83,62 @@ const hint = {
     hint.arrow.style.top = '-1000px';
   },
 
-  show: function () {
+  showMsg: function () {
     // align msg with arrow that is already pointing at the item
-    hint.msg.style.top = ``
+    let verticalOffset = 6;
+      
+    let msgPos = {
+      x: hint.arrow.offsetLeft + (hint.arrow.offsetWidth / 2),
+      y: hint.arrow.offsetTop + (hint.arrow.offsetHeight / 2),
+    }
     if (hint.orient.x == -1) {
+      // shift things back by the width of the msg box
+      msgPos.x = msgPos.x - hint.msg.offsetWidth;
     };
-    },
+    if (hint.orient.y == -1) {
+      // shift things up by the width of the msg box - add some verticalOffset
+      msgPos.y = msgPos.y - hint.msg.offsetHeight - verticalOffset;
+    } else {
+      msgPos.y = msgPos.y + verticalOffset;
+    };
+    hint.msg.style.left = `${msgPos.x}px`;
+    hint.msg.style.top = `${msgPos.y}px`;
+  },
 
-    // a random OK message
-    ok: function () {
-      okText = [
-        "Ok",
-        "Okay",
-        "Righto",
-        "Gotcha",
-        "I see",
-        "Interesting",
-        "Thanks",
-        "Got that",
-        "Roger",
-        "Understood",
-        "Aha",
-        "Go",
-        "Yup",
-        "Makes sense",
-        "Agreed",
-        "Affirmative",
-      ];
-      return okText[rnd(okText.length)];
-    },
+  // a random OK message
+  ok: function () {
+    okText = [
+      "Ok",
+      "Okay",
+      "Righto",
+      "Gotcha",
+      "I see",
+      "Interesting",
+      "Thanks",
+      "Got that",
+      "Roger",
+      "Understood",
+      "Aha",
+      "Go",
+      "Yup",
+      "Makes sense",
+      "Agreed",
+      "Affirmative",
+    ];
+    return okText[rnd(okText.length)];
+  },
 
-    random: function () {
-      let randomHint = [
-        "You may find things other than potatoes buried beneath you",
-        "There are 4 levels of scanner upgrade. The 4th shows what's directly under you",
-        "Everything is saved, all the time (in your browser's local storage)",
-        "If you have a keyboard, use cursor, space, enter and escape keys",
-        "It takes 30 random white circles to make one cloud",
-        "The rarest potatoes are found on the furthest fields",
-      ];
+  random: function () {
+    let randomHint = [
+      "You may find things other than potatoes buried beneath you",
+      "There are 4 levels of scanner upgrade. The 4th shows what's directly under you",
+      "Everything is saved, all the time (in your browser's local storage)",
+      "If you have a keyboard, use cursor, space, enter and escape keys",
+      "It takes 30 random white circles to make one cloud",
+      "The rarest potatoes are found on the furthest fields",
+    ];
 
-      return randomHint[rnd(randomHint.length)];
-    },
+    return randomHint[rnd(randomHint.length)];
+  },
 
-  };
+};
