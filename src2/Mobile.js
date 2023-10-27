@@ -58,7 +58,7 @@ class Mobile extends game.Item {
         this.checkCollisions(game.ABOVEGROUND);
         game.save();
         if (this.hitItem || !this.withinBounds()) {
-          timers.moving = false;
+          controls.endInput();
           if (direction == 'up' && player.currentField == 0) {
             // are we conflicting with a building?
             Object.entries(buildings.list).forEach(([itemName, item]) => {
@@ -69,23 +69,23 @@ class Mobile extends game.Item {
                 }
               }
             });
-          } else if (direction == 'right' && player.fields.length > 1 && player.currentField < 1) {
+          } else if (direction == 'right' && player.y <= (sprite.height * 1.5) && player.fields.length > 1 && player.currentField < 1) {
             if (this.x > (sprite.width * game.grid.x) - sprite.width) {
               // change fields
               player.currentField++;
               player.x = 5;
               field.redraw();
-              controls.endInput();
+              //controls.endInput();
               this.look(direction);
               return; 
             }
-          } else if (direction == 'left' && player.fields.length > 1 && player.currentField > 0) {
+          } else if (direction == 'left' && player.y <= (sprite.height * 1.5) && player.fields.length > 1 && player.currentField > 0) {
             if (this.x < 1) {
               // change fields
               player.currentField--;
               player.x = (sprite.width * game.grid.x) - sprite.width - 6;
               field.redraw();
-              controls.endInput();
+              //controls.endInput();
               this.look(direction);
               return;
             }
