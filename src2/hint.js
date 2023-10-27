@@ -4,6 +4,7 @@ const hint = {
   msg: null,
   message: '',
   okButton: '',
+  btnText: 'Ok',
   group: '',
   visible: false,
 
@@ -30,8 +31,14 @@ const hint = {
 
   test: function () {
     dialog.hide();
+    hint.group = 'test';
+    hint.okButton = 'hint.controls';
     hint.text = 'This is not a pipe. This is not a pipe. This is not a pipe. This is not a pipe. This is not a pipe. ';
     hint.render(game.playerItem);
+  },
+  controls: function () {
+    hint.hide();
+    console.log('blah');
   },
 
   render: function (item) {
@@ -40,9 +47,38 @@ const hint = {
       hint.hide();
       return;
     }
-    hint.msg.innerHTML = hint.text;
+    let skipCheckbox = hint.buildSkip();
+    let input = `<div class="hintButtons">${skipCheckbox}`;
+    input += ` <button class="button buttonize" onclick="hint.confirm()">${hint.btnText}</button></div>`;
+    hint.msg.innerHTML = `${hint.text} ${input}`;
     hint.pointAt();
     hint.showMsg();
+  },
+
+  buildSkip: function () {
+    let skipCheckbox = '';
+    if (hint.group) {
+      skipCheckbox = `<span class="checkboxSpan">`;
+      skipCheckbox += `<input type="checkbox" id="hintSkip" />`;
+      skipCheckbox += `<label class="checkboxLabel" for="hintSkip">Hide next time </label></span>`;
+    }
+    return skipCheckbox;
+  },
+
+  confirm: function () {
+    hint.hide();
+    // if they don't want to see this again, then mark it as hinted
+    hint.isItSkipped();
+    eval(`${hint.okButton}()`);
+  },
+
+  isItSkipped: function () {
+    let skipHint = document.querySelector('#hintSkip');
+    if (skipHint && skipHint.checked) {
+      player.hinted[hint.group] = true;
+      game.save();
+      hint.hide();
+    }
   },
 
   pointAt: function () {
@@ -86,7 +122,7 @@ const hint = {
   showMsg: function () {
     // align msg with arrow that is already pointing at the item
     let verticalOffset = 6;
-      
+
     let msgPos = {
       x: hint.arrow.offsetLeft + (hint.arrow.offsetWidth / 2),
       y: hint.arrow.offsetTop + (hint.arrow.offsetHeight / 2),
