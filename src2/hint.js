@@ -31,18 +31,29 @@ const hint = {
 
   test: function () {
     dialog.hide();
+    hint.target = game.playerItem;
     hint.group = 'test';
+    hint.btnText = hint.ok();
     hint.okButton = 'hint.controls';
     hint.text = 'This is not a pipe. This is not a pipe. This is not a pipe. This is not a pipe. This is not a pipe. ';
-    hint.render(game.playerItem);
-  },
-  controls: function () {
-    hint.hide();
-    console.log('blah');
+    hint.render();
   },
 
-  render: function (item) {
-    hint.target = item;
+  controls: function () {
+    hint.hide();
+    hint.target = tools.list.basket;
+    hint.group = 'test';
+    hint.btnText = hint.ok();
+    hint.okButton = 'hint.done';
+    hint.text = 'Items end up in your basket.';
+    hint.render();
+  },
+
+  done: function () {
+    hint.hide();
+  },
+
+  render: function () {
     if (player.hinted[hint.group] || !player.hints) {
       hint.hide();
       return;
@@ -60,7 +71,7 @@ const hint = {
     if (hint.group) {
       skipCheckbox = `<span class="checkboxSpan">`;
       skipCheckbox += `<input type="checkbox" id="hintSkip" />`;
-      skipCheckbox += `<label class="checkboxLabel" for="hintSkip">Hide next time </label></span>`;
+      skipCheckbox += `<label class="checkboxLabel" for="hintSkip">Hide</label></span>`;
     }
     return skipCheckbox;
   },
