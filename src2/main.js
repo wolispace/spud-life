@@ -46,17 +46,24 @@ window.addEventListener("resize", (event) => {
 });
 
 document.addEventListener("keydown", (event) => {
-  //event.preventDefault();
-  let direction = game.getDirection(event);
-  if (game.isDirection(direction)) {
-    game.playerItem.move(direction);
-  } else if (event.code == 'Space') {
-    controls.dig();
+  if (!game.keydown) {
+    //event.preventDefault();
+    console.log('keydown', event.code);
+    let direction = game.getDirection(event);
+    if (game.isDirection(direction)) {
+      game.playerItem.move(direction);
+    } else if (event.code == 'Space') {
+      controls.dig();
+    }
+    game.keydown = true;
   }
+
 });
 
 document.addEventListener("keyup", (event) => {
   //event.preventDefault();
+  game.keydown = false;
+  console.log('keyup', event.code);
   controls.endInput();
 });
 
