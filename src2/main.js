@@ -83,6 +83,7 @@ function introGame() {
       field.addRandom(player.currentField);
       field.redraw();
       game.save();
+      hint.player();
     }
   });
 }
