@@ -207,7 +207,44 @@ const field = {
       });
     });
     game.save();
-  }
+  },
+
+  grass: function () {
+    let grassField = document.querySelector(`.grassField`);
+    let width = grassField.offsetWidth;
+    let height = grassField.offsetHeight;
+    let guts = '';
+    let paths = [];
+
+    let i = 0;
+
+    while (i++ < 100) {
+      paths.push({
+        s: "",
+        cx: rnd(width),
+        cy: rnd(height),
+        r: rnd(5) / 4,
+      });
+    }
+
+    paths.forEach((path) => {
+      // path
+      if (path.d) {
+        guts += `<path d="${path.d}" style="${path.s}" />`;
+      }
+      // circle
+      if (path.r) {
+        guts += `<circle cx="${path.cx}" cy="${path.cy}" r="${path.r}"  style="${path.s}" />`;
+      }
+    });
+
+    let svgImg = `<svg class="stars" viewBox="0 0 ${width} ${height}">
+    ${guts}
+    </svg>`;
+
+    grassField.innerHTML = svgImg;
+  },
+
 
 };
 

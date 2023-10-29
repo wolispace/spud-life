@@ -4,7 +4,7 @@ const hint = {
   msg: null,
   message: '',
   okButton: '',
-  btnText: 'Ok',
+  btnText: null,
   group: '',
   visible: false,
 
@@ -58,9 +58,10 @@ const hint = {
       hint.hide();
       return;
     }
+    let btnText = hint.btnText || hint.ok();
     let skipCheckbox = hint.buildSkip();
     let input = `<div class="hintButtons">${skipCheckbox}`;
-    input += ` <button class="button buttonize" onclick="hint.confirm()">${hint.btnText}</button></div>`;
+    input += ` <button class="button buttonize" onclick="hint.confirm()">${btnText}</button></div>`;
     hint.msg.innerHTML = `${hint.message} ${input}`;
     hint.pointAt();
     hint.showMsg();
@@ -133,6 +134,7 @@ const hint = {
     hint.msg.style.top = '-200px';
     hint.arrow.style.top = '-200px';
     hint.msg.innerHTML = '';
+    hint.btnText = null;
   },
 
   showMsg: function () {
