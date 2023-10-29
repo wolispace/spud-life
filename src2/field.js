@@ -55,7 +55,6 @@ const field = {
   },
 
   addRandom: function (fieldId) {
-    console.log('adding to a new field', fieldId);
     let skyBottom = (sprite.height * sky.height);
     // reset field data..
     player.fields[fieldId] = [[], [], []];
@@ -157,6 +156,7 @@ const field = {
     field.refresh();
     setupThings();
     sky.refresh();
+    field.grass();
   },
 
   refresh: function () {
@@ -209,21 +209,58 @@ const field = {
     game.save();
   },
 
+  grass1: function () {
+    let world = document.querySelector(`.world`);
+    let svgIcon = svg.render('grass', 3, '');
+    var encoded = window.btoa(svgIcon);
+    world.style.background = "url(data:image/svg+xml;base64,"+encoded+")";
+  },
+
   grass: function () {
     let grassField = document.querySelector(`.grassField`);
-    let width = grassField.offsetWidth;
-    let height = grassField.offsetHeight;
+    let params = {
+      x: 1,
+      y: sprite.height * sky.height,
+      w: sprite.width * game.grid.x,
+      h: sprite.height * game.grid.y - sky.height,
+    }
+    grassField.style.left = `${params.x}px`;
+    grassField.style.top = `${params.y}px`;
+    grassField.style.width = `${params.w}px`;
+    grassField.style.height = `${params.h}px`;
+
     let guts = '';
     let paths = [];
 
     let i = 0;
+    let maxGrass =  game.grid.x *  game.grid.y;
 
-    while (i++ < 100) {
+    while (i++ < maxGrass) {
+      let clump = {
+        x: rnd(params.w),
+        y: rnd(params.h),
+        dx: halfRnd(3),
+        dy: 10,
+        mx: 5, 
+        my: 5,       
+      };
+
+      // M447,213 447,213 M452,213 446,213 M457,213 448,208
+      let path = `M${clump.x},${clump.y} `;
+      path += (clump.x + clump.dx) + ',' + (clump.y + clump.my + rnd(clump.dy));
+
+      path += ` M${clump.x + clump.mx},${clump.y} `;
+      path += (clump.x + clump.dx * 2) + ',' + (clump.y + clump.my + rnd(clump.dy));
+
+      path += ` M${clump.x + clump.mx},${clump.y} `;
+      path += (clump.x + clump.dx * 3) + ',' + (clump.y + clump.my + rnd(clump.dy));
+
+      // path += ` M${clump.x + (clump.mx * 2)},${clump.y} `;
+      // path += (clump.x + halfRnd(clump.dx)) + ',' + (clump.y - rnd(clump.dy));
+
       paths.push({
-        s: "",
-        cx: rnd(width),
-        cy: rnd(height),
-        r: rnd(5) / 4,
+        s: "stroke-width:2;stroke-linecap:round;stroke:darkgreen;",
+        d: path,
       });
     }
 
@@ -232,13 +269,9 @@ const field = {
       if (path.d) {
         guts += `<path d="${path.d}" style="${path.s}" />`;
       }
-      // circle
-      if (path.r) {
-        guts += `<circle cx="${path.cx}" cy="${path.cy}" r="${path.r}"  style="${path.s}" />`;
-      }
     });
 
-    let svgImg = `<svg class="stars" viewBox="0 0 ${width} ${height}">
+    let svgImg = `<svg class="grass" viewBox="0 0 ${params.w} ${params.h}">
     ${guts}
     </svg>`;
 
