@@ -32,15 +32,18 @@ const controls = {
         id: direction, x: newPos.x, y: newPos.y, qty: coords.qty,
         autoRender: false,
       }
-      controls.list[direction] = new Tool(params);
-      let controlElement = sprite.get(direction);
-
-      controls.stopDefaults(controlElement);
-      if (['spade'].includes(direction)) {
+      if (direction == 'spade') {
+        tools.list[direction] = new Tool(params);
+        let controlElement = sprite.get(direction);
+        controls.stopDefaults(controlElement);
         controls.addDigEvent(controlElement);
       } else {
+        controls.list[direction] = new Tool(params);
+        let controlElement = sprite.get(direction);
+        controls.stopDefaults(controlElement);
         controls.addMoveEvent(controlElement, direction);
       }
+
     });
   },
 
@@ -75,7 +78,7 @@ const controls = {
       return;
     }
     let skyBottom = (sprite.height * sky.height);
-    if (game.playerItem.y > skyBottom && controls.list['spade'].qty > 0) {
+    if (game.playerItem.y > skyBottom && tools.list['spade'].qty > 0) {
       game.digging = true;
       // add the hole first
       let params = {
@@ -91,7 +94,7 @@ const controls = {
       let newHole = new game.Item(params);
       player.fields[player.currentField][game.SURFACE].push(newHole);
       game.playerItem.checkCollisions(game.UNDERGROUND);
-      controls.list['spade'].decrQty();
+      tools.list['spade'].decrQty();
       game.save();
     }
   },

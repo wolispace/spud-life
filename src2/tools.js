@@ -111,9 +111,6 @@ const tools = {
         toolInfo.resetQty();
       }
     });
-
-    controls.list.spade.resetQty();
-
   },
 
 };

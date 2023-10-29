@@ -208,7 +208,7 @@ const hint = {
     hint.render();
   },
   spade: function () {
-    hint.target = controls.list.spade;
+    hint.target = tools.list.spade;
     hint.message = `Use your spade to dig where you stand.`;
     hint.okButton = 'hint.field';
     hint.group = 'spade',
