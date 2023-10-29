@@ -35,7 +35,7 @@ const hint = {
     hint.group = 'test';
     hint.btnText = hint.ok();
     hint.okButton = 'hint.controls';
-    hint.text = 'This is not a pipe. This is not a pipe. This is not a pipe. This is not a pipe. This is not a pipe. ';
+    hint.message = 'This is not a pipe. This is not a pipe. This is not a pipe. This is not a pipe. This is not a pipe. ';
     hint.render();
   },
 
@@ -130,8 +130,9 @@ const hint = {
   },
 
   hide: function () {
-    hint.msg.style.top = '-1000px';
-    hint.arrow.style.top = '-1000px';
+    hint.msg.style.top = '-200px';
+    hint.arrow.style.top = '-200px';
+    hint.msg.innerHTML = '';
   },
 
   showMsg: function () {
