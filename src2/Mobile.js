@@ -148,6 +148,7 @@ class Mobile extends game.Item {
             return true;
           } else {
             spriteBox.jiggle(game.direction);
+            hint.toolUsedUp(toolName);
             return false;
           }
 

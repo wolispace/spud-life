@@ -225,7 +225,7 @@ const hint = {
 
   noDigHome: function () {
     hint.target = game.playerItem;
-    hint.message = `You can't dig here. Move down onto an empty patch and dig there. [${hint.ok()}]`;
+    hint.message = `You can't dig here. Move down onto an empty patch and dig there.`;
     hint.okButton = 'hint.close';
     hint.group = 'noDigHome';
     hint.render();
@@ -234,22 +234,30 @@ const hint = {
   toolUsedUp: function (toolName) {
     hint.target = tools.list[toolName];
     hint.message = `Your ${toolName} is exhausted. Tomorrow morning it will be refreshed and you can use it again.`;
-    hint.okButton = 'hint.toolCart';
-    hint.group = 'toolUsedUp';
+    hint.okButton = 'hint.close';
+    if (toolName == 'spade') {
+      hint.okButton = 'hint.letsCook';
+    }
+    hint.group = toolName;
     hint.render();
   },
 
-  toolCart: function () {
-    hint.target = buildings.list.cart;
-    
-    hint.message = `It's time to load your machines with spuds and open for the night.`;
-    hint.okButton = 'hint.toolHome';
-    hint.group = 'toolCart';
+  letsCook: function () {
+    if (tools.list.basket.hasSpuds()) {
+      hint.target = buildings.list.cart;
+      hint.message = `It's time to cook up some spuds using your machines. `;
+      hint.group = 'letsCook';
+    } else {
+      hint.target = buildings.list.home;
+      hint.message = `You found no spuds today so go home and get some sleep. Tomorrow you can try again.`;
+      hint.group = 'letsSleep';
+    }
+    hint.okButton = 'hint.close';
     hint.render();
   },
 
   toolHome: function () {
-    hint.target = game.playerItem;
+    hint.target = buildings.list.home;
     
     hint.message = `If you have no spuds, go home and bring on the night.`;
     hint.okButton = 'hint.toolHW';
@@ -259,7 +267,7 @@ const hint = {
 
   toolHW: function () {
     hint.target = buildings.list.hardware;
-        hint.message = `Remember to check the hardware store for things to buy and sell. [${hint.ok()}]`;
+        hint.message = `Remember to check the hardware store for things to buy and sell.`;
     hint.okButton = 'hint.close';
     hint.group = 'toolHW';
     hint.render();
@@ -267,7 +275,7 @@ const hint = {
 
   itsNight: function () {
     hint.target = `.dialog .close`;
-        hint.message = `It's night time and too late to open your shop. Go home and get some sleep. [${hint.ok()}]`;
+        hint.message = `It's night time and too late to open your shop. Go home and get some sleep.`;
     hint.okButton = 'hint.close';
     hint.group = 'itsNight';
     hint.render();
@@ -275,7 +283,7 @@ const hint = {
 
   goHome: function () {
     hint.target = game.playerItem;
-    hint.message = `It's getting late. Go home and get some sleep. [${hint.ok()}]`;
+    hint.message = `It's getting late. Go home and get some sleep.`;
     hint.okButton = 'hint.close';
     hint.group = 'goHome';
     hint.render();
@@ -283,7 +291,7 @@ const hint = {
 
   openShop: function () {
     hint.target = `.dialog .okButton`;
-    hint.message = `When your ready, open your shop and sell your potato-based meals. [${hint.ok()}]`;
+    hint.message = `When your ready, open your shop and sell your potato-based meals.`;
     hint.okButton = 'hint.close';
     hint.group = 'allocate';
     hint.render();
@@ -291,7 +299,7 @@ const hint = {
 
   dugItem: function () {
     hint.target = tools.list.basket;
-    hint.message = `You dug up something. Click your basket to see what you found. [${hint.ok()}]`;
+    hint.message = `You dug up something. Click your basket to see what you found.`;
     hint.okButton = 'hint.close';
     hint.group = 'dugItem';
     hint.render();
@@ -299,7 +307,7 @@ const hint = {
 
   dugTool: function (item) {
     hint.target = tools.list[toolName];
-    hint.message = `You dug up a ${item.name} to add to your collection. [${hint.ok()}]`;
+    hint.message = `You dug up a ${item.name} to add to your collection.`;
     hint.okButton = 'hint.close';
     hint.group = 'dugTool';
     hint.render();
@@ -307,7 +315,7 @@ const hint = {
 
   dugMachine: function (tool) {
     hint.target = buildings.list.cart;
-    hint.message = `You dug up a ${tool.name}. It's going straight to work. [${hint.ok()}]`;
+    hint.message = `You dug up a ${tool.name}. It's going straight to work.`;
     hint.okButton = 'hint.close';
     hint.group = 'dugMachine';
     hint.render();
@@ -315,7 +323,7 @@ const hint = {
 
   scannerUpgrade: function (tool) {
     hint.target = tools.list.scanner;
-    hint.message = `You dug up a ${tool.name}. It's going straight to work. [${hint.ok()}]`;
+    hint.message = `You dug up a ${tool.name}. It's going straight to work.`;
     hint.okButton = 'hint.close';
     hint.group = 'scannerUpgrade';
     hint.render();
@@ -323,7 +331,7 @@ const hint = {
 
   petIntro: function () {
     hint.target = game.petItem;
-    hint.message = `Oh look.. a small black fluffy animal. I think its a stray [${hint.ok()}]`;
+    hint.message = `Oh look.. a small black fluffy animal. I think its a stray`;
     hint.okButton = 'hint.close';
     hint.group = 'petIntro';
     hint.render();
