@@ -34,6 +34,7 @@ class Cart extends game.Item {
   dayDialog() {
     let title = "Your food cart";
     let content = `<div class="dialog-message-content">`;
+    content += this.ownedIcons();
     let footer = "";
     if (basket.hasSpuds()) {
       content += `Sell meals`;
@@ -142,4 +143,14 @@ class Cart extends game.Item {
     html += `<div><br/><strong>${this.meals} total meals is $${this.income}</string></div>`;
     return html;
   }
+
+  ownedIcons() {
+    let html = '';
+    Object.entries(player.cart).forEach(([machineName, info]) => {
+      let itemSvg = svg.render(machineName);
+      html += `<div class="cartMachine buttonize button machine_${machineName}" onclick="machines.describe('${machineName}')">${itemSvg}</div>`;
+    });
+    return `<div class="cartMachines">${html}</div>`;
+  }
+
 };

@@ -243,7 +243,7 @@ const hint = {
   },
 
   letsCook: function () {
-    if (tools.list.basket.hasSpuds()) {
+    if (basket.hasSpuds()) {
       hint.target = buildings.list.cart;
       hint.message = `It's time to cook up some spuds using your machines. `;
       hint.group = 'letsCook';

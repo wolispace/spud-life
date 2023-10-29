@@ -78,24 +78,31 @@ const controls = {
       return;
     }
     let skyBottom = (sprite.height * sky.height);
-    if (game.playerItem.y > skyBottom && tools.list['spade'].qty > 0) {
-      game.digging = true;
-      // add the hole first
-      let params = {
-        id: game.uid++,
-        x: player.x,
-        y: player.y,
-        w: sprite.width,
-        h: sprite.height,
-        qty: 5,
-        classes: '',
-        item: 'hole'
+    if (game.playerItem.y > skyBottom) {
+      if (tools.list['spade'].qty > 0) {
+        game.digging = true;
+        // add the hole first
+        let params = {
+          id: game.uid++,
+          x: player.x,
+          y: player.y,
+          w: sprite.width,
+          h: sprite.height,
+          qty: 5,
+          classes: '',
+          item: 'hole'
+        }
+        let newHole = new game.Item(params);
+        player.fields[player.currentField][game.SURFACE].push(newHole);
+        game.playerItem.checkCollisions(game.UNDERGROUND);
+        tools.list['spade'].decrQty();
+        game.save();
+      } else {
+        hint.toolUsedUp('spade');
+        tools.list.spade.jiggle('down');
       }
-      let newHole = new game.Item(params);
-      player.fields[player.currentField][game.SURFACE].push(newHole);
-      game.playerItem.checkCollisions(game.UNDERGROUND);
-      tools.list['spade'].decrQty();
-      game.save();
+    } else {
+      hint.noDigHome();
     }
   },
 

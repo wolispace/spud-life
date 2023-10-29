@@ -438,7 +438,7 @@ svg.height {
 
 .hintArrow {
   position: absolute;
-  z-index: 3;
+  z-index: 8;
 }
 
 .hintMsg {
@@ -447,7 +447,7 @@ svg.height {
   border: 3px solid black;
   border-radius: 10px;
   padding: 1rem;
-  z-index: 2;
+  z-index: 7;
   width: 50%;
   max-width: 37%;
 }
@@ -459,6 +459,13 @@ svg.height {
   padding-top: 1rem;
 }
 
+.cartMachines {
+  display: flex;
+}
+
+.cartMachine {
+  width: 3rem;
+}
 
 @keyframes buttonDown {
   0% {
