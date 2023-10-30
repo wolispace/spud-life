@@ -227,12 +227,13 @@ const field = {
     let paths = [];
 
     let i = 0;
-    let maxGrass =  game.grid.x *  game.grid.y;
+    let maxGrass =  game.grid.x *  game.grid.y * 3;
 
     while (i++ < maxGrass) {
+      let upper = (rnd(10) == 1) ? rnd(grassHeight)+grassHeight : rnd(params.h) + grassHeight;
       let clump = {
         x: rnd(params.w),
-        y: rnd(params.h) + grassHeight,
+        y: upper,
         dx: 0,
         dy: 10,
         mx: 5, 
@@ -247,12 +248,12 @@ const field = {
       let path = `M${clump.x},${clump.y} ${top.x + halfRnd(3) / 2},${top.y - rnd(clump.peek)}`;
 
       clump.x += clump.gap;
-      top.x += clump.gap + 2 + halfRnd(3);
+      top.x = clump.x + halfRnd(3);
 
       path += ` M${clump.x},${clump.y} ${top.x},${top.y - clump.peek}`;
 
       clump.x += clump.gap;
-      top.x += clump.gap + rnd(3);
+      top.x = clump.x + rnd(3);
 
       path += ` M${clump.x},${clump.y}  ${top.x + halfRnd(3) / 2},${top.y - rnd(clump.peek)}`;
 
