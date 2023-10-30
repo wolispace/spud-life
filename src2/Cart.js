@@ -37,8 +37,8 @@ class Cart extends game.Item {
     content += this.ownedIcons();
     let footer = "";
     if (basket.hasSpuds()) {
-      content += `Sell meals`;
-      footer += `<button class="buttonize" onclick="buildings.list.cart.cook()"> Cook </button>`;
+      content += `Load your machines with spuds and start them cooking`;
+      footer += `<button class="buttonize" onclick="buildings.list.cart.load()"> Load machines </button>`;
     } else {
       content += `<div>You haven't found any potatoes yet.</div>`;
       content += `<div>Go out and dig for some or sleep till tomorrow to refresh your tools.</div>`;
@@ -47,6 +47,19 @@ class Cart extends game.Item {
     dialog.cancelButton = function () { buildings.list.cart.exit(); };
     dialog.okButton = function () { buildings.list.cart.exit(); };
     dialog.render(title, content, footer);
+  }
+
+  readyDialog() {
+    let title = "Your food cart";
+    let content = `<div class="dialog-message-content">`;
+    content += this.ownedIcons();
+    let footer = "";
+    content += `It's time to open your cart and sell your potato-based meals`;
+
+    footer += `<button class="buttonize" onclick="dialog.confirm()"> Open </button>`;
+    dialog.cancelButton = function () { buildings.list.cart.open(); };
+    dialog.okButton = function () { buildings.list.cart.open(); };
+    dialog.render(title, content, footer);    
   }
 
   nightDialog() {
@@ -72,7 +85,7 @@ class Cart extends game.Item {
     this.list = {};
   }
 
-  cook() {
+  load() {
     this.reset();
     dialog.hide();
     this.allocate();
@@ -88,7 +101,12 @@ class Cart extends game.Item {
         this.list[machine.makes].income += income;
       }
     });
+    this.readyDialog();
+  }
+  
+  open() {
     customers.find(this.meals);
+
   }
 
   allocate() {
