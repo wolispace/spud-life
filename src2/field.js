@@ -209,18 +209,12 @@ const field = {
     game.save();
   },
 
-  grass1: function () {
-    let world = document.querySelector(`.world`);
-    let svgIcon = svg.render('grass', 3, '');
-    var encoded = window.btoa(svgIcon);
-    world.style.background = "url(data:image/svg+xml;base64,"+encoded+")";
-  },
-
   grass: function () {
     let grassField = document.querySelector(`.grassField`);
+    let grassHeight = sprite.height / 7;
     let params = {
       x: 1,
-      y: sprite.height * sky.height,
+      y: sprite.height * sky.height - grassHeight,
       w: sprite.width * game.grid.x,
       h: sprite.height * game.grid.y - sky.height,
     }
@@ -238,25 +232,29 @@ const field = {
     while (i++ < maxGrass) {
       let clump = {
         x: rnd(params.w),
-        y: rnd(params.h),
-        dx: halfRnd(3),
+        y: rnd(params.h) + grassHeight,
+        dx: 0,
         dy: 10,
         mx: 5, 
-        my: 5,       
+        my: 5,
+        gap: rnd(3) + 3,
+        peek: grassHeight ,       
       };
+      let top = {
+        x: clump.x - rnd(3),
+        y: clump.y - clump.my,
+      }
+      let path = `M${clump.x},${clump.y} ${top.x + halfRnd(3) / 2},${top.y - rnd(clump.peek)}`;
 
-      // M447,213 447,213 M452,213 446,213 M457,213 448,208
-      let path = `M${clump.x},${clump.y} `;
-      path += (clump.x + clump.dx) + ',' + (clump.y + clump.my + rnd(clump.dy));
+      clump.x += clump.gap;
+      top.x += clump.gap + 2 + halfRnd(3);
 
-      path += ` M${clump.x + clump.mx},${clump.y} `;
-      path += (clump.x + clump.dx * 2) + ',' + (clump.y + clump.my + rnd(clump.dy));
+      path += ` M${clump.x},${clump.y} ${top.x},${top.y - clump.peek}`;
 
-      path += ` M${clump.x + clump.mx},${clump.y} `;
-      path += (clump.x + clump.dx * 3) + ',' + (clump.y + clump.my + rnd(clump.dy));
+      clump.x += clump.gap;
+      top.x += clump.gap + rnd(3);
 
-      // path += ` M${clump.x + (clump.mx * 2)},${clump.y} `;
-      // path += (clump.x + halfRnd(clump.dx)) + ',' + (clump.y - rnd(clump.dy));
+      path += ` M${clump.x},${clump.y}  ${top.x + halfRnd(3) / 2},${top.y - rnd(clump.peek)}`;
 
       paths.push({
         s: "stroke-width:2;stroke-linecap:round;stroke:darkgreen;",
