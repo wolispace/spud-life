@@ -285,7 +285,7 @@ const hint = {
   },
 
   goHome: function () {
-    hint.target = game.playerItem;
+    hint.target =  buildings.list.home;
     hint.message = `It's getting late. Go home and get some sleep.`;
     hint.okButton = 'hint.close';
     hint.group = 'goHome';

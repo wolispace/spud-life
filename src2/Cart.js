@@ -106,7 +106,6 @@ class Cart extends game.Item {
   
   open() {
     customers.find(this.meals);
-
   }
 
   allocate() {
