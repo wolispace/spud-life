@@ -147,8 +147,13 @@ class Mobile extends game.Item {
             spriteBox.jiggle(game.direction, onEnd);
             return true;
           } else {
-            spriteBox.jiggle(game.direction);
-            hint.toolUsedUp(toolName);
+            if (tools.list[toolName].max > 0) {
+              spriteBox.jiggle(game.direction);
+              hint.toolUsedUp(toolName);
+            } else {
+              spriteBox.jiggle(game.direction);
+              hint.toolNone(toolName);
+            }
             return false;
           }
 

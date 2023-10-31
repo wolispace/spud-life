@@ -20,7 +20,7 @@ const tools = {
         tools.list[itemName] = new Tool(params);
         tools.list[itemName].sprite.onclick = tools.clicks[itemName];
         params.x = params.x - tools.list[itemName].w - padding;
-        if (player.tools[itemName].max == 0) {
+        if (player.tools[itemName].max === 0) {
           tools.list[itemName].hide();
         }
         

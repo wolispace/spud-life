@@ -9,6 +9,12 @@ function halfRnd(num) {
   return rnd(num * 2) - num;
 }
 
+// returns the singular or plural based on the word supplied
+// pluraliser('axe', 'a', 'an'); returns 'an'
+function pluraliser(word, single, plural) {
+  return ['a','e','i','o','u'].includes(word.charAt(0)) ? plural : single;
+}
+
 function addToBody(html) {
   let bodyElement = document.querySelector("body");
   bodyElement.insertAdjacentHTML('beforeend', html);

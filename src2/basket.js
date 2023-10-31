@@ -83,8 +83,6 @@ const basket = {
     let hasSpuds = false;
 
       Object.entries(tools.list.basket.list).forEach(([itemName, qty]) => {
-        console.log(itemName,qty);
-
         if (qty > 0) {
           let itemInfo = items[itemName];
           if (itemInfo.type == 'spuds') {

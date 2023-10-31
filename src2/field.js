@@ -69,13 +69,13 @@ const field = {
       let id = game.uid++;
       game.setUid(item.uid);
       let params = {
-        id: id, 
-        x: x, 
-        y: y, 
-        w: sprite.width, 
-        h: sprite.height, 
-        qty: qty, 
-        classes: '', 
+        id: id,
+        x: x,
+        y: y,
+        w: sprite.width,
+        h: sprite.height,
+        qty: qty,
+        classes: '',
         item: item,
         autoRender: false,
       }
@@ -91,8 +91,8 @@ const field = {
       let id = game.uid++;
       game.setUid(item.uid);
       let params = {
-        id: id, x: x, y: y, 
-        w: sprite.width, h: sprite.height, 
+        id: id, x: x, y: y,
+        w: sprite.width, h: sprite.height,
         qty: qty, classes: '', item: item,
         autoRender: false,
       }
@@ -103,10 +103,10 @@ const field = {
     let maxItems = list.items.list.length;
     for (let step = 0; step < 50; step++) {
       let params = {
-        id: game.uid++, 
-        x: rnd(fieldWidth), 
-        y: rnd(fieldHeight) + skyBottom, 
-        w: sprite.width, 
+        id: game.uid++,
+        x: rnd(fieldWidth),
+        y: rnd(fieldHeight) + skyBottom,
+        w: sprite.width,
         h: sprite.height,
         qty: 1,
         autoRender: false,
@@ -134,11 +134,11 @@ const field = {
       for (let y = 0; y < game.grid.y; y++) {
         index++;
         let params = {
-          id: `grid${index}`, 
-          x: x * sprite.width, 
-          y: y * sprite.height, 
-          w: sprite.width, h: 
-          sprite.height, qty: 1, classes: 'grid',
+          id: `grid${index}`,
+          x: x * sprite.width,
+          y: y * sprite.height,
+          w: sprite.width, h:
+            sprite.height, qty: 1, classes: 'grid',
           item: 'blank',
         }
         field.gridList[index] = new game.Item(params);
@@ -171,7 +171,7 @@ const field = {
       item.render();
       // scale down if not 5
       let itemQty = 5;
-      if (item.qty < 5) {     
+      if (item.qty < 5) {
         while (itemQty > item.qty) {
           item.reduceSize();
           itemQty--;
@@ -202,7 +202,11 @@ const field = {
           console.log('removing blank hole', fieldId, index);
           console.log('add a new spud or item underground in field ', player);
         } else {
-          item.sprite.style.opacity = field.holeState(item);
+          if (item.sprite) {
+            item.sprite.style.opacity = field.holeState(item);
+          } else {
+            console.log('missing item', index, item);
+          }
         }
       });
     });
@@ -227,19 +231,19 @@ const field = {
     let paths = [];
 
     let i = 0;
-    let maxGrass =  game.grid.x *  game.grid.y * 3;
+    let maxGrass = game.grid.x * game.grid.y * 3;
 
     while (i++ < maxGrass) {
-      let upper = (rnd(10) == 1) ? rnd(grassHeight)+grassHeight : rnd(params.h) + grassHeight;
+      let upper = (rnd(10) == 1) ? rnd(grassHeight) + grassHeight : rnd(params.h) + grassHeight;
       let clump = {
         x: rnd(params.w),
         y: upper,
         dx: 0,
         dy: 10,
-        mx: 5, 
+        mx: 5,
         my: 5,
         gap: rnd(3) + 3,
-        peek: grassHeight ,       
+        peek: grassHeight,
       };
       let top = {
         x: clump.x - rnd(3),

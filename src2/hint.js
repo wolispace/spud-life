@@ -204,7 +204,7 @@ const hint = {
   },
   controls: function () {
     hint.isItSkipped();
-    hint.target = controls.list.up;
+    hint.target = controls.list.right;
     hint.message = `Use these arrows to move.`;
     hint.okButton = 'hint.spade';
     hint.group = 'controls',
@@ -245,36 +245,46 @@ const hint = {
     hint.render();
   },
 
+  toolNone: function (toolName) {
+    let an = pluraliser(toolName, 'a', 'an');
+    hint.target = buildings.list.hardware;
+    hint.message = `Go to the hardware store and buy ${an} ${toolName} to clear this.`;
+    hint.okButton = 'hint.close';
+    hint.group = `no_${toolName}`;
+    hint.render();
+  },
+
   letsCook: function () {
     if (basket.hasSpuds()) {
       hint.target = buildings.list.cart;
       hint.message = `It's time to cook up some spuds using your machines. `;
       hint.group = 'letsCook';
     } else {
-      hint.target = buildings.list.home;
-      hint.message = `You found no spuds today so go home and get some sleep. Tomorrow you can try again.`;
+      hint.target = tools.list.basket;
+      hint.message = `You found no spuds today.`;
       hint.group = 'letsSleep';
     }
-    hint.okButton = 'hint.close';
+    hint.okButton = 'hint.toolHW';
+    hint.render();
+  },
+
+  toolHW: function () {
+    hint.target = buildings.list.hardware;
+        hint.message = `Check the hardware store for things to buy and sell.`;
+    hint.okButton = 'hint.toolHome';
+    hint.group = 'toolHW';
     hint.render();
   },
 
   toolHome: function () {
     hint.target = buildings.list.home;
     
-    hint.message = `If you have no spuds, go home and bring on the night.`;
-    hint.okButton = 'hint.toolHW';
+    hint.message = `Then go home and get some sleep. Try again tomorrow.`;
+    hint.okButton = 'hint.close';
     hint.group = 'toolHome';
     hint.render();
   },
 
-  toolHW: function () {
-    hint.target = buildings.list.hardware;
-        hint.message = `Remember to check the hardware store for things to buy and sell.`;
-    hint.okButton = 'hint.close';
-    hint.group = 'toolHW';
-    hint.render();
-  },
 
   itsNight: function () {
     hint.target = `.dialog .close`;
