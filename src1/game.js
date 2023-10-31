@@ -143,6 +143,7 @@ const game = {
       let less = { w: this.w * .2, h: this.h * .2 };
       this.w = this.w - less.w;
       this.h = this.h - less.h;
+      this.reduced = true;
     }
 
     reducePosition() {
