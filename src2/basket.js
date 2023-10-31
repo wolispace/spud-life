@@ -63,6 +63,7 @@ const basket = {
       }
       qty = (itemClass.qty == 0) ? 8 : 2;
       itemClass.addQty(qty);
+      tools.list[itemName].show();
     }
 
     tools.list.wallet.addQty(0-cost);
