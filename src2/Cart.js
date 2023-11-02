@@ -25,7 +25,11 @@ class Cart extends game.Item {
 
   enter() {
     if (player.daytime) {
-      buildings.list.cart.dayDialog();
+      if (this.meals > 0) {
+        buildings.list.cart.readyDialog();
+      } else {
+        buildings.list.cart.dayDialog();
+      }
     } else {
       buildings.list.cart.nightDialog();
     }
@@ -53,9 +57,17 @@ class Cart extends game.Item {
     let title = "Your food cart";
     let content = `<div class="dialog-message-content">`;
     content += this.ownedIcons();
-    let footer = "";
-    content += `It's time to open your cart and sell your potato-based meals`;
+    content += `<div>You can make ${this.meals} potato-based meals.<ul>`;
 
+    Object.entries(this.machines).forEach(([meal, info]) => {
+      content += `<li>${meal}</li>`;
+      console.log(info);
+    });
+    content += '</ul></div>';
+
+    content += `<div>It's time to open your cart and sell your potato-based meals</div>`;
+    
+    let footer = "";
     footer += `<button class="buttonize" onclick="dialog.confirm()"> Open </button>`;
     dialog.cancelButton = function () { buildings.list.cart.open(); };
     dialog.okButton = function () { buildings.list.cart.open(); };
@@ -119,6 +131,7 @@ class Cart extends game.Item {
         //we we dont have a machine for this spuds bestfor then dump it into the max machine
         let bestFor = this.machines[itemInfo.bestFor] ? itemInfo.bestFor : 'max';
         this.machines[bestFor].qty += qty;
+        player.cart[this.machines[itemInfo.bestFor].name] += qty;
         // remove item from basket (ie se its to zero)
         tools.list.basket.list[itemName] = 0;
         tools.list.basket.addQty(0 - qty);
@@ -127,7 +140,7 @@ class Cart extends game.Item {
     });
   }
 
-  // returns a list of things machines make and the max price for it
+  // builds a list of things machines make and the max price for it
   // {max: {pricePerItem: 20, qty: 0}, chips: {pricePerItem: 15, qty: 0}, soup: {pricePerItem:20, qty: 0}}
 
   machineList() {
