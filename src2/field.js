@@ -82,23 +82,23 @@ const field = {
       let newItem = new game.Item(params);
       player.fields[fieldId][layer].push(newItem);
     }
-    layer = game.SURFACE;
-    for (let step = 0; step < 1; step++) {
-      let x = rnd(fieldWidth);
-      let y = rnd(fieldHeight) + skyBottom;
-      let qty = 5;
-      let item = 'hole';
-      let id = game.uid++;
-      game.setUid(item.uid);
-      let params = {
-        id: id, x: x, y: y,
-        w: sprite.width, h: sprite.height,
-        qty: qty, classes: '', item: item,
-        autoRender: false,
-      }
-      let newItem = new game.Item(params);
-      player.fields[fieldId][layer].push(newItem);
-    }
+    // layer = game.SURFACE;
+    // for (let step = 0; step < 1; step++) {
+    //   let x = rnd(fieldWidth);
+    //   let y = rnd(fieldHeight) + skyBottom;
+    //   let qty = 5;
+    //   let item = 'hole';
+    //   let id = game.uid++;
+    //   game.setUid(item.uid);
+    //   let params = {
+    //     id: id, x: x, y: y,
+    //     w: sprite.width, h: sprite.height,
+    //     qty: qty, classes: '', item: item,
+    //     autoRender: false,
+    //   }
+    //   let newItem = new game.Item(params);
+    //   player.fields[fieldId][layer].push(newItem);
+    // }
     layer = game.UNDERGROUND;
     let maxItems = list.items.list.length;
     for (let step = 0; step < 50; step++) {

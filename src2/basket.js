@@ -21,6 +21,12 @@ const basket = {
         content += basket.makeButton(params);
       }
     });
+
+    if (content == '') {
+      content = `<div class="dialog-message-content">`;
+      content += `Your basket is empty. Dig to find things.`;
+    }
+
     
     let footer = "";
     footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
