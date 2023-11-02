@@ -66,9 +66,26 @@ const hint = {
     hint.pointAt();
     hint.showMsg();
   },
-
+  
   close: function () {
     hint.hide();
+  },
+  
+  hide: function () {
+    hint.msg.style.top = '-200px';
+    hint.arrow.style.top = '-200px';
+    hint.msg.innerHTML = '';
+    hint.btnText = null;
+  },
+
+  confirm: function () {
+  hint.isItSkipped();
+    hint.hide();
+    // if they don't want to see this again, then mark it as hinted
+    if (hint.okButton == 'hint.confirm') {
+      hint.okButton = 'hint.close';
+    }
+    eval(`${hint.okButton}()`);
   },
 
   buildSkip: function () {
@@ -81,19 +98,11 @@ const hint = {
     return skipCheckbox;
   },
 
-  confirm: function () {
-    hint.hide();
-    // if they don't want to see this again, then mark it as hinted
-    hint.isItSkipped();
-    eval(`${hint.okButton}()`);
-  },
-
   isItSkipped: function () {
     let skipHint = document.querySelector('#hintSkip');
     if (skipHint && skipHint.checked) {
       player.hinted[hint.group] = true;
       game.save();
-      hint.hide();
     }
   },
 
@@ -130,12 +139,6 @@ const hint = {
     }
   },
 
-  hide: function () {
-    hint.msg.style.top = '-200px';
-    hint.arrow.style.top = '-200px';
-    hint.msg.innerHTML = '';
-    hint.btnText = null;
-  },
 
   showMsg: function () {
     // align msg with arrow that is already pointing at the item
@@ -228,7 +231,7 @@ const hint = {
     hint.target = player.fields[0][0][10];
     hint.btnText = `Let's start digging!`;
     hint.message = `Rocks and logs block your path.`;
-    hint.okButton = 'hint.close';
+    hint.okButton = 'hint.confirm';
     hint.group = '',
     hint.render();
   },   
@@ -236,7 +239,7 @@ const hint = {
   noDigHome: function () {
     hint.target = game.playerItem;
     hint.message = `You can't dig here. Move down onto an empty patch and dig there.`;
-    hint.okButton = 'hint.close';
+    hint.okButton = 'hint.confirm';
     hint.group = 'noDigHome';
     hint.render();
   },
@@ -244,7 +247,7 @@ const hint = {
   toolUsedUp: function (toolName) {
     hint.target = tools.list[toolName];
     hint.message = `Your ${toolName} is exhausted. Tomorrow morning it will be refreshed and you can use it again.`;
-    hint.okButton = 'hint.close';
+    hint.okButton = 'hint.confirm';
     if (toolName == 'spade') {
       hint.okButton = 'hint.letsCook';
     }
@@ -256,7 +259,7 @@ const hint = {
     let an = pluraliser(toolName, 'a', 'an');
     hint.target = buildings.list.hardware;
     hint.message = `Go to the hardware store and buy ${an} ${toolName} to clear this.`;
-    hint.okButton = 'hint.close';
+    hint.okButton = 'hint.confirm';
     hint.group = `no_${toolName}`;
     hint.render();
   },
@@ -287,7 +290,7 @@ const hint = {
     hint.target = buildings.list.home;
     
     hint.message = `Then go home and get some sleep. Try again tomorrow.`;
-    hint.okButton = 'hint.close';
+    hint.okButton = 'hint.confirm';
     hint.group = 'toolHome';
     hint.render();
   },
@@ -296,7 +299,7 @@ const hint = {
   itsNight: function () {
     hint.target = `.dialog .close`;
         hint.message = `It's night time and too late to open your shop. Go home and get some sleep.`;
-    hint.okButton = 'hint.close';
+    hint.okButton = 'hint.confirm';
     hint.group = 'itsNight';
     hint.render();
   },
@@ -304,7 +307,7 @@ const hint = {
   goHome: function () {
     hint.target =  buildings.list.home;
     hint.message = `It's getting late. Go home and get some sleep.`;
-    hint.okButton = 'hint.close';
+    hint.okButton = 'hint.confirm';
     hint.group = 'goHome';
     hint.render();
   },
@@ -312,7 +315,7 @@ const hint = {
   openShop: function () {
     hint.target = `.dialog .okButton`;
     hint.message = `When your ready, open your shop and sell your potato-based meals.`;
-    hint.okButton = 'hint.close';
+    hint.okButton = 'hint.confirm';
     hint.group = 'allocate';
     hint.render();
   },
@@ -320,7 +323,7 @@ const hint = {
   dugItem: function () {
     hint.target = tools.list.basket;
     hint.message = `You dug up something. Click your basket to see what you found.`;
-    hint.okButton = 'hint.close';
+    hint.okButton = 'hint.confirm';
     hint.group = 'dugItem';
     hint.render();
   },
@@ -328,7 +331,7 @@ const hint = {
   dugTool: function (item) {
     hint.target = tools.list[toolName];
     hint.message = `You dug up a ${item.name} to add to your collection.`;
-    hint.okButton = 'hint.close';
+    hint.okButton = 'hint.confirm';
     hint.group = 'dugTool';
     hint.render();
   },
@@ -336,15 +339,23 @@ const hint = {
   dugMachine: function (tool) {
     hint.target = buildings.list.cart;
     hint.message = `You dug up a ${tool.name}. It's going straight to work.`;
-    hint.okButton = 'hint.close';
+    hint.okButton = 'hint.confirm';
     hint.group = 'dugMachine';
+    hint.render();
+  },
+
+  scanner: function () {
+    hint.target = tools.list.scanner;
+    hint.message = `You scanner flashes when something is buried near by.`;
+    hint.okButton = 'hint.confirm';
+    hint.group = 'scanner';
     hint.render();
   },
 
   scannerUpgrade: function (tool) {
     hint.target = tools.list.scanner;
     hint.message = `You dug up a ${tool.name}. It's going straight to work.`;
-    hint.okButton = 'hint.close';
+    hint.okButton = 'hint.confirm';
     hint.group = 'scannerUpgrade';
     hint.render();
   },
@@ -352,7 +363,7 @@ const hint = {
   petIntro: function () {
     hint.target = game.petItem;
     hint.message = `Oh look.. a small black fluffy animal. I think its a stray`;
-    hint.okButton = 'hint.close';
+    hint.okButton = 'hint.confirm';
     hint.group = 'petIntro';
     hint.render();
   },

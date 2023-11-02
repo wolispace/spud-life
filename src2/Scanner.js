@@ -53,6 +53,9 @@ class Scanner extends game.Item {
 
   on() {
     if (this.scannerScreen) {
+      if (!player.hinted['scanner'] && player.hints) {
+        hint.scanner();
+      }
       this.scannerScreen.style.animation = `glow ${this.duration}s ${this.delay}s linear infinite`;
     }
   }
