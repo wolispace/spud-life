@@ -3,6 +3,7 @@ const tools = {
   recordDelim: '^',
   fieldDelim: '|',
   list: {},
+  buyable: ['axe', 'pick'],
 
   setup: function () {
     let toolList = ['wallet', 'scanner', 'basket', 'axe', 'pick', 'spade'];
@@ -20,7 +21,7 @@ const tools = {
         tools.list[itemName] = new Tool(params);
         tools.list[itemName].sprite.onclick = tools.clicks[itemName];
         params.x = params.x - tools.list[itemName].w - padding;
-        if (player.tools[itemName].max === 0) {
+        if (tools.buyable.includes(itemName) && player.tools[itemName].max === 0) {
           tools.list[itemName].hide();
         }
         
@@ -36,7 +37,7 @@ const tools = {
       let bit = thisSpud.split(tools.fieldDelim);
       decoded[bit[0]] = {
         qty: parseInt(bit[1]),
-        max: bit[2],
+        max: parseInt(bit[2]),
         list: JSON.parse(bit[3]),
         state: bit[4],
       };
