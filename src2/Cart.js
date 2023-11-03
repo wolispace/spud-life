@@ -111,7 +111,7 @@ class Cart extends game.Item {
   reset() {
     this.qty = 0;
     Object.entries(player.cart).forEach(([itemName, qty]) => {
-      qty = 0;
+      player.cart[itemName] = 0;
     });
   }
 
