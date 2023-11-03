@@ -6,6 +6,7 @@ class Cart extends game.Item {
       qty: 0,
     }
   };
+  qty = 0;
   meals = 0;
   income = 0;
   list = {};
@@ -25,10 +26,30 @@ class Cart extends game.Item {
 
   enter() {
     if (player.daytime) {
-      buildings.list.cart.dayDialog();
+      this.summariseMachines();
+      console.log(this.machineSummary);
+      if (this.qty > 0) {
+        buildings.list.cart.readyDialog();
+      } else {
+        buildings.list.cart.dayDialog();
+      }
     } else {
       buildings.list.cart.nightDialog();
     }
+  }
+
+  summariseMachines() {
+    this.machineSummary = {};
+    Object.entries(player.cart).forEach(([itemName, qty]) => {
+      let itemInfo = items[itemName];
+      this.qty += qty;
+      this.machineSummary[itemName] = {
+        qty: qty,
+        makes: itemInfo.makes,
+        pricePerItem: itemInfo.pricePerItem,
+        total: itemInfo.pricePerItem * qty,
+      }
+    });    
   }
 
   dayDialog() {
@@ -51,11 +72,19 @@ class Cart extends game.Item {
 
   readyDialog() {
     let title = "Your food cart";
+    let mealQty = 0;
     let content = `<div class="dialog-message-content">`;
     content += this.ownedIcons();
+    content += '<div><ul>';    
+    Object.entries(this.machineSummary).forEach(([itemName, info]) => {
+      content += `<li>${itemName} makes ${info.makes}: ${info.qty} x ${info.pricePerItem} = ${info.total}</li>`;
+      mealQty += info.qty;
+    });
+    content += '</ul></div>';
+    let s = mealQty == 1 ? '' : 's';
+    content += `<div>It's time to open your cart and sell your ${mealQty} potato-based meal${s}</div>`;
+    
     let footer = "";
-    content += `It's time to open your cart and sell your potato-based meals`;
-
     footer += `<button class="buttonize" onclick="dialog.confirm()"> Open </button>`;
     dialog.cancelButton = function () { buildings.list.cart.open(); };
     dialog.okButton = function () { buildings.list.cart.open(); };
@@ -80,9 +109,10 @@ class Cart extends game.Item {
   }
 
   reset() {
-    this.meals = 0;
-    this.income = 0;
-    this.list = {};
+    this.qty = 0;
+    Object.entries(player.cart).forEach(([itemName, qty]) => {
+      qty = 0;
+    });
   }
 
   load() {
@@ -105,7 +135,8 @@ class Cart extends game.Item {
   }
   
   open() {
-    customers.find(this.meals);
+    customers.find(this.machineSummary);
+    this.reset();
   }
 
   allocate() {
@@ -116,22 +147,23 @@ class Cart extends game.Item {
     Object.entries(tools.list.basket.list).forEach(([itemName, qty]) => {
       let itemInfo = items[itemName];
       if (itemInfo.type == "spuds") {
-        //we we dont have a machine for this spuds bestfor then dump it into the max machine
+        //if we dont have a machine for this spuds bestfor then dump it into the max machine
         let bestFor = this.machines[itemInfo.bestFor] ? itemInfo.bestFor : 'max';
         this.machines[bestFor].qty += qty;
+        player.cart[this.machines[bestFor].name] += qty;
         // remove item from basket (ie se its to zero)
         tools.list.basket.list[itemName] = 0;
         tools.list.basket.addQty(0 - qty);
-
       }
     });
+    this.summariseMachines();
   }
 
-  // returns a list of things machines make and the max price for it
+  // builds a list of things machines make and the max price for it
   // {max: {pricePerItem: 20, qty: 0}, chips: {pricePerItem: 15, qty: 0}, soup: {pricePerItem:20, qty: 0}}
 
   machineList() {
-    Object.entries(player.cart).forEach(([itemName]) => {
+    Object.entries(player.cart).forEach(([itemName, qty]) => {
       let itemInfo = items[itemName];
       if (!this.machines[itemInfo.makes]
         || (this.machines[itemInfo.makes]
@@ -140,7 +172,7 @@ class Cart extends game.Item {
           pricePerItem: itemInfo.pricePerItem,
           name: itemName,
           makes: itemInfo.makes,
-          qty: 0
+          qty: qty,
         };
       }
       // record the max if there are no bestfors that match each spud

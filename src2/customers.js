@@ -8,16 +8,23 @@ const customers = {
   keyFrame: 'parade2',
   repeat: 1,
 
-  find: function (qty) {
+  find: function (machineSummary) {
     dialog.hide();
-    customers.qty = qty;
+
+    // count meals find customers
+    customers.reset();
+    Object.entries(machineSummary).forEach(([itemName, info]) => {
+      customers.qty += info.qty;
+      customers.total += info.total;
+    });
+
     customers.endItem = {
       x: buildings.list.cart.x - rnd(sprite.width / 2),
       y: (game.playerItem.h * sky.height) - game.playerItem.h
     };
     // add as many customers as we have qty
     let counter = 0;
-    while (counter++ < qty) {
+    while (counter++ < customers.qty) {
       let params = {
         id: `customer_${counter}`,
         x: sprite.width * (game.grid.x + 1),
@@ -66,6 +73,7 @@ const customers = {
     customers.list = [];
     customers.qty = 0;
     customers.done = 0;
+    customers.total = 0;
   },
 
   // animate coins into basket
@@ -80,7 +88,7 @@ const customers = {
     let endItem = tools.list.wallet;
     let onEnd = function () {
       game.spriteBox.remove();
-      endItem.addQty(buildings.list.cart.income);
+      endItem.addQty(customers.total);
       game.save();
     };
     game.spriteBox.animateArc(endItem, onEnd);
