@@ -148,8 +148,8 @@ const spuds = {
   },
 
   // select a random spud based on rareness
-  select: function () {
-    let newSpud = spuds.byRareness(player.currentField + 1);
+  select: function (fieldId) {
+    let newSpud = spuds.byRareness(fieldId + 1);
     return { name: newSpud.name, qty: rnd(3) + 1 };
   },
 

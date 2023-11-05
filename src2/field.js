@@ -115,8 +115,7 @@ const field = {
       // fieldId dictates how rare we get
       if (rnd(3) > 0) {
         params.qty = rnd(4) + 2;
-        // TODO take rarity into account
-        let itemInfo = spuds.select(); //list.spuds.list[rnd(maxSpuds)];
+        let itemInfo = spuds.select(fieldId);
         params.item = itemInfo.name;
         params.svg = svg.render('spud1');
       } else {
