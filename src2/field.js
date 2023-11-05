@@ -101,7 +101,8 @@ const field = {
     // }
     layer = game.UNDERGROUND;
     let maxItems = list.items.list.length;
-    for (let step = 0; step < 50; step++) {
+    let totalItems = (game.grid.x * game.grid.y) / 3;
+    for (let step = 0; step < totalItems; step++) {
       let params = {
         id: game.uid++,
         x: rnd(fieldWidth),
@@ -109,7 +110,7 @@ const field = {
         w: sprite.width,
         h: sprite.height,
         qty: 1,
-        autoRender: false,
+        autoRender: true,
       }
       // fieldId dictates how rare we get
       if (rnd(3) > 0) {
