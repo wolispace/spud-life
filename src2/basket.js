@@ -58,7 +58,7 @@ const basket = {
   buyItem: function (itemName, qty, cost) {
     let itemInfo = items[itemName];
     if (itemInfo.type == 'machines') {
-      player.cart[itemName] = {};
+      player.cart[itemName] = 0;
     } else if (itemInfo.type == 'land') {
       field.addField();
     } else {

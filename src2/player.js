@@ -18,7 +18,7 @@ let player = {
   sowSeeds: 0,
   grassQty: 7,
   tools: {
-    spade: { qty: 3, max: 3 },
+    spade: { qty: 8, max: 8 },
     axe: { qty: 0, max: 0 },
     pick: { qty: 0, max: 0 },
     basket: { qty: 0, list: {} },
@@ -27,6 +27,6 @@ let player = {
   },
   currentField: 0,
   fields: [[[], [], []]],
-  cart: {'chipper': {}},
+  cart: {'chipper': 0},
 };
 
