@@ -29,6 +29,19 @@ button {
   }
 }
 
+.dialogIntro {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.introSvg {
+  width: 60%;
+  height: 60%;
+}
+
 .world {
   position: absolute;
   top: 0;

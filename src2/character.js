@@ -79,7 +79,11 @@ const character = {
     game.save();
 
     game.playerItem.refresh(svg.renderPerson(player.body));
-    buildings.list.home.enter();
+    if (game.intro) {
+      introGame();
+    } else {
+      buildings.list.home.enter();
+    }
   },
 
   randomName: function () {

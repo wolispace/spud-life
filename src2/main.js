@@ -2,9 +2,9 @@
 let pixelScale = 1; //window.devicePixelRatio;
 let itemNumber = 0;
 let containerBox = null;
-let step = { x: 5 * pixelScale, y: 5 * pixelScale};
+let step = { x: 5 * pixelScale, y: 5 * pixelScale };
 let timers = { duration: 30 };
-let list = {all: {}};
+let list = { all: {} };
 let scanner = null;
 
 // if savedate injected (by referencing it with ?id={dataFileId} then load it.
@@ -20,8 +20,9 @@ if (urlParams.has('reset')) {
 
 // all of the events..
 document.addEventListener("DOMContentLoaded", function () {
-  introGame();
+  startGame();
 });
+
 
 // prevent context menus - does this prevent mobile selecting text
 // ot so we need the user-select: none; css?
@@ -42,7 +43,7 @@ window.addEventListener("resize", (event) => {
   let newHeightPct = containerBox.height / last.height;
 
   sprite.resize(newWidthPct, newHeightPct);
-  
+
 });
 
 document.addEventListener("keydown", (event) => {
@@ -65,34 +66,46 @@ document.addEventListener("keyup", (event) => {
   controls.endInput();
 });
 
-function introGame() {
-  character.bodySet = character.getBodySet();
+function splashScreen() {
+  let title = "Welcome to your Spud Life";
+  let content = `<div class="dialogIntro">`;
   let titleSvg = svg.render('title');
-  titleSvg = svg.addOrientationClass(titleSvg);
-  addToWorld(titleSvg);
-  let introDelay = isDev ? 0.1 : 3;
-  let worldElement = document.querySelector('.world');
-  svg.animate(worldElement, 'goInvisible', introDelay, function () {
-    setContainerBox();
-    // loads previously save state from localStorage if found
-    game.load();
-    
-    controls.render();
-    tools.setup();
-    if (player.day && player.day > 0) {
-      field.redraw();
-    } else {
-      player.day = 1;
-      player.body = character.randomBody();
-      setupThings();
-      field.addRandom(player.currentField);
-      field.redraw();
-      game.save();
-      if (player.hints) {
-        hint.player();
-      }
-    }
-  });
+  //titleSvg = svg.addOrientationClass(titleSvg);
+  content += `<div class="introSvg">${titleSvg}</div>`;
+  let footer = `Version ${game.version}`;
+  footer += `<button class="buttonize" onclick="dialog.okButton()"> Let's play </button>`;
+  dialog.cancelButton = function () { closeSplash(); };
+  dialog.okButton = function () { closeSplash(); };
+  dialog.render(title, content, footer);
+}
+
+function closeSplash() {
+  dialog.hide();
+  if (player.hints) {
+    hint.player();
+  }
+}
+
+function startGame() {
+  character.bodySet = character.getBodySet();
+  setContainerBox();
+  // loads previously save state from localStorage if found
+  game.load();
+
+  controls.render();
+  tools.setup();
+  if (player.day && player.day > 0) {
+    field.redraw();
+  } else {
+    player.day = 1;
+    player.body = character.randomBody();
+    setupThings();
+    field.addRandom(player.currentField);
+    field.redraw();
+    game.save();
+
+  }
+  splashScreen();
 }
 
 function setupThings() {
@@ -104,7 +117,7 @@ function setupThings() {
   dialog.setup();
 
   makeLists();
-  if (Object.keys(player.spuds).length === 0 ) {
+  if (Object.keys(player.spuds).length === 0) {
     spuds.bestForList();
     spuds.sprout(6);
   } else {
@@ -135,9 +148,9 @@ function clearWorld() {
 function makeLists() {
   Object.entries(items).forEach(([itemName, item]) => {
     list['all'][itemName] = item;
-    list[item.type] = list[item.type] ?? {byName: {}, list: []};
+    list[item.type] = list[item.type] ?? { byName: {}, list: [] };
     list[item.type]['byName'][itemName] = item;
-    list[item.type]['list'].push(item); 
+    list[item.type]['list'].push(item);
   });
 }
 

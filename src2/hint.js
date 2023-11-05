@@ -202,7 +202,7 @@ const hint = {
     hint.target = game.playerItem;
     hint.message = `This is you`;
     hint.okButton = 'hint.controls';
-    hint.group = '',
+    hint.group = 'player',
     hint.render();
   },
   controls: function () {
