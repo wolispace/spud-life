@@ -51,7 +51,7 @@ function getSaveScript($v, $id)
 function getScripts($v)
 {
   // TODO: notgetting min version until we fix renaming o constants in terser
-  $scripts = "<script src='_js_files.js?{$v}'></script><script>const isDev = false</script>";
+  $scripts = "<script src='_js_files.min.js?{$v}'></script><script>const isDev = false</script>";
   if (isDevMode()) {
     //$jsFiles = "game sprite svg spuds items controls character field player sky home hardware cart tools dialog hint";
     //$files = explode(' ', "utils {$jsFiles} main");

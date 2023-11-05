@@ -10,4 +10,4 @@ for /R "src1" %%f in (*.js) do type "%%f" >> %ALLFILES%
 for /R "src2" %%f in (*.js) do type "%%f" >> %ALLFILES%
 for /R "src3" %%f in (*.js) do type "%%f" >> %ALLFILES%
 
-terser %ALLFILES% --output _js_files.min.js -c -m toplevel --config-file terser_options.json
+terser %ALLFILES% --output _js_files.min.js --compressed
