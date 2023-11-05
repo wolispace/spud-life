@@ -146,6 +146,12 @@ const field = {
     }
   },
 
+  showAll() {
+    player.fields[player.currentField][game.UNDERGROUND].forEach( (item) => {
+      item.render();
+    });
+  },
+
   removeGrid() {
     // TODO move elements from dom and classes from field.gridList[]
   },
