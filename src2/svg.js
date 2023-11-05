@@ -7,27 +7,27 @@ const svg = {
       scale: 90,
       rotate: 40,
     },
-    title: `<svg id="d" viewBox="0 0 100 66">
+    title: `<svg viewBox="0 0 100 66">
     <defs>
-     <linearGradient id="a" x1="47.927" x2="46.257" y1="43.946" y2="14.584" gradientTransform="matrix(1.2227 0 0 1.4112 -14.695 -38.822)" gradientUnits="userSpaceOnUse">
+     <linearGradient id="a1" x1="47.927" x2="46.257" y1="43.946" y2="14.584" gradientTransform="matrix(1.2227 0 0 1.4112 -14.695 -38.822)" gradientUnits="userSpaceOnUse">
       <stop style="stop-color:#cfab65" offset="0"/>
       <stop style="stop-color:#fff" offset="1"/>
      </linearGradient>
-     <linearGradient id="c" x1="50.531" x2="51.177" y1="38.413" y2="71.913" gradientTransform="translate(-1.1621 -2.6038)" gradientUnits="userSpaceOnUse">
+     <linearGradient id="c1" x1="50.531" x2="51.177" y1="38.413" y2="71.913" gradientTransform="translate(-1.1621 -2.6038)" gradientUnits="userSpaceOnUse">
       <stop style="stop-color:#d3b272" offset="0"/>
       <stop style="stop-color:#715522" offset="1"/>
      </linearGradient>
     </defs>
-    <path id="b" d="m10.033 36.24s9.9249-18.995 40.187-19.019c26.482-0.02109 36.405 18 36.405 18" style="fill:none;paint-order:stroke fill markers"/>
+    <path id="b1" d="m10.033 36.24s9.9249-18.995 40.187-19.019c26.482-0.02109 36.405 18 36.405 18" style="fill:none;paint-order:stroke fill markers"/>
     <g transform="matrix(1.0634 0 0 1.0806 -2.5377 -8.1549)">
-     <path d="m16.516 31.868c-4.2426 5.1265-9.197 15.62-6.8943 21.92 2.1937 6.0022 3.8625 8.8335 10.96 10.783 6.7368 1.8507 8.2562-0.6838 17.678-1.0607 8.8388-0.35355 6.6804 1.8764 19.445 2.2981 21.542 0.7116 25.956-5.5154 29.875-19.445 1.923-6.8341-5.7603-10.352-10.663-14.912-6.842-6.3643-18.507-5.1855-21.864-5.417-10.253-0.70711-22.451-0.70711-26.163 0-3.7123 0.70711-8.1317 1.2374-12.374 5.8336z" style="fill:url(#c);paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.8;stroke:#000"/>
+     <path d="m16.516 31.868c-4.2426 5.1265-9.197 15.62-6.8943 21.92 2.1937 6.0022 3.8625 8.8335 10.96 10.783 6.7368 1.8507 8.2562-0.6838 17.678-1.0607 8.8388-0.35355 6.6804 1.8764 19.445 2.2981 21.542 0.7116 25.956-5.5154 29.875-19.445 1.923-6.8341-5.7603-10.352-10.663-14.912-6.842-6.3643-18.507-5.1855-21.864-5.417-10.253-0.70711-22.451-0.70711-26.163 0-3.7123 0.70711-8.1317 1.2374-12.374 5.8336z" style="fill:url(#c1);paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.8;stroke:#000"/>
      <ellipse transform="rotate(33.958)" cx="95.59" cy="4.8248" rx=".7955" ry="1.7678" style="fill:#473716;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.10954;stroke-width:2.8;stroke:#c1943c"/>
      <ellipse transform="rotate(34.077)" cx="83.635" cy="6.4376" rx=".7955" ry="1.7678" style="fill:#6b5222;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.095406;stroke-width:2.8;stroke:#c1943c"/>
      <ellipse transform="rotate(-22.028)" cx="60.155" cy="68.807" rx=".7955" ry="1.7678" style="fill:#806228;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.19081;stroke-width:2.8;stroke:#c1943c"/>
     </g>
     <g transform="matrix(1.0634 0 0 1.0806 -.41097 -5.1833)">
-     <text transform="translate(-1.1551 3.1796)" style="fill:#000000;font-family:sans-serif;font-size:15.763px;font-weight:bold;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-width:3.678;stroke:#000000" xml:space="preserve"><textPath style="stroke-width:3.678" xlink:href="#b"><tspan style="fill:#000000;font-family:'Comic Sans MS';font-weight:normal;paint-order:stroke fill markers;stroke-width:3.678">SPUD LIFE</tspan></textPath></text>
-     <text transform="translate(-.21614 1.7463)" style="fill:url(#a);font-family:sans-serif;font-size:15.763px;font-weight:bold;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-width:3.678;stroke:#000000" xml:space="preserve"><textPath style="fill:url(#a);stroke-width:3.678" xlink:href="#b"><tspan style="fill:url(#a);font-family:'Comic Sans MS';font-weight:normal;paint-order:stroke fill markers;stroke-width:3.678">SPUD LIFE</tspan></textPath></text>
+     <text transform="translate(-1.1551 3.1796)" style="fill:#000000;font-family:sans-serif;font-size:15.763px;font-weight:bold;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-width:3.678;stroke:#000000" xml:space="preserve"><textPath style="stroke-width:3.678" xlink:href="#b1"><tspan style="fill:#000000;font-family:'Comic Sans MS';font-weight:normal;paint-order:stroke fill markers;stroke-width:3.678">SPUD LIFE</tspan></textPath></text>
+     <text transform="translate(-.21614 1.7463)" style="fill:url(#a1);font-family:sans-serif;font-size:15.763px;font-weight:bold;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-width:3.678;stroke:#000000" xml:space="preserve"><textPath style="fill:url(#a);stroke-width:3.678" xlink:href="#b1"><tspan style="fill:url(#a1);font-family:'Comic Sans MS';font-weight:normal;paint-order:stroke fill markers;stroke-width:3.678">SPUD LIFE</tspan></textPath></text>
     </g>
     <text x="17.75" y="57.75" style="fill:#3c2f12;font-family:Tahoma;font-size:5.3333px;font-weight:bold;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.095406;stroke-width:2.8" xml:space="preserve"><tspan x="17.75" y="57.75" style="fill:#3c2f12;font-size:5.3333px">A chip shop simulator</tspan></text>
    </svg>`,
@@ -531,14 +531,14 @@ const svg = {
     },
     log: `<svg viewBox="0 0 97 64">
     <defs>
-     <linearGradient id="a" x1="49.189" x2="45.981" y1="49.438" y2="35.066" gradientTransform="translate(2.1213 -1.0607)" gradientUnits="userSpaceOnUse">
+     <linearGradient id="a2" x1="49.189" x2="45.981" y1="49.438" y2="35.066" gradientTransform="translate(2.1213 -1.0607)" gradientUnits="userSpaceOnUse">
       <stop style="stop-color:#161616" offset="0"/>
       <stop style="stop-color:#3c2f12" offset="1"/>
      </linearGradient>
     </defs>
     <path d="m77.251 22.981s3.3438-5.034 8.3085-1.2374l3.0052 2.2981" style="fill:#eaddb9;stroke-linecap:round;stroke-opacity:.75115;stroke-width:2.5;stroke:#fff"/>
     <path d="m14.142 39.068s4.097-4.7659 6.5407-3.3588c2.6607 1.5321 0.96008 3.0641 1.4142 4.5962" style="fill:#eaddb9;stroke-linecap:round;stroke-opacity:.6129;stroke-width:2.5;stroke:#fff"/>
-    <path d="m6.364 24.749s-6.5407 12.021-3.182 19.092c3.3588 7.0711 4.9497 17.678 9.3692 16.794 4.4194-0.88388 19.976-9.0156 33.588-12.374 13.612-3.3588 43.134-7.7782 43.134-7.7782s1.591 1.2374 3.7123-7.2478c2.1213-8.4853 1.591-16.263-1.0607-17.147-2.6516-0.88388-20.86-1.4142-28.638-0.70711s-10.253 1.591-10.253 1.591-0.17678-6.8943-2.4749-9.5459c-2.2981-2.6517-3.5355-3.182-3.5355-3.182s-12.728-2.6517-18.915 0.70711c-6.1872 3.3588-6.1872 6.364-6.1872 6.364l3.8891 9.5459z" style="fill:url(#a);paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-width:4.6;stroke:#000"/>
+    <path d="m6.364 24.749s-6.5407 12.021-3.182 19.092c3.3588 7.0711 4.9497 17.678 9.3692 16.794 4.4194-0.88388 19.976-9.0156 33.588-12.374 13.612-3.3588 43.134-7.7782 43.134-7.7782s1.591 1.2374 3.7123-7.2478c2.1213-8.4853 1.591-16.263-1.0607-17.147-2.6516-0.88388-20.86-1.4142-28.638-0.70711s-10.253 1.591-10.253 1.591-0.17678-6.8943-2.4749-9.5459c-2.2981-2.6517-3.5355-3.182-3.5355-3.182s-12.728-2.6517-18.915 0.70711c-6.1872 3.3588-6.1872 6.364-6.1872 6.364l3.8891 9.5459z" style="fill:url(#a2);paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-width:4.6;stroke:#000"/>
     <path d="m6.8943 24.926s2.8136 2.3597 4.5536 6.3001c0.41617 0.94249 19.077-0.72973 19.077-0.72973 0.16348 0.12737-16.509 2.2345-16.382 5.213 0.14166 3.329 1.9789 3.1687 0.88048 11.709-0.7899 6.1416-3.7089 12.863-3.7089 12.863s-3.061-1.9327-5.2847-6.1248c-2.5603-4.8266-4.2985-12.245-3.7309-16.503 1.0607-7.955 4.5962-12.728 4.5962-12.728z" style="fill:#d5b36c;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-width:4.6;stroke:#000"/>
     <path d="m22.097 10.783s4.5169 4.3853 12.551 2.2981c7.0138-1.8221 9.5644-1.6243 11.314-4.773l1.7678-3.182s-9.5459-4.0659-16.794-1.2374c-7.2478 2.8284-8.8388 6.8943-8.8388 6.8943z" style="fill:#e4cfa3;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-width:4.6;stroke:#000"/>
     <path d="m53.205 22.054c10.546-1.9673 27.826-1.2577 38.366-0.13388" style="fill:none;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.2383;stroke-width:3.2;stroke:#fff"/>
@@ -583,14 +583,14 @@ const svg = {
         { c: "hi thin", d: "m 50,30 1,1 m 10,-5 1,1 m 6,11 1,1 " },
       ],
     },
-    spud1: `<svg width="82.142" height="43.52" viewBox="0 0 28 12">
+    spud1: `<svg viewBox="0 0 28 12">
     <defs>
-     <linearGradient id="a" x1="50.531" x2="51.177" y1="38.413" y2="71.913" gradientTransform="matrix(.26458 0 0 .26458 -2.2084 -6.9635)" gradientUnits="userSpaceOnUse">
+     <linearGradient id="a3" x1="50.531" x2="51.177" y1="38.413" y2="71.913" gradientTransform="matrix(.26458 0 0 .26458 -2.2084 -6.9635)" gradientUnits="userSpaceOnUse">
       <stop style="stop-color:#d8af73" offset="0"/>
       <stop style="stop-color:#715522" offset="1"/>
      </linearGradient>
     </defs>
-    <path d="m2.4688 2.1571c-1.1225 1.3564-2.4334 4.1327-1.8241 5.7997 0.58041 1.5881 1.022 2.3372 2.8999 2.8531 1.7824 0.48967 2.1845-0.18092 4.6772-0.28063 2.3386-0.09354 1.7675 0.49647 5.1449 0.60804 5.6995 0.18828 6.8674-1.4593 7.9045-5.1449 0.5088-1.8082-1.5241-2.7389-2.8213-3.9456-1.8103-1.6839-4.8966-1.372-5.7848-1.4332-2.7128-0.18709-5.9401-0.18709-6.9223 0-0.98222 0.18709-2.1515 0.3274-3.2741 1.5435z" style="fill:url(#a);paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-width:.74083;stroke:#000"/>
+    <path d="m2.4688 2.1571c-1.1225 1.3564-2.4334 4.1327-1.8241 5.7997 0.58041 1.5881 1.022 2.3372 2.8999 2.8531 1.7824 0.48967 2.1845-0.18092 4.6772-0.28063 2.3386-0.09354 1.7675 0.49647 5.1449 0.60804 5.6995 0.18828 6.8674-1.4593 7.9045-5.1449 0.5088-1.8082-1.5241-2.7389-2.8213-3.9456-1.8103-1.6839-4.8966-1.372-5.7848-1.4332-2.7128-0.18709-5.9401-0.18709-6.9223 0-0.98222 0.18709-2.1515 0.3274-3.2741 1.5435z" style="fill:url(#a3);paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-width:.74083;stroke:#000"/>
     <ellipse transform="rotate(33.958)" cx="20.21" cy="-2.8661" rx=".21047" ry=".46772" style="fill:#473716;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.10954;stroke-width:.74083;stroke:#c1943c"/>
     <ellipse transform="rotate(34.077)" cx="17.038" cy="-2.4288" rx=".21047" ry=".46772" style="fill:#6b5222;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.095406;stroke-width:.74083;stroke:#c1943c"/>
     <ellipse transform="rotate(-22.028)" cx="16.507" cy="11.676" rx=".21047" ry=".46772" style="fill:#806228;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.19081;stroke-width:.74083;stroke:#c1943c"/>
