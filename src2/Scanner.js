@@ -10,10 +10,15 @@ class Scanner extends game.Item {
   }
 
   setup() {
-    // the bigger the player.scanLevel the smaller the distance from the player
-    // 50 * 2 / 1
-    this.scanDepth = sprite.width / player.scanLevel;
+    // the bigger the player.scanLevel the larger the distance from the player
+    // decrease by one part of a grid - start at 4
+    this.scanDepth = parseInt(sprite.width / game.maxScan) * tools.list.scanner.qty;
     this.setRange();
+  }
+
+  upgrade() {
+    tools.list.scanner.addQty(-1);
+    this.setup();
   }
 
   setRange() {
@@ -85,7 +90,7 @@ class Scanner extends game.Item {
   showScanner() {
     dialog.hide();
     this.showRange(this);
-    setTimeout( this.hideRange, 1000);
+    setTimeout(this.hideRange, 1500);
   }
 
   showRange(itemInfo) {
@@ -112,5 +117,4 @@ class Scanner extends game.Item {
     });
   }
 }
-  
-  
+

@@ -22,7 +22,7 @@ let player = {
     axe: { qty: 0, max: 0 },
     pick: { qty: 0, max: 0 },
     basket: { qty: 0, list: {} },
-    scanner: { qty: 1, on: true },
+    scanner: { qty: 4, on: true },
     wallet: { qty: 5000 },
   },
   currentField: 0,

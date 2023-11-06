@@ -12,6 +12,7 @@ const game = {
   step: { x: 5, y: 5 },
   incrementQty: 2,
   holeLife: 5, // how long until a hole dissapears
+  maxScan: 4,
 
 
   // everything show on the page is an Item with coords and an svg

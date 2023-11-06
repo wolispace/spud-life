@@ -61,6 +61,12 @@ const basket = {
       player.cart[itemName] = 0;
     } else if (itemInfo.type == 'land') {
       field.addField();
+    } else if (itemName == 'scanner') {
+      if (tools.list.scanner.qty > 1) {
+        scanner.upgrade();
+      } else {
+        return;
+      }
     } else {
       // its a tool.. increment
       let itemClass = tools.list[itemName];
@@ -69,7 +75,6 @@ const basket = {
       }
       qty = (itemClass.qty == 0) ? 8 : 2;
       itemClass.addQty(qty);
-      tools.list[itemName].show();
     }
 
     tools.list.wallet.addQty(0-cost);

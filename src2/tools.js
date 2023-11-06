@@ -18,6 +18,10 @@ const tools = {
     toolList.forEach((itemName) => {
       if (itemName != 'spade') {
         params.id = itemName;
+        // start scanner at max
+        if (itemName == 'scanner') {
+          params.qty = game.maxScan;
+        }
         tools.list[itemName] = new Tool(params);
         tools.list[itemName].sprite.onclick = tools.clicks[itemName];
         params.x = params.x - tools.list[itemName].w - padding;

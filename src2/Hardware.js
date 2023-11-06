@@ -40,6 +40,9 @@ class Hardware extends game.Item {
         return '';
       }
     }
+    if (itemName == 'scanner' && tools.list.scanner.qty <= 1) {
+      return '';
+    }
     let icon;
     itemInfo.qty = 0;
     itemInfo.name = itemName;
