@@ -472,6 +472,7 @@ svg.height {
   width: 50%;
   max-width: 37%;
   transition: all .5s;
+  box-shadow: 0px 2px 8px 0px black;
 }
 
 .hintButtons {
