@@ -56,15 +56,20 @@ const field = {
 
   addRandom: function (fieldId) {
     let topNoSeed = (sprite.height * (sky.height + 0.5));
-    let leftNoSeed = (sprite.width * 2);
+    let leftNoSeed = (sprite.width * 3);
     // reset field data..
     player.fields[fieldId] = [[], [], []];
     let layer = game.ABOVEGROUND;
-    let fieldHeight = containerBox.height - sprite.height - topNoSeed;
+    let fieldHeight = containerBox.height - (sprite.height * 2) - topNoSeed;
     let fieldWidth = containerBox.width - sprite.width - leftNoSeed;
-    for (let step = 0; step < 15; step++) {
+    let totalItems = (game.grid.x * game.grid.y) / 3;
+    for (let step = 0; step < totalItems; step++) {
+      let y = rnd(fieldHeight) + topNoSeed + rnd(sprite.height);
       let x = rnd(fieldWidth) + leftNoSeed;
-      let y = rnd(fieldHeight) + topNoSeed;
+      // if below controls allow full width
+      if (y > topNoSeed + (sprite.height * 4)) {
+        x = rnd(fieldWidth + leftNoSeed);
+      }
       let qty = 5;
       let item = rnd(2) == 1 ? 'log' : 'rock';
       let id = game.uid++;
@@ -84,13 +89,15 @@ const field = {
       player.fields[fieldId][layer].push(newItem);
     }
     layer = game.UNDERGROUND;
+    fieldHeight = containerBox.height - (sprite.height * 2);
+    fieldWidth = containerBox.width;
     let maxItems = list.items.list.length;
-    let totalItems = (game.grid.x * game.grid.y) / 3;
+    totalItems = (game.grid.x * game.grid.y) / 5;
     for (let step = 0; step < totalItems; step++) {
       let params = {
         id: game.uid++,
-        x: rnd(fieldWidth) + leftNoSeed,
-        y: rnd(fieldHeight) + topNoSeed,
+        x: rnd(fieldWidth),
+        y: rnd(fieldHeight) + (sprite.height * 2),
         w: sprite.width,
         h: sprite.height,
         qty: 1,
@@ -131,6 +138,7 @@ const field = {
   },
 
   showAll() {
+    dialog.hide();
     player.fields[player.currentField][game.UNDERGROUND].forEach( (item) => {
       item.render();
     });
