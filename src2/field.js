@@ -55,15 +55,16 @@ const field = {
   },
 
   addRandom: function (fieldId) {
-    let skyBottom = (sprite.height * sky.height);
+    let topNoSeed = (sprite.height * (sky.height + 0.5));
+    let leftNoSeed = (sprite.width * 2);
     // reset field data..
     player.fields[fieldId] = [[], [], []];
     let layer = game.ABOVEGROUND;
-    let fieldHeight = containerBox.height - sprite.height - skyBottom;
-    let fieldWidth = containerBox.width - sprite.width;
+    let fieldHeight = containerBox.height - sprite.height - topNoSeed;
+    let fieldWidth = containerBox.width - sprite.width - leftNoSeed;
     for (let step = 0; step < 15; step++) {
-      let x = rnd(fieldWidth);
-      let y = rnd(fieldHeight) + skyBottom;
+      let x = rnd(fieldWidth) + leftNoSeed;
+      let y = rnd(fieldHeight) + topNoSeed;
       let qty = 5;
       let item = rnd(2) == 1 ? 'log' : 'rock';
       let id = game.uid++;
@@ -88,8 +89,8 @@ const field = {
     for (let step = 0; step < totalItems; step++) {
       let params = {
         id: game.uid++,
-        x: rnd(fieldWidth),
-        y: rnd(fieldHeight) + skyBottom,
+        x: rnd(fieldWidth) + leftNoSeed,
+        y: rnd(fieldHeight) + topNoSeed,
         w: sprite.width,
         h: sprite.height,
         qty: 1,
