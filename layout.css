@@ -17,7 +17,7 @@ button {
 
 #scanner-range {
   position: absolute;
-  border: 2px solid white;
+  background: rgba(255,255,255,0.35);
 }
 
 @media (max-width: 480px) {

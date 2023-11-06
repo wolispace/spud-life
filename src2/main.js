@@ -82,7 +82,7 @@ function splashScreen() {
 function closeSplash() {
   dialog.hide();
   if (player.hints) {
-    hint.player();
+    //hint.player();
   }
 }
 

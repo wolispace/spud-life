@@ -20,8 +20,8 @@ class Scanner extends game.Item {
     this.scannerScreen = document.querySelector(`#scanner-screen`);
     this.x = game.playerItem.x - this.scanDepth;
     this.y = game.playerItem.y - this.scanDepth;
-    this.w = game.playerItem.w + this.scanDepth;
-    this.h = game.playerItem.h + this.scanDepth;
+    this.w = game.playerItem.w + (this.scanDepth * 2);
+    this.h = game.playerItem.h + (this.scanDepth * 2);
   }
 
   scan() {
@@ -72,6 +72,7 @@ class Scanner extends game.Item {
     content += `This is your scanner.`;
     content += `<br/>Scanner = ${player.scanState}`;
     let footer = "";
+    footer += `<button class="buttonize" onclick="scanner.showScanner()"> Show </button>`;
     footer += `<button class="buttonize" onclick="field.clear()"> Clear </button>`;
     footer += `<button class="buttonize" onclick="game.clear(true)"> Reset </button>`;
     footer += `<button class="buttonize" onclick="potatadex.show()"> Potatádex </button>`;
@@ -79,6 +80,12 @@ class Scanner extends game.Item {
     dialog.cancelButton = function () { dialog.hide(); };
     dialog.okButton = function () { dialog.hide(); };
     dialog.render(title, content, footer);
+  }
+
+  showScanner() {
+    dialog.hide();
+    this.showRange(this);
+    setTimeout( this.hideRange, 1000);
   }
 
   showRange(itemInfo) {
@@ -100,7 +107,9 @@ class Scanner extends game.Item {
       addToBody(`<div id="scanner-range"></div>`);
       scannerRange = document.querySelector(`#scanner-range`);
     }
-    scannerRange.style.display = "none";
+    svg.animate(scannerRange, 'shrink', 1, function () {
+      scannerRange.style.display = 'none';
+    });
   }
 }
   
