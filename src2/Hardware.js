@@ -35,6 +35,11 @@ class Hardware extends game.Item {
 
   makeButton(itemName) {
     let itemInfo = items[itemName];
+    if (['machines'].includes(itemInfo.type)) {
+      if (character.has(itemName) !== undefined) {
+        return '';
+      }
+    }
     let icon;
     itemInfo.qty = 0;
     itemInfo.name = itemName;
@@ -88,6 +93,11 @@ class Hardware extends game.Item {
 
     
     // if they already have some then this becomes 'upgrade'
+    if (['spade', 'axe', 'pick', 'scanner'].includes(itemInfo.name)) {
+      if (tools.list[itemInfo.name].max > 0) {
+        caption = 'Upgrade';
+      }
+    }
 
     let html = ` <div class="hardware-button-${buy} buttonize button ${tooMuch}"
      ${onClick}>

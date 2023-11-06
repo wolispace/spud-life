@@ -40,7 +40,7 @@ const character = {
 
   // has he player interacted with this item
   has: function (itemName) {
-    return tools.list.basket.list[itemName] || player.cart[itemName] || tools.list[itemName];
+    return tools.list.basket.list[itemName] ?? player.cart[itemName] ?? tools.list[itemName];
   },
 
   // make a random body
