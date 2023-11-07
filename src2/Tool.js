@@ -40,6 +40,7 @@ class Tool extends game.Item {
 
   addQty(newQty) {
     this.qty = this.qty + parseInt(newQty);
+    this.max = this.max + parseInt(newQty);
     this.updateQty();
   }
 

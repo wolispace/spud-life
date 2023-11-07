@@ -74,7 +74,8 @@ const basket = {
       if (!itemClass) {
         itemClass = controls.list[itemName];
       }
-      qty = (itemClass.qty == 0) ? 8 : 2;
+      qty = (itemClass.max == 0) ? 8 : 2;
+      itemClass.show();
       itemClass.addQty(qty);
     }
 
