@@ -9,6 +9,7 @@ body {
   overflow: hidden;
   font-family: Tahoma, sans-serif;
   color: var(--sl-font-color);
+  user-select: none;
 }
 
 button {
