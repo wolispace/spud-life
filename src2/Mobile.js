@@ -69,7 +69,7 @@ class Mobile extends game.Item {
                 }
               }
             });
-          } else if (direction == 'right' && player.y <= (sprite.height * 1.5) && player.fields.length > 1 && player.currentField < 1) {
+          } else if (direction == 'right' && player.y <= (sprite.height * 1.5) && player.fields.length > 1 && player.currentField < player.fields.length) {
             if (this.x > (sprite.width * game.grid.x) - sprite.width) {
               // change fields
               player.currentField++;
@@ -174,7 +174,7 @@ class Mobile extends game.Item {
           // shift to the players pos
           spriteBox.x = game.playerItem.x;
           spriteBox.y = game.playerItem.y;
-
+          console.log(spriteBox);
           spriteBox.render();
           game.spriteBox = spriteBox;
 

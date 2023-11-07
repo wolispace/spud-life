@@ -81,6 +81,9 @@ function splashScreen() {
 
 function closeSplash() {
   dialog.hide();
+  // DEBUG dev gets no hints
+  player.hints = !isDev;
+
   if (player.hints) {
     //hint.player();
   }
