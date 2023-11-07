@@ -74,8 +74,6 @@ const tools = {
       let content = `<div class="dialog-message-content">`;
       content += `This is your pick.`;
       let footer = "";
-      footer += `<button class="buttonize" onclick="dialog.hide(); sky.goDark()"> Dark </button>`;
-      footer += `<button class="buttonize" onclick="dialog.hide(); sky.goLight()"> Light </button>`;
       footer += `<button class="buttonize" onclick="dialog.okButton()"> Ok </button>`;
       dialog.cancelButton = function () { dialog.hide(); };
       dialog.okButton = function () { dialog.hide(); };
@@ -86,8 +84,6 @@ const tools = {
       let content = `<div class="dialog-message-content">`;
       content += `This is your axe.`;
       let footer = "";
-      footer += `<button class="buttonize" onclick="dialog.hide(); game.playerItem.hide()"> Hide </button>`;
-      footer += `<button class="buttonize" onclick="dialog.hide(); game.playerItem.show()"> Show </button>`;
       footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
       dialog.cancelButton = function () { dialog.hide(); };
       dialog.okButton = function () { dialog.hide(); };
@@ -105,8 +101,9 @@ const tools = {
       content += `Summary of your last sale`;
       content += buildings.list.cart.summarise();
       let footer = "";
-      footer += `<button class="buttonize" onclick="field.showAll()"> Show </button>`;
-      footer += `<button class="buttonize" onclick="hint.test()"> Hint </button>`;
+      if (isDev) {
+        footer += `<button class="buttonize" onclick="field.showAll()"> Show all </button>`;
+      }
       footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
       dialog.cancelButton = function () { dialog.hide(); };
       dialog.okButton = function () { console.log('wallet OK'); dialog.hide(); };
