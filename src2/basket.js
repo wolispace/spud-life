@@ -5,6 +5,7 @@ const basket = {
     } else {
       tools.list.basket.list[item.item] = item.qty;
     }
+    hint.dugItem();
     tools.list.basket.addQty(item.qty);
   },
 

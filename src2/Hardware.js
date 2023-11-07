@@ -97,7 +97,7 @@ class Hardware extends game.Item {
     
     // if they already have some then this becomes 'upgrade'
     if (['spade', 'axe', 'pick', 'scanner'].includes(itemInfo.name)) {
-      if (tools.list[itemInfo.name].max > 0) {
+      if (tools.list[itemInfo.name].max > 0 || itemInfo.name == 'scanner') {
         caption = 'Upgrade';
       }
     }

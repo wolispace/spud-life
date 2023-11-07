@@ -117,6 +117,7 @@ class Mobile extends game.Item {
   checkCollisions(layer) {
     this.hitItem = null;
     let spritesList = player.fields[player.currentField][layer];
+    let endItem = tools.list.basket;
 
     spritesList.forEach((spriteBox, index) => {
       if (!this.hitItem && this.collides(spriteBox)) {
@@ -124,6 +125,7 @@ class Mobile extends game.Item {
         // clone the object..
         this.hitItem = Object.assign(Object.create(Object.getPrototypeOf(spriteBox)), spriteBox);
         if (layer == game.ABOVEGROUND) {
+          // reduce and/or remove blocker in onEnd of jiggling the block
           function onEnd() {
             if (spriteBox.qty > 0) {
               spriteBox.setPos();
@@ -133,13 +135,21 @@ class Mobile extends game.Item {
             if (spriteBox.qty < 1) {
               // add the rock or log to the basket.. no arc for now
               // TODO: arc the item into the basket
+              function removeBlocker() {
+                basket.add(spriteBox);
+                spriteBox.remove();
+                delete player.fields[player.currentField][layer][index];
+              }
               spriteBox.qty = 1;
-              basket.add(spriteBox);
-              spriteBox.remove();
-              delete player.fields[player.currentField][layer][index];
+              spriteBox.x = game.playerItem.x;
+              spriteBox.y = game.playerItem.y;
+              spriteBox.render();
+              spriteBox.setPos();
+              spriteBox.animateArc(endItem, removeBlocker);
             }
             game.save();
           }
+          // do we have a tool with qty left?
           let toolName = spriteBox.item == 'rock' ? 'pick' : 'axe';
 
           if (tools.list[toolName].qty > 0) {
@@ -147,6 +157,8 @@ class Mobile extends game.Item {
             spriteBox.jiggle(game.direction, onEnd);
             return true;
           } else {
+            // max > 0 means we have bought one and it will be refreshed..
+            // otherwise hint to buy one
             if (tools.list[toolName].max > 0) {
               spriteBox.jiggle(game.direction);
               hint.toolUsedUp(toolName);
@@ -165,7 +177,7 @@ class Mobile extends game.Item {
 
           spriteBox.render();
           game.spriteBox = spriteBox;
-          let endItem = tools.list.basket;
+
           delete player.fields[player.currentField][layer][index];
           scanner.scan();
           let onEnd = function () {
