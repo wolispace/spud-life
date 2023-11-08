@@ -76,12 +76,12 @@ class Scanner extends game.Item {
   render() {
     let title = "Your scanner";
     let content = `<div class="dialog-message-content">`;
-    content += `<div>Upgrade your scanner in the hardware store. The better your scanner the more precise it is (has a smaller range).</div>`;
-    content += `<div>Use the 'Show' button to see the range of your scanner.</div>`;
-    content += `<div>Your 'Potatadex' shows all the things you have found so far. Gotta find them all!</div>`;
+    content += `<div>Upgrade your scanner to be more precise in the hardware store.</div>`;
+    content += `<div>'Show' scanner range and check what you have found in the 'Potatedex' Gotta find them all!</div>`;
     let footer = "";
     if (isDev) {
       content += dialog.makeCheckbox("scanOn", "Turn scanner on/off", player.scanState);
+      content += dialog.makeCheckbox("hintsOn", "Show hints on/off", player.hints);
       footer += `<button class="buttonize" onclick="game.clear(true)"> Reset </button>`;
     }
     footer += `<button class="buttonize" onclick="scanner.showScanner()"> Show </button>`;
@@ -94,6 +94,7 @@ class Scanner extends game.Item {
 
   closeDialog() {
     player.scanState = dialog.isChecked("scanOn");
+    player.hints = dialog.isChecked("hintsOn");
     dialog.hide();
     game.save();
     scanner.scan();

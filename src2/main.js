@@ -72,6 +72,7 @@ function splashScreen() {
   let titleSvg = svg.render('title');
   //titleSvg = svg.addOrientationClass(titleSvg);
   content += `<div class="introSvg">${titleSvg}</div>`;
+  content += dialog.makeCheckbox("hintsOn", "Show hints on/off", player.hints);
   let footer = `Version ${game.version}`;
   footer += `<button class="buttonize" onclick="dialog.okButton()"> Let's play </button>`;
   dialog.cancelButton = function () { closeSplash(); };
@@ -80,12 +81,10 @@ function splashScreen() {
 }
 
 function closeSplash() {
+  player.hints = dialog.isChecked("hintsOn");
   dialog.hide();
-  // DEBUG dev gets no hints
-  player.hints = !isDev;
-
   if (player.hints) {
-    //hint.player();
+    hint.player();
   }
 }
 

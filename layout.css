@@ -34,8 +34,9 @@ button {
   display: flex;
   flex-direction: column;
   align-content: center;
-  justify-content: center;
   align-items: center;
+  padding: 0.5rem;
+  gap: 0.5rem;
 }
 
 .introSvg {
@@ -276,10 +277,10 @@ svg.height {
 }
 
 .dialog-message-content {
-  padding: 2rem;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
   line-height: 1.5rem;
 }
 
