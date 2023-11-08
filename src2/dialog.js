@@ -64,8 +64,8 @@ const dialog = {
     return checkbox;
   },
   // returns true if the checkbox is checked..
-  isChecked: function (element) {
-    let chk = document.querySelector(element);
+  isChecked: function (id) {
+    let chk = document.querySelector(`#${id}`);
     return chk.checked;
   },
 

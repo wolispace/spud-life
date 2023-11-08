@@ -53,6 +53,8 @@ class Scanner extends game.Item {
         }
         this.off();
       }
+    } else {
+      this.off();
     }
   }
 
@@ -75,6 +77,7 @@ class Scanner extends game.Item {
     let title = "Scanner";
     let content = `<div class="dialog-message-content">`;
     content += `This is your scanner.`;
+    content += dialog.makeCheckbox("scanOn", "On", player.scanState);
     content += `<br/>Scanner = ${player.scanState}`;
     let footer = "";
     if (isDev) {
@@ -83,9 +86,16 @@ class Scanner extends game.Item {
     footer += `<button class="buttonize" onclick="scanner.showScanner()"> Show </button>`;
     footer += `<button class="buttonize" onclick="potatadex.show()"> Potatádex </button>`;
     footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
-    dialog.cancelButton = function () { dialog.hide(); };
-    dialog.okButton = function () { dialog.hide(); };
+    dialog.cancelButton = scanner.closeDialog;
+    dialog.okButton = scanner.closeDialog;
     dialog.render(title, content, footer);
+  }
+
+  closeDialog() {
+    player.scanState = dialog.isChecked("scanOn");
+    dialog.hide();
+    game.save();
+    scanner.scan();
   }
 
   showScanner() {
