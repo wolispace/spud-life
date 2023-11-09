@@ -60,7 +60,6 @@ const dialog = {
     let checkbox = `<span class="checkboxSpan">`;
     checkbox += `<input type="checkbox" id="${id}" ${checked} />`;
     checkbox += `<label class="checkboxLabel" for="${id}">${text}</label></span>`;
-
     return checkbox;
   },
   // returns true if the checkbox is checked..

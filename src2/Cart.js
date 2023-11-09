@@ -75,12 +75,10 @@ class Cart extends game.Item {
     let mealQty = 0;
     let content = `<div class="dialog-message-content">`;
     content += this.ownedIcons();
-    content += '<div><ul>';    
     Object.entries(this.machineSummary).forEach(([itemName, info]) => {
-      content += `<li>${itemName} makes ${info.makes}: ${info.qty} x ${info.pricePerItem} = ${info.total}</li>`;
+      content += `<div>${itemName} makes ${info.makes}: ${info.qty} x ${info.pricePerItem} = ${info.total}</div>`;
       mealQty += info.qty;
     });
-    content += '</ul></div>';
     let s = mealQty == 1 ? '' : 's';
     content += `<div>It's time to open your cart and sell your ${mealQty} potato-based meal${s}</div>`;
     
