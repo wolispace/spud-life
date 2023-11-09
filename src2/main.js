@@ -9,6 +9,7 @@ let scanner = null;
 
 // if savedate injected (by referencing it with ?id={dataFileId} then load it.
 if (typeof saveData !== 'undefined') {
+  game.transferred = true;
   game.write(saveData);
 }
 
@@ -70,28 +71,6 @@ document.addEventListener("keyup", (event) => {
   controls.endInput();
 });
 
-function splashScreen() {
-  let title = "Welcome to your Spud Life";
-  let content = `<div class="dialogIntro">`;
-  let titleSvg = svg.render('title');
-  //titleSvg = svg.addOrientationClass(titleSvg);
-  content += `<div class="introSvg">${titleSvg}</div>`;
-  content += dialog.makeCheckbox("hintsOn", "Show hints on/off", player.hints);
-  let footer = `Version ${game.version}`;
-  footer += `<button class="buttonize" onclick="dialog.okButton()"> Let's play </button>`;
-  dialog.cancelButton = function () { closeSplash(); };
-  dialog.okButton = function () { closeSplash(); };
-  dialog.render(title, content, footer);
-}
-
-function closeSplash() {
-  player.hints = dialog.isChecked("hintsOn");
-  dialog.hide();
-  if (player.hints) {
-    hint.player();
-  }
-}
-
 function startGame() {
   character.bodySet = character.getBodySet();
   setContainerBox();
@@ -103,6 +82,7 @@ function startGame() {
   if (player.day && player.day > 0) {
     field.redraw();
   } else {
+    game.new = true;
     player.day = 1;
     player.body = character.randomBody();
     setupThings();
@@ -111,7 +91,11 @@ function startGame() {
     game.save();
 
   }
-  splashScreen();
+  if (game.transferred) {
+    window.location.href = '/';
+  } else {
+    splashScreen();
+  }
 }
 
 function setupThings() {
@@ -160,6 +144,38 @@ function makeLists() {
   });
 }
 
+function splashScreen() {
+  let back = game.new ? '' : ' back ';
+  let title = `Welcome ${back} to your Spud Life`;
+  let content = `<div class="dialogIntro">`;
+  let titleSvg = svg.render('title');
+  //titleSvg = svg.addOrientationClass(titleSvg);
+  content += `<div class="introSvg">${titleSvg}</div>`;
+  if (!game.new) {
+    content += `Welcome back ${player.name}`;
+  }
+  content += dialog.makeCheckbox("hintsOn", "Show hints on/off", player.hints);
+
+  content += `<div><form method="get" action="?">`;
+  content += `Transfer from another device: <input type="text" name="id" value="" />`
+  content += `<button type="submit" class="buttonize">Transfer here</button>`;
+  content += `</form></div>`;
+
+  let footer = `Version ${game.version}`;
+  footer += `<button class="buttonize" onclick="dialog.okButton()"> Let's play </button>`;
+  dialog.cancelButton = function () { closeSplash(); };
+  dialog.okButton = function () { closeSplash(); };
+  dialog.render(title, content, footer);
+}
+
+function closeSplash() {
+  player.hints = dialog.isChecked("hintsOn");
+  dialog.hide();
+  if (player.hints) {
+    hint.player();
+  }
+}
+
 function transfer () {
   let currentState = game.read();
   let rndName = randomName();
@@ -169,7 +185,6 @@ function transfer () {
   content += `<div>Your one-off transfer link lets you pick up this game on another device.</div>`;
   content += `<div>Your code is <input type="text" name="id" value="${rndName}" /></div>`
   content += `<div><input type="hidden" id="compressed" name="data" value="${currentState}" /></div>`
-  //content += `<div>Z<textarea>${currentState}"</textarea></div>`
   content += `<div><button type="submit" class="buttonize">Generate link</button></div>`;
   content += `</div></form>`;
 
