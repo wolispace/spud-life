@@ -13,6 +13,8 @@ const game = {
   incrementQty: 2,
   holeLife: 5, // how long until a hole dissapears
   maxScan: 4,
+  compress: false,
+  compressXfer: true,
 
 
   // everything show on the page is an Item with coords and an svg
@@ -171,7 +173,7 @@ const game = {
         this.sprite.style.display = 'none';
       }
     }
-    
+
     show() {
       if (!this.sprite) {
         this.render();
@@ -243,13 +245,15 @@ const game = {
     if (game.playerItem) {
       player.x = game.playerItem.x;
       player.y = game.playerItem.y;
-  
+
       player.fields = field.encodeAll(player.fields, true);
       player.spuds = spuds.encode(player.spuds);
       player.tools = tools.encode();
-  
-      let compressed = LZString.compressToUTF16(JSON.stringify(player));
-      //let compressed = JSON.stringify(player);
+
+      let compressed = JSON.stringify(player);
+      if (game.compress) {
+        compressed = LZString.compressToUTF16(JSON.stringify(player));
+      }
       localStorage.setItem("state", compressed);
       player.fields = saveFields;
       player.spuds = saveSpuds;
@@ -259,8 +263,10 @@ const game = {
   load: () => {
     let compressed = localStorage.getItem("state");
     if (compressed) {
-      let decompressed = LZString.decompressFromUTF16(compressed);
-      //let decompressed = compressed;
+      let decompressed = compressed;
+      if (game.compress) {
+        decompressed = LZString.decompressFromUTF16(compressed);
+      }
       let newPlayer = JSON.parse(decompressed);
       newPlayer.fields = field.encodeAll(newPlayer.fields, false);
       newPlayer.spuds = spuds.decode(newPlayer.spuds);
@@ -279,13 +285,19 @@ const game = {
   },
 
   read: () => {
-    return LZString.compressToBase64(JSON.stringify(player));
+    let compressed = localStorage.getItem("state");
+    if (game.compressXfer) {
+      compressed = LZString.compressToBase64(compressed);
+    }
+    return compressed;
   },
 
   write: (compressed) => {
-    let decompressed = LZString.decompressFromBase64(compressed);
-    player = JSON.parse(decompressed);
-    game.save();
+    let decompressed = compressed;
+    if (game.compressXfer) {
+      decompressed = LZString.decompressFromBase64(compressed);
+    }
+    localStorage.setItem("state", decompressed);
   },
 
   // ------------------------------

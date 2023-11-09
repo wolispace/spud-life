@@ -169,6 +169,7 @@ function transfer () {
   content += `<div>Your one-off transfer link lets you pick up this game on another device.</div>`;
   content += `<div>Your code is <input type="text" name="id" value="${rndName}" /></div>`
   content += `<div><input type="hidden" id="compressed" name="data" value="${currentState}" /></div>`
+  //content += `<div>Z<textarea>${currentState}"</textarea></div>`
   content += `<div><button type="submit" class="buttonize">Generate link</button></div>`;
   content += `</div></form>`;
 

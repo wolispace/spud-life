@@ -74,7 +74,7 @@ const character = {
   save: function () {
     let dialogInput = document.querySelector(`#playerName`);
     player.name = cleanString(dialogInput.value);
-    player.hints = dialog.isChecked(`#showHints`);
+    player.hints = dialog.isChecked(`showHints`);
     dialog.hide();
     game.save();
 
