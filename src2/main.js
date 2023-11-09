@@ -157,8 +157,8 @@ function splashScreen() {
   content += dialog.makeCheckbox("hintsOn", "Show hints on/off", player.hints);
 
   content += `<div><form method="get" action="?">`;
-  content += `Transfer from another device: <input type="text" name="id" value="" />`
-  content += `<button type="submit" class="buttonize">Transfer here</button>`;
+  content += `Transfer from another device: <input type="text" name="id" id="transferCode" value="" />`
+  content += `<button type="submit" class="buttonize">Go</button>`;
   content += `</form></div>`;
 
   let footer = `Version ${game.version}`;
@@ -183,7 +183,7 @@ function transfer () {
   let content = `<form method="post" action="?">`;
   content += `<div class="dialog-message-content">`;
   content += `<div>Your one-off transfer link lets you pick up this game on another device.</div>`;
-  content += `<div>Your code is <input type="text" name="id" value="${rndName}" /></div>`
+  content += `<div>Your code is <input type="text" name="id" id="transferCode" value="${rndName}" /></div>`
   content += `<div><input type="hidden" id="compressed" name="data" value="${currentState}" /></div>`
   content += `<div><button type="submit" class="buttonize">Generate link</button></div>`;
   content += `</div></form>`;

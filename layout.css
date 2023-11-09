@@ -16,6 +16,11 @@ button {
   color: var(--sl-font-color);
 }
 
+#transferCode {
+  width: 5rem;
+  height:2rem; 
+}
+
 #scanner-range {
   position: absolute;
   background: rgba(255,255,255,0.35);
