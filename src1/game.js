@@ -11,9 +11,9 @@ const game = {
   digging: false,
   step: { x: 5, y: 5 },
   incrementQty: 2,
-  holeLife: 5, // how long until a hole dissapears
+  holeLife: 5, // how long until a hole disappears
   maxScan: 4,
-  compress: false,
+  compress: true,
   transferred: false,
 
 
@@ -286,12 +286,14 @@ const game = {
 
   read: () => {
     let gameState = localStorage.getItem("state");
-    return LZString.compressToBase64(gameState);
+    decompressed = LZString.decompressFromUTF16(gameState);
+    return LZString.compressToBase64(decompressed);
   },
 
   write: (compressed) => {
     let gameState = LZString.decompressFromBase64(compressed);
-    localStorage.setItem("state", gameState);
+    compressed = LZString.compressToUTF16(gameState);
+    localStorage.setItem("state", compressed);
   },
 
   // ------------------------------
