@@ -202,7 +202,7 @@ const hint = {
     hint.target = game.playerItem;
     hint.message = `This is you`;
     hint.okButton = 'hint.controls';
-    hint.group = 'player',
+    hint.group = '',
     hint.render();
   },
   controls: function () {
@@ -210,21 +210,21 @@ const hint = {
     hint.target = controls.list.right;
     hint.message = `Use these arrows to move.`;
     hint.okButton = 'hint.house';
-    hint.group = '',
+    hint.group = 'intro',
     hint.render();
   },
   house: function () {
     hint.target = buildings.list.home;
     hint.message = `Move UP when in front of your house then use your Wardrobe to change your look.`;
     hint.okButton = 'hint.spade';
-    hint.group = '',
+    hint.group = 'intro',
     hint.render();
   },
   spade: function () {
     hint.target = tools.list.spade;
     hint.message = `Use your spade to dig where you stand.`;
     hint.okButton = 'hint.field';
-    hint.group = '',
+    hint.group = 'intro',
     hint.render();
   },
   field: function () {
@@ -232,7 +232,7 @@ const hint = {
     hint.btnText = `Let's start digging!`;
     hint.message = `Rocks and logs block your path.`;
     hint.okButton = 'hint.confirm';
-    hint.group = '',
+    hint.group = 'intro',
     hint.render();
   },   
 

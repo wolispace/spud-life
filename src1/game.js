@@ -240,26 +240,27 @@ const game = {
   save: () => {
     let saveFields = player.fields;
     let saveSpuds = player.spuds;
-    player.x = game.playerItem.x;
-    player.y = game.playerItem.y;
-
-    player.fields = field.encodeAll(player.fields, true);
-    player.spuds = spuds.encode(player.spuds);
-    player.tools = tools.encode();
-
-    //let compressed = LZString.compressToUTF16(JSON.stringify(player));
-    let compressed = JSON.stringify(player);
-    localStorage.setItem("state", compressed);
-    player.fields = saveFields;
-    player.spuds = saveSpuds;
-
+    if (game.playerItem) {
+      player.x = game.playerItem.x;
+      player.y = game.playerItem.y;
+  
+      player.fields = field.encodeAll(player.fields, true);
+      player.spuds = spuds.encode(player.spuds);
+      player.tools = tools.encode();
+  
+      let compressed = LZString.compressToUTF16(JSON.stringify(player));
+      //let compressed = JSON.stringify(player);
+      localStorage.setItem("state", compressed);
+      player.fields = saveFields;
+      player.spuds = saveSpuds;
+    }
   },
 
   load: () => {
     let compressed = localStorage.getItem("state");
     if (compressed) {
-      //let decompressed = LZString.decompressFromUTF16(compressed);
-      let decompressed = compressed;
+      let decompressed = LZString.decompressFromUTF16(compressed);
+      //let decompressed = compressed;
       let newPlayer = JSON.parse(decompressed);
       newPlayer.fields = field.encodeAll(newPlayer.fields, false);
       newPlayer.spuds = spuds.decode(newPlayer.spuds);

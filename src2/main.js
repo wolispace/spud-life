@@ -18,6 +18,10 @@ if (urlParams.has('reset')) {
   game.clear();
 }
 
+if (!urlParams.has('id') && typeof saveId !== 'undefined') {
+  showTransferLink();
+}
+
 // all of the events..
 document.addEventListener("DOMContentLoaded", function () {
   startGame();
@@ -156,3 +160,46 @@ function makeLists() {
   });
 }
 
+function transfer () {
+  let currentState = game.read();
+  let rndName = randomName();
+
+  let content = `<form method="post" action="?">`;
+  content += `<div class="dialog-message-content">`;
+  content += `<div>Your one-off transfer link lets you pick up this game on another device.</div>`;
+  content += `<div>Your code is <input type="text" name="id" value="${rndName}" /></div>`
+  content += `<div><input type="hidden" id="compressed" name="data" value="${currentState}" /></div>`
+  content += `<div><button type="submit" class="buttonize">Generate link</button></div>`;
+  content += `</div></form>`;
+
+  let footer = "";
+  footer += `<button class="buttonize" onclick="dialog.confirm()"> Cancel </button>`;
+  dialog.cancelButton = function () { dialog.hide(); };
+  dialog.okButton = function () { dialog.hide(); };
+  dialog.hasInput = true;
+  dialog.render("Transfer link", content, footer);
+}
+
+
+function showTransferLink () {
+  let url = 'https://wolispace.com/spudlife';
+  let link = `${url}?id=${saveId}`;
+
+  let content = `<div class="dialog-message-content">`;
+  content += `<div>Your one-off transfer link is:</div>`;
+  content += `<div><a href="${link}">${link}</a></div>`;
+  content += `<div>Email this to yourself to play on any device.</div>`;
+  content += `<div>Remember, its your game saved at this point in time. Create another transfer link to continue on another device again</div>`;
+
+  let footer = "";
+  footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
+  dialog.cancelButton = function () { character.render(); dialog.hide(); };
+  dialog.okButton = function () { character.render(); dialog.hide(); };
+  dialog.render("Transfer link", content, footer);
+}
+
+function writeState () {
+  let compressed = document.querySelector('#compressed').value;
+  game.write(compressed);
+  player = game.load();
+}

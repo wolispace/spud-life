@@ -78,12 +78,11 @@ class Scanner extends game.Item {
     let content = `<div class="dialog-message-content">`;
     content += `<div>Upgrade your scanner to be more precise in the hardware store.</div>`;
     content += `<div>'Show' scanner range and check what you have found in the 'Potatedex' Gotta find them all!</div>`;
+    content += dialog.makeCheckbox("scanOn", "Turn scanner on/off", player.scanState);
+    content += dialog.makeCheckbox("hintsOn", "Show hints on/off", player.hints);
     let footer = "";
-    if (isDev) {
-      content += dialog.makeCheckbox("scanOn", "Turn scanner on/off", player.scanState);
-      content += dialog.makeCheckbox("hintsOn", "Show hints on/off", player.hints);
-      footer += `<button class="buttonize" onclick="game.clear(true)"> Reset </button>`;
-    }
+    footer += `<button class="buttonize" onclick="game.clear(true)"> Reset </button>`;
+    footer += `<button class="buttonize" onclick="transfer()"> Transfer </button>`;
     footer += `<button class="buttonize" onclick="scanner.showScanner()"> Show </button>`;
     footer += `<button class="buttonize" onclick="potatadex.show()"> Potatádex </button>`;
     footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
