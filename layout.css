@@ -16,9 +16,16 @@ button {
   color: var(--sl-font-color);
 }
 
+input {
+  width: 2rem;
+  height: 1.5rem;
+  font-size: 1rem; 
+  border-radius: 5px;
+  box-shadow: 2px 2px 7px rgb(100, 100, 100) inset;  
+}
+
 #transferCode {
   width: 5rem;
-  height:2rem; 
 }
 
 #scanner-range {
@@ -456,8 +463,13 @@ svg.height {
   white-space: nowrap;
 }
 
-.checkboxSpan>label {
+.checkboxSpan > label {
   cursor: pointer;
+}
+
+.checkboxSpan > input {
+  width: 1.1rem;
+  height: 1.1rem;
 }
 
 .checkboxSpan:hover {

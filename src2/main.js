@@ -19,10 +19,6 @@ if (urlParams.has('reset')) {
   game.clear();
 }
 
-if (!urlParams.has('id') && typeof saveId !== 'undefined') {
-  showTransferLink();
-}
-
 // all of the events..
 document.addEventListener("DOMContentLoaded", function () {
   startGame();
@@ -91,11 +87,16 @@ function startGame() {
     game.save();
 
   }
-  if (game.transferred) {
-    window.location.href = '/';
+  if (!urlParams.has('id') && typeof saveId !== 'undefined') {
+    showTransferLink();
   } else {
     splashScreen();
   }
+  // if (game.transferred) {
+  //   window.location.href = '/';
+  //   showTransferLink();
+  // } else {
+  // }
 }
 
 function setupThings() {
@@ -182,10 +183,10 @@ function transfer () {
 
   let content = `<form method="post" action="?">`;
   content += `<div class="dialog-message-content">`;
-  content += `<div>Your one-off transfer link lets you pick up this game on another device.</div>`;
-  content += `<div>Your code is <input type="text" name="id" id="transferCode" value="${rndName}" /></div>`
+  content += `<div>Your one-off transfer code lets you continue playing as ${player.name} at this point in time on another device.</div>`;
+  content += `<div>Your code will be <input type="text" name="id" id="transferCode" value="${rndName}" /></div>`
   content += `<div><input type="hidden" id="compressed" name="data" value="${currentState}" /></div>`
-  content += `<div><button type="submit" class="buttonize">Generate link</button></div>`;
+  content += `<div><button type="submit" class="buttonize">Generate new code</button></div>`;
   content += `</div></form>`;
 
   let footer = "";
@@ -193,25 +194,28 @@ function transfer () {
   dialog.cancelButton = function () { dialog.hide(); };
   dialog.okButton = function () { dialog.hide(); };
   dialog.hasInput = true;
-  dialog.render("Transfer link", content, footer);
+  dialog.render("New transfer code", content, footer);
 }
 
 
 function showTransferLink () {
-  let url = 'https://wolispace.com/spudlife';
-  let link = `${url}?id=${saveId}`;
-
   let content = `<div class="dialog-message-content">`;
-  content += `<div>Your one-off transfer link is:</div>`;
-  content += `<div><a href="${link}">${link}</a></div>`;
-  content += `<div>Email this to yourself to play on any device.</div>`;
-  content += `<div>Remember, its your game saved at this point in time. Create another transfer link to continue on another device again</div>`;
+  content += `<div>Your transfer code is: <strong>${saveId}</strong></div>`;
+  content += `<div></div>`;
+  content += `<div>It is this game saved at this point in time.</div>`;
+  content += `<div>Enter it on the welcome screen on a different device.</div>`;
+  content += `<div>Create a new transfer code each time you want to continue playing as ${player.name} on a different device.</div>`;
 
   let footer = "";
   footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
-  dialog.cancelButton = function () { character.render(); dialog.hide(); };
-  dialog.okButton = function () { character.render(); dialog.hide(); };
-  dialog.render("Transfer link", content, footer);
+  dialog.cancelButton = function () { dialog.hide(); };
+  dialog.okButton = function () { dialog.hide(); };
+  dialog.render("Your new transfer code", content, footer);
+}
+
+function endShowTransfer() {
+  dialog.hide();
+  splashScreen();
 }
 
 function writeState () {
