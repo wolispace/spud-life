@@ -73,7 +73,7 @@ let items = {
     pricePerItem: 15,
     makes: "mash",
   },
-  soup: {
+  souper: {
     type: "machines",
     fullName: "Soup spinner",
     desc: "Makes a hearty potato soup",
@@ -84,7 +84,7 @@ let items = {
     pricePerItem: 15,
     makes: "soup",
   },
-  bake: {
+  baker: {
     type: "machines",
     fullName: "Bake-o-matic",
     desc: "Makes an excellent baked potato",
@@ -95,7 +95,7 @@ let items = {
     pricePerItem: 20,
     makes: "baked",
   },
-  curly: {
+  curler: {
     type: "machines",
     fullName: "Curly cooker",
     desc: "Cooks a potato into a curly-fry",
@@ -104,7 +104,7 @@ let items = {
     upgradeCost: 100,
     maxUpgrades: 100,
     pricePerItem: 20,
-    makes: "curly-fries",
+    makes: "curly",
   },
   chipper2000: {
     type: "machines",
@@ -117,7 +117,7 @@ let items = {
     pricePerItem: 30,
     makes: "chips",
   },
-  rosti: {
+  roster: {
     type: "machines",
     fullName: "Rösti squasher",
     desc: "A fancy machine for making crispy rösti",
@@ -128,7 +128,7 @@ let items = {
     pricePerItem: 30,
     makes: "rosti",
   },
-  croquette: {
+  croquetter: {
     type: "machines",
     fullName: "Croquette roller",
     desc: "Makes small golden balls of potato croquettes",

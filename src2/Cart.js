@@ -72,15 +72,12 @@ class Cart extends game.Item {
 
   readyDialog() {
     let title = "Your food cart";
-    let mealQty = 0;
     let content = `<div class="dialog-message-content">`;
     content += this.ownedIcons();
-    Object.entries(this.machineSummary).forEach(([itemName, info]) => {
-      content += `<div>${itemName} makes ${info.makes}: ${info.qty} x ${info.pricePerItem} = ${info.total}</div>`;
-      mealQty += info.qty;
-    });
-    let s = mealQty == 1 ? '' : 's';
-    content += `<div>It's time to open your cart and sell your ${mealQty} potato-based meal${s}</div>`;
+    let mInfo = this.mealList();
+    content += mInfo.content;
+    let s = mInfo.mealQty == 1 ? '' : 's';
+    content += `<div>It's time to open your cart and sell your ${mInfo.mealQty} potato-based meal${s}</div>`;
     
     let footer = "";
     footer += `<button class="buttonize" onclick="dialog.confirm()"> Open </button>`;
@@ -99,6 +96,20 @@ class Cart extends game.Item {
     dialog.cancelButton = function () { buildings.list.cart.exit(); };
     dialog.okButton = function () { buildings.list.cart.exit(); };
     dialog.render(title, content, footer);
+  }
+
+  mealList() {
+    let content = '';
+    let mealQty = 0;
+    Object.entries(this.machineSummary).forEach(([itemName, itemInfo]) => {
+      let itemSvg = svg.render(itemInfo.makes);
+      itemSvg = itemSvg ?? svg.inLine('chips');
+      let mealIcon = `<div class="cartMachine buttonize button">${itemSvg}</div>`;
+      content += `<div >${mealIcon} ${itemName} made ${itemInfo.makes}: ${itemInfo.qty} x ${itemInfo.pricePerItem} = ${itemInfo.total}</div>`;
+      mealQty += itemInfo.qty;
+    });
+
+    return {content: content, mealQty: mealQty};
   }
 
   exit() {
@@ -185,9 +196,9 @@ class Cart extends game.Item {
   summarise() {
     let html = '';
     Object.entries(this.list).forEach(([machineName, itemInfo]) => {
-      html += `<div>${itemInfo.meals} meals of ${machineName} is $${itemInfo.income}<//div>`;
+      html += `<div>${itemInfo.meals} serves of ${machineName} is $${itemInfo.income}<//div>`;
     });
-    html += `<div><br/><strong>${this.meals} total meals is $${this.income}</string></div>`;
+    html += `<div><br/><strong>${this.meals} total serves is $${this.income}</string></div>`;
     return html;
   }
 
