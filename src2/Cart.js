@@ -27,7 +27,6 @@ class Cart extends game.Item {
   enter() {
     if (player.daytime) {
       this.summariseMachines();
-      console.log(this.machineSummary);
       if (this.qty > 0) {
         buildings.list.cart.readyDialog();
       } else {
@@ -55,7 +54,7 @@ class Cart extends game.Item {
   dayDialog() {
     let title = "Your food cart";
     let content = `<div class="dialog-message-content">`;
-    content += this.ownedIcons();
+    content += this.ownedMachines();
     let footer = "";
     if (basket.hasSpuds()) {
       content += `Load your machines with spuds and start them cooking`;
@@ -73,7 +72,7 @@ class Cart extends game.Item {
   readyDialog() {
     let title = "Your food cart";
     let content = `<div class="dialog-message-content">`;
-    content += this.ownedIcons();
+    content += this.ownedMachines();
     let mInfo = this.mealList();
     content += mInfo.content;
     let s = mInfo.mealQty == 1 ? '' : 's';
@@ -102,11 +101,16 @@ class Cart extends game.Item {
     let content = '';
     let mealQty = 0;
     Object.entries(this.machineSummary).forEach(([itemName, itemInfo]) => {
-      let itemSvg = svg.render(itemInfo.makes);
-      itemSvg = itemSvg ?? svg.inLine('chips');
-      let mealIcon = `<div class="cartMachine buttonize button">${itemSvg}</div>`;
-      content += `<div >${mealIcon} ${itemName} made ${itemInfo.makes}: ${itemInfo.qty} x ${itemInfo.pricePerItem} = ${itemInfo.total}</div>`;
-      mealQty += itemInfo.qty;
+      if (itemInfo.qty > 0) {
+        let itemSvg = svg.render(itemInfo.makes);
+        itemSvg = itemSvg ?? svg.inLine('chips');
+        let mealIcon = `<div class="cartMachine buttonize button">${itemSvg}</div>`;
+        let machineSvg = svg.render(itemName);
+        let machineIcon = `<div class="cartMachine buttonize button">${machineSvg}</div>`;
+  
+        content += `<div class="cartRow">${machineIcon} = ${mealIcon} x ${itemInfo.qty} @${itemInfo.pricePerItem} = $${itemInfo.total}</div>`;
+        mealQty += itemInfo.qty;
+      }
     });
 
     return {content: content, mealQty: mealQty};
@@ -202,11 +206,13 @@ class Cart extends game.Item {
     return html;
   }
 
-  ownedIcons() {
+  ownedMachines() {
     let html = '';
-    Object.entries(player.cart).forEach(([machineName, info]) => {
-      let itemSvg = svg.render(machineName);
-      html += `<div class="cartMachine buttonize button machine_${machineName}" onclick="machines.describe('${machineName}')">${itemSvg}</div>`;
+    Object.entries(player.cart).forEach(([machineName, qty]) => {
+      if (qty <= 0) {
+        let itemSvg = svg.render(machineName);
+        html += `<div class="cartMachine buttonize button machine_${machineName}" onclick="machines.describe('${machineName}')">${itemSvg}</div>`;
+      }
     });
     return `<div class="cartMachines">${html}</div>`;
   }
