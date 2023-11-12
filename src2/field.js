@@ -70,7 +70,7 @@ const field = {
       if (y > topNoSeed + (sprite.height * 4)) {
         x = rnd(fieldWidth + leftNoSeed);
       }
-      let qty = 5;
+      let qty = game.blockerHits;
       let item = rnd(2) == 1 ? 'log' : 'rock';
       let id = game.uid++;
       game.setUid(item.uid);
@@ -191,6 +191,8 @@ const field = {
   holeState: function (item) {
     return item.qty / game.holeLife;
   },
+
+  
 
   roll: function () {
     player.fields.forEach((fieldSpace, fieldId) => {

@@ -12,6 +12,7 @@ const game = {
   step: { x: 5, y: 5 },
   incrementQty: 2,
   holeLife: 5, // how long until a hole disappears
+  blockerHits: 5, // how many hits on a blocker to clear it
   maxScan: 4,
   compress: true,
   transferred: false,
