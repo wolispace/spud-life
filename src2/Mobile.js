@@ -175,7 +175,7 @@ class Mobile extends game.Item {
           spriteBox.x = game.playerItem.x;
           spriteBox.y = game.playerItem.y;
           console.log(spriteBox);
-          spriteBox.render();
+          spriteBox.show();
           game.spriteBox = spriteBox;
 
           delete player.fields[player.currentField][layer][index];

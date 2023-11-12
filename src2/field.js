@@ -140,7 +140,7 @@ const field = {
   showAll() {
     dialog.hide();
     player.fields[player.currentField][game.UNDERGROUND].forEach( (item) => {
-      item.render();
+      item.show();
     });
   },
 
