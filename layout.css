@@ -307,6 +307,8 @@ svg.height {
   padding: 0.2rem;
   background-color: rgb(160, 160, 160);
   text-align: right;
+  box-shadow: 0px -5px 19px rgba(0,0,0,.45);
+
 }
 
 .hardware {
