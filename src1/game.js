@@ -243,6 +243,7 @@ const game = {
     let saveFields = player.fields;
     let saveSpuds = player.spuds;
     if (game.playerItem) {
+      player.v = game.version;
       player.x = game.playerItem.x;
       player.y = game.playerItem.y;
 
@@ -264,7 +265,8 @@ const game = {
     let gameState = localStorage.getItem("state");
     if (gameState) {
       let decompressed = gameState;
-      if (game.compress) {
+      console.log(gameState.indexOf('name'));
+      if (game.compress && gameState.indexOf('name') < 0) {
         decompressed = LZString.decompressFromUTF16(gameState);
       }
       let newPlayer = JSON.parse(decompressed);
