@@ -503,6 +503,7 @@ svg.height {
 
 .cartMachines {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .cartMachine {
