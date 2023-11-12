@@ -54,12 +54,16 @@ const game = {
     }
 
     render() {
+      if (document.querySelector(`#i${this.id}`)) {
+        // its already here..
+      } else {
       let newSprite = `<div id="i${this.id}" class="sprite ${this.classes}">${this.svg}</div>`;
       addToWorld(newSprite);
       this.sprite = sprite.get(this.id);
       this.position();
       this.shrinkWrap();
       this.position();
+      }
     }
 
     refresh(newSvg) {
@@ -179,6 +183,7 @@ const game = {
         this.render();
       } else {
         this.sprite.style.display = 'block';
+        console.log('showing');
       }
     }
 
@@ -265,7 +270,6 @@ const game = {
     let gameState = localStorage.getItem("state");
     if (gameState) {
       let decompressed = gameState;
-      console.log(gameState.indexOf('name'));
       if (game.compress && gameState.indexOf('name') < 0) {
         decompressed = LZString.decompressFromUTF16(gameState);
       }
