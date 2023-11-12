@@ -846,7 +846,7 @@ rosti: `
 </svg>
 `,
 soup: `
-<svg iewBox="0 0 90 93">
+<svg viewBox="0 0 90 93">
  <defs>
   <linearGradient id="s_a" x1="19.913" x2="73.071" y1="70.729" y2="70.729" gradientTransform="translate(-.35355 .17678)" gradientUnits="userSpaceOnUse">
    <stop offset=".0045249"/>
