@@ -48,13 +48,14 @@ class Cart extends game.Item {
         pricePerItem: itemInfo.pricePerItem,
         total: itemInfo.pricePerItem * qty,
       }
-    });    
+    });
   }
 
   dayDialog() {
     let title = "Your food cart";
     let content = `<div class="dialog-message-content">`;
     content += this.ownedMachines();
+    content += this.showMeals();
     let footer = "";
     if (basket.hasSpuds()) {
       content += `Load your machines with spuds and start them cooking`;
@@ -77,19 +78,19 @@ class Cart extends game.Item {
     content += mInfo.content;
     let s = mInfo.mealQty == 1 ? '' : 's';
     content += `<div>It's time to open your cart and sell your ${mInfo.mealQty} potato-based meal${s}</div>`;
-    
+
     let footer = "";
     footer += `<button class="buttonize" onclick="dialog.confirm()"> Open </button>`;
     dialog.cancelButton = function () { buildings.list.cart.open(); };
     dialog.okButton = function () { buildings.list.cart.open(); };
-    dialog.render(title, content, footer);    
+    dialog.render(title, content, footer);
   }
 
   nightDialog() {
     let title = "Your food cart";
     let content = `<div class="dialog-message-content">`;
     content += `<div>It's nighttime and everyone has gone to sleep.</div>`;
-    content += `<div>Go home and get some sleep.</div>`;   
+    content += `<div>Go home and get some sleep.</div>`;
     let footer = "";
     footer += `<button class="buttonize" onclick="dialog.confirm()"> Exit </button>`;
     dialog.cancelButton = function () { buildings.list.cart.exit(); };
@@ -104,16 +105,16 @@ class Cart extends game.Item {
       if (itemInfo.qty > 0) {
         let itemSvg = svg.render(itemInfo.makes);
         itemSvg = itemSvg ?? svg.inLine('chips');
-        let mealIcon = `<div class="cartMachine buttonize button">${itemSvg}</div>`;
+        let mealIcon = `<div class="cartMachine buttonize button machine_${itemInfo.makes}" onclick="machines.describe('${itemInfo.makes}')">${itemSvg}</div>`;
         let machineSvg = svg.render(itemName);
-        let machineIcon = `<div class="cartMachine buttonize button">${machineSvg}</div>`;
-  
+        let machineIcon = `<div class="cartMachine buttonize button machine_${itemName}" onclick="machines.describe('${itemName}')">${machineSvg}</div>`;
+
         content += `<div class="cartRow">${machineIcon} = ${mealIcon} x ${itemInfo.qty} @${itemInfo.pricePerItem} = $${itemInfo.total}</div>`;
         mealQty += itemInfo.qty;
       }
     });
 
-    return {content: content, mealQty: mealQty};
+    return { content: content, mealQty: mealQty };
   }
 
   exit() {
@@ -146,7 +147,7 @@ class Cart extends game.Item {
     });
     this.readyDialog();
   }
-  
+
   open() {
     customers.find(this.machineSummary);
     this.reset();
@@ -213,6 +214,16 @@ class Cart extends game.Item {
         let itemSvg = svg.render(machineName);
         html += `<div class="cartMachine buttonize button machine_${machineName}" onclick="machines.describe('${machineName}')">${itemSvg}</div>`;
       }
+    });
+    return `<div class="cartMachines">${html}</div>`;
+  }
+
+  showMeals() {
+    let meals = ['chips', 'mash', 'curly', 'croquette', 'soup', 'baked', 'rosti'];
+    let html = '';
+    meals.forEach((meal) => {
+      let itemSvg = svg.render(meal);
+      html += `<div class="cartMachine buttonize button machine_${meal}" onclick="machines.describe('${meal}')">${itemSvg}</div>`;
     });
     return `<div class="cartMachines">${html}</div>`;
   }

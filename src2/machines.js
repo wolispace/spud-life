@@ -1,6 +1,7 @@
 const machines = {
   describe: function (itemName) {
     let itemInfo = items[itemName];
+    hint.force = true;
     hint.target = document.querySelector(`.machine_${itemName}`);
     hint.target.centre = function () {
       let icon = {

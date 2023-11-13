@@ -139,6 +139,41 @@ let items = {
     pricePerItem: 40,
     makes: "croquette",
   },
+  chips: {
+    type: "meal",
+    fullName: "Hot ships",
+    desc: "A cup of hot chips",
+  },
+  mash: {
+    type: "meal",
+    fullName: "Mashed potato",
+    desc: "A cup of mashed potato",
+  },
+  curly: {
+    type: "meal",
+    fullName: "Curly fried",
+    desc: "A cup of curly fries",
+  },
+  croquette: {
+    type: "meal",
+    fullName: "A cup of golden croquette",
+    desc: "",
+  },
+  soup: {
+    type: "meal",
+    fullName: "A cup of steaming potato soup",
+    desc: "",
+  },
+  baked: {
+    type: "meal",
+    fullName: "A large baked potato",
+    desc: "",
+  },
+  rosti: {
+    type: "meal",
+    fullName: "A server of 3 crispy rosti",
+    desc: "",
+  },
   land: {
     type: "land",
     fullName: "A field for sale",

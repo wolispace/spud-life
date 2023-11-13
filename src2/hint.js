@@ -7,6 +7,7 @@ const hint = {
   btnText: null,
   group: '',
   visible: false,
+  force: false,
 
   defaultParams: {
     autoRender: false,
@@ -54,7 +55,7 @@ const hint = {
   },
 
   render: function () {
-    if (player.hinted[hint.group] || !player.hints) {
+    if ((player.hinted[hint.group] || !player.hints) && !hint.force) {
       hint.hide();
       return;
     }
@@ -76,6 +77,7 @@ const hint = {
     hint.arrow.style.top = '-200px';
     hint.msg.innerHTML = '';
     hint.btnText = null;
+    hint.force = false;
   },
 
   confirm: function () {
