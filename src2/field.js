@@ -119,6 +119,29 @@ const field = {
     }
   },
 
+  add: function (fieldId) {
+    console.log('add a new spud underground in field ', player);
+    layer = game.UNDERGROUND;
+    fieldHeight = containerBox.height - (sprite.height * 2);
+    fieldWidth = containerBox.width;
+    let params = {
+      id: game.uid++,
+      x: rnd(fieldWidth),
+      y: rnd(fieldHeight) + (sprite.height * 2),
+      w: sprite.width,
+      h: sprite.height,
+      qty: 1,
+      autoRender: false,
+    }
+    params.qty = rnd(4) + 2;
+    let itemInfo = spuds.select(fieldId);
+    params.item = itemInfo.name;
+    params.svg = svg.render('spud1');
+    game.setUid(params.id);
+    let newItem = new game.Item(params);
+    player.fields[fieldId][layer].push(newItem);
+  },
+
   addGrid: function () {
     let index = 0;
     for (let x = 0; x < game.grid.x; x++) {
@@ -139,7 +162,7 @@ const field = {
 
   showAll() {
     dialog.hide();
-    player.fields[player.currentField][game.UNDERGROUND].forEach( (item) => {
+    player.fields[player.currentField][game.UNDERGROUND].forEach((item) => {
       item.show();
     });
   },
@@ -192,7 +215,7 @@ const field = {
     return item.qty / game.holeLife;
   },
 
-  
+
 
   roll: function () {
     player.fields.forEach((fieldSpace, fieldId) => {
@@ -202,7 +225,8 @@ const field = {
           item.remove();
           delete fieldSpace[game.SURFACE][index];
           console.log('removing blank hole', fieldId, index);
-          console.log('add a new spud or item underground in field ', player);
+          field.add(fieldId);
+         
         } else {
           if (item.sprite) {
             item.sprite.style.opacity = field.holeState(item);
