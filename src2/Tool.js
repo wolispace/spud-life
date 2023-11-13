@@ -3,6 +3,7 @@ class Tool extends game.Item {
   max = 0;
   list = {};
   state = true;
+  total = 0;
 
   constructor(params) {
     params.w = sprite.width;
@@ -57,6 +58,7 @@ class Tool extends game.Item {
     this.jiggle('up');
     this.qty = this.qty > 0 ? this.qty = this.qty - 1 : 0;
     this.updateQty();
+    this.total++;
   }
 
   resetQty() {

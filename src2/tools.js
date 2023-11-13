@@ -25,6 +25,7 @@ const tools = {
         tools.list[itemName] = new Tool(params);
         tools.list[itemName].sprite.onclick = tools.clicks[itemName];
         params.x = params.x - tools.list[itemName].w - padding;
+        tools.list[itemName].total = player.tools[itemName].total ?? 0;
         if (tools.buyable.includes(itemName) && player.tools[itemName].max === 0) {
           tools.list[itemName].hide();
         }
@@ -44,6 +45,7 @@ const tools = {
         max: parseInt(bit[2]),
         list: JSON.parse(bit[3]),
         state: bit[4],
+        total: parseInt(bit[5]),
       };
     });
 
@@ -61,6 +63,7 @@ const tools = {
       encodedString += `${toolInfo.max || 0}${d}`;
       encodedString += `${stringOfList}${d}`;
       encodedString += `${toolInfo.state || true}${d}`;
+      encodedString += `${toolInfo.total || 0}${d}`;
       r = tools.recordDelim;
     });
 
@@ -73,6 +76,7 @@ const tools = {
       let title = "Pick";
       let content = `<div class="dialog-message-content">`;
       content += `This is your pick.`;
+      content += `You have used it ${tools.list.pick.total} times.`;
       let footer = "";
       footer += `<button class="buttonize" onclick="dialog.okButton()"> Ok </button>`;
       dialog.cancelButton = function () { dialog.hide(); };
@@ -83,6 +87,7 @@ const tools = {
       let title = "axe";
       let content = `<div class="dialog-message-content">`;
       content += `This is your axe.`;
+      content += `You have used it ${tools.list.axe.total} times.`;
       let footer = "";
       footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
       dialog.cancelButton = function () { dialog.hide(); };
