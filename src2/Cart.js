@@ -55,7 +55,7 @@ class Cart extends game.Item {
     let title = "Your food cart";
     let content = `<div class="dialog-message-content">`;
     content += this.ownedMachines();
-    content += this.showMeals();
+    //content += this.showMeals();
     let footer = "";
     if (basket.hasSpuds()) {
       content += `Load your machines with spuds and start them cooking`;
