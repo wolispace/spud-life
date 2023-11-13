@@ -156,23 +156,23 @@ let items = {
   },
   croquette: {
     type: "meal",
-    fullName: "A cup of golden croquette",
-    desc: "",
+    fullName: "Croquette balls",
+    desc: "A cup of golden croquette balls",
   },
   soup: {
     type: "meal",
-    fullName: "A cup of steaming potato soup",
-    desc: "",
+    fullName: "Soup",
+    desc: "A cup of steaming potato soup",
   },
   baked: {
     type: "meal",
-    fullName: "A large baked potato",
-    desc: "",
+    fullName: "Baked potato",
+    desc: "A large baked potato",
   },
   rosti: {
     type: "meal",
-    fullName: "A server of 3 crispy rosti",
-    desc: "",
+    fullName: "Rosti",
+    desc: "A server of 3 crispy rosti",
   },
   land: {
     type: "land",
