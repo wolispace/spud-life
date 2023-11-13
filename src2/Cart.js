@@ -143,6 +143,11 @@ class Cart extends game.Item {
         }
         this.list[machine.makes].meals += machine.qty;
         this.list[machine.makes].income += income;
+        // record that we have seen this meal
+        if (!player.meals[machine.makes]) {
+          player.meals[machine.makes] = 0;
+        }
+        player.meals[machine.makes] += machine.qty;
       }
     });
     this.readyDialog();

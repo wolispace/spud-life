@@ -14,7 +14,6 @@ let player = {
   spuds: {},
   scanLevel: 1,
   scanState: true,
-  spudRegen: -5,
   sowSeeds: 0,
   grassQty: 7,
   tools: {
@@ -25,6 +24,7 @@ let player = {
     scanner: { qty: 4, on: true },
     wallet: { qty: 5000 },
   },
+  meals: {},
   currentField: 0,
   fields: [[[], [], []]],
   cart: {'chipper': 0},
