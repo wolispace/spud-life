@@ -1,6 +1,3 @@
-const rows = 14;
-const cols = 10;
-
 let player = {
   name: 'Ashley',
   hints: true,
@@ -9,13 +6,10 @@ let player = {
   y: 1,
   daytime: true,
   day: 0,
-  cols: cols,
-  rows: rows,
   spuds: {},
   scanLevel: 1,
   scanState: true,
   sowSeeds: 0,
-  grassQty: 7,
   tools: {
     spade: { qty: 8, max: 8 },
     axe: { qty: 0, max: 0 },
