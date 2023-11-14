@@ -39,13 +39,17 @@ function saveLoad($v, $id)
 
 function getJsDataFileName($id)
 {
-  return "_saves/_save_{$id}.js";
+  $dataFile = "_saves/_save_{$id}.js";
+
+  return file_exists($dataFile) ? $dataFile : '';
 }
 
 function getSaveScript($v, $id)
 {
   $jsDataFileName = getJsDataFileName($id);
-  return "<script src='{$jsDataFileName}?{$v}' ></script>";
+  if (!empty($jsDataFileName)) {
+    return "<script src='{$jsDataFileName}?{$v}' ></script>";
+  }
 }
 
 function getScripts($v)

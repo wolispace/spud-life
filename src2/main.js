@@ -157,10 +157,9 @@ function splashScreen() {
   }
   content += dialog.makeCheckbox("hintsOn", "Show hints on/off", player.hints);
 
-  content += `<div><form method="get" action="?">`;
+  content += `<div>`;
   content += `Transfer from another device: <input type="text" name="id" id="transferCode" value="" />`
-  content += `<button type="submit" class="buttonize">Go</button>`;
-  content += `</form></div>`;
+  content += `</div>`;
 
   let footer = `Version ${game.version}`;
   footer += `<button class="buttonize" onclick="dialog.okButton()"> Let's play </button>`;
@@ -170,6 +169,10 @@ function splashScreen() {
 }
 
 function closeSplash() {
+  let transferCode = document.querySelector("#transferCode").value;
+  if (transferCode) {
+    window.location.replace(`?id=${transferCode}`);
+  }
   player.hints = dialog.isChecked("hintsOn");
   dialog.hide();
   if (player.hints) {
