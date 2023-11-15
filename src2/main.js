@@ -78,6 +78,7 @@ function startGame() {
   if (player.day && player.day > 0) {
     field.redraw();
   } else {
+    console.log('new game');
     game.new = true;
     player.day = 1;
     player.body = character.randomBody();
@@ -92,11 +93,6 @@ function startGame() {
   } else {
     splashScreen();
   }
-  // if (game.transferred) {
-  //   window.location.href = '/';
-  //   showTransferLink();
-  // } else {
-  // }
 }
 
 function setupThings() {
@@ -158,7 +154,7 @@ function splashScreen() {
   content += dialog.makeCheckbox("hintsOn", "Show hints on/off", player.hints);
 
   content += `<div>`;
-  content += `Transfer from another device: <input type="text" name="id" id="transferCode" value="" />`
+  content += `<input placeholder="Transfer code" type="text" name="id" id="transferCode" value="" title="Enter a transfer code from another device to continue playing here" />`
   content += `</div>`;
 
   let footer = `Version ${game.version}`;
@@ -175,9 +171,17 @@ function closeSplash() {
   }
   player.hints = dialog.isChecked("hintsOn");
   dialog.hide();
-  if (player.hints) {
-    hint.player();
+
+
+  // if first time go straight to wardrobe
+  if (game.new) {
+    character.customize();
+  } else {
+    if (player.hints) {
+      hint.player();
+    }
   }
+
 }
 
 function transfer () {

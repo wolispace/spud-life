@@ -67,11 +67,11 @@ const hint = {
     hint.pointAt();
     hint.showMsg();
   },
-  
+
   close: function () {
     hint.hide();
   },
-  
+
   hide: function () {
     hint.msg.style.top = '-200px';
     hint.arrow.style.top = '-200px';
@@ -81,7 +81,7 @@ const hint = {
   },
 
   confirm: function () {
-  hint.isItSkipped();
+    hint.isItSkipped();
     hint.hide();
     // if they don't want to see this again, then mark it as hinted
     if (hint.okButton == 'hint.confirm') {
@@ -109,6 +109,10 @@ const hint = {
   },
 
   pointAt: function () {
+    if (!hint.target) {
+      console.trace('pointing at nothing!');
+      return;
+    }
     hint.setOrient();
     let tCtr = hint.target.centre();
     let newPos = {
@@ -205,7 +209,7 @@ const hint = {
     hint.message = `This is you`;
     hint.okButton = 'hint.controls';
     hint.group = '',
-    hint.render();
+      hint.render();
   },
   controls: function () {
     hint.isItSkipped();
@@ -213,30 +217,30 @@ const hint = {
     hint.message = `Use these arrows to move.`;
     hint.okButton = 'hint.house';
     hint.group = 'intro',
-    hint.render();
+      hint.render();
   },
   house: function () {
     hint.target = buildings.list.home;
-    hint.message = `Move UP when in front of your house then use your Wardrobe to change your look.`;
+    hint.message = `Move UP when in front of a building to go inside.`;
     hint.okButton = 'hint.spade';
     hint.group = 'intro',
-    hint.render();
+      hint.render();
   },
   spade: function () {
     hint.target = tools.list.spade;
     hint.message = `Use your spade to dig where you stand.`;
     hint.okButton = 'hint.field';
     hint.group = 'intro',
-    hint.render();
+      hint.render();
   },
   field: function () {
-    hint.target = player.fields[0][0][10];
+    hint.target = player.fields[0][0][0];
     hint.btnText = `Let's start digging!`;
     hint.message = `Rocks and logs block your path.`;
     hint.okButton = 'hint.confirm';
     hint.group = 'intro',
-    hint.render();
-  },   
+      hint.render();
+  },
 
   noDigHome: function () {
     hint.target = game.playerItem;
@@ -282,7 +286,7 @@ const hint = {
 
   toolHW: function () {
     hint.target = buildings.list.hardware;
-        hint.message = `Check the hardware store for things to buy and sell.`;
+    hint.message = `Check the hardware store for things to buy and sell.`;
     hint.okButton = 'hint.toolHome';
     hint.group = 'toolHW';
     hint.render();
@@ -290,7 +294,7 @@ const hint = {
 
   toolHome: function () {
     hint.target = buildings.list.home;
-    
+
     hint.message = `Then go home and get some sleep. Try again tomorrow.`;
     hint.okButton = 'hint.confirm';
     hint.group = 'toolHome';
@@ -300,14 +304,14 @@ const hint = {
 
   itsNight: function () {
     hint.target = `.dialog .close`;
-        hint.message = `It's night time and too late to open your shop. Go home and get some sleep.`;
+    hint.message = `It's night time and too late to open your shop. Go home and get some sleep.`;
     hint.okButton = 'hint.confirm';
     hint.group = 'itsNight';
     hint.render();
   },
 
   goHome: function () {
-    hint.target =  buildings.list.home;
+    hint.target = buildings.list.home;
     hint.message = `It's getting late. Go home and get some sleep.`;
     hint.okButton = 'hint.confirm';
     hint.group = 'goHome';

@@ -79,8 +79,8 @@ const character = {
     game.save();
 
     game.playerItem.refresh(svg.renderPerson(player.body));
-    if (game.intro) {
-      introGame();
+    if (game.new) {
+      hint.player();
     } else {
       buildings.list.home.enter();
     }
