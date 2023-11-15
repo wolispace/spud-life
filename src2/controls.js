@@ -97,6 +97,7 @@ const controls = {
         game.playerItem.checkCollisions(game.UNDERGROUND);
         tools.list['spade'].decrQty();
         game.save();
+        setTimeout(function() {game.digging = false}, 1000);
       } else {
         hint.toolUsedUp('spade');
         tools.list.spade.jiggle('down');

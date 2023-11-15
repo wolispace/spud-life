@@ -183,7 +183,6 @@ class Mobile extends game.Item {
           let onEnd = function () {
             game.spriteBox.remove();
             setTimeout(() => {
-              game.digging = false;
               endItem.jiggle('down');
               setTimeout(() => {
                 basket.add(game.spriteBox);
@@ -196,7 +195,6 @@ class Mobile extends game.Item {
         }
         return spriteBox;
       }
-      game.digging = false;
     }
     );
   }
