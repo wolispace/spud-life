@@ -88,7 +88,7 @@ class Hardware extends game.Item {
     let tooMuch = '';
     let onClick = `onclick="basket.${buy}Item('${itemInfo.name}', ${itemInfo.qty}, ${cost})"`;
     
-    if (cost > tools.list.wallet.qty) {
+    if (buy == 'buy' && cost > tools.list.wallet.qty) {
       tooMuch = 'tooMuch';
       onClick = '';
 
