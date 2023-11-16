@@ -107,8 +107,9 @@ const tools = {
       content += buildings.list.cart.summarise();
       let footer = "";
       if (isDev) {
-        footer += `<button class="buttonize" onclick="field.showAll()"> Show all </button>`;
+        footer += `<button class="buttonize devButton" onclick="field.showAll()"> Show all </button>`;
       }
+      footer += `<button class="buttonize" onclick="aboutGame()"> About </button>`;
       footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
       dialog.cancelButton = function () { dialog.hide(); };
       dialog.okButton = function () { console.log('wallet OK'); dialog.hide(); };

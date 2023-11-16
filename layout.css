@@ -209,6 +209,18 @@ svg.height {
   transition: 0.01s linear;
 }
 
+.devButton {
+  border: 2px solid darkslategray;
+}
+
+.footnote {
+  font-size: 75%;
+  font-style: italic;
+}
+.footnote > sup {
+  font-size: 125%;
+}
+
 .control {
   background-color: rgba(0, 0, 128, .25);
   color: white;
