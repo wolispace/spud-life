@@ -81,7 +81,7 @@ class Scanner extends game.Item {
     content += dialog.makeCheckbox("scanOn", "Turn scanner on/off", player.scanState);
     content += dialog.makeCheckbox("hintsOn", "Show hints on/off", player.hints);
     let footer = "";
-    footer += `<button class="buttonize" onclick="game.clear(true)"> Reset </button>`;
+    footer += `<button class="buttonize" onclick="game.clear(true)"> New game! </button>`;
     footer += `<button class="buttonize" onclick="transfer()"> Transfer </button>`;
     footer += `<button class="buttonize" onclick="scanner.showScanner()"> Show </button>`;
     footer += `<button class="buttonize" onclick="potatadex.show()"> Potatádex </button>`;

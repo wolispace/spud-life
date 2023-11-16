@@ -285,9 +285,11 @@ const game = {
   },
 
   clear: (reload = false) => {
-    localStorage.clear();
-    if (reload) {
-      window.location.reload();
+    if (confirm("Are you sure you want to start a new game?")) {
+      localStorage.clear();
+      if (reload) {
+        window.location.reload();
+      }
     }
   },
 
