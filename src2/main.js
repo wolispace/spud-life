@@ -175,7 +175,7 @@ function closeSplash() {
 
   // if first time go straight to wardrobe
   if (game.new) {
-    character.customize();
+    storyIntro();
   } else {
     if (player.hints) {
       hint.player();
@@ -183,6 +183,53 @@ function closeSplash() {
   }
 
 }
+
+function storyIntro() {
+  let items = ['spade', 'basket', 'home', 'cart', 'scanner'];
+  let itemsShow = '<div style="display: flex; justify-content: space-evenly;">';
+  items.forEach( (item) => {
+    itemsShow += svg.inline(item);
+  });
+  itemsShow += '</div>';
+
+  let content = `<div class="dialog-message-content">`;
+  content += '<div>You receive a letter from a distance aunt: </div>';
+  content += '<div><i>"I am retiring from the food business and have no need for these things. See what you can do with them"</i></div>';
+  content += `<div>${itemsShow}</div>`;
+  content += '<div>During the day, you dig for potatoes (spuds).</div>';
+  content += '<div>At the end of the day you open your food cart and sell potato meals.</div>';
+  content += '<div>Then you go home to sleep. Wake refreshed and ready to find more spuds!</div>';
+  content += '<div>Visit the hardware store to upgrade your equipment and sell any junk you find in your travels.</div>';
+  content += '</div>';
+
+  let footer = "";
+  footer += `<button class="buttonize" onclick="dialog.confirm()"> Create your character </button>`;
+  dialog.cancelButton = character.customize;
+  dialog.okButton = character.customize;
+  dialog.render("Letter from your aunt", content, footer);
+}
+
+function aboutGame () {
+  let content = `<div class="dialog-message-content">`;
+  content += `<div>This game was inspired by 'Man Eats Fish' by <a href="http://www.supermoof.com/">SuperMoof</a></div>`;
+  content += `<div>I wanted to make a browser-based game that:`;
+  content += `<li>has no dedicated server</li>`;
+  content += `<li>doesn't rely on third-party libraries or assets</li>`;
+  content += `<li>can be stopped and started quickly and easily</li>`;
+  content += `<li>doesn't require quick reflexes or boss-fights</li>`;
+  content += ` I got close. The only thing I am relying on is <a href="https://github.com/pieroxy/lz-string">lz-string</a> to compress the game state that is stored in local storage.</div>`;
+
+  content += `<div>No fish or svg paths were harmed during the making of this game.</div>`;
+  content += `<div>Version ${version}</div>`;
+  content += `</div>`;
+
+  let footer = "";
+  footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
+  dialog.cancelButton = function () { character.render(); dialog.hide(); };
+  dialog.okButton = function () { character.render(); dialog.hide(); };
+  dialog.render("About spud life", content, footer);
+}
+
 
 function transfer () {
   let currentState = game.read();

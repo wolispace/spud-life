@@ -73,7 +73,7 @@ const character = {
 
   save: function () {
     let dialogInput = document.querySelector(`#playerName`);
-    player.name = cleanString(dialogInput.value);
+    player.name = cleanString(dialogInput.value) || character.randomName();
     player.hints = dialog.isChecked(`showHints`);
     dialog.hide();
     game.save();
@@ -129,10 +129,13 @@ const character = {
     dialog.hasInput = true;
     dialog.render("Character creator", `${content}`, footer);
     character.demoBody();
+    character.setBodyPart('body');
   },
 
   editName: function () {
-    return `<div><input type="text" id="playerName" value="${player.name}" /></div>`;
+    return `<div><input type="text" id="playerName" 
+      placeholder="Your name" value="${player.name}" 
+      maxlength="14" /></div>`;
   },
 
   buildBodySelect: function (bodyPart) {

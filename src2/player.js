@@ -1,5 +1,5 @@
 let player = {
-  name: 'Ashley',
+  name: '',
   hints: true,
   hinted: {},
   x: 1,

@@ -33,6 +33,15 @@ input {
   background: rgba(255,255,255,0.35);
 }
 
+.selected {
+  background-color: rgba(247, 166, 74, 0.3) !important;
+}
+
+.selected:hover {
+  background-color: rgba(247, 166, 74, 0.1) !important;
+}
+
+
 @media (max-width: 480px) {
 
   .dialog,
@@ -193,7 +202,7 @@ svg.height {
 }
 
 #playerName {
-  width: 100%;
+  width: 95%;
 }
 
 .customer {
