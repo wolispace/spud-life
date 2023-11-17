@@ -158,6 +158,10 @@ function splashScreen() {
   content += `</div>`;
 
   let footer = `Version ${game.version}`;
+  if (!game.new) {
+    footer += `<button class="buttonize" onclick="game.clear(true)"> New game! </button>`;
+  }
+
   footer += `<button class="buttonize" onclick="dialog.okButton()"> Let's play </button>`;
   dialog.cancelButton = function () { closeSplash(); };
   dialog.okButton = function () { closeSplash(); };

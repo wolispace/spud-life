@@ -113,6 +113,7 @@ const hint = {
       console.trace('pointing at nothing!');
       return;
     }
+    hint.addCtr();
     hint.setOrient();
     let tCtr = hint.target.centre();
     let newPos = {
@@ -142,6 +143,24 @@ const hint = {
     hint.orient = {
       x: (tCtr.x < worldCentre.x) ? 1 : -1,
       y: (tCtr.y < worldCentre.y) ? 1 : -1,
+    }
+  },
+
+  addCtr: function () {
+    if (hint.target.centre) {
+      return;
+    }
+    hint.target.centre = function () {
+      let icon = {
+        x: hint.target.offsetLeft,
+        y: hint.target.offsetTop,
+        w: hint.target.offsetWidth,
+        h: hint.target.offsetHeight,
+      };
+      return {
+        x: icon.x + (icon.w / 2),
+        y: icon.y + (icon.h / 2),
+      }
     }
   },
 
@@ -204,47 +223,82 @@ const hint = {
     return randomHint[rnd(randomHint.length)];
   },
 
+  myName: function () {
+    hint.target = document.querySelector('#playerName');
+    hint.message = `What is your name? You get a random one if you leave this blank.`;
+    hint.okButton = 'hint.part';
+    hint.group = '';
+    hint.force = true;
+    hint.render();
+  },
+
+  part: function () {
+    hint.target = document.querySelector('.part_body');
+    hint.message = `Select a body part, change its type..`;
+    hint.okButton = 'hint.colour';
+    hint.group = '';
+    hint.force = true;
+    hint.render();
+  },
+
+  colour: function () {
+    hint.target = document.querySelector('.color-group');
+    hint.message = `Change its colour`;
+    hint.okButton = 'hint.confirm';
+    hint.group = '';
+    hint.force = true;
+    hint.render();
+  },
+
+  buyPick: function () {
+    hint.target = document.querySelectorAll('.hardware-button-buy')[1];
+    hint.message = `I suggest you first buy a pick or an axe to clear the ground`;
+    hint.okButton = 'hint.confirm';
+    hint.group = 'byPick';
+    hint.render();
+  },
+
   player: function () {
     hint.target = game.playerItem;
     hint.message = `This is you`;
     hint.okButton = 'hint.controls';
-    hint.group = '',
-      hint.render();
+    hint.group = '';
+    hint.render();
   },
   controls: function () {
     hint.isItSkipped();
     hint.target = controls.list.right;
     hint.message = `Use these arrows to move.`;
     hint.okButton = 'hint.house';
-    hint.group = 'intro',
-      hint.render();
+    hint.group = 'intro';
+    hint.render();
   },
   house: function () {
     hint.target = buildings.list.home;
     hint.message = `Move UP when in front of a building to go inside.`;
     hint.okButton = 'hint.spade';
-    hint.group = 'intro',
-      hint.render();
+    hint.group = 'intro';
+    hint.render();
   },
   spade: function () {
     hint.target = tools.list.spade;
     hint.message = `Use your spade to dig where you stand.`;
     hint.okButton = 'hint.field';
-    hint.group = 'intro',
-      hint.render();
+    hint.group = 'intro';
+    hint.render();
   },
   field: function () {
     hint.target = player.fields[0][0][0];
     hint.btnText = `Let's start digging!`;
     hint.message = `Rocks and logs block your path.`;
     hint.okButton = 'hint.confirm';
-    hint.group = 'intro',
-      hint.render();
+    hint.group = 'intro';
+    hint.render();
   },
 
   noDigHome: function () {
     hint.target = game.playerItem;
-    hint.message = `You can't dig here. Move down onto an empty patch and dig there.`;
+    hint.message = `You can't dig here. Move down a bit and try again.`;
     hint.okButton = 'hint.confirm';
     hint.group = 'noDigHome';
     hint.render();

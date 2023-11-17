@@ -130,6 +130,7 @@ const character = {
     dialog.render("Character creator", `${content}`, footer);
     character.demoBody();
     character.setBodyPart('body');
+    hint.myName();
   },
 
   editName: function () {

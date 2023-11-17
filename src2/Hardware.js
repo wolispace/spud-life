@@ -26,6 +26,7 @@ class Hardware extends game.Item {
     dialog.cancelButton = function () { buildings.list.hardware.exit(); };
     dialog.okButton = function () { buildings.list.hardware.exit(); };
     dialog.render(title, content, footer);
+    hint.buyPick();
   }
 
   exit() {
