@@ -153,6 +153,13 @@ const spuds = {
     return { name: newSpud.name, qty: rnd(3) + 1 };
   },
 
+  build: function (spudName) {
+   let spudInfo = player.spuds[spudName];
+   let spudSvg = svg.render('spud1');
+   console.log(spudSvg, spudName, spudInfo);
+   return spudSvg;
+  },
+
   desc: function (spud) {
     return `These are ${spuds.bits.rareNames[spud.rareness]} variety potatoes that are best for ${spud.bestFor}`;
   },

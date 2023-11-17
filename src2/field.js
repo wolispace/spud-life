@@ -108,7 +108,7 @@ const field = {
         params.qty = rnd(4) + 2;
         let itemInfo = spuds.select(fieldId);
         params.item = itemInfo.name;
-        params.svg = svg.render('spud1');
+        params.svg = spuds.build(itemInfo.name);
       } else {
         itemInfo = list.items.list[rnd(maxItems)];
         params.item = itemInfo.name;
@@ -120,7 +120,7 @@ const field = {
   },
 
   add: function (fieldId) {
-    console.log('add a new spud underground in field ', player);
+    //console.log('add a new spud underground in field ', player);
     layer = game.UNDERGROUND;
     fieldHeight = containerBox.height - (sprite.height * 2);
     fieldWidth = containerBox.width;
