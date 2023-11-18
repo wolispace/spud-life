@@ -138,8 +138,8 @@ class Mobile extends game.Item {
               function removeBlocker() {
                 basket.add(spriteBox);
                 spriteBox.remove();
-                delete player.fields[player.currentField][layer][index];
               }
+              delete player.fields[player.currentField][layer][index];
               spriteBox.qty = 1;
               spriteBox.x = game.playerItem.x;
               spriteBox.y = game.playerItem.y;

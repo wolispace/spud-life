@@ -39,6 +39,12 @@ document.addEventListener('touchstart', function(event) {
   }
 }, {passive: false});
 
+document.addEventListener('touchend', function(event) {
+  if (!['BUTTON', 'INPUT', 'LABEL', 'svg', 'DIV'].includes(event.target.tagName)) {
+    event.preventDefault();
+  }
+}, {passive: false});
+
 window.addEventListener("resize", (event) => {
   return;
   let last = {
@@ -163,10 +169,11 @@ function splashScreen() {
   content += `<input placeholder="Transfer code" type="text" name="id" id="transferCode" value="" title="Enter a transfer code from another device to continue playing here" />`
   content += `</div>`;
 
-  let footer = `Version ${game.version}`;
+  let footer = '';
   if (!game.new) {
     footer += `<button class="buttonize" onclick="game.clear(true)"> New game! </button>`;
   }
+  footer += `v${game.version}`;
 
   footer += `<button class="buttonize" onclick="dialog.okButton()"> Let's play </button>`;
   dialog.cancelButton = function () { closeSplash(); };

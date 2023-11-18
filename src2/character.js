@@ -90,6 +90,9 @@ const character = {
       "Ashley",
       "Stevie",
       "Charlie",
+      "Ash",
+      "Billy",
+      "Pip",      
     ];
 
     return names[rnd(names.length)];

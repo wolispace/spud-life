@@ -44,7 +44,7 @@ class Home extends game.Item {
   enterNighttime() {
     let title = "Welcome home";
     let content = `<div class="dialog-message-content">`;
-    content += `Its nighttime. You need to seep`;
+    content += `Its nighttime. You need to sleep`;
 
     let footer = "";
     footer += `<button class="buttonize" onclick="character.customize()"> Wardrobe </button>`;
@@ -126,7 +126,7 @@ class Home extends game.Item {
       "You dreamt a little dream of me",
       "You dreamt the cake was a lie",
       "You dreamt about the delivery man",
-      "You dreamt you were baba",
+      "You dreamt you were Baba",
       "You dreamt that you finally wound up like a spring",
       "you dreamt that the sun machine was coming down and you had a party",
       "You dreamt you were in a boat on a river with tangerine trees and marmalade skies",
@@ -140,9 +140,10 @@ class Home extends game.Item {
       "Baba is you",
       "Skyrim",
       "The Saboteur",
-      "The Stanley parable",
+      "The Stanley Parable",
       "Visual Pinball X",
-      "Tony Hawk's P_o__tater 2"
+      "with ChatGPT",
+      "Tony Hawk's P_o ___tater 2"
     ];
 
     return games[rnd(games.length)];
