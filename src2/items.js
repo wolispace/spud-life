@@ -20,7 +20,7 @@ let items = {
     name: "diamond",
     fullName: "A small diamond",
     desc: "Maybe it fell out of someones wedding ring",
-    price: 50,
+    price: 100,
     rareness: 150,
   },
   tin: {
@@ -28,7 +28,7 @@ let items = {
     name: "tin",
     fullName: "A rusty tin",
     desc: "Looks like it once stored baked beans",
-    price: 1,
+    price: 5,
     rareness: 20,
   },
   pottery: {
@@ -36,7 +36,7 @@ let items = {
     name: "pottery",
     fullName: "A piece of pottery",
     desc: "Possibly from a broken terracotta flowerpot",
-    price: 1,
+    price: 5,
     rareness: 20,
   },
   bottle: {
@@ -68,16 +68,16 @@ let items = {
     name: "rock",
     fullName: "A rock",
     desc: "Found while cleared the field. Rocks are heavy, hard and doesn't taste nice",
-    price: 1,
-    rareness: 20,
+    price: 5,
+    rareness: 9999,
   },
   log: {
     type: "blocker",
     name: "log",
     fullName: "A log",
     desc: "These logs are weathered and splintered, however neatly cut",
-    price: 1,
-    rareness: 20,
+    price: 5,
+    rareness: 9999,
   },
   spade: {
     type: "tools",

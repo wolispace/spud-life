@@ -33,6 +33,12 @@ document.addEventListener('contextmenu', event => {
   }
 });
 
+document.addEventListener('touchstart', function(event) {
+  if (!['BUTTON', 'INPUT', 'LABEL', 'svg', 'DIV'].includes(event.target.tagName)) {
+    event.preventDefault();
+  }
+}, {passive: false});
+
 window.addEventListener("resize", (event) => {
   return;
   let last = {
