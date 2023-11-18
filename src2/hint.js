@@ -225,7 +225,7 @@ const hint = {
 
   myName: function () {
     hint.target = document.querySelector('#playerName');
-    hint.message = `What is your name? You get a random one if you leave this blank.`;
+    hint.message = `What is your name? Leave blank for a random name.`;
     hint.okButton = 'hint.part';
     hint.group = '';
     hint.force = true;
@@ -234,7 +234,7 @@ const hint = {
 
   part: function () {
     hint.target = document.querySelector('.part_body');
-    hint.message = `Select a body part, change its type..`;
+    hint.message = `Select a body part.<br/>Change its type with arrows`;
     hint.okButton = 'hint.colour';
     hint.group = '';
     hint.force = true;
@@ -243,7 +243,7 @@ const hint = {
 
   colour: function () {
     hint.target = document.querySelector('.color-group');
-    hint.message = `Change its colour`;
+    hint.message = `Also change it's colour`;
     hint.okButton = 'hint.confirm';
     hint.group = '';
     hint.force = true;
