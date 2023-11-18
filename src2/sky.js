@@ -2,6 +2,7 @@ const sky = {
   height: 2,
   id: 'skyBox',
   clouds: [],
+  nightDuration: 8,
 
   render: function () {
     // make sure we have a sky div that is 0,0, 100% sprite.height * sky.height
@@ -91,17 +92,17 @@ const sky = {
     // nightime.. when it ends..wait for customers to finish parade
     let nightShade = document.querySelector(`.nightShade`);
     let starField = document.querySelector(`.starField`);
-    svg.animate(starField, "go-dark", 9, function () {
+    svg.animate(starField, "go-dark", sky.nightDuration+1, function () {
       starField.style.opacity = 1;
     });
 
-    svg.animate(nightShade, "go-dark", 8, function () {
+    svg.animate(nightShade, "go-dark", sky.nightDuration, function () {
       let nightShade = document.querySelector(`.nightShade`);
       nightShade.style.opacity = 1;
       sky.lightDoor();
       player.daytime = false;
       if (straightToBed) {
-        home.enter();
+        buildings.list.home.sleep();
       }
       game.save();
     });
@@ -112,10 +113,10 @@ const sky = {
     // daytime.. when it ends.. wake up
     let nightShade = document.querySelector(`.nightShade`);
     let starField = document.querySelector(`.starField`);
-    svg.animate(starField, "go-light", 4, function () {
+    svg.animate(starField, "go-light", sky.nightDuration/2, function () {
       starField.style.opacity = 0;
     });
-    svg.animate(nightShade, "go-light", 4, function () {
+    svg.animate(nightShade, "go-light", sky.nightDuration/2, function () {
       let nightShade = document.querySelector(`.nightShade`);
       nightShade.style.opacity = 0;
       sky.darkDoor();

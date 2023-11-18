@@ -43,6 +43,7 @@ const customers = {
   },
 
   parade: function () {
+    sky.nightDuration = 8;
     sky.goDark();
     customers.list.forEach(customer => {
       let delay = (customer.qty * customers.gap) + rnd(customers.gap);

@@ -61,8 +61,10 @@ class Home extends game.Item {
   }
 
   evening() {
-    sky.goDark();
-    buildings.list.home.sleep();
+    dialog.hide();
+    sky.nightDuration = 2;
+    sky.goDark(true);
+    
   }
 
   sleep() {
