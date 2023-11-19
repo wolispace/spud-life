@@ -1,5 +1,5 @@
 const game = {
-  version: '0.1.1',
+  version: '0.1.2',
   ABOVEGROUND: 0,
   SURFACE: 1,
   UNDERGROUND: 2,
@@ -14,8 +14,10 @@ const game = {
   holeLife: 5, // how long until a hole disappears
   blockerHits: 5, // how many hits on a blocker to clear it
   maxScan: 4,
+  spudVarieties: 8, // how many different varieties
   compress: true,
   transferred: false,
+  newPlayer: {}, // temp info loaded before its finished being decoded
 
 
   // everything show on the page is an Item with coords and an svg
@@ -274,12 +276,12 @@ const game = {
       if (game.compress && gameState.indexOf('name') < 0) {
         decompressed = LZString.decompressFromUTF16(gameState);
       }
-      let newPlayer = JSON.parse(decompressed);
-      newPlayer.fields = field.encodeAll(newPlayer.fields, false);
-      newPlayer.spuds = spuds.decode(newPlayer.spuds);
-      newPlayer.tools = tools.decode(newPlayer.tools);
+      game.newPlayer = JSON.parse(decompressed);
+      game.newPlayer.spuds = spuds.decode(game.newPlayer.spuds);
+      game.newPlayer.tools = tools.decode(game.newPlayer.tools);
+      game.newPlayer.fields = field.encodeAll(game.newPlayer.fields, false);
       if (!player.pos) {
-        player = newPlayer;
+        player = game.newPlayer;
       }
     }
   },

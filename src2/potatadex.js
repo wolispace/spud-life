@@ -35,7 +35,7 @@ const potatadex = {
   makeButton: function (itemInfo) {
     let icon;
     if (itemInfo.type == 'spuds') {
-      icon = svg.render('spud1');
+      icon =spuds.build(itemInfo.name); // svg.render('spud1');
       itemInfo.desc = spuds.desc(itemInfo);
     } else {
       icon = svg.render(itemInfo.name);
@@ -48,7 +48,7 @@ const potatadex = {
     if (!itemInfo.found) {
       icon = '<br/> &nbsp; ???';
       itemName = '????';
-      itemDesc = '??? ?????? ???? ?????? ?? ????';
+      itemDesc = '??? ?????? ???? ??????';
     }
 
     let content = `<div  class="hardware-button buttonize">`;

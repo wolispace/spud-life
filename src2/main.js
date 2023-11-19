@@ -118,7 +118,7 @@ function setupThings() {
   makeLists();
   if (Object.keys(player.spuds).length === 0) {
     spuds.bestForList();
-    spuds.sprout(6);
+    spuds.sprout(game.spudVarieties);
   } else {
     spuds.addToItems();
   }
@@ -238,13 +238,13 @@ function aboutGame () {
   content += ` I got close. The only thing I am relying on is <a href="https://github.com/pieroxy/lz-string">lz-string</a> to compress the game state that is stored in local storage.</div>`;
 
   content += `<div>No fish or svg paths were harmed during the making of this game.</div>`;
-  content += `<div>Version ${version}</div>`;
+  content += `<div>Version ${game.version}</div>`;
   content += `</div>`;
 
   let footer = "";
   footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
-  dialog.cancelButton = function () { character.render(); dialog.hide(); };
-  dialog.okButton = function () { character.render(); dialog.hide(); };
+  dialog.cancelButton = function () { dialog.hide(); };
+  dialog.okButton = function () { dialog.hide(); };
   dialog.render("About spud life", content, footer);
 }
 

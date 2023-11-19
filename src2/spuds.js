@@ -8,25 +8,26 @@ const spuds = {
     middle: ["sa", "cho", "ma", "nal", "sso", "li"],
     suffix: ["lor", "ker", "pry", "ly", "der", "mid"],
     bestFor: [],
-    color: [
-      "white",
-      "brick",
-      "wheat",
-      "teal",
-      "orange",
-      "maroon",
-      "black",
-      "navy",
-      "pink",
-      "purple",
-      "red",
-    ],
+    gradients: {
+      "white": {top: "white", bottom: "khaki"},
+      "brick": {top: "indianred", bottom: "firebrick"},
+      "wheat": {top: "wheat", bottom: "darksalmon"},
+      "teal": {top: "white", bottom: "teal"},
+      "orange": {top: "sandybrown", bottom: "chocolate"},
+      "maroon": {top: "mediumpurple", bottom: "indigo"},
+      "black": {top: "midnightblue", bottom: "black"},
+      "navy": {top: "darkslateblue", bottom: "navy"},
+      "pink": {top: "lightpink", bottom: "	palevioletred"},
+      "purple": {top: "mediumpurple", bottom: "indigo"},
+      "red": {top: "darksalmon", bottom: "firebrick"},
+    },
     showColors: ["white", "orange", "black", "pink", "purple", "red"],
     rareness: [1, 2, 3, 4],
     rareNames: ["common", "standard", "fine", "rare"],
   },
 
   sprout: (qty) => {
+    spuds.bits.color = Object.keys(spuds.bits.gradients);
     let counter = 0;
     spuds.bits.bestFor = spuds.bestForList();
     // used next element from array cycling back to the start so its not completely random.
@@ -153,11 +154,31 @@ const spuds = {
     return { name: newSpud.name, qty: rnd(3) + 1 };
   },
 
-  build: function (spudName) {
-   let spudInfo = player.spuds[spudName];
-   let spudSvg = svg.render('spud1');
-   console.log(spudSvg, spudName, spudInfo);
+  build: function (itemName) {
+   let spudInfo = {}; 
+    if (game.newPlayer.spuds) {
+      spudInfo = game.newPlayer.spuds[itemName];
+    } else {
+      spudInfo = player.spuds[itemName];
+    }
+   let spudSvg = spuds.setColours(svg.render('spud1'), spudInfo);
+   console.log(spudInfo);
+
    return spudSvg;
+  },
+
+  setColours: function (spudSvg, spudInfo) {
+    let defaultColours = {
+      top: "#d8af73", 
+      bottom: "#715522"
+    };
+    let colours = spuds.bits.gradients[spudInfo.color] ?? defaultColours;
+    console.log(colours);
+    spudSvg = spudSvg.replaceAll('{gradientId}', `gradient_${spudInfo.name}`);
+    spudSvg = spudSvg.replace('{top}', colours.top);
+    spudSvg = spudSvg.replace('{bottom}', colours.bottom);
+
+    return spudSvg;
   },
 
   desc: function (spud) {

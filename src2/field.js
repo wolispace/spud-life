@@ -20,7 +20,7 @@ const field = {
       id: parseInt(bits[4])
     };
     if (!svg.imgList[params.item]) {
-      params.svg = svg.render('spud1');
+      params.svg = spuds.build(params.item); // svg.render('spud1');
     }
 
     return new game.Item(params);
@@ -136,7 +136,7 @@ const field = {
     params.qty = rnd(4) + 2;
     let itemInfo = spuds.select(fieldId);
     params.item = itemInfo.name;
-    params.svg = svg.render('spud1');
+    params.svg = spuds.build(itemInfo.name); //svg.render('spud1');
     game.setUid(params.id);
     let newItem = new game.Item(params);
     player.fields[fieldId][layer].push(newItem);
