@@ -346,6 +346,7 @@ svg.height {
 .hardware-button-icon {
   width: 3rem;
   height: 3rem;
+  flex-shrink: 0;
 }
 
 .hardware-button-buy {
