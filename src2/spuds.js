@@ -162,7 +162,6 @@ const spuds = {
       spudInfo = player.spuds[itemName];
     }
    let spudSvg = spuds.setColours(svg.render('spud1'), spudInfo);
-   console.log(spudInfo);
 
    return spudSvg;
   },
@@ -173,7 +172,6 @@ const spuds = {
       bottom: "#715522"
     };
     let colours = spuds.bits.gradients[spudInfo.color] ?? defaultColours;
-    console.log(colours);
     spudSvg = spudSvg.replaceAll('{gradientId}', `gradient_${spudInfo.name}`);
     spudSvg = spudSvg.replace('{top}', colours.top);
     spudSvg = spudSvg.replace('{bottom}', colours.bottom);

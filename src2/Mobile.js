@@ -114,7 +114,7 @@ class Mobile extends game.Item {
       this.y <= bounds.h)
   }
 
-  checkCollisions(layer) {
+  checkCollisions(layer, showHints = true) {
     this.hitItem = null;
     let spritesList = player.fields[player.currentField][layer];
     let endItem = tools.list.basket;
@@ -161,10 +161,14 @@ class Mobile extends game.Item {
             // otherwise hint to buy one
             if (tools.list[toolName].max > 0) {
               spriteBox.jiggle(game.direction);
-              hint.toolUsedUp(toolName);
+              if (showHints) {
+                hint.toolUsedUp(toolName);
+              }
             } else {
               spriteBox.jiggle(game.direction);
-              hint.toolNone(toolName);
+              if (showHints) {
+                hint.toolNone(toolName);
+              }
             }
             return false;
           }

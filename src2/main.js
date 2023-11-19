@@ -33,19 +33,20 @@ document.addEventListener('contextmenu', event => {
   }
 });
 
-document.addEventListener('touchstart', function(event) {
+document.addEventListener('touchstart', function (event) {
   if (!['BUTTON', 'INPUT', 'LABEL', 'svg', 'DIV'].includes(event.target.tagName)) {
     event.preventDefault();
   }
-}, {passive: false});
+}, { passive: false });
 
-document.addEventListener('touchend', function(event) {
+document.addEventListener('touchend', function (event) {
   if (!['BUTTON', 'INPUT', 'LABEL', 'svg', 'DIV'].includes(event.target.tagName)) {
     event.preventDefault();
   }
-}, {passive: false});
+}, { passive: false });
 
 window.addEventListener("resize", (event) => {
+  location.reload();
   return;
   let last = {
     width: containerBox.width,
@@ -90,11 +91,9 @@ function startGame() {
   if (player.day && player.day > 0) {
     field.redraw();
   } else {
-    console.log('new game');
     game.new = true;
     player.day = 1;
     player.body = character.randomBody();
-    setupThings();
     field.addRandom(player.currentField);
     field.redraw();
     game.save();
@@ -124,6 +123,18 @@ function setupThings() {
   }
   // run a second time once we have other lists to work from..
   makeLists();
+  // are we conflicting.. if so move to Y 1
+  game.playerItem.checkCollisions(game.ABOVEGROUND, false);
+  
+  if (game.playerItem.hitItem || game.playerItem.y < sprite.height) {
+    game.playerItem.y = sprite.height;
+    game.playerItem.x = 1;
+    game.playerItem.position();
+    console.log('re-render player');
+    //window.resizeTo(window.screen.availWidth / 2, window.screen.availHeight / 2);
+  }
+
+
   scanner.scan();
 }
 
@@ -204,7 +215,7 @@ function closeSplash() {
 function storyIntro() {
   let items = ['spade', 'basket', 'home', 'cart', 'scanner'];
   let itemsShow = '<div style="display: flex; justify-content: space-evenly;">';
-  items.forEach( (item) => {
+  items.forEach((item) => {
     itemsShow += svg.inline(item);
   });
   itemsShow += '</div>';
@@ -227,7 +238,7 @@ function storyIntro() {
   dialog.render("Letter from your aunt", content, footer);
 }
 
-function aboutGame () {
+function aboutGame() {
   let content = `<div class="dialog-message-content">`;
   content += `<div>This game was inspired by 'Man Eats Fish' by <a href="http://www.supermoof.com/">SuperMoof</a></div>`;
   content += `<div>I wanted to make a browser-based game that:`;
@@ -249,7 +260,7 @@ function aboutGame () {
 }
 
 
-function transfer () {
+function transfer() {
   let currentState = game.read();
   let rndName = randomName();
 
@@ -270,7 +281,7 @@ function transfer () {
 }
 
 
-function showTransferLink () {
+function showTransferLink() {
   let content = `<div class="dialog-message-content">`;
   content += `<div>Your transfer code is: <strong>${saveId}</strong></div>`;
   content += `<div></div>`;
@@ -290,7 +301,7 @@ function endShowTransfer() {
   splashScreen();
 }
 
-function writeState () {
+function writeState() {
   let compressed = document.querySelector('#compressed').value;
   game.write(compressed);
   player = game.load();
