@@ -111,9 +111,11 @@ const game = {
 
     // shifts the div from starting 1,1 x.y to improve animation speeds
     position() {
-      this.sprite.style.width = `${this.w}px`;
-      this.sprite.style.height = `${this.h}px`;
-      this.sprite.style.transform = `translate3d(${this.x}px, ${this.y}px, 0)`;
+      if (this.sprite) {
+        this.sprite.style.width = `${this.w}px`;
+        this.sprite.style.height = `${this.h}px`;
+        this.sprite.style.transform = `translate3d(${this.x}px, ${this.y}px, 0)`;
+      }
     }
 
     // restore item to its transform3d position

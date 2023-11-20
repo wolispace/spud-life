@@ -114,7 +114,8 @@ function setupThings() {
   scanner = new Scanner();
   hint.setup();
   dialog.setup();
-
+  field.resize();
+  
   makeLists();
   if (Object.keys(player.spuds).length === 0) {
     spuds.bestForList();

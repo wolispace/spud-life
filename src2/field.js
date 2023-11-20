@@ -215,7 +215,25 @@ const field = {
     return item.qty / game.holeLife;
   },
 
+  resize: function () {
+    let scale = {
+      x: ((game.grid.x * sprite.width) / (player.g.x * player.g.w)),
+      y: ((game.grid.y * sprite.height) / (player.g.y * player.g.h)),
+    }
 
+    player.fields.forEach((field) => {
+      field.forEach((layer, index) => {
+        layer.forEach((item) => {
+          item.x *= scale.x;
+          item.y *= scale.y;
+          if (index < 2) {
+            item.position();
+          }
+        });
+      });
+    });
+
+  },
 
   roll: function () {
     player.fields.forEach((fieldSpace, fieldId) => {
@@ -226,7 +244,7 @@ const field = {
           delete fieldSpace[game.SURFACE][index];
           console.log('removing blank hole', fieldId, index);
           field.add(fieldId);
-         
+
         } else {
           if (item.sprite) {
             item.sprite.style.opacity = field.holeState(item);
