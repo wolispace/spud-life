@@ -77,7 +77,7 @@ const controls = {
     if (game.digging) {
       return;
     }
-    let skyBottom = (sprite.height * sky.height);
+    let skyBottom = (sprite.height * sky.height) - (sprite.height / 4);
     if (game.playerItem.y > skyBottom) {
       if (tools.list['spade'].qty > 0) {
         game.digging = true;
@@ -103,6 +103,11 @@ const controls = {
         tools.list.spade.jiggle('down');
       }
     } else {
+      let onEnd = function () {
+        game.playerItem.restorePos();
+      };
+      game.playerItem.fixPos();
+      game.playerItem.jiggle('left', onEnd);
       hint.noDigHome();
     }
   },
