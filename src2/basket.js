@@ -30,6 +30,7 @@ const basket = {
 
     
     let footer = "";
+    footer += `<div></div>`;
     footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
     dialog.cancelButton = function () { dialog.hide(); };
     dialog.okButton = function () { dialog.hide(); };

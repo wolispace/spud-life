@@ -63,6 +63,7 @@ class Cart extends game.Item {
     } else {
       content += `<div>You haven't found any potatoes yet.</div>`;
       content += `<div>Go out and dig for some or sleep till tomorrow to refresh your tools.</div>`;
+      footer += `<div></div>`;
     }
     footer += `<button class="buttonize" onclick="dialog.confirm()"> Exit </button>`;
     dialog.cancelButton = function () { buildings.list.cart.exit(); };
@@ -80,6 +81,7 @@ class Cart extends game.Item {
     content += `<div>It's time to open your cart and sell your ${mInfo.mealQty} potato-based meal${s}</div>`;
 
     let footer = "";
+    footer += `<div></div>`;
     footer += `<button class="buttonize" onclick="dialog.confirm()"> Open </button>`;
     dialog.cancelButton = function () { buildings.list.cart.open(); };
     dialog.okButton = function () { buildings.list.cart.open(); };
@@ -92,6 +94,7 @@ class Cart extends game.Item {
     content += `<div>It's nighttime and everyone has gone to sleep.</div>`;
     content += `<div>Go home and get some sleep.</div>`;
     let footer = "";
+    footer += `<div></div>`;
     footer += `<button class="buttonize" onclick="dialog.confirm()"> Exit </button>`;
     dialog.cancelButton = function () { buildings.list.cart.exit(); };
     dialog.okButton = function () { buildings.list.cart.exit(); };

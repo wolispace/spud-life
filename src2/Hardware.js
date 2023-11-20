@@ -22,6 +22,7 @@ class Hardware extends game.Item {
     });
 
     let footer = "";
+    footer += `<span id="basketWallet">Current balance ${tools.list.wallet.qty}</span>`;
     footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
     dialog.cancelButton = function () { buildings.list.hardware.exit(); };
     dialog.okButton = function () { buildings.list.hardware.exit(); };
