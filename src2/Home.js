@@ -90,6 +90,7 @@ class Home extends game.Item {
     content += `<div>Your tools have been refreshed.</div>`;
 
     let footer = "";
+    footer += `<div></div>`;
     footer += `<button class="buttonize" onclick="dialog.confirm()"> Get out of bed </button>`;
     dialog.cancelButton = function () { buildings.list.home.wake(); };
     dialog.okButton = function () { buildings.list.home.wake(); };

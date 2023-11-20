@@ -178,7 +178,6 @@ class Mobile extends game.Item {
           // shift to the players pos
           spriteBox.x = game.playerItem.x;
           spriteBox.y = game.playerItem.y;
-          console.log(spriteBox);
           spriteBox.render();
           game.spriteBox = spriteBox;
 
