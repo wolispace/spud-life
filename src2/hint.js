@@ -227,8 +227,7 @@ const hint = {
     hint.target = document.querySelector('#playerName');
     hint.message = `What is your name? Leave blank for a random name.`;
     hint.okButton = 'hint.part';
-    hint.group = '';
-    hint.force = true;
+    hint.group = 'myName';
     hint.render();
   },
 
@@ -236,8 +235,7 @@ const hint = {
     hint.target = document.querySelector('.part_body');
     hint.message = `Select a body part.<br/>Change its type with arrows`;
     hint.okButton = 'hint.colour';
-    hint.group = '';
-    hint.force = true;
+    hint.group = 'myName';
     hint.render();
   },
 
@@ -245,8 +243,7 @@ const hint = {
     hint.target = document.querySelector('.color-group');
     hint.message = `Also change it's colour`;
     hint.okButton = 'hint.confirm';
-    hint.group = '';
-    hint.force = true;
+    hint.group = 'myName';
     hint.render();
   },
 
@@ -262,7 +259,7 @@ const hint = {
     hint.target = game.playerItem;
     hint.message = `This is you`;
     hint.okButton = 'hint.controls';
-    hint.group = '';
+    hint.group = 'itsYou';
     hint.render();
   },
   controls: function () {

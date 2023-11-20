@@ -1,5 +1,5 @@
 const game = {
-  version: '0.1.2',
+  version: '0.1.3',
   ABOVEGROUND: 0,
   SURFACE: 1,
   UNDERGROUND: 2,
@@ -251,6 +251,9 @@ const game = {
     let saveFields = player.fields;
     let saveSpuds = player.spuds;
     if (game.playerItem) {
+      player.g = game.grid;
+      player.g.w = sprite.width;
+      player.g.h = sprite.height;
       player.v = game.version;
       player.x = game.playerItem.x;
       player.y = game.playerItem.y;
