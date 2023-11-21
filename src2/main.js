@@ -291,7 +291,7 @@ function showTransferLink() {
 }
 
 function endShowTransfer() {
-  window.location.replace('/');
+  game.reload();
 }
 
 function writeState() {

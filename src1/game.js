@@ -295,7 +295,7 @@ const game = {
     if (confirm("Are you sure you want to start a new game?")) {
       localStorage.clear();
       if (reload) {
-        window.location.replace('/');
+       game.reload();
       }
     }
   },
@@ -310,6 +310,10 @@ const game = {
     let gameState = LZString.decompressFromBase64(compressed);
     compressed = LZString.compressToUTF16(gameState);
     localStorage.setItem("state", compressed);
+  },
+
+  reload: () => {
+    window.location.replace('/spudlife');
   },
 
   // ------------------------------
