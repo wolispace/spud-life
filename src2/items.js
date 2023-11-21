@@ -67,7 +67,7 @@ let items = {
     type: "blocker",
     name: "rock",
     fullName: "A rock",
-    desc: "Found while cleared the field. Rocks are heavy, hard and doesn't taste nice",
+    desc: "Found while clearing the field. Rocks are heavy, hard and don't taste nice",
     price: 5,
     rareness: 9999,
   },
