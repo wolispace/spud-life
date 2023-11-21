@@ -6,12 +6,17 @@ $id = cleanString($id);
 // unique code for js loading
 $v = rand(10, 99999);
 
-//file_put_contents('_request.txt', json_encode($_REQUEST));
+logIt(json_encode($_REQUEST));
+
 
 if (empty($id)) {
   outputGamePage($v);
 } else {
   saveLoad($v, $id);
+}
+
+function logIt($str) {
+  //file_put_contents('_log.txt', "{$str}\n", FILE_APPEND | LOCK_EX);
 }
 
 function cleanString($str)
@@ -40,8 +45,9 @@ function saveLoad($v, $id)
 function getJsDataFileName($id)
 {
   $dataFile = "_saves/_save_{$id}.js";
+  logIt($dataFile);
 
-  return file_exists($dataFile) ? $dataFile : '';
+  return $dataFile; // file_exists($dataFile) ? $dataFile : '';
 }
 
 function getSaveScript($v, $id)
@@ -80,7 +86,7 @@ function readFolder ($folder, $v) {
 function outputGamePage($v, $id = '')
 {
   $scripts = getScripts($v);
-  $saveScript = empty($id) ? '' : getSaveScript($v, $id);
+  $saveScript = empty($id) ? '<script>//no id</script>' : getSaveScript($v, $id);
   print "<!DOCTYPE html>
 <html dir='ltr' lang='en'>
   <head>

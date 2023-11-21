@@ -33,31 +33,20 @@ document.addEventListener('contextmenu', event => {
   }
 });
 
-document.addEventListener('touchstart', function (event) {
+function handleTouchEvent(event) {
   if (!['BUTTON', 'INPUT', 'LABEL', 'svg', 'DIV'].includes(event.target.tagName)) {
     event.preventDefault();
   }
-}, { passive: false });
+}
 
-document.addEventListener('touchend', function (event) {
-  if (!['BUTTON', 'INPUT', 'LABEL', 'svg', 'DIV'].includes(event.target.tagName)) {
-    event.preventDefault();
-  }
-}, { passive: false });
+['touchstart', 'touchmove', 'touchend', 'touchcancel'].forEach(function(eventName) {
+  document.addEventListener(eventName, handleTouchEvent, { passive: false });
+});
 
 window.addEventListener("resize", (event) => {
-  location.reload();
-  return;
-  let last = {
-    width: containerBox.width,
-    height: containerBox.height
+  if (!dialog.hasInput) {    
+    location.reload();
   }
-  setContainerBox();
-  let newWidthPct = containerBox.width / last.width;
-  let newHeightPct = containerBox.height / last.height;
-
-  sprite.resize(newWidthPct, newHeightPct);
-
 });
 
 document.addEventListener("keydown", (event) => {
@@ -211,7 +200,6 @@ function closeSplash() {
       hint.player();
     }
   }
-
 }
 
 function storyIntro() {
@@ -234,6 +222,7 @@ function storyIntro() {
   content += '</div>';
 
   let footer = "";
+  footer += `<div></div>`;
   footer += `<button class="buttonize" onclick="dialog.confirm()"> Create your character </button>`;
   dialog.cancelButton = character.customize;
   dialog.okButton = character.customize;
@@ -255,6 +244,7 @@ function aboutGame() {
   content += `</div>`;
 
   let footer = "";
+  footer += `<div></div>`;
   footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
   dialog.cancelButton = function () { dialog.hide(); };
   dialog.okButton = function () { dialog.hide(); };
@@ -275,11 +265,12 @@ function transfer() {
   content += `</div></form>`;
 
   let footer = "";
+  footer += `<div></div>`;
   footer += `<button class="buttonize" onclick="dialog.confirm()"> Cancel </button>`;
   dialog.cancelButton = function () { dialog.hide(); };
   dialog.okButton = function () { dialog.hide(); };
-  dialog.hasInput = true;
   dialog.render("New transfer code", content, footer);
+  dialog.hasInput = true;
 }
 
 
@@ -292,15 +283,15 @@ function showTransferLink() {
   content += `<div>Create a new transfer code each time you want to continue playing as ${player.name} on a different device.</div>`;
 
   let footer = "";
+  footer += `<div></div>`;
   footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
-  dialog.cancelButton = function () { dialog.hide(); };
-  dialog.okButton = function () { dialog.hide(); };
+  dialog.cancelButton = function () { endShowTransfer(); };
+  dialog.okButton = function () { endShowTransfer(); };
   dialog.render("Your new transfer code", content, footer);
 }
 
 function endShowTransfer() {
-  dialog.hide();
-  splashScreen();
+  window.location.replace('/');
 }
 
 function writeState() {

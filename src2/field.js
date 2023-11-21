@@ -216,6 +216,9 @@ const field = {
   },
 
   resize: function () {
+    if (!player.g) {
+      return;
+    }
     let scale = {
       x: ((game.grid.x * sprite.width) / (player.g.x * player.g.w)),
       y: ((game.grid.y * sprite.height) / (player.g.y * player.g.h)),
