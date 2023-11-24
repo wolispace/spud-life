@@ -39,12 +39,12 @@ function handleTouchEvent(event) {
   }
 }
 
-['touchstart', 'touchmove', 'touchend', 'touchcancel'].forEach(function(eventName) {
+['touchstart', 'touchmove', 'touchend', 'touchcancel'].forEach(function (eventName) {
   document.addEventListener(eventName, handleTouchEvent, { passive: false });
 });
 
 window.addEventListener("resize", (event) => {
-  if (!dialog.hasInput) {    
+  if (!dialog.hasInput) {
     location.reload();
   }
 });
@@ -79,6 +79,8 @@ function startGame() {
   tools.setup();
   if (player.day && player.day > 0) {
     field.redraw();
+    pet.add();
+    pet.moveTo();
   } else {
     game.new = true;
     player.day = 1;
@@ -104,7 +106,7 @@ function setupThings() {
   hint.setup();
   dialog.setup();
   field.resize();
-  
+
   makeLists();
   if (Object.keys(player.spuds).length === 0) {
     spuds.bestForList();
@@ -116,7 +118,7 @@ function setupThings() {
   makeLists();
   // are we conflicting.. if so move to Y 1
   game.playerItem.checkCollisions(game.ABOVEGROUND, false);
-  
+
   if (game.playerItem.hitItem || game.playerItem.y < sprite.height) {
     game.playerItem.y = sprite.height;
     game.playerItem.x = 1;
@@ -124,8 +126,6 @@ function setupThings() {
     console.log('re-render player');
     //window.resizeTo(window.screen.availWidth / 2, window.screen.availHeight / 2);
   }
-
-
   scanner.scan();
 }
 
@@ -175,7 +175,7 @@ function splashScreen() {
   if (!game.new) {
     footer += `<button class="buttonize" onclick="game.clear(true)"> New game! </button>`;
   }
-  footer += `v${game.version}`;
+  footer += `<div>&nbsp;v${game.version}</div>`;
 
   footer += `<button class="buttonize" onclick="dialog.okButton()"> Let's play </button>`;
   dialog.cancelButton = function () { closeSplash(); };

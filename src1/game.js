@@ -8,6 +8,7 @@ const game = {
   directions: ['up', 'down', 'left', 'right'],
   qty: [0, 20, 30],
   playerItem: null,
+  petItem: null,
   digging: false,
   step: { x: 5, y: 5 },
   incrementQty: 2,
@@ -18,6 +19,7 @@ const game = {
   compress: true,
   transferred: false,
   newPlayer: {}, // temp info loaded before its finished being decoded
+
 
 
   // everything show on the page is an Item with coords and an svg

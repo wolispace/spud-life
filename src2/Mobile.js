@@ -210,12 +210,12 @@ class Mobile extends game.Item {
   }
 
   animatePath(params) {
-    //void this.sprite.offsetWidth;
     this.sprite.style.display = 'block';
     this.sprite.style.offsetRotate = `0deg`;
     this.sprite.style.offsetPath = this.makePath(params.endItem);
     //this.sprite.style.animationPlayState = 'running'; 
     this.sprite.style.animation = `${params.keyFrame} ${params.duration}s ${params.easing} 0s ${params.repeat} normal forwards`;
+    console.log(this.id, this.sprite.style.animation);
     this.sprite.addEventListener("animationend", function handler() {
       if (params.onEnd) {
         params.onEnd();

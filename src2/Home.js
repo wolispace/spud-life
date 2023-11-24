@@ -100,6 +100,7 @@ class Home extends game.Item {
   wake() {
     dialog.hide();
     buildings.list.home.exit();
+    pet.add();
   }
 
   lookInside() {

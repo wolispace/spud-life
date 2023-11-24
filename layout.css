@@ -623,6 +623,11 @@ svg.height {
     transform: translateX(0.15rem) scale(1.02, 1);
   }
 }
+@keyframes move-to {
+  100% {
+    offset-distance: 100%;
+  }
+}
 
 @keyframes into-basket {
   100% {
