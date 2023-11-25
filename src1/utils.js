@@ -90,3 +90,7 @@ function cleanString(userInput) {
   return userInput.replace(/[^a-z0-9]/gi, '').slice(0, 14);
 }
 
+function calculateDiagonal(height, length) {
+  return Math.sqrt(Math.pow(height, 2) + Math.pow(length, 2));
+}
+

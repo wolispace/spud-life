@@ -59,6 +59,17 @@ const pet = {
     pet.moveTo(endItem);
   },
 
+  distanceToEndItem: function (endItem) {
+    // returns seconds so pet moves at a consistent speed no matter how far they travel
+    let distance = {
+      x: Math.abs(game.petItem.x - endItem.x) / sprite.width,
+      y: Math.abs(game.petItem.y - endItem.y) / sprite.height,
+    };
+    let diagonal = calculateDiagonal(distance.y, distance.x);
+    let duration = parseInt(diagonal / 2) + 0.5;
+
+    return duration;
+  },
 
   moveTo: function (endItem) {
     if (pet.moving) {
@@ -69,10 +80,9 @@ const pet = {
     let params = {
       easing: 'linear',
       keyFrame: 'move-to',
-      duration: 5,
+      duration: pet.distanceToEndItem(endItem),
       repeat: '1',
       endItem: endItem,
-      duration: 5,
       onEnd: function () {
         pet.moving = false;
         pet.think();
