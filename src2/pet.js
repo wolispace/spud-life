@@ -46,6 +46,12 @@ const pet = {
     }
   },
 
+  setState: function (newState) {
+    pet.state = newState;
+    let newSvg = svg.render(`pet-${pet.state}`);
+    game.petItem.refresh(newSvg);
+  },
+
   think: function () {
     // TODO do more things like sleep, scratch.. for we just move to a buried item
     let paws = (rnd(2) + 5) * 1000;
@@ -75,7 +81,7 @@ const pet = {
     if (pet.moving) {
       return;
     }
-
+    pet.setState('standing');
     pet.moving = true;
     let params = {
       easing: 'linear',
@@ -85,6 +91,7 @@ const pet = {
       endItem: endItem,
       onEnd: function () {
         pet.moving = false;
+        pet.setState('sitting');
         pet.think();
         game.petItem.x = endItem.x;
         game.petItem.y = endItem.y;
