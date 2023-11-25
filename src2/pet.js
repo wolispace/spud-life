@@ -1,5 +1,34 @@
 const pet = {
   state: 'sitting',
+  name: 'Stray',
+  currentField: 0,
+  moving: false,
+  timer: null,
+  fieldDelim: '|',
+
+  encode: function () {
+    if (game.petItem) {
+      return `${pet.name}${pet.fieldDelim}${pet.currentField}${pet.fieldDelim}${game.petItem.x}${pet.fieldDelim}${game.petItem.y}`;
+    }
+  },
+
+  decode: function (encodedString) {
+    let bit = encodedString.split(pet.fieldDelim);
+    pet.name = bit[0];
+    pet.currentField = bit[1];
+    game.petItem.x = bit[2];
+    game.petItem.y = bit[3];
+  },
+
+  show: function () {
+    if (player.currentField != pet.currentField) {
+      game.petItem.hide();
+    } else {
+      game.petItem.show();
+      pet.think();
+    }
+  },
+
   add: function () {
     if (player.day > 1) {
       if (!game.petItem) {
@@ -11,22 +40,47 @@ const pet = {
           h: sprite.height,
           item: `pet-${pet.state}`,
         };
-
         game.petItem = new Mobile(params);
       }
+      pet.show();      
     }
   },
-  moveTo: function () {
+
+  think: function () {
+    // TODO do more things like sleep, scratch.. for we just move to a buried item
+    let paws = (rnd(2) + 5) * 1000;
+    setTimeout( pet.moveToRandomItem, paws);
+  },
+
+  moveToRandomItem() {
+    // find a random item underground in the same field as the pet..
+    let buried = player.fields[pet.currentField][game.UNDERGROUND];
+    let endItem = buried[Math.floor(Math.random() * buried.length)];
+    pet.moveTo(endItem);
+  },
+
+
+  moveTo: function (endItem) {
+    if (pet.moving) {
+      return;
+    }
+
+    pet.moving = true;
     let params = {
       easing: 'linear',
       keyFrame: 'move-to',
       duration: 5,
-      repeat: 'infinite',
-      endItem: {
-        x: (sprite.width * game.grid.x) / 2,
-        y: (sprite.height * game.grid.y) / 2,
-      },
-      duration: 5000,
+      repeat: '1',
+      endItem: endItem,
+      duration: 5,
+      onEnd: function () {
+        pet.moving = false;
+        pet.think();
+        game.petItem.x = endItem.x;
+        game.petItem.y = endItem.y;
+        game.petItem.fixPos();
+        game.petItem.resetAnimation();
+      }
     }
 
     game.petItem.animatePath(params);

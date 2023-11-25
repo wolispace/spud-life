@@ -79,8 +79,7 @@ function startGame() {
   tools.setup();
   if (player.day && player.day > 0) {
     field.redraw();
-    pet.add();
-    pet.moveTo();
+    setTimeout(pet.add, 1000);
   } else {
     game.new = true;
     player.day = 1;

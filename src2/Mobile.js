@@ -206,7 +206,8 @@ class Mobile extends game.Item {
     let startX = 0 + (this.w / 2);
     let startY = 0 + (this.h / 2);
     let endX = endItem.x - this.x + (this.w / 2);
-    return `path('M ${startX},${startY} ${endX},${startY}')`;
+    let endY = endItem.y - this.y + (this.h / 2);
+    return `path('M ${startX},${startY} ${endX},${endY}')`;
   }
 
   animatePath(params) {
@@ -215,7 +216,9 @@ class Mobile extends game.Item {
     this.sprite.style.offsetPath = this.makePath(params.endItem);
     //this.sprite.style.animationPlayState = 'running'; 
     this.sprite.style.animation = `${params.keyFrame} ${params.duration}s ${params.easing} 0s ${params.repeat} normal forwards`;
-    console.log(this.id, this.sprite.style.animation);
+    if (this.i == 'pet') {
+      console.log(this.id, params, this.sprite.style.offsetPath, this.sprite.style.animation);
+    }
     this.sprite.addEventListener("animationend", function handler() {
       if (params.onEnd) {
         params.onEnd();
@@ -223,6 +226,12 @@ class Mobile extends game.Item {
       //this.animation = 'none';
       this.removeEventListener("animationend", handler);
     });
+  }
+
+  resetAnimation() {
+    this.sprite.style.animation = 'none';
+    this.sprite.offsetHeight; /* trigger reflow */
+    this.sprite.style.animation = null; 
   }
 
 } 
