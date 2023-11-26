@@ -21,11 +21,12 @@ const pet = {
   },
 
   show: function () {
+    console.log(player.currentField, pet.currentField);
     if (player.currentField != pet.currentField) {
+      pet.finished();
       game.petItem.hide();
     } else {
-      game.petItem.show();
-      pet.think();
+      pet.add();
     }
   },
 
@@ -41,8 +42,11 @@ const pet = {
           item: `pet-${pet.state}`,
         };
         game.petItem = new Mobile(params);
+      } else {
+        game.petItem.render();
       }
-      pet.show();      
+      game.petItem.show();
+      pet.think();      
     }
   },
 
@@ -88,7 +92,7 @@ const pet = {
   },
 
   moveTo: function (endItem) {
-    if (pet.moving) {
+    if (pet.moving || player.currentField != pet.currentField) {
       return;
     }
     pet.setState('standing');
@@ -101,16 +105,21 @@ const pet = {
       repeat: '1',
       endItem: endItem,
       onEnd: function () {
-        pet.moving = false;
-        pet.setState('sitting');
-        pet.think();
         game.petItem.x = endItem.x;
         game.petItem.y = endItem.y;
-        game.petItem.fixPos();
-        game.petItem.resetAnimation();
+        pet.setState('sitting');
+        pet.think();
+        pet.finished();
+
       }
     }
 
     game.petItem.animatePath(params);
   },
+
+  finished: function () {
+    pet.moving = false;
+    game.petItem.fixPos();
+    game.petItem.resetAnimation();
+  }
 }

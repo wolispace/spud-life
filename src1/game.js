@@ -138,13 +138,16 @@ const game = {
         x: this.x,
         y: this.y,
       };
-      this.sprite.style.transform
-      this.sprite = sprite.get(this.id);
-      this.sprite.style.width = `${this.w}px`;
-      this.sprite.style.height = `${this.h}px`;
-      this.sprite.style.top = `${this.y}px`;
-      this.sprite.style.left = `${this.x}px`;
-      this.sprite.style.transform = null;
+      if (!this.sprite) {
+        this.sprite = sprite.get(this.id);
+      }
+      if (this.sprite) {
+        this.sprite.style.width = `${this.w}px`;
+        this.sprite.style.height = `${this.h}px`;
+        this.sprite.style.top = `${this.y}px`;
+        this.sprite.style.left = `${this.x}px`;
+        this.sprite.style.transform = null;
+      }
     }
 
     reduceAndPosition() {

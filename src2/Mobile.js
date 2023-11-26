@@ -77,6 +77,7 @@ class Mobile extends game.Item {
               field.redraw();
               //controls.endInput();
               this.look(direction);
+              pet.show();
               return; 
             }
           } else if (direction == 'left' && player.y <= (sprite.height * 1.5) && player.fields.length > 1 && player.currentField > 0) {
@@ -87,6 +88,7 @@ class Mobile extends game.Item {
               field.redraw();
               //controls.endInput();
               this.look(direction);
+              pet.show();
               return;
             }
           }
