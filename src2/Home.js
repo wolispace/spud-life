@@ -34,7 +34,9 @@ class Home extends game.Item {
 
     let footer = "";
     footer += `<button class="buttonize" onclick="character.customize()"> Wardrobe </button>`;
-    footer += `<button class="buttonize" onclick="pet.interact()"> Pet </button>`;
+    if (game.petItem) {
+      footer += `<button class="buttonize" onclick="pet.interact()"> Pet </button>`;
+    }
     footer += `<button class="buttonize" onclick="buildings.list.home.evening()"> Bring on the night </button>`;
     footer += `<button class="buttonize" onclick="dialog.cancel()"> Exit </button>`;
     dialog.cancelButton = function () { buildings.list.home.exit(); };
@@ -103,6 +105,7 @@ class Home extends game.Item {
     buildings.list.home.exit();
     if (player.day > game.daysToPet) {
       pet.show();
+      hint.petIntro();
     }
   }
 

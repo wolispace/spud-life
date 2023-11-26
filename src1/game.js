@@ -9,7 +9,7 @@ const game = {
   qty: [0, 20, 30],
   playerItem: null,
   petItem: null,
-  daysToPet: 1,
+  daysToPet: 5,
   digging: false,
   step: { x: 5, y: 5 },
   incrementQty: 2,
