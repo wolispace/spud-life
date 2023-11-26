@@ -22,43 +22,33 @@ const pet = {
       game.petItem.x = parseInt(bit[2]);
       game.petItem.y = parseInt(bit[3]);
       game.petItem.setPos();
-      console.log(game.petItem);
     }
-    },
+  },
 
   show: function () {
-    console.log(player.currentField, pet.currentField);
     if (player.currentField != pet.currentField) {
       pet.finished();
-      game.petItem.hide();
     } else {
       pet.add();
     }
   },
 
   add: function () {
-//    if (player.day > 1) {
-      if (!game.petItem) {
-        let params = {
-          id: 'pet',
-          x: (sprite.width * game.grid.x) - sprite.width,
-          y: sprite.height,
-          w: sprite.width,
-          h: sprite.height,
-          item: `pet-${pet.state}`,
-        };
-        game.petItem = new Mobile(params);
-      } else {
-        game.petItem.render();
-      }
-      game.petItem.show();
-      pet.think();
-      let petDiv = document.querySelector("#ipet");
-      petDiv.addEventListener('click', function () {
-        console.log('clicked');
-      });      
-//    }
-    console.log('pet added', game.petItem);
+    if (!game.petItem) {
+      let params = {
+        id: 'pet',
+        x: (sprite.width * game.grid.x) - sprite.width,
+        y: sprite.height,
+        w: sprite.width,
+        h: sprite.height,
+        item: `pet-${pet.state}`,
+      };
+      game.petItem = new Mobile(params);
+    } else {
+      game.petItem.render();
+    }
+    game.petItem.show();
+    pet.think();
   },
 
   setState: function (newState) {
@@ -70,8 +60,7 @@ const pet = {
   think: function () {
     // TODO do more things like sleep, scratch.. for we just move to a buried item
     let paws = (rnd(2) + 5) * 1000;
-    console.log(`think ${paws}`);
-    setTimeout( pet.moveToRandomItem, paws);
+    setTimeout(pet.moveToRandomItem, paws);
   },
 
   moveToRandomItem() {
@@ -136,6 +125,17 @@ const pet = {
   },
 
   interact: function () {
-    alert('Show pet interaction here');
+    let title = `${game.petItem.name}`;
+
+    let content = `<div class="dialog-message-content">`;
+
+    content += `<div>Its small, black and fluffy. is it a dog or cat?</div>`;
+
+    let footer = "";
+    footer += `<div></div>`;
+    footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
+    dialog.cancelButton = function () { buildings.list.home.enter(); };
+    dialog.okButton = function () { buildings.list.home.enter(); };
+    dialog.render(title, content, footer);
   },
 }

@@ -332,7 +332,9 @@ const game = {
   },
 
   getDirection: function (event) {
-    return event.code.toLowerCase().replace('arrow', '');
+    if (event.code) {
+      return event.code.toLowerCase().replace('arrow', '');
+    }
   },
 
   isDirection: function (direction) {

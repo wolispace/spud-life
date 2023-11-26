@@ -101,7 +101,9 @@ class Home extends game.Item {
   wake() {
     dialog.hide();
     buildings.list.home.exit();
-    pet.show();
+    if (player.day > game.daysToPet) {
+      pet.show();
+    }
   }
 
   lookInside() {
