@@ -77,11 +77,22 @@ const pet = {
     return duration;
   },
 
+  facing: function (endItem) {
+    let petSprite = document.querySelector("#ipet > svg");
+    if (game.petItem.x > endItem.x) {
+      // flip
+      petSprite.setAttribute("transform", "translate(0, 0) scale(-1, 1)");
+    } else {
+      petSprite.setAttribute("transform", "translate(0, 0) scale(1, 1)");
+    }
+  },
+
   moveTo: function (endItem) {
     if (pet.moving) {
       return;
     }
     pet.setState('standing');
+    pet.facing(endItem);
     pet.moving = true;
     let params = {
       easing: 'linear',
