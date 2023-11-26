@@ -9,6 +9,7 @@ const game = {
   qty: [0, 20, 30],
   playerItem: null,
   petItem: null,
+  daysToPet: 1,
   digging: false,
   step: { x: 5, y: 5 },
   incrementQty: 2,
@@ -16,7 +17,7 @@ const game = {
   blockerHits: 5, // how many hits on a blocker to clear it
   maxScan: 4,
   spudVarieties: 8, // how many different varieties
-  compress: true,
+  compress: false,
   transferred: false,
   newPlayer: {}, // temp info loaded before its finished being decoded
 
@@ -268,6 +269,7 @@ const game = {
       player.fields = field.encodeAll(player.fields, true);
       player.spuds = spuds.encode(player.spuds);
       player.tools = tools.encode();
+      player.pet = pet.encode();
 
       let compressed = JSON.stringify(player);
       if (game.compress) {
@@ -283,13 +285,14 @@ const game = {
     let gameState = localStorage.getItem("state");
     if (gameState) {
       let decompressed = gameState;
-      if (game.compress && gameState.indexOf('name') < 0) {
+      if (game.compress || gameState.indexOf('name') < 0) {
         decompressed = LZString.decompressFromUTF16(gameState);
       }
       game.newPlayer = JSON.parse(decompressed);
       game.newPlayer.spuds = spuds.decode(game.newPlayer.spuds);
       game.newPlayer.tools = tools.decode(game.newPlayer.tools);
       game.newPlayer.fields = field.encodeAll(game.newPlayer.fields, false);
+      game.newPlayer.pet = pet.decode(game.newPlayer.pet);
       if (!player.pos) {
         player = game.newPlayer;
       }

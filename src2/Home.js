@@ -34,6 +34,7 @@ class Home extends game.Item {
 
     let footer = "";
     footer += `<button class="buttonize" onclick="character.customize()"> Wardrobe </button>`;
+    footer += `<button class="buttonize" onclick="pet.interact()"> Pet </button>`;
     footer += `<button class="buttonize" onclick="buildings.list.home.evening()"> Bring on the night </button>`;
     footer += `<button class="buttonize" onclick="dialog.cancel()"> Exit </button>`;
     dialog.cancelButton = function () { buildings.list.home.exit(); };
@@ -100,7 +101,7 @@ class Home extends game.Item {
   wake() {
     dialog.hide();
     buildings.list.home.exit();
-    pet.add();
+    pet.show();
   }
 
   lookInside() {

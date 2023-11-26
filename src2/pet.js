@@ -10,15 +10,21 @@ const pet = {
     if (game.petItem) {
       return `${pet.name}${pet.fieldDelim}${pet.currentField}${pet.fieldDelim}${game.petItem.x}${pet.fieldDelim}${game.petItem.y}`;
     }
+    else return '';
   },
 
   decode: function (encodedString) {
-    let bit = encodedString.split(pet.fieldDelim);
-    pet.name = bit[0];
-    pet.currentField = bit[1];
-    game.petItem.x = bit[2];
-    game.petItem.y = bit[3];
-  },
+    if (encodedString != '') {
+      pet.add();
+      let bit = encodedString.split(pet.fieldDelim);
+      pet.name = bit[0];
+      pet.currentField = parseInt(bit[1]);
+      game.petItem.x = parseInt(bit[2]);
+      game.petItem.y = parseInt(bit[3]);
+      game.petItem.setPos();
+      console.log(game.petItem);
+    }
+    },
 
   show: function () {
     console.log(player.currentField, pet.currentField);
@@ -31,7 +37,7 @@ const pet = {
   },
 
   add: function () {
-    if (player.day > 1) {
+//    if (player.day > 1) {
       if (!game.petItem) {
         let params = {
           id: 'pet',
@@ -46,8 +52,13 @@ const pet = {
         game.petItem.render();
       }
       game.petItem.show();
-      pet.think();      
-    }
+      pet.think();
+      let petDiv = document.querySelector("#ipet");
+      petDiv.addEventListener('click', function () {
+        console.log('clicked');
+      });      
+//    }
+    console.log('pet added', game.petItem);
   },
 
   setState: function (newState) {
@@ -59,6 +70,7 @@ const pet = {
   think: function () {
     // TODO do more things like sleep, scratch.. for we just move to a buried item
     let paws = (rnd(2) + 5) * 1000;
+    console.log(`think ${paws}`);
     setTimeout( pet.moveToRandomItem, paws);
   },
 
@@ -121,5 +133,9 @@ const pet = {
     pet.moving = false;
     game.petItem.fixPos();
     game.petItem.resetAnimation();
-  }
+  },
+
+  interact: function () {
+    alert('Show pet interaction here');
+  },
 }
