@@ -4,6 +4,8 @@ const pet = {
   currentField: 0,
   moving: false,
   timer: null,
+  pawsTime: 20,
+  pawsMin: 20,
   fieldDelim: '|',
 
   encode: function () {
@@ -59,7 +61,7 @@ const pet = {
 
   think: function () {
     // TODO do more things like sleep, scratch.. for we just move to a buried item
-    let paws = (rnd(2) + 5) * 1000;
+    let paws = (rnd(pet.pawsTime) + pet.pawsMin) * 1000;
     setTimeout(pet.moveToRandomItem, paws);
   },
 
@@ -114,7 +116,6 @@ const pet = {
 
       }
     }
-
     game.petItem.animatePath(params);
   },
 
@@ -124,18 +125,33 @@ const pet = {
     game.petItem.resetAnimation();
   },
 
+  save: function () {
+    let dialogInput = document.querySelector(`#petName`);
+    pet.name = cleanString(dialogInput.value) || character.randomName();
+    dialog.hide();
+    game.save();
+    buildings.list.home.enter();
+  },
+
   interact: function () {
-    let title = `${game.petItem.name}`;
+    let title = `${pet.name}`;
 
     let content = `<div class="dialog-message-content">`;
-
     content += `<div>Its small, black and fluffy. is it a dog or cat?</div>`;
-
+    content += pet.editName();
     let footer = "";
     footer += `<div></div>`;
     footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
-    dialog.cancelButton = function () { buildings.list.home.enter(); };
-    dialog.okButton = function () { buildings.list.home.enter(); };
+    dialog.cancelButton = function () { pet.save(); };
+    dialog.okButton = function () { pet.save(); };
     dialog.render(title, content, footer);
   },
+
+  editName: function () {
+    return `<div><label>You call it <input type="text" id="petName" 
+      placeholder="Pet's name" value="${pet.name}" 
+      maxlength="14" /></div>`;
+  },
+
+
 }

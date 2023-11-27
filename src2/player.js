@@ -16,7 +16,7 @@ let player = {
     pick: { qty: 0, max: 0 },
     basket: { qty: 0, list: {} },
     scanner: { qty: 4, on: true },
-    wallet: { qty: 15000 },
+    wallet: { qty: 150 },
   },
   meals: {},
   currentField: 0,

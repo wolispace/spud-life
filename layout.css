@@ -205,6 +205,10 @@ svg.height {
   width: 95%;
 }
 
+#petName {
+  width: 25%;
+}
+
 .customer {
   transition: 0.01s linear;
 }

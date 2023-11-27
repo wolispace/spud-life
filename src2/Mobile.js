@@ -218,9 +218,6 @@ class Mobile extends game.Item {
     this.sprite.style.offsetPath = this.makePath(params.endItem);
     //this.sprite.style.animationPlayState = 'running'; 
     this.sprite.style.animation = `${params.keyFrame} ${params.duration}s ${params.easing} 0s ${params.repeat} normal forwards`;
-    if (this.i == 'pet') {
-      console.log(this.id, params, this.sprite.style.offsetPath, this.sprite.style.animation);
-    }
     this.sprite.addEventListener("animationend", function handler() {
       if (params.onEnd) {
         params.onEnd();

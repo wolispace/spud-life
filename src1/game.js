@@ -1,5 +1,5 @@
 const game = {
-  version: '0.1.6',
+  version: '0.2.0',
   ABOVEGROUND: 0,
   SURFACE: 1,
   UNDERGROUND: 2,
@@ -9,7 +9,7 @@ const game = {
   qty: [0, 20, 30],
   playerItem: null,
   petItem: null,
-  daysToPet: 5,
+  daysToPet: 4,
   digging: false,
   step: { x: 5, y: 5 },
   incrementQty: 2,
@@ -285,10 +285,11 @@ const game = {
     let gameState = localStorage.getItem("state");
     if (gameState) {
       let decompressed = gameState;
-      if (game.compress || gameState.indexOf('name') < 0) {
+      if (game.compress || gameState.indexOf('name') < 0) {       
         decompressed = LZString.decompressFromUTF16(gameState);
       }
       game.newPlayer = JSON.parse(decompressed);
+      // TODO: check versions and do things as needed..
       game.newPlayer.spuds = spuds.decode(game.newPlayer.spuds);
       game.newPlayer.tools = tools.decode(game.newPlayer.tools);
       game.newPlayer.fields = field.encodeAll(game.newPlayer.fields, false);
