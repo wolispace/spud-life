@@ -421,7 +421,7 @@ const hint = {
     hint.target = game.petItem;
     hint.message = `Oh look.. a small black fluffy animal. I think its a stray`;
     hint.okButton = 'hint.petHome';
-    hint.group = '';
+    hint.group = 'pet';
     hint.render();
   },
 
@@ -429,7 +429,7 @@ const hint = {
     hint.target = buildings.list.home;
     hint.message = `Go home to interact with it`;
     hint.okButton = 'hint.confirm';
-    hint.group = 'petIntro';
+    hint.group = 'petHome';
     hint.render();
   },
 

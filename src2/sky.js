@@ -106,6 +106,7 @@ const sky = {
       }
       game.save();
     });
+    pet.goHome(); 
     //element.style.animation = `${type} ${duration}s ease-in-out 0s 1 normal forwards`;
   },
 

@@ -67,7 +67,7 @@ class Home extends game.Item {
     dialog.hide();
     sky.nightDuration = 2;
     sky.goDark(true);
-    pet.goHome();    
+       
   }
 
   sleep() {

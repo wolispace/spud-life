@@ -182,6 +182,7 @@ function splashScreen() {
   dialog.cancelButton = function () { closeSplash(); };
   dialog.okButton = function () { closeSplash(); };
   dialog.render(title, content, footer);
+  dialog.hasInput = true;
 }
 
 function closeSplash() {

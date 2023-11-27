@@ -1,5 +1,5 @@
 const game = {
-  version: '0.2.0',
+  version: '0.3.1',
   ABOVEGROUND: 0,
   SURFACE: 1,
   UNDERGROUND: 2,

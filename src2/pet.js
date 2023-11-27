@@ -63,6 +63,7 @@ const pet = {
   think: function () {
     // TODO do more things like sleep, scratch.. for we just move to a buried item
     let paws = (rnd(pet.pawsTime) + pet.pawsMin) * 1000;
+    console.trace('think', paws);
     setTimeout(pet.moveToRandomItem, paws);
   },
 
@@ -72,8 +73,8 @@ const pet = {
     let endItem = buried[Math.floor(Math.random() * buried.length)];
     let endAction = function () {
       pet.setState('sitting');
-      pet.think();
       pet.finished();
+      pet.think();
     }
     pet.moveTo(endItem, endAction);
   },
@@ -91,12 +92,16 @@ const pet = {
   },
 
   facing: function (endItem) {
-    let petSprite = document.querySelector("#ipet > svg");
-    if (game.petItem.x > endItem.x) {
-      // flip
-      petSprite.setAttribute("transform", "translate(0, 0) scale(-1, 1)");
+    if (endItem) {
+      let petSprite = document.querySelector("#ipet > svg");
+      if (game.petItem.x > endItem.x) {
+        // flip
+        petSprite.setAttribute("transform", "translate(0, 0) scale(-1, 1)");
+      } else {
+        petSprite.setAttribute("transform", "translate(0, 0) scale(1, 1)");
+      }
     } else {
-      petSprite.setAttribute("transform", "translate(0, 0) scale(1, 1)");
+      console.trace('facing nothing!', endItem);
     }
   },
 
@@ -148,6 +153,7 @@ const pet = {
     dialog.cancelButton = function () { pet.save(); };
     dialog.okButton = function () { pet.save(); };
     dialog.render(title, content, footer);
+    dialog.hasInput = true;
   },
 
   editName: function () {
