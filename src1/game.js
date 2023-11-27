@@ -285,7 +285,7 @@ const game = {
     let gameState = localStorage.getItem("state");
     if (gameState) {
       let decompressed = gameState;
-      if (game.compress || gameState.indexOf('name') < 0) {       
+      if (gameState.indexOf('"name":') < 0) {       
         decompressed = LZString.decompressFromUTF16(gameState);
       }
       game.newPlayer = JSON.parse(decompressed);
