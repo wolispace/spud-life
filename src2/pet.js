@@ -1,6 +1,7 @@
 const pet = {
   state: 'sitting',
   name: 'Stray',
+  daysToPet: 4,
   currentField: 0,
   moving: false,
   timer: null,
@@ -69,7 +70,12 @@ const pet = {
     // find a random item underground in the same field as the pet..
     let buried = player.fields[pet.currentField][game.UNDERGROUND];
     let endItem = buried[Math.floor(Math.random() * buried.length)];
-    pet.moveTo(endItem);
+    let endAction = function () {
+      pet.setState('sitting');
+      pet.think();
+      pet.finished();
+    }
+    pet.moveTo(endItem, endAction);
   },
 
   distanceToEndItem: function (endItem) {
@@ -94,7 +100,7 @@ const pet = {
     }
   },
 
-  moveTo: function (endItem) {
+  moveTo: function (endItem, endAction, speed = 1) {
     if (pet.moving || player.currentField != pet.currentField) {
       return;
     }
@@ -104,16 +110,13 @@ const pet = {
     let params = {
       easing: 'linear',
       keyFrame: 'move-to',
-      duration: pet.distanceToEndItem(endItem),
+      duration: pet.distanceToEndItem(endItem) * speed,
       repeat: '1',
       endItem: endItem,
       onEnd: function () {
         game.petItem.x = endItem.x;
         game.petItem.y = endItem.y;
-        pet.setState('sitting');
-        pet.think();
-        pet.finished();
-
+        endAction();
       }
     }
     game.petItem.animatePath(params);
@@ -153,5 +156,16 @@ const pet = {
       maxlength="14" /></div>`;
   },
 
+  goHome: function () {
+    if (game.petItem) {
+      pet.finished();
+      let endAction = function () {
+        pet.setState('sitting');
+        game.petItem.hide();
+        pet.finished();
+      }
+      pet.moveTo(buildings.list.home.centre(), endAction, 0.5);
+    }
+  },
 
 }

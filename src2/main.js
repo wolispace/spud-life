@@ -79,7 +79,7 @@ function startGame() {
   tools.setup();
   if (player.day && player.day > 0) {
     field.redraw();
-    if (player.day > game.daysToPet) {
+    if (player.day > pet.daysToPet) {
       pet.show();
     }
   } else {

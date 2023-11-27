@@ -67,7 +67,7 @@ class Home extends game.Item {
     dialog.hide();
     sky.nightDuration = 2;
     sky.goDark(true);
-    
+    pet.goHome();    
   }
 
   sleep() {
@@ -103,7 +103,7 @@ class Home extends game.Item {
   wake() {
     dialog.hide();
     buildings.list.home.exit();
-    if (player.day > game.daysToPet) {
+    if (player.day > pet.daysToPet) {
       pet.show();
       hint.petIntro();
     }
