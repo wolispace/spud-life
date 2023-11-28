@@ -57,6 +57,10 @@ document.addEventListener("keydown", (event) => {
       game.playerItem.move(direction);
     } else if (event.code == 'Space') {
       controls.dig();
+    } else if (event.code == 'Enter') {
+      dialog.confirm();
+    } else if (event.code == 'Escape') {
+      dialog.cancel();
     }
     game.keydown = true;
   }
