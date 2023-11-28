@@ -47,14 +47,16 @@ function getJsDataFileName($id)
   $dataFile = "_saves/_save_{$id}.js";
   logIt($dataFile);
 
-  return $dataFile; // file_exists($dataFile) ? $dataFile : '';
+  return $dataFile;
 }
 
 function getSaveScript($v, $id)
 {
   $jsDataFileName = getJsDataFileName($id);
-  if (!empty($jsDataFileName)) {
+  if (file_exists($jsDataFileName)) {
     return "<script src='{$jsDataFileName}?{$v}' ></script>";
+  } else {
+    return "<script>alert('no transfer code [{$id}] found');</script>"; 
   }
 }
 

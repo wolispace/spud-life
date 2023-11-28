@@ -17,7 +17,7 @@ const pet = {
   },
 
   decode: function (encodedString) {
-    if (encodedString != '') {
+    if (encodedString) {
       pet.add();
       let bit = encodedString.split(pet.fieldDelim);
       pet.name = bit[0];

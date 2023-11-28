@@ -157,39 +157,33 @@ function makeLists() {
 }
 
 function splashScreen() {
-  let back = game.new ? '' : ' back ';
-  let title = `Welcome ${back} to your Spud Life`;
-  let content = `<div class="dialogIntro">`;
+  let back = '';
   let titleSvg = svg.render('title');
-  //titleSvg = svg.addOrientationClass(titleSvg);
+  let continueButton = 'Start new game';
+  
+  let content = `<div class="dialogIntro">`;
   content += `<div class="introSvg">${titleSvg}</div>`;
-  if (!game.new) {
-    content += `Welcome back ${player.name}`;
-  }
-  content += dialog.makeCheckbox("hintsOn", "Show hints on/off", player.hints);
-
-  content += `<div>`;
-  content += `<input placeholder="Transfer code" type="text" name="id" id="transferCode" value="" title="Enter a transfer code from another device to continue playing here" />`
-  content += `</div>`;
 
   let footer = '';
   if (!game.new) {
-    footer += `<button class="buttonize" onclick="game.clear(true)"> New game! </button>`;
+    content += `Welcome back <strong>${player.name}</strong>`;
+    back = 'back';
+    continueButton = 'Continue';
+    footer += `<button class="buttonize" onclick="game.clear(true)"> New game </button>`;
   }
-  footer += `<div>&nbsp;v${game.version}</div>`;
+  content += dialog.makeCheckbox("hintsOn", "Show hints?", player.hints);
+  content += `<div>&nbsp;v${game.version}</div>`;
+  
+  let title = `Welcome ${back} to your Spud Life`;
+  footer += `<button class="buttonize" onclick="transferHere()"> Transfer </button>`;
 
-  footer += `<button class="buttonize" onclick="dialog.okButton()"> Let's play </button>`;
+  footer += `<button class="buttonize" onclick="dialog.okButton()"> ${continueButton} </button>`;
   dialog.cancelButton = function () { closeSplash(); };
   dialog.okButton = function () { closeSplash(); };
   dialog.render(title, content, footer);
-  dialog.hasInput = true;
 }
 
 function closeSplash() {
-  let transferCode = document.querySelector("#transferCode").value;
-  if (transferCode) {
-    window.location.replace(`?id=${transferCode}`);
-  }
   player.hints = dialog.isChecked("hintsOn");
   dialog.hide();
 
@@ -275,7 +269,6 @@ function transfer() {
   dialog.hasInput = true;
 }
 
-
 function showTransferLink() {
   let content = `<div class="dialog-message-content">`;
   content += `<div>Your transfer code is: <strong>${saveId}</strong></div>`;
@@ -294,6 +287,31 @@ function showTransferLink() {
 
 function endShowTransfer() {
   game.reload();
+}
+
+function transferHere() {
+  let content = `<div class="dialog-message-content">`;
+  content += `<div>`;
+  content += `Enter your transfer code <input placeholder="Transfer code" type="text" name="id" id="transferCode" value="" title="Enter a transfer code from another device to continue playing here" />`
+  content += `</div>`;
+  content += `<div></div>`;
+  content += `<div>Click transfer here to continue playing on this device.</div>`;
+
+  let footer = "";
+  footer += `<button class="buttonize" onclick="dialog.cancel()"> Cancel </button>`;
+  footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
+  dialog.cancelButton = function () { splashScreen(); };
+  dialog.okButton = function () { closeTransferHere(); };
+  dialog.render("Transfer your game here", content, footer);
+}
+
+function closeTransferHere() {
+  let transferCode = document.querySelector("#transferCode").value;
+  if (transferCode) {
+    window.location.replace(`?id=${transferCode}`);
+  } else {
+    transferHere();
+  }
 }
 
 function writeState() {
