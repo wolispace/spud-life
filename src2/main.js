@@ -176,7 +176,7 @@ function splashScreen() {
     footer += `<button class="buttonize" onclick="game.clear(true)"> New game </button>`;
   }
   content += dialog.makeCheckbox("hintsOn", "Show hints?", player.hints);
-  content += `<div>&nbsp;v${game.version}</div>`;
+  content += `<div>&nbsp;v${version}</div>`;
   
   let title = `Welcome ${back} to your Spud Life`;
   footer += `<button class="buttonize" onclick="transferHere()"> Transfer </button>`;
@@ -240,7 +240,7 @@ function aboutGame() {
   content += ` I got close. The only thing I am relying on is <a href="https://github.com/pieroxy/lz-string">lz-string</a> to compress the game state that is stored in local storage.</div>`;
 
   content += `<div>No fish or svg paths were harmed during the making of this game.</div>`;
-  content += `<div>Version ${game.version}</div>`;
+  content += `<div>Version ${version}</div>`;
   content += `</div>`;
 
   let footer = "";

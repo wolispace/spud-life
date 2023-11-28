@@ -1,5 +1,4 @@
 const game = {
-  version: '0.3.1',
   ABOVEGROUND: 0,
   SURFACE: 1,
   UNDERGROUND: 2,
@@ -261,7 +260,7 @@ const game = {
       player.g = game.grid;
       player.g.w = sprite.width;
       player.g.h = sprite.height;
-      player.v = game.version;
+      player.v = version;
       player.x = game.playerItem.x;
       player.y = game.playerItem.y;
 
