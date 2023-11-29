@@ -146,7 +146,7 @@ class Home extends game.Item {
   game() {
     let games = [
       "Portal",
-      "Baba is you",
+      "Baba Is You",
       "Skyrim",
       "The Saboteur",
       "The Stanley Parable",
@@ -166,6 +166,7 @@ class Home extends game.Item {
       `You were up late fixing your scanner, you're handy like that.`,
       "Your pillow was unusually lumpy, maybe its time for a new one?",
       "You noticed a rabbit-shaped crack on your ceiling.",
+      "You re-watched The Empire Strikes Back yet again, just to see they used spuds for asteroids.",
     ];
 
     return sleeps[rnd(sleeps.length)];

@@ -103,7 +103,7 @@ const tools = {
     wallet: function () {
       let title = "Wallet";
       let content = `<div class="dialog-message-content">`;
-      content += `Summary of your last sale`;
+      content += `Summary of your sales this session:`;
       content += buildings.list.cart.summarise();
       let footer = "";
       if (isDev) {
