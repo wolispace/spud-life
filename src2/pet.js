@@ -1,7 +1,7 @@
 const pet = {
   state: 'sitting',
   name: 'Stray',
-  daysToPet: 1,
+  daysToPet: 4,
   currentField: 0,
   moving: false,
   timer: null,
