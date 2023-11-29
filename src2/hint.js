@@ -220,7 +220,7 @@ const hint = {
   random: function () {
     let randomHint = [
       "You may find things other than potatoes buried beneath you",
-      "There are 4 levels of scanner upgrade. The 4th shows what's directly under you",
+      `There are ${game.maxScan} levels of scanner upgrade. The ${game.maxScan}th shows what's directly under you`,
       "Everything is saved, all the time (in your browser's local storage)",
       "If you have a keyboard, use cursor, space, enter and escape keys",
       "It takes 30 random white circles to make one cloud",

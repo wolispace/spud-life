@@ -25,9 +25,9 @@ class Home extends game.Item {
     let title = "Home sweet home";
     let content = `<div class="dialog-message-content">`;
     content += `<div>${svg.inline('home')} Your house ${this.lookInside()}.</div>`;
+    content += `<div class="hasButton"><button class="buttonize" onclick="buildings.list.home.evening()"> Bring on the night </button> If you have no spuds to sell.</div>`;
     content += `<div>Go outside and use your spade to dig for potatoes.</div>`;
     content += `<div>You can change how you look any time in your wardrobe.</div>`;
-    content += `<div>Bring on the night any time, even if you have no spuds to sell.</div>`;
     content += `<div>${hint.random()}.</div>`;
     content += `<div>Click on your scanner to adjust settings.</div>`;
     content += `</div>`;
@@ -37,7 +37,6 @@ class Home extends game.Item {
     if (game.petItem) {
       footer += `<button class="buttonize" onclick="pet.interact()"> Pet </button>`;
     }
-    footer += `<button class="buttonize" onclick="buildings.list.home.evening()"> Bring on the night </button>`;
     footer += `<button class="buttonize" onclick="dialog.cancel()"> Exit </button>`;
     dialog.cancelButton = function () { buildings.list.home.exit(); };
     dialog.render(title, content, footer);

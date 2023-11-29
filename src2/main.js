@@ -182,7 +182,7 @@ function splashScreen() {
   content += dialog.makeCheckbox("hintsOn", "Show hints?", player.hints);
   content += `<div>&nbsp;v${version}</div>`;
   
-  let title = `Welcome ${back} to your Spud Life`;
+  let title = `Welcome ${back} to..`;
   footer += `<button class="buttonize" onclick="transferHere()"> Transfer </button>`;
 
   footer += `<button class="buttonize" onclick="dialog.okButton()"> ${continueButton} </button>`;

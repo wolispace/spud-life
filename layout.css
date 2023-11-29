@@ -321,6 +321,10 @@ svg.height {
   line-height: 1.5rem;
 }
 
+.hasButton {
+  text-indent: -0.35em;
+}
+
 .dialog-content {
   padding: 2rem;
 }
