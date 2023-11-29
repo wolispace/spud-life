@@ -1,14 +1,14 @@
 const pet = {
   state: 'sitting',
   name: 'Stray',
-  daysToPet: 4,
+  daysToPet: 2,
   currentField: 0,
   moving: false,
   timer: null,
   pawsTime: 20,
   pawsMin: 20,
   fieldDelim: '|',
-  locked: false,
+  locked: true,
 
   encode: function () {
     if (game.petItem) {
@@ -52,6 +52,7 @@ const pet = {
       game.petItem.render();
     }
     pet.locked = false;
+    console.log('pet added');
     game.petItem.show();
     pet.think();
   },
@@ -116,7 +117,7 @@ const pet = {
   },
 
   moveTo: function (endItem, endAction, speed = 1) {
-    if (pet.moving || player.currentField != pet.currentField) {
+    if (pet.locked || pet.moving || player.currentField != pet.currentField) {
       return;
     }
     pet.setState('standing');

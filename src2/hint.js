@@ -113,6 +113,12 @@ const hint = {
     }
   },
 
+  reset: function () {
+    dialog.hide();
+    player.hinted = [];
+    hint.resetHints();
+  },
+
   pointAt: function () {
     if (!hint.target) {
       console.trace('pointing at nothing!');
@@ -437,6 +443,14 @@ const hint = {
     hint.message = `Go home to interact with it`;
     hint.okButton = 'hint.confirm';
     hint.group = '22';
+    hint.render();
+  },
+
+  resetHints: function () {
+    hint.target = game.playerItem;
+    hint.message = `This is you, and your hints have been reset`;
+    hint.okButton = 'hint.confirm';
+    hint.group = '23';
     hint.render();
   },
 
