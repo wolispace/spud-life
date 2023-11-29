@@ -43,10 +43,14 @@ function handleTouchEvent(event) {
   document.addEventListener(eventName, handleTouchEvent, { passive: false });
 });
 
+let debounceTimeout;
 window.addEventListener("resize", (event) => {
-  if (!dialog.hasInput) {
-    location.reload();
-  }
+  clearTimeout(debounceTimeout);
+  debounceTimeout = setTimeout(() => {
+    if (!dialog.hasInput) {
+      location.reload();
+    }
+  }, 200); // 200ms delay
 });
 
 document.addEventListener("keydown", (event) => {
