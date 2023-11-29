@@ -60,12 +60,17 @@ const hint = {
       return;
     }
     let btnText = hint.btnText || hint.ok();
-    let skipCheckbox = hint.buildSkip();
-    let input = `<div class="hintButtons">${skipCheckbox}`;
+    // hints show once
+    // let skipCheckbox = hint.buildSkip();
+    let input = `<div class="hintButtons">`;
+    // input += `${skipCheckbox}`;
     input += ` <button class="button buttonize" onclick="hint.confirm()">${btnText}</button></div>`;
     hint.msg.innerHTML = `${hint.message} ${input}`;
     hint.pointAt();
     hint.showMsg();
+    // only show each hint one.
+    player.hinted[hint.group] = true;
+    game.save();
   },
 
   close: function () {
@@ -202,6 +207,8 @@ const hint = {
       "Understood",
       "Aha",
       "Go",
+      "Cool",
+      "Yes",
       "Yup",
       "Makes sense",
       "Agreed",
@@ -227,7 +234,7 @@ const hint = {
     hint.target = document.querySelector('#playerName');
     hint.message = `What is your name? Leave blank for a random name.`;
     hint.okButton = 'hint.part';
-    hint.group = 'myName';
+    hint.group = '1';
     hint.render();
   },
 
@@ -235,7 +242,7 @@ const hint = {
     hint.target = document.querySelector('.part_body');
     hint.message = `Select a body part.<br/>Change its type with arrows`;
     hint.okButton = 'hint.colour';
-    hint.group = 'myName';
+    hint.group = '2';
     hint.render();
   },
 
@@ -243,7 +250,7 @@ const hint = {
     hint.target = document.querySelector('.color-group');
     hint.message = `Also change it's colour`;
     hint.okButton = 'hint.confirm';
-    hint.group = 'myName';
+    hint.group = '3';
     hint.render();
   },
 
@@ -251,7 +258,7 @@ const hint = {
     hint.target = document.querySelectorAll('.hardware-button-buy')[1];
     hint.message = `I suggest you first buy a pick or an axe to clear the ground`;
     hint.okButton = 'hint.confirm';
-    hint.group = 'byPick';
+    hint.group = '4';
     hint.render();
   },
 
@@ -259,7 +266,7 @@ const hint = {
     hint.target = game.playerItem;
     hint.message = `This is you`;
     hint.okButton = 'hint.controls';
-    hint.group = 'itsYou';
+    hint.group = '5';
     hint.render();
   },
   controls: function () {
@@ -267,21 +274,21 @@ const hint = {
     hint.target = controls.list.right;
     hint.message = `Use these arrows to move.`;
     hint.okButton = 'hint.house';
-    hint.group = 'intro';
+    hint.group = '6';
     hint.render();
   },
   house: function () {
     hint.target = buildings.list.home;
     hint.message = `Move UP when in front of a building to go inside.`;
     hint.okButton = 'hint.spade';
-    hint.group = 'intro';
+    hint.group = '7';
     hint.render();
   },
   spade: function () {
     hint.target = tools.list.spade;
     hint.message = `Use your spade to dig where you stand.`;
     hint.okButton = 'hint.field';
-    hint.group = 'intro';
+    hint.group = '8';
     hint.render();
   },
   field: function () {
@@ -289,7 +296,7 @@ const hint = {
     hint.btnText = `Let's start digging!`;
     hint.message = `Rocks and logs block your path.`;
     hint.okButton = 'hint.confirm';
-    hint.group = 'intro';
+    hint.group = '9';
     hint.render();
   },
 
@@ -297,7 +304,7 @@ const hint = {
     hint.target = game.playerItem;
     hint.message = `You can't dig here. Move down a bit and try again.`;
     hint.okButton = 'hint.confirm';
-    hint.group = 'noDigHome';
+    hint.group = '10';
     hint.render();
   },
 
@@ -339,7 +346,7 @@ const hint = {
     hint.target = buildings.list.hardware;
     hint.message = `Check the hardware store for things to buy and sell.`;
     hint.okButton = 'hint.toolHome';
-    hint.group = 'toolHW';
+    hint.group = '11';
     hint.render();
   },
 
@@ -348,7 +355,7 @@ const hint = {
 
     hint.message = `Then go home and get some sleep. Try again tomorrow.`;
     hint.okButton = 'hint.confirm';
-    hint.group = 'toolHome';
+    hint.group = '12';
     hint.render();
   },
 
@@ -357,7 +364,7 @@ const hint = {
     hint.target = `.dialog .close`;
     hint.message = `It's night time and too late to open your shop. Go home and get some sleep.`;
     hint.okButton = 'hint.confirm';
-    hint.group = 'itsNight';
+    hint.group = '13';
     hint.render();
   },
 
@@ -365,7 +372,7 @@ const hint = {
     hint.target = buildings.list.home;
     hint.message = `It's getting late. Go home and get some sleep.`;
     hint.okButton = 'hint.confirm';
-    hint.group = 'goHome';
+    hint.group = '14';
     hint.render();
   },
 
@@ -373,7 +380,7 @@ const hint = {
     hint.target = `.dialog .okButton`;
     hint.message = `When your ready, open your shop and sell your potato-based meals.`;
     hint.okButton = 'hint.confirm';
-    hint.group = 'allocate';
+    hint.group = '15';
     hint.render();
   },
 
@@ -381,7 +388,7 @@ const hint = {
     hint.target = tools.list.basket;
     hint.message = `You dug up something. Click your basket to see what you found.`;
     hint.okButton = 'hint.confirm';
-    hint.group = 'dugItem';
+    hint.group = '16';
     hint.render();
   },
 
@@ -389,7 +396,7 @@ const hint = {
     hint.target = tools.list[toolName];
     hint.message = `You dug up a ${item.name} to add to your collection.`;
     hint.okButton = 'hint.confirm';
-    hint.group = 'dugTool';
+    hint.group = '17';
     hint.render();
   },
 
@@ -397,7 +404,7 @@ const hint = {
     hint.target = buildings.list.cart;
     hint.message = `You dug up a ${tool.name}. It's going straight to work.`;
     hint.okButton = 'hint.confirm';
-    hint.group = 'dugMachine';
+    hint.group = '18';
     hint.render();
   },
 
@@ -405,7 +412,7 @@ const hint = {
     hint.target = tools.list.scanner;
     hint.message = `You scanner flashes when something is buried near by.`;
     hint.okButton = 'hint.confirm';
-    hint.group = 'scanner';
+    hint.group = '19';
     hint.render();
   },
 
@@ -413,7 +420,7 @@ const hint = {
     hint.target = tools.list.scanner;
     hint.message = `You dug up a ${tool.name}. It's going straight to work.`;
     hint.okButton = 'hint.confirm';
-    hint.group = 'scannerUpgrade';
+    hint.group = '20';
     hint.render();
   },
 
@@ -421,7 +428,7 @@ const hint = {
     hint.target = game.petItem;
     hint.message = `Oh look.. a small black fluffy animal. I think its a stray`;
     hint.okButton = 'hint.petHome';
-    hint.group = 'pet';
+    hint.group = '21';
     hint.render();
   },
 
@@ -429,7 +436,7 @@ const hint = {
     hint.target = buildings.list.home;
     hint.message = `Go home to interact with it`;
     hint.okButton = 'hint.confirm';
-    hint.group = 'petHome';
+    hint.group = '22';
     hint.render();
   },
 

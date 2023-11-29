@@ -2,7 +2,9 @@
 :: https://www.digitalocean.com/community/tools/minify
 
 :: npm install terser -g
-"W:\My Drive\Wallace\Utilities\Php\php_743\php.exe" rollVersion.php minor
+
+:: mjor, minor or patch
+"W:\My Drive\Wallace\Utilities\Php\php_743\php.exe" rollVersion.php patch
 
 set ALLFILES=_js_files.js
 echo "" > %ALLFILES%
