@@ -1,13 +1,14 @@
 const pet = {
   state: 'sitting',
   name: 'Stray',
-  daysToPet: 4,
+  daysToPet: 1,
   currentField: 0,
   moving: false,
   timer: null,
   pawsTime: 20,
   pawsMin: 20,
   fieldDelim: '|',
+  locked: false,
 
   encode: function () {
     if (game.petItem) {
@@ -50,6 +51,7 @@ const pet = {
     } else {
       game.petItem.render();
     }
+    pet.locked = false;
     game.petItem.show();
     pet.think();
   },
@@ -63,20 +65,28 @@ const pet = {
   think: function () {
     // TODO do more things like sleep, scratch.. for we just move to a buried item
     let paws = (rnd(pet.pawsTime) + pet.pawsMin) * 1000;
-    console.trace('think', paws);
+    //console.trace('think', paws);
     setTimeout(pet.moveToRandomItem, paws);
   },
 
   moveToRandomItem() {
+    if (pet.locked) {
+      return;
+    }
+    console.trace('moveToRandomItem');
     // find a random item underground in the same field as the pet..
     let buried = player.fields[pet.currentField][game.UNDERGROUND];
     let endItem = buried[Math.floor(Math.random() * buried.length)];
-    let endAction = function () {
-      pet.setState('sitting');
-      pet.finished();
+    if (endItem) {
+      let endAction = function () {
+        pet.setState('sitting');
+        pet.finished();
+        pet.think();
+      }
+      pet.moveTo(endItem, endAction);
+    } else {
       pet.think();
     }
-    pet.moveTo(endItem, endAction);
   },
 
   distanceToEndItem: function (endItem) {
@@ -169,6 +179,7 @@ const pet = {
         pet.setState('sitting');
         game.petItem.hide();
         pet.finished();
+        pet.locked = true;
       }
       pet.moveTo(buildings.list.home.centre(), endAction, 0.5);
     }
