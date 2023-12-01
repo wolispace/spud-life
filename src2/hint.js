@@ -8,6 +8,7 @@ const hint = {
   group: '',
   visible: false,
   force: false,
+  reminder: {},
 
   defaultParams: {
     autoRender: false,
@@ -106,11 +107,8 @@ const hint = {
   },
 
   isItSkipped: function () {
-    let skipHint = document.querySelector('#hintSkip');
-    if (skipHint && skipHint.checked) {
-      player.hinted[hint.group] = true;
-      game.save();
-    }
+    player.hinted[hint.group] = true;
+    game.save();
   },
 
   reset: function () {
@@ -306,31 +304,100 @@ const hint = {
     hint.render();
   },
 
+  hintPrompts: [
+    ['You'],
+    [
+      'Yes, you',
+      'Like I said, you',
+      'Again, you',
+      'I repeat, you',
+    ],
+    [
+      'One more time, you',
+      `I'll say it again, you`,
+      'For the third time, you',
+    ],
+    [
+      'Ahem.. You',
+      'Oi! You',
+      'Hay! You',
+      "What!? You"
+    ],
+    [
+      `Pay attention, you`,
+      `It's actually quite important, you`,
+      `I told you before and I'll tell you again, you`,
+      `Its important that you know, you`,
+    ],
+    [
+      `Really!! You`,
+      `Wow! Look at you! You`,
+      `I'm impressed with your stamina. You`,
+    ],
+    [
+      `For the umpteenth time, you`,
+      `For the last time!! You`,
+      `Didn't I just tell you? You`,
+    ],
+    [
+      `I don't think you understand. You`,
+      'Maybe you were not paying attention, you',
+      'Really? Really!?! You',
+      'What! What!!  You',
+    ],
+    [
+      `Ok, one more time, you`,
+      'Listen up, you',
+      'Pay attention, you',
+      'Maybe I didn`t make myself clear, you',
+    ],
+  ],
+
+  getReminder: function (hintSet, suffix) {
+    let reminderCount = hint.reminder[hintSet] ?? 0;
+    if (reminderCount > hint.hintPrompts.length) {
+      reminderCount = 3;
+    }
+    let msgList = hint.hintPrompts[reminderCount];
+    let prefix = msgList[rnd(msgList.length)];
+
+    reminderCount++;
+    if (reminderCount >= hint.hintPrompts.length) {
+      reminderCount = 3;
+    }
+    hint.reminder[hintSet] = reminderCount;
+
+    return `${prefix}${suffix}`;
+  },
+
   noDigHome: function () {
     hint.target = game.playerItem;
-    hint.message = `You can't dig here. Move down a bit and try again.`;
+    hint.message = hint.getReminder('noDigHome', ` can't dig here. Move down a bit and try again.`);
     hint.okButton = 'hint.confirm';
-    hint.group = '10';
+    hint.group = '';
+    hint.force = true;
     hint.render();
   },
 
   toolUsedUp: function (toolName) {
     hint.target = tools.list[toolName];
-    hint.message = `Your ${toolName} is exhausted. Tomorrow morning it will be refreshed and you can use it again.`;
+    hint.message = hint.getReminder('toolUsedUp', `r ${toolName} is exhausted. Tomorrow morning it will be refreshed and you can use it again.`);
     hint.okButton = 'hint.confirm';
     if (toolName == 'spade') {
       hint.okButton = 'hint.letsCook';
     }
-    hint.group = toolName;
+    hint.group = '';
+    hint.force = true;
     hint.render();
   },
 
   toolNone: function (toolName) {
     let an = pluraliser(toolName, 'a', 'an');
     hint.target = buildings.list.hardware;
-    hint.message = `Go to the hardware store and buy ${an} ${toolName} to clear this.`;
+    hint.message = hint.getReminder(`no_${toolName}`, ` should go to the hardware store and buy ${an} ${toolName} to clear this.`);
     hint.okButton = 'hint.confirm';
-    hint.group = `no_${toolName}`;
+    hint.group = '';
+    hint.force = true;
     hint.render();
   },
 
@@ -415,10 +482,11 @@ const hint = {
   },
 
   scanner: function () {
+    player.hinted['scanner'] = true;
     hint.target = tools.list.scanner;
     hint.message = `You scanner flashes when something is buried near by.`;
     hint.okButton = 'hint.confirm';
-    hint.group = '19';
+    hint.group = '';
     hint.render();
   },
 

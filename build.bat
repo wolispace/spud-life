@@ -4,7 +4,7 @@
 :: npm install terser -g
 
 :: mjor, minor or patch
-"W:\My Drive\Wallace\Utilities\Php\php_743\php.exe" rollVersion.php patch
+"W:\My Drive\Wallace\Utilities\Php\php_743\php.exe" rollVersion.php minor
 
 set ALLFILES=_js_files.js
 echo "" > %ALLFILES%
