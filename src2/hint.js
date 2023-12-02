@@ -351,21 +351,35 @@ const hint = {
       'Pay attention, you',
       'Maybe I didn`t make myself clear, you',
     ],
+    [
+      `I'm getting tired of reminding you that you`,
+    ],
+    [
+      `I'm exhausted! You`,
+    ],
+    [
+      `Ok, you win. This is the last. You`,
+    ]
   ],
 
-  getReminder: function (hintSet, suffix) {
+  // returns -1 if we have exceeded max msgs, otherwise return the reminderCount 
+  getReminderCount: function (hintSet) {
     let reminderCount = hint.reminder[hintSet] ?? 0;
-    if (reminderCount > hint.hintPrompts.length) {
-      reminderCount = 3;
+    return reminderCount > hint.hintPrompts.length ? -1 : reminderCount;
+  },
+
+  getReminder: function (hintSet, suffix) {
+    let reminderCount = hint.getReminderCount(hintSet);
+    if (reminderCount < 0) {
+      return '';
     }
     let msgList = hint.hintPrompts[reminderCount];
+    if (!msgList) {
+      return '';
+    }
     let prefix = msgList[rnd(msgList.length)];
 
-    reminderCount++;
-    if (reminderCount >= hint.hintPrompts.length) {
-      reminderCount = 3;
-    }
-    hint.reminder[hintSet] = reminderCount;
+    hint.reminder[hintSet] = reminderCount + 1;
 
     return `${prefix}${suffix}`;
   },
@@ -375,7 +389,7 @@ const hint = {
     hint.message = hint.getReminder('noDigHome', ` can't dig here. Move down a bit and try again.`);
     hint.okButton = 'hint.confirm';
     hint.group = '';
-    hint.force = true;
+    hint.force = hint.message.length > 0;
     hint.render();
   },
 
@@ -387,7 +401,7 @@ const hint = {
       hint.okButton = 'hint.letsCook';
     }
     hint.group = '';
-    hint.force = true;
+    hint.force = hint.message.length > 0;
     hint.render();
   },
 
@@ -397,7 +411,7 @@ const hint = {
     hint.message = hint.getReminder(`no_${toolName}`, ` should go to the hardware store and buy ${an} ${toolName} to clear this.`);
     hint.okButton = 'hint.confirm';
     hint.group = '';
-    hint.force = true;
+    hint.force = hint.message.length > 0;
     hint.render();
   },
 

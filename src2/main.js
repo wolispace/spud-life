@@ -174,12 +174,12 @@ function splashScreen() {
 
   let footer = '';
   if (!game.new) {
-    content += `Welcome back <strong>${player.name}</strong>`;
+    content += `Welcome back <b>${player.name}</b>`;
+    //content += dialog.makeCheckbox("hintsOn", "Show hints?", player.hints);
     back = 'back';
     continueButton = 'Continue';
     footer += `<button class="buttonize" onclick="game.clear(true)"> New game </button>`;
   }
-  content += dialog.makeCheckbox("hintsOn", "Show hints?", player.hints);
   content += `<div>&nbsp;v${version}</div>`;
   
   let title = `Welcome ${back} to..`;
@@ -192,7 +192,7 @@ function splashScreen() {
 }
 
 function closeSplash() {
-  player.hints = dialog.isChecked("hintsOn");
+  //player.hints = dialog.isChecked("hintsOn");
   dialog.hide();
 
 
