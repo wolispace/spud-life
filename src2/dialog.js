@@ -10,6 +10,7 @@ const dialog = {
   render: function (title, content, footer) {
     dialog.setup();
     controls.endInput();
+    dialog.overlay.style.display = 'block';
     dialog.visible = true;
     dialog.title = title;
     dialog.dialogBox.style.opacity = 1;
@@ -53,6 +54,7 @@ const dialog = {
     dialog.hasInput = false;
     hint.hide();
     timers.moving = false;
+    dialog.overlay.style.display = 'none';
   },
 
   makeCheckbox: function (id, text, isChecked) {
@@ -75,6 +77,7 @@ const dialog = {
 
     if (!dialogBox) {
       addToBody(`
+      <div id='dialogOverlay' class='overlay' onclick='dialog.overlayClicked()'></div>
       <div class='dialog'>
         <div class='header'>
           <div class='title'></div>
@@ -86,7 +89,12 @@ const dialog = {
       `);
     }
     dialog.dialogBox = document.querySelector(`.${dialog.id}`);
+    dialog.overlay = document.querySelector(`#dialogOverlay`);
     dialog.hide();
+  },
+
+  overlayClicked() {
+    // do nothing but could close dialog
   },
 
 };
