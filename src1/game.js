@@ -192,7 +192,6 @@ const game = {
         this.render();
       } else {
         this.sprite.style.display = 'block';
-        console.log('showing');
       }
     }
 

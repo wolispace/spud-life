@@ -386,6 +386,12 @@ svg.height {
   background-color: rgb(181 79 79) !important;
 }
 
+.hardware-button-upgrade {
+  font-weight: bold;
+  color: white;
+  background-color: rgb(181 79 79)!important;
+}
+
 .hardware-button-desc {
   flex: auto;
 }
@@ -448,7 +454,6 @@ svg.height {
   stroke-width: 1.2;
 }
 
-
 .part {
   display: flex;
   flex-direction: row;
@@ -479,7 +484,6 @@ svg.height {
   justify-content: space-around;
   padding: 1rem;
 }
-
 
 .demoBody {
   width: 100%;
@@ -534,7 +538,6 @@ svg.height {
 #hintOverlay {
   z-index: 8;
 }
-
 
 .hintMsg {
   position: absolute;

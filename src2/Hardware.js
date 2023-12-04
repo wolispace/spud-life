@@ -27,7 +27,10 @@ class Hardware extends game.Item {
     dialog.cancelButton = function () { buildings.list.hardware.exit(); };
     dialog.okButton = function () { buildings.list.hardware.exit(); };
     dialog.render(title, content, footer);
-    hint.buyPick();
+    
+    if (tools.list['pick'].max < 1 || tools.list['axe'].max < 1) {
+      hint.buyTool();
+    }
   }
 
   exit() {
@@ -101,6 +104,7 @@ class Hardware extends game.Item {
     if (['spade', 'axe', 'pick', 'scanner'].includes(itemInfo.name)) {
       if (tools.list[itemInfo.name].max > 0 || itemInfo.name == 'scanner') {
         caption = 'Upgrade';
+        buy = 'upgrade';
       }
     }
 

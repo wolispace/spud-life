@@ -276,8 +276,8 @@ const hint = {
     hint.render();
   },
 
-  buyPick: function () {
-    hint.target = document.querySelectorAll('.hardware-button-buy')[1];
+  buyTool: function () {
+    hint.target = document.querySelectorAll('.hardware-button-buy')[0];
     hint.message = `I suggest you first buy a pick or an axe to clear the ground`;
     hint.okButton = 'hint.confirm';
     hint.group = '4';
