@@ -4,7 +4,13 @@
   --sl-font-color: black;
 }
 
+html, body {
+  overflow-x: hidden;
+  height: 100%;
+}
+
 body {
+  position: relative;
   background-color: black;
   overflow: hidden;
   font-family: Tahoma, sans-serif;
