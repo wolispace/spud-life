@@ -186,7 +186,7 @@ const hint = {
       };
       return {
         x: icon.x + (icon.w / 2),
-        y: icon.y + (icon.h / 2),
+        y: icon.y + (icon.h),
       }
     }
   },
@@ -457,7 +457,6 @@ const hint = {
 
   toolHome: function () {
     hint.target = buildings.list.home;
-
     hint.message = `Then go home and get some sleep. Try again tomorrow.`;
     hint.okButton = 'hint.confirm';
     hint.group = '12';

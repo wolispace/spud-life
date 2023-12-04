@@ -29,7 +29,7 @@ const tools = {
         if (tools.buyable.includes(itemName) && player.tools[itemName].max === 0) {
           tools.list[itemName].hide();
         }
-        
+
       }
     });
   },
@@ -70,7 +70,6 @@ const tools = {
     return encodedString;
   },
 
-
   clicks: {
     pick: function () {
       let title = "Pick";
@@ -78,28 +77,34 @@ const tools = {
       content += `This is your pick.`;
       content += `You have used it ${tools.list.pick.total} times.`;
       let footer = "";
+      footer += `<div></div>`;
       footer += `<button class="buttonize" onclick="dialog.okButton()"> Ok </button>`;
       dialog.cancelButton = function () { dialog.hide(); };
       dialog.okButton = function () { dialog.hide(); };
       dialog.render(title, content, footer);
     },
+
     axe: function () {
       let title = "axe";
       let content = `<div class="dialog-message-content">`;
       content += `This is your axe.`;
       content += `You have used it ${tools.list.axe.total} times.`;
       let footer = "";
+      footer += `<div></div>`;
       footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
       dialog.cancelButton = function () { dialog.hide(); };
       dialog.okButton = function () { dialog.hide(); };
       dialog.render(title, content, footer);
     },
+
     basket: function () {
       basket.show();
     },
+
     scanner: function () {
       scanner.render();
     },
+
     wallet: function () {
       let title = "Wallet";
       let content = `<div class="dialog-message-content">`;

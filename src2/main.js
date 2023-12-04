@@ -132,8 +132,6 @@ function setupThings() {
     game.playerItem.y = sprite.height;
     game.playerItem.x = 1;
     game.playerItem.position();
-    console.log('re-render player');
-    //window.resizeTo(window.screen.availWidth / 2, window.screen.availHeight / 2);
   }
   scanner.scan();
 }
@@ -206,15 +204,18 @@ function closeSplash() {
   }
 }
 
-function storyIntro() {
+function presentList() {
   let items = ['spade', 'basket', 'scanner', 'home', 'cart', 'chipper'];
-  let itemsShow = '<div style="display: flex; justify-content: space-evenly;">';
+  let html = '';
   items.forEach((item) => {
-    let itemSvg = svg.inline(item);
-    itemsShow += `<div class="cartMachine buttonize button machine_${item}" onclick="machines.describe('${item}')">${itemSvg}</div>`;
+    let itemSvg = svg.render(item);
+    html += `<div class="cartMachine buttonize button machine_${item}" onclick="machines.describe('${item}')">${itemSvg}</div>`;
   });
-  itemsShow += '</div>';
+  return `<div class="cartMachines">${html}</div>`;
+}
 
+function storyIntro() {
+  let itemsShow = presentList();
   let content = `<div class="dialog-message-content">`;
   content += '<div>You receive a letter from a distance aunt: </div>';
   content += '<div><i>"I am retiring from the food business and have no need for these things. See what you can do with them"</i></div>';
