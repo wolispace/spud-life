@@ -59,9 +59,9 @@ const dialog = {
 
   makeCheckbox: function (id, text, isChecked) {
     let checked = isChecked ? 'checked="checked"' : '';
-    let checkbox = `<span class="checkboxSpan">`;
+    let checkbox = `<label class="checkboxLabel">`;
     checkbox += `<input type="checkbox" id="${id}" ${checked} />`;
-    checkbox += `<label class="checkboxLabel" for="${id}">${text}</label></span>`;
+    checkbox += `${text}</label>`;
     return checkbox;
   },
   // returns true if the checkbox is checked..
