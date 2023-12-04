@@ -21,21 +21,32 @@ const hint = {
 
     if (!hintBox) {
       addToBody(`
+        <div id='hintOverlay' class='overlay' onclick='hint.overlayClicked()'></div>
         <div class='hintArrow'>${arrowSvg}</div>
         <div class='hintMsg'></div>
       `);
     }
-    hint.arrow = document.querySelector(`.hintArrow`);
+    hint.overlay = document.querySelector(`#hintOverlay`);
     hint.msg = document.querySelector(`.hintMsg`);
+    hint.arrow = document.querySelector(`.hintArrow`);
 
     hint.hide();
   },
 
   test: function () {
+    hint.target = document.querySelector(`.close`);
+    hint.group = '';
+    hint.force = true;
+    hint.okButton = 'hint.test2';
+    hint.message = 'This is the close button. This is not a pipe. This is not a pipe. This is not a pipe. This is not a pipe. This is not a pipe. ';
+    hint.render();
+  },
+
+  test2: function () {
     dialog.hide();
     hint.target = game.playerItem;
-    hint.group = 'test';
-    hint.btnText = hint.ok();
+    hint.group = '';
+    hint.force = true;
     hint.okButton = 'hint.controls';
     hint.message = 'This is not a pipe. This is not a pipe. This is not a pipe. This is not a pipe. This is not a pipe. ';
     hint.render();
@@ -69,9 +80,15 @@ const hint = {
     hint.msg.innerHTML = `${hint.message} ${input}`;
     hint.pointAt();
     hint.showMsg();
+    hint.overlay.style.display = 'block';
     // only show each hint one.
     player.hinted[hint.group] = true;
     game.save();
+  },
+
+  overlayClicked: function () {
+    // do nothing so player has to acknowledge the hint
+    //hint.confirm();
   },
 
   close: function () {
@@ -81,6 +98,7 @@ const hint = {
   hide: function () {
     hint.msg.style.top = '-200px';
     hint.arrow.style.top = '-200px';
+    hint.overlay.style.display = 'none';
     hint.msg.innerHTML = '';
     hint.btnText = null;
     hint.force = false;

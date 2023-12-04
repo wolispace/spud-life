@@ -263,3 +263,18 @@ let items = {
   
 };
 
+const fixedItems = {
+  home: {
+    fullName: "Your home",
+    desc: "It's a small house and surprisingly comfortable. It has FTTN NBN too",
+  },
+  basket: {
+    fullName: "A handy basket",
+    desc: "Wonderful for holding all sorts of dug-up things",
+  },
+  cart: {
+    fullName: "You food cart",
+    desc: "Well appointed and suitably retro",
+  },
+}
+

@@ -207,10 +207,11 @@ function closeSplash() {
 }
 
 function storyIntro() {
-  let items = ['spade', 'basket', 'home', 'cart', 'scanner'];
+  let items = ['spade', 'basket', 'scanner', 'home', 'cart', 'chipper'];
   let itemsShow = '<div style="display: flex; justify-content: space-evenly;">';
   items.forEach((item) => {
-    itemsShow += svg.inline(item);
+    let itemSvg = svg.inline(item);
+    itemsShow += `<div class="cartMachine buttonize button machine_${item}" onclick="machines.describe('${item}')">${itemSvg}</div>`;
   });
   itemsShow += '</div>';
 
