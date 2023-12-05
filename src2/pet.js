@@ -52,7 +52,6 @@ const pet = {
       game.petItem.render();
     }
     pet.locked = false;
-    console.log('pet added');
     game.petItem.show();
     pet.think();
   },
@@ -74,7 +73,6 @@ const pet = {
     if (pet.locked) {
       return;
     }
-    console.trace('moveToRandomItem');
     // find a random item underground in the same field as the pet..
     let buried = player.fields[pet.currentField][game.UNDERGROUND];
     let endItem = buried[Math.floor(Math.random() * buried.length)];
@@ -158,6 +156,7 @@ const pet = {
     let content = `<div class="dialog-message-content">`;
     content += `<div>Its small, black and fluffy. is it a dog or cat?</div>`;
     content += pet.editName();
+    content += `<div>Pets like sitting close to buried things.</div>`;
     let footer = "";
     footer += `<div></div>`;
     footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
