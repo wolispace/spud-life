@@ -90,6 +90,9 @@ class Home extends game.Item {
     content += `<div>${buildings.list.home.sleepHow()}</div>`;
     content += `<div>${buildings.list.home.dream()}.</div>`;
     content += `<div>Your tools have been refreshed.</div>`;
+    if (player.day >= game.holeLife) {
+      content += `<div>You scatter some seed-potatoes randomly.</div>`;
+    }
 
     let footer = "";
     footer += `<div></div>`;
