@@ -111,8 +111,8 @@ class Home extends game.Item {
     }
   }
 
-  lookInside() {
-    let insides = [
+  insideList = "᭡ࡅ䆼`䍈මƒ㸥ᥠ孔™㱠͢ḡ盄ۖ䅉Ⱕ㠬〢攠㭐ව৶◙⅂ㆤ䔷䮮ଦ勂兪祠䌪撨展☸礑ᭁ•ᦠݕ᰺⫨⦦᪨〠⚈߀Ϛ湪䏪❡ؾ᯷揢ჶሹ怠滼䄖✴ষ愢癃ታ℀撂䐪نၑᝬ䶒װ砸〰吴嚴٠؀‥椠 ";
+  insideList_OLD = [
       "is a little messy",
       "looks so much nicer after that fresh coat of paint",
       "is small",
@@ -124,30 +124,31 @@ class Home extends game.Item {
       "is cozy",
     ];
 
-    return insides[rnd(insides.length)];
+  lookInside() {
+    return this.insideList[rnd(this.insideList.length)];
   }
+
+  dreamList = [
+    "You dreamt of living in a park, but were rudely awoken by the dustmen",
+    "You dreamt you were a walrus",
+    "You dreamt of holding onto nothing, to see how long nothing lasts",
+    "You dreamt of spinning plates",
+    "You didn't dream of anything, however you wake up, back to life, back to reality",
+    "You dreamt you were a hero, just for one day",
+    "You dreamt a little dream of me",
+    "You dreamt the cake was a lie",
+    "You dreamt about the delivery man",
+    "You dreamt you were Baba",
+    "You dreamt that you finally wound up like a spring",
+    "you dreamt that the sun machine was coming down and you had a party",
+    "You dreamt you were in a boat on a river with tangerine trees and marmalade skies",
+  ];
 
   dream() {
-    let dreams = [
-      "You dreamt of living in a park, but were rudely awoken by the dustmen",
-      "You dreamt you were a walrus",
-      "You dreamt of holding onto nothing, to see how long nothing lasts",
-      "You dreamt of spinning plates",
-      "You didn't dream of anything, however you wake up, back to life, back to reality",
-      "You dreamt you were a hero, just for one day",
-      "You dreamt a little dream of me",
-      "You dreamt the cake was a lie",
-      "You dreamt about the delivery man",
-      "You dreamt you were Baba",
-      "You dreamt that you finally wound up like a spring",
-      "you dreamt that the sun machine was coming down and you had a party",
-      "You dreamt you were in a boat on a river with tangerine trees and marmalade skies",
-    ];
-    return dreams[rnd(dreams.length)];
+    return this.dreamList[rnd(this.dreamList.length)];
   }
 
-  game() {
-    let games = [
+  gameList = [
       "Portal",
       "Baba Is You",
       "Skyrim",
@@ -158,40 +159,44 @@ class Home extends game.Item {
       "Tony Hawk's P_o ___tater 2"
     ];
 
-    return games[rnd(games.length)];
+  game() {
+    return this.gameList[rnd(this.gameList.length)];
   }
 
-  sleepHow() {
-    let sleeps = [
+sleepList = [
       "You got to sleep quickly.",
       "You had a hard time getting to sleep.",
-      `You stayed up very late playing ${buildings.list.home.game()} and didn't get much sleep.`,
+      `You stayed up very late playing [gameList] and didn't get much sleep.`,
       `You were up late fixing your scanner, you're handy like that.`,
       "Your pillow was unusually lumpy, maybe its time for a new one?",
       "You noticed a rabbit-shaped crack on your ceiling.",
       "You re-watched The Empire Strikes Back yet again, just to see they used spuds for asteroids.",
     ];
 
-    return sleeps[rnd(sleeps.length)];
+  sleepHow() {
+    let sleepMsg = this.sleepList[rnd(this.sleepList.length)];
+    return sleepMsg.replace('[gameList]', this.game());
   }
 
-  days() {
-    let msgs = [
-      `Day ${player.day}`,
-      `It's day ${player.day}`,
-      `Nice going, day ${player.day}`,
-      `Right on, day ${player.day}`,
-      `Woo hoo, day ${player.day}`,
-      `${player.day} days of digging`,
-      `${player.day} days`,
-      `${player.day} days and counting`,
-      `${player.day} days, what fun`,
-      `${player.day} days for ${player.day} spuds?`,
-      `${player.day} sunrises`,
-      `${player.day} days of adventure`,
+  dayMsgList = [
+      `Day [days]`,
+      `It's day [days]`,
+      `Nice going, day [days]`,
+      `Right on, day [days]`,
+      `Woo hoo, day [days]`,
+      `[days] days of digging`,
+      `[days] days`,
+      `[days] days and counting`,
+      `[days] days, what fun`,
+      `[days] days for [days] spuds?`,
+      `[days] sunrises`,
+      `[days] days of adventure`,
     ]
 
-    return msgs[rnd(msgs.length)];
+  days() {
+    let dayMsg = this.dayMsgList[rnd(this.dayMsgList.length)];
+
+    return dayMsg.replace('[days]', player.day);
   }
 
 };

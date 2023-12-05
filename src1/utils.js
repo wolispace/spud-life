@@ -94,3 +94,15 @@ function calculateDiagonal(height, length) {
   return Math.sqrt(Math.pow(height, 2) + Math.pow(length, 2));
 }
 
+function compressArrays() {
+  let list = 'insideList';
+  let sourceArray = buildings.list.home[list];
+  compressed = LZString.compressToUTF16(JSON.stringify(sourceArray));
+  console.log(`${list} = "${compressed}";`);
+}
+
+function decompressArrays() {
+  let list = 'insideList';
+  let sourceArray = buildings.list.home[list];
+  buildings.list.home[list] = JSON.parse(LZString.decompressFromUTF16(sourceArray));
+}
