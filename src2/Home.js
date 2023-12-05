@@ -86,7 +86,7 @@ class Home extends game.Item {
     let title = "Morning!";
 
     let content = `<div class="dialog-message-content">`;
-    //  `${income}${sleep}${dream}${reset}${sow}`;
+    content += `<div>${buildings.list.home.days()}.</div>`;
     content += `<div>${buildings.list.home.sleepHow()}</div>`;
     content += `<div>${buildings.list.home.dream()}.</div>`;
     content += `<div>Your tools have been refreshed.</div>`;
@@ -170,6 +170,25 @@ class Home extends game.Item {
     ];
 
     return sleeps[rnd(sleeps.length)];
+  }
+
+  days() {
+    let msgs = [
+      `Day ${player.day}`,
+      `It's day ${player.day}`,
+      `Nice going, day ${player.day}`,
+      `Right on, day ${player.day}`,
+      `Woo hoo, day ${player.day}`,
+      `${player.day} days of digging`,
+      `${player.day} days`,
+      `${player.day} days and counting`,
+      `${player.day} days, what fun`,
+      `${player.day} days for ${player.day} spuds?`,
+      `${player.day} sunrises`,
+      `${player.day} days of adventure`,
+    ]
+
+    return msgs[rnd(msgs.length)];
   }
 
 };
