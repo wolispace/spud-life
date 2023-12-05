@@ -34,7 +34,7 @@ document.addEventListener('contextmenu', event => {
 });
 
 function handleTouchEvent(event) {
-  if (!['BUTTON', 'INPUT', 'LABEL', 'svg', 'DIV'].includes(event.target.tagName)) {
+  if (!['BUTTON', 'INPUT', 'LABEL', 'DIV', 'svg', 'path', 'rect', 'ellipse', 'text'].includes(event.target.tagName)) {
     event.preventDefault();
   }
 }
@@ -171,19 +171,22 @@ function splashScreen() {
   content += `<div class="introSvg">${titleSvg}</div>`;
 
   let footer = '';
+  footer += `<button class="buttonize" onclick="transferHere()"> Transfer </button>`;
   if (!game.new) {
     content += `Welcome back <b>${player.name}</b>`;
     //content += dialog.makeCheckbox("hintsOn", "Show hints?", player.hints);
     back = 'back';
     continueButton = 'Continue';
     footer += `<button class="buttonize" onclick="game.clear(true)"> New game </button>`;
+    footer += `<button class="buttonize" onclick="dialog.okButton()"> ${continueButton} </button>`;
+  } else {
+    content += `<button class="buttonize" onclick="dialog.okButton()"> ${continueButton} </button>`;
   }
   content += `<div>&nbsp;v${version}</div>`;
   
   let title = `Welcome ${back} to..`;
-  footer += `<button class="buttonize" onclick="transferHere()"> Transfer </button>`;
 
-  footer += `<button class="buttonize" onclick="dialog.okButton()"> ${continueButton} </button>`;
+  //footer += `<button class="buttonize" onclick="dialog.okButton()"> ${continueButton} </button>`;
   dialog.cancelButton = function () { closeSplash(); };
   dialog.okButton = function () { closeSplash(); };
   dialog.render(title, content, footer);
