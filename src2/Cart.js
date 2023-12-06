@@ -59,12 +59,12 @@ class Cart extends game.Item {
     let footer = "";
     if (basket.hasSpuds()) {
       content += `Load your machines with spuds and start them cooking`;
-      footer += `<button class="buttonize" onclick="buildings.list.cart.load()"> Load machines </button>`;
+      content += `<div><button class="buttonize" onclick="buildings.list.cart.load()"> Load machines </button></div>`;
     } else {
       content += `<div>You haven't found any potatoes yet.</div>`;
       content += `<div>Go out and dig for some or sleep till tomorrow to refresh your tools.</div>`;
-      footer += `<div></div>`;
     }
+    footer += `<div></div>`;
     footer += `<button class="buttonize" onclick="dialog.confirm()"> Exit </button>`;
     dialog.cancelButton = function () { buildings.list.cart.exit(); };
     dialog.okButton = function () { buildings.list.cart.exit(); };

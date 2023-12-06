@@ -216,40 +216,13 @@ const hint = {
 
   // a random OK message
   ok: function () {
-    okText = [
-      "Ok",
-      "Okay",
-      "Righto",
-      "Gotcha",
-      "I see",
-      "Interesting",
-      "Thanks",
-      "Got that",
-      "Roger",
-      "Understood",
-      "Aha",
-      "Go",
-      "Cool",
-      "Yes",
-      "Yup",
-      "Makes sense",
-      "Agreed",
-      "Affirmative",
-    ];
-    return okText[rnd(okText.length)];
+    return lists.get('okText');;
   },
 
   random: function () {
-    let randomHint = [
-      "You may find things other than potatoes buried beneath you",
-      `There are ${game.maxScan} levels of scanner upgrade. The ${game.maxScan}th shows what's directly under you`,
-      "Everything is saved, all the time (in your browser's local storage)",
-      "If you have a keyboard, use cursor, space, enter and escape keys",
-      "It takes 30 random white circles to make one cloud",
-      "The rarest potatoes are found on the furthest fields",
-    ];
+    let randomHintMsg = lists.get('randomHint');
+    return randomHintMsg.replace('[maxScan]', game.maxScan);
 
-    return randomHint[rnd(randomHint.length)];
   },
 
   myName: function () {
@@ -322,68 +295,10 @@ const hint = {
     hint.render();
   },
 
-  hintPrompts: [
-    ['You'],
-    [
-      'Yes, you',
-      'Like I said, you',
-      'Again, you',
-      'I repeat, you',
-    ],
-    [
-      'One more time, you',
-      `I'll say it again, you`,
-      'For the third time, you',
-    ],
-    [
-      'Ahem.. You',
-      'Oi! You',
-      'Hay! You',
-      "What!? You"
-    ],
-    [
-      `Pay attention, you`,
-      `It's actually quite important, you`,
-      `I told you before and I'll tell you again, you`,
-      `Its important that you know, you`,
-    ],
-    [
-      `Really!! You`,
-      `Wow! Look at you! You`,
-      `I'm impressed with your stamina. You`,
-    ],
-    [
-      `For the umpteenth time, you`,
-      `For the last time!! You`,
-      `Didn't I just tell you? You`,
-    ],
-    [
-      `I don't think you understand. You`,
-      'Maybe you were not paying attention, you',
-      'Really? Really!?! You',
-      'What! What!!  You',
-    ],
-    [
-      `Ok, one more time, you`,
-      'Listen up, you',
-      'Pay attention, you',
-      'Maybe I didn`t make myself clear, you',
-    ],
-    [
-      `I'm getting tired of reminding you that you`,
-    ],
-    [
-      `I'm exhausted! You`,
-    ],
-    [
-      `Ok, you win. This is the last. You`,
-    ]
-  ],
-
   // returns -1 if we have exceeded max msgs, otherwise return the reminderCount 
   getReminderCount: function (hintSet) {
     let reminderCount = hint.reminder[hintSet] ?? 0;
-    return reminderCount > hint.hintPrompts.length ? -1 : reminderCount;
+    return reminderCount > lists.raw.hintPrompts.length ? -1 : reminderCount;
   },
 
   getReminder: function (hintSet, suffix) {
@@ -391,7 +306,7 @@ const hint = {
     if (reminderCount < 0) {
       return '';
     }
-    let msgList = hint.hintPrompts[reminderCount];
+    let msgList = lists.raw.hintPrompts[reminderCount];
     if (!msgList) {
       return '';
     }
@@ -451,7 +366,7 @@ const hint = {
     hint.target = buildings.list.hardware;
     hint.message = `Check the hardware store for things to buy and sell.`;
     hint.okButton = 'hint.toolHome';
-    hint.group = '11';
+    hint.group = 'a';
     hint.render();
   },
 
@@ -459,7 +374,7 @@ const hint = {
     hint.target = buildings.list.home;
     hint.message = `Then go home and get some sleep. Try again tomorrow.`;
     hint.okButton = 'hint.confirm';
-    hint.group = '12';
+    hint.group = 'b';
     hint.render();
   },
 
@@ -468,7 +383,7 @@ const hint = {
     hint.target = `.dialog .close`;
     hint.message = `It's night time and too late to open your shop. Go home and get some sleep.`;
     hint.okButton = 'hint.confirm';
-    hint.group = '13';
+    hint.group = 'c';
     hint.render();
   },
 
@@ -476,7 +391,7 @@ const hint = {
     hint.target = buildings.list.home;
     hint.message = `It's getting late. Go home and get some sleep.`;
     hint.okButton = 'hint.confirm';
-    hint.group = '14';
+    hint.group = 'd';
     hint.render();
   },
 
@@ -484,7 +399,7 @@ const hint = {
     hint.target = `.dialog .okButton`;
     hint.message = `When your ready, open your shop and sell your potato-based meals.`;
     hint.okButton = 'hint.confirm';
-    hint.group = '15';
+    hint.group = 'e';
     hint.render();
   },
 
@@ -492,7 +407,7 @@ const hint = {
     hint.target = tools.list.basket;
     hint.message = `You dug up something. Click your basket to see what you found.`;
     hint.okButton = 'hint.confirm';
-    hint.group = '16';
+    hint.group = 'f';
     hint.render();
   },
 
@@ -500,7 +415,7 @@ const hint = {
     hint.target = tools.list[toolName];
     hint.message = `You dug up a ${item.name} to add to your collection.`;
     hint.okButton = 'hint.confirm';
-    hint.group = '17';
+    hint.group = 'g';
     hint.render();
   },
 
@@ -508,16 +423,23 @@ const hint = {
     hint.target = buildings.list.cart;
     hint.message = `You dug up a ${tool.name}. It's going straight to work.`;
     hint.okButton = 'hint.confirm';
-    hint.group = '18';
+    hint.group = 'h';
     hint.render();
   },
 
   scanner: function () {
-    player.hinted['scanner'] = true;
     hint.target = tools.list.scanner;
     hint.message = `You scanner flashes when something is buried near by.`;
+    hint.okButton = 'hint.scannerClick';
+    hint.group = 's';
+    hint.render();
+  },
+
+  scannerClick: function () {
+    hint.target = tools.list.scanner;
+    hint.message = `Click your scanner to change settings.`;
     hint.okButton = 'hint.confirm';
-    hint.group = '';
+    hint.group = 's2';
     hint.render();
   },
 
@@ -525,7 +447,7 @@ const hint = {
     hint.target = tools.list.scanner;
     hint.message = `You dug up a ${tool.name}. It's going straight to work.`;
     hint.okButton = 'hint.confirm';
-    hint.group = '20';
+    hint.group = 'j';
     hint.render();
   },
 
@@ -533,7 +455,7 @@ const hint = {
     hint.target = game.petItem;
     hint.message = `Oh look.. a small black fluffy animal. I think its a stray`;
     hint.okButton = 'hint.petHome';
-    hint.group = '21';
+    hint.group = 'k';
     hint.render();
   },
 
@@ -541,7 +463,7 @@ const hint = {
     hint.target = buildings.list.home;
     hint.message = `Go home to interact with it`;
     hint.okButton = 'hint.confirm';
-    hint.group = '22';
+    hint.group = 'l';
     hint.render();
   },
 
@@ -549,7 +471,7 @@ const hint = {
     hint.target = game.playerItem;
     hint.message = `This is you, and your hints have been reset`;
     hint.okButton = 'hint.confirm';
-    hint.group = '23';
+    hint.group = 'm';
     hint.render();
   },
 

@@ -111,91 +111,25 @@ class Home extends game.Item {
     }
   }
 
-  insideList = "᭡ࡅ䆼`䍈මƒ㸥ᥠ孔™㱠͢ḡ盄ۖ䅉Ⱕ㠬〢攠㭐ව৶◙⅂ㆤ䔷䮮ଦ勂兪祠䌪撨展☸礑ᭁ•ᦠݕ᰺⫨⦦᪨〠⚈߀Ϛ湪䏪❡ؾ᯷揢ჶሹ怠滼䄖✴ষ愢癃ታ℀撂䐪نၑᝬ䶒װ砸〰吴嚴٠؀‥椠 ";
-  insideList_OLD = [
-      "is a little messy",
-      "looks so much nicer after that fresh coat of paint",
-      "is small",
-      "is bigger on the inside",
-      "is where you lay your hat",
-      "is a very nice house",
-      "looks a lot like my house",
-      "is your castle",
-      "is cozy",
-    ];
-
   lookInside() {
-    return this.insideList[rnd(this.insideList.length)];
+    return lists.get('insideList');
   }
-
-  dreamList = [
-    "You dreamt of living in a park, but were rudely awoken by the dustmen",
-    "You dreamt you were a walrus",
-    "You dreamt of holding onto nothing, to see how long nothing lasts",
-    "You dreamt of spinning plates",
-    "You didn't dream of anything, however you wake up, back to life, back to reality",
-    "You dreamt you were a hero, just for one day",
-    "You dreamt a little dream of me",
-    "You dreamt the cake was a lie",
-    "You dreamt about the delivery man",
-    "You dreamt you were Baba",
-    "You dreamt that you finally wound up like a spring",
-    "you dreamt that the sun machine was coming down and you had a party",
-    "You dreamt you were in a boat on a river with tangerine trees and marmalade skies",
-  ];
 
   dream() {
-    return this.dreamList[rnd(this.dreamList.length)];
+    return lists.get('dreamList');
   }
-
-  gameList = [
-      "Portal",
-      "Baba Is You",
-      "Skyrim",
-      "The Saboteur",
-      "The Stanley Parable",
-      "Visual Pinball X",
-      "with ChatGPT",
-      "Tony Hawk's P_o ___tater 2"
-    ];
 
   game() {
-    return this.gameList[rnd(this.gameList.length)];
+    return lists.get('gameList');
   }
 
-sleepList = [
-      "You got to sleep quickly.",
-      "You had a hard time getting to sleep.",
-      `You stayed up very late playing [gameList] and didn't get much sleep.`,
-      `You were up late fixing your scanner, you're handy like that.`,
-      "Your pillow was unusually lumpy, maybe its time for a new one?",
-      "You noticed a rabbit-shaped crack on your ceiling.",
-      "You re-watched The Empire Strikes Back yet again, just to see they used spuds for asteroids.",
-    ];
-
   sleepHow() {
-    let sleepMsg = this.sleepList[rnd(this.sleepList.length)];
+    let sleepMsg = lists.get('sleepList');
     return sleepMsg.replace('[gameList]', this.game());
   }
 
-  dayMsgList = [
-      `Day [days]`,
-      `It's day [days]`,
-      `Nice going, day [days]`,
-      `Right on, day [days]`,
-      `Woo hoo, day [days]`,
-      `[days] days of digging`,
-      `[days] days`,
-      `[days] days and counting`,
-      `[days] days, what fun`,
-      `[days] days for [days] spuds?`,
-      `[days] sunrises`,
-      `[days] days of adventure`,
-    ]
-
   days() {
-    let dayMsg = this.dayMsgList[rnd(this.dayMsgList.length)];
-
+    let dayMsg = lists.get('dayMsgList');
     return dayMsg.replace('[days]', player.day);
   }
 

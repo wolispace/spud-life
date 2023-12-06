@@ -30,33 +30,30 @@ function addToControls(html) {
   bodyElement.insertAdjacentHTML('beforeend', html);
 }
 
-const state = {
- };
+// function html(selector, text) {
+//   let elem = checkSelector(selector);
 
-function html(selector, text) {
-  let elem = checkSelector(selector);
+//   if (text) {
+//     elem.innerHTML = text;
+//   } else {
+//     return elem.innerHTML;
+//   }
+//   return elem;
+// }
 
-  if (text) {
-    elem.innerHTML = text;
-  } else {
-    return elem.innerHTML;
-  }
-  return elem;
-}
+// function checkSelector(selector) {
+//   let elem = selector;
+//   if (typeof selector === "string") {
+//     elem = document.querySelector(selector);
+//   }
+//   return elem;
+// }
 
-function checkSelector(selector) {
-  let elem = selector;
-  if (typeof selector === "string") {
-    elem = document.querySelector(selector);
-  }
-  return elem;
-}
-
-function css(selector, styles) {
-  let elem = checkSelector(selector);
-  Object.assign(elem.style, styles);
-  return selector;
-}
+// function css(selector, styles) {
+//   let elem = checkSelector(selector);
+//   Object.assign(elem.style, styles);
+//   return selector;
+// }
 
 
 // returns the bounding box.. and simplify w & h
@@ -64,7 +61,6 @@ function getBoundingBox(element) {
   if (typeof element === 'string') {
     element = document.querySelector(element);
     element = element.getBoundingClientRect();
-  } else {
   }
 
   element.w = element.width;
@@ -92,17 +88,4 @@ function cleanString(userInput) {
 
 function calculateDiagonal(height, length) {
   return Math.sqrt(Math.pow(height, 2) + Math.pow(length, 2));
-}
-
-function compressArrays() {
-  let list = 'insideList';
-  let sourceArray = buildings.list.home[list];
-  compressed = LZString.compressToUTF16(JSON.stringify(sourceArray));
-  console.log(`${list} = "${compressed}";`);
-}
-
-function decompressArrays() {
-  let list = 'insideList';
-  let sourceArray = buildings.list.home[list];
-  buildings.list.home[list] = JSON.parse(LZString.decompressFromUTF16(sourceArray));
 }

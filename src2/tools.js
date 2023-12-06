@@ -112,8 +112,7 @@ const tools = {
       content += buildings.list.cart.summarise();
       let footer = "";
       if (isDev) {
-        footer += `<button class="buttonize devButton" onclick="compressArrays()"> Comp </button>`;
-        footer += `<button class="buttonize devButton" onclick="decompressArrays()"> Decomp </button>`;
+        footer += `<button class="buttonize devButton" onclick="lists.compress()"> Compress </button>`;
         footer += `<button class="buttonize devButton" onclick="field.showAll()"> Show all </button>`;
       }
       footer += `<button class="buttonize" onclick="aboutGame()"> About </button>`;
