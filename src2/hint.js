@@ -229,7 +229,7 @@ const hint = {
     hint.target = document.querySelector('#playerName');
     hint.message = `What is your name? Leave blank for a random name.`;
     hint.okButton = 'hint.part';
-    hint.group = '1';
+    hint.group = 'n';
     hint.render();
   },
 
@@ -237,7 +237,7 @@ const hint = {
     hint.target = document.querySelector('.part_body');
     hint.message = `Select a body part.<br/>Change its type with arrows`;
     hint.okButton = 'hint.colour';
-    hint.group = '2';
+    hint.group = 'o';
     hint.render();
   },
 
@@ -245,7 +245,7 @@ const hint = {
     hint.target = document.querySelector('.color-group');
     hint.message = `Also change it's colour`;
     hint.okButton = 'hint.confirm';
-    hint.group = '3';
+    hint.group = 'p';
     hint.render();
   },
 
@@ -253,7 +253,7 @@ const hint = {
     hint.target = document.querySelectorAll('.hardware-button-buy')[0];
     hint.message = `I suggest you first buy a pick or an axe to clear the ground`;
     hint.okButton = 'hint.confirm';
-    hint.group = '4';
+    hint.group = 'q';
     hint.render();
   },
 
@@ -261,7 +261,7 @@ const hint = {
     hint.target = game.playerItem;
     hint.message = `This is you`;
     hint.okButton = 'hint.controls';
-    hint.group = '5';
+    hint.group = 'r';
     hint.render();
   },
   controls: function () {
@@ -269,21 +269,21 @@ const hint = {
     hint.target = controls.list.right;
     hint.message = `Use these arrows to move.`;
     hint.okButton = 'hint.house';
-    hint.group = '6';
+    hint.group = 't';
     hint.render();
   },
   house: function () {
     hint.target = buildings.list.home;
     hint.message = `Move UP when in front of a building to go inside.`;
     hint.okButton = 'hint.spade';
-    hint.group = '7';
+    hint.group = 'u';
     hint.render();
   },
   spade: function () {
     hint.target = tools.list.spade;
     hint.message = `Use your spade to dig where you stand.`;
     hint.okButton = 'hint.field';
-    hint.group = '8';
+    hint.group = 'v';
     hint.render();
   },
   field: function () {
@@ -291,7 +291,7 @@ const hint = {
     hint.btnText = `Let's start digging!`;
     hint.message = `Rocks and logs block your path.`;
     hint.okButton = 'hint.confirm';
-    hint.group = '9';
+    hint.group = 'w';
     hint.render();
   },
 
@@ -427,21 +427,6 @@ const hint = {
     hint.render();
   },
 
-  scanner: function () {
-    hint.target = tools.list.scanner;
-    hint.message = `You scanner flashes when something is buried near by.`;
-    hint.okButton = 'hint.scannerClick';
-    hint.group = 's';
-    hint.render();
-  },
-
-  scannerClick: function () {
-    hint.target = tools.list.scanner;
-    hint.message = `Click your scanner to change settings.`;
-    hint.okButton = 'hint.confirm';
-    hint.group = 's2';
-    hint.render();
-  },
 
   scannerUpgrade: function (tool) {
     hint.target = tools.list.scanner;
@@ -472,6 +457,22 @@ const hint = {
     hint.message = `This is you, and your hints have been reset`;
     hint.okButton = 'hint.confirm';
     hint.group = 'm';
+    hint.render();
+  },
+
+  scanner: function () {
+    hint.target = tools.list.scanner;
+    hint.message = `You scanner flashes when something is buried near by.`;
+    hint.okButton = 'hint.scannerClick';
+    hint.group = 's';
+    hint.render();
+  },
+
+  scannerClick: function () {
+    hint.target = tools.list.scanner;
+    hint.message = `Click your scanner to change settings.`;
+    hint.okButton = 'hint.confirm';
+    hint.group = 's2';
     hint.render();
   },
 
