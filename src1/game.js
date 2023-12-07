@@ -19,8 +19,6 @@ const game = {
   transferred: false,
   newPlayer: {}, // temp info loaded before its finished being decoded
 
-
-
   // everything show on the page is an Item with coords and an svg
   Item: class {
     id = '';
@@ -61,12 +59,12 @@ const game = {
       if (document.querySelector(`#i${this.id}`)) {
         // its already here..
       } else {
-      let newSprite = `<div id="i${this.id}" class="sprite ${this.classes}">${this.svg}</div>`;
-      addToWorld(newSprite);
-      this.sprite = sprite.get(this.id);
-      this.position();
-      this.shrinkWrap();
-      this.position();
+        let newSprite = `<div id="i${this.id}" class="sprite ${this.classes}">${this.svg}</div>`;
+        addToWorld(newSprite);
+        this.sprite = sprite.get(this.id);
+        this.position();
+        this.shrinkWrap();
+        this.position();
       }
     }
 
@@ -282,7 +280,7 @@ const game = {
     let gameState = localStorage.getItem("state");
     if (gameState) {
       let decompressed = gameState;
-      if (gameState.indexOf('"name":') < 0) {       
+      if (gameState.indexOf('"name":') < 0) {
         decompressed = LZString.decompressFromUTF16(gameState);
       }
       game.newPlayer = JSON.parse(decompressed);
@@ -301,7 +299,7 @@ const game = {
     if (confirm("Are you sure you want to start a new game?")) {
       localStorage.clear();
       if (reload) {
-       game.reload();
+        game.reload();
       }
     }
   },

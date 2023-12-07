@@ -78,6 +78,7 @@ document.addEventListener("keyup", (event) => {
 });
 
 function startGame() {
+  svg.imgList = lists.raw.imgList;
   character.bodySet = character.getBodySet();
   setContainerBox();
   // loads previously save state from localStorage if found

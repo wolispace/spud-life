@@ -49,7 +49,7 @@ const character = {
     let newBody = {};
     let skinTones = ["Cornsilk", "Bisque", "Wheat", "Tan", "SaddleBrown"];
 
-    let colourNames = Object.keys(CSS_COLOR_NAMES);
+    let colourNames = Object.keys(lists.raw.colorNames);
     let skinTone = skinTones[rnd(skinTones.length)];
 
     Object.keys(character.bodySet).forEach((bodyPart) => {
@@ -200,7 +200,7 @@ const character = {
     // build a clickable grid of X * Y clickable squares that set a colour
     let colourGrid = `<div class="color-grid">`;
 
-    Object.entries(CSS_COLOR_GROUPS).forEach(([groupName, colours]) => {
+    Object.entries(lists.raw.colorGroups).forEach(([groupName, colours]) => {
       colourGrid += '<div class="color-group">';
       colours.forEach((colourName) => {
         colourGrid += character.colourSquare(colourName);

@@ -68,6 +68,7 @@ function getScripts($v)
     $scripts .= readFolder("src1", $v);
     $scripts .= readFolder("src2", $v);
     $scripts .= readFolder("src3", $v);
+    $scripts .= readFolder("src_", $v);
   }
   
   return $scripts;
@@ -77,7 +78,7 @@ function readFolder ($folder, $v) {
   $scripts = '';
   $files = scandir($folder);
   foreach ($files as $file) {
-    if ($file[0] != '.') {
+    if ($file[0] != '.' && substr($file, 0, 1) != '_') {
       $scripts .= "<script src='{$folder}/{$file}?{$v}'></script>\n";
     }
   }
