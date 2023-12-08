@@ -78,6 +78,9 @@ function readFolder ($folder, $v) {
   $scripts = '';
   $files = scandir($folder);
   foreach ($files as $file) {
+    if ($folder == 'src2' && $file == 'lists.js') {
+      continue;
+    }
     if ($file[0] != '.' && substr($file, 0, 1) != '_') {
       $scripts .= "<script src='{$folder}/{$file}?{$v}'></script>\n";
     }

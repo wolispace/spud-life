@@ -78,6 +78,9 @@ document.addEventListener("keyup", (event) => {
 });
 
 function startGame() {
+  if (!lists.raw) {
+    decompressLists();
+  }
   svg.imgList = lists.raw.imgList;
   character.bodySet = character.getBodySet();
   setContainerBox();

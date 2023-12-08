@@ -30,32 +30,6 @@ function addToControls(html) {
   bodyElement.insertAdjacentHTML('beforeend', html);
 }
 
-// function html(selector, text) {
-//   let elem = checkSelector(selector);
-
-//   if (text) {
-//     elem.innerHTML = text;
-//   } else {
-//     return elem.innerHTML;
-//   }
-//   return elem;
-// }
-
-// function checkSelector(selector) {
-//   let elem = selector;
-//   if (typeof selector === "string") {
-//     elem = document.querySelector(selector);
-//   }
-//   return elem;
-// }
-
-// function css(selector, styles) {
-//   let elem = checkSelector(selector);
-//   Object.assign(elem.style, styles);
-//   return selector;
-// }
-
-
 // returns the bounding box.. and simplify w & h
 function getBoundingBox(element) {
   if (typeof element === 'string') {
@@ -89,3 +63,19 @@ function cleanString(userInput) {
 function calculateDiagonal(height, length) {
   return Math.sqrt(Math.pow(height, 2) + Math.pow(length, 2));
 }
+
+  // compressed the entire raw list (see _build.js)
+  function compressLists () {
+    compressed = LZString.compressToEncodedURIComponent(JSON.stringify(lists.raw));
+    return compressed;
+  }
+
+  // decompress the compress: into raw: 
+  function decompressLists  () {
+    if (lists.compressed != '') {
+      lists.raw = JSON.parse(LZString.decompressFromEncodedURIComponent(lists.compressed));
+      console
+    } else {
+      console.log('nothing to decompress');
+    }
+  }
