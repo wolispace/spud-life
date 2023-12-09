@@ -205,6 +205,11 @@ const game = {
       svg.animate(this.sprite, `jiggle-${direction}`, 0.25, onEnd);
     }
 
+    jumpUp(onEnd) {
+      this.setPos();
+      svg.animate(this.sprite, `jump-up`, 0.5 , onEnd);
+    }
+
     animateArc(endItem, onEnd) {
       // slow start fast middle
       var easing = 'cubic-bezier(0, 0, .25, 0)';

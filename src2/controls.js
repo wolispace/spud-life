@@ -80,7 +80,15 @@ const controls = {
     let skyBottom = (sprite.height * sky.height) - (sprite.height / 4);
     if (game.playerItem.y > skyBottom) {
       if (tools.list['spade'].qty > 0) {
+
         game.digging = true;
+
+        let onEnd = function () {
+          game.playerItem.restorePos();
+        };
+        game.playerItem.fixPos();
+        game.playerItem.jumpUp(onEnd, 1);
+
         // add the hole first
         let params = {
           id: game.uid++,
