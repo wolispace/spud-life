@@ -216,12 +216,12 @@ const hint = {
 
   // a random OK message
   ok: function () {
-    return lists.get('okText');;
+    return getFromList('okText');;
   },
 
   random: function () {
-    let randomHintMsg = lists.get('randomHint');
-    return randomHintMsg.replace('[maxScan]', game.maxScan);
+    let randomHintMsg = getFromList('randomHint');
+    return randomHintMsg.replaceAll('[maxScan]', game.maxScan);
 
   },
 
@@ -317,6 +317,10 @@ const hint = {
     return `${prefix}${suffix}`;
   },
 
+  resetReminders: function () {
+    hint.reminder = {};
+  },
+
   noDigHome: function () {
     hint.target = game.playerItem;
     hint.message = hint.getReminder('noDigHome', ` can't dig here. Move down a bit and try again.`);
@@ -340,8 +344,9 @@ const hint = {
 
   toolNone: function (toolName) {
     let an = pluraliser(toolName, 'a', 'an');
+    let item = toolName == 'pick' ? 'rocks' : 'logs';
     hint.target = buildings.list.hardware;
-    hint.message = hint.getReminder(`no_${toolName}`, ` should go to the hardware store and buy ${an} ${toolName} to clear this.`);
+    hint.message = hint.getReminder(`no_${toolName}`, ` should go to the hardware store and buy ${an} ${toolName} to clear ${item}.`);
     hint.okButton = 'hint.confirm';
     hint.group = '';
     hint.force = hint.message.length > 0;

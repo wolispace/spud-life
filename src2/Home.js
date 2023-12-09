@@ -105,6 +105,7 @@ class Home extends game.Item {
   wake() {
     dialog.hide();
     buildings.list.home.exit();
+    hint.resetReminders();
     if (player.day > pet.daysToPet) {
       pet.show();
       hint.petIntro();
@@ -112,25 +113,24 @@ class Home extends game.Item {
   }
 
   lookInside() {
-    return lists.get('insideList');
+    return getFromList('insideList');
   }
 
   dream() {
-    return lists.get('dreamList');
+    return getFromList('dreamList');
   }
 
   game() {
-    return lists.get('gameList');
+    return getFromList('gameList');
   }
 
   sleepHow() {
-    let sleepMsg = lists.get('sleepList');
-    return sleepMsg.replace('[gameList]', this.game());
+    return getFromList('sleepList');
   }
 
   days() {
-    let dayMsg = lists.get('dayMsgList');
-    return dayMsg.replace('[days]', player.day);
+    let dayMsg = getFromList('dayMsgList');
+    return dayMsg.replaceAll('[days]', player.day);
   }
 
 };

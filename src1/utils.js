@@ -12,7 +12,7 @@ function halfRnd(num) {
 // returns the singular or plural based on the word supplied
 // pluraliser('axe', 'a', 'an'); returns 'an'
 function pluraliser(word, single, plural) {
-  return ['a','e','i','o','u'].includes(word.charAt(0)) ? plural : single;
+  return ['a', 'e', 'i', 'o', 'u'].includes(word.charAt(0)) ? plural : single;
 }
 
 function addToBody(html) {
@@ -64,18 +64,29 @@ function calculateDiagonal(height, length) {
   return Math.sqrt(Math.pow(height, 2) + Math.pow(length, 2));
 }
 
-  // compressed the entire raw list (see _build.js)
-  function compressLists () {
-    compressed = LZString.compressToEncodedURIComponent(JSON.stringify(lists.raw));
-    return compressed;
-  }
+// compressed the entire raw list (see _build.js)
+function compressLists() {
+  compressed = LZString.compressToEncodedURIComponent(JSON.stringify(lists.raw));
+  return compressed;
+}
 
-  // decompress the compress: into raw: 
-  function decompressLists  () {
-    if (lists.compressed != '') {
-      lists.raw = JSON.parse(LZString.decompressFromEncodedURIComponent(lists.compressed));
-      console
-    } else {
-      console.log('nothing to decompress');
-    }
+// decompress the compress: into raw: 
+function decompressLists() {
+  if (lists.compressed != '') {
+    lists.raw = JSON.parse(LZString.decompressFromEncodedURIComponent(lists.compressed));
+  } else {
+    console.log('nothing to decompress');
   }
+}
+
+// get a random string from the named list, if it includes replaceable params then get those from other lists
+function getFromList(key) {
+  let randomMsg = lists.get(key);
+  if (randomMsg.includes('[')) {
+    return randomMsg.replace(/\[(.*?List)\]/g, function(_, key) {
+      return getFromList(key);
+  });
+  } else {
+    return randomMsg;
+  }
+}
