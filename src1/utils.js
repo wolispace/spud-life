@@ -83,7 +83,7 @@ function decompressLists() {
 function getFromList(key) {
   let randomMsg = lists.get(key);
   if (randomMsg.includes('[')) {
-    return randomMsg.replace(/\[(.*?List)\]/g, function(_, key) {
+    return randomMsg.replace(/\[(\w+List)\]/g, function(_, key) {
       return getFromList(key);
   });
   } else {

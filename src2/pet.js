@@ -1,7 +1,7 @@
 const pet = {
   state: 'sitting',
   name: 'Stray',
-  daysToPet: 2,
+  daysToPet: 4, // they appear on the next day
   currentField: 0,
   moving: false,
   timer: null,
@@ -81,6 +81,7 @@ const pet = {
         pet.setState('sitting');
         pet.finished();
         pet.think();
+        pet.showMsg();
       }
       pet.moveTo(endItem, endAction);
     } else {
@@ -101,6 +102,7 @@ const pet = {
   },
 
   facing: function (endItem) {
+    console.trace('pet?', pet, player, game);
     if (endItem) {
       let petSprite = document.querySelector("#ipet > svg");
       if (game.petItem.x > endItem.x) {
@@ -183,6 +185,13 @@ const pet = {
       }
       pet.moveTo(buildings.list.home.centre(), endAction, 0.5);
     }
+  },
+
+  showMsg: function () {
+    let paws = (rnd(10) + 4) * 1000;
+    if (rnd(5) == 3) {
+      setTimeout(hint.petMsg, paws )
+    } 
   },
 
 }

@@ -24,7 +24,7 @@ class Home extends game.Item {
   enterDaytime() {
     let title = "Home sweet home";
     let content = `<div class="dialog-message-content">`;
-    content += `<div>${svg.inline('home')} Your house ${this.lookInside()}.</div>`;
+    content += `<div>${svg.inline('home')} Your house ${getFromList('insideList')}.</div>`;
     content += `<div class="hasButton"><button class="buttonize" onclick="buildings.list.home.evening()"> Bring on the night </button> If you have no spuds to sell.</div>`;
     content += `<div>Go outside and use your spade to dig for potatoes.</div>`;
     content += `<div>You can change how you look any time in your wardrobe.</div>`;
@@ -47,10 +47,10 @@ class Home extends game.Item {
     let title = "Welcome home";
     let content = `<div class="dialog-message-content">`;
     content += `Its nighttime. You need to sleep`;
+    content += `<div><button class="buttonize" onclick="dialog.confirm()"> Sleep </button></div>`;
 
     let footer = "";
     footer += `<button class="buttonize" onclick="character.customize()"> Wardrobe </button>`;
-    footer += `<button class="buttonize" onclick="dialog.confirm()"> Sleep </button>`;
     footer += `<button class="buttonize" onclick="dialog.cancel()"> Exit </button>`;
     dialog.cancelButton = function () { buildings.list.home.exit(); };
     dialog.okButton = function () { buildings.list.home.sleep(); };
@@ -86,13 +86,17 @@ class Home extends game.Item {
     let title = "Morning!";
 
     let content = `<div class="dialog-message-content">`;
-    content += `<div>${buildings.list.home.days()}.</div>`;
-    content += `<div>${buildings.list.home.sleepHow()}</div>`;
-    content += `<div>${buildings.list.home.dream()}.</div>`;
-    content += `<div>Your tools have been refreshed.</div>`;
+    content += `<div>${buildings.list.home.days()}</div>`;
+    content += `<div>${getFromList('sleepList')}</div>`;
+    content += `<div>${getFromList('dreamList')}.</div>`;
+
+    content += `<div>${getFromList('weatherList')}</div>`;
+
+    let seedMsg = '';
     if (player.day >= game.holeLife) {
-      content += `<div>You scatter some seed-potatoes randomly.</div>`;
+      seedMsg = ` and you randomly scattered some seed-potatoes`;
     }
+    content += `<div>Your tools have been refreshed${seedMsg}.</div>`;
 
     let footer = "";
     footer += `<div></div>`;
@@ -110,22 +114,6 @@ class Home extends game.Item {
       pet.show();
       hint.petIntro();
     }
-  }
-
-  lookInside() {
-    return getFromList('insideList');
-  }
-
-  dream() {
-    return getFromList('dreamList');
-  }
-
-  game() {
-    return getFromList('gameList');
-  }
-
-  sleepHow() {
-    return getFromList('sleepList');
   }
 
   days() {

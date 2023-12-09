@@ -216,7 +216,7 @@ const hint = {
 
   // a random OK message
   ok: function () {
-    return getFromList('okText');;
+    return getFromList('okText');
   },
 
   random: function () {
@@ -454,6 +454,15 @@ const hint = {
     hint.message = `Go home to interact with it`;
     hint.okButton = 'hint.confirm';
     hint.group = 'l';
+    hint.render();
+  },
+
+  petMsg: function () {
+    hint.target = game.petItem;
+    let rndMsg =  getFromList('petMsgList');
+    hint.message = `${pet.name} ${rndMsg}`;
+    hint.okButton = 'hint.confirm';
+    hint.group = '';
     hint.render();
   },
 
