@@ -37,7 +37,7 @@ if (empty($compressed)) {
 }
 
 function logIt($str) {
-  file_put_contents('_log.txt', "{$str}\n", FILE_APPEND | LOCK_EX);
+  //file_put_contents('_log.txt', "{$str}\n", FILE_APPEND | LOCK_EX);
 }
 
 function outputBuildPage()

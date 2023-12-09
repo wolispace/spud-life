@@ -199,7 +199,13 @@ const pet = {
       let paws = (rnd(3) + 3) * 1000;
       if (rnd(5) == 3) {
         setTimeout(hint.petMsg, paws);
-      } 
+      } else {
+        let onEnd = function () {
+          game.petItem.restorePos();
+        };
+        game.petItem.fixPos();
+        game.petItem.jumpUp(onEnd, 1);
+      }
     }
   },
 
