@@ -295,6 +295,14 @@ const game = {
     }
   },
 
+  // make sure old versions of saved data are up-to-date 
+  versionCheck: () => {
+    if (typeof player.petChatter === `undefined`) {
+      player.petChatter = true;
+    }
+
+  },
+
   clear: (reload = false) => {
     if (confirm("Are you sure you want to start a new game?")) {
       localStorage.clear();

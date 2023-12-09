@@ -86,6 +86,7 @@ function startGame() {
   setContainerBox();
   // loads previously save state from localStorage if found
   game.load();
+  game.versionCheck();
 
   controls.render();
   tools.setup();

@@ -33,6 +33,7 @@ const lists = {
       "You dreamt about dropping the pilot",
       "You dreamt that it was all yellow", 
       "You dreamt you were Baba",
+      "You dreamt the black night challenges you",
       "You dreamt that you finally wound up like a spring",
       "you dreamt that the sun machine was coming down and you had a party",
       "You dreamt you were in a boat on a river with tangerine trees and marmalade skies",

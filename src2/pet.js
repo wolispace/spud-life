@@ -121,6 +121,7 @@ const pet = {
   },
 
   moveTo: function (endItem, endAction, speed = 1) {
+    hint.hide();
     if (pet.locked || pet.moving || player.currentField != pet.currentField) {
       return;
     }
@@ -151,6 +152,7 @@ const pet = {
   save: function () {
     let dialogInput = document.querySelector(`#petName`);
     pet.name = cleanString(dialogInput.value) || character.randomName();
+    player.petChatter = dialog.isChecked("petChatterOn");
     dialog.hide();
     game.save();
     buildings.list.home.enter();
@@ -163,6 +165,7 @@ const pet = {
     content += `<div>Its small, black and fluffy. is it a dog or cat?</div>`;
     content += pet.editName();
     content += `<div>Pets like sitting close to buried things.</div>`;
+    content += dialog.makeCheckbox("petChatterOn", "Pet chatter on/off", player.petChatter);
     let footer = "";
     footer += `<div></div>`;
     footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
@@ -192,10 +195,12 @@ const pet = {
   },
 
   showMsg: function () {
-    let paws = (rnd(3) + 3) * 1000;
-    if (rnd(5) == 3) {
-      setTimeout(hint.petMsg, paws);
-    } 
+    if (!dialog.visible) {
+      let paws = (rnd(3) + 3) * 1000;
+      if (rnd(5) == 3) {
+        setTimeout(hint.petMsg, paws);
+      } 
+    }
   },
 
 }
