@@ -93,8 +93,9 @@ class Home extends game.Item {
     content += `<div>${getFromList('weatherList')}</div>`;
 
     let seedMsg = '';
-    if (player.day >= game.holeLife) {
+    if (player.reseed) {
       seedMsg = ` and you hear new potatoes growing underground`;
+      player.reseed = false;
     }
     content += `<div>Your tools have been refreshed${seedMsg}.</div>`;
 

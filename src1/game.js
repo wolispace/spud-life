@@ -211,6 +211,10 @@ const game = {
     }
 
     animateArc(endItem, onEnd) {
+      if (!this.sprite) {
+        console.log('Missing sprite for', this);
+        this.show();
+      }
       // slow start fast middle
       var easing = 'cubic-bezier(0, 0, .25, 0)';
       // slow and get faster

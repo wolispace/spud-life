@@ -247,7 +247,7 @@ const field = {
           delete fieldSpace[game.SURFACE][index];
           console.log('removing blank hole', fieldId, index);
           field.add(fieldId);
-
+          player.reseed = true;
         } else {
           if (item.sprite) {
             item.sprite.style.opacity = field.holeState(item);

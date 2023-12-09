@@ -185,13 +185,12 @@ const lists = {
       "The rarest potatoes are found on the furthest fields",
     ],
     petMsgList: [
-      `looks like they might have found something`,
+      `has a quizzical look on their face`,
       `[squirrleList]... SQUIRREL!`,
       `makes a sound that is half-way between a bark and a meow`,
-      `wonders<br/>.oO( [wonderList]? )`,
-      `has a quizzical look on their face`,
-      `watches what your doing`,
       `thinks<br/>.oO( [thinkList] )`,     
+      `wonders<br/>.oO( [wonderList]? )`,
+      `watches what your doing`,
     ],
     squirrleList: [
       "looks at th",
@@ -199,23 +198,25 @@ const lists = {
       "wants to tel",
       "has just foun",
       "starts to fl",
-      "just solved th"
+      "just solved th",
+      'I think I know whe'
     ],
     wonderList: [
       "when will they throw my frisbee",
       "do they have a spare bone",
-      "what is the sky blue",
+      "why is the sky blue",
       "how much is that doggy in the window",
       "where do they start, where do they begin",
       "why are my paws dirty",
+      "Is it tea-time yet",
     ],
     thinkList: [
       "Good move human",
       "snappy outfit",
       "I prefer axes to picks",
-      "Is it tea-time yet?",
       "I'm exhausted, I need a lie down",
       "It's cozy in that house",
+      "I think I know where something is buried",
     ],
     hintPrompts: [
       ['You'],

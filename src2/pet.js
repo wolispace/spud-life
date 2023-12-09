@@ -5,8 +5,8 @@ const pet = {
   currentField: 0,
   moving: false,
   timer: null,
-  pawsTime: 20,
-  pawsMin: 20,
+  pawsTime: 5,
+  pawsMin: 5,
   fieldDelim: '|',
   locked: true,
 
@@ -63,10 +63,13 @@ const pet = {
   },
 
   think: function () {
-    // TODO do more things like sleep, scratch.. for we just move to a buried item
+    // TODO do more things like sleep, scratch.. 
     let paws = (rnd(pet.pawsTime) + pet.pawsMin) * 1000;
-    //console.trace('think', paws);
-    setTimeout(pet.moveToRandomItem, paws);
+    if (rnd(4) == 1) {
+      pet.timer = setTimeout(pet.moveToRandomItem, paws);
+    } else {
+      pet.timer = setTimeout(pet.goPlayer, paws);
+    }
   },
 
   moveToRandomItem() {
@@ -86,6 +89,7 @@ const pet = {
       pet.moveTo(endItem, endAction);
     } else {
       pet.think();
+      pet.showMsg();
     }
   },
 
@@ -102,7 +106,7 @@ const pet = {
   },
 
   facing: function (endItem) {
-    console.trace('pet?', pet, player, game);
+    //console.trace('pet?', pet, player, game);
     if (endItem) {
       let petSprite = document.querySelector("#ipet > svg");
       if (petSprite) {
@@ -121,7 +125,11 @@ const pet = {
   },
 
   moveTo: function (endItem, endAction, speed = 1) {
-    hint.hide();
+    if (hint.visible) {
+      pet.think();
+      return;
+    }
+
     if (pet.locked || pet.moving || player.currentField != pet.currentField) {
       return;
     }
@@ -145,6 +153,10 @@ const pet = {
 
   finished: function () {
     pet.moving = false;
+    if (pet.timer) {
+      clearTimeout(pet.timer);
+      //console.log('timeout cleared');
+    }
     game.petItem.fixPos();
     game.petItem.resetAnimation();
   },
@@ -194,18 +206,30 @@ const pet = {
     }
   },
 
+  goPlayer: function () {
+    if (game.petItem) {
+      pet.finished();
+      let endAction = function () {
+        pet.setState('sitting');
+        pet.finished();
+        pet.think();
+        pet.showMsg();
+      }
+      pet.moveTo(game.playerItem.centre(), endAction, 0.5);
+    }
+  },
+
   showMsg: function () {
     if (!dialog.visible) {
-      let paws = (rnd(3) + 3) * 1000;
-      if (rnd(5) == 3) {
+      let paws = (rnd(2) + 2) * 1000;
+      if (rnd(3) == 1) {
         setTimeout(hint.petMsg, paws);
-      } else {
-        let onEnd = function () {
-          game.petItem.restorePos();
-        };
-        game.petItem.fixPos();
-        game.petItem.jumpUp(onEnd, 1);
       }
+      let onEnd = function () {
+        game.petItem.restorePos();
+      };
+      game.petItem.fixPos();
+      game.petItem.jumpUp(onEnd, 1);
     }
   },
 
