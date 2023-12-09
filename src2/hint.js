@@ -463,6 +463,7 @@ const hint = {
     hint.message = `${pet.name} ${rndMsg}`;
     hint.okButton = 'hint.confirm';
     hint.group = '';
+    hint.force = true;
     hint.render();
   },
 

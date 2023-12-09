@@ -105,11 +105,15 @@ const pet = {
     console.trace('pet?', pet, player, game);
     if (endItem) {
       let petSprite = document.querySelector("#ipet > svg");
-      if (game.petItem.x > endItem.x) {
-        // flip
-        petSprite.setAttribute("transform", "translate(0, 0) scale(-1, 1)");
+      if (petSprite) {
+        if (game.petItem.x > endItem.x) {
+          // flip
+          petSprite.setAttribute("transform", "translate(0, 0) scale(-1, 1)");
+        } else {
+          petSprite.setAttribute("transform", "translate(0, 0) scale(1, 1)");
+        }
       } else {
-        petSprite.setAttribute("transform", "translate(0, 0) scale(1, 1)");
+        console.trace('no pet yet to face towards', endItem);
       }
     } else {
       console.trace('facing nothing!', endItem);
@@ -188,9 +192,9 @@ const pet = {
   },
 
   showMsg: function () {
-    let paws = (rnd(10) + 4) * 1000;
+    let paws = (rnd(3) + 3) * 1000;
     if (rnd(5) == 3) {
-      setTimeout(hint.petMsg, paws )
+      setTimeout(hint.petMsg, paws);
     } 
   },
 

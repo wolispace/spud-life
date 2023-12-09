@@ -215,6 +215,10 @@ svg.height {
   width: 25%;
 }
 
+#ipet {
+  /* filter: drop-shadow(0px 2px 2px white); */
+}
+
 .customer {
   transition: 0.01s linear;
 }

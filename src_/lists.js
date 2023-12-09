@@ -25,6 +25,7 @@ const lists = {
       "You dreamt you were a hero, just for one day",
       "You dreamt a little dream of me",
       "You dreamt the cake was a lie",
+      "You dreamt you heard someone call out 'Gathering the seeds'",
       "You dreamt about the delivery man",
       "You dreamt that David Byrne wore the Kings Lead Hat",
       "You dreamt about fluffy white clouds",
@@ -189,6 +190,9 @@ const lists = {
       `is wondering when you will throw the frisbee`,
       `has a quizzical look on their face`,
       `watches what your doing`,
+      `thinks .oO( Good move human )`,
+      `wonders how much is that doggy in the window`,
+
       
     ],
     hintPrompts: [

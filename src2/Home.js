@@ -94,7 +94,7 @@ class Home extends game.Item {
 
     let seedMsg = '';
     if (player.day >= game.holeLife) {
-      seedMsg = ` and you randomly scattered some seed-potatoes`;
+      seedMsg = ` and you hear new potatoes growing underground`;
     }
     content += `<div>Your tools have been refreshed${seedMsg}.</div>`;
 
