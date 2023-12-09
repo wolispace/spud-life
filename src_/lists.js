@@ -186,15 +186,36 @@ const lists = {
     ],
     petMsgList: [
       `looks like they might have found something`,
-      `looks like th... SQUIRREL!`,
+      `[squirrleList]... SQUIRREL!`,
       `makes a sound that is half-way between a bark and a meow`,
-      `is wondering when you will throw the frisbee`,
+      `wonders<br/>.oO( [wonderList]? )`,
       `has a quizzical look on their face`,
       `watches what your doing`,
-      `thinks .oO( Good move human )`,
-      `wonders how much is that doggy in the window`,
-
-      
+      `thinks<br/>.oO( [thinkList] )`,     
+    ],
+    squirrleList: [
+      "looks at th",
+      "ponders the univ",
+      "wants to tel",
+      "has just foun",
+      "starts to fl",
+      "just solved th"
+    ],
+    wonderList: [
+      "when will they throw my frisbee",
+      "do they have a spare bone",
+      "what is the sky blue",
+      "how much is that doggy in the window",
+      "where do they start, where do they begin",
+      "why are my paws dirty",
+    ],
+    thinkList: [
+      "Good move human",
+      "snappy outfit",
+      "I prefer axes to picks",
+      "Is it tea-time yet?",
+      "I'm exhausted, I need a lie down",
+      "It's cozy in that house",
     ],
     hintPrompts: [
       ['You'],

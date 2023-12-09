@@ -133,6 +133,7 @@ class Mobile extends game.Item {
               spriteBox.setPos();
               spriteBox.qty--;
               spriteBox.reduceAndPosition();
+              hint.firstTool(spriteBox);
             }
             if (spriteBox.qty < 1) {
               // add the rock or log to the basket.. no arc for now

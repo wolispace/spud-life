@@ -353,6 +353,14 @@ const hint = {
     hint.render();
   },
 
+  firstTool: function (hitItem) {
+    hint.target = hitItem;
+    hint.message = `You need to hit this 4 more times to remove it completely`;
+    hint.okButton = 'hint.confirm';
+    hint.group = 'x';
+    hint.render();
+  },
+
   letsCook: function () {
     if (basket.hasSpuds()) {
       hint.target = buildings.list.cart;
