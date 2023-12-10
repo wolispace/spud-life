@@ -178,6 +178,9 @@ const field = {
     setupThings();
     sky.refresh();
     field.grass();
+    if (pet.currentField == player.currentField) {
+      pet.add();
+    }
   },
 
   refresh: function () {
@@ -245,7 +248,7 @@ const field = {
         if (item.qty <= 0) {
           item.remove();
           delete fieldSpace[game.SURFACE][index];
-          console.log('removing blank hole', fieldId, index);
+          //console.log('removing blank hole', fieldId, index);
           field.add(fieldId);
           player.reseed = true;
         } else {

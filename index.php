@@ -65,10 +65,10 @@ function getScripts($v)
   $scripts = "<script src='_js_files.min.js?{$v}'></script><script>const isDev = false</script>";
   if (isDevMode()) {
     $scripts = '<script>const isDev = true</script>';
-    $scripts .= readFolder("src1", $v);
-    $scripts .= readFolder("src2", $v);
-    $scripts .= readFolder("src3", $v);
-    $scripts .= readFolder("src_", $v);
+    $scripts .= readFolder("src1", 'dev');
+    $scripts .= readFolder("src2", 'dev');
+    $scripts .= readFolder("src3", 'dev');
+    $scripts .= readFolder("src_", 'dev');
   }
   
   return $scripts;

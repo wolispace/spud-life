@@ -209,6 +209,12 @@ const pet = {
   goPlayer: function () {
     if (game.petItem) {
       pet.finished();
+      game.petItem.x = -sprite.width;
+      if (pet.currentField > player.currentField) {
+        game.petItem.x = (sprite.width * (game.grid.x + 1));
+      }
+      pet.currentField = player.currentField;
+      game.petItem.render();
       let endAction = function () {
         pet.setState('sitting');
         pet.finished();
