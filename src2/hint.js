@@ -71,7 +71,6 @@ const hint = {
       hint.hide();
       return;
     }
-    controls.endInput();
     let btnText = hint.btnText || hint.ok();
     // hints show once
     // let skipCheckbox = hint.buildSkip();
