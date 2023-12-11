@@ -102,7 +102,7 @@ const controls = {
           game.save();
         };
         game.playerItem.fixPos();
-        game.playerItem.jumpUp(onEnd, 0.5);
+        game.playerItem.jumpUp(onEnd, 0.3);
       } else {
         hint.toolUsedUp('spade');
         tools.list.spade.jiggle('down');

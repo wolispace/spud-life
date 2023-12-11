@@ -58,6 +58,7 @@ const customers = {
         customers.paradeEnd();
       }
     };
+    customer.sprite.classList.add('moving');
     customer.animatePath(customers);
   },
 

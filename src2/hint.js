@@ -71,6 +71,7 @@ const hint = {
       hint.hide();
       return;
     }
+    hint.visible = true;
     let btnText = hint.btnText || hint.ok();
     // hints show once
     // let skipCheckbox = hint.buildSkip();
@@ -102,6 +103,7 @@ const hint = {
     hint.msg.innerHTML = '';
     hint.btnText = null;
     hint.force = false;
+    hint.visible = false;
   },
 
   confirm: function () {
@@ -466,6 +468,9 @@ const hint = {
   },
 
   petMsg: function () {
+    if (dialog.visible || hint.visible) {
+      return;
+    }
     hint.target = game.petItem;
     let rndMsg =  getFromList('petMsgList');
     hint.message = `${pet.name} ${rndMsg}`;

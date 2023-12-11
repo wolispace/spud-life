@@ -205,9 +205,9 @@ const game = {
       svg.animate(this.sprite, `jiggle-${direction}`, 0.25, onEnd);
     }
 
-    jumpUp(onEnd) {
+    jumpUp(onEnd, duration = 0.5) {
       this.setPos();
-      svg.animate(this.sprite, `jump-up`, 0.5 , onEnd);
+      svg.animate(this.sprite, `jump-up`, duration , onEnd);
     }
 
     animateArc(endItem, onEnd) {
@@ -225,6 +225,7 @@ const game = {
       this.sprite.style.offsetRotate = `0deg`;
       this.sprite.style.animation = `into-basket 1.5s ${easing} 0s 1 normal forwards`;
       this.sprite.classList.add('moving');
+      this.sprite.style.zIndex = 99;
       this.sprite.addEventListener("animationend", function handler() {
         // this is the spriteBox
         if (this) {
