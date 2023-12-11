@@ -111,7 +111,10 @@ class Home extends game.Item {
     dialog.hide();
     buildings.list.home.exit();
     hint.resetReminders();
-    if (player.day > pet.daysToPet) {
+    if (game.petItem) {
+      pet.locked = false;
+      pet.goPlayer();
+    } else if (player.day == pet.daysToPet) {
       pet.show();
       hint.petIntro();
     }

@@ -203,18 +203,21 @@ const pet = {
         pet.locked = true;
       }
       pet.moveTo(buildings.list.home.centre(), endAction, 0.5);
+      player.currentField = 0;
     }
   },
 
   goPlayer: function () {
     if (game.petItem) {
-      pet.finished();
-      game.petItem.x = -sprite.width;
-      if (pet.currentField > player.currentField) {
-        game.petItem.x = (sprite.width * (game.grid.x + 1));
+      //pet.finished();
+      if (pet.currentField != player.currentField) {
+        game.petItem.x = -sprite.width;
+        if (pet.currentField > player.currentField) {
+          game.petItem.x = (sprite.width * (game.grid.x + 1));
+        }
+        pet.currentField = player.currentField;
+        game.petItem.render();
       }
-      pet.currentField = player.currentField;
-      game.petItem.render();
       let endAction = function () {
         pet.setState('sitting');
         pet.finished();
@@ -226,7 +229,7 @@ const pet = {
   },
 
   showMsg: function () {
-    if (!dialog.visible) {
+    if (!dialog.visible && !hint.visible) {      
       let paws = (rnd(2) + 2) * 1000;
       if (rnd(3) == 1) {
         setTimeout(hint.petMsg, paws);

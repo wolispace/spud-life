@@ -322,8 +322,11 @@ const game = {
   },
 
   read: () => {
-    let gameState = localStorage.getItem("state");
-    decompressed = LZString.decompressFromUTF16(gameState);
+    let decompressed = localStorage.getItem("state");
+    if (decompressed.indexOf('"name":') < 0) {
+      decompressed = LZString.decompressFromUTF16(gameState);
+    }
+
     return LZString.compressToBase64(decompressed);
   },
 
