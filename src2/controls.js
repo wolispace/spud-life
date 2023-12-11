@@ -80,32 +80,29 @@ const controls = {
     let skyBottom = (sprite.height * sky.height) - (sprite.height / 4);
     if (game.playerItem.y > skyBottom) {
       if (tools.list['spade'].qty > 0) {
-
         game.digging = true;
 
         let onEnd = function () {
           game.playerItem.restorePos();
+          let params = {
+            id: game.uid++,
+            x: player.x,
+            y: player.y,
+            w: sprite.width,
+            h: sprite.height,
+            qty: 5,
+            classes: '',
+            item: 'hole'
+          }
+          let newHole = new game.Item(params);
+          player.fields[player.currentField][game.SURFACE].push(newHole);
+          game.playerItem.checkCollisions(game.UNDERGROUND);
+          tools.list['spade'].decrQty();
+          game.digging = false
+          game.save();
         };
         game.playerItem.fixPos();
-        game.playerItem.jumpUp(onEnd, 1);
-
-        // add the hole first
-        let params = {
-          id: game.uid++,
-          x: player.x,
-          y: player.y,
-          w: sprite.width,
-          h: sprite.height,
-          qty: 5,
-          classes: '',
-          item: 'hole'
-        }
-        let newHole = new game.Item(params);
-        player.fields[player.currentField][game.SURFACE].push(newHole);
-        game.playerItem.checkCollisions(game.UNDERGROUND);
-        tools.list['spade'].decrQty();
-        game.save();
-        setTimeout(function() {game.digging = false}, 1000);
+        game.playerItem.jumpUp(onEnd, 0.5);
       } else {
         hint.toolUsedUp('spade');
         tools.list.spade.jiggle('down');

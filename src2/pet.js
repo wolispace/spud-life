@@ -136,6 +136,7 @@ const pet = {
     pet.setState('standing');
     pet.facing(endItem);
     pet.moving = true;
+    game.petItem.sprite.classList.add('moving');
     let params = {
       easing: 'linear',
       keyFrame: 'move-to',
@@ -153,6 +154,7 @@ const pet = {
 
   finished: function () {
     pet.moving = false;
+    game.petItem.sprite.classList.remove('moving');
     if (pet.timer) {
       clearTimeout(pet.timer);
       //console.log('timeout cleared');
@@ -223,6 +225,7 @@ const pet = {
         pet.finished();
         pet.think();
         pet.showMsg();
+        game.petItem.sprite.classList.remove('moving');
       }
       pet.moveTo(game.playerItem.centre(), endAction, 0.5);
     }
@@ -238,7 +241,7 @@ const pet = {
         game.petItem.restorePos();
       };
       game.petItem.fixPos();
-      game.petItem.jumpUp(onEnd, 1);
+      //game.petItem.jumpUp(onEnd, 1);
     }
   },
 

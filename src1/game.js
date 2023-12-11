@@ -224,9 +224,11 @@ const game = {
       this.sprite.style.offsetPath = this.makeAcr(endItem);
       this.sprite.style.offsetRotate = `0deg`;
       this.sprite.style.animation = `into-basket 1.5s ${easing} 0s 1 normal forwards`;
+      this.sprite.classList.add('moving');
       this.sprite.addEventListener("animationend", function handler() {
         // this is the spriteBox
         if (this) {
+          this.classList.add('moving');
           this.style.animation = 'none';
           this.style.display = 'none';
           if (typeof onEnd == "function") {
