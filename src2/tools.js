@@ -22,6 +22,7 @@ const tools = {
         if (itemName == 'scanner') {
           params.qty = game.maxScan;
         }
+        params.name = itemName;
         tools.list[itemName] = new Tool(params);
         tools.list[itemName].sprite.onclick = tools.clicks[itemName];
         params.x = params.x - tools.list[itemName].w - padding;
@@ -29,7 +30,6 @@ const tools = {
         if (tools.buyable.includes(itemName) && player.tools[itemName].max === 0) {
           tools.list[itemName].hide();
         }
-
       }
     });
   },
@@ -130,6 +130,18 @@ const tools = {
         toolInfo.resetQty();
       }
     });
+  },
+
+  add: function (itemInfo) {
+    console.log('addTool', itemInfo);
+    let thisTool = tools.list[itemInfo.item];
+    let addQty = game.tool.incrementQty;
+    if (thisTool.max < 1) {
+      thisTool.show();
+      addQty = game.tool.initialQty;
+    }
+    thisTool.addQty(addQty);
+    hint.addTool(thisTool);
   },
 
 };

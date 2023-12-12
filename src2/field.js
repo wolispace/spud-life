@@ -91,7 +91,7 @@ const field = {
     layer = game.UNDERGROUND;
     fieldHeight = containerBox.height - (sprite.height * 2);
     fieldWidth = containerBox.width;
-    let maxItems = list.items.list.length;
+    let maxItems = list.buriable.length;
     totalItems = (game.grid.x * game.grid.y) / 5;
     for (let step = 0; step < totalItems; step++) {
       let params = {
@@ -110,7 +110,7 @@ const field = {
         params.item = itemInfo.name;
         params.svg = spuds.build(itemInfo.name);
       } else {
-        itemInfo = list.items.list[rnd(maxItems)];
+        let itemInfo = list.buriable[rnd(maxItems)];
         params.item = itemInfo.name;
       }
       game.setUid(params.id);

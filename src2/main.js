@@ -159,13 +159,20 @@ function clearWorld() {
 }
 
 function makeLists() {
+  list['buriable'] = [];
   Object.entries(items).forEach(([itemName, item]) => {
+    item.name = item.name || itemName;
     list['all'][itemName] = item;
+    if (['tools', 'items', 'machines'].includes(item.type)) {
+      list['buriable'].push(item); 
+    }
     list[item.type] = list[item.type] ?? { byName: {}, list: [] };
     list[item.type]['byName'][itemName] = item;
     list[item.type]['list'].push(item);
   });
 }
+
+
 
 function splashScreen() {
   let back = '';

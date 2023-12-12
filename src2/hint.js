@@ -52,16 +52,6 @@ const hint = {
     hint.render();
   },
 
-  // controls: function () {
-  //   hint.hide();
-  //   hint.target = tools.list.basket;
-  //   hint.group = 'test';
-  //   hint.btnText = hint.ok();
-  //   hint.okButton = 'hint.done';
-  //   hint.text = 'Items end up in your basket.';
-  //   hint.render();
-  // },
-
   done: function () {
     hint.hide();
   },
@@ -70,6 +60,9 @@ const hint = {
     if ((player.hinted[hint.group] || !player.hints) && !hint.force) {
       hint.hide();
       return;
+    }
+    if (isDev) {
+      //return;
     }
     hint.visible = true;
     let btnText = hint.btnText || hint.ok();
@@ -501,6 +494,27 @@ const hint = {
     hint.message = `Click your scanner to change settings.`;
     hint.okButton = 'hint.confirm';
     hint.group = 's2';
+    hint.render();
+  },
+  addTool: function (itemInfo) {
+    hint.target = itemInfo;
+    hint.message = `You dug up a ${itemInfo.item}. It's going straight to work.`;
+    hint.okButton = 'hint.confirm';
+    hint.group = 'y';
+    hint.render();
+  },
+  addMachine: function (machineName) {
+    hint.target = buildings.list.cart;
+    hint.message = `You dug up a ${machineName}. It's going straight to work.`;
+    hint.okButton = 'hint.confirm';
+    hint.group = 'z';
+    hint.render();
+  },
+  gotMachine: function (machineName) {
+    hint.target = buildings.list.hardware;
+    hint.message = `You dug up a ${machineName}. You already have one so sell this muddy one.`;
+    hint.okButton = 'hint.confirm';
+    hint.group = 'z2';
     hint.render();
   },
 

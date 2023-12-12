@@ -182,14 +182,31 @@ class Mobile extends game.Item {
           spriteBox.render();
           game.spriteBox = spriteBox;
 
+          let itemInfo = list.all[spriteBox.item];
+
+          if (itemInfo.type == 'machines') {
+            game.endItem = machines;
+            if (player.cart[spriteBox.item] > -1) {
+              endItem = buildings.list.hardware;
+            } else {
+              endItem = buildings.list.cart;
+            }
+          } else if (itemInfo.type == 'tools') {
+            game.endItem = tools;
+            endItem = tools.list[itemInfo.name];
+          } else {
+            game.endItem = basket;
+          }
+
           delete player.fields[player.currentField][layer][index];
           scanner.scan();
+
           let onEnd = function () {
             game.spriteBox.remove();
             setTimeout(() => {
               endItem.jiggle('down');
               setTimeout(() => {
-                basket.add(game.spriteBox);
+                game.endItem.add(game.spriteBox);
                 game.save();
               }, 200);
             }, 1);

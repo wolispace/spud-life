@@ -10,7 +10,7 @@ const game = {
   petItem: null,
   digging: false,
   step: { x: 5, y: 5 },
-  incrementQty: 2,
+  tool: {incrementQty: 2, initialQty: 8},
   holeLife: 5, // how long until a hole disappears
   blockerHits: 5, // how many hits on a blocker to clear it
   maxScan: 4,
@@ -18,6 +18,8 @@ const game = {
   compress: false,
   transferred: false,
   newPlayer: {}, // temp info loaded before its finished being decoded
+
+
 
   // everything show on the page is an Item with coords and an svg
   Item: class {
