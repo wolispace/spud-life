@@ -393,23 +393,26 @@ svg.height {
 .hardware-button-buy {
   font-weight: bold;
   color: white;
+  text-shadow: 0 0 4px black !important;
   background-color: rgb(181 79 79) !important;
 }
 
 .hardware-button-upgrade {
   font-weight: bold;
   color: white;
-  background-color: rgb(181 79 79)!important;
-}
-
-.hardware-button-desc {
-  flex: auto;
+  text-shadow: 0 0 4px black !important;
+  background-color: rgb(214, 141, 45)!important;
 }
 
 .hardware-button-sell {
   background-color: rgba(40, 117, 53, 0.76) !important;
   color: white;
+  text-shadow: 0 0 4px black !important;
   font-weight: bold;
+}
+
+.hardware-button-desc {
+  flex: auto;
 }
 
 .button-tools {
