@@ -6,8 +6,8 @@
 :: mjor, minor or patch
 "W:\My Drive\Wallace\Utilities\Php\php_743\php.exe" rollVersion.php minor
 
-start "" http://localhost/build.php
-timeout /t 5
+:: start "" http://localhost/build.php
+:: timeout /t 5
 
 set ALLFILES=_js_files.js
 echo "" > %ALLFILES%

@@ -234,14 +234,10 @@ const pet = {
   showMsg: function () {
     if (!dialog.visible && !hint.visible) {      
       let paws = (rnd(2) + 2) * 1000;
-      if (rnd(3) == 1) {
+      if (rnd(20) == 1) {
         setTimeout(hint.petMsg, paws);
       }
-      let onEnd = function () {
-        game.petItem.restorePos();
-      };
       game.petItem.fixPos();
-      //game.petItem.jumpUp(onEnd, 1);
     }
   },
 

@@ -60,15 +60,22 @@ function getSaveScript($v, $id)
   }
 }
 
+function getListVersion () {
+  return filemtime("lists.min.js");
+}
+
 function getScripts($v)
 {
-  $scripts = "<script src='_js_files.min.js?{$v}'></script><script>const isDev = false</script>";
+  $vList = getListVersion();
+  $scripts = "<script>const isDev = false</script>";
+  $scripts .= "<script src='_js_files.min.js?{$v}'></script>";
+  $scripts .= "<script src='lists.min.js?{$vList}'></script>";
   if (isDevMode()) {
-    $scripts = '<script>const isDev = true</script>';
+    $scripts = "<script>const isDev = true</script>";
     $scripts .= readFolder("src1", 'dev');
     $scripts .= readFolder("src2", 'dev');
     $scripts .= readFolder("src3", 'dev');
-    $scripts .= readFolder("src_", 'dev');
+    $scripts .= "<script src='src_/lists.js?dev'></script>";
   }
   
   return $scripts;
@@ -78,9 +85,6 @@ function readFolder ($folder, $v) {
   $scripts = '';
   $files = scandir($folder);
   foreach ($files as $file) {
-    if ($folder == 'src2' && $file == 'lists.js') {
-      continue;
-    }
     if ($file[0] != '.' && substr($file, 0, 1) != '_') {
       $scripts .= "<script src='{$folder}/{$file}?{$v}'></script>\n";
     }
@@ -91,6 +95,7 @@ function readFolder ($folder, $v) {
 
 function outputGamePage($v, $id = '')
 {
+  $vLists = '1';
   $scripts = getScripts($v);
   $saveScript = empty($id) ? '<script>//no id</script>' : getSaveScript($v, $id);
   print "<!DOCTYPE html>

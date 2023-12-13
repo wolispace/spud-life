@@ -27,11 +27,11 @@ if (empty($compressed)) {
   outputBuildPage();
 } else {
   // write out src2/lists.js
-  $jsFile = 'src2/lists.js';
-  $content = file_get_contents($jsFile);
+  $jsFileMin = 'lists.min.js';
+  $content = file_get_contents($jsFileMin);
   $replacement = "compressed: `{$compressed}`,";
   $newContent = preg_replace("/compressed: `.*`,/", $replacement, $content);
-  file_put_contents($jsFile, $newContent);
+  file_put_contents($jsFileMin, $newContent);
   print "Ok";
 
 }

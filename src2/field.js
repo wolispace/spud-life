@@ -178,7 +178,7 @@ const field = {
     setupThings();
     sky.refresh();
     field.grass();
-    if (pet.currentField == player.currentField) {
+    if (pet.currentField == player.currentField && player.day > pet.daysToPet) {
       pet.add();
     }
   },
