@@ -50,8 +50,8 @@ const basket = {
     icon = svg.addOrientationClass(icon);
 
     let content = `<div  class="hardware-button buttonize">`;
-    content += ` <div class="hardware-button-icon">${icon}</div>`;
-    content += ` <div class="hardware-button-desc"><b>${itemInfo.fullName}.</b> ${itemInfo.desc} (x ${params.qty}) </div>`;
+    content += ` <div class="hardware-button-desc"><b>${itemInfo.fullName}.</b> ${itemInfo.desc} </div>`;
+    content += ` <div class="hardware-button-sub"><div class="hardware-button-icon">${icon}</div>${params.qty}</div>`;
     content += `</div>`;
 
     return content;

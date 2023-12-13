@@ -74,10 +74,10 @@ class Hardware extends game.Item {
     }
 
     let content = `<div id="hardware-${itemName}" class="hardware-button buttonize button-${itemInfo.type}">`;
-    content += ` <div class="hardware-button-icon">${icon}</div>`;
-    content += ` <div class="hardware-button-desc"><b>${itemInfo.fullName}.</b> ${itemInfo.desc} </div>`;
+    content += `<div class="hardware-button-desc"><b>${itemInfo.fullName}.</b> ${itemInfo.desc} </div>`;
+    content += `<div class="hardware-button-sub"><div class="hardware-button-icon">${icon}</div>`;
     content += this.saleButton(itemInfo);
-    content += `</div>`;
+    content += `</div></div>`;
 
     return content;
   }
@@ -110,7 +110,7 @@ class Hardware extends game.Item {
 
     let html = ` <div class="hardware-button-${buy} buttonize button ${tooMuch}"
      ${onClick}>
-     ${caption}<br>${cost}
+     ${caption} ${cost}
    </div>`;
     return html;
   }

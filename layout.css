@@ -16,6 +16,8 @@ body {
   font-family: Tahoma, sans-serif;
   color: var(--sl-font-color);
   user-select: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
 }
 
 button {
@@ -380,13 +382,12 @@ svg.height {
 
 .hardware-button {
   display: flex;
-  align-items: center;
-  gap: 0.75rem;
+  flex-direction: column;
 }
 
 .hardware-button-icon {
-  width: 3rem;
-  height: 3rem;
+  width: 2.5rem;
+  height: 2.5rem;
   flex-shrink: 0;
 }
 
@@ -411,8 +412,9 @@ svg.height {
   font-weight: bold;
 }
 
-.hardware-button-desc {
-  flex: auto;
+.hardware-button-sub {
+  display: flex;
+  justify-content: space-between;
 }
 
 .button-tools {
