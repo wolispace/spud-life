@@ -19,6 +19,7 @@ const field = {
       qty: parseInt(bits[3]),
       id: parseInt(bits[4])
     };
+    game.setUid(params.id);
     if (!svg.imgList[params.item]) {
       params.svg = spuds.build(params.item); // svg.render('spud1');
     }
@@ -72,10 +73,8 @@ const field = {
       }
       let qty = game.blockerHits;
       let item = rnd(2) == 1 ? 'log' : 'rock';
-      let id = game.uid++;
-      game.setUid(item.uid);
       let params = {
-        id: id,
+        id: game.getUid(),
         x: x,
         y: y,
         w: sprite.width,
@@ -95,7 +94,7 @@ const field = {
     totalItems = (game.grid.x * game.grid.y) / 5;
     for (let step = 0; step < totalItems; step++) {
       let params = {
-        id: game.uid++,
+        id: game.getUid(),
         x: rnd(fieldWidth),
         y: rnd(fieldHeight) + (sprite.height * 2),
         w: sprite.width,
@@ -113,7 +112,6 @@ const field = {
         let itemInfo = list.buriable[rnd(maxItems)];
         params.item = itemInfo.name;
       }
-      game.setUid(params.id);
       let newItem = new game.Item(params);
       player.fields[fieldId][layer].push(newItem);
     }
@@ -125,7 +123,7 @@ const field = {
     fieldHeight = containerBox.height - (sprite.height * 2);
     fieldWidth = containerBox.width;
     let params = {
-      id: game.uid++,
+      id: game.getUid(),
       x: rnd(fieldWidth),
       y: rnd(fieldHeight) + (sprite.height * 2),
       w: sprite.width,
@@ -137,7 +135,6 @@ const field = {
     let itemInfo = spuds.select(fieldId);
     params.item = itemInfo.name;
     params.svg = spuds.build(itemInfo.name); //svg.render('spud1');
-    game.setUid(params.id);
     let newItem = new game.Item(params);
     player.fields[fieldId][layer].push(newItem);
   },

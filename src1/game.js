@@ -345,11 +345,17 @@ const game = {
     window.location.replace('/spudlife');
   },
 
-  // ------------------------------
+  // whatever id we load, set it plus 1 for the next auto-generated id
   setUid(itemUid) {
     if (itemUid >= game.uid) {
       game.uid = itemUid + 1;
     }
+  },
+
+  // increment the uid to avoid a clashing
+  getUid() {
+    game.uid++;
+    return game.uid;
   },
 
   getDirection: function (event) {

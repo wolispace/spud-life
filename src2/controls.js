@@ -85,7 +85,7 @@ const controls = {
         let onEnd = function () {
           game.playerItem.restorePos();
           let params = {
-            id: game.uid++,
+            id: game.getUid(),
             x: player.x,
             y: player.y,
             w: sprite.width,
