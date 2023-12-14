@@ -34,6 +34,23 @@ document.addEventListener('contextmenu', event => {
 });
 
 function handleTouchEvent(event) {
+  let target = event.target;
+  while (target != null) {
+    if (target.classList.contains('control') || target.classList.contains('buttonize')) {
+      // If it does, prevent the movement
+      console.log('Clicked on a button, not moving.');
+      return;
+    }
+    target = target.parentElement;
+  }
+  if (event.type === "touchstart") {
+    let touch = event.touches[0];
+    if (touch) {
+      setTouchPoint(touch);
+      game.playerItem.moveToTouch();
+    }
+  }
+
   if (!['BUTTON', 'INPUT', 'LABEL', 'DIV', 'svg', 'path', 'rect', 'ellipse', 'text'].includes(event.target.tagName)) {
     event.preventDefault();
   }
@@ -52,6 +69,28 @@ window.addEventListener("resize", (event) => {
     }
   }, 200); // 200ms delay
 });
+
+document.addEventListener('click', function (event) {
+  let target = event.target;
+  while (target != null) {
+    console.log(target.classList);
+    if (target.classList.contains('control') || target.classList.contains('buttonize')) {
+      // If it does, prevent the movement
+      console.log('Clicked on a button, not moving.');
+      return;
+    }
+    target = target.parentElement;
+  }
+  if (game.playing) {
+    setTouchPoint(event);
+    game.playerItem.moveToTouch();
+  }
+});
+
+// takes an object with {clientX, clientY} and offset to match the bottom middle of the player
+function setTouchPoint(touch) {
+  game.touchPoint = { x: touch.clientX - (sprite.width / 4), y: touch.clientY - sprite.height };
+}
 
 document.addEventListener("keydown", (event) => {
   if (!game.keydown) {
@@ -164,7 +203,7 @@ function makeLists() {
     item.name = item.name || itemName;
     list['all'][itemName] = item;
     if (['tools', 'items', 'machines'].includes(item.type)) {
-      list['buriable'].push(item); 
+      list['buriable'].push(item);
     }
     list[item.type] = list[item.type] ?? { byName: {}, list: [] };
     list[item.type]['byName'][itemName] = item;
@@ -178,7 +217,7 @@ function splashScreen() {
   let back = '';
   let titleSvg = svg.render('title');
   let continueButton = 'Start new game';
-  
+
   let content = `<div class="dialogIntro">`;
   content += `<div class="introSvg">${titleSvg}</div>`;
 
@@ -195,7 +234,7 @@ function splashScreen() {
     content += `<button class="buttonize" onclick="dialog.okButton()"> ${continueButton} </button>`;
   }
   content += `<div>&nbsp;v${version}</div>`;
-  
+
   let title = `Welcome ${back} to..`;
 
   //footer += `<button class="buttonize" onclick="dialog.okButton()"> ${continueButton} </button>`;

@@ -1,4 +1,7 @@
 class Mobile extends game.Item {
+
+  moving = false;
+
   constructor(params) {
     super(params);
   }
@@ -43,6 +46,7 @@ class Mobile extends game.Item {
 
   move(direction) {
     if (!timers.moving) {
+      game.playing = true;
       game.direction = direction;
       this.look(direction);
       timers[direction] = setInterval(() => {
@@ -248,5 +252,64 @@ class Mobile extends game.Item {
     this.sprite.offsetHeight; /* trigger reflow */
     this.sprite.style.animation = null; 
   }
+
+  moveToTouch() {
+    if (this.moving) {
+      return;
+    }
+        // Clear any existing interval
+        if (this.touchStepTimer) {
+          clearTimeout(this.touchStepTimer);
+      }
+    this.path = this.pointsToTouch();
+    this.stepCount = 0;
+    this.touchStepTimer = setInterval(this.stepToTouch.bind(this), 25);
+  }
+  
+  stepToTouch() {
+    if (!this.path) {
+      return;
+    }
+    let newPos = this.path[this.stepCount++];
+    let oldPos = {x: this.x, y: this.y};
+    if (newPos) {
+      //console.log(this.stepCount, newPos)
+      this.x = newPos.x;
+      this.y = newPos.y;
+      this.checkCollisions(game.ABOVEGROUND, false);
+          
+      if (this.hitItem) {
+        this.x = oldPos.x;
+        this.y = oldPos.y;
+        clearTimeout(this.touchStepTimer);
+        this.stepCount = 0;
+        this.path = null;
+        
+        return;
+      }
+      this.position();
+    }
+  }
+
+ pointsToTouch() {
+    // x/y of touch point is stored in game.touch;
+    let path = [];
+    let dx = game.touchPoint.x - this.x;
+    let dy = game.touchPoint.y - this.y;
+    let distance = Math.sqrt(dx*dx + dy*dy);
+    let spacing = 5; // Change this to control the spacing between points
+    let steps = Math.floor(distance / spacing);
+    //console.log(distance, spacing, steps);
+    this.hitItem = false;
+    for (let i = 0; i <= steps; i++) {
+        let interpolationRatio = i / steps;
+        let x = Math.round(this.x * (1 - interpolationRatio) + game.touchPoint.x * interpolationRatio);
+        let y = Math.round(this.y * (1 - interpolationRatio) + game.touchPoint.y * interpolationRatio);
+
+        path.push({x: x, y: y});
+    }
+
+    return path;
+}
 
 } 
