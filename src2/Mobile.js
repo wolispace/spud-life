@@ -279,9 +279,9 @@ class Mobile extends game.Item {
           if (this.collides(building)) {
             this.x = oldPos.x;
             this.y = oldPos.y;
+            this.position();
+            buildings.enter(buildingName);
             character.stopMoving();
-            game.playerItem.fixPos();
-            building.enter();
             return;
           }
         });
