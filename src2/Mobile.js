@@ -266,12 +266,12 @@ class Mobile extends game.Item {
 
   stepToTouch() {
     if (this.path.length <= 0) {
-      timers.moving = false;
+      character.stopMoving();
       return;
     }
     let newPos = this.path.shift();
     let oldPos = { x: this.x, y: this.y };
-    if (newPos) {
+    if (newPos && newPos.x) {
       this.x = newPos.x;
       this.y = newPos.y;
       this.checkCollisions(game.ABOVEGROUND, false);
@@ -312,7 +312,7 @@ class Mobile extends game.Item {
     let path = [];
     let dx = game.touchPoint.x - this.x;
     let dy = game.touchPoint.y - this.y;
-    let distance = Math.sqrt(dx * dx + dy * dy);
+    let distance = Math.sqrt(dx * dx + dy * dy) || 0;
     let spacing = 5; // Change this to control the spacing between points
     let steps = Math.floor(distance / spacing);
     this.hitItem = false;

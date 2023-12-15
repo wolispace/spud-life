@@ -41,7 +41,7 @@ function handleTouchEvent(event) {
     }
     target = target.parentElement;
   }
-  if (event.type === "touchstart") {
+  if (['touchstart', 'touchmove'].includes(event.type)) {
     let touch = event.touches[0];
     if (touch) {
       setTouchPoint(touch);

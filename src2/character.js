@@ -272,7 +272,6 @@ const character = {
     game.playerItem.path = null;
   },
 
-
   // the default
   defaultBody: {
     body: {
