@@ -274,17 +274,20 @@ class Mobile extends game.Item {
       this.x = newPos.x;
       this.y = newPos.y;
       this.checkCollisions(game.ABOVEGROUND, false);
-      if (((this.y + sprite.height) < (sprite.height * sky.height))) {        
-        Object.entries(buildings.list).forEach(([buildingName, building]) => {
-          if (this.collides(building)) {
-            this.x = oldPos.x;
-            this.y = oldPos.y;
-            this.position();
-            buildings.enter(buildingName);
-            character.stopMoving();
-            return;
-          }
-        });
+      if (((this.y + sprite.height) < (sprite.height * sky.height))) {
+        if (this.path.length < 1) {
+
+          Object.entries(buildings.list).forEach(([buildingName, building]) => {
+            if (this.collides(building)) {
+              this.x = oldPos.x;
+              this.y = oldPos.y;
+              this.position();
+              buildings.enter(buildingName);
+              character.stopMoving();
+              return;
+            }
+          });
+        }
         this.y = (sprite.height * sky.height) - sprite.height;
         this.hitItem = null;
       }
