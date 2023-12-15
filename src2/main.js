@@ -58,10 +58,10 @@ function handleTouchEvent(event) {
   document.addEventListener(eventName, handleTouchEvent, { passive: false });
 });
 
-let debounceTimeout;
+
 window.addEventListener("resize", (event) => {
-  clearTimeout(debounceTimeout);
-  debounceTimeout = setTimeout(() => {
+  clearTimeout(timers.debounceTimeout);
+  timers.debounceTimeout = setTimeout(() => {
     if (!dialog.hasInput) {
       location.reload();
     }
@@ -70,16 +70,18 @@ window.addEventListener("resize", (event) => {
 
 document.addEventListener('click', function (event) {
   let target = event.target;
+
   while (target != null) {
     if (target.classList.contains('control') || target.classList.contains('buttonize')) {
+      character.stopMoving();
       return;
     }
     target = target.parentElement;
   }
-  if (game.playing) {
-    setTouchPoint(event);
-    game.playerItem.moveToTouch();
-  }
+
+  setTouchPoint(event);
+  game.playerItem.moveToTouch();
+  
 });
 
 // takes an object with {clientX, clientY} and offset to match the bottom middle of the player

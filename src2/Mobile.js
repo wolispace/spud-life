@@ -46,7 +46,6 @@ class Mobile extends game.Item {
 
   move(direction) {
     if (!timers.moving) {
-      game.playing = true;
       game.direction = direction;
       this.look(direction);
       timers[direction] = setInterval(() => {
@@ -81,7 +80,7 @@ class Mobile extends game.Item {
               field.redraw();
               controls.endInput();
               this.look(direction);
-              return; 
+              return;
             }
           } else if (direction == 'left' && player.y <= (sprite.height * 1.5) && (player.fields.length > 1) && player.currentField > 0) {
             if (this.x < 1) {
@@ -250,66 +249,62 @@ class Mobile extends game.Item {
   resetAnimation() {
     this.sprite.style.animation = 'none';
     this.sprite.offsetHeight; /* trigger reflow */
-    this.sprite.style.animation = null; 
+    this.sprite.style.animation = null;
   }
 
   moveToTouch() {
-    if (this.moving) {
+    if (timers.moving || hint.visible || dialog.visible) {
       return;
     }
-        // Clear any existing interval
-        if (this.touchStepTimer) {
-          clearTimeout(this.touchStepTimer);
-      }
+    if (timers.touchStepTimer) {
+      character.stopMoving();
+    }
     this.path = this.pointsToTouch();
-    this.stepCount = 0;
-    this.touchStepTimer = setInterval(this.stepToTouch.bind(this), 25);
+    timers.touchStepTimer = setInterval(this.stepToTouch.bind(this), 25);
   }
-  
+
   stepToTouch() {
-    if (!this.path) {
+    if (this.path.length <= 0) {
+      timers.moving = false;
       return;
     }
-    let newPos = this.path[this.stepCount++];
-    let oldPos = {x: this.x, y: this.y};
+    let newPos = this.path.shift();
+    let oldPos = { x: this.x, y: this.y };
     if (newPos) {
-      //console.log(this.stepCount, newPos)
       this.x = newPos.x;
       this.y = newPos.y;
       this.checkCollisions(game.ABOVEGROUND, false);
-          
+
       if (this.hitItem || ((this.y + sprite.height) < (sprite.height * sky.height))) {
         this.x = oldPos.x;
         this.y = oldPos.y;
-        clearTimeout(this.touchStepTimer);
-        this.stepCount = 0;
-        this.path = null;
-        
+        character.stopMoving();
+
         return;
       }
+      player.x = this.x;
+      player.y = this.y;
       this.position();
     }
   }
 
- pointsToTouch() {
+  pointsToTouch() {
     // x/y of touch point is stored in game.touch;
     let path = [];
     let dx = game.touchPoint.x - this.x;
     let dy = game.touchPoint.y - this.y;
-    let distance = Math.sqrt(dx*dx + dy*dy);
+    let distance = Math.sqrt(dx * dx + dy * dy);
     let spacing = 5; // Change this to control the spacing between points
     let steps = Math.floor(distance / spacing);
-    //console.log(distance, spacing, steps);
     this.hitItem = false;
     for (let i = 0; i <= steps; i++) {
-        let interpolationRatio = i / steps;
-        let x = Math.round(this.x * (1 - interpolationRatio) + game.touchPoint.x * interpolationRatio);
-        let y = Math.round(this.y * (1 - interpolationRatio) + game.touchPoint.y * interpolationRatio);
-
-        path.push({x: x, y: y});
+      let interpolationRatio = i / steps;
+      let x = Math.round(this.x * (1 - interpolationRatio) + game.touchPoint.x * interpolationRatio);
+      let y = Math.round(this.y * (1 - interpolationRatio) + game.touchPoint.y * interpolationRatio);
+      path.push({ x: x, y: y });
     }
 
     return path;
-}
+  }
 
 } 

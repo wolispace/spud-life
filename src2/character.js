@@ -266,6 +266,11 @@ const character = {
     return getBoundingBox('#iplayer');
   },
 
+  stopMoving: function () {
+    clearTimeout(timers.touchStepTimer);
+    timers.moving = false;
+    game.playerItem.path = null;
+  },
 
 
   // the default

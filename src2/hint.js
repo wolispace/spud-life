@@ -64,6 +64,8 @@ const hint = {
     if (isDev) {
       //return;
     }
+    character.stopMoving();
+    
     hint.visible = true;
     let btnText = hint.btnText || hint.ok();
     // hints show once
