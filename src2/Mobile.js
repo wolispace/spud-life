@@ -278,7 +278,7 @@ class Mobile extends game.Item {
       this.y = newPos.y;
       this.checkCollisions(game.ABOVEGROUND, false);
           
-      if (this.hitItem) {
+      if (this.hitItem || ((this.y + sprite.height) < (sprite.height * sky.height))) {
         this.x = oldPos.x;
         this.y = oldPos.y;
         clearTimeout(this.touchStepTimer);

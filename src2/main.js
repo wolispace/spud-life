@@ -37,8 +37,6 @@ function handleTouchEvent(event) {
   let target = event.target;
   while (target != null) {
     if (target.classList.contains('control') || target.classList.contains('buttonize')) {
-      // If it does, prevent the movement
-      console.log('Clicked on a button, not moving.');
       return;
     }
     target = target.parentElement;
@@ -73,10 +71,7 @@ window.addEventListener("resize", (event) => {
 document.addEventListener('click', function (event) {
   let target = event.target;
   while (target != null) {
-    console.log(target.classList);
     if (target.classList.contains('control') || target.classList.contains('buttonize')) {
-      // If it does, prevent the movement
-      console.log('Clicked on a button, not moving.');
       return;
     }
     target = target.parentElement;
