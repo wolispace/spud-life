@@ -260,6 +260,7 @@ class Mobile extends game.Item {
       character.stopMoving();
     }
     this.path = this.pointsToTouch();
+    this.look(game.direction);
     timers.touchStepTimer = setInterval(this.stepToTouch.bind(this), 25);
   }
 
@@ -275,10 +276,10 @@ class Mobile extends game.Item {
       this.y = newPos.y;
       this.checkCollisions(game.ABOVEGROUND, false);
       if (((this.y + sprite.height) < (sprite.height * sky.height))) {
+        // only enter the house at the end of the path
         if (this.path.length < 1) {
-
           Object.entries(buildings.list).forEach(([buildingName, building]) => {
-            if (this.collides(building)) {
+            if (this.collides(building) && building.visible !== false) {
               this.x = oldPos.x;
               this.y = oldPos.y;
               this.position();
@@ -305,6 +306,7 @@ class Mobile extends game.Item {
     }
   }
 
+  // returns an array of x/y points between starting pos and touch point
   pointsToTouch() {
     // x/y of touch point is stored in game.touch;
     let path = [];
@@ -314,6 +316,8 @@ class Mobile extends game.Item {
     let spacing = 5; // Change this to control the spacing between points
     let steps = Math.floor(distance / spacing);
     this.hitItem = false;
+    game.direction = (game.touchPoint.x < this.x) ? 'left' : 'right';
+
     for (let i = 0; i <= steps; i++) {
       let interpolationRatio = i / steps;
       let x = Math.round(this.x * (1 - interpolationRatio) + game.touchPoint.x * interpolationRatio);

@@ -68,6 +68,7 @@ const game = {
         this.shrinkWrap();
         this.position();
       }
+      this.visible = true;
     }
 
     refresh(newSvg) {
@@ -185,6 +186,7 @@ const game = {
       if (this.sprite) {
         this.sprite.style.display = 'none';
       }
+      this.visible = false;
     }
 
     show() {

@@ -1,5 +1,5 @@
 class Land extends game.Item {
-
+  visible = false;
   constructor() {
     let params = {
       id: 'land',
