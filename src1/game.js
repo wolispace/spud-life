@@ -121,7 +121,7 @@ const game = {
 
     // restore item to its transform3d position
     restorePos() {
-      if (this.oldPos.y > 1) {
+      if (this.oldPos && this.oldPos.y > 1) {
         this.sprite.style.top = '1px';
         this.sprite.style.left = '1px';
         this.x = this.oldPos.x;
