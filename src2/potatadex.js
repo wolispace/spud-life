@@ -25,11 +25,17 @@ const potatadex = {
       footer += `You have found ${foundItems} of the ${maxItems} things.`;
     }
     footer += `</span>`;
+    if (isDev) {
+      footer += `<button class="buttonize devButton" onclick="confetti.render()"> X </button>`;
+    }
 
     footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
     dialog.cancelButton = function () { dialog.hide(); };
     dialog.okButton = function () { dialog.hide(); };
     dialog.render("Potatádex", content, footer);
+    if (foundItems == maxItems) {
+      confetti.render();
+    }
   },
 
   makeButton: function (itemInfo) {
