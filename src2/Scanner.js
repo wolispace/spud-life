@@ -96,7 +96,12 @@ class Scanner extends game.Item {
   closeDialog() {
     player.scanState = dialog.isChecked("scanOn");
     player.hints = dialog.isChecked("hintsOn");
-    player.cursors = dialog.isChecked("cursors");
+    let newCursorState = dialog.isChecked("cursors");
+    if (newCursorState != player.cursors) {
+      player.cursors = newCursorState;
+      game.save();
+      location.reload();
+    }
     dialog.hide();
     game.save();
     scanner.scan();

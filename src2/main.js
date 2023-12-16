@@ -37,6 +37,12 @@ function handleTouchEvent(event) {
   let target = event.target;
   while (target != null) {
     if (target.classList.contains('control') || target.classList.contains('buttonize')) {
+      character.stopMoving();
+      return;
+    }
+    if (target.classList.contains('playerBody')) {
+      controls.dig();
+      character.stopMoving();
       return;
     }
     target = target.parentElement;
@@ -73,6 +79,11 @@ document.addEventListener('click', function (event) {
 
   while (target != null) {
     if (target.classList.contains('control') || target.classList.contains('buttonize')) {
+      character.stopMoving();
+      return;
+    }
+    if (target.classList.contains('playerBody')) {
+      controls.dig();
       character.stopMoving();
       return;
     }

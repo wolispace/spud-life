@@ -50,6 +50,25 @@ const controls = {
     });
   },
 
+  removeAll: function () {
+    var elements = document.getElementsByClassName("control");
+
+    while (elements.length > 0) {
+      elements[0].parentNode.removeChild(elements[0]);
+    }
+  },
+
+  removeCursors: function () {
+    var ids = ["iup", "idown", "ileft", "iright"];
+
+    ids.forEach(function (id) {
+      var element = document.getElementById(id);
+      if (element) {
+        element.parentNode.removeChild(element);
+      }
+    });
+  },
+
   addMoveEvent: function (controlElement, direction) {
     if (dialog.visible) {
       return;
