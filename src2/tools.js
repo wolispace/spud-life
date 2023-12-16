@@ -141,7 +141,6 @@ const tools = {
   },
 
   add: function (itemInfo) {
-    console.log('addTool', itemInfo);
     let thisTool = tools.list[itemInfo.item];
     let addQty = game.tool.incrementQty;
     if (thisTool.max < 1) {

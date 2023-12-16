@@ -50,12 +50,9 @@ const character = {
       return true;
     }
     if (tools.list[itemName]) {
-      console.log(itemName, tools.list[itemName]);
-      
       return tools.list[itemName].visible != false ?? false;
     }
     return false;
-    //return tools.list.basket.list[itemName] ?? (player.cart[itemName] >= 0) ?? player.meals[itemName] ?? tools.list[itemName];
   },
 
   // make a random body

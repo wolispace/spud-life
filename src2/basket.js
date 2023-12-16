@@ -106,6 +106,20 @@ const basket = {
       });
 
     return hasSpuds;
-  }
+  },
+
+  spudList: function () {
+    let spudList = {};
+    Object.entries(tools.list.basket.list).forEach(([itemName, qty]) => {
+      if (qty > 0) {
+        let itemInfo = items[itemName];
+        if (itemInfo.type == 'spuds') {
+          spudList[itemName] = {qty: qty, itemInfo: itemInfo};
+        }
+      }
+    });
+
+    return spudList;
+  },
 }
 

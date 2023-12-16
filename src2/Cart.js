@@ -55,6 +55,7 @@ class Cart extends game.Item {
     let title = "Your food cart";
     let content = `<div class="dialog-message-content">`;
     content += this.ownedMachines();
+    content += this.currentSpuds();
     //content += this.showMeals();
     let footer = "";
     if (basket.hasSpuds()) {
@@ -223,6 +224,22 @@ class Cart extends game.Item {
         html += `<div class="cartMachine buttonize button machine_${machineName}" onclick="machines.describe('${machineName}')">${itemSvg}</div>`;
       }
     });
+    return `<div class="cartMachines">${html}</div>`;
+  }
+
+  currentSpuds() {
+    let html = '';
+    Object.entries(tools.list.basket.list).forEach(([itemName, qty]) => {
+      if (qty > 0) {
+        let itemInfo = items[itemName];
+        if (itemInfo.type == 'spuds') {
+          let icon =spuds.build(itemInfo.name); // svg.render('spud1');
+          //itemInfo.desc = spuds.desc(itemInfo);
+          html += `<div class="cartMachine buttonize button machine_${itemName}" onclick="machines.describe('${itemName}')">${icon}<br/>${qty}</div>`;
+        }
+      }
+    });
+
     return `<div class="cartMachines">${html}</div>`;
   }
 
