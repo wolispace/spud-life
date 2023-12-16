@@ -41,7 +41,7 @@ class Hardware extends game.Item {
   makeButton(itemName) {
     let itemInfo = items[itemName];
     if (['machines'].includes(itemInfo.type)) {
-      if (character.has(itemName) !== undefined) {
+      if (character.has(itemName)) {
         return '';
       }
     }

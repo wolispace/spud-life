@@ -61,6 +61,7 @@ const basket = {
     let itemInfo = items[itemName];
     if (itemInfo.type == 'machines') {
       player.cart[itemName] = 0;
+      player.meals[itemInfo.makes] = 0;
     } else if (itemInfo.type == 'land') {
       field.addField();
     } else if (itemName == 'scanner') {

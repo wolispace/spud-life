@@ -319,6 +319,13 @@ const game = {
     if (typeof player.cursors === `undefined`) {
       player.cursors = true;
     }
+    // make sure we know about the meal each machine they own makes
+    Object.entries(player.cart).forEach(([machineName, qty]) => {
+      let machineInfo = items[machineName];
+      if (!player.meals[machineInfo.makes]) {
+        player.meals[machineInfo.makes] = 0;
+      }
+    });
 
   },
 
