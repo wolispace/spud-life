@@ -12,5 +12,9 @@ class Land extends game.Item {
     };
     super(params);
   }
+
+  enter() {
+    field.change('right');
+  }
   
 };

@@ -12,5 +12,10 @@ class LandBack extends game.Item {
     };
     super(params);
   }
+
+  enter() {
+    field.change('left');
+  }
+  
   
 };

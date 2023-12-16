@@ -74,22 +74,12 @@ class Mobile extends game.Item {
             });
           } else if (direction == 'right' && player.y <= (sprite.height * 1.5) && player.fields.length > 1 && (player.currentField + 1) < player.fields.length) {
             if (this.x > (sprite.width * game.grid.x) - sprite.width) {
-              // change fields
-              player.currentField++;
-              player.x = 5;
-              field.redraw();
-              controls.endInput();
-              this.look(direction);
+              field.change(direction);  
               return;
             }
           } else if (direction == 'left' && player.y <= (sprite.height * 1.5) && (player.fields.length > 1) && player.currentField > 0) {
             if (this.x < 1) {
-              // change fields
-              player.currentField--;
-              player.x = (sprite.width * game.grid.x) - sprite.width - 6;
-              field.redraw();
-              controls.endInput();
-              this.look(direction);
+              field.change(direction);
               return;
             }
           }

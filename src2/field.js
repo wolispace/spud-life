@@ -328,6 +328,19 @@ const field = {
     grassField.innerHTML = svgImg;
   },
 
+  change: function (direction) {
+    if (direction == 'right') {
+      player.currentField = 1;
+      player.x = 5;      
+    } else {
+      player.currentField--;
+      player.x = (sprite.width * game.grid.x) - sprite.width - 6;
+    }
+    field.redraw();
+    controls.endInput();
+    game.playerItem.look(direction);
+  }
+
 
 };
 

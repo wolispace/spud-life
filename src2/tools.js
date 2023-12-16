@@ -114,13 +114,18 @@ const tools = {
       if (isDev) {
         footer += `<button class="buttonize devButton" onclick="lists.compress()"> Compress </button>`;
         footer += `<button class="buttonize devButton" onclick="field.showAll()"> Show all </button>`;
+        footer += `<button class="buttonize devButton" onclick="tools.addMoney(1000)"> Add 1k </button>`;
       }
       footer += `<button class="buttonize" onclick="aboutGame()"> About </button>`;
       footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
       dialog.cancelButton = function () { dialog.hide(); };
-      dialog.okButton = function () { console.log('wallet OK'); dialog.hide(); };
+      dialog.okButton = function () { dialog.hide(); };
       dialog.render(title, content, footer);
     },
+  },
+
+  addMoney: function (amount) {
+    tools.list.wallet.addQty(amount);
   },
 
   reset: function () {
