@@ -100,7 +100,7 @@ const controls = {
       return;
     }
     let skyBottom = (sprite.height * sky.height) - (sprite.height / 4);
-    if (game.playerItem.y > skyBottom) {
+    if (game.playerItem.y > skyBottom - (sprite.height / 2)) {
       if (tools.list['spade'].qty > 0) {
         game.digging = true;
 
@@ -109,7 +109,7 @@ const controls = {
           let params = {
             id: game.getUid(),
             x: player.x,
-            y: player.y,
+            y: player.y + (sprite.height / 2),
             w: sprite.width,
             h: sprite.height,
             qty: 5,
