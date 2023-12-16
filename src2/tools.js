@@ -147,7 +147,11 @@ const tools = {
       thisTool.show();
       addQty = game.tool.initialQty;
     }
-    thisTool.addQty(addQty);
+    if (itemInfo.item == 'scanner') {
+      thisTool.addQty(-1);
+    } else {
+      thisTool.addQty(addQty);
+    }
     hint.addTool(thisTool);
   },
 
