@@ -316,6 +316,9 @@ const game = {
     if (typeof player.petChatter === `undefined`) {
       player.petChatter = true;
     }
+    if (typeof player.cursors === `undefined`) {
+      player.cursors = true;
+    }
 
   },
 

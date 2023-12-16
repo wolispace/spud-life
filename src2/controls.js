@@ -12,6 +12,9 @@ const controls = {
   },
 
   render: function () {
+    if (!player.cursors) {
+      return;
+    }
     let padding = 15;
     let buttons = {
       up: { x: 1, y: 0, qty: '', px: padding, py: -padding },

@@ -134,6 +134,7 @@ function startGame() {
   } else {
     game.new = true;
     player.day = 1;
+    player.cursors = true;
     player.body = character.randomBody();
     setupThings();
     field.addRandom(player.currentField);

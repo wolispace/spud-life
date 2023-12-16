@@ -16,7 +16,7 @@ const tools = {
     }
 
     toolList.forEach((itemName) => {
-      if (itemName != 'spade') {
+      if (itemName != 'spade' || !player.cursors) {
         params.id = itemName;
         // start scanner at max
         if (itemName == 'scanner') {
@@ -71,6 +71,9 @@ const tools = {
   },
 
   clicks: {
+    spade: function () {
+      controls.dig();
+    },
     pick: function () {
       let title = "Pick";
       let content = `<div class="dialog-message-content">`;
