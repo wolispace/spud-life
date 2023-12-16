@@ -40,7 +40,22 @@ const character = {
 
   // has he player interacted with this item
   has: function (itemName) {
-    return tools.list.basket.list[itemName] ?? player.cart[itemName] ?? player.meals[itemName] ?? tools.list[itemName];
+    if (tools.list.basket.list[itemName] >= 0) {
+      return true;
+    }
+    if (player.cart[itemName] >= 0) {
+      return true;
+    }
+    if (player.meals[itemName]) {
+      return true;
+    }
+    if (tools.list[itemName]) {
+      console.log(itemName, tools.list[itemName]);
+      
+      return tools.list[itemName].visible != false ?? false;
+    }
+    return false;
+    //return tools.list.basket.list[itemName] ?? (player.cart[itemName] >= 0) ?? player.meals[itemName] ?? tools.list[itemName];
   },
 
   // make a random body
