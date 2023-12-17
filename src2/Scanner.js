@@ -17,8 +17,10 @@ class Scanner extends game.Item {
   }
 
   upgrade() {
-    tools.list.scanner.addQty(-1);
-    this.setup();
+    if (tools.list.scanner.qty > 0) {
+      tools.list.scanner.addQty(-1);
+      this.setup();
+    } 
   }
 
   setRange() {
