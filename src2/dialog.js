@@ -93,8 +93,39 @@ const dialog = {
     dialog.hide();
   },
 
-  overlayClicked() {
+  overlayClicked: function() {
     // do nothing but could close dialog
   },
+
+  // div is the container
+  // pos is y pixels to scroll
+  // time is how long the animation takes
+
+  scrollToSmoothly: function(div, pos, time) {
+    var currentPos = div.scrollTop;
+    var start = null;
+    if(time == null) time = 500;
+    pos = +pos, time = +time;
+    window.requestAnimationFrame(function step(currentTime) {
+      start = !start ? currentTime : start;
+      var progress = currentTime - start;
+      if(currentPos < pos) {
+        div.scrollTop = ((pos - currentPos) * progress / time) + currentPos;
+      } else {
+        div.scrollTop = currentPos - ((currentPos - pos) * progress / time);
+      }
+      if(progress < time) {
+        window.requestAnimationFrame(step);
+      } else {
+        div.scrollTop = pos;
+      }
+    })
+  },
+
+  calculatePos: function(parentDiv, targetDiv) {
+    return targetDiv.offsetTop - parentDiv.offsetTop;
+  }
+
+  
 
 };

@@ -64,22 +64,37 @@ const hint = {
     if (isDev) {
       //return;
     }
-    character.stopMoving();
-    
-    hint.visible = true;
-    let btnText = hint.btnText || hint.ok();
-    // hints show once
-    // let skipCheckbox = hint.buildSkip();
-    let input = `<div class="hintButtons">`;
-    // input += `${skipCheckbox}`;
-    input += ` <button class="button buttonize" onclick="hint.confirm()">${btnText}</button></div>`;
-    hint.msg.innerHTML = `${hint.message} ${input}`;
-    hint.pointAt();
-    hint.showMsg();
-    hint.overlay.style.display = 'block';
-    // only show each hint one.
-    player.hinted[hint.group] = true;
-    game.save();
+
+    if (dialog.visible) {
+      // scroll the target into view..
+      var parentDiv = document.querySelector('.dialog .content');
+      var targetDiv = hint.target.sprite || hint.target;
+      if (targetDiv) {
+        var pos = dialog.calculatePos(parentDiv, targetDiv);
+        dialog.scrollToSmoothly(parentDiv, pos, 100);
+      }
+    }
+
+    setTimeout(() => {
+      character.stopMoving();
+      
+      hint.visible = true;
+      let btnText = hint.btnText || hint.ok();
+      // hints show once
+      // let skipCheckbox = hint.buildSkip();
+      let input = `<div class="hintButtons">`;
+      // input += `${skipCheckbox}`;
+      input += ` <button class="button buttonize" onclick="hint.confirm()">${btnText}</button></div>`;
+      hint.msg.innerHTML = `${hint.message} ${input}`;
+      hint.pointAt();
+      hint.showMsg();
+      hint.overlay.style.display = 'block';
+      // only show each hint one.
+      player.hinted[hint.group] = true;
+      game.save();
+      
+    }, 200);
+
   },
 
   overlayClicked: function () {
@@ -175,15 +190,16 @@ const hint = {
       return;
     }
     hint.target.centre = function () {
+      var rect = hint.target.getBoundingClientRect();
       let icon = {
-        x: hint.target.offsetLeft,
-        y: hint.target.offsetTop,
+        x: rect.left,
+        y: rect.top,
         w: hint.target.offsetWidth,
         h: hint.target.offsetHeight,
       };
       return {
         x: icon.x + (icon.w / 2),
-        y: icon.y + (icon.h),
+        y: icon.y + (icon.h / 2),
       }
     }
   },
