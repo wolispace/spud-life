@@ -234,8 +234,8 @@ class Cart extends game.Item {
         let itemInfo = items[itemName];
         if (itemInfo.type == 'spuds') {
           let icon =spuds.build(itemInfo.name); // svg.render('spud1');
-          //itemInfo.desc = spuds.desc(itemInfo);
-          html += `<div class="cartMachine buttonize button machine_${itemName}" onclick="machines.describe('${itemName}')">${icon}<br/>${qty}</div>`;
+          
+          html += `<div class="cartMachine buttonize button machine_${itemName}" onclick="spuds.describe('${itemName}')">${icon}<div class="cartQty">${qty}</div></div>`;
         }
       }
     });
