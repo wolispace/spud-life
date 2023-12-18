@@ -137,7 +137,7 @@ function startGame() {
 
   controls.render();
   tools.setup();
-  if (player.day && player.day > 0) {
+  if (player.day && player.day > 0 && player.name != '') {
     field.redraw();
     if (player.day > pet.daysToPet) {
       pet.show();
@@ -232,17 +232,18 @@ function splashScreen() {
 
   let footer = '';
   footer += `<button class="buttonize" onclick="transferHere()"> Transfer </button>`;
+  footer += `<div>&nbsp;v${version}</div>`;
   if (!game.new) {
-    content += `Welcome back <b>${player.name}</b>`;
+    content += `<div>Welcome back <b>${player.name}</b></div>`;
     //content += dialog.makeCheckbox("hintsOn", "Show hints?", player.hints);
     back = 'back';
     continueButton = 'Continue';
     footer += `<button class="buttonize" onclick="game.clear(true)"> New game </button>`;
-    footer += `<button class="buttonize" onclick="dialog.okButton()"> ${continueButton} </button>`;
+    content += `<button class="buttonize" onclick="dialog.okButton()"> ${continueButton} </button>`;
   } else {
     content += `<button class="buttonize" onclick="dialog.okButton()"> ${continueButton} </button>`;
+    footer += `<div>&nbsp; </div>`;
   }
-  content += `<div>&nbsp;v${version}</div>`;
 
   let title = `Welcome ${back} to..`;
 

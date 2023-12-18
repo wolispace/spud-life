@@ -282,6 +282,7 @@ const character = {
     clearTimeout(timers.touchStepTimer);
     timers.moving = false;
     game.playerItem.path = null;
+    game.save();
   },
 
   // the default
