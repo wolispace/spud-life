@@ -69,7 +69,7 @@ function getScripts($v)
   $vList = getListVersion();
   $scripts = "<script>const isDev = false</script>";
   $scripts .= "<script src='_js_files.min.js?{$v}'></script>";
-  $scripts .= "<script src='lists.min.js?{$vList}'></script>";
+  $scripts .= "<script src='lists.min.js?{$vList}' async></script>";
   if (isDevMode()) {
     $scripts = "<script>const isDev = true</script>";
     $scripts .= readFolder("src1", 'dev');
@@ -77,6 +77,14 @@ function getScripts($v)
     $scripts .= readFolder("src3", 'dev');
     $scripts .= "<script src='src_/lists.js?dev'></script>";
   }
+
+  // dynamically loading JS after initial js loaded
+  // var script = document.createElement('script');
+  // script.src = 'path/to/your/script.js';
+  // script.type = 'text/javascript';
+  // script.async = false; // This ensures the script is loaded before it's used
+  // document.head.appendChild(script);
+
   
   return $scripts;
 }

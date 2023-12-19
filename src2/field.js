@@ -330,7 +330,7 @@ const field = {
 
   change: function (direction) {
     if (direction == 'right') {
-      player.currentField = 1;
+      player.currentField++;
       player.x = 5;      
     } else {
       player.currentField--;
