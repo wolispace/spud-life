@@ -46,11 +46,14 @@ const character = {
     if (player.cart[itemName] >= 0) {
       return true;
     }
-    if (player.meals[itemName]) {
+    if (player.meals[itemName] >= 0) {
       return true;
     }
     if (tools.list[itemName]) {
       return tools.list[itemName].visible != false ?? false;
+    }
+    if (itemName.indexOf('land') > -1) {
+      return true;
     }
     return false;
   },
