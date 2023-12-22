@@ -150,6 +150,7 @@ const hint = {
   pointAt: function () {
     if (!hint.target) {
       console.trace('pointing at nothing!');
+      hint.hide();
       return;
     }
     hint.addCtr();
