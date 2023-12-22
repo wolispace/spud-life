@@ -122,5 +122,25 @@ const basket = {
 
     return spudList;
   },
+
+  firstNotFoundItemName: function (fieldId) {
+    let missingItem;
+    // pick an item they have not found yet eg 'caps'
+    Object.entries(list.items.byName).forEach(([itemName, itemInfo]) => {
+      if (!missingItem) {
+        if (!tools.list.basket.list[itemName]) {
+          missingItem = itemName;
+          // does the missingItem exist in the current field?
+          player.fields[fieldId][game.UNDERGROUND].forEach((item) => {
+            if (item.item == missingItem) {
+              missingItem = null;
+            }
+          });
+        }
+      }
+    });
+
+    return missingItem;
+  },
 }
 

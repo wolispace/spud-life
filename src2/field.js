@@ -64,6 +64,9 @@ const field = {
     let fieldHeight = containerBox.height - (sprite.height * 2) - topNoSeed;
     let fieldWidth = containerBox.width - sprite.width - leftNoSeed;
     let totalItems = (game.grid.x * game.grid.y) / 3;
+    if (isDev) {
+      //totalItems = 1;
+    }
     for (let step = 0; step < totalItems; step++) {
       let y = rnd(fieldHeight) + topNoSeed + rnd(sprite.height);
       let x = rnd(fieldWidth) + leftNoSeed;
@@ -91,6 +94,9 @@ const field = {
     fieldHeight = containerBox.height - (sprite.height * 2);
     fieldWidth = containerBox.width;
     totalItems = (game.grid.x * game.grid.y) / 5;
+    if (isDev) {
+      //totalItems = 5;
+    }
     for (let step = 0; step < totalItems; step++) {
       let params = {
         id: game.getUid(),
@@ -148,15 +154,40 @@ const field = {
       y: rnd(fieldHeight - sprite.height) + (sprite.height * 2),
       w: sprite.width,
       h: sprite.height,
-      qty: 1,
+      qty: rnd(4) + 2,
       autoRender: false,
     }
-    params.qty = rnd(4) + 2;
+
     let itemInfo = spuds.select(fieldId);
     params.item = itemInfo.name;
     params.svg = spuds.build(itemInfo.name); //svg.render('spud1');
     let newItem = new game.Item(params);
     player.fields[fieldId][layer].push(newItem);
+  },
+
+  addItem: function (fieldId) {
+    //console.log('add a new spud underground in field ', player);
+    layer = game.UNDERGROUND;
+    fieldHeight = containerBox.height - (sprite.height * 2);
+    fieldWidth = containerBox.width;
+    let params = {
+      id: game.getUid(),
+      x: rnd(fieldWidth - sprite.width),
+      y: rnd(fieldHeight - sprite.height) + (sprite.height * 2),
+      w: sprite.width,
+      h: sprite.height,
+      qty: 1,
+      autoRender: false,
+    }
+
+    // what item has not been found yet and add it.
+    let notFoundItemName = basket.firstNotFoundItemName(fieldId);
+    if (notFoundItemName) {
+      params.item = notFoundItemName;
+      params.svg = svg.render(notFoundItemName);
+      let newItem = new game.Item(params);
+      player.fields[fieldId][layer].push(newItem);
+    }
   },
 
   addGrid: function () {
@@ -265,7 +296,6 @@ const field = {
         if (item.qty <= 0) {
           item.remove();
           delete fieldSpace[game.SURFACE][index];
-          //console.log('removing blank hole', fieldId, index);
           field.add(fieldId);
           player.reseed = true;
         } else {
@@ -276,7 +306,12 @@ const field = {
           }
         }
       });
+      // if we added at least one spud then also add one item they have not found yet
+      if (player.reseed) {
+        field.addItem(fieldId);
+      }      
     });
+
     game.save();
   },
 
