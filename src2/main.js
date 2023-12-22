@@ -150,7 +150,7 @@ function startGame() {
     setupThings();
     field.addRandom(player.currentField);
     field.redraw();
-    game.save();
+    //game.save();
 
   }
   if (!urlParams.has('id') && typeof saveId !== 'undefined') {

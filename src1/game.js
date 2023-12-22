@@ -293,7 +293,14 @@ const game = {
   },
 
   load: () => {
+    let clearSaved = localStorage.getItem("log");
+    if (clearSaved ==  "cleared") {
+      localStorage.removeItem("state");
+    }
+    localStorage.removeItem("log");
+
     let gameState = localStorage.getItem("state");
+
     if (gameState) {
       let decompressed = gameState;
       if (gameState.indexOf('"name":') < 0) {
@@ -331,7 +338,8 @@ const game = {
 
   clear: (reload = false) => {
     if (confirm("Are you sure you want to start a new game?")) {
-      localStorage.clear();
+      localStorage.removeItem("state");
+      localStorage.setItem("log", "cleared");
       if (reload) {
         game.reload();
       }
