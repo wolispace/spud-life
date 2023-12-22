@@ -90,13 +90,12 @@ const field = {
     layer = game.UNDERGROUND;
     fieldHeight = containerBox.height - (sprite.height * 2);
     fieldWidth = containerBox.width;
-    let maxItems = list.buriable.length;
     totalItems = (game.grid.x * game.grid.y) / 5;
     for (let step = 0; step < totalItems; step++) {
       let params = {
         id: game.getUid(),
-        x: rnd(fieldWidth),
-        y: rnd(fieldHeight) + (sprite.height * 2),
+        x: rnd(fieldWidth - sprite.width),
+        y: rnd(fieldHeight - sprite.height) + (sprite.height * 2),
         w: sprite.width,
         h: sprite.height,
         qty: 1,
@@ -109,12 +108,33 @@ const field = {
         params.item = itemInfo.name;
         params.svg = spuds.build(itemInfo.name);
       } else {
-        let itemInfo = list.buriable[rnd(maxItems)];
+        // use rarity to choose item
+        let itemInfo = field.rarenessItem();
         params.item = itemInfo.name;
       }
       let newItem = new game.Item(params);
       player.fields[fieldId][layer].push(newItem);
     }
+  },
+  
+  // return an items based on its rareness, defaulting to most common
+  rarenessItem: function() {
+    let counter = 0;
+    let maxItems = list.buriable.length;
+    while (counter < maxItems) {
+      let itemInfo = list.buriable[counter];
+      if (itemInfo && itemInfo.rareness) {
+
+        if (rnd(itemInfo.rareness) < itemInfo.rareness/2) {
+          return itemInfo;
+        }
+      } else {
+        console.log('no rareness in', counter, itemInfo);
+      }
+      counter++;
+    }
+
+    return list.items.byName['bone'];
   },
 
   add: function (fieldId) {
@@ -124,8 +144,8 @@ const field = {
     fieldWidth = containerBox.width;
     let params = {
       id: game.getUid(),
-      x: rnd(fieldWidth),
-      y: rnd(fieldHeight) + (sprite.height * 2),
+      x: rnd(fieldWidth - sprite.width),
+      y: rnd(fieldHeight - sprite.height) + (sprite.height * 2),
       w: sprite.width,
       h: sprite.height,
       qty: 1,
@@ -160,7 +180,7 @@ const field = {
   showAll() {
     dialog.hide();
     player.fields[player.currentField][game.UNDERGROUND].forEach((item) => {
-      item.show();
+      item.render();
     });
   },
 
