@@ -139,7 +139,9 @@ function startGame() {
   tools.setup();
   if (player.day && player.day > 0 && player.name != '') {
     field.redraw();
-    if (player.day > pet.daysToPet) {
+    if (player.day >= pet.daysToPet) {
+      player.pet = pet.decode(player.pet);
+      hint.petIntro();
       pet.show();
     }
   } else {

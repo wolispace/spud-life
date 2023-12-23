@@ -311,7 +311,6 @@ const game = {
       game.newPlayer.spuds = spuds.decode(game.newPlayer.spuds);
       game.newPlayer.tools = tools.decode(game.newPlayer.tools);
       game.newPlayer.fields = field.encodeAll(game.newPlayer.fields, false);
-      game.newPlayer.pet = pet.decode(game.newPlayer.pet);
       if (!player.pos) {
         player = game.newPlayer;
       }

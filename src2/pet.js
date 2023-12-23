@@ -9,10 +9,13 @@ const pet = {
   pawsMin: 5,
   fieldDelim: '|',
   locked: true,
+  level: 0,
 
   encode: function () {
     if (game.petItem) {
-      return `${pet.name}${pet.fieldDelim}${pet.currentField}${pet.fieldDelim}${game.petItem.x}${pet.fieldDelim}${game.petItem.y}`;
+      let encoded = `${pet.name}${pet.fieldDelim}${pet.currentField}${pet.fieldDelim}`;
+      encoded += `${game.petItem.x}${pet.fieldDelim}${game.petItem.y}${pet.fieldDelim}${pet.level}`;
+      return encoded;
     }
     else return '';
   },
@@ -25,6 +28,7 @@ const pet = {
       pet.currentField = parseInt(bit[1]);
       game.petItem.x = parseInt(bit[2]);
       game.petItem.y = parseInt(bit[3]);
+      game.level = parseInt(bit[4]) ?? 0;
       game.petItem.setPos();
     }
   },
@@ -65,7 +69,7 @@ const pet = {
   think: function () {
     // TODO do more things like sleep, scratch.. 
     let paws = (rnd(pet.pawsTime) + pet.pawsMin) * 1000;
-    if (rnd(4) == 1) {
+    if (rnd(5) == 1 && pet.level > 0) {
       pet.timer = setTimeout(pet.moveToRandomItem, paws);
     } else {
       pet.timer = setTimeout(pet.goPlayer, paws);
@@ -83,6 +87,9 @@ const pet = {
       let endAction = function () {
         pet.setState('sitting');
         pet.finished();
+        if (pet.level > 0) {
+          pet.level--;
+        }
         pet.think();
         pet.showMsg();
       }
@@ -184,7 +191,7 @@ const pet = {
     let content = `<div class="dialog-message-content">`;
     content += `<div>Its small, black and fluffy. is it a dog or cat?</div>`;
     content += pet.editName();
-    content += `<div>Pets like sitting close to buried things.</div>`;
+    content += pet.showLevel();
     content += pet.showBones();
     content += dialog.makeCheckbox("petChatterOn", "Pet chatter", player.petChatter);
     let footer = "";
@@ -196,15 +203,25 @@ const pet = {
     dialog.hasInput = true;
   },
 
+  showLevel: function () {
+    let html = `<div>`;
+    if (pet.level > 0) {
+      html += `${pet.name} is happy and it will look for buried treasure.`;
+    } else {
+      html += `${pet.name} is not all that interested in looking for buried treasure. Give it a present to cheer it up.`;
+    }
+    html += `</div>`;
+    return html;
+  },
+
   showBones: function () {
     let html = '<div>';
     let boneCount = tools.list.basket.list.bone;
+    let itemSvg = svg.inline('bone', 2);
     if (boneCount > 0) {
-      let item = 'bone';
-      let itemSvg = svg.inline('bone', 2);
-      html += dialog.makeCheckbox("boneQty", `Give your pet ${boneCount} ${itemSvg}`, false);
+      html += dialog.makeCheckbox("boneQty", `Give ${pet.name} ${boneCount} ${itemSvg}`, false);
     } else {
-      html = `You have no bones to give your pet`;
+      html = `<div>You have no ${itemSvg} to give ${pet.name}.</div>`;
     }
     html += `</div>`;
     return html;
@@ -213,6 +230,7 @@ const pet = {
   giveBones: function (boneQty) {
     tools.list.basket.list.bone = 0;
     tools.list.basket.addQty(0-boneQty);
+    pet.level += boneQty;
   },
 
   editName: function () {
