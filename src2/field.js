@@ -65,7 +65,7 @@ const field = {
     let fieldWidth = containerBox.width - sprite.width - leftNoSeed;
     let totalItems = (game.grid.x * game.grid.y) / 3;
     if (isDev) {
-      totalItems = 1;
+      //totalItems = 1;
     }
     for (let step = 0; step < totalItems; step++) {
       let y = rnd(fieldHeight) + topNoSeed + rnd(sprite.height);
