@@ -167,6 +167,12 @@ const pet = {
     let dialogInput = document.querySelector(`#petName`);
     pet.name = cleanString(dialogInput.value) || character.randomName();
     player.petChatter = dialog.isChecked("petChatterOn");
+    if (tools.list.basket.list.bone) {
+      if (dialog.isChecked("boneQty")) {
+        let boneQty = tools.list.basket.list.bone;
+        pet.giveBones(boneQty);
+      }
+    }
     dialog.hide();
     game.save();
     buildings.list.home.enter();
@@ -179,7 +185,8 @@ const pet = {
     content += `<div>Its small, black and fluffy. is it a dog or cat?</div>`;
     content += pet.editName();
     content += `<div>Pets like sitting close to buried things.</div>`;
-    content += dialog.makeCheckbox("petChatterOn", "Pet chatter on/off", player.petChatter);
+    content += pet.showBones();
+    content += dialog.makeCheckbox("petChatterOn", "Pet chatter", player.petChatter);
     let footer = "";
     footer += `<div></div>`;
     footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
@@ -187,6 +194,25 @@ const pet = {
     dialog.okButton = function () { pet.save(); };
     dialog.render(title, content, footer);
     dialog.hasInput = true;
+  },
+
+  showBones: function () {
+    let html = '<div>';
+    let boneCount = tools.list.basket.list.bone;
+    if (boneCount > 0) {
+      let item = 'bone';
+      let itemSvg = svg.inline('bone', 2);
+      html += dialog.makeCheckbox("boneQty", `Give your pet ${boneCount} ${itemSvg}`, false);
+    } else {
+      html = `You have no bones to give your pet`;
+    }
+    html += `</div>`;
+    return html;
+  },
+
+  giveBones: function (boneQty) {
+    tools.list.basket.list.bone = 0;
+    tools.list.basket.addQty(0-boneQty);
   },
 
   editName: function () {

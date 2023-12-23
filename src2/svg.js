@@ -1,7 +1,7 @@
 const svg = {
 
-  inline: function (itemName) {
-    let style = `style="width: 3rem;"`;
+  inline: function (itemName, num = 3) {
+    let style = `style="width: ${num}rem;"`;
     return svg.render(itemName, 1, style);
   },
 
