@@ -184,7 +184,7 @@ function setupThings() {
   game.playerItem.checkCollisions(game.ABOVEGROUND, false);
 
   if (game.playerItem.hitItem || game.playerItem.y < sprite.height) {
-    game.playerItem.y = sprite.height;
+    game.playerItem.y = 2 + sprite.height;
     game.playerItem.x = 1;
     game.playerItem.position();
   }

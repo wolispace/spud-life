@@ -253,9 +253,11 @@ const character = {
     }
     game.playerItem = new Mobile(params);
 
-    if (player.y == 1) {
-      player.x = game.playerItem.w / 2;
-      player.y = (game.playerItem.h * sky.height) - game.playerItem.h + 5;
+    let minTop = (game.playerItem.h * sky.height) - game.playerItem.h + 5;
+    if (player.y < minTop) {
+      game.playerItem.x = game.playerItem.w / 2;
+      game.playerItem.y = minTop;
+      game.playerItem.position();
     }
   },
 
