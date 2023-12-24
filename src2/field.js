@@ -297,6 +297,9 @@ const field = {
           item.remove();
           delete fieldSpace[game.SURFACE][index];
           field.add(fieldId);
+          if (rnd(5) == 1) {
+            field.addItem(fieldId);
+          }
           player.reseed = true;
         } else {
           if (item.sprite) {
