@@ -16,7 +16,7 @@ if (empty($id)) {
 }
 
 function logIt($str) {
-  //file_put_contents('_log.txt', "{$str}\n", FILE_APPEND | LOCK_EX);
+  file_put_contents('_log.txt', "{$str}\n", FILE_APPEND | LOCK_EX);
 }
 
 function cleanString($str)
@@ -45,7 +45,7 @@ function saveLoad($v, $id)
 function getJsDataFileName($id)
 {
   $dataFile = "_saves/_save_{$id}.js";
-  logIt($dataFile);
+  //logIt($dataFile);
 
   return $dataFile;
 }
@@ -69,7 +69,7 @@ function getScripts($v)
   $vList = getListVersion();
   $scripts = "<script>const isDev = false</script>";
   $scripts .= "<script src='_js_files.min.js?{$v}'></script>";
-  $scripts .= "<script src='lists.min.js?{$vList}' async></script>";
+  $scripts .= "<script src='lists.min.js?{$vList}'></script>";
   if (isDevMode()) {
     $scripts = "<script>const isDev = true</script>";
     $scripts .= readFolder("src1", 'dev');

@@ -425,11 +425,23 @@ svg.height {
   background-color: lightblue;
 }
 
+.button-meal {
+  background-color: rgb(212, 193, 106);
+}
+
+.button-spuds {
+  background-color: rgb(189, 180, 165);
+}
+
+.button-land {
+  background-color: rgb(171, 233, 212);
+}
+
 .button-field {
   background-color: rgb(145, 182, 161);
 }
 
-.button-block {
+.button-blocker {
   background-color: rgb(177, 155, 169);
 }
 

@@ -15,7 +15,7 @@ const game = {
   blockerHits: 5, // how many hits on a blocker to clear it
   maxScan: 4,
   spudVarieties: 8, // how many different varieties
-  compress: false,
+  compress: true,
   transferred: false,
   newPlayer: {}, // temp info loaded before its finished being decoded
 

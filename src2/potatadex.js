@@ -57,7 +57,7 @@ const potatadex = {
       itemDesc = '??? ?????? ???? ??????';
     }
 
-    let content = `<div  class="hardware-button buttonize">`;
+    let content = `<div  class="hardware-button buttonize  button-${itemInfo.type}">`;
     content += ` <div class="hardware-button-desc"><b>${itemName}.</b> ${itemDesc}</div>`;
     content += ` <div class="hardware-button-icon">${icon}</div>`;
     content += `</div>`;

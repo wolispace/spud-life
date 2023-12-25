@@ -32,7 +32,7 @@ class Scanner extends game.Item {
   }
 
   scan() {
-    if (player.scanState) {
+    if (player.scanState && player.name != '') {
 
       this.setRange();
       let spritesList = player.fields[player.currentField][game.UNDERGROUND];
