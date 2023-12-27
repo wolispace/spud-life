@@ -67,11 +67,11 @@ function getListVersion () {
 function getScripts($v)
 {
   $vList = getListVersion();
-  $scripts = "<script>const isDev = false</script>";
+  $scripts = "<script>let isDev = false</script>";
   $scripts .= "<script src='_js_files.min.js?{$v}'></script>";
   $scripts .= "<script src='lists.min.js?{$vList}'></script>";
   if (isDevMode()) {
-    $scripts = "<script>const isDev = true</script>";
+    $scripts = "<script>let isDev = true</script>";
     $scripts .= readFolder("src1", 'dev');
     $scripts .= readFolder("src2", 'dev');
     $scripts .= readFolder("src3", 'dev');

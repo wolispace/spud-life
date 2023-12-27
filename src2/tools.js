@@ -118,6 +118,7 @@ const tools = {
         footer += `<button class="buttonize devButton" onclick="lists.compress()"> Compress </button>`;
         footer += `<button class="buttonize devButton" onclick="field.showAll()"> Show all </button>`;
         footer += `<button class="buttonize devButton" onclick="tools.addMoney(1000)"> Add 1k </button>`;
+        footer += `<button class="buttonize devButton" onclick="tools.addItems()"> +items </button>`;
       }
       footer += `<button class="buttonize" onclick="aboutGame()"> About </button>`;
       footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
@@ -129,6 +130,13 @@ const tools = {
 
   addMoney: function (amount) {
     tools.list.wallet.addQty(amount);
+  },
+
+  addItems: function () {
+    let items = ['log', 'rock', 'bottle', 'caps', 'diamond'];
+    items.forEach((item => {
+      basket.add({item: item, qty: 1});
+    }));
   },
 
   reset: function () {

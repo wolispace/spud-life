@@ -19,6 +19,10 @@ if (urlParams.has('reset')) {
   game.clear();
 }
 
+if (urlParams.has('moar')) {
+  isDev = true;
+}
+
 // all of the events..
 document.addEventListener("DOMContentLoaded", function () {
   startGame();
