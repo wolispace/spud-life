@@ -1,9 +1,11 @@
 *** TO DO
 
 ** Bugs
-[ ] basket can show negative qty - maybe interupted animation?
+[ ] basket can show negative qty - maybe interrupted animation?
 
-[ ] transfer button is broken
+[ ] prevent showing a hint if another hint is already showing
+
+[x] transfer button is broken
 
 ** New things:
 [x] 4 bumps then then noTool hint.. reset then another 4 bump

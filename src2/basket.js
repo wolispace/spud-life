@@ -6,7 +6,15 @@ const basket = {
       tools.list.basket.list[item.item] = item.qty;
     }
     hint.dugItem();
-    tools.list.basket.addQty(item.qty);
+    basket.recount();
+  },
+
+  recount: function () {
+    let count = 0; 
+    Object.entries(tools.list.basket.list).forEach(([itemName, qty]) => {
+      count += qty;
+    });
+    tools.list.basket.setQty(count);
   },
 
   show: function () {

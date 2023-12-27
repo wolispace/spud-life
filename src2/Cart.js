@@ -176,7 +176,7 @@ class Cart extends game.Item {
         player.cart[this.machines[bestFor].name] += qty;
         // remove item from basket (ie se its to zero)
         tools.list.basket.list[itemName] = 0;
-        tools.list.basket.addQty(0 - qty);
+        basket.recount();
       }
     });
     this.summariseMachines();

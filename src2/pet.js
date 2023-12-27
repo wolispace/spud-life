@@ -229,7 +229,7 @@ const pet = {
 
   giveBones: function (boneQty) {
     tools.list.basket.list.bone = 0;
-    tools.list.basket.addQty(0-boneQty);
+    basket.recount();
     pet.level += boneQty;
   },
 
