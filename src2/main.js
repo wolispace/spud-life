@@ -36,7 +36,7 @@ document.addEventListener('contextmenu', event => {
 function handleTouchEvent(event) {
   let target = event.target;
   while (target != null) {
-    if (target.classList.contains('control') || target.classList.contains('buttonize')) {
+    if (target.classList.contains('controlsBacking') || target.classList.contains('control') || target.classList.contains('buttonize')) {
       character.stopMoving();
       return;
     }
@@ -78,7 +78,7 @@ document.addEventListener('click', function (event) {
   let target = event.target;
 
   while (target != null) {
-    if (target.classList.contains('control') || target.classList.contains('buttonize')) {
+    if (target.classList.contains('controlsBacking') || target.classList.contains('control') || target.classList.contains('buttonize')) {
       character.stopMoving();
       return;
     }

@@ -91,6 +91,11 @@ input {
   background-color: transparent;
 }
 
+.controlsBacking {
+  position: absolute;
+  z-index: 2;
+}
+
 .skyBox {
   position: absolute;
   top: 0;

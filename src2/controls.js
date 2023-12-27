@@ -23,6 +23,13 @@ const controls = {
       right: { x: 2, y: 1, qty: '', px: padding * 2, py: 0 },
       down: { x: 1, y: 2, qty: '', px: padding, py: padding },
     }
+
+    controls.addBacking({
+      x: 0, 
+      y: (sprite.height) * 3, 
+      h: ((sprite.height) * 5),
+      w: ((sprite.width) * 4.5)});
+
     let start = { x: 0, y: sprite.height * 4 };
 
     Object.entries(buttons).forEach(([direction, coords]) => {
@@ -48,6 +55,16 @@ const controls = {
       }
 
     });
+  },
+
+  addBacking: function (pos) {
+    let html = `<div class="controlsBacking"></div>`;
+    addToControls(html);
+    let backing = document.querySelector(".controlsBacking");
+    backing.style.left = `${pos.x}px`;
+    backing.style.width = `${pos.w}px`;
+    backing.style.top = `${pos.y}px`;
+    backing.style.height= `${pos.h}px`; 
   },
 
   removeAll: function () {
