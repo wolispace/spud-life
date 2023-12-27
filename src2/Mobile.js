@@ -267,7 +267,7 @@ class Mobile extends game.Item {
     if (newPos && newPos.x) {
       this.x = newPos.x;
       this.y = newPos.y;
-      this.checkCollisions(game.ABOVEGROUND, false);
+      this.checkCollisions(game.ABOVEGROUND, true);
       if (((this.y + sprite.height) < (sprite.height * sky.height))) {
         // only enter the house at the end of the path
         if (this.path.length < 1) {

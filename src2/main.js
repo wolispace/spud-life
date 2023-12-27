@@ -312,7 +312,7 @@ function aboutGame() {
   content += ` I got close. The only thing I am relying on is <a href="https://github.com/pieroxy/lz-string">lz-string</a> to compress the game state that is stored in local storage.</div>`;
 
   content += `<div>No fish or svg paths were harmed during the making of this game.</div>`;
-  content += `<div>Version ${version}</div>`;
+  content += `<div>wm@wolispace.com. Version ${version}</div>`;
   content += `</div>`;
 
   let footer = "";

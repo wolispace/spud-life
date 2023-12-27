@@ -9,6 +9,7 @@ const hint = {
   visible: false,
   force: false,
   reminder: {},
+  toolNoneCount: -1,
 
   defaultParams: {
     autoRender: false,
@@ -357,6 +358,15 @@ const hint = {
   },
 
   toolNone: function (toolName) {
+    // only show the hint every 5 times.. 0, 5, 10
+    hint.toolNoneCount++;
+    if (hint.toolNoneCount >= 5) {
+      hint.toolNoneCount = 0;
+    }
+    if (hint.toolNoneCount > 0) {
+      return;
+    }
+
     let an = pluraliser(toolName, 'a', 'an');
     let item = toolName == 'pick' ? 'rocks' : 'logs';
     hint.target = buildings.list.hardware;
