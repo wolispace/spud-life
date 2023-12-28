@@ -1,4 +1,7 @@
 const basket = {
+
+  buying: false,
+
   add: function (item) {
     if (tools.list.basket.list[item.item]) {
       tools.list.basket.list[item.item] = tools.list.basket.list[item.item] + item.qty;
@@ -66,6 +69,10 @@ const basket = {
   },
   
   buyItem: function (itemName, qty, cost) {
+    if (basket.buying) {
+      return;
+    }
+    basket.buying = true;
     let itemInfo = items[itemName];
     if (itemInfo.type == 'machines') {
       player.cart[itemName] = 0;
@@ -95,6 +102,10 @@ const basket = {
   },
 
   sellItem: function (itemName, qty, cost) {
+    if (basket.buying) {
+      return;
+    }
+    basket.buying = true;
     tools.list.basket.list[itemName] = 0;
     tools.list.basket.addQty(0-qty);
     tools.list.wallet.addQty(cost);

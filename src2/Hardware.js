@@ -14,6 +14,7 @@ class Hardware extends game.Item {
   }
 
   enter() {
+    basket.buying = false;
     let title = "Hardware store";
     let content = ''; //`<div class="dialog-message-content">`;
 
