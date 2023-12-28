@@ -16,7 +16,8 @@ if (empty($id)) {
 }
 
 function logIt($str) {
-  file_put_contents('_log.txt', "{$str}\n", FILE_APPEND | LOCK_EX);
+  $dateTime = date('Ymd:His');
+  file_put_contents('_log.txt', "{$dateTime},{$_SERVER['REMOTE_ADDR']},{$str}\n", FILE_APPEND | LOCK_EX);
 }
 
 function cleanString($str)

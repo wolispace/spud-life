@@ -43,4 +43,5 @@
     - makes the golden potato.. final item to find
     - maybe 5000 + a spud for each donation.
 
+[ ] Increase walking speed with spud-skin-skates
     
