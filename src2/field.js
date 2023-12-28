@@ -387,18 +387,14 @@ const field = {
   },
 
   change: function (direction) {
-    if (direction == 'right') {
-      player.currentField++;
-      player.x = 5;      
-    } else {
-      player.currentField--;
-      player.x = (sprite.width * game.grid.x) - sprite.width - 6;
-    }
+    player.currentField += (direction == 'right')? 1 : -1;
     field.redraw();
     controls.endInput();
     game.playerItem.look(direction);
+    game.playerItem.x = (direction == 'right') ? 5 : (sprite.width * game.grid.x) - sprite.width - 6;
+    game.playerItem.position();
+    game.playerItem.resetIfCollides();
   }
-
 
 };
 

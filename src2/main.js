@@ -184,14 +184,7 @@ function setupThings() {
   }
   // run a second time once we have other lists to work from..
   makeLists();
-  // are we conflicting.. if so move to Y 1
-  game.playerItem.checkCollisions(game.ABOVEGROUND, false);
-
-  if (game.playerItem.hitItem || game.playerItem.y < sprite.height) {
-    game.playerItem.y = 2 + sprite.height;
-    game.playerItem.x = 1;
-    game.playerItem.position();
-  }
+  game.playerItem.resetIfCollides();
   scanner.scan();
 }
 

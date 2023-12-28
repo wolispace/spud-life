@@ -75,14 +75,14 @@ class Mobile extends game.Item {
                 }
               }
             });
-          } else if (direction == 'right' && player.y <= (sprite.height * 1.5) && player.fields.length > 1 && (player.currentField + 1) < player.fields.length) {
+          } else if (direction == 'right' && player.fields.length > 1 && (player.currentField + 1) < player.fields.length) {
             if (this.x > (sprite.width * game.grid.x) - sprite.width) {
-              field.change(direction);  
+              buildings.list.land.enter();
               return;
             }
-          } else if (direction == 'left' && player.y <= (sprite.height * 1.5) && (player.fields.length > 1) && player.currentField > 0) {
+          } else if (direction == 'left' && (player.fields.length > 1) && player.currentField > 0) {
             if (this.x < 1) {
-              field.change(direction);
+              buildings.list.landBack.enter();
               return;
             }
           }
@@ -319,6 +319,16 @@ class Mobile extends game.Item {
     }
 
     return path;
+  }
+  
+  resetIfCollides() {
+    // are we conflicting.. if so move to Y 1
+    this.checkCollisions(game.ABOVEGROUND, false);
+
+    if (this.hitItem || this.y < sprite.height) {
+      this.y = 2 + sprite.height;
+      this.position();
+    }
   }
 
 } 
