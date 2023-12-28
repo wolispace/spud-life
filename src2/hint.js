@@ -446,8 +446,16 @@ const hint = {
   dugItem: function () {
     hint.target = tools.list.basket;
     hint.message = `You dug up something. Click your basket to see what you found.`;
-    hint.okButton = 'hint.confirm';
+    hint.okButton = 'hint.holeLife';
     hint.group = 'f';
+    hint.render();
+  },
+
+  holeLife: function () {
+    hint.target = game.playerItem;
+    hint.message = `Each hole clears after 5 days, then a new spud is randomly sown`;
+    hint.okButton = 'hint.confirm';
+    hint.group = 'f2';
     hint.render();
   },
 
