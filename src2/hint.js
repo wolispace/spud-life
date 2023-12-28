@@ -58,6 +58,9 @@ const hint = {
   },
 
   render: function () {
+    if (hint.visible) {
+      return;
+    }
     if ((player.hinted[hint.group] || !player.hints) && !hint.force) {
       hint.hide();
       return;
@@ -282,21 +285,21 @@ const hint = {
   controls: function () {
     hint.isItSkipped();
     hint.target = controls.list.right;
-    hint.message = `Use these arrows to move.`;
+    hint.message = `Use arrows<br/>...or tap to move.`;
     hint.okButton = 'hint.house';
     hint.group = 't';
     hint.render();
   },
   house: function () {
     hint.target = buildings.list.home;
-    hint.message = `Move UP when in front of a building to go inside.`;
+    hint.message = `Move UP<br/>...or tap a building to go inside.`;
     hint.okButton = 'hint.spade';
     hint.group = 'u';
     hint.render();
   },
   spade: function () {
     hint.target = tools.list.spade;
-    hint.message = `Use your spade to dig where you stand.`;
+    hint.message = `Use your spade<br/>...or tap on yourself to dig where you stand.`;
     hint.okButton = 'hint.field';
     hint.group = 'v';
     hint.render();
