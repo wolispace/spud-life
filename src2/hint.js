@@ -1,4 +1,6 @@
 const hint = {
+  recordDelim: '^',
+  fieldDelim: '|',
   target: null,
   arrow: null,
   msg: null,
@@ -14,6 +16,32 @@ const hint = {
   defaultParams: {
     autoRender: false,
   },
+
+    // cant use ^ or | in spud descriptions!
+    decode: function (encodedString) {
+      let hintList = {};
+      let records = encodedString.split(hint.recordDelim);
+      records.forEach((thisHint) => {
+        let bit = thisHint.split(hint.fieldDelim);
+        hintList[bit[0]] = bit[1] == 1;
+      });
+  
+      return hintList;
+    },
+  
+    encode: function (hintList) {
+      let encodedString = '';
+      let r = '';
+      let d = hint.fieldDelim;
+
+      Object.entries(hintList).forEach(([hintName, hintValue]) => {
+        let binary = hintValue ? 1 : 0;
+        encodedString += `${r}${hintName}${d}${binary}`;
+        r = hint.recordDelim;
+      });
+    
+      return encodedString;
+    },
 
   setup: function () {
     // make two objects.. the body and the arrow
@@ -557,5 +585,22 @@ const hint = {
     hint.group = 'z2';
     hint.render();
   },
+  hotelCheckout: function () {
+    hint.target = document.querySelector('#nameSelector');
+    hint.message = `You can checkout any time you like...`;
+    hint.okButton = 'hint.confirm';
+    hint.group = '';
+    hint.force = true;
+    hint.render();
+  },
+  hotelLeave: function () {
+    hint.target = document.querySelector('#nameSelector');
+    hint.message = `.. but you can never leave.`;
+    hint.okButton = 'hint.confirm';
+    hint.group = '';
+    hint.force = true;
+    hint.render();
+  },
+
 
 };

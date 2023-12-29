@@ -269,6 +269,7 @@ const game = {
   save: () => {
     let saveFields = player.fields;
     let saveSpuds = player.spuds;
+    let saveHinted = player.hinted;
     if (game.playerItem) {
       player.g = game.grid;
       player.g.w = sprite.width;
@@ -281,7 +282,8 @@ const game = {
       player.spuds = spuds.encode(player.spuds);
       player.tools = tools.encode();
       player.pet = pet.encode();
-
+      player.hinted = hint.encode(player.hinted);
+  
       let compressed = JSON.stringify(player);
       if (game.compress) {
         compressed = LZString.compressToUTF16(compressed);
@@ -289,6 +291,7 @@ const game = {
       localStorage.setItem("state", compressed);
       player.fields = saveFields;
       player.spuds = saveSpuds;
+      player.hinted = saveHinted;
     }
   },
 
@@ -310,6 +313,7 @@ const game = {
       // TODO: check versions and do things as needed..
       game.newPlayer.spuds = spuds.decode(game.newPlayer.spuds);
       game.newPlayer.tools = tools.decode(game.newPlayer.tools);
+      game.newPlayer.hinted = hint.decode(game.newPlayer.hinted);
       game.newPlayer.fields = field.encodeAll(game.newPlayer.fields, false);
       if (!player.pos) {
         player = game.newPlayer;
