@@ -19,6 +19,9 @@ const hint = {
 
     // cant use ^ or | in spud descriptions!
     decode: function (encodedString) {
+      if ((typeof str !== 'string')) {
+        encodedString = "";
+      }
       let hintList = {};
       let records = encodedString.split(hint.recordDelim);
       records.forEach((thisHint) => {
