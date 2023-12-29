@@ -17,34 +17,34 @@ const hint = {
     autoRender: false,
   },
 
-    // cant use ^ or | in spud descriptions!
-    decode: function (encodedString) {
-      if ((typeof str !== 'string')) {
-        encodedString = "";
-      }
-      let hintList = {};
-      let records = encodedString.split(hint.recordDelim);
-      records.forEach((thisHint) => {
-        let bit = thisHint.split(hint.fieldDelim);
-        hintList[bit[0]] = bit[1] == 1;
-      });
-  
-      return hintList;
-    },
-  
-    encode: function (hintList) {
-      let encodedString = '';
-      let r = '';
-      let d = hint.fieldDelim;
+  // cant use ^ or | in spud descriptions!
+  decode: function (encodedString) {
+    if ((typeof str !== 'string')) {
+      encodedString = "";
+    }
+    let hintList = {};
+    let records = encodedString.split(hint.recordDelim);
+    records.forEach((thisHint) => {
+      let bit = thisHint.split(hint.fieldDelim);
+      hintList[bit[0]] = bit[1] == 1;
+    });
 
-      Object.entries(hintList).forEach(([hintName, hintValue]) => {
-        let binary = hintValue ? 1 : 0;
-        encodedString += `${r}${hintName}${d}${binary}`;
-        r = hint.recordDelim;
-      });
-    
-      return encodedString;
-    },
+    return hintList;
+  },
+
+  encode: function (hintList) {
+    let encodedString = '';
+    let r = '';
+    let d = hint.fieldDelim;
+
+    Object.entries(hintList).forEach(([hintName, hintValue]) => {
+      let binary = hintValue ? 1 : 0;
+      encodedString += `${r}${hintName}${d}${binary}`;
+      r = hint.recordDelim;
+    });
+
+    return encodedString;
+  },
 
   setup: function () {
     // make two objects.. the body and the arrow
@@ -63,6 +63,16 @@ const hint = {
     hint.arrow = document.querySelector(`.hintArrow`);
 
     hint.hide();
+  },
+
+  addHinted: function (key) {
+    if (!hint.isHinted(key)) {
+      player.hinted += `${key},`;  
+    }
+  },
+
+  isHinted: function (key) {
+    return player.hinted.indexOf(`${key},`) > -1;
   },
 
   test: function () {
@@ -88,11 +98,13 @@ const hint = {
     hint.hide();
   },
 
+
+
   render: function () {
     if (hint.visible) {
       return;
     }
-    if ((player.hinted[hint.group] || !player.hints) && !hint.force) {
+    if ((hint.isHinted(hint.group) || !player.hints) && !hint.force) {
       hint.hide();
       return;
     }
@@ -112,7 +124,7 @@ const hint = {
 
     setTimeout(() => {
       character.stopMoving();
-      
+
       hint.visible = true;
       let btnText = hint.btnText || hint.ok();
       // hints show once
@@ -125,9 +137,9 @@ const hint = {
       hint.showMsg();
       hint.overlay.style.display = 'block';
       // only show each hint one.
-      player.hinted[hint.group] = true;
+      hint.addHinted(hint.group);
       game.save();
-      
+
     }, 200);
 
   },
@@ -178,7 +190,7 @@ const hint = {
 
   reset: function () {
     dialog.hide();
-    player.hinted = [];
+    player.hinted = '';
     hint.resetHints();
   },
 
@@ -536,7 +548,7 @@ const hint = {
       return;
     }
     hint.target = game.petItem;
-    let rndMsg =  getFromList('petMsgList');
+    let rndMsg = getFromList('petMsgList');
     hint.message = `${pet.name} ${rndMsg}`;
     hint.okButton = 'hint.confirm';
     hint.group = '';
@@ -547,7 +559,7 @@ const hint = {
   resetHints: function () {
     hint.target = game.playerItem;
     hint.message = `This is you, and your hints have been reset`;
-    hint.okButton = 'hint.confirm';
+    hint.okButton = 'hint.controls';
     hint.group = 'm';
     hint.render();
   },

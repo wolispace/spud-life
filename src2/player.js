@@ -1,7 +1,7 @@
 let player = {
   name: '',
   hints: true,
-  hinted: {},
+  hinted: '',
   x: 1,
   y: 1,
   daytime: true,
