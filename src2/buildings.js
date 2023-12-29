@@ -7,18 +7,31 @@ const buildings = {
     buildings.list.cart = new Cart();
     buildings.list.land = new Land();
     buildings.list.landBack = new LandBack();
+    buildings.list.hotel = new Hotel();
 
   },
 
   render: function () {
+    Object.keys(buildings.list).forEach((itemName) => {
+      let building = buildings.list[itemName];
+      if (building.field == player.currentField) {
+        building.render();
+      } else {
+        building.hide();
+      }
+    });
+
+    
     if (player.currentField == 0) {
       buildings.list.home.render();
       buildings.list.hardware.render();
       buildings.list.cart.render();
+      buildings.list.hotel.hide();
     } else {
       buildings.list.home.hide();
       buildings.list.hardware.hide();
       buildings.list.cart.hide();
+      buildings.list.hotel.render();
     }
 
     if (player.fields.length - 1 > player.currentField) {

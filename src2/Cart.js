@@ -10,6 +10,7 @@ class Cart extends game.Item {
   meals = 0;
   income = 0;
   list = {};
+  field = 0;
 
   constructor() {
     let params = {

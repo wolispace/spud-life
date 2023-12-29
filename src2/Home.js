@@ -1,4 +1,7 @@
 class Home extends game.Item {
+
+  field = 0;
+  
   constructor() {
 
     let params = {

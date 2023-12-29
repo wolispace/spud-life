@@ -395,6 +395,25 @@ const lists = {
           <path d="m17.828 46.075c10.09-3.3942 21.301-5.6569 33.632-7.9197" style="stroke-linecap:round;stroke-width:2.2524;stroke:#2f4f4f"/>
           <path d="m19.229 37.553c10.609 3.8741 22.344 4.0826 33.808 7.6427" style="stroke-linecap:round;stroke-width:2.2524;stroke:#2f4f4f"/>
         </svg>`,
+      hotel: `<svg viewBox="0 0 100 100">
+        <rect x="30" y="9.875" width="33.625" height="11.625" style="fill:#fffafa;stroke-width:.96918;stroke:#c74a4c"/>
+        <text x="33.125" y="18.75" style="fill:#800000;font-family:'Comic Sans MS';font-size:8px;font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;font-weight:bold"><tspan x="33.125" y="18.75">HOTEL</tspan></text>
+        <rect x="13.125" y="55.375" width="70.75" height="43.75" style="fill:#f7cdb7"/>
+        <rect x="40.375" y="69.625" width="16.625" height="29.625"/>
+        <path d="m7.375 56.125 9-33.5 65.375-0.25 8.75 32.875" style="fill:#ab6868;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.75397;stroke-width:4.8"/>
+        <path d="m19.125 56.125 0.25-9.25 8-5.25 8.5 5.375 0.375 9" style="fill:#765858;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.75397;stroke-width:4.8"/>
+        <path d="m21 66.75 13.375-0.125-0.375-16.125s-0.54035-6.2401-6.625-5.875c-6.25 0.375-6.75 6.875-6.75 6.875" style="fill:#7e86f1;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.75397;stroke-width:4.8"/>
+        <path d="m59.75 55.75 0.25-9.25 8-5.25 8.5 5.375 0.375 9" style="fill:#765858;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.75397;stroke-width:4.8"/>
+        <path d="m65.25 99.125-0.125-7.75" style="fill:#0c8000;paint-order:stroke fill markers;stroke-linejoin:round;stroke-width:3.1;stroke:#471617"/>
+        <path d="m90.925 99.15-0.125-7.75" style="fill:#0c8000;paint-order:stroke fill markers;stroke-linejoin:round;stroke-width:3.1;stroke:#471617"/>
+        <rect x="59.625" y="70.875" width="38.5" height="20.25" ry="0" style="fill:#fffafa;stroke-width:.96918;stroke:#c74a4c"/>
+        <text x="70.625" y="76.125" style="fill:#800000;font-family:'Comic Sans MS';font-size:5.3333px;font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;font-weight:bold"><tspan x="70.625" y="76.125">VACANCY</tspan></text>
+        <text x="60.9375" y="82.914062" style="fill:#000480;font-family:'Comic Sans MS';font-size:5.3333px;font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;font-weight:bold"><tspan>COLOR TV</tspan></text>
+        <text x="60.869793" y="88.890625" style="fill:#0c8000;font-family:'Comic Sans MS';font-size:5.3333px;font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;font-weight:bold"><tspan>AIR COND</tspan></text>
+        <text x="61.0625" y="76.039062" style="fill-opacity:.21342;fill:#800000;font-family:'Comic Sans MS';font-size:5.3333px;font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;font-weight:bold"><tspan x="61.0625" y="76.039062">NO</tspan></text>
+        <path d="m61.625 66.375 13.375-0.125-0.375-16.125s-0.54035-6.2401-6.625-5.875c-6.25 0.375-6.75 6.875-6.75 6.875" style="fill:#7e86f1;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.75397;stroke-width:4.8"/>
+       </svg>
+       `,
       pick: `<svg viewBox="0 0 100 100">
         <rect x="46.321" y="2.4125" width="7.7201" height="76.236" style="fill:#693f1d;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-width:2.5323;stroke:#000"/>
         <path d="m90.591 21.351s-10.433-15.456-40.652-15.44c-30.22 0.015776-39.685 16.164-39.685 16.164s26.713-7.2747 40.169-7.367c13.455-0.09226 40.169 6.6432 40.169 6.6432z" style="fill:#929292;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-width:2.1543;stroke:#000"/>
