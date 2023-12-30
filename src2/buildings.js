@@ -21,19 +21,6 @@ const buildings = {
       }
     });
 
-    
-    if (player.currentField == 0) {
-      buildings.list.home.render();
-      buildings.list.hardware.render();
-      buildings.list.cart.render();
-      buildings.list.hotel.hide();
-    } else {
-      buildings.list.home.hide();
-      buildings.list.hardware.hide();
-      buildings.list.cart.hide();
-      buildings.list.hotel.render();
-    }
-
     if (player.fields.length - 1 > player.currentField) {
       buildings.list.land.render();
     } else {
