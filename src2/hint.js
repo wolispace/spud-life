@@ -17,35 +17,6 @@ const hint = {
     autoRender: false,
   },
 
-  // cant use ^ or | in spud descriptions!
-  decode: function (encodedString) {
-    if ((typeof str !== 'string')) {
-      encodedString = "";
-    }
-    let hintList = {};
-    let records = encodedString.split(hint.recordDelim);
-    records.forEach((thisHint) => {
-      let bit = thisHint.split(hint.fieldDelim);
-      hintList[bit[0]] = bit[1] == 1;
-    });
-
-    return hintList;
-  },
-
-  encode: function (hintList) {
-    let encodedString = '';
-    let r = '';
-    let d = hint.fieldDelim;
-
-    Object.entries(hintList).forEach(([hintName, hintValue]) => {
-      let binary = hintValue ? 1 : 0;
-      encodedString += `${r}${hintName}${d}${binary}`;
-      r = hint.recordDelim;
-    });
-
-    return encodedString;
-  },
-
   setup: function () {
     // make two objects.. the body and the arrow
     let hintBox = document.querySelector(`.hintArrow`);
@@ -392,6 +363,14 @@ const hint = {
   },
 
   toolUsedUp: function (toolName) {
+    // only show the hint every 5 times.. 0, 5, 10
+    hint.toolNoneCount++;
+    if (hint.toolNoneCount >= 5) {
+      hint.toolNoneCount = 0;
+    }
+    if (hint.toolNoneCount > 0) {
+      return;
+    }
     hint.target = tools.list[toolName];
     hint.message = hint.getReminder('toolUsedUp', `r ${toolName} is exhausted. Tomorrow morning it will be refreshed and you can use it again.`);
     hint.okButton = 'hint.confirm';

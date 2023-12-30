@@ -138,7 +138,6 @@ const lists = {
       `[dayPrefixList] [days] [daySuffixList]`,
       `[dayPrefixList] [days] [daySuffixList]`,
       `[days] sunrises`,
-      `End of days? Ragnarok??`,
     ],
     dayPrefixList: [
       "Day",
