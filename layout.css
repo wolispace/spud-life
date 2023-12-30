@@ -480,6 +480,10 @@ svg.height {
   width: 9rem;
 }
 
+.part_name {
+  width: 35%;
+}
+
 .brows {
   stroke: black;
   stroke-linecap: round;

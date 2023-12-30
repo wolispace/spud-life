@@ -62,7 +62,7 @@ class Mobile extends game.Item {
         game.save();
         if (this.hitItem || !this.withinBounds()) {
           controls.endInput();
-          if (direction == 'up' && player.currentField == 0) {
+          if (direction == 'up') {
             // are we conflicting with a building?
             Object.entries(buildings.list).forEach(([itemName, item]) => {
               if (this.collides(item)) {

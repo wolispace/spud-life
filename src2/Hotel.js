@@ -1,6 +1,7 @@
 class Hotel extends game.Item {
   
   field = 1;
+  nameList = ['California', 'Kennebec', 'Cauliflower'];
 
   constructor() {
 
@@ -28,7 +29,7 @@ class Hotel extends game.Item {
   enterDaytime() {
     let title = `Welcome to the Hotel ${player.hotelName}`;
     let content = `<div class="dialog-message-content">`;
-    content += `<div>The Hotel ${buildings.list.hotel.nameSelector()}</div>`;
+    content += `<div>${buildings.list.hotel.buildNameSelect()}</div>`;
     content += buildings.list.hotel.critics();
     content += `</div>`;
 
@@ -45,8 +46,6 @@ class Hotel extends game.Item {
 
   
   checkout() {
-
-    player.hotelName = document.querySelector('#nameSelector option:checked').value;
     if (player.hotelName == "California") {
       hint.hotelCheckout();
       return;
@@ -55,7 +54,6 @@ class Hotel extends game.Item {
   }
 
   leave() {
-    player.hotelName = document.querySelector('#nameSelector option:checked').value;
     if (player.hotelName == "California") {
       hint.hotelLeave();
       return;
@@ -68,16 +66,44 @@ class Hotel extends game.Item {
     buildings.exit();
   }
 
-  nameSelector() {
-    let html = `<select id="nameSelector">`;
-    let nameList = ['California', 'Kennebec', 'Cauliflower'];
-    nameList.forEach(oneName => {
-      let selected = player.hotelName == oneName ? 'selected' : '';
-      html += `<option ${selected}>${oneName}</option>`;      
-    });
-    html += `</select>`;
+  buildNameSelect () {
 
-    return html;
+    let selectName = `<div class="part part_name buttonize">`;
+    selectName += `<div class="part-name">Name</div>`;
+    if (buildings.list.hotel.nameList.length > 1) {
+      selectName += `<div class="button buttonize" onclick="buildings.list.hotel.prevName()"><</div>`;
+      selectName += `<div class="button buttonize" onclick="buildings.list.hotel.nextName()">></div>`;
+    }
+    selectName += `</div>`;
+
+    return selectName;
+  }
+
+  nextName() {
+    let oldName = player.hotelName;
+    let pos = buildings.list.hotel.nameList.indexOf(player.hotelName) + 1;
+    if (pos >= buildings.list.hotel.nameList.length) {
+      pos = 0;
+    };
+    player.hotelName = buildings.list.hotel.nameList[pos];
+    buildings.list.hotel.setName(oldName);
+  }
+
+  prevName() {
+    let oldName = player.hotelName;
+    let pos = buildings.list.hotel.nameList.indexOf(player.hotelName) - 1;
+    if (pos < 0) {
+      pos = buildings.list.hotel.nameList.indexOf(player.hotelName) - 1;
+    };
+    player.hotelName = buildings.list.hotel.nameList[pos];
+    buildings.list.hotel.setName(oldName);
+  }
+
+  setName(oldName) {
+    let titleElement = document.querySelector('.title');
+    let title = titleElement.innerHTML;
+    title = title.replace(oldName, player.hotelName);
+    titleElement.innerHTML = title;
   }
 
   critics() {
@@ -87,6 +113,5 @@ class Hotel extends game.Item {
     html += `<div><i>"Endearing. Played longer than I should have."</i></div>`;
 
     return html;
-
   }
 };

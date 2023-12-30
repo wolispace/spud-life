@@ -580,7 +580,7 @@ const hint = {
     hint.render();
   },
   hotelCheckout: function () {
-    hint.target = document.querySelector('#nameSelector');
+    hint.target = document.querySelector('.part_name');
     hint.message = `You can checkout any time you like...`;
     hint.okButton = 'hint.confirm';
     hint.group = '';
@@ -588,7 +588,7 @@ const hint = {
     hint.render();
   },
   hotelLeave: function () {
-    hint.target = document.querySelector('#nameSelector');
+    hint.target = document.querySelector('.part_name');
     hint.message = `.. but you can never leave.`;
     hint.okButton = 'hint.confirm';
     hint.group = '';
