@@ -31,7 +31,7 @@ const lists = {
       "You dreamt about fluffy white clouds",
       "You dreamt you had a fast car",
       "You dreamt about dropping the pilot",
-      "You dreamt that it was all yellow", 
+      "You dreamt that it was all yellow",
       "You dreamt you were Baba",
       "You dreamt of electric sheep",
       "You dreamt you played piano, sustain held down, only the black notes",
@@ -69,7 +69,7 @@ const lists = {
       "Escape to the Country",
       "Great Potato Myths of our Time",
       "Time Team",
-      "the sitcom: Once a potato",      
+      "the sitcom: Once a potato",
     ],
     streamingList: [
       "Netflix",
@@ -144,10 +144,10 @@ const lists = {
       "It's day",
       "Nice going, day",
       "Right on, day",
-      "Woo hoo, day", 
-      "Congrats, day", 
+      "Woo hoo, day",
+      "Congrats, day",
     ],
-    
+
     daySuffixList: [
       "of digging.",
       "of fun.",
@@ -201,6 +201,22 @@ const lists = {
       "Agreed",
       "Affirmative",
     ],
+
+    bookTitleList: [
+      "Pride and potatoes",
+      "100 years of potatoes",
+      "Lord of the fries",
+      "A spud with a view",
+      "The Guernsey Literary and Potato Peel Pie Society",
+      "My life as a potato",
+      "Potatonisi",
+      "The happy potato",
+      "Goodbye Mr Chips",
+      "A tale of two potatoes",
+      "Brave new potatoes",
+      "Boy swallows potato",
+    ],
+
     randomHint: [
       "You may find things other than potatoes buried beneath you",
       `There are [maxScan] levels of scanner upgrade. The [maxScan]th shows what's directly under you`,
@@ -213,7 +229,7 @@ const lists = {
       `has a quizzical look on their face`,
       `[squirrleList]... SQUIRREL!`,
       `makes a sound that is half-way between a bark and a meow`,
-      `thinks<br/>.oO( [thinkList] )`,     
+      `thinks<br/>.oO( [thinkList] )`,
       `wonders<br/>.oO( [wonderList]? )`,
       `watches what your doing`,
     ],
@@ -413,6 +429,35 @@ const lists = {
         <path d="m61.625 66.375 13.375-0.125-0.375-16.125s-0.54035-6.2401-6.625-5.875c-6.25 0.375-6.75 6.875-6.75 6.875" style="fill:#7e86f1;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.75397;stroke-width:4.8"/>
        </svg>
        `,
+      library: `<svg viewBox="0 0 100 100" >
+        <defs>
+        <linearGradient id="la">
+          <stop style="stop-color:#a8a49e" offset=".0021186"/>
+          <stop style="stop-color:#fefefe" offset=".50424"/>
+          <stop style="stop-color:#b0a6a3" offset="1"/>
+        </linearGradient>
+        <linearGradient id="lc" x1="18.208" x2="32.35" y1="74.511" y2="74.511" gradientTransform="translate(-3.5,-5.875)" gradientUnits="userSpaceOnUse" xlink:href="#la"/>
+        <linearGradient id="lb" x1="18.208" x2="32.35" y1="74.511" y2="74.511" gradientTransform="translate(50.35 -5.7614)" gradientUnits="userSpaceOnUse" xlink:href="#la"/>
+        </defs>
+        <rect x="13.25" y="49.125" width="72.393" height="49.823" style="fill:#dfd5cf"/>
+        <rect x="40.375" y="69.625" width="16.625" height="29.625"/>
+        <rect x="16.476" y="54.936" width="12.374" height="38.184" style="fill:url(#lc);paint-order:stroke fill markers"/>
+        <path d="m9.4931 50.163 25.721-0.17678v4.4194s-0.61872 3.4471-3.6239 3.5355c-3.0246 0.08896-2.9168-3.182-2.9168-3.182l-12.816 0.35355s0.22475 3.5669-3.2704 3.6239c-3.716 0.0606-3.182-3.5355-3.182-3.5355z" style="fill:#f3f2f1;paint-order:stroke fill markers;stroke-linejoin:round;stroke-width:2.2;stroke:#d3b9b9"/>
+        <path d="m16.431 55.468s0.31868-2.683-1.7678-2.9168c-1.9739-0.22123-2.5633 2.1213-2.5633 2.1213" style="fill:none;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.2;stroke:#d3b9b9"/>
+        <path d="m27.966 55.201s0.06382-2.6742 2.2981-3.0052c2.3865-0.35355 2.2097 1.8562 2.2097 1.8562" style="fill:none;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.2;stroke:#d3b9b9"/>
+        <path d="m3.125 36.625 48.625-22.375 44.375 22z" style="fill:#f3f2f1;paint-order:fill markers stroke;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.2;stroke:#d3b9b9"/>
+        <path d="m52.975 24.226s2.375-4 6.75-1.375 1.6291 6.6202 4.5 8.5c4.1516 2.7183 12 1.5 12 1.5" style="fill:#f3f2f1;paint-order:fill markers stroke;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.2;stroke:#d3b9b9"/>
+        <rect x="7.375" y="37.25" width="83.625" height="11.5" style="fill:#f3f2f1;paint-order:fill markers stroke;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.2;stroke:#d3b9b9"/>
+        <text x="33.71257" y="46.648602" style="fill:#173999;font-family:'Comic Sans MS';font-size:8px;font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;font-weight:bold"><tspan x="33.71257" y="46.648602">LIBRARY</tspan></text>
+        <path d="m48.75 24.125s-2.375-4-6.75-1.375-1.6291 6.6202-4.5 8.5c-4.1516 2.7183-12 1.5-12 1.5" style="fill:#f3f2f1;paint-order:fill markers stroke;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.2;stroke:#d3b9b9"/>
+        <rect x="14.5" y="93.125" width="15.875" height="5.625" style="fill:#f3f2f1;paint-order:fill markers stroke;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.2;stroke:#d3b9b9"/>
+        <rect x="70.326" y="55.05" width="12.374" height="38.184" style="fill:url(#lb);paint-order:stroke fill markers"/>
+        <path d="m63.343 50.277 25.721-0.17678v4.4194s-0.61872 3.4471-3.6239 3.5355c-3.0246 0.08896-2.9168-3.182-2.9168-3.182l-12.816 0.35355s0.22475 3.5669-3.2704 3.6239c-3.716 0.0606-3.182-3.5355-3.182-3.5355z" style="fill:#f3f2f1;paint-order:stroke fill markers;stroke-linejoin:round;stroke-width:2.2;stroke:#d3b9b9"/>
+        <path d="m70.281 55.581s0.31868-2.683-1.7678-2.9168c-1.9739-0.22123-2.5633 2.1213-2.5633 2.1213" style="fill:none;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.2;stroke:#d3b9b9"/>
+        <path d="m81.816 55.315s0.0638-2.6742 2.2981-3.0052c2.3865-0.35355 2.2097 1.8562 2.2097 1.8562" style="fill:none;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.2;stroke:#d3b9b9"/>
+        <rect x="68.35" y="93.239" width="15.875" height="5.625" style="fill:#f3f2f1;paint-order:fill markers stroke;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.2;stroke:#d3b9b9"/>
+        <path d="m36.875 69.5h24v-3.75l-11.5-5.875-12.375 5.875z" style="fill:#f3f2f1;paint-order:fill markers stroke;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.2;stroke:#d3b9b9"/>
+      </svg>`,
       pick: `<svg viewBox="0 0 100 100">
         <rect x="46.321" y="2.4125" width="7.7201" height="76.236" style="fill:#693f1d;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-width:2.5323;stroke:#000"/>
         <path d="m90.591 21.351s-10.433-15.456-40.652-15.44c-30.22 0.015776-39.685 16.164-39.685 16.164s26.713-7.2747 40.169-7.367c13.455-0.09226 40.169 6.6432 40.169 6.6432z" style="fill:#929292;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-width:2.1543;stroke:#000"/>
@@ -627,6 +672,13 @@ const lists = {
           <path d="m23.397 59.654-0.15089 6.5489" style="fill:#8f3432;stroke-linecap:round;stroke-opacity:.49362;stroke-width:2.5;stroke:#fff"/>
           </g>
         </svg>`,
+      book1: `<svg viewBox="0 0 100 100">
+        <path d="m25.5 8.25 58.75 10.75-0.25 63-11-3.25 0.25 10.5-50-11.75s-5.25-1-5.75-4.5-0.5-4.5-0.5-4.5l0.75-51.25s-1.75-2.75 1.75-6.25 6-2.75 6-2.75z" style="fill:tomato;paint-order:fill markers stroke;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.4;stroke:#000"/>
+        <path d="m18.25 17.25 54 12 0.75 49.5" style="fill:#5e3226;paint-order:fill markers stroke;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.4;stroke:#000"/>
+        <path d="m20.75 16.5 51.757 11.529s0.46127 0.06483 0.71127 0.50233c0.34375 0.5 0.29688 0.90646 0.29688 0.90646l0.73437 55.812s-0.1403-2.4797 1.25-4.5c1.8067-2.6253 4.125-1.375 4.125-1.375l0.125-56.125-54.75-11.5s-0.25-0.5-2.5 1.25-1.75 3.5-1.75 3.5z" style="fill:#dcd8b2;paint-order:fill markers stroke"/>
+        <path d="m21.091 19.987 48.79 11.235 0.58839 51.73" style="fill:none;paint-order:fill markers stroke;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.28497;stroke-width:2.4;stroke:#fff"/>
+        <path d="m20.547 16.441c17.388 3.9326 34.805 7.741 52.187 11.695 0 0-0.2028-1.4875 1.875-2.9453 2.6088-1.8303 4.9375-2 4.9375-2l-54.75-11.5s-0.25-0.5-2.5 1.25-1.75 3.5-1.75 3.5z" style="fill:#fff;paint-order:fill markers stroke"/>
+      </svg>`,
       chipper: `<svg viewBox="0 0 90 93">
         <g transform="translate(-3.0052 -1.7678)">
          <path d="m18.75 8.5 44.25-0.5s-1.75 9.5-8.25 14.5c-13.424 10.326-18.009 5.0148-26.25-0.25-9-5.75-9.75-13.75-9.75-13.75z" style="fill:#b0b0a9;stroke-linecap:round;stroke-width:2.5;stroke:#000"/>
@@ -1286,20 +1338,6 @@ const lists = {
         scale: 50,
         rotate: 360,
       },
-      rockX: {
-        class: "thick",
-        paths: [
-          { c: "", d: "m 30,55 10,-10 15,0 5,3 10,15 0,10 -15,4 -6,0 -13,-9 z" },
-          {
-            c: "lo",
-            d: "m 30,55 10,-10 15,0 5,3 10,15 0,10 -15,4 -6,0 -13,-9 z",
-          },
-          { c: "hi", d: "m 34,55 6,-6 11,0 7,8 4,11 -10,3 -5,-2 z" },
-        ],
-        shift: { x: 10, y: 10 },
-        scale: 70,
-        rotate: 360,
-      },
       log: `<svg viewBox="0 0 97 64">
         <defs>
          <linearGradient id="a2" x1="49.189" x2="45.981" y1="49.438" y2="35.066" gradientTransform="translate(2.1213 -1.0607)" gradientUnits="userSpaceOnUse">
@@ -1332,28 +1370,6 @@ const lists = {
        <path d="m2.6765 38.258 12.123-0.62977 3.1488 22.042-12.753-11.808z" style="fill-opacity:.70466;fill:#2e2e2e;paint-order:stroke fill markers;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.3;stroke:#000"/>
       </svg>
       `,
-      logX: {
-        class: "thick",
-        paths: [
-          { c: "", d: "m 30,35 -5,5 0,12 5,5 45,0 5,-5 0,-12 -5,-5 z" },
-          { c: "lo", d: "m 40,55 30,0 z" },
-          { c: "hi", d: "m 31,38 -3,3 0,10 3,3 3,-3 0,-10 z" },
-        ],
-        shift: { x: 10, y: 10 },
-        scale: 70,
-        rotate: 10,
-      },
-      spud: {
-        class: "thick",
-        paths: [
-          {
-            c: "",
-            d: "m 20,65 t -5,-10 5,-20 22,-14 25,4, 15,20 -1,20 -20,12 -40,-11 z",
-          },
-          // { "c": "lo", "d": "m 30,70 t 22,5 30,-25 " },
-          { c: "hi thin", d: "m 50,30 1,1 m 10,-5 1,1 m 6,11 1,1 " },
-        ],
-      },
       spud1: `<svg viewBox="0 0 28 12">
         <defs>
          <linearGradient id="{gradientId}" x1="50.531" x2="51.177" y1="38.413" y2="71.913" gradientTransform="matrix(.26458 0 0 .26458 -2.2084 -6.9635)" gradientUnits="userSpaceOnUse">

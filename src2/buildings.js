@@ -8,6 +8,7 @@ const buildings = {
     buildings.list.land = new Land();
     buildings.list.landBack = new LandBack();
     buildings.list.hotel = new Hotel();
+    buildings.list.library = new Library();
 
   },
 
