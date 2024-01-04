@@ -328,6 +328,9 @@ const game = {
     if (typeof player.hinted !== `string`) {
       player.hinted = '';
     }
+    if (typeof player.books === `undefined`) {
+      player.books = books.setup();
+    }
     // make sure we know about the meal each machine they own makes
     Object.entries(player.cart).forEach(([machineName, qty]) => {
       let machineInfo = items[machineName];

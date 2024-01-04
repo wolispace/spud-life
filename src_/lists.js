@@ -674,7 +674,7 @@ const lists = {
         </svg>`,
       book1: `<svg viewBox="0 0 100 100">
         <path d="m25.5 8.25 58.75 10.75-0.25 63-11-3.25 0.25 10.5-50-11.75s-5.25-1-5.75-4.5-0.5-4.5-0.5-4.5l0.75-51.25s-1.75-2.75 1.75-6.25 6-2.75 6-2.75z" style="fill:tomato;paint-order:fill markers stroke;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.4;stroke:#000"/>
-        <path d="m18.25 17.25 54 12 0.75 49.5" style="fill:#5e3226;paint-order:fill markers stroke;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.4;stroke:#000"/>
+        <path d="m18.25 17.25 54 12 0.75 49.5" style="fill:none;paint-order:fill markers stroke;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.4;stroke:#000"/>
         <path d="m20.75 16.5 51.757 11.529s0.46127 0.06483 0.71127 0.50233c0.34375 0.5 0.29688 0.90646 0.29688 0.90646l0.73437 55.812s-0.1403-2.4797 1.25-4.5c1.8067-2.6253 4.125-1.375 4.125-1.375l0.125-56.125-54.75-11.5s-0.25-0.5-2.5 1.25-1.75 3.5-1.75 3.5z" style="fill:#dcd8b2;paint-order:fill markers stroke"/>
         <path d="m21.091 19.987 48.79 11.235 0.58839 51.73" style="fill:none;paint-order:fill markers stroke;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.28497;stroke-width:2.4;stroke:#fff"/>
         <path d="m20.547 16.441c17.388 3.9326 34.805 7.741 52.187 11.695 0 0-0.2028-1.4875 1.875-2.9453 2.6088-1.8303 4.9375-2 4.9375-2l-54.75-11.5s-0.25-0.5-2.5 1.25-1.75 3.5-1.75 3.5z" style="fill:#fff;paint-order:fill markers stroke"/>

@@ -28,9 +28,11 @@ class Library extends game.Item {
     let title = `Public Library`;
     let content = `<div class="dialog-message-content">`;
     content += `<div>TODO: Return library books here..</div>`;
+    content += books.listBooks();
     content += `</div>`;
 
     let footer = "";
+    footer += `<button class="buttonize" onclick="books.test()"> Test </button>`;
     footer += `<button class="buttonize" onclick="dialog.cancel()"> Exit </button>`;
     dialog.cancelButton = function () { buildings.list.library.exit(); };
     dialog.render(title, content, footer);    
