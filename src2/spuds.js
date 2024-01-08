@@ -9,17 +9,17 @@ const spuds = {
     suffix: ["lor", "ker", "pry", "ly", "der", "mid"],
     bestFor: [],
     gradients: {
-      "white": {top: "white", bottom: "khaki"},
-      "brick": {top: "indianred", bottom: "firebrick"},
-      "wheat": {top: "wheat", bottom: "darksalmon"},
-      "teal": {top: "white", bottom: "teal"},
-      "orange": {top: "sandybrown", bottom: "chocolate"},
-      "maroon": {top: "mediumpurple", bottom: "indigo"},
-      "black": {top: "midnightblue", bottom: "black"},
-      "navy": {top: "darkslateblue", bottom: "navy"},
-      "pink": {top: "lightpink", bottom: "	palevioletred"},
-      "purple": {top: "mediumpurple", bottom: "indigo"},
-      "red": {top: "darksalmon", bottom: "firebrick"},
+      "white": { top: "white", bottom: "khaki" },
+      "brick": { top: "indianred", bottom: "firebrick" },
+      "wheat": { top: "wheat", bottom: "darksalmon" },
+      "teal": { top: "white", bottom: "teal" },
+      "orange": { top: "sandybrown", bottom: "chocolate" },
+      "maroon": { top: "mediumpurple", bottom: "indigo" },
+      "black": { top: "midnightblue", bottom: "black" },
+      "navy": { top: "darkslateblue", bottom: "navy" },
+      "pink": { top: "lightpink", bottom: "	palevioletred" },
+      "purple": { top: "mediumpurple", bottom: "indigo" },
+      "red": { top: "darksalmon", bottom: "firebrick" },
     },
     showColors: ["white", "orange", "black", "pink", "purple", "red"],
     rareness: [1, 2, 3, 4],
@@ -56,7 +56,6 @@ const spuds = {
       // uppercase first letter
       fullName = fullName.charAt(0).toUpperCase() + fullName.slice(1);
 
-      let svgInfo = svg.imgList["spud"];
       // add into our universal list of items
       items[name] = {
         type: 'spuds',
@@ -65,7 +64,7 @@ const spuds = {
         color: colorName,
         rareness: rarityCycle,
         bestFor: spuds.bits.bestFor[bestForCycle],
-        path: svg.jiggle(svgInfo.paths[0].d, 3),
+        //path: svg.jiggle(svgInfo.paths[0].d, 3),
       };
       // add to player data so these are consistent for this player
       player.spuds[name] = items[name];
@@ -115,7 +114,7 @@ const spuds = {
       encodedString += `${spudInfo.rareness}${d}`;
       r = spuds.recordDelim;
     });
-  
+
     return encodedString;
   },
 
@@ -131,7 +130,7 @@ const spuds = {
           bestFor: spudInfo.bestFor,
         };
       }
-        
+
     });
   },
 
@@ -144,7 +143,7 @@ const spuds = {
     while (spud.rareness > rareness) {
       spud = list.spuds.list[rnd(list.spuds.list.length)];
     }
-    
+
     return spud;
   },
 
@@ -155,20 +154,20 @@ const spuds = {
   },
 
   build: function (itemName) {
-   let spudInfo = {}; 
+    let spudInfo = {};
     if (game.newPlayer.spuds) {
       spudInfo = game.newPlayer.spuds[itemName];
     } else {
       spudInfo = player.spuds[itemName];
     }
-   let spudSvg = spuds.setColours(svg.render('spud1'), spudInfo);
+    let spudSvg = spuds.setColours(svg.render('spud1'), spudInfo);
 
-   return spudSvg;
+    return spudSvg;
   },
 
   setColours: function (spudSvg, spudInfo) {
     let defaultColours = {
-      top: "#d8af73", 
+      top: "#d8af73",
       bottom: "#715522"
     };
     let colours = spuds.bits.gradients[spudInfo.color] ?? defaultColours;
@@ -186,7 +185,7 @@ const spuds = {
   describe: function (itemName) {
     let itemInfo = items[itemName];
     hint.force = true;
-    
+
     hint.target = document.querySelector(`.machine_${itemName}`);
     hint.target.centre = function () {
       let icon = {
@@ -204,7 +203,7 @@ const spuds = {
     hint.message = `<b>${itemInfo.fullName}</b></br>${itemInfo.desc}`;
     hint.okButton = 'hint.close';
     hint.group = ``,
-    hint.render();
+      hint.render();
   },
 
 
