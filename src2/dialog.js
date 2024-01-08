@@ -124,7 +124,17 @@ const dialog = {
 
   calculatePos: function(parentDiv, targetDiv) {
     return targetDiv.offsetTop - parentDiv.offsetTop;
-  }
+  },
+
+
+  makeButton: function(itemInfo) {
+    let content = `<div  class="hardware-button buttonize  button-${itemInfo.type}">`;
+    content += ` <div class="hardware-button-desc"><b>${itemInfo.name}.</b> ${itemInfo.desc}</div>`;
+    content += ` <div class="hardware-button-icon">${itemInfo.icon}</div>`;
+    content += `</div>`;
+
+    return content;
+  },
 
   
 

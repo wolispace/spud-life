@@ -26,7 +26,7 @@ class Library extends game.Item {
   
   enterDaytime() {
     let title = `Public Library`;
-    let content = `<div class="dialog-message-content">`;
+    let content = `<div>`;
     content += `<div>TODO: Return library books here..</div>`;
     content += books.listBooks();
     content += `</div>`;

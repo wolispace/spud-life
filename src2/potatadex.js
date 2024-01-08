@@ -38,31 +38,27 @@ const potatadex = {
     }
   },
 
-  makeButton: function (itemInfo) {
-    let icon;
-    if (itemInfo.type == 'spuds') {
-      icon =spuds.build(itemInfo.name); // svg.render('spud1');
-      itemInfo.desc = spuds.desc(itemInfo);
-    } else {
-      icon = svg.render(itemInfo.name);
+  makeButton: function (itemInfo, showIfNotFound = false) {
+    let spudInfo = {
+      type: itemInfo.type,
+      icon: '<br/> &nbsp; ???',
+      name: '????',
+      desc: '??? ?????? ???? ??????',
+    }
+    
+    if (itemInfo.found || showIfNotFound) {
+      if (itemInfo.type == 'spuds') {
+        spudInfo.icon =spuds.build(itemInfo.name); // svg.render('spud1');
+        itemInfo.desc = spuds.desc(itemInfo);
+      } else {
+        spudInfo.icon = svg.render(itemInfo.name);
+      }
+      spudInfo.icon = svg.addOrientationClass(spudInfo.icon);
+      spudInfo.name = itemInfo.fullName;
+      spudInfo.desc = itemInfo.desc;
     }
 
-    icon = svg.addOrientationClass(icon);
-    let itemName = itemInfo.fullName;
-    let itemDesc = itemInfo.desc;
-
-    if (!itemInfo.found) {
-      icon = '<br/> &nbsp; ???';
-      itemName = '????';
-      itemDesc = '??? ?????? ???? ??????';
-    }
-
-    let content = `<div  class="hardware-button buttonize  button-${itemInfo.type}">`;
-    content += ` <div class="hardware-button-desc"><b>${itemName}.</b> ${itemDesc}</div>`;
-    content += ` <div class="hardware-button-icon">${icon}</div>`;
-    content += `</div>`;
-
-    return content;
+    return dialog.makeButton(spudInfo);
   },
 };
 

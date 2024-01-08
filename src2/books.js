@@ -46,10 +46,13 @@ const books = {
   },
 
   getTitleIdx: function () {
-    return rnd(lists.raw.bookTitleList.length);
+    let itemIndex = rnd(lists.raw.bookTitleList.length);
+    // remove item from the list so we dont re-select it..
+    let removedItem = lists.raw.bookTitleList.splice(itemIndex, 1);
+    return itemIndex;
   },
 
-  describe: function(bookId) {
+  hint: function(bookId) {
     hint.force = true;
     hint.target = document.querySelector(`.book_${bookId}`);
     let bookList = player.books.split(books.recordDelim);
@@ -66,8 +69,15 @@ const books = {
     let bookList = player.books.split(books.recordDelim);
     let html = '<div>';
     bookList.forEach( (bookString, bookId) => {
-      let itemSvg = books.render(bookString);
-      html += `<div class="cartMachine buttonize button book_${bookId}" onclick="books.describe(${bookId})">${itemSvg}</div>`;
+      let bookInfo = books.bookInfo(bookString);
+      let bookParams = {
+        item: 'book',
+        icon: books.render(bookString),
+        name: bookInfo.title,
+        desc: 'Returned to the library',
+      }
+      html += dialog.makeButton(bookParams, true);
+      //html += `<div class="cartMachine buttonize button book_${bookId}" onclick="books.hint(${bookId})">${itemSvg}</div>`;
     });
     html += '</div>';
 
