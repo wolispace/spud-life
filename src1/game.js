@@ -315,6 +315,9 @@ const game = {
         player = game.newPlayer;
       }
     }
+    player.speed = player.speed ?? 1;
+    game.step.x = game.step.x * player.speed;
+    game.step.y = game.step.y * player.speed; 
   },
 
   // make sure old versions of saved data are up-to-date 

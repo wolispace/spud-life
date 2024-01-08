@@ -33,7 +33,7 @@ const sky = {
     while (cloudCount-- > 0) {
       params.id = `cloud_${cloudCount}`;
       params.x = - (sprite.width + rnd(sprite.width * 10));
-      params.y = rnd(sprite.height/2);
+      params.y = rnd(sprite.height) - (sprite.height / 2);
       let cloud = new Cloud(params);
       sky.clouds.push(cloud);
     }

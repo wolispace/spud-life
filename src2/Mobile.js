@@ -306,7 +306,7 @@ class Mobile extends game.Item {
     let dx = game.touchPoint.x - this.x;
     let dy = game.touchPoint.y - this.y;
     let distance = Math.sqrt(dx * dx + dy * dy) || 0;
-    let spacing = 5; // Change this to control the spacing between points
+    let spacing = game.step.x; // Change this to control the spacing between points
     let steps = Math.floor(distance / spacing);
     this.hitItem = false;
     game.direction = (game.touchPoint.x < this.x) ? 'left' : 'right';
