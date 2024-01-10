@@ -115,7 +115,6 @@ const tools = {
       content += buildings.list.cart.summarise();
       let footer = "";
       if (isDev) {
-        footer += `<button class="buttonize devButton" onclick="lists.compress()"> Compress </button>`;
         footer += `<button class="buttonize devButton" onclick="field.showAll()"> Show all </button>`;
         footer += `<button class="buttonize devButton" onclick="tools.addMoney(1000)"> Add 1k </button>`;
         footer += `<button class="buttonize devButton" onclick="tools.addItems()"> +items </button>`;

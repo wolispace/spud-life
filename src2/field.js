@@ -91,6 +91,7 @@ const field = {
       player.fields[fieldId][layer].push(newItem);
     }
     layer = game.UNDERGROUND;
+    books.addAllToField(fieldId);
     fieldHeight = containerBox.height - (sprite.height * 2);
     fieldWidth = containerBox.width;
     totalItems = (game.grid.x * game.grid.y) / 5;

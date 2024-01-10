@@ -1,6 +1,6 @@
 let player = {
   name: '',
-  hints: true,
+  hints: false,
   hinted: '',
   x: 1,
   y: 1,
@@ -16,7 +16,7 @@ let player = {
     pick: { qty: 0, max: 0 },
     basket: { qty: 0, list: {} },
     scanner: { qty: 4, on: true },
-    wallet: { qty: 150 },
+    wallet: { qty: 5150 },
   },
   meals: {},
   currentField: 0,

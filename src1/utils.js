@@ -1,5 +1,5 @@
 // randoms a random number like a dice roll, with side being the number of sides: rnd(2) is a flip of a coin, rnd(6) is a six sided dice.
-// this a zero based number do rnd(2) gives us 0 or 1, rnd(6) gives us 0...5
+// this a zero based number so rnd(2) gives us 0 or 1, rnd(6) gives us 0...5
 function rnd(sides) {
   return Math.floor(Math.random() * sides);
 }

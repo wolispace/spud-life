@@ -1,44 +1,41 @@
 const books = {
   recordDelim: '^',
   fieldDelim: '|',
+  maxBooks: 8,
+  titles: [],
 
-  // generates the random books in the game
+  // generates the random books in the game as an encoded string..
   setup: function () {
     let d = books.fieldDelim;
     let bookCount = 8;
     let bookList = [];
-    while (bookCount-- > 0 ) {
-      let bookInfo = books.build();
-      bookList.push(`${bookInfo.color}${d}${bookInfo.titleIdx}${d}0`);
+    let fieldId = 1;
+    let fieldSet = books.perField();
+    books.prepTitles();
+
+    while (bookCount < books.maxBooks) {
+      let bookInfo = books.build(bookCount);
+      bookList.push(`${bookInfo.color}${d}${bookInfo.titleIdx}${d}${fieldId}`);
+      bookList.length - 1;
+
+      books.addOneToField(fieldId, bookInfo);
+      if (fieldSet-- <= 0) {
+        fieldSet = books.perField();
+        fieldId++;
+      }
+      bookCount++;
     }
     return bookList.join(books.recordDelim);
   },
 
   // returns a random book with a random title
-  build: function () {    
+  build: function (id) {
     return {
+      id: id,
       color: books.getColour(),
       titleIdx: books.getTitleIdx(),
     }
   },
-  
-  // take an encoded string `red,4,0` and return an object {color: title: owned}
-  bookInfo: function (bookInfoString) {
-    let bookInfo = bookInfoString.split(books.fieldDelim);
-    return {
-      color: bookInfo[0],
-      title: lists.raw.bookTitleList[bookInfo[1]],
-      owned: bookInfo[2],
-    };
-  },
-  
-  // returns and svg 
-  render: function (bookInfoString) {
-    let bookInfo = books.bookInfo(bookInfoString);
-    let bookSvg = svg.render('book1');
-    return bookSvg.replace('tomato', bookInfo.color);
-  },
-
 
   getColour: function () {
     let colourList = Object.keys(lists.raw.colorNames);
@@ -46,13 +43,75 @@ const books = {
   },
 
   getTitleIdx: function () {
-    let itemIndex = rnd(lists.raw.bookTitleList.length);
+    let itemIndex = rnd(books.titles.length);
     // remove item from the list so we dont re-select it..
-    let removedItem = lists.raw.bookTitleList.splice(itemIndex, 1);
-    return itemIndex;
+    let removedItem = books.titles.splice(itemIndex, 1);
+    return removedItem[0].index;
   },
 
-  hint: function(bookId) {
+  // number of books to hide in this field
+  perField: function () {
+    return rnd(2) + 1;
+  },
+
+  prepTitles: function () {
+    lists.raw.bookTitleList.forEach((title, index) => {
+      books.titles.push({
+        index: index,
+        title: title,
+      });
+    });
+  },
+
+  addAllToField: function (fieldId) {
+    // loop through all books.. if the fieldId matches then randomly add it..
+    books.decode();
+    books.list.forEach((bookInfo, _) => {
+      books.addOneToField(fieldId, bookInfo);
+    });
+  },
+
+  addOneToField: function(fieldId, bookInfo) {
+    console.log(fieldId, bookInfo, player.fields[fieldId]);
+    if (player.fields[fieldId].length > 0) {
+      // player has the field so add the book
+      // TODO: move this to field. so its setup early
+      fieldHeight = containerBox.height - (sprite.height * 2);
+      fieldWidth = containerBox.width;
+      let params = {
+        id: game.getUid(),
+        x: rnd(fieldWidth - sprite.width),
+        y: rnd(fieldHeight - sprite.height) + (sprite.height * 2),
+        w: sprite.width,
+        h: sprite.height,
+        qty: 1,
+        autoRender: false,
+        item: bookInfo.name,
+        svg: books.render(bookInfo.color),
+      };
+      let newItem = new game.Item(params);
+      player.fields[fieldId][game.UNDERGROUND].push(newItem);
+    }
+  },
+
+  // take an encoded string `red,4,0` and return an object {color: title: owned}
+  bookInfo: function (bookInfoString) {
+    let bookInfo = bookInfoString.split(books.fieldDelim);
+    return {
+      color: bookInfo[0],
+      title: lists.raw.bookTitleList[bookInfo[1]],
+      field: bookInfo[2],
+    };
+  },
+
+  // returns and svg 
+  render: function (color) {
+    let bookSvg = svg.render('book1');
+    return bookSvg.replace('tomato', color);
+  },
+
+
+  hint: function (bookId) {
     hint.force = true;
     hint.target = document.querySelector(`.book_${bookId}`);
     let bookList = player.books.split(books.recordDelim);
@@ -61,31 +120,36 @@ const books = {
 
     hint.message = `<b>${bookInfo.title}</b></br>To be returned to the library`;
     hint.okButton = 'hint.close';
-    hint.group = ``,
+    hint.group = ``;
     hint.render();
   },
 
-  listBooks: function () {
+  // take the player.books string and explode into bookStrings which get converted into objects
+  decode: function () {
+    books.list = [];
     let bookList = player.books.split(books.recordDelim);
-    let html = '<div>';
-    bookList.forEach( (bookString, bookId) => {
+    bookList.forEach((bookString, bookId) => {
       let bookInfo = books.bookInfo(bookString);
-      let bookParams = {
+      books.list.push({
+        id: `book_${bookId}`,
         item: 'book',
-        icon: books.render(bookString),
+        field: bookInfo.field,
+        icon: books.render(bookInfo.color),
         name: bookInfo.title,
-        desc: 'Returned to the library',
-      }
-      html += dialog.makeButton(bookParams, true);
-      //html += `<div class="cartMachine buttonize button book_${bookId}" onclick="books.hint(${bookId})">${itemSvg}</div>`;
+        desc: 'Return to the library',
+      })
+    });
+  },
+
+  listBooks: function () {
+    books.decode(player.books);
+    let html = '<div>';
+    books.list.forEach((bookInfo, _) => {
+      html += dialog.makeButton(bookInfo, true);
     });
     html += '</div>';
 
     return html;
   },
 
-  test: function () {
-
-    console.log(bookList); 
-  }
 }
