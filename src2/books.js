@@ -91,7 +91,7 @@ const books = {
         autoRender: false,
         item: `${bookInfo.id}`,
         type: 'books',
-        svg: books.render(bookInfo.color),
+        svg: bookInfo.icon,
       };
       let newItem = new game.Item(params);
       player.fields[fieldId][game.UNDERGROUND].push(newItem);
