@@ -21,7 +21,13 @@ const field = {
     };
     game.setUid(params.id);
     if (!svg.imgList[params.item]) {
-      params.svg = spuds.build(params.item); // svg.render('spud1');
+      let bits = params.item.split('_');
+      if (bits[0] == 'book') {
+        let bookInfo = books.list[bits[1]];
+        params.svg =  bookInfo.icon;
+      } else {
+        params.svg = spuds.build(params.item);
+      }
     }
 
     return new game.Item(params);
@@ -91,7 +97,6 @@ const field = {
       player.fields[fieldId][layer].push(newItem);
     }
     layer = game.UNDERGROUND;
-    books.addAllToField(fieldId);
     fieldHeight = containerBox.height - (sprite.height * 2);
     fieldWidth = containerBox.width;
     totalItems = (game.grid.x * game.grid.y) / 5;
@@ -122,6 +127,7 @@ const field = {
       let newItem = new game.Item(params);
       player.fields[fieldId][layer].push(newItem);
     }
+    books.addAllToField(fieldId);
   },
   
   // return an items based on its rareness, defaulting to most common
@@ -131,7 +137,7 @@ const field = {
     while (counter < maxItems) {
       let itemInfo = list.buriable[counter];
       if (itemInfo && itemInfo.rareness) {
-
+        
         if (rnd(itemInfo.rareness) < itemInfo.rareness/2) {
           return itemInfo;
         }

@@ -178,7 +178,7 @@ class Mobile extends game.Item {
           spriteBox.render();
           game.spriteBox = spriteBox;
 
-          let itemInfo = list.all[spriteBox.item];
+          let itemInfo = list.all[spriteBox.item] ?? {item:'any'};
 
           if (itemInfo.type == 'machines') {
             game.endItem = machines;

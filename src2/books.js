@@ -6,26 +6,28 @@ const books = {
 
   // generates the random books in the game as an encoded string..
   setup: function () {
-    let d = books.fieldDelim;
-    let bookCount = 8;
-    let bookList = [];
-    let fieldId = 1;
-    let fieldSet = books.perField();
-    books.prepTitles();
-
-    while (bookCount < books.maxBooks) {
-      let bookInfo = books.build(bookCount);
-      bookList.push(`${bookInfo.color}${d}${bookInfo.titleIdx}${d}${fieldId}`);
-      bookList.length - 1;
-
-      books.addOneToField(fieldId, bookInfo);
-      if (fieldSet-- <= 0) {
-        fieldSet = books.perField();
-        fieldId++;
+    if (!player.books) {
+      let d = books.fieldDelim;
+      let bookCount = 1;
+      let bookList = [];
+      let fieldId = 0;
+      let fieldSet = books.perField();
+      books.prepTitles();
+  
+      while (bookCount < books.maxBooks) {
+        let bookInfo = books.build(bookCount);
+        bookList.push(`${bookInfo.color}${d}${bookInfo.titleIdx}${d}${fieldId}`);
+  
+        //books.addOneToField(fieldId, bookInfo);
+        if (fieldSet-- <= 0) {
+          fieldSet = books.perField();
+          fieldId++;
+        }
+        bookCount++;
       }
-      bookCount++;
+      player.books = bookList.join(books.recordDelim);
     }
-    return bookList.join(books.recordDelim);
+    books.decode();
   },
 
   // returns a random book with a random title
@@ -65,28 +67,30 @@ const books = {
 
   addAllToField: function (fieldId) {
     // loop through all books.. if the fieldId matches then randomly add it..
+    if (player.books == '') {
+      return;
+    }
     books.decode();
-    books.list.forEach((bookInfo, _) => {
+    books.list.forEach((bookInfo, bookIndex) => {
+      bookInfo.id = `book_${bookIndex}`;
       books.addOneToField(fieldId, bookInfo);
     });
   },
 
-  addOneToField: function(fieldId, bookInfo) {
-    console.log(fieldId, bookInfo, player.fields[fieldId]);
-    if (player.fields[fieldId].length > 0) {
+  addOneToField: function (fieldId, bookInfo) {
+
+    if (player.fields[fieldId] && bookInfo.field == fieldId) {
       // player has the field so add the book
-      // TODO: move this to field. so its setup early
-      fieldHeight = containerBox.height - (sprite.height * 2);
-      fieldWidth = containerBox.width;
       let params = {
         id: game.getUid(),
-        x: rnd(fieldWidth - sprite.width),
-        y: rnd(fieldHeight - sprite.height) + (sprite.height * 2),
+        x: rnd(field.space[game.UNDERGROUND].w - sprite.width),
+        y: rnd(field.space[game.UNDERGROUND].h - sprite.height) + (sprite.height * 2),
         w: sprite.width,
         h: sprite.height,
         qty: 1,
         autoRender: false,
-        item: bookInfo.name,
+        item: `${bookInfo.id}`,
+        type: 'books',
         svg: books.render(bookInfo.color),
       };
       let newItem = new game.Item(params);
@@ -94,7 +98,7 @@ const books = {
     }
   },
 
-  // take an encoded string `red,4,0` and return an object {color: title: owned}
+  // take an encoded string `red,4,0` and return an object {color: title: field}
   bookInfo: function (bookInfoString) {
     let bookInfo = bookInfoString.split(books.fieldDelim);
     return {

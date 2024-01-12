@@ -49,13 +49,22 @@ const basket = {
     },
 
   makeButton: function (params) {
-    let itemInfo = items[params.item];
+    //console.log('params', params);
+    let itemInfo = items[params.item] ?? {item:'any'};
     let icon;
     if (itemInfo.type == 'spuds') {
       icon = spuds.build(itemInfo.name); //svg.render('spud1');
       itemInfo.desc = spuds.desc(itemInfo);
     } else {
-      icon = svg.render(params.item);
+      let bits = params.item.split('_');
+      if (bits[0] == 'book') {
+        let bookInfo = books.list[bits[1]];
+        icon =  bookInfo.icon;
+        itemInfo.desc = bookInfo.desc;
+        itemInfo.fullName = bookInfo.name;
+      } else {
+        icon = svg.render(params.item);
+      }
     }
 
     icon = svg.addOrientationClass(icon);

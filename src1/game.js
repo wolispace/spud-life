@@ -307,7 +307,7 @@ const game = {
         decompressed = LZString.decompressFromUTF16(gameState);
       }
       game.newPlayer = JSON.parse(decompressed);
-      // TODO: check versions and do things as needed..
+      books.setup();
       game.newPlayer.spuds = spuds.decode(game.newPlayer.spuds);
       game.newPlayer.tools = tools.decode(game.newPlayer.tools);
       game.newPlayer.fields = field.encodeAll(game.newPlayer.fields, false);
@@ -330,9 +330,6 @@ const game = {
     }
     if (typeof player.hinted !== `string`) {
       player.hinted = '';
-    }
-    if (typeof player.books === `undefined`) {
-      player.books = books.setup();
     }
     // make sure we know about the meal each machine they own makes
     Object.entries(player.cart).forEach(([machineName, qty]) => {

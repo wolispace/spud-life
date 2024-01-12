@@ -138,6 +138,7 @@ function startGame() {
   // loads previously save state from localStorage if found
   game.load();
   game.versionCheck();
+  books.setup();
 
   controls.render();
   tools.setup();
@@ -174,6 +175,7 @@ function setupThings() {
   hint.setup();
   dialog.setup();
   field.resize();
+  books.setup();
 
   makeLists();
   if (Object.keys(player.spuds).length === 0) {
@@ -192,6 +194,17 @@ function setContainerBox() {
   let containerElement = document.querySelector(".world");
   containerBox = containerElement.getBoundingClientRect();
   sprite.setSize();
+  let topNoSeed = (sprite.height * (sky.height + 0.5));
+  let leftNoSeed = (sprite.width * 3);
+  field.space = {};
+  field.space[game.ABOVEGROUND] = {
+    w: containerBox.width - sprite.width - leftNoSeed,
+    h: containerBox.height - (sprite.height * 2) - topNoSeed,
+  }
+  field.space[game.UNDERGROUND] = {
+    w: containerBox.width,
+    h: containerBox.height - (sprite.height * 2),
+  }
 }
 
 function clearWorld() {
