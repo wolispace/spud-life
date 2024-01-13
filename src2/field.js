@@ -23,7 +23,7 @@ const field = {
     if (!svg.imgList[params.item]) {
       let bits = params.item.split('_');
       if (bits[0] == 'book') {
-        let bookInfo = books.list[bits[1]];
+        let bookInfo = books.list[bits[1]-1];
         params.svg =  bookInfo.icon;
       } else {
         params.svg = spuds.build(params.item);
@@ -127,6 +127,7 @@ const field = {
       let newItem = new game.Item(params);
       player.fields[fieldId][layer].push(newItem);
     }
+    // add any books for his field
     books.addAllToField(fieldId);
   },
   

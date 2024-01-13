@@ -138,7 +138,6 @@ function startGame() {
   // loads previously save state from localStorage if found
   game.load();
   game.versionCheck();
-  books.setup();
 
   controls.render();
   tools.setup();
@@ -175,7 +174,6 @@ function setupThings() {
   hint.setup();
   dialog.setup();
   field.resize();
-  books.setup();
 
   makeLists();
   if (Object.keys(player.spuds).length === 0) {
@@ -240,7 +238,7 @@ function splashScreen() {
   let continueButton = 'Start new game';
 
   let content = `<div class="dialogIntro">`;
-  content += `<div class="introSvg">${titleSvg}</div>`;
+  content += `<div  onclick="dialog.okButton();" class="introSvg">${titleSvg}</div>`;
 
   let footer = '';
   footer += `<button class="buttonize" onclick="transferHere()"> Transfer </button>`;

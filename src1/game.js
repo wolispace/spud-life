@@ -15,7 +15,7 @@ const game = {
   blockerHits: 5, // how many hits on a blocker to clear it
   maxScan: 4,
   spudVarieties: 8, // how many different varieties
-  compress: true,
+  compress: false,
   transferred: false,
   newPlayer: {}, // temp info loaded before its finished being decoded
 
@@ -281,7 +281,8 @@ const game = {
       player.spuds = spuds.encode(player.spuds);
       player.tools = tools.encode();
       player.pet = pet.encode();
-  
+      player.books = books.encode(); 
+
       let compressed = JSON.stringify(player);
       if (game.compress) {
         compressed = LZString.compressToUTF16(compressed);
@@ -307,9 +308,9 @@ const game = {
         decompressed = LZString.decompressFromUTF16(gameState);
       }
       game.newPlayer = JSON.parse(decompressed);
-      books.setup();
       game.newPlayer.spuds = spuds.decode(game.newPlayer.spuds);
       game.newPlayer.tools = tools.decode(game.newPlayer.tools);
+      game.newPlayer.books = books.decode(game.newPlayer.books); 
       game.newPlayer.fields = field.encodeAll(game.newPlayer.fields, false);
       if (!player.pos) {
         player = game.newPlayer;
@@ -317,7 +318,7 @@ const game = {
     }
     player.speed = player.speed ?? 1;
     game.step.x = game.step.x * player.speed;
-    game.step.y = game.step.y * player.speed; 
+    game.step.y = game.step.y * player.speed;
   },
 
   // make sure old versions of saved data are up-to-date 

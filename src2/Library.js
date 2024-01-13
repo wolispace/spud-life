@@ -17,6 +17,7 @@ class Library extends game.Item {
   }
 
   enter() {
+    books.setup();
     if (player.daytime) {
       this.enterDaytime();
     } else {
