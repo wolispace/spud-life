@@ -39,6 +39,7 @@ const books = {
   bookInfo: function (bookCount, bookInfoString) {
     let bookInfo = bookInfoString.split(books.fieldDelim);
     return {
+      type: 'book',
       item: `book_${bookCount}`,
       color: bookInfo[0],
       titleIdx: bookInfo[1],

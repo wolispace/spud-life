@@ -64,7 +64,7 @@ class Library extends game.Item {
     footer += `<button class="buttonize" onclick="dialog.cancel()"> Exit </button>`;
     dialog.cancelButton = function () { buildings.list.library.exit(); };
     dialog.render(title, content, footer);
-    if (true || returned == books.maxBooks) {
+    if (returned == books.maxBooks) {
       confetti.render();
     }
   }

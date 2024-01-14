@@ -454,6 +454,10 @@ svg.height {
   background-color: rgb(199, 176, 169);
 }
 
+.button-book {
+  background-color: rgb(199, 175, 214);
+}
+
 .tooMuch {
   opacity: 50%;
   background-color: rgba(0, 0, 0, 0.05);

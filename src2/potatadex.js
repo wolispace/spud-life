@@ -18,6 +18,16 @@ const potatadex = {
       }
     });
 
+    // add the books..
+    books.list.forEach((bookInfo, _) => {
+      maxItems++;
+      if (bookInfo.field == -2) {
+        bookInfo.found = true;
+        foundItems++;
+      }
+      content += potatadex.makeButton(bookInfo);
+    });
+
     let footer = `<span class="footer-msg">`;
     if (foundItems == maxItems) {
       footer += 'You found all of the things!';
@@ -47,11 +57,16 @@ const potatadex = {
     }
     
     if (itemInfo.found || showIfNotFound) {
-      if (itemInfo.type == 'spuds') {
-        spudInfo.icon =spuds.build(itemInfo.name); // svg.render('spud1');
-        itemInfo.desc = spuds.desc(itemInfo);
+      //let bookInfo = books.isBook(itemInfo);
+      if (itemInfo.type == 'book') {
+        spudInfo.icon = itemInfo.icon;
       } else {
-        spudInfo.icon = svg.render(itemInfo.name);
+        if (itemInfo.type == 'spuds') {
+          spudInfo.icon =spuds.build(itemInfo.name); // svg.render('spud1');
+          itemInfo.desc = spuds.desc(itemInfo);        
+        } else {
+          spudInfo.icon = svg.render(itemInfo.name);
+        }
       }
       spudInfo.icon = svg.addOrientationClass(spudInfo.icon);
       spudInfo.name = itemInfo.fullName;
