@@ -153,6 +153,14 @@ const books = {
     books.addAllToField(-1);
   },
 
+  // returns a bookInfo if the passed in string is a book otherwise null eg 'book_1' returns book 1 info
+  isBook: function(item) {
+    let bits = item.split('_');
+    if (bits[0] == 'book') {
+      return books.list[bits[1]-1];
+    }
+  },
+
   hint: function (bookId) {
     hint.force = true;
     hint.target = document.querySelector(`.book_${bookId}`);
@@ -166,16 +174,49 @@ const books = {
     hint.render();
   },
 
+  // loop through all books, any with -1 are in basket so set to -2 = in library
+  newFinds: function () {
+    let html = '<div class="dialog-message-content">';
+    let bookMsg = '';
+
+    books.list.forEach((bookInfo, _) => {
+      if (bookInfo.field == -1) {
+        bookMsg += `<div>The librarian says:<br/><i>"Ah.. <b>${bookInfo.fullName}</b>. I shall return it to the shelves."</i></div>`;
+        bookInfo.field = -2;
+        delete tools.list.basket.list[bookInfo.item];
+        tools.list.basket.addQty(-1);
+      }
+    });
+    if (bookMsg == '') {
+      bookMsg += 'The librarian look as you eagerly, hoping for news of lost books';
+    }
+    html += `${bookMsg}</div>`;
+
+    return html;
+  },
 
   listBooks: function () {
-    books.decode(player.books);
     let html = '<div>';
     books.list.forEach((bookInfo, _) => {
-      html += dialog.makeButton(bookInfo, true);
+      if (bookInfo.field < -1) {
+        html += dialog.makeButton(bookInfo, true);
+      }
     });
     html += '</div>';
 
     return html;
+  },
+
+  returned: function () {
+    let returned = 0;
+    books.list.forEach((bookInfo, _) => {
+      if (bookInfo.field == -2) {
+        returned++;
+      }
+    });
+
+    return returned;
+
   },
 
 }

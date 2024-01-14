@@ -25,7 +25,7 @@ class Library extends game.Item {
   }
   
   enterDaytime() {
-    if (books.list.length > 0) {
+    if (books.list.length <= 0) {
       this.welcome();
     } else {
       this.showBooks();
@@ -50,17 +50,23 @@ class Library extends game.Item {
   }
   
   showBooks() {
+    let returned = books.returned();
+
     let title = `Public Library`;
     let content = `<div>`;
-    content += `<div>TODO: Return library books here..</div>`;
+    content += books.newFinds();
+    content += '<div>Books in the library:';
     content += books.listBooks();
     content += `</div>`;
   
     let footer = "";
-    footer += `<button class="buttonize" onclick="books.test()"> Test </button>`;
+    footer += `<span class="footer-msg">You have found ${returned} of the ${books.maxBooks} books.</span>`;
     footer += `<button class="buttonize" onclick="dialog.cancel()"> Exit </button>`;
     dialog.cancelButton = function () { buildings.list.library.exit(); };
-    dialog.render(title, content, footer);    
+    dialog.render(title, content, footer);
+    if (true || returned == books.maxBooks) {
+      confetti.render();
+    }
   }
 
   enterNighttime() {

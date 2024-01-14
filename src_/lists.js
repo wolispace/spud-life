@@ -213,8 +213,9 @@ const lists = {
       "The happy potato",
       "Goodbye Mr Chips",
       "A tale of two potatoes",
-      "Brave new potatoes",
+      "Brave new potato",
       "Boy swallows potato",
+      "Spuds and Amazons",
     ],
 
     randomHint: [

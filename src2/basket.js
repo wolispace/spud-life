@@ -10,6 +10,10 @@ const basket = {
     }
     hint.dugItem();
     basket.recount();
+    let bookInfo = books.isBook(item.item);
+    if (bookInfo) {
+      bookInfo.field = -1;
+    }
   },
 
   recount: function () {
@@ -56,9 +60,8 @@ const basket = {
       icon = spuds.build(itemInfo.name); //svg.render('spud1');
       itemInfo.desc = spuds.desc(itemInfo);
     } else {
-      let bits = params.item.split('_');
-      if (bits[0] == 'book') {
-        let bookInfo = books.list[bits[1]];
+      let bookInfo = books.isBook(params.item);
+      if (bookInfo) {
         icon =  bookInfo.icon;
         itemInfo.desc = bookInfo.desc;
         itemInfo.fullName = bookInfo.name;
