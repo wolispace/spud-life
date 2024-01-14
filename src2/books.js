@@ -46,7 +46,7 @@ const books = {
       field: bookInfo[2],
       name: lists.raw.bookTitleList[bookInfo[1]],
       fullName: lists.raw.bookTitleList[bookInfo[1]],
-      desc: 'Return to the library',
+      desc: getFromList('bookReview'),
       icon: books.render(bookInfo[0]),
     };
   },

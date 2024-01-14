@@ -218,6 +218,99 @@ const lists = {
       "Spuds and Amazons",
     ],
 
+    bookReview: [
+      "It was well reviewed",
+      "Banned in several countries",
+      "It was panned by critics",
+      "A cult classic",
+      "It lingers in your thoughts [bookLingerList]",
+      "No story quite like it",
+      "it will change the way you [bookChangeList]",
+      "Nominated for a [bookAwardsList]",
+      "[bookActionList] [bookTaleList] about [bookAboutList]",
+      "[bookActionList] [bookTaleList] about [bookAboutList]",
+      "[bookActionList] [bookTaleList] about [bookAboutList]",
+      "[bookActionList] [bookTaleList] of [bookAboutList]",
+      "[bookActionList] [bookTaleList] of [bookAboutList]",
+      "[bookActionList] [bookTaleList] of [bookAboutList]",
+    ],
+
+    bookLingerList: [
+      "briefly",
+      "for ages",
+      "well into the future",
+      "well past bedtime",
+      "for a long time",
+      "for an eternity",
+      "until you read another book",
+      "until the cows come home",
+    ],
+
+    bookChangeList: [
+      "think",
+      "love",
+      "remember",
+      "cook",
+      "eat",
+      "view the world",
+      "view your life",
+      "live your life",
+      "treat others",
+    ],
+
+    bookActionList: [
+      "A gripping",
+      "A chilling",
+      "A suspenseful",
+      "A rollicking",
+      "A moving",
+      "A poignant",
+      "A well told",
+      "An abstract",
+      "An obtuse",
+      "An off-beat",
+    ],
+
+    bookTaleList: [
+      "tale",
+      "novel",
+      "story",
+      "saga",
+      "romp",
+    ],
+
+    bookAboutList: [
+      "friendship",
+      "love",
+      "loss",
+      "simple things",
+      "complex things",
+      "common things",
+    ],
+
+    bookAwardsList: [
+      "Booker Prize",
+      "Nobel Prize",
+      "Pulitzer Prize",
+      "Botev Prize",
+      "Potato Prize",
+      "Goldsmiths Prize",
+      "Bram Stoker Award",
+      "Frost Medal",
+      "Gotham Book Prize",
+      "Lambda Literary Award"
+    ],
+
+    librarianAction: [
+      "shuffles",
+      "coughs",
+      "blinks",
+      "yawns",
+      "turns",
+      "stands",
+      "approaches",
+    ],
+
     randomHint: [
       "You may find things other than potatoes buried beneath you",
       `There are [maxScan] levels of scanner upgrade. The [maxScan]th shows what's directly under you`,
