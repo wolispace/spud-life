@@ -56,11 +56,11 @@ const basket = {
     //console.log('params', params);
     let itemInfo = items[params.item] ?? {item:'any'};
     let icon;
-    if (itemInfo.type == 'spuds') {
+    let bookInfo = books.isBook(params.item);
+    if (!bookInfo && itemInfo.type == 'spuds') {
       icon = spuds.build(itemInfo.name); //svg.render('spud1');
       itemInfo.desc = spuds.desc(itemInfo);
     } else {
-      let bookInfo = books.isBook(params.item);
       if (bookInfo) {
         icon =  bookInfo.icon;
         itemInfo.desc = bookInfo.desc;
@@ -73,8 +73,13 @@ const basket = {
     icon = svg.addOrientationClass(icon);
 
     let content = `<div  class="hardware-button buttonize">`;
-    content += ` <div class="hardware-button-desc"><b>${itemInfo.fullName}.</b> ${itemInfo.desc} </div>`;
-    content += ` <div class="hardware-button-sub"><div class="hardware-button-icon">${icon}</div>${params.qty}</div>`;
+    content += ` <div class="hardware-button-desc"><b>${itemInfo.fullName}</b></div>`;
+    content += ` <div class="hardware-button-info">`;
+    content += `  <div class="hardware-button-icon">${icon}`;
+    content += `   <div class="cartQty">${params.qty}</div>`;
+    content += `  </div>`;
+    content += `  <div>${itemInfo.desc}</div>`;
+    content += ` </div>`;
     content += `</div>`;
 
     return content;
@@ -131,7 +136,8 @@ const basket = {
       Object.entries(tools.list.basket.list).forEach(([itemName, qty]) => {
         if (qty > 0) {
           let itemInfo = items[itemName];
-          if (itemInfo.type == 'spuds') {
+          let bookInfo = books.isBook(itemName);
+          if (!bookInfo && itemInfo.type == 'spuds') {
             hasSpuds = true;
           }
         }

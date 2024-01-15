@@ -129,9 +129,13 @@ const dialog = {
 
   makeButton: function(itemInfo) {
     let content = `<div  class="hardware-button buttonize  button-${itemInfo.type}">`;
-    content += ` <div class="hardware-button-desc"><b>${itemInfo.name}.</b> ${itemInfo.desc}</div>`;
-    content += ` <div class="hardware-button-icon">${itemInfo.icon}</div>`;
+    content += ` <div class="hardware-button-desc"><b>${itemInfo.name}.</b> </div>`;
+    content += ` <div class="hardware-button-info">`;
+    content += `  <div class="hardware-button-icon">${itemInfo.icon}</div>`;
+    content += `  <div>${itemInfo.desc}</div>`;
+    content += ` </div>`;
     content += `</div>`;
+
 
     return content;
   },

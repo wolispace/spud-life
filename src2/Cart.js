@@ -233,10 +233,13 @@ class Cart extends game.Item {
     Object.entries(tools.list.basket.list).forEach(([itemName, qty]) => {
       if (qty > 0) {
         let itemInfo = items[itemName];
-        if (itemInfo.type == 'spuds') {
-          let icon =spuds.build(itemInfo.name); // svg.render('spud1');
+        let bookInfo = books.isBook(itemName);
+        if (!bookInfo && itemInfo.type == 'spuds') {
+          let icon =spuds.build(itemInfo.name);
           
-          html += `<div class="cartMachine buttonize button machine_${itemName}" onclick="spuds.describe('${itemName}')">${icon}<div class="cartQty">${qty}</div></div>`;
+          html += `<div class="cartMachine buttonize button machine_${itemName}" onclick="spuds.describe('${itemName}')">`;
+          html += ` ${icon}<div class="cartQty">${qty}</div>`;
+          html += `</div>`;
         }
       }
     });

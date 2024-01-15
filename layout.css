@@ -394,6 +394,7 @@ svg.height {
   width: 2.5rem;
   height: 2.5rem;
   flex-shrink: 0;
+  position: relative;
 }
 
 .hardware-button-buy {
@@ -421,6 +422,11 @@ svg.height {
   display: flex;
   justify-content: space-between;
 }
+.hardware-button-info {
+  display: flex;
+
+}
+
 
 .button-tools {
   background-color: wheat;

@@ -51,7 +51,7 @@ const potatadex = {
   makeButton: function (itemInfo, showIfNotFound = false) {
     let spudInfo = {
       type: itemInfo.type,
-      icon: '<br/> &nbsp; ???',
+      icon: '',
       name: '????',
       desc: '??? ?????? ???? ??????',
     }
