@@ -216,6 +216,12 @@ const lists = {
       "Brave new potato",
       "Boy swallows potato",
       "Spuds and Amazons",
+      "The Bumper Book of Spuds",
+      "Spuds at sunrise",
+      "The Monster Mash",
+      "Ring of Bright Spuds",
+      "The Sword and the Spud",
+      "The Potato Bride",
     ],
 
     bookReview: [

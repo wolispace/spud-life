@@ -60,11 +60,11 @@ class Library extends game.Item {
     content += `</div>`;
   
     let footer = "";
-    footer += `<span class="footer-msg">You have found ${returned} of the ${books.maxBooks} books.</span>`;
+    footer += `<span class="footer-msg">You have found ${returned} of the ${game.maxBooks} books.</span>`;
     footer += `<button class="buttonize" onclick="dialog.cancel()"> Exit </button>`;
     dialog.cancelButton = function () { buildings.list.library.exit(); };
     dialog.render(title, content, footer);
-    if (returned == books.maxBooks) {
+    if (returned == game.maxBooks) {
       confetti.render();
     }
   }

@@ -1,7 +1,6 @@
 const books = {
   recordDelim: '^',
   fieldDelim: '|',
-  maxBooks: 8,
   titles: [],
   list: [],
 
@@ -58,7 +57,7 @@ const books = {
       let fieldId = 0;
       let fieldSet = books.perField();
       books.prepTitles();
-      while (bookCount <= books.maxBooks) {
+      while (bookCount <= game.maxBooks) {
         let bookInfo = books.build();
         books.list.push(books.bookInfo(bookCount, books.encodeOne(bookInfo.color, bookInfo.titleIdx, fieldId)));
         // increment the field so the books are scattered randomly across multiple fields in sets of 1-3
@@ -220,4 +219,4 @@ const books = {
 
   },
 
-}
+};
