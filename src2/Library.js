@@ -50,15 +50,15 @@ class Library extends game.Item {
   }
   
   showBooks() {
-    let returned = books.returned();
-
+    
     let title = `Public Library`;
     let content = `<div>`;
     content += books.newFinds();
     content += '<div>Books in the library:';
     content += books.listBooks();
     content += `</div>`;
-  
+    
+    let returned = books.returned();
     let footer = "";
     footer += `<span class="footer-msg">You have found ${returned} of the ${game.maxBooks} books.</span>`;
     footer += `<button class="buttonize" onclick="dialog.cancel()"> Exit </button>`;

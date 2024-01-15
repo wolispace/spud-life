@@ -222,10 +222,6 @@ svg.height {
   width: 25%;
 }
 
-#ipet {
-  /* filter: drop-shadow(0px 2px 2px white); */
-}
-
 .moving {
   filter: drop-shadow(0px 5px 5px black);
 }
