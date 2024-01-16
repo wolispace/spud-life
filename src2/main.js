@@ -238,7 +238,7 @@ function splashScreen() {
   let continueButton = 'Start new game';
 
   let content = `<div class="dialogIntro">`;
-  content += `<div  onclick="dialog.okButton(event);" class="introSvg">${titleSvg}</div>`;
+  content += `<div  onclick="dialog.okButton(event);" class="introSvg" title="Continue the game">${titleSvg}</div>`;
 
   let footer = '';
   footer += `<button class="buttonize" onclick="transferHere()"> Transfer </button>`;
@@ -325,6 +325,7 @@ function aboutGame() {
 
   let footer = "";
   footer += `<div></div>`;
+  footer += `<button class="buttonize" onclick="change.show()"> Changelog </button>`;
   footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
   dialog.cancelButton = function () { dialog.hide(); };
   dialog.okButton = function () { dialog.hide(); };

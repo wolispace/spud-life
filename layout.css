@@ -71,6 +71,15 @@ input {
 .introSvg {
   width: 60%;
   height: 60%;
+  cursor: pointer;
+}
+
+.introSvg:hover {
+  opacity: 0.80;
+}
+
+.changelog ul {
+  margin: 0;
 }
 
 .world {
