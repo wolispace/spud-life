@@ -64,7 +64,7 @@ class Hardware extends game.Item {
       itemInfo.qty = 1;
       icon = itemClass.svg;
     }
-    if (['machines', 'land', 'items', 'blocker'].includes(itemInfo.type)) {
+    if (['machines', 'land', 'items', 'blocker', 'upgrade'].includes(itemInfo.type)) {
       icon = svg.render(itemName);
       icon = svg.addOrientationClass(icon);
       itemInfo.qty = player.cart[itemName] ? 0 : 1;

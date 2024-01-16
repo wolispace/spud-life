@@ -96,6 +96,8 @@ const basket = {
       player.meals[itemInfo.makes] = 0;
     } else if (itemInfo.type == 'land') {
       field.addField();
+    } else if (itemInfo.type == 'upgrade') {
+      character.upgrade(itemName);
     } else if (itemName == 'scanner') {
       if (tools.list.scanner.qty > 1) {
         scanner.upgrade();

@@ -260,6 +260,30 @@ let items = {
     desc: "Next to your plot of land is another, you can expand your digging activities and maybe find rarer potatoes",
     price: 1000,
   },
+  boots: {
+    type: "upgrade",
+    name: "boots",
+    fullName: "Some potato-skin boots",
+    desc: "Fashioned from leathery baked-potato skins, surprisingly, they make you move faster",
+    price: 8000,
+    rareness: 9999,
+  },
+  ringSpeed: {
+    type: "upgrade",
+    name: "ringSpeed",
+    fullName: "A ring of speed",
+    desc: "Don't ask me how, but this ring makes you move faster",
+    price: 8000,
+    rareness: 9999,
+  },
+  glovesPower: {
+    type: "upgrade",
+    name: "glovesPower",
+    fullName: "Gauntlets of power",
+    desc: "Amazing gloves that reduce the number of hits to clear rocks and logs",
+    price: 8000,
+    rareness: 9999,
+  },  
   
 };
 

@@ -476,6 +476,10 @@ svg.height {
   background-color: rgb(199, 175, 214);
 }
 
+.button-upgrade {
+  background-color: rgb(250, 221, 213);
+}
+
 .tooMuch {
   opacity: 50%;
   background-color: rgba(0, 0, 0, 0.05);
