@@ -1,6 +1,6 @@
 let player = {
   name: '',
-  hints: true,
+  hints: false,
   hinted: '',
   x: 1,
   y: 1,

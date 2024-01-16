@@ -9,6 +9,9 @@ const game = {
   playerItem: null,
   petItem: null,
   digging: false,
+  speed: {
+    player: 1,
+  },
   step: { x: 5, y: 5 },
   tool: {incrementQty: 2, initialQty: 8},
   holeLife: 5, // how long until a hole disappears
@@ -16,7 +19,7 @@ const game = {
   maxScan: 4,
   spudVarieties: 8, // how many different varieties
   maxBooks: 10, //how many books to find
-  compress: true,
+  compress: false,
   transferred: false,
   newPlayer: {}, // temp info loaded before its finished being decoded
 
@@ -283,6 +286,7 @@ const game = {
       player.tools = tools.encode();
       player.pet = pet.encode();
       player.books = books.encode(); 
+      player.upgrade = upgrade.encode(); 
 
       let compressed = JSON.stringify(player);
       if (game.compress) {
@@ -312,14 +316,16 @@ const game = {
       game.newPlayer.spuds = spuds.decode(game.newPlayer.spuds);
       game.newPlayer.tools = tools.decode(game.newPlayer.tools);
       game.newPlayer.books = books.decode(game.newPlayer.books); 
+      game.newPlayer.upgrade = upgrade.decode(game.newPlayer.upgrade); 
       game.newPlayer.fields = field.encodeAll(game.newPlayer.fields, false);
       if (!player.pos) {
         player = game.newPlayer;
       }
     }
-    player.speed = player.speed ?? 1;
-    game.step.x = game.step.x * player.speed;
-    game.step.y = game.step.y * player.speed;
+    upgrade.blockHits();
+    upgrade.speed();
+
+
   },
 
   // make sure old versions of saved data are up-to-date 
@@ -332,6 +338,9 @@ const game = {
     }
     if (typeof player.hinted !== `string`) {
       player.hinted = '';
+    }
+    if (typeof player.cursors !== `undefined`) {
+      delete player.speed;
     }
     // make sure we know about the meal each machine they own makes
     Object.entries(player.cart).forEach(([machineName, qty]) => {

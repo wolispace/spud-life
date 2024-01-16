@@ -124,6 +124,10 @@ class Mobile extends game.Item {
           // reduce and/or remove blocker in onEnd of jiggling the block
           function onEnd() {
             if (spriteBox.qty > 0) {
+              // dont allow blocker to have a qty greater than players current blockHits
+              if (spriteBox.qty > game.blockHits) {
+                spriteBox.qty = game.blockHits;
+              }
               spriteBox.setPos();
               spriteBox.qty--;
               spriteBox.reduceAndPosition();

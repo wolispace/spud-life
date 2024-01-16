@@ -97,7 +97,7 @@ const basket = {
     } else if (itemInfo.type == 'land') {
       field.addField();
     } else if (itemInfo.type == 'upgrade') {
-      character.upgrade(itemName);
+      upgrade.add(itemName);
     } else if (itemName == 'scanner') {
       if (tools.list.scanner.qty > 1) {
         scanner.upgrade();

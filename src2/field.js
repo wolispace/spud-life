@@ -240,7 +240,7 @@ const field = {
 
   refresh: function () {
     player.fields[player.currentField][game.SURFACE].forEach((item) => {
-      item.svg = svg.render('hole', 5);
+      item.svg = svg.render('hole', game.holeLife);
       item.render();
       item.sprite.style.opacity = field.holeState(item);
       game.setUid(item.id);
@@ -250,8 +250,8 @@ const field = {
       item.render();
       if (item.reduced !== true) {
         // scale down if not 5
-        let itemQty = 5;
-        if (item.qty < 5) {
+        let itemQty = game.holeLife;
+        if (item.qty < game.holeLife) {
           while (itemQty > item.qty) {
             item.reduceSize();
             itemQty--;

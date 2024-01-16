@@ -1,9 +1,8 @@
 const upgrade = {
-  fieldDelim: '|',
   list: [],
 
   encode: function () {
-    return upgrade.list.join(upgrade.recordDelim);
+    return upgrade.list.join(',');
   },
 
   decode: function (encodedString) {
@@ -11,13 +10,34 @@ const upgrade = {
       return;
     }
 
-    upgrade.list = encodedString.split(upgrade.fieldDelim);
+    upgrade.list = encodedString.split(',');
 
   },
 
   add: function (itemName) {
+    upgrade.list.push(itemName);
     console.log('add upgrade', itemName);
+    this.speed();
+    this.blockHits();
 
-  
-  }, 
+  },
+
+  speed: function () {
+    game.speed.player = 1;
+    if (upgrade.list.includes('boots')) {
+      game.speed.player++;
+    }
+    if (upgrade.list.includes('ringSpeed')) {
+      game.speed.player++;
+    }
+    game.step.x = game.step.x * game.speed.player;
+    game.step.y = game.step.y * game.speed.player;
+  },
+
+  blockHits: function () {
+    game.blockHits = 5;
+    if (upgrade.list.includes('glovesPower')) {
+      game.blockHits -= 2;
+    }
+  },
 }
