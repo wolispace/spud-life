@@ -89,11 +89,13 @@ input {
   left: 0;
   right: 0;
   background-color: transparent;
+  pointer-events: none;
 }
 
 .controlsBacking {
   position: absolute;
   z-index: 2;
+  
 }
 
 .skyBox {
@@ -161,6 +163,10 @@ input {
 
 .sprite {
   position: absolute;
+}
+
+.building {
+  cursor: pointer;
 }
 
 .buttonize {
@@ -252,6 +258,7 @@ svg.height {
   box-shadow: 0px 5px 5px black;
   z-index: 2;
   opacity: 80%;
+  pointer-events: auto;
 }
 
 .control:hover {

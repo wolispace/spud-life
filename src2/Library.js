@@ -12,6 +12,7 @@ class Library extends game.Item {
       h: sprite.width * 2,
       item: 'library',
       autoRender: false,
+      classes: 'building',
     };
     super(params);
   }

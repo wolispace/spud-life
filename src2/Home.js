@@ -12,6 +12,7 @@ class Home extends game.Item {
       h: sprite.width * 2,
       item: 'home',
       autoRender: false,
+      classes: 'building',
     };
     super(params);
   }

@@ -9,6 +9,7 @@ class Land extends game.Item {
       h: sprite.height,
       item: 'land',
       autoRender: false,
+      classes: 'building',
     };
     super(params);
   }

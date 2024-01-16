@@ -13,6 +13,7 @@ class Hotel extends game.Item {
       h: sprite.width * 2,
       item: 'hotel',
       autoRender: false,
+      classes: 'building',
     };
     player.hotelName = player.hotelName ?? 'California';
     super(params);

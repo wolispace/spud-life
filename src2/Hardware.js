@@ -12,6 +12,7 @@ class Hardware extends game.Item {
       h: sprite.width * 2,
       item: 'hardware',
       autoRender: false,
+      classes: 'building',
     };
     super(params);
   }

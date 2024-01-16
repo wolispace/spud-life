@@ -21,6 +21,7 @@ class Cart extends game.Item {
       h: sprite.width * 2,
       item: 'cart',
       autoRender: false,
+      classes: 'building',
     };
     super(params);
   }
