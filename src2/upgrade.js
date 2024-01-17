@@ -1,7 +1,16 @@
 const upgrade = {
+  set: [
+    {name: 'boots', state: 0},
+    {name: 'ringSpeed', state: 0},
+    {name: 'glovesPower', state: 0},
+  ],
   list: [],
 
   encode: function () {
+    // TODO: return a list of IDs not words eg 'boots', 'glovesPower' becomes '1,3'
+    upgrade.set.forEach((itemInfo, index) => {
+
+    });
     return upgrade.list.join(',');
   },
 
@@ -9,8 +18,45 @@ const upgrade = {
     if (!encodedString) {
       return;
     }
-
+    //TODO: convert a list of ids eg '1,3' = 'boots', 'glovesPower' from upgrade.set
     upgrade.list = encodedString.split(',');
+  },
+
+  show: function () {
+    let title = "Upgrades";
+    let content = `<div class="dialog-message-content">`;
+    content += upgrade.current();
+    content += `</div>`;
+    let footer = "";
+    footer += `<div></div>`;
+    footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
+    dialog.cancelButton = function () { upgrade.hide(); };
+    dialog.okButton = function () { upgrade.hide(); };
+    dialog.render(title, content, footer);
+  },
+
+  hide: function () {    
+    let boots = dialog.isChecked("boots");
+    let ringSpeed = dialog.isChecked("ringSpeed");
+    let globesPower = dialog.isChecked("glovesPower");
+    dialog.hide();
+  },
+
+  current: function () {
+    let html = '';
+
+    if (upgrade.list.length > 0) {
+      upgrade.list.forEach((itemName, _) => {
+        html += `<div class="row">[${itemName}] `;
+        html += dialog.makeCheckbox(itemName, itemName, true)
+        html += `</div>`;
+      });
+    } else {
+      html += 'You have not bought any upgrades yet.';
+    }
+
+
+    return html;
 
   },
 
@@ -19,7 +65,6 @@ const upgrade = {
     console.log('add upgrade', itemName);
     this.speed();
     this.blockHits();
-
   },
 
   speed: function () {

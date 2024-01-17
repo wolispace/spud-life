@@ -378,6 +378,10 @@ svg.height {
   padding: 2rem;
 }
 
+.dialog .row {
+  display: flex;
+}
+
 .dialog .footer {
   display: flex;
   justify-content: space-between;

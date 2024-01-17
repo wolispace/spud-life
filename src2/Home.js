@@ -38,6 +38,7 @@ class Home extends game.Item {
 
     let footer = "";
     footer += `<button class="buttonize" onclick="character.customize()"> Wardrobe </button>`;
+    footer += `<button class="buttonize" onclick="upgrade.show()"> Upgrades </button>`;
     if (game.petItem) {
       footer += `<button class="buttonize" onclick="pet.interact()"> Pet </button>`;
     }
@@ -55,6 +56,7 @@ class Home extends game.Item {
 
     let footer = "";
     footer += `<button class="buttonize" onclick="character.customize()"> Wardrobe </button>`;
+    footer += `<button class="buttonize" onclick="upgrade.show()"> Upgrades </button>`;
     footer += `<button class="buttonize" onclick="dialog.cancel()"> Exit </button>`;
     dialog.cancelButton = function () { buildings.list.home.exit(); };
     dialog.okButton = function () { buildings.list.home.sleep(); };

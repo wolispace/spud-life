@@ -779,11 +779,18 @@ const lists = {
         <path d="m21.091 19.987 48.79 11.235 0.58839 51.73" style="fill:none;paint-order:fill markers stroke;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:.28497;stroke-width:2.4;stroke:#fff"/>
         <path d="m20.547 16.441c17.388 3.9326 34.805 7.741 52.187 11.695 0 0-0.2028-1.4875 1.875-2.9453 2.6088-1.8303 4.9375-2 4.9375-2l-54.75-11.5s-0.25-0.5-2.5 1.25-1.75 3.5-1.75 3.5z" style="fill:#fff;paint-order:fill markers stroke"/>
       </svg>`,
-      boots:  `<svg viewBox="0 0 100 100">
-      <path d="m9.75 69.25s5.75-7.5 16.25-7.75 18.921 5.1711 24.5 11.25c6.275 6.8374 3.75 11.5 3.75 11.5s5.75 4.25 9 0 1.5-3.5 1.5-3.5 2 1.25 10.75-3.25 10-9.25 13-15c2.2454-4.3036 0-10.25 0-10.25s-3.75-14.25-17-16-30-3.25-41.5 4.5-9.75 10.5-9.75 10.5-7.25-0.25-10.5 4.75 0 13.25 0 13.25z" style="fill:#934e3b;stroke-linecap:round;stroke-width:2.5;stroke:#000"/>
-      <path d="m16 52s5.2381-1.6457 14.25 0.5c5.25 1.25 12 4.5 12 4.5" style="fill:#934e3b;stroke-linecap:round;stroke-width:2.5;stroke:#000"/>
-      <path d="m63.75 83.5s1.5-4.25-0.5-8.5c-0.5-6.25-5.25-7.75-5.25-7.75" style="fill:#934e3b;stroke-linecap:round;stroke-width:2.5;stroke:#000"/>
-      </svg>`,
+      boots:  `<svg id="bta" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+      <path d="m87 68.75-20 10-2.75-3.25s-16.75 14.5-26.75 16l-10 1.5-8 0.25-11-8s-5.25-21.25 7.75-26.75 14.5-2.5 22.75-7.75 5.75-28.5 5.75-28.5 15.75-16.25 24.25-15 22 10.5 22.25 16.5-6.25 21.75-6.25 21.75 5.25 9.75 5.5 14.25-3.5 9-3.5 9z" style="fill:#5e3226;paint-order:fill markers stroke;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.4;stroke:#000"/>
+      <path d="m88 18.25c-0.32135-0.36473-3.75 10.25-12.75 12.75s-19.75 0.25-19.75 0.25 1.0684 13.187-3.5 20.75c-3.8707 6.4076-15 8.25-15 8.25s8.75-2.75 10.75-9.25 2.75-20.75 2.75-20.75-5.8649-8.4482-4.6281-8.9842c0 0 6.1303-9.2446 17.128-12.516 13.035-3.2891 25 9.5 25 9.5z" style="fill:#321b15;paint-order:fill markers stroke;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.4;stroke:#000"/>
+      <path d="m11.084 75.202s0.625-8.625 4.875-12.375c5-3.5 12.375-4.125 12.375-4.125" style="fill:none;stroke-linecap:round;stroke-opacity:.35751;stroke-width:2.5;stroke:#fff"/>
+      <path d="m88.082 25.292s-0.51197 3.5931-2.5448 9.1738c-1.6619 4.5625-4.4084 11.384-4.4084 11.384 1.0714 0.83337 4.9549 9.2891 4.9549 9.2891" style="fill:none;stroke-linecap:round;stroke-opacity:.28497;stroke-width:2.5;stroke:#fff"/>
+      <path d="m9 85s10.25 5.75 16 4.75 21.25-5.5 25.5-9.25 14.75-11.25 14.75-11.25 6 3 11.75-0.75 8-3.25 10.25-6.25 1.75-5.25 1.75-5.25l1.75 5.5-2.25 5.5-21.25 10.25-2.75-3.25s-18.75 17.75-28.25 18.75-17.5-0.5-17.5-0.5z" style="fill:#060606;paint-order:fill markers stroke;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.4;stroke:#000"/>
+      <path d="m36.447 57.23s0.46939-1.0442 4.8554 1.1497c3.1382 1.5697 2.8503 5.6939 2.8503 5.6939" style="fill:none;paint-order:fill markers stroke;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.4;stroke:#000"/>
+      <path d="m41.751 52.138s2.6463-0.28231 5.5085 1.6939c2.8875 1.9937 3.2857 5.3673 3.2857 5.3673" style="fill:none;paint-order:fill markers stroke;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.4;stroke:#000"/>
+      <path d="m45.561 43.6s4.3174 0.15306 6.3793 1.0408c3.2229 1.3877 4.3741 6.5646 4.3741 6.5646" style="fill:none;paint-order:fill markers stroke;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.4;stroke:#000"/>
+      <path d="m47.302 33.811s2.5374 0.04422 6.0527 2.3469c2.9352 1.9227 6.4422 7 6.4422 7" style="fill:none;paint-order:fill markers stroke;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.4;stroke:#000"/>
+     </svg>
+     `,
       glovesPower:  `<svg viewBox="0 0 100 100">
       <path d="m9.75 69.25s5.75-7.5 16.25-7.75 18.921 5.1711 24.5 11.25c6.275 6.8374 3.75 11.5 3.75 11.5s5.75 4.25 9 0 1.5-3.5 1.5-3.5 2 1.25 10.75-3.25 10-9.25 13-15c2.2454-4.3036 0-10.25 0-10.25s-3.75-14.25-17-16-30-3.25-41.5 4.5-9.75 10.5-9.75 10.5-7.25-0.25-10.5 4.75 0 13.25 0 13.25z" style="fill:#934e3b;stroke-linecap:round;stroke-width:2.5;stroke:#000"/>
       <path d="m16 52s5.2381-1.6457 14.25 0.5c5.25 1.25 12 4.5 12 4.5" style="fill:#934e3b;stroke-linecap:round;stroke-width:2.5;stroke:#000"/>

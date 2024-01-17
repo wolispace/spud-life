@@ -64,12 +64,16 @@ const dialog = {
     checkbox += `${text}</label>`;
     return checkbox;
   },
+
   // returns true if the checkbox is checked..
   isChecked: function (id) {
     let chk = document.querySelector(`#${id}`);
-    return chk.checked;
+    if (chk) {
+      return chk.checked;
+    } else {
+      return false;
+    }
   },
-
 
   setup: function () {
     // make sure we have a sky div that is 0,0, 100% sprite.height * sky.height
@@ -93,7 +97,7 @@ const dialog = {
     dialog.hide();
   },
 
-  overlayClicked: function() {
+  overlayClicked: function () {
     // do nothing but could close dialog
   },
 
@@ -101,20 +105,20 @@ const dialog = {
   // pos is y pixels to scroll
   // time is how long the animation takes
 
-  scrollToSmoothly: function(div, pos, time) {
+  scrollToSmoothly: function (div, pos, time) {
     var currentPos = div.scrollTop;
     var start = null;
-    if(time == null) time = 500;
+    if (time == null) time = 500;
     pos = +pos, time = +time;
     window.requestAnimationFrame(function step(currentTime) {
       start = !start ? currentTime : start;
       var progress = currentTime - start;
-      if(currentPos < pos) {
+      if (currentPos < pos) {
         div.scrollTop = ((pos - currentPos) * progress / time) + currentPos;
       } else {
         div.scrollTop = currentPos - ((currentPos - pos) * progress / time);
       }
-      if(progress < time) {
+      if (progress < time) {
         window.requestAnimationFrame(step);
       } else {
         div.scrollTop = pos;
@@ -122,12 +126,12 @@ const dialog = {
     })
   },
 
-  calculatePos: function(parentDiv, targetDiv) {
+  calculatePos: function (parentDiv, targetDiv) {
     return targetDiv.offsetTop - parentDiv.offsetTop;
   },
 
 
-  makeButton: function(itemInfo) {
+  makeButton: function (itemInfo) {
     let content = `<div  class="hardware-button buttonize  button-${itemInfo.type}">`;
     content += ` <div class="hardware-button-desc"><b>${itemInfo.name}.</b> </div>`;
     content += ` <div class="hardware-button-info">`;
@@ -140,6 +144,6 @@ const dialog = {
     return content;
   },
 
-  
+
 
 };

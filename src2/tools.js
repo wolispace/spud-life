@@ -1,5 +1,4 @@
 const tools = {
-  fieldDelim: '|',
   list: {},
   buyable: ['axe', 'pick'],
 
@@ -37,7 +36,7 @@ const tools = {
     let decoded = {};
     let records = encodedString.split(game.recDelim);
     records.forEach((thisSpud) => {
-      let bit = thisSpud.split(tools.fieldDelim);
+      let bit = thisSpud.split(game.fldDelim);
       decoded[bit[0]] = {
         qty: parseInt(bit[1]),
         max: parseInt(bit[2]),
@@ -53,7 +52,7 @@ const tools = {
   encode: function () {
     let encodedString = '';
     let r = '';
-    let d = tools.fieldDelim;
+    let d = game.fldDelim;
     Object.entries(tools.list).forEach(([toolName, toolInfo]) => {
       let stringOfList = JSON.stringify(toolInfo.list) || '{}';
       encodedString += `${r}${toolName}${d}`;
