@@ -30,8 +30,8 @@ const upgrade = {
     if (upgrade.list.includes('ringSpeed')) {
       game.speed.player++;
     }
-    game.step.x = game.step.x * game.speed.player;
-    game.step.y = game.step.y * game.speed.player;
+    game.step.x = game.step.base.x * game.speed.player;
+    game.step.y = game.step.base.y * game.speed.player;
   },
 
   blockHits: function () {

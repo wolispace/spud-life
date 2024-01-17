@@ -265,7 +265,7 @@ let items = {
     name: "boots",
     fullName: "Some potato-skin boots",
     desc: "Fashioned from leathery baked-potato skins, surprisingly, they make you move faster",
-    price: 8000,
+    price: 1000,
     rareness: 9999,
   },
   ringSpeed: {
@@ -273,7 +273,7 @@ let items = {
     name: "ringSpeed",
     fullName: "A ring of speed",
     desc: "Don't ask me how, but this ring makes you move faster",
-    price: 8000,
+    price: 1500,
     rareness: 9999,
   },
   glovesPower: {
@@ -281,7 +281,7 @@ let items = {
     name: "glovesPower",
     fullName: "Gauntlets of power",
     desc: "Amazing gloves that reduce the number of hits to clear rocks and logs",
-    price: 8000,
+    price: 1000,
     rareness: 9999,
   },  
   
