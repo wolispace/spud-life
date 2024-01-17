@@ -7,14 +7,13 @@ const pet = {
   timer: null,
   pawsTime: 5,
   pawsMin: 5,
-  fieldDelim: '|',
   locked: true,
   level: 0,
 
   encode: function () {
     if (game.petItem) {
-      let encoded = `${pet.name}${pet.fieldDelim}${pet.currentField}${pet.fieldDelim}`;
-      encoded += `${game.petItem.x}${pet.fieldDelim}${game.petItem.y}${pet.fieldDelim}${pet.level}`;
+      let encoded = `${pet.name}${game.fldDelim}${pet.currentField}${game.fldDelim}`;
+      encoded += `${game.petItem.x}${game.fldDelim}${game.petItem.y}${game.fldDelim}${pet.level}`;
       return encoded;
     }
     else return '';
@@ -23,7 +22,7 @@ const pet = {
   decode: function (encodedString) {
     if (encodedString) {
       pet.add();
-      let bit = encodedString.split(pet.fieldDelim);
+      let bit = encodedString.split(game.fldDelim);
       pet.name = bit[0];
       pet.currentField = parseInt(bit[1]);
       game.petItem.x = parseInt(bit[2]);

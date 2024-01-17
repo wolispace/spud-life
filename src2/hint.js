@@ -1,6 +1,4 @@
 const hint = {
-  recordDelim: '^',
-  fieldDelim: '|',
   target: null,
   arrow: null,
   msg: null,

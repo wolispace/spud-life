@@ -1,6 +1,4 @@
 const tools = {
-
-  recordDelim: '^',
   fieldDelim: '|',
   list: {},
   buyable: ['axe', 'pick'],
@@ -37,7 +35,7 @@ const tools = {
   // cant use ^ or | in spud descriptions!
   decode: function (encodedString) {
     let decoded = {};
-    let records = encodedString.split(tools.recordDelim);
+    let records = encodedString.split(game.recDelim);
     records.forEach((thisSpud) => {
       let bit = thisSpud.split(tools.fieldDelim);
       decoded[bit[0]] = {
@@ -64,7 +62,7 @@ const tools = {
       encodedString += `${stringOfList}${d}`;
       encodedString += `${toolInfo.state || true}${d}`;
       encodedString += `${toolInfo.total || 0}${d}`;
-      r = tools.recordDelim;
+      r = game.recDelim;
     });
 
     return encodedString;

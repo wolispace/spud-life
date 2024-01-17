@@ -21,6 +21,8 @@ const game = {
   maxBooks: 10, //how many books to find
   compress: false,
   transferred: false,
+  recDelim: ',',
+  fldDelim: '|',
   newPlayer: {}, // temp info loaded before its finished being decoded
 
 
@@ -309,6 +311,7 @@ const game = {
 
     if (gameState) {
       let decompressed = gameState;
+      decompressed = decompressed.replaceAll('^', ',');
       if (gameState.indexOf('"name":') < 0) {
         decompressed = LZString.decompressFromUTF16(gameState);
       }

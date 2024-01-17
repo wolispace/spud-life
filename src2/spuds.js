@@ -1,6 +1,4 @@
 const spuds = {
-  recordDelim: '^',
-  fieldDelim: '|',
 
   //generate the the complete random list of spuds for this session
   bits: {
@@ -85,9 +83,9 @@ const spuds = {
   // cant use ^ or | in spud descriptions!
   decode: function (encodedString) {
     let spudList = {};
-    let records = encodedString.split(spuds.recordDelim);
+    let records = encodedString.split(game.recDelim);
     records.forEach((thisSpud) => {
-      let bit = thisSpud.split(spuds.fieldDelim);
+      let bit = thisSpud.split(game.fldDelim);
       spudList[bit[0]] = {
         name: bit[0],
         bestFor: bit[1],
@@ -104,7 +102,7 @@ const spuds = {
   encode: function (spudList) {
     let encodedString = '';
     let r = '';
-    let d = spuds.fieldDelim;
+    let d = game.fldDelim;
 
     Object.entries(spudList).forEach(([spudName, spudInfo]) => {
       encodedString += `${r}${spudName}${d}`;
@@ -112,7 +110,7 @@ const spuds = {
       encodedString += `${spudInfo.color}${d}`;
       encodedString += `${spudInfo.fullName}${d}`;
       encodedString += `${spudInfo.rareness}${d}`;
-      r = spuds.recordDelim;
+      r = game.recDelim;
     });
 
     return encodedString;

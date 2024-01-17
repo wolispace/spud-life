@@ -1,23 +1,21 @@
 const books = {
-  recordDelim: '^',
-  fieldDelim: '|',
   titles: [],
   list: [],
 
   // encode all books.list into one string for saving
   encode: function () {
-    let d = books.fieldDelim;
+    let d = game.fldDelim;
     let bookList = [];
     books.list.forEach((bookInfo, _) => {
       bookList.push(books.encodeOne(bookInfo.color,bookInfo.titleIdx, bookInfo.field));
     });
 
-    return bookList.join(books.recordDelim);
+    return bookList.join(game.recDelim);
   },
 
   // build encoded bookInfo string for one book
   encodeOne: function(color, titleIdx, fieldId) {
-    return `${color}${books.fieldDelim}${titleIdx}${books.fieldDelim}${fieldId}`;
+    return `${color}${game.fldDelim}${titleIdx}${game.fldDelim}${fieldId}`;
   },
 
   // take the player.books string and explode into bookStrings which get converted into objects
@@ -26,7 +24,7 @@ const books = {
       return;
     }
     books.list = [];
-    let bookList = encoded.split(books.recordDelim);
+    let bookList = encoded.split(game.recDelim);
     bookList.forEach((bookString, index) => {
       let bookInfo = books.bookInfo(index, bookString);
       books.list.push(bookInfo);
@@ -36,7 +34,7 @@ const books = {
 
   // take an encoded string `red,4,0` and return an object {color: titleIdx, title: field}
   bookInfo: function (bookCount, bookInfoString) {
-    let bookInfo = bookInfoString.split(books.fieldDelim);
+    let bookInfo = bookInfoString.split(game.fldDelim);
     return {
       type: 'book',
       item: `book_${bookCount}`,
@@ -164,7 +162,7 @@ const books = {
   hint: function (bookId) {
     hint.force = true;
     hint.target = document.querySelector(`.book_${bookId}`);
-    let bookList = player.books.split(books.recordDelim);
+    let bookList = player.books.split(game.recDelim);
     let bookString = bookList[bookId];
     let bookInfo = books.bookInfo(bookString);
 
