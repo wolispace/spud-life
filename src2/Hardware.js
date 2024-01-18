@@ -50,7 +50,7 @@ class Hardware extends game.Item {
         return '';
       }
     }
-    if (upgrade.list.includes(itemName)) {
+    if (upgrade.has(itemName)) {
       return '';
     }
     if (itemName == 'scanner' && tools.list.scanner.qty <= 1) {

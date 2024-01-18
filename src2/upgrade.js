@@ -1,25 +1,34 @@
 const upgrade = {
-  set: [
-    {name: 'boots', state: 0},
-    {name: 'ringSpeed', state: 0},
-    {name: 'glovesPower', state: 0},
-  ],
+  set: ['boots', 'ringSpeed', 'glovesPower'],
+
+  state: {
+    'boots': 0,
+    'ringSpeed': 0,
+    'glovesPower': 0,
+  },
   list: [],
 
   encode: function () {
-    // TODO: return a list of IDs not words eg 'boots', 'glovesPower' becomes '1,3'
-    upgrade.set.forEach((itemInfo, index) => {
-
+    let saveState = [];
+    upgrade.set.forEach((itemName, _) => {
+      saveState.push(upgrade.state[itemName]);
     });
-    return upgrade.list.join(',');
+
+    return saveState.join(',');
   },
 
   decode: function (encodedString) {
     if (!encodedString) {
       return;
     }
-    //TODO: convert a list of ids eg '1,3' = 'boots', 'glovesPower' from upgrade.set
-    upgrade.list = encodedString.split(',');
+    let states = encodedString.split(',');
+    upgrade.set.forEach((itemName, index) => {
+      upgrade.state[itemName] = states[index];
+    });
+  },
+
+  has: function (itemName) {
+    return (upgrade.set.includes(itemName) && upgrade.state[itemName] != 0);
   },
 
   show: function () {
@@ -35,33 +44,36 @@ const upgrade = {
     dialog.render(title, content, footer);
   },
 
-  hide: function () {    
-    let boots = dialog.isChecked("boots");
-    let ringSpeed = dialog.isChecked("ringSpeed");
-    let globesPower = dialog.isChecked("glovesPower");
-    dialog.hide();
+  hide: function () {
+    upgrade.set.forEach((itemName) => {
+      if (upgrade.state[itemName] != 0) {
+        upgrade.state[itemName] = dialog.isChecked(itemName) ? 1 : -1;
+      }
+    });
+
+    buildings.list.home.enter();
   },
 
   current: function () {
     let html = '';
-
-    if (upgrade.list.length > 0) {
-      upgrade.list.forEach((itemName, _) => {
-        html += `<div class="row">[${itemName}] `;
-        html += dialog.makeCheckbox(itemName, itemName, true)
+    Object.entries(upgrade.state).forEach(([itemName, itemState]) => {
+      if (itemState != 0) {
+        let icon = svg.inline(itemName);
+        html += `<div class="row">${icon}`;
+        html += dialog.makeCheckbox(itemName, itemName, upgrade.state[itemName] == 1)
         html += `</div>`;
-      });
-    } else {
+      }
+    });
+    if (html == '') {
       html += 'You have not bought any upgrades yet.';
     }
-
 
     return html;
 
   },
 
   add: function (itemName) {
-    upgrade.list.push(itemName);
+    upgrade.state[itemName] = 1;
     console.log('add upgrade', itemName);
     this.speed();
     this.blockHits();
@@ -69,10 +81,10 @@ const upgrade = {
 
   speed: function () {
     game.speed.player = 1;
-    if (upgrade.list.includes('boots')) {
+    if (upgrade.state['boots'] == 1) {
       game.speed.player++;
     }
-    if (upgrade.list.includes('ringSpeed')) {
+    if (upgrade.state['ringSpeed'] == 1) {
       game.speed.player++;
     }
     game.step.x = game.step.base.x * game.speed.player;
@@ -81,7 +93,7 @@ const upgrade = {
 
   blockHits: function () {
     game.blockHits = 5;
-    if (upgrade.list.includes('glovesPower')) {
+    if (upgrade.state['glovesPower'] == 1) {
       game.blockHits -= 2;
     }
   },
