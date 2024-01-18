@@ -124,4 +124,4 @@ const upgrade = {
     hint.group = ``,
       hint.render();
   },
-}
+};

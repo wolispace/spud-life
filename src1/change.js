@@ -1,5 +1,8 @@
 const change = {
   log: {
+    "1.8.0": [
+      "Added upgrades",
+    ], 
     "1.7.0": [
       "Added changelog",
     ],
