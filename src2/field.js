@@ -278,8 +278,8 @@ const field = {
       return;
     }
     let scale = {
-      x: ((game.grid.x * sprite.width) / (player.g.x * player.g.w)),
-      y: ((game.grid.y * sprite.height) / (player.g.y * player.g.h)),
+      x: round((game.grid.x * sprite.width) / (player.g.x * player.g.w)),
+      y: round((game.grid.y * sprite.height) / (player.g.y * player.g.h)),
     }
 
     player.fields.forEach((field) => {

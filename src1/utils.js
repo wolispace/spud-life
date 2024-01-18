@@ -9,6 +9,10 @@ function halfRnd(num) {
   return rnd(num * 2) - num;
 }
 
+function round(num, decimals = 2) {
+  return Math.round(num * Math.pow(10, decimals)) / Math.pow(10, decimals);
+}
+
 // returns the singular or plural based on the word supplied
 // pluraliser('axe', 'a', 'an'); returns 'an'
 function pluraliser(word, single, plural) {
