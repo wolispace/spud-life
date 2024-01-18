@@ -55,12 +55,16 @@ const upgrade = {
   },
 
   current: function () {
-    let html = '';
+    let html = '<div>You can turn upgrades off if you like.</div>';
     Object.entries(upgrade.state).forEach(([itemName, itemState]) => {
       if (itemState != 0) {
         let icon = svg.inline(itemName);
-        html += `<div class="row">${icon}`;
-        html += dialog.makeCheckbox(itemName, itemName, upgrade.state[itemName] == 1)
+        let itemInfo = items[itemName];
+        let desc = `<b>${itemInfo.fullName}</b>`;
+        html += `<div class="row">`;
+        html += `<div class="buttonize button upgrade_${itemName}" onclick="upgrade.describe('${itemName}')">${icon}</div>`;
+
+        html += dialog.makeCheckbox(itemName, desc, upgrade.state[itemName] == 1)
         html += `</div>`;
       }
     });
@@ -96,5 +100,28 @@ const upgrade = {
     if (upgrade.state['glovesPower'] == 1) {
       game.blockHits -= 2;
     }
+  },
+
+  describe: function (itemName) {
+    let itemInfo = items[itemName];
+    hint.force = true;
+
+    hint.target = document.querySelector(`.upgrade_${itemName}`);
+    hint.target.centre = function () {
+      let icon = {
+        x: hint.target.offsetLeft,
+        y: hint.target.offsetTop,
+        w: hint.target.offsetWidth,
+        h: hint.target.offsetHeight,
+      };
+      return {
+        x: icon.x + (icon.w * 0.75),
+        y: icon.y + (icon.h * 0.75),
+      }
+    }
+    hint.message = `<b>${itemInfo.fullName}</b></br>${itemInfo.desc}`;
+    hint.okButton = 'hint.close';
+    hint.group = ``,
+      hint.render();
   },
 }
