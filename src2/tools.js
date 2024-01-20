@@ -76,6 +76,9 @@ const tools = {
       let content = `<div class="dialog-message-content">`;
       content += `This is your pick.`;
       content += `You have used it ${tools.list.pick.total} times.`;
+      if (isDev) {
+        content += tools.fieldCount();
+      }
       let footer = "";
       footer += `<div></div>`;
       footer += `<button class="buttonize" onclick="dialog.okButton()"> Ok </button>`;
@@ -89,6 +92,9 @@ const tools = {
       let content = `<div class="dialog-message-content">`;
       content += `This is your axe.`;
       content += `You have used it ${tools.list.axe.total} times.`;
+      if (isDev) {
+        content += tools.fieldCount();
+      }
       let footer = "";
       footer += `<div></div>`;
       footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
@@ -157,6 +163,39 @@ const tools = {
       thisTool.addQty(addQty);
     }
     hint.addTool(thisTool);
+  },
+
+  fieldCount: function() {
+    let allItems = [];
+    player.fields.forEach((field, fieldId) => {
+      allItems[fieldId] = {};
+      field.forEach((layer, _) => {
+        layer.forEach((itemInfo, _) => {
+          let type = 'unknown';
+          let id = 'unknown';
+          if (itemInfo) {
+            type = itemInfo.type ?? itemInfo.item ?? 'unknown';
+            id = itemInfo.id;
+          }
+          if (!allItems[fieldId][type]) {
+            allItems[fieldId][type] = []; 
+          }
+          allItems[fieldId][type].push(id);   
+          
+        });
+      });
+    });
+
+    let html = '<div>';
+    allItems.forEach((field, fieldId) => {
+      console.log(field, fieldId);
+      Object.entries(field).forEach(([itemName, items]) => {
+        console.log(itemName);
+        html += `${itemName} = ${items.length}</br>`;
+      });
+    });
+    html += '</div>';
+    return html;
   },
 
 };

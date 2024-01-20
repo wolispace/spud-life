@@ -129,7 +129,7 @@ const controls = {
             y: player.y + (sprite.height / 2),
             w: sprite.width,
             h: sprite.height,
-            qty: 5,
+            qty: game.holeLife,
             classes: '',
             item: 'hole'
           }

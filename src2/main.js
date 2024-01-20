@@ -156,6 +156,9 @@ function startGame() {
     setupThings();
     field.addRandom(player.currentField);
     field.redraw();
+    if (isDev) {
+      player.hints = false;
+    }
     //game.save();
 
   }

@@ -140,7 +140,7 @@ class Mobile extends game.Item {
                 basket.add(spriteBox);
                 spriteBox.remove();
               }
-              delete player.fields[player.currentField][layer][index];
+              player.fields[player.currentField][layer].splice(index, 1);
               spriteBox.qty = 1;
               spriteBox.x = game.playerItem.x;
               spriteBox.y = game.playerItem.y;
@@ -198,7 +198,7 @@ class Mobile extends game.Item {
             game.endItem = basket;
           }
 
-          delete player.fields[player.currentField][layer][index];
+          player.fields[player.currentField][layer].splice(index, 1);
           scanner.scan();
 
           let onEnd = function () {

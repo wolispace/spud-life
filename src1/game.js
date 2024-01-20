@@ -19,7 +19,7 @@ const game = {
   maxScan: 4,
   spudVarieties: 8, // how many different varieties
   maxBooks: 10, //how many books to find
-  compress: false,
+  compress: true,
   transferred: false,
   recDelim: '^',
   fldDelim: '|',

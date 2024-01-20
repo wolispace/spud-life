@@ -78,7 +78,6 @@ const upgrade = {
 
   add: function (itemName) {
     upgrade.state[itemName] = 1;
-    console.log('add upgrade', itemName);
     this.speed();
     this.blockHits();
   },

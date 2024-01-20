@@ -2,6 +2,7 @@ const change = {
   log: {
     "1.8.0": [
       "Added upgrades",
+      ".1 - Only reseed spuds to max field capacity",
     ], 
     "1.7.0": [
       "Added changelog",

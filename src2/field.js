@@ -68,10 +68,7 @@ const field = {
     let layer = game.ABOVEGROUND;
     let fieldHeight = containerBox.height - (sprite.height * 2) - topNoSeed;
     let fieldWidth = containerBox.width - sprite.width - leftNoSeed;
-    let totalItems = (game.grid.x * game.grid.y) / 3;
-    if (isDev) {
-      //totalItems = 1;
-    }
+    let totalItems = field.totalItems();
     for (let step = 0; step < totalItems; step++) {
       let y = rnd(fieldHeight) + topNoSeed + rnd(sprite.height);
       let x = rnd(fieldWidth) + leftNoSeed;
@@ -98,10 +95,6 @@ const field = {
     layer = game.UNDERGROUND;
     fieldHeight = containerBox.height - (sprite.height * 2);
     fieldWidth = containerBox.width;
-    totalItems = (game.grid.x * game.grid.y) / 5;
-    if (isDev) {
-      //totalItems = 5;
-    }
     for (let step = 0; step < totalItems; step++) {
       let params = {
         id: game.getUid(),
@@ -129,6 +122,15 @@ const field = {
     // add any books for his field
     books.addAllToField(fieldId);
   },
+
+  totalItems: function () {
+    let totalItems = (game.grid.x * game.grid.y) / 5;
+    if (isDev) {
+      totalItems = 3;
+    }
+
+    return totalItems;
+  },
   
   // return an items based on its rareness, defaulting to most common
   rarenessItem: function() {
@@ -151,8 +153,12 @@ const field = {
   },
 
   add: function (fieldId) {
-    //console.log('add a new spud underground in field ', player);
-    layer = game.UNDERGROUND;
+    // add a spud if the field is not already at max capacity
+    let layer = game.UNDERGROUND;
+    if (player.fields[fieldId][layer].length >= field.totalItems()) {
+      return;
+    }
+
     fieldHeight = containerBox.height - (sprite.height * 2);
     fieldWidth = containerBox.width;
     let params = {
@@ -173,8 +179,11 @@ const field = {
   },
 
   addItem: function (fieldId) {
-    //console.log('add a new spud underground in field ', player);
-    layer = game.UNDERGROUND;
+    // adds an item the player hasnt found yet.
+    let layer = game.UNDERGROUND;
+    if (player.fields[fieldId][layer].length >= field.totalItems()) {
+      return;
+    }
     fieldHeight = containerBox.height - (sprite.height * 2);
     fieldWidth = containerBox.width;
     let params = {
@@ -395,6 +404,9 @@ const field = {
 
   change: function (direction) {
     player.currentField += (direction == 'right')? 1 : -1;
+    if (player.currentField < 0 ) {
+      player.currentField = 0;
+    }
     field.redraw();
     controls.endInput();
     game.playerItem.look(direction);
