@@ -132,7 +132,7 @@ const game = {
         this.sprite.style.top = '1px';
         this.sprite.style.left = '1px';
         this.x = this.oldPos.x;
-        this.y = this.oldPos.y;
+        this.y = this.oldPos.y + 1;
         this.position();
       }
       this.oldPos = {};
