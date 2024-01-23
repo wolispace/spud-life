@@ -402,7 +402,7 @@ const hint = {
 
   firstTool: function (hitItem) {
     hint.target = hitItem;
-    hint.message = `You need to hit this ${game.blockHits} more times to remove it completely`;
+    hint.message = `You need to hit this ${game.blockHits - 1} more times to remove it completely`;
     hint.okButton = 'hint.confirm';
     hint.group = 'x';
     hint.render();

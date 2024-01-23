@@ -49,10 +49,13 @@ const character = {
     if (player.meals[itemName] >= 0) {
       return true;
     }
+    if (upgrade.has(itemName)) {
+      return true;
+    }
     if (tools.list[itemName]) {
       return tools.list[itemName].visible != false ?? false;
     }
-    if (itemName.indexOf('land') > -1) {
+    if (itemName.indexOf('land') > -1 && player.fields.length > 1) {
       return true;
     }
     return false;
