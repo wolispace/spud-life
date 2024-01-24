@@ -8,7 +8,7 @@ const basket = {
     } else {
       tools.list.basket.list[item.item] = item.qty;
     }
-    hint.dugItem();
+    hint.dugItem(item);
     basket.recount();
     let bookInfo = books.isBook(item.item);
     if (bookInfo) {

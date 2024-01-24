@@ -120,6 +120,9 @@ class Home extends game.Item {
     dialog.hide();
     buildings.list.home.exit();
     hint.resetReminders();
+    if (player.fields[0][game.SURFACE].length > 0) {
+      hint.holeLife();
+    }
     if (game.petItem) {
       pet.locked = false;
       pet.goPlayer();

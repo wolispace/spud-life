@@ -119,6 +119,15 @@ input {
   z-index: 2;
 }
 
+.hintIcon {
+  width: 5rem;
+  height: 5rem;
+  background: radial-gradient(circle, white, rgba(255, 251, 0, 0));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .skyBox {
   position: absolute;
   top: 0;

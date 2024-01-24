@@ -236,7 +236,7 @@ class Cart extends game.Item {
         let itemInfo = items[itemName];
         let bookInfo = books.isBook(itemName);
         if (!bookInfo && itemInfo.type == 'spuds') {
-          let icon =spuds.build(itemInfo.name);
+          let icon = spuds.build(itemInfo.name);
           
           html += `<div class="cartMachine buttonize button machine_${itemName}" onclick="spuds.describe('${itemName}')">`;
           html += ` ${icon}<div class="cartQty">${qty}</div>`;

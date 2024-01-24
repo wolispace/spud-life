@@ -288,6 +288,7 @@ const character = {
 
   stopMoving: function () {
     clearTimeout(timers.touchStepTimer);
+    scanner.scan();
     timers.moving = false;
     game.playerItem.path = null;
     game.save();

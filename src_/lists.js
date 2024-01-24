@@ -179,6 +179,18 @@ const lists = {
       "Today there will be the usual amount of weather.",
     ],
 
+    wowMsgList: [
+      "Oh look!",
+      "Wow!",
+      "Oh my!",
+      "Well looky here..",
+      "Golly!",
+      "Boy oh boy..",
+      "Gee whizz..",
+      "Gee willikas!",
+      "What, What!",
+    ],
+
     okText: [
       "Ok",
       "Okay",

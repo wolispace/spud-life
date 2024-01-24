@@ -171,7 +171,7 @@ const pet = {
 
   save: function () {
     let dialogInput = document.querySelector(`#petName`);
-    pet.name = cleanString(dialogInput.value) || character.randomName();
+    pet.name = cleanString(dialogInput.value);
     player.petChatter = dialog.isChecked("petChatterOn");
     if (tools.list.basket.list.bone) {
       if (dialog.isChecked("boneQty")) {

@@ -241,18 +241,19 @@ function splashScreen() {
   let continueButton = 'Start new game';
 
   let content = `<div class="dialogIntro">`;
-  content += `<div  onclick="dialog.okButton(event);" class="introSvg" title="Continue the game">${titleSvg}</div>`;
+
+  content += `<div  onclick="dialog.okButton(event);" class="introSvg" title="Continue your game">${titleSvg}</div>`;
 
   let footer = '';
   footer += `<button class="buttonize" onclick="transferHere()"> Transfer </button>`;
-  footer += `<div>&nbsp;v${version}</div>`;
   if (!game.new) {
     content += `<div>Welcome back <b>${player.name}</b></div>`;
     //content += dialog.makeCheckbox("hintsOn", "Show hints?", player.hints);
     back = 'back';
     continueButton = 'Continue';
-    footer += `<button class="buttonize" onclick="game.clear(true)"> New game </button>`;
+    footer += `<button class="buttonize" onclick="change.show()">v${version}</button>`;
     content += `<button class="buttonize" onclick="dialog.okButton()"> ${continueButton} </button>`;
+    footer += `<button class="buttonize" onclick="game.clear(true)"> New game </button>`;
   } else {
     content += `<button class="buttonize" onclick="dialog.okButton()"> ${continueButton} </button>`;
     footer += `<div>&nbsp; </div>`;

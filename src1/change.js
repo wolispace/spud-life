@@ -6,6 +6,7 @@ const change = {
       ".2 - Prevent player getting stuck after exiting a building",
       ".3 - Upgrades added to potatadex, fix hints in dialog alignment",
       ".4 - Choose spade pos and refined no-click zones",
+      ".5 - Celebrate first items dug and scan after touch move",
     ], 
     "1.7.0": [
       "Added changelog",

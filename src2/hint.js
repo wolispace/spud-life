@@ -10,6 +10,7 @@ const hint = {
   force: false,
   reminder: {},
   toolNoneCount: -1,
+  hintBasket: false,
 
   defaultParams: {
     autoRender: false,
@@ -463,16 +464,29 @@ const hint = {
     hint.render();
   },
 
-  dugItem: function () {
+  dugItem: function (item) {
+    let itemInfo = items[item.item];
+    let icon;
+    if (itemInfo.type == 'spuds') {
+      icon = spuds.build(itemInfo.name);
+      itemInfo.fullName = `A spud called ${itemInfo.fullName}`;
+    } else {
+      icon = svg.inline(item.item);
+    }
+    let wowMsg = getFromList('wowMsgList');
     hint.target = tools.list.basket;
-    hint.message = `You dug up something. Click your basket to see what you found.`;
-    hint.okButton = 'hint.holeLife';
-    hint.group = 'f';
+    hint.message = `${wowMsg} You just dug up:<br/><b>${itemInfo.fullName}</b>`;
+    hint.message += `<div class="hintIcon">${icon}</div>`;
+    if (!hint.hintBasket) {
+      hint.message += `<div>Check your basket to see what you found.</div>`;
+    }
+    hint.hintBasket = true;
+    hint.group = item.item;
     hint.render();
   },
 
   holeLife: function () {
-    hint.target = game.playerItem;
+    hint.target = player.fields[0][game.SURFACE][0];
     hint.message = `Each hole clears after 5 days, then a new spud is randomly sown`;
     hint.okButton = 'hint.confirm';
     hint.group = 'f2';
