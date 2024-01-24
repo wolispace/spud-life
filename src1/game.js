@@ -13,7 +13,7 @@ const game = {
     player: 1,
   },
   step: { base: { x: 5, y: 5 }},
-  tool: {incrementQty: 2, initialQty: 8},
+  tool: {incrementQty: 2, initialQty: 8, padding: 20},
   holeLife: 5, // how long until a hole disappears
   blockerHits: 5, // how many hits on a blocker to clear it
   maxScan: 4,

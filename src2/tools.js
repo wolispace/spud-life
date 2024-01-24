@@ -5,15 +5,17 @@ const tools = {
   setup: function () {
     let toolList = ['wallet', 'scanner', 'basket', 'axe', 'pick', 'spade'];
 
-    let padding = 20;
     let params = {
-      x: (game.grid.x * sprite.width) - sprite.width - padding,
-      y: (game.grid.y * sprite.height) - sprite.height - padding,
+      x: (game.grid.x * sprite.width) - sprite.width - game.tool.padding,
+      y: (game.grid.y * sprite.height) - sprite.height - game.tool.padding,
       autoRender: false,
     }
 
     toolList.forEach((itemName) => {
-      if (itemName != 'spade' || !player.cursors) {
+      if (player.cursors) {
+        if (itemName == 'spade') {
+          params = tools.spadeCoords(params);
+        }
         params.id = itemName;
         // start scanner at max
         if (itemName == 'scanner') {
@@ -22,13 +24,40 @@ const tools = {
         params.name = itemName;
         tools.list[itemName] = new Tool(params);
         tools.list[itemName].sprite.onclick = tools.clicks[itemName];
-        params.x = params.x - tools.list[itemName].w - padding;
+        params.x = params.x - tools.list[itemName].w - game.tool.padding;
         tools.list[itemName].total = player.tools[itemName].total ?? 0;
         if (tools.buyable.includes(itemName) && player.tools[itemName].max === 0) {
           tools.list[itemName].hide();
         }
+        if (itemName == 'spade') {
+          tools.spadePos();
+        }
       }
     });
+  },
+
+  spadePos: function () {
+    let params = tools.spadeCoords();
+    tools.list['spade'].x = params.x;
+    tools.list['spade'].y = params.y;
+    tools.list['spade'].setPos();
+    let backing = document.querySelector(".spd");
+    let start = tools.list['spade'];
+    let padding = start.w / 2;
+    backing.style.left = `${start.x - padding}px`;
+    backing.style.top = `${start.y - padding}px`;
+    backing.style.width = `${start.w + padding * 2}px`;
+    backing.style.height = `${start.h + padding * 2}px`;
+  },
+
+  spadeCoords: function (params = {}) {
+    let target = controls.list['down'];
+    if (player.spadePos) {
+      target = tools.list['wallet'];
+    }
+    params.x = target.x;
+    params.y = target.y - sprite.height - game.tool.padding;
+    return params;
   },
 
   // cant use ^ or | in spud descriptions!
@@ -137,7 +166,7 @@ const tools = {
   addItems: function () {
     let items = ['log', 'rock', 'bottle', 'caps', 'diamond'];
     items.forEach((item => {
-      basket.add({item: item, qty: 1});
+      basket.add({ item: item, qty: 1 });
     }));
   },
 
@@ -165,7 +194,7 @@ const tools = {
     hint.addTool(thisTool);
   },
 
-  fieldCount: function() {
+  fieldCount: function () {
     let allItems = [];
     player.fields.forEach((field, fieldId) => {
       allItems[fieldId] = {};
@@ -178,10 +207,10 @@ const tools = {
             id = itemInfo.id;
           }
           if (!allItems[fieldId][type]) {
-            allItems[fieldId][type] = []; 
+            allItems[fieldId][type] = [];
           }
-          allItems[fieldId][type].push(id);   
-          
+          allItems[fieldId][type].push(id);
+
         });
       });
     });

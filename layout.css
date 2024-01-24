@@ -98,13 +98,25 @@ input {
   left: 0;
   right: 0;
   background-color: transparent;
+  pointer-events: auto;
+}
+
+/* not needed margin around buttons
+.control::after {
+  content: "";
+  position: absolute;
+  top: var(--sl-control-padding);
+  bottom: var(--sl-control-padding);
+  left: var(--sl-control-padding);
+  right: var(--sl-control-padding);
   pointer-events: none;
 }
+
+*/
 
 .controlsBacking {
   position: absolute;
   z-index: 2;
-  
 }
 
 .skyBox {

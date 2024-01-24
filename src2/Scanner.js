@@ -81,8 +81,9 @@ class Scanner extends game.Item {
     content += `<div class="hasButton"><button class="buttonize" onclick="scanner.showScanner()"> Show scanner range </button></div>`;
     content += `<div>Upgrade your scanner to be more precise in the hardware store.</div>`;
     content += dialog.makeCheckbox("scanOn", "Scanner", player.scanState);
+    content += dialog.makeCheckbox("spadePos", "Spade button left/right", player.spadePos);
+    content += dialog.makeCheckbox("cursors", "Movement buttons", player.cursors);
     content += dialog.makeCheckbox("hintsOn", "Hints", player.hints);
-    content += dialog.makeCheckbox("cursors", "Movement keys", player.cursors);
     content += `<div class="hasButton"><button class="buttonize" onclick="hint.reset()"> Reset hints </button></div>`;
 
     let footer = "";
@@ -97,6 +98,8 @@ class Scanner extends game.Item {
   closeDialog() {
     player.scanState = dialog.isChecked("scanOn");
     player.hints = dialog.isChecked("hintsOn");
+    player.spadePos = dialog.isChecked("spadePos");
+    tools.spadePos();
     let newCursorState = dialog.isChecked("cursors");
     if (newCursorState != player.cursors) {
       player.cursors = newCursorState;

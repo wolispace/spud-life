@@ -15,20 +15,14 @@ const controls = {
     if (!player.cursors) {
       return;
     }
-    let padding = 15;
     let buttons = {
-      up: { x: 1, y: 0, qty: '', px: padding, py: -padding },
+      up: { x: 1, y: 0, qty: '', px: game.tool.padding, py: -game.tool.padding },
       left: { x: 0, y: 1, qty: '', px: 0, py: 0 },
-      spade: { x: 1, y: 1, qty: 10, px: padding, py: 0 },
-      right: { x: 2, y: 1, qty: '', px: padding * 2, py: 0 },
-      down: { x: 1, y: 2, qty: '', px: padding, py: padding },
+      right: { x: 2, y: 1, qty: '', px: game.tool.padding * 2, py: 0 },
+      down: { x: 1, y: 2, qty: '', px: game.tool.padding, py: game.tool.padding },
     }
 
-    controls.addBacking({
-      x: 0, 
-      y: (sprite.height) * 3, 
-      h: ((sprite.height) * 5),
-      w: ((sprite.width) * 4.5)});
+    controls.addBacking();
 
     let start = { x: 0, y: sprite.height * 4 };
 
@@ -42,29 +36,42 @@ const controls = {
         id: direction, x: newPos.x, y: newPos.y, qty: coords.qty,
         autoRender: false,
       }
-      if (direction == 'spade') {
-        tools.list[direction] = new Tool(params);
-        let controlElement = sprite.get(direction);
-        controls.stopDefaults(controlElement);
-        controls.addDigEvent(controlElement);
-      } else {
-        controls.list[direction] = new Tool(params);
-        let controlElement = sprite.get(direction);
-        controls.stopDefaults(controlElement);
-        controls.addMoveEvent(controlElement, direction);
-      }
-
+      controls.list[direction] = new Tool(params);
+      let controlElement = sprite.get(direction);
+      controls.stopDefaults(controlElement);
+      controls.addMoveEvent(controlElement, direction);
     });
+    controls.backingPos();
   },
 
-  addBacking: function (pos) {
-    let html = `<div class="controlsBacking"></div>`;
+  addBacking: function () {
+    let html = `<div class="controlsBacking ex"></div>`;
+    html += `<div class="controlsBacking why"></div>`;
+    html += `<div class="controlsBacking spd"></div>`;
     addToControls(html);
-    let backing = document.querySelector(".controlsBacking");
-    backing.style.left = `${pos.x}px`;
-    backing.style.width = `${pos.w}px`;
-    backing.style.top = `${pos.y}px`;
-    backing.style.height= `${pos.h}px`; 
+  },
+
+  backingPos: function () {
+    // the X
+    let backing = document.querySelector(".ex");
+    let start = controls.list['left'];
+    let end = controls.list['right'];
+    let padding = start.w / 2;
+    backing.style.left = `${start.x - padding}px`;
+    backing.style.top = `${start.y - padding}px`;
+    backing.style.width = `${end.x + end.w + padding * 2}px`;
+    backing.style.height = `${start.h + padding * 2}px`;
+    
+
+    backing = document.querySelector(".why");
+    start = controls.list['up'];
+    end = controls.list['down'];
+
+    backing.style.left = `${start.x - padding}px`;
+    backing.style.top = `${start.y - padding}px`;
+    backing.style.width = `${start.w + padding * 2}px`;
+    backing.style.height = `${end.y + end.h - start.y + padding * 2}px`
+    
   },
 
   removeAll: function () {

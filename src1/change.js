@@ -5,6 +5,7 @@ const change = {
       ".1 - Only reseed spuds to max field capacity",
       ".2 - Prevent player getting stuck after exiting a building",
       ".3 - Upgrades added to potatadex, fix hints in dialog alignment",
+      ".4 - Choose spade pos and refined no-click zones",
     ], 
     "1.7.0": [
       "Added changelog",

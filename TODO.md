@@ -12,7 +12,8 @@
 [x] 4 bumps then then noTool hint.. reset then another 4 bump
 
 [x] calc collision on new field. hint "something is blocking, try another spot"
-[ ] choice of of controls and spade pos: spade above wallet. flip all left/right
+[x] choice of spade pos: spade above wallet. 
+[ ] choice of controls - flip all left/right
 [ ] note for each item first time. a bit of fan fair 
 [ ] increase cost of upgrade
 [ ] sell all button items
@@ -21,7 +22,7 @@
     - meteor shower leaves new rocks rocks
     - strong winds block logs into your field
 [ ] landBack can be bought for 5000 to quickly return to field 1   
-[ ] upgrade to reduce hits of a rock or log to clear ir
+[x] upgrade to reduce hits of a rock or log to clear ir
 [x] Add a library to field 3, dig up books.. return to library
 [ ] Add a museum to field 4, dig up pottery pieces to return to museum
 [ ] restart game with bonus equal to progress
@@ -32,5 +33,5 @@
     - makes the golden potato.. final item to find
     - maybe 5000 + a spud for each donation.
     - alien abduction - golden potato is their energy source
-[ ] Increase walking speed with spud-skin-boots
+[x] Increase walking speed with spud-skin-boots
     
