@@ -126,7 +126,7 @@ const field = {
   totalItems: function () {
     let totalItems = (game.grid.x * game.grid.y) / 5;
     if (isDev) {
-      totalItems = 3;
+      totalItems = 5;
     }
 
     return totalItems;

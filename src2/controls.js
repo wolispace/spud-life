@@ -142,9 +142,9 @@ const controls = {
           }
           let newHole = new game.Item(params);
           player.fields[player.currentField][game.SURFACE].push(newHole);
+          game.digging = false;
           game.playerItem.checkCollisions(game.UNDERGROUND);
           tools.list['spade'].decrQty();
-          game.digging = false
           game.save();
         };
         game.playerItem.fixPos();

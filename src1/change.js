@@ -7,6 +7,7 @@ const change = {
       ".3 - Upgrades added to potatadex, fix hints in dialog alignment",
       ".4 - Choose spade pos and refined no-click zones",
       ".5 - Celebrate first items dug and scan after touch move",
+      ".6 - Prevent moving while animating into basket"
     ], 
     "1.7.0": [
       "Added changelog",

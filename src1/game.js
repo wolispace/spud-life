@@ -228,7 +228,7 @@ const game = {
       // slow start fast middle
       var easing = 'cubic-bezier(0, 0, .25, 0)';
       // slow and get faster
-      easing = 'cubic-bezier(0.3, 0, 1, 1)';
+      //easing = 'cubic-bezier(0.3, 0, 1, 1)';
       easing = 'ease-in';
       this.sprite.style.display = 'block';
       this.sprite.style.offsetPath = this.makeAcr(endItem);

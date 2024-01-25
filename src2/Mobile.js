@@ -45,6 +45,9 @@ class Mobile extends game.Item {
   }
 
   move(direction) {
+    if (game.digging) {
+      return;
+    }
     if (!timers.moving) {
       game.direction = direction;
       this.look(direction);
@@ -134,11 +137,11 @@ class Mobile extends game.Item {
               hint.firstTool(spriteBox);
             }
             if (spriteBox.qty < 1) {
-              // add the rock or log to the basket.. no arc for now
-              // TODO: arc the item into the basket
+              game.digging = true;
               function removeBlocker() {
                 basket.add(spriteBox);
                 spriteBox.remove();
+                game.digging = false;
               }
               player.fields[player.currentField][layer].splice(index, 1);
               spriteBox.qty = 1;
@@ -173,10 +176,11 @@ class Mobile extends game.Item {
             }
             return false;
           }
-
+          
         } else {
           // dig it up.. animate the arc. then remove it..
           // shift to the players pos
+          game.digging = true;
           spriteBox.x = game.playerItem.x;
           spriteBox.y = game.playerItem.y;
           spriteBox.render();
@@ -208,6 +212,7 @@ class Mobile extends game.Item {
               setTimeout(() => {
                 game.endItem.add(game.spriteBox);
                 game.save();
+                game.digging = false;
               }, 200);
             }, 1);
 
@@ -250,7 +255,7 @@ class Mobile extends game.Item {
   }
 
   moveToTouch() {
-    if (timers.moving || hint.visible || dialog.visible) {
+    if (timers.moving || hint.visible || dialog.visible || game.digging) {
       return;
     }
     if (timers.touchStepTimer) {
