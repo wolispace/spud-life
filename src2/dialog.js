@@ -6,6 +6,7 @@ const dialog = {
   confirmKey: 'Enter',
   okButton: null,
   cancelButton: null,
+  stack: [],
 
   render: function (title, content, footer) {
     dialog.setup();
@@ -13,12 +14,35 @@ const dialog = {
     dialog.overlay.style.display = 'block';
     dialog.visible = true;
     dialog.title = title;
+    dialog.content = content;
+    dialog.footer = footer;
     dialog.dialogBox.style.opacity = 1;
     dialog.dialogBox.style.top = '1rem';
     dialog.dialogBox.style.bottom = '4rem';
     dialog.part(`.dialog .header .title`, title);
     dialog.part(`.dialog .content`, content);
     dialog.part(`.dialog .footer`, footer);
+  },
+
+  push: function () {
+    console.log('add',dialog.title, dialog.stack);
+    dialog.stack.push({
+      title: dialog.title,
+      content: dialog.content,
+      footer: dialog.footer,
+      okButton: dialog.okButton,
+      cancelButton: dialog.cancelButton,
+    });
+  },
+
+  pop: function() {
+    // remove the current dialog from the stack
+    let lastState = dialog.stack.pop();
+    if (lastState) {
+      dialog.okButton = lastState.okButton;
+      dialog.cancelButton = lastState.cancelButton;
+      dialog.render(lastState.title, lastState.content, lastState.footer);
+    }
   },
 
   part: function (partClass, content) {

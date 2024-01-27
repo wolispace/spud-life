@@ -37,6 +37,7 @@ const change = {
   },
 
   show: function () {
+    dialog.push();
     let title = `Change log`;
     let content = `<div class="dialog-message-content">`;
     content += change.summary();
@@ -45,9 +46,14 @@ const change = {
     let footer = ``;
     footer += `<div></div>`;
     footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
-    dialog.cancelButton = function () { dialog.hide(); };
-    dialog.okButton = function () { dialog.hide(); };
+    dialog.cancelButton = function () { change.hide(); };
+    dialog.okButton = function () { change.hide() };
     dialog.render(title, content, footer);
+  },
+
+  hide: function () {
+    dialog.hide();
+    dialog.pop();
   },
 
   summary: function () {
