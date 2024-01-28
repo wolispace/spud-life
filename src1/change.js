@@ -9,6 +9,7 @@ const change = {
       ".5 - Celebrate first items dug and scan after touch move",
       ".6 - Prevent moving while animating into basket",
       ".7 - Now an installable web app",
+      ".8 - Clicking body in wardrobe doesn't try to dig",
     ], 
     "1.7.0": [
       "Added changelog",

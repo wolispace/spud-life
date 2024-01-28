@@ -2,6 +2,25 @@ class Hotel extends game.Item {
   
   field = 1;
   nameList = ['California', 'Kennebec', 'Cauliflower'];
+  foundList = {};
+  findMax = 5;
+  
+  // spudName:qty,
+  encode() {
+    let saveState = [];
+    upgrade.set.forEach((itemName, _) => {
+      saveState.push(upgrade.state[itemName]);
+    });
+
+    return JSON.stringify(this.foundList);
+  }
+
+  decode(encodedString) {
+    if (!encodedString) {
+      return;
+    }
+    this.foundList = json.parse(encodedString);
+  }
 
   constructor() {
 

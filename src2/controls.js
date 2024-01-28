@@ -120,7 +120,7 @@ const controls = {
   },
 
   dig: function () {
-    if (game.digging) {
+    if (game.digging || dialog.visible) {
       return;
     }
     let skyBottom = (sprite.height * sky.height) - (sprite.height / 4);

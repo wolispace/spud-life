@@ -25,7 +25,6 @@ const dialog = {
   },
 
   push: function () {
-    console.log('add',dialog.title, dialog.stack);
     dialog.stack.push({
       title: dialog.title,
       content: dialog.content,
