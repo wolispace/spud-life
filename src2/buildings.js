@@ -51,5 +51,22 @@ const buildings = {
     });
   },
 
+  hotel: {
+    // spudName:qty,
+    encode: function () {
+      if (!player.hotel) {
+        player.hotel = {};
+      }
+      return JSON.stringify(player.hotel);
+    },
+
+    decode: function (encodedString) {
+      if (!encodedString) {
+        return;
+      }
+      return JSON.parse(encodedString);
+    },
+  },
+
 }
 

@@ -391,6 +391,12 @@ svg.height {
   line-height: 1.5rem;
 }
 
+.dialog-message-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
 .hasButton {
   text-indent: -0.35em;
 }

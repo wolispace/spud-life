@@ -273,8 +273,13 @@ const game = {
   // ---end of Item class ------------------------------
 
   save: () => {
+    if (isDev) {
+      game.compress = false;
+    }
+  
     let saveFields = player.fields;
     let saveSpuds = player.spuds;
+    let saveHotel = player.hotel;
     if (game.playerItem) {
       player.g = game.grid;
       player.g.w = sprite.width;
@@ -289,6 +294,7 @@ const game = {
       player.pet = pet.encode();
       player.books = books.encode(); 
       player.upgrade = upgrade.encode(); 
+      player.hotel = buildings.hotel.encode(); 
 
       let compressed = JSON.stringify(player);
       if (game.compress) {
@@ -297,6 +303,7 @@ const game = {
       localStorage.setItem("state", compressed);
       player.fields = saveFields;
       player.spuds = saveSpuds;
+      player.hotel = saveHotel;
     }
   },
 
@@ -322,6 +329,7 @@ const game = {
       game.newPlayer.books = books.decode(game.newPlayer.books); 
       game.newPlayer.upgrade = upgrade.decode(game.newPlayer.upgrade); 
       game.newPlayer.fields = field.encodeAll(game.newPlayer.fields, false);
+      game.newPlayer.hotel = buildings.hotel.decode(game.newPlayer.hotel);
       if (!player.pos) {
         player = game.newPlayer;
       }
