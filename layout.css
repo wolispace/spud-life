@@ -550,6 +550,7 @@ svg.height {
   margin: 0 !important;
   font-weight: bold;
   cursor: pointer;
+  width: 100%;
 }
 
 .part:hover {
@@ -703,6 +704,12 @@ svg.height {
 .cartRow {
   display: flex;
   align-items: center;
+}
+
+.paper {
+  background-color: antiquewhite;
+  box-shadow: 0.5rem 0.5rem 1rem rgba(0,0,0,.5);
+  padding: 1rem;
 }
 
 @keyframes buttonDown {

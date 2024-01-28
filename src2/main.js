@@ -296,8 +296,8 @@ function storyIntro() {
   let itemsShow = presentList();
   let content = `<div class="dialog-message-content">`;
   content += '<div>You receive a letter from a distance aunt: </div>';
-  content += '<div><i>"I am retiring from the food business and have no need for these things. See what you can do with them"</i></div>';
-  content += `<div>${itemsShow}</div>`;
+  content += '<div class="paper"><i>"I am retiring from the food business and have no need for these things. See what you can do with them"</i>';
+  content += `<div>${itemsShow}</div></div>`;
   content += '<div>During the day, you dig for potatoes (spuds).<sup>*</sup></div>';
   content += '<div>At the end of the day you open your food cart and sell potato meals.</div>';
   content += '<div>Then you go home to sleep. Wake refreshed and ready to find more spuds!</div>';
