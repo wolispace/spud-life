@@ -1,11 +1,10 @@
 class Hotel extends game.Item {
 
   field = 1;
-  nameList = ['California', 'Kennebec', 'Cauliflower'];
+  nameList = ['California', 'Kennebec', 'Cauliflower', 'Cupcake', 'Cardiff', 'Clementine'];
   findMax = 5;
   findDone = false;
   added = 0;
-  foundAll = false;
 
   constructor() {
     let params = {
@@ -51,7 +50,11 @@ class Hotel extends game.Item {
     content += `</div>`;
     content += `<div class="right"></div>`;
     content += `</div>`;
-    content += this.quests();
+    content += `<div class="dialog-message-groups">`;
+    content += this.greet();
+    content += this.quest();
+    content += this.summary();
+    content += `</div>`;
     content += `<div class="paper">`;
     content += this.critics();
     content += `</div>`;
@@ -140,43 +143,61 @@ class Hotel extends game.Item {
     return html;
   }
 
-  quests() {
+  greet() {
+    let html = '<div>';
+    html += `The maitre d' ${getFromList('hotelGreetList')}`;
+    html += `</div>`;
+    return html;
+  }
+
+  quest() {
     this.checkActive();
     this.addSpuds();
-    let html = `<div class="dialog-message-groups">`;
-    if (this.foundAll) {
-      html += `<div>You have found them all!</div>`;
-      confetti.render();
-    } else {
-      html += `<div>The matrade rushes up and says:</div>`;
-      if (player.findSpud != '') {
-        html += `<div><i>"I need ${this.findMax} ${player.findSpud} potatoes in a hurry.</i></div>`;
-      }
-      if (this.added > 0) {
-        if (this.findDone) {
-          html += `<div><i>&nbsp;Wonderful. Thanks for giving me ${this.added} ${player.findSpud}."</i></div>`;
-        } else {
-          html += `<div><i>&nbsp;Wonderful. Thankyou for giving me all ${this.findMax} ${player.findSpud}."</i></div>`;
-          // add rewards
-        }
-      } else {
-        html += `<div><i>&nbsp;Please find them for me."</i></div>`;
-      }
-      html += `<div>You have found ${this.showQty()} of the ${this.findMax} so far.</div>`;
-      html += `</div>`;
+    let html = ``;
+    html += `<div><i>"${getFromList('hotelMsgList')}</i></div>`;
 
+    if (player.findSpud != '') {
+      html += `<div><i>I need ${this.findMax} ${player.findSpud} potatoes in a hurry.</i></div>`;
+    }
+    if (this.added > 0) {
       if (this.findDone) {
-        player.findSpud = '';
-        this.checkActive();
+        html += `<div><i>Wonderful. Thanks for bringing me ${this.added} ${player.findSpud}.</i></div>`;
+      } else {
+        html += `<div><i>Wonderful. Thankyou for brining me all ${this.findMax} ${player.findSpud}</i></div>`;
+        this.addReward();
       }
     }
+
+    if (this.findDone) {
+      player.findSpud = '';
+      this.checkActive();
+    }
+
+    html += ``;
     game.save();
     return html;
   }
 
-  showQty() {
-    let qty = player.hotel[player.findSpud];
-    return qty < 0 ? 0 : qty;
+  summary() {
+    let html = `<div><i>`;
+    if (this.foundAll()) {
+      html += `Oh, well done!! You have made my day!`;
+      confetti.render();
+    } else {
+      let findLeft = this.findMax - player.hotel[player.findSpud];
+      if (findLeft == this.findMax) {
+        html += `Please bring me ${this.findMax} ${player.findSpud}`;
+      } else {
+        html += `You just need to bring me ${findLeft} more ${player.findSpud}`;
+      }
+    }
+    html += `"</i></div>`;
+
+    return html;
+  }
+
+  addReward() {
+
   }
 
   checkActive() {
@@ -191,12 +212,20 @@ class Hotel extends game.Item {
         player.findSpud = spudName;
       }
     });
-    if (player.findSpud == '') {
-      // we have found them all!
-      this.foundAll = true;
-    }
+  }
 
+  // returns true if we have found all spuds
+  foundAll() {
+    let count = 0;
+    let found = 0;
+    Object.entries(player.hotel).forEach(([_, qty]) => {
+      count++;
+      if (qty == this.findMax) {
+        found++;
+      }
+    });
 
+    return count == found;
   }
 
   addSpuds() {

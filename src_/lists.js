@@ -159,12 +159,79 @@ const lists = {
       "and is that a [morningItemList] I see before me?",
       "and its going to be a real good one.",
     ],
+
     morningItemList: [
       "rock",
       "pick",
       "potato",
       "spade",
       "dagger",
+    ],
+
+    hotelGreetList: [
+      `[hotelActionList] and [hotelSaysList]:`,
+    ],
+
+    hotelActionList: [
+      "[hotelSpeedList] forward",
+      "[hotelSpeedList] towards you",
+      "[hotelAppearList] from [hotelFromList]",
+    ],
+    
+    hotelSpeedList: [
+      "rushes",
+      "saunters",
+      "glides",     
+    ],
+    
+    hotelAppearList: [
+      "materialises",
+      "appears",
+      "pops up",
+      "blinks",
+      "winks",
+      "laughs",
+      "coughs",
+    ],
+
+    hotelFromList: [
+      "nowhere",
+      "behind a door",
+      "a cloud of smoke",
+      "behind the desk",
+      "behind you",
+    ],
+
+    hotelSaysList: [
+      "says",
+      "sings",
+      "mumbles",
+      "laughs",
+      "chortles",
+    ],
+    
+    hotelMsgList: [
+      "[hotelSoNiceList] [hotelHereList]!",
+      "[hotelSoNiceList] [hotelHereList]!",
+      "Where have you been?",
+      "It's been ages!",
+      "I'm rather busy, but while your here...",
+    ],
+
+    hotelSoNiceList: [
+      "So nice",
+      "Happy",
+      "Pleasure",
+      "Wonderful",
+      "I'm grateful",
+      "I'm relieved",
+    ],
+
+    hotelHereList: [
+      "to see you",
+      "your here",
+      "you finally made it",
+
     ],
 
     weatherList: [
