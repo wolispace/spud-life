@@ -236,6 +236,17 @@ svg.height {
   height: 100%;
 }
 
+q {
+  font-style: italic;
+  line-height: 0.5rem;
+}
+
+.quote {
+  text-indent: -0.5rem;
+  padding-left: 1rem;
+  padding-top: 0.5rem;
+}
+
 .player {
   filter: drop-shadow(0px 5px 5px black);
   z-index: 1;
@@ -389,12 +400,6 @@ svg.height {
   flex-direction: column;
   gap: 1rem;
   line-height: 1.5rem;
-}
-
-.dialog-message-groups {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
 }
 
 .hasButton {

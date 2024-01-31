@@ -163,6 +163,13 @@ const spuds = {
     return spudSvg;
   },
 
+  inline: function (itemName, height = '1rem') {
+    let spudSvg = spuds.build(itemName);
+    spudSvg = spudSvg.replace(` viewBox`, ` style="height:${height};" viewBox`);
+
+    return spudSvg;
+  },
+
   setColours: function (spudSvg, spudInfo) {
     let defaultColours = {
       top: "#d8af73",

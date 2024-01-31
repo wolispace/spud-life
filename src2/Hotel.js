@@ -1,10 +1,10 @@
 class Hotel extends game.Item {
 
   field = 1;
-  nameList = ['California', 'Kennebec', 'Cauliflower', 'Cupcake', 'Cardiff', 'Clementine'];
+  nameList = ['California', 'Kennebec', 'Cauliflower', 'Carrot', 'Cupcake', 'Cardiff', 'Clementine'];
   findMax = 5;
-  findDone = false;
   added = 0;
+  rewardAmount = 200;
 
   constructor() {
     let params = {
@@ -50,7 +50,7 @@ class Hotel extends game.Item {
     content += `</div>`;
     content += `<div class="right"></div>`;
     content += `</div>`;
-    content += `<div class="dialog-message-groups">`;
+    content += `<div>`;
     content += this.greet();
     content += this.quest();
     content += this.summary();
@@ -137,67 +137,86 @@ class Hotel extends game.Item {
   critics() {
     let html = '<div>What the critics are saying about Spud life:</div>';
 
-    html += `<div><i>"This is terrible."</i></div>`;
-    html += `<div><i>"Endearing. Played longer than I should have."</i></div>`;
+    html += `<div class="quote"><q>This is terrible.</q></div>`;
+    html += `<div class="quote"><q>Endearing. Played longer than I should have.</q></div>`;
 
     return html;
   }
 
   greet() {
-    let html = '<div>';
-    html += `The maitre d' ${getFromList('hotelGreetList')}`;
-    html += `</div>`;
+    return `The maitre d' ${getFromList('hotelGreetList')}`;
+  }
+
+  accept() {
+    return `The maitre d' ${getFromList('hotelAcceptList')}`;
+  }
+
+  acceptSpuds() {
+    let html = '';
+    if (this.added > 0) {
+      html += `<div><br/>${this.accept()}:</div>`;
+      html += `<div class="quote"><q>`;
+      if (this.findDone()) {
+        html += `Wonderful. Thankyou for brining me all ${this.findMax} ${this.findName()}`;
+        html += `. Here is ${this.rewardAmount} for your troubles.`;
+      } else {
+        html += `Wonderful. Thanks for bringing me ${this.added} ${this.findName()}`;
+      }
+      html += `</q></div>`;
+    }
     return html;
   }
 
   quest() {
+    if (this.foundAll()) {
+      return  ``;
+    }
+
     this.checkActive();
     this.addSpuds();
-    let html = ``;
-    html += `<div><i>"${getFromList('hotelMsgList')}</i></div>`;
-
+    let html = `<div class="quote"><q>`;
+    html += `${getFromList('hotelMsgList')} `;
     if (player.findSpud != '') {
-      html += `<div><i>I need ${this.findMax} ${player.findSpud} potatoes in a hurry.</i></div>`;
+      html += `I need ${this.findMax} ${this.findName()}potatoes in a hurry.`;
     }
-    if (this.added > 0) {
-      if (this.findDone) {
-        html += `<div><i>Wonderful. Thanks for bringing me ${this.added} ${player.findSpud}.</i></div>`;
-      } else {
-        html += `<div><i>Wonderful. Thankyou for brining me all ${this.findMax} ${player.findSpud}</i></div>`;
-        this.addReward();
-      }
-    }
+    html += `</q></div>`;
+    html += this.acceptSpuds();
 
-    if (this.findDone) {
-      player.findSpud = '';
-      this.checkActive();
-    }
-
-    html += ``;
-    game.save();
     return html;
   }
 
+  findName() {
+    let spudSvg = spuds.inline(player.findSpud);
+
+    return `${player.findSpud} ${spudSvg}`;
+  }
+  
   summary() {
-    let html = `<div><i>`;
+    let html = `<div class="quote"><q>`;
     if (this.foundAll()) {
-      html += `Oh, well done!! You have made my day!`;
+      html += `Oh, well done!! You have found them all and made me so happy!`;
       confetti.render();
+    } else if (this.findDone()) {
+      this.addReward();
+      this.checkActive();
+      html += "I hope to see you again soon.";
     } else {
       let findLeft = this.findMax - player.hotel[player.findSpud];
       if (findLeft == this.findMax) {
-        html += `Please bring me ${this.findMax} ${player.findSpud}`;
+        html += `Please bring me ${this.findMax} ${this.findName()}`;
       } else {
-        html += `You just need to bring me ${findLeft} more ${player.findSpud}`;
+        html += `You just need to bring me ${findLeft} more.`;
       }
     }
-    html += `"</i></div>`;
-
+    html += `</q></div>`;
+    game.save();
+    
     return html;
   }
-
+  
   addReward() {
-
+    player.findSpud = '';
+    tools.list.wallet.addQty(this.rewardAmount);
   }
 
   checkActive() {
@@ -249,7 +268,11 @@ class Hotel extends game.Item {
     console.log(player.findSpud, this.added, newQty, excessQty);
     player.hotel[player.findSpud] += this.added;
     basket.add({ item: player.findSpud, qty: - this.added });
-    this.findDone = excessQty >= 0;
+  }
+
+  // return true if we have found all of this spud type
+  findDone() {
+    return player.hotel[player.findSpud] == this.findMax;
   }
 
   test() {

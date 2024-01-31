@@ -234,6 +234,27 @@ const lists = {
 
     ],
 
+    hotelAcceptList: [
+      "[hotelTakeList] your spuds [hotelGleeList]",
+    ],
+
+    hotelTakeList: [
+      "accepts",
+      "takes",
+      "receives",
+      "pockets",
+    ],
+
+    hotelGleeList: [
+      "with glee",
+      "happily",
+      "quickly",
+      "with surprise",
+      "with excitement",
+      "eagerly",
+    ],
+
+
     weatherList: [
       "It's going to be a beautiful day.",
       "It looks lovely outside.",
