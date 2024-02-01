@@ -2,6 +2,7 @@ class Hotel extends game.Item {
 
   field = 1;
   nameList = ['California', 'Kennebec', 'Cauliflower', 'Carrot', 'Cupcake', 'Cardiff', 'Clementine'];
+  defaultName = 'California';
   findMax = 5;
   added = 0;
   rewardAmount = 200;
@@ -17,8 +18,8 @@ class Hotel extends game.Item {
       autoRender: false,
       classes: 'building',
     };
-    player.hotelName = player.hotelName ?? 'California';
     super(params);
+    player.hotelName = player.hotelName ?? this.defaultName;
     this.prepSpuds();
   }
 
@@ -54,9 +55,6 @@ class Hotel extends game.Item {
     content += this.greet();
     content += this.quest();
     content += this.summary();
-    content += `</div>`;
-    content += `<div class="paper">`;
-    content += this.critics();
     content += `</div>`;
     content += `</div>`;
 
@@ -132,15 +130,6 @@ class Hotel extends game.Item {
     let title = titleElement.innerHTML;
     title = title.replace(oldName, player.hotelName);
     titleElement.innerHTML = title;
-  }
-
-  critics() {
-    let html = '<div>What the critics are saying about Spud life:</div>';
-
-    html += `<div class="quote"><q>This is terrible.</q></div>`;
-    html += `<div class="quote"><q>Endearing. Played longer than I should have.</q></div>`;
-
-    return html;
   }
 
   greet() {
@@ -259,13 +248,11 @@ class Hotel extends game.Item {
   add() {
     let excessQty = 0;
     let newQty = player.hotel[player.findSpud] + this.added;
-    console.log(player.findSpud, player.hotel[player.findSpud], this.added, newQty, excessQty);
     if (newQty > this.findMax) {
       excessQty = newQty - this.findMax;
     }
 
     this.added = this.added - excessQty;
-    console.log(player.findSpud, this.added, newQty, excessQty);
     player.hotel[player.findSpud] += this.added;
     basket.add({ item: player.findSpud, qty: - this.added });
   }

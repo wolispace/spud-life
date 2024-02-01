@@ -329,6 +329,7 @@ function aboutGame() {
 
   let footer = "";
   footer += `<div></div>`;
+  footer += `<button class="buttonize" onclick="reviews.show()"> Reviews </button>`;
   footer += `<button class="buttonize" onclick="change.show()"> Changelog </button>`;
   footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
   dialog.cancelButton = function () { dialog.hide(); };

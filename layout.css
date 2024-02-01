@@ -516,6 +516,10 @@ q {
   background-color: rgb(250, 221, 213);
 }
 
+.button-building {
+  background-color: rgb(206, 199, 241);
+}
+
 .tooMuch {
   opacity: 50%;
   background-color: rgba(0, 0, 0, 0.05);
@@ -721,6 +725,7 @@ q {
   background-color: antiquewhite;
   box-shadow: 0.5rem 0.5rem 1rem rgba(0,0,0,.5);
   padding: 1rem;
+  border-radius: 0.2rem;
 }
 
 @keyframes buttonDown {

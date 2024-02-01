@@ -1,5 +1,8 @@
 const change = {
   log: {
+    "1.9.0": [
+      "Added hotel quests",
+    ],    
     "1.8.0": [
       "Added upgrades",
       ".1 - Only reseed spuds to max field capacity",
@@ -69,10 +72,6 @@ const change = {
     html += `</div>`;
     return html;
   },
-
-
-
-
 
 };
 

@@ -28,6 +28,34 @@ const potatadex = {
       content += potatadex.makeButton(bookInfo);
     });
 
+    let foundHotel = 0;
+    let maxHotel = 0;
+    Object.entries(player.hotel).forEach(([_, qty]) => {
+      maxHotel++;
+      if (qty == buildings.list.hotel.findMax) {
+        foundHotel++;
+      }
+    });
+
+    let hotelInfo = {
+      type: 'building',
+      found: (maxHotel > 0),
+      icon: svg.render('hotel'),
+      fullName: `Hotel ${player.hotelName}`,
+      desc: `You have completed ${foundHotel} of the ${maxHotel} hotel quests`,      
+    }
+
+    // if no hotel found then simply +1 
+    if (player.hotelName == buildings.list.hotel.defaultName) {
+      maxItems++;
+      hotelInfo = potatadex.notFoundInfo('building');
+    }
+
+    foundItems += foundHotel;
+    maxItems += maxHotel;
+
+    content += potatadex.makeButton(hotelInfo);
+
     let footer = `<span class="footer-msg">`;
     if (foundItems == maxItems) {
       footer += 'You found all of the things!';
@@ -49,16 +77,11 @@ const potatadex = {
   },
 
   makeButton: function (itemInfo, showIfNotFound = false) {
-    let spudInfo = {
-      type: itemInfo.type,
-      icon: '',
-      name: '????',
-      desc: '??? ?????? ???? ??????',
-    }
+    let spudInfo = potatadex.notFoundInfo(itemInfo.type);
     
     if (itemInfo.found || showIfNotFound) {
       //let bookInfo = books.isBook(itemInfo);
-      if (itemInfo.type == 'book') {
+      if (['book', 'building'].includes(itemInfo.type)) {
         spudInfo.icon = itemInfo.icon;
       } else {
         if (itemInfo.type == 'spuds') {
@@ -75,5 +98,14 @@ const potatadex = {
 
     return dialog.makeButton(spudInfo);
   },
+
+  notFoundInfo: function (type) {
+    return {
+      type: type,
+      icon: '',
+      name: '????',
+      desc: '??? ?????? ???? ??????',      
+    }
+  }
 };
 
