@@ -215,7 +215,7 @@ const tools = {
       });
     });
 
-    let html = '<div>';
+    let html = '<pre>Dev, this is in the field:<br/>';
     allItems.forEach((field, fieldId) => {
       console.log(field, fieldId);
       Object.entries(field).forEach(([itemName, items]) => {
@@ -223,7 +223,7 @@ const tools = {
         html += `${itemName} = ${items.length}</br>`;
       });
     });
-    html += '</div>';
+    html += '</pre>';
     return html;
   },
 

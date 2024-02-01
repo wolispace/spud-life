@@ -259,8 +259,8 @@ const field = {
       item.render();
       if (item.reduced !== true) {
         // scale down if not 5
-        let itemQty = game.holeLife;
-        if (item.qty < game.holeLife) {
+        let itemQty = game.blockHits;
+        if (item.qty < game.blockHits) {
           while (itemQty > item.qty) {
             item.reduceSize();
             itemQty--;

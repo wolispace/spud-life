@@ -214,9 +214,9 @@ class Hotel extends game.Item {
     }
     player.findSpud = '';
 
-    // loop through spuds (in rareness order) and set findSpud as the first qty = 0
-    Object.entries(player.hotel).forEach(([spudName, qty]) => {
-      if (qty < this.findMax && player.findSpud == '') {
+    let rarenessList = spuds.rarenessList();
+    rarenessList.forEach((spudName, _) => {
+      if(player.hotel[spudName] < this.findMax && player.findSpud == '') {
         player.findSpud = spudName;
       }
     });

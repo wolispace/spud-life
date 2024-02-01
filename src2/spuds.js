@@ -145,6 +145,21 @@ const spuds = {
     return spud;
   },
 
+  rarenessList: function () {
+    let rarenessList = [];
+    // Convert the object to an array
+    let sortedSpuds = Object.values(player.spuds);
+
+    // Sort the array
+    sortedSpuds.sort((a, b) => a.rareness - b.rareness);
+
+    sortedSpuds.forEach((spudInfo, _) => { 
+      rarenessList.push(spudInfo.name);
+    });
+
+    return rarenessList;
+  },
+
   // select a random spud based on rareness
   select: function (fieldId) {
     let newSpud = spuds.byRareness(fieldId + 1);
