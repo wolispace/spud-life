@@ -171,7 +171,7 @@ class Cart extends game.Item {
     // otherwise put them in the machine that makes the most
     Object.entries(tools.list.basket.list).forEach(([itemName, qty]) => {
       let itemInfo = items[itemName];
-      if (itemInfo.type == "spuds") {
+      if (itemInfo && itemInfo.type == "spuds") {
         //if we dont have a machine for this spuds bestfor then dump it into the max machine
         let bestFor = this.machines[itemInfo.bestFor] ? itemInfo.bestFor : 'max';
         this.machines[bestFor].qty += qty;

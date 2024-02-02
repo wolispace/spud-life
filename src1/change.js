@@ -2,6 +2,7 @@ const change = {
   log: {
     "1.9.0": [
       "Added hotel quests",
+      ".1 - First dig books work now",
     ],    
     "1.8.0": [
       "Added upgrades",

@@ -33,7 +33,7 @@ const sky = {
     while (cloudCount-- > 0) {
       params.id = `cloud_${cloudCount}`;
       params.x = - (sprite.width + rnd(sprite.width * 10));
-      params.y = rnd(sprite.height) - (sprite.height / 2);
+      params.y = rnd(sprite.height * 2) - (sprite.height / 2);
       let cloud = new Cloud(params);
       sky.clouds.push(cloud);
     }
@@ -56,7 +56,7 @@ const sky = {
     };
     sky.clouds.forEach(function (cloud) {
       params.endItem.x = sprite.width * (game.grid.x + rnd(2));
-      params.duration = speed + cloud.y;
+      params.duration = speed + (cloud.y * 2);
       
       cloud.animatePath(params);
     });

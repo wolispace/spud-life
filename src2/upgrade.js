@@ -32,6 +32,7 @@ const upgrade = {
   },
 
   show: function () {
+    dialog.push();
     let title = "Upgrades";
     let content = `<div class="dialog-message-content">`;
     content += upgrade.current();
@@ -51,7 +52,9 @@ const upgrade = {
       }
     });
 
-    buildings.list.home.enter();
+    upgrade.blockHits();
+    upgrade.speed();
+    dialog.pop();
   },
 
   current: function () {

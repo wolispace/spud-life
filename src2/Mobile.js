@@ -29,21 +29,6 @@ class Mobile extends game.Item {
     }
   }
 
-  moveStep(direction, thisStep) {
-    game.direction = direction;
-    this.look(direction);
-    console.log(direction, thisStep);
-    let dirInfo = {
-      'left': { axis: 'x', 'dir': -1 },
-      'right': { axis: 'x', 'dir': 1 },
-      'up': { axis: 'y', 'dir': -1 },
-      'down': { axis: 'y', 'dir': 1 },
-    }
-    // update object to new position, n steps away, regardless of collision
-    this[dirInfo[direction].axis] = this[dirInfo[direction].axis] + (dirInfo[direction].dir * thisStep);
-    this.position();
-  }
-
   move(direction) {
     if (game.digging) {
       return;

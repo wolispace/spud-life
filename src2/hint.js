@@ -466,13 +466,23 @@ const hint = {
 
   dugItem: function (item) {
     let itemInfo = items[item.item];
-    let icon;
-    if (itemInfo.type == 'spuds') {
-      icon = spuds.build(itemInfo.name);
+    let bookInfo = books.isBook(item.item);
+    if (!bookInfo && itemInfo.type == 'spuds') {
+      icon = spuds.build(itemInfo.name); //svg.render('spud1');
+      itemInfo.desc = spuds.desc(itemInfo);
       itemInfo.fullName = `A spud called ${itemInfo.fullName}`;
     } else {
-      icon = svg.inline(item.item);
+      if (bookInfo) {      
+        icon =  bookInfo.icon;
+        itemInfo = {
+          desc: bookInfo.desc,
+          fullName: bookInfo.name,
+        };
+      } else {
+        icon = svg.render(item.item);
+      }
     }
+
     let wowMsg = getFromList('wowMsgList');
     hint.target = tools.list.basket;
     hint.message = `${wowMsg} You just dug up:<br/><b>${itemInfo.fullName}</b>`;
