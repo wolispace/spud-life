@@ -100,6 +100,7 @@ const tools = {
     spade: function () {
       controls.dig();
     },
+
     pick: function () {
       let title = "Pick";
       let content = `<div class="dialog-message-content">`;
@@ -110,6 +111,9 @@ const tools = {
       }
       let footer = "";
       footer += `<div></div>`;
+      if (isDev) {
+        footer += `<button class="buttonize" onclick="tools.testAddBlocker('rock')"> +Rocks </button>`;
+      }
       footer += `<button class="buttonize" onclick="dialog.okButton()"> Ok </button>`;
       dialog.cancelButton = function () { dialog.hide(); };
       dialog.okButton = function () { dialog.hide(); };
@@ -126,6 +130,9 @@ const tools = {
       }
       let footer = "";
       footer += `<div></div>`;
+      if (isDev) {
+        footer += `<button class="buttonize" onclick="tools.testAddBlocker('log')"> +Logs </button>`;
+      }
       footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
       dialog.cancelButton = function () { dialog.hide(); };
       dialog.okButton = function () { dialog.hide(); };
@@ -135,11 +142,11 @@ const tools = {
     basket: function () {
       basket.show();
     },
-
+    
     scanner: function () {
       scanner.render();
     },
-
+    
     wallet: function () {
       let title = "Wallet";
       let content = `<div class="dialog-message-content">`;
@@ -159,10 +166,14 @@ const tools = {
     },
   },
 
+  testAddBlocker: function (item) {
+    field.addDailyBlocker(player.currentField, item);
+  },
+  
   addMoney: function (amount) {
     tools.list.wallet.addQty(amount);
   },
-
+  
   addItems: function () {
     let items = ['log', 'rock', 'bottle', 'caps', 'diamond'];
     items.forEach((item => {
@@ -217,9 +228,7 @@ const tools = {
 
     let html = '<pre>Dev, this is in the field:<br/>';
     allItems.forEach((field, fieldId) => {
-      console.log(field, fieldId);
       Object.entries(field).forEach(([itemName, items]) => {
-        console.log(itemName);
         html += `${itemName} = ${items.length}</br>`;
       });
     });

@@ -60,6 +60,18 @@ const field = {
     field.addRandom(newField);
   },
 
+  init: function (layer = game.UNDERGROUND) {
+    field.topNoSeed = (sprite.height * (sky.height + 0.5));
+    field.leftNoSeed = (sprite.width * 3);
+    if (layer == game.ABOVEGROUND) {
+      field.fieldHeight = containerBox.height - (sprite.height * 2) - field.topNoSeed;
+      field.fieldWidth = containerBox.width - sprite.width - field.leftNoSeed;
+    } else {
+      field.fieldHeight = containerBox.height - (sprite.height * 2);
+      field.fieldWidth = containerBox.width;
+    }
+  },
+
   // adds a log or a rock to the field
   addBlocker: function (fieldId, item) {
     let y = rnd(field.fieldHeight) + field.topNoSeed + rnd(sprite.height);
@@ -79,27 +91,32 @@ const field = {
       classes: '',
       item: item,
       type: 'blocker',
-      autoRender: false,
+
     }
     let newItem = new game.Item(params);
     player.fields[fieldId][game.ABOVEGROUND].push(newItem);
   },
+
+  addDailyBlocker: function (fieldId, item) {
+    field.init(game.ABOVEGROUND);
+    let newItemCount = rnd(5) + 5;
+    for (let step = 0; step < newItemCount; step++) {
+      field.addBlocker(fieldId, item);
+    }    
+  },
   
   addRandom: function (fieldId) {
-    field.topNoSeed = (sprite.height * (sky.height + 0.5));
-    field.leftNoSeed = (sprite.width * 3);
+    field.init(game.ABOVEGROUND);
     // reset field data..
     player.fields[fieldId] = [[], [], []];
-    field.fieldHeight = containerBox.height - (sprite.height * 2) - field.topNoSeed;
-    field.fieldWidth = containerBox.width - sprite.width - field.leftNoSeed;
+
     let totalItems = field.totalItems();
     for (let step = 0; step < totalItems; step++) {
       let item = rnd(2) == 1 ? 'log' : 'rock';
       field.addBlocker(fieldId, item);
     }
     let layer = game.UNDERGROUND;
-    field.fieldHeight = containerBox.height - (sprite.height * 2);
-    field.fieldWidth = containerBox.width;
+    field.init(layer);
     for (let step = 0; step < totalItems; step++) {
       let params = {
         id: game.getUid(),
@@ -163,9 +180,7 @@ const field = {
     if (player.fields[fieldId][layer].length >= field.totalItems()) {
       return;
     }
-
-    field.fieldHeight = containerBox.height - (sprite.height * 2);
-    field.fieldWidth = containerBox.width;
+    field.init(layer);
     let params = {
       id: game.getUid(),
       x: rnd(field.fieldWidth - sprite.width),
@@ -189,8 +204,7 @@ const field = {
     if (player.fields[fieldId][layer].length >= field.totalItems()) {
       return;
     }
-    field.fieldHeight = containerBox.height - (sprite.height * 2);
-    field.fieldWidth = containerBox.width;
+    field.init(layer);
     let params = {
       id: game.getUid(),
       x: rnd(field.fieldWidth - sprite.width),
