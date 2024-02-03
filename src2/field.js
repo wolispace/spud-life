@@ -60,46 +60,51 @@ const field = {
     field.addRandom(newField);
   },
 
+  // adds a log or a rock to the field
+  addBlocker: function (fieldId, item) {
+    let y = rnd(field.fieldHeight) + field.topNoSeed + rnd(sprite.height);
+    let x = rnd(field.fieldWidth) + field.leftNoSeed;
+    // if below controls allow full width
+    if (y > field.topNoSeed + (sprite.height * 4)) {
+      x = rnd(field.fieldWidth + field.leftNoSeed);
+    }
+    let qty = game.blockerHits;
+    let params = {
+      id: game.getUid(),
+      x: x,
+      y: y,
+      w: sprite.width,
+      h: sprite.height,
+      qty: qty,
+      classes: '',
+      item: item,
+      type: 'blocker',
+      autoRender: false,
+    }
+    let newItem = new game.Item(params);
+    player.fields[fieldId][game.ABOVEGROUND].push(newItem);
+  },
+  
   addRandom: function (fieldId) {
-    let topNoSeed = (sprite.height * (sky.height + 0.5));
-    let leftNoSeed = (sprite.width * 3);
+    field.topNoSeed = (sprite.height * (sky.height + 0.5));
+    field.leftNoSeed = (sprite.width * 3);
     // reset field data..
     player.fields[fieldId] = [[], [], []];
-    let layer = game.ABOVEGROUND;
-    let fieldHeight = containerBox.height - (sprite.height * 2) - topNoSeed;
-    let fieldWidth = containerBox.width - sprite.width - leftNoSeed;
+    field.fieldHeight = containerBox.height - (sprite.height * 2) - field.topNoSeed;
+    field.fieldWidth = containerBox.width - sprite.width - field.leftNoSeed;
     let totalItems = field.totalItems();
     for (let step = 0; step < totalItems; step++) {
-      let y = rnd(fieldHeight) + topNoSeed + rnd(sprite.height);
-      let x = rnd(fieldWidth) + leftNoSeed;
-      // if below controls allow full width
-      if (y > topNoSeed + (sprite.height * 4)) {
-        x = rnd(fieldWidth + leftNoSeed);
-      }
-      let qty = game.blockerHits;
       let item = rnd(2) == 1 ? 'log' : 'rock';
-      let params = {
-        id: game.getUid(),
-        x: x,
-        y: y,
-        w: sprite.width,
-        h: sprite.height,
-        qty: qty,
-        classes: '',
-        item: item,
-        autoRender: false,
-      }
-      let newItem = new game.Item(params);
-      player.fields[fieldId][layer].push(newItem);
+      field.addBlocker(fieldId, item);
     }
-    layer = game.UNDERGROUND;
-    fieldHeight = containerBox.height - (sprite.height * 2);
-    fieldWidth = containerBox.width;
+    let layer = game.UNDERGROUND;
+    field.fieldHeight = containerBox.height - (sprite.height * 2);
+    field.fieldWidth = containerBox.width;
     for (let step = 0; step < totalItems; step++) {
       let params = {
         id: game.getUid(),
-        x: rnd(fieldWidth - sprite.width),
-        y: rnd(fieldHeight - sprite.height) + (sprite.height * 2),
+        x: rnd(field.fieldWidth - sprite.width),
+        y: rnd(field.fieldHeight - sprite.height) + (sprite.height * 2),
         w: sprite.width,
         h: sprite.height,
         qty: 1,
@@ -159,12 +164,12 @@ const field = {
       return;
     }
 
-    fieldHeight = containerBox.height - (sprite.height * 2);
-    fieldWidth = containerBox.width;
+    field.fieldHeight = containerBox.height - (sprite.height * 2);
+    field.fieldWidth = containerBox.width;
     let params = {
       id: game.getUid(),
-      x: rnd(fieldWidth - sprite.width),
-      y: rnd(fieldHeight - sprite.height) + (sprite.height * 2),
+      x: rnd(field.fieldWidth - sprite.width),
+      y: rnd(field.fieldHeight - sprite.height) + (sprite.height * 2),
       w: sprite.width,
       h: sprite.height,
       qty: rnd(4) + 2,
@@ -184,12 +189,12 @@ const field = {
     if (player.fields[fieldId][layer].length >= field.totalItems()) {
       return;
     }
-    fieldHeight = containerBox.height - (sprite.height * 2);
-    fieldWidth = containerBox.width;
+    field.fieldHeight = containerBox.height - (sprite.height * 2);
+    field.fieldWidth = containerBox.width;
     let params = {
       id: game.getUid(),
-      x: rnd(fieldWidth - sprite.width),
-      y: rnd(fieldHeight - sprite.height) + (sprite.height * 2),
+      x: rnd(field.fieldWidth - sprite.width),
+      y: rnd(field.fieldHeight - sprite.height) + (sprite.height * 2),
       w: sprite.width,
       h: sprite.height,
       qty: 1,
