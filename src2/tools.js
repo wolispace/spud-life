@@ -111,9 +111,6 @@ const tools = {
       }
       let footer = "";
       footer += `<div></div>`;
-      if (isDev) {
-        footer += `<button class="buttonize" onclick="tools.testAddBlocker('rock')"> +Rocks </button>`;
-      }
       footer += `<button class="buttonize" onclick="dialog.okButton()"> Ok </button>`;
       dialog.cancelButton = function () { dialog.hide(); };
       dialog.okButton = function () { dialog.hide(); };
@@ -130,9 +127,6 @@ const tools = {
       }
       let footer = "";
       footer += `<div></div>`;
-      if (isDev) {
-        footer += `<button class="buttonize" onclick="tools.testAddBlocker('log')"> +Logs </button>`;
-      }
       footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
       dialog.cancelButton = function () { dialog.hide(); };
       dialog.okButton = function () { dialog.hide(); };
@@ -164,10 +158,6 @@ const tools = {
       dialog.okButton = function () { dialog.hide(); };
       dialog.render(title, content, footer);
     },
-  },
-
-  testAddBlocker: function (item) {
-    field.addDailyBlocker(player.currentField, item);
   },
   
   addMoney: function (amount) {

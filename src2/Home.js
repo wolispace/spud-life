@@ -1,7 +1,7 @@
 class Home extends game.Item {
 
   field = 0;
-  
+
   constructor() {
 
     let params = {
@@ -24,7 +24,7 @@ class Home extends game.Item {
       this.enterNighttime();
     }
   }
-  
+
   enterDaytime() {
     let title = "Home sweet home";
     let content = `<div class="dialog-message-content">`;
@@ -45,7 +45,7 @@ class Home extends game.Item {
     footer += `<button class="buttonize" onclick="dialog.cancel()"> Exit </button>`;
     dialog.cancelButton = function () { buildings.list.home.exit(); };
     dialog.render(title, content, footer);
-    
+
   }
 
   enterNighttime() {
@@ -75,22 +75,44 @@ class Home extends game.Item {
       sky.nightDuration = 0.1;
     }
     sky.goDark(true);
-       
+
   }
 
   sleep() {
     dialog.hide();
-    setTimeout( buildings.list.home.dawn, 2000);
+    setTimeout(buildings.list.home.dawn, 2000);
   }
 
   dawn() {
     sky.goLight();
-    setTimeout( buildings.list.home.morning, 2000);
+    setTimeout(buildings.list.home.morning, 2000);
   }
-  
+
+  nightEvent() {
+    let html = `<div>${getFromList('weatherList')}</div>`;
+    let doIt = rnd(game.nightEvent);
+    if (doIt == 1) {
+      field.init(game.ABOVEGROUND);
+      let item = rnd(2) == 1 ? 'log' : 'rock';
+      let maxItems = rnd(5) + 5;
+      for (let fieldId = 0; fieldId < player.fields.length; fieldId++) {
+        for (let items = 0; items < maxItems; items++) {
+          field.addBlocker(fieldId, item);
+        }
+      }
+      if (item == 'rock') {
+        html = `<div>There was a meteor shower last night resulting in some rocks strewn randomly!</div>`;
+      } else {
+        html = `<div>There was a violent storm last night resulting in some logs strewn randomly!</div>`;
+      }
+    } 
+    return html;
+  }
+
   morning() {
     tools.reset();
     field.roll();
+
     player.day++;
     let title = "Morning!";
 
@@ -98,8 +120,7 @@ class Home extends game.Item {
     content += `<div>${buildings.list.home.days()}</div>`;
     content += `<div>${getFromList('sleepList')}</div>`;
     content += `<div>${getFromList('dreamList')}.</div>`;
-
-    content += `<div>${getFromList('weatherList')}</div>`;
+    content += buildings.list.home.nightEvent();
 
     let seedMsg = '';
     if (player.reseed) {

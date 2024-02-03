@@ -6,6 +6,10 @@ const field = {
   */
   list: [],
   gridList: [],
+  fieldHeight: 0,
+  fieldWidth: 0,
+  topNoSeed: 0,
+  leftNoSeed: 0,
 
   decode: function (infoString) {
     let bits = infoString.split(',');
@@ -70,6 +74,7 @@ const field = {
       field.fieldHeight = containerBox.height - (sprite.height * 2);
       field.fieldWidth = containerBox.width;
     }
+    //console.trace('init', field, layer);
   },
 
   // adds a log or a rock to the field
@@ -94,15 +99,8 @@ const field = {
 
     }
     let newItem = new game.Item(params);
+    //console.trace(params);
     player.fields[fieldId][game.ABOVEGROUND].push(newItem);
-  },
-
-  addDailyBlocker: function (fieldId, item) {
-    field.init(game.ABOVEGROUND);
-    let newItemCount = rnd(5) + 5;
-    for (let step = 0; step < newItemCount; step++) {
-      field.addBlocker(fieldId, item);
-    }    
   },
   
   addRandom: function (fieldId) {

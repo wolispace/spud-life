@@ -24,8 +24,7 @@ const game = {
   recDelim: '^',
   fldDelim: '|',
   newPlayer: {}, // temp info loaded before its finished being decoded
-
-
+  nightEvent: 50, // random number governing a night-time event like new logs or rocks
 
   // everything show on the page is an Item with coords and an svg
   Item: class {
