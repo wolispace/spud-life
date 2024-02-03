@@ -49,6 +49,7 @@ const buildings = {
       game.playerItem.show();
       game.playerItem.restorePos();
     });
+    game.save();
   },
 
   hotel: {

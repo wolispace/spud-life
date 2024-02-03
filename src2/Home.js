@@ -92,18 +92,25 @@ class Home extends game.Item {
     let html = `<div>${getFromList('weatherList')}</div>`;
     let doIt = rnd(game.nightEvent);
     if (doIt == 1) {
+      let addedSomething = 0;
       field.init(game.ABOVEGROUND);
       let item = rnd(2) == 1 ? 'log' : 'rock';
       let maxItems = rnd(5) + 5;
+      let totalItems = field.totalItems();
       for (let fieldId = 0; fieldId < player.fields.length; fieldId++) {
         for (let items = 0; items < maxItems; items++) {
-          field.addBlocker(fieldId, item);
+          if (player.fields[fieldId][game.ABOVEGROUND].length < totalItems) {
+            field.addBlocker(fieldId, item);
+            addedSomething++;
+          }
         }
       }
-      if (item == 'rock') {
-        html = `<div>There was a meteor shower last night resulting in some rocks strewn randomly!</div>`;
-      } else {
-        html = `<div>There was a violent storm last night resulting in some logs strewn randomly!</div>`;
+      if (addedSomething > 0) {
+        if (item == 'rock') {
+          html = `<div>There was a meteor shower last night resulting in some rocks strewn randomly!</div>`;
+        } else {
+          html = `<div>There was a violent storm last night resulting in some logs strewn randomly!</div>`;
+        }
       }
     } 
     return html;

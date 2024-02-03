@@ -96,6 +96,7 @@ const field = {
       classes: '',
       item: item,
       type: 'blocker',
+      autoRender: (fieldId == player.currentField),
 
     }
     let newItem = new game.Item(params);

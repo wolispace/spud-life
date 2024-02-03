@@ -3,6 +3,7 @@ const change = {
     "1.9.0": [
       "Added hotel quests",
       ".1 - First dig books work now",
+      ".2 - added random night events",
     ],    
     "1.8.0": [
       "Added upgrades",
