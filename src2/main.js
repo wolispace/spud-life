@@ -41,12 +41,12 @@ function handleTouchEvent(event) {
   let target = event.target;
   while (target != null) {
     if (target.classList.contains('controlsBacking') || target.classList.contains('control') || target.classList.contains('buttonize')) {
-      character.stopMoving();
+      character.stopMoving(false);
       return;
     }
     if (target.classList.contains('playerBody')) {
       controls.dig();
-      character.stopMoving();
+      character.stopMoving(false);
       return;
     }
     target = target.parentElement;
@@ -83,12 +83,12 @@ document.addEventListener('click', function (event) {
 
   while (target != null) {
     if (target.classList.contains('controlsBacking') || target.classList.contains('control') || target.classList.contains('buttonize')) {
-      character.stopMoving();
+      character.stopMoving(false);
       return;
     }
     if (target.classList.contains('playerBody')) {
       controls.dig();
-      character.stopMoving();
+      character.stopMoving(false);
       return;
     }
     target = target.parentElement;
@@ -125,7 +125,7 @@ document.addEventListener("keydown", (event) => {
 document.addEventListener("keyup", (event) => {
   //event.preventDefault();
   game.keydown = false;
-  controls.endInput();
+  controls.endInput(true);
 });
 
 function startGame() {
@@ -157,7 +157,7 @@ function startGame() {
     field.addRandom(player.currentField);
     field.redraw();
     if (isDev) {
-      player.hints = false;
+      //player.hints = false;
     }
     //game.save();
 

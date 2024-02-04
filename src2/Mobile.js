@@ -49,7 +49,7 @@ class Mobile extends game.Item {
         this.checkCollisions(game.ABOVEGROUND);
         game.save();
         if (this.hitItem || !this.withinBounds()) {
-          controls.endInput();
+          controls.endInput(true);
           if (direction == 'up') {
             // are we conflicting with a building?
             Object.entries(buildings.list).forEach(([itemName, item]) => {
@@ -105,7 +105,7 @@ class Mobile extends game.Item {
 
     spritesList.forEach((spriteBox, index) => {
       if (!this.hitItem && this.collides(spriteBox)) {
-        controls.endInput();
+        controls.endInput(true);
         // clone the object..
         this.hitItem = Object.assign(Object.create(Object.getPrototypeOf(spriteBox)), spriteBox);
         if (layer == game.ABOVEGROUND) {
@@ -244,7 +244,7 @@ class Mobile extends game.Item {
       return;
     }
     if (timers.touchStepTimer) {
-      character.stopMoving();
+      character.stopMoving(false);
     }
     this.path = this.pointsToTouch();
     this.look(game.direction);
@@ -253,7 +253,7 @@ class Mobile extends game.Item {
 
   stepToTouch() {
     if (this.path.length <= 0) {
-      character.stopMoving();
+      character.stopMoving(true);
       return;
     }
     let newPos = this.path.shift();
@@ -271,7 +271,7 @@ class Mobile extends game.Item {
               this.y = oldPos.y;
               this.position();
               buildings.enter(buildingName);
-              character.stopMoving();
+              character.stopMoving(false);
               return;
             }
           });
@@ -283,7 +283,7 @@ class Mobile extends game.Item {
       if (this.hitItem || ((this.y + sprite.height) < (sprite.height * sky.height))) {
         this.x = oldPos.x;
         this.y = oldPos.y;
-        character.stopMoving();
+        character.stopMoving(true);
 
         return;
       }

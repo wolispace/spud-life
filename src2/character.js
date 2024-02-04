@@ -153,7 +153,7 @@ const character = {
   editName: function () {
     return `<div><input type="text" id="playerName" 
       placeholder="Your name" value="${player.name}" 
-      maxlength="14" /></div>`;
+      maxlength="14" onfocusout="hint.part()" /></div>`;
   },
 
   buildBodySelect: function (bodyPart) {
@@ -177,7 +177,9 @@ const character = {
     partsList.forEach((element) => { element.classList.remove('selected'); });
 
     let element = document.querySelector(`.part_${bodyPart}`);
-    element.classList.add('selected');
+    if (element) {
+      element.classList.add('selected');
+    }
   },
 
   nextBodyPart: function (bodyPart) {
@@ -286,11 +288,33 @@ const character = {
     return getBoundingBox('#iplayer');
   },
 
-  stopMoving: function () {
+  stopMoving: function (wasMoving = false) {
+    if (wasMoving) {
+      character.moved();
+    }
     clearTimeout(timers.touchStepTimer);
     scanner.scan();
     timers.moving = false;
     game.playerItem.path = null;
+    game.save();
+  },
+  
+  moved: function () {
+    if (dialog.visible) {
+      return;
+    }
+    player.newHint = player.newHint ?? 0;
+    let hintList = ['scanner', 'spade', 'field', 'house', 'scanner2'];
+
+    if (hintList[player.newHint]) {
+      console.log('moved', player.newHint, hintList[player.newHint]);
+      hint[hintList[player.newHint]]();
+      player.newHint++;
+    }
+  },
+
+  resetMoved: function() {
+    player.moved = 0;
     game.save();
   },
 

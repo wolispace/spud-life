@@ -98,10 +98,10 @@ const controls = {
       return;
     }
     controlElement.onmousedown = function () { game.playerItem.move(direction); };
-    controlElement.onmouseup = function () { controls.endInput(); };
+    controlElement.onmouseup = function () { controls.endInput(true); };
     //controlElement.onmouseout = function () { controls.endInput(direction); };
     controlElement.addEventListener("touchstart", function () { game.playerItem.move(direction); }, false);
-    controlElement.addEventListener("touchend", function () { controls.endInput(); });
+    controlElement.addEventListener("touchend", function () { controls.endInput(true); });
   },
 
   addDigEvent: function (controlElement) {
@@ -177,7 +177,10 @@ const controls = {
     };
   },
 
-  endInput: function () {
+  endInput: function (wasMoving = false) {
+    if (wasMoving) {
+      character.moved();
+    }
     if (game.direction) {
       controls.buttonUp(game.direction);
       clearInterval(timers[game.direction]);

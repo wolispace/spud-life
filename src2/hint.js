@@ -93,7 +93,7 @@ const hint = {
     }
 
     setTimeout(() => {
-      character.stopMoving();
+      character.stopMoving(false);
 
       hint.visible = true;
       let btnText = hint.btnText || hint.ok();
@@ -161,6 +161,7 @@ const hint = {
   reset: function () {
     dialog.hide();
     player.hinted = '';
+    character.resetMoved();
     hint.resetHints();
   },
 
@@ -259,7 +260,7 @@ const hint = {
   myName: function () {
     hint.target = document.querySelector('#playerName');
     hint.message = `What is your name? Leave blank for a random name.`;
-    hint.okButton = 'hint.part';
+    hint.okButton = 'hint.confirm';
     hint.group = 'n';
     hint.render();
   },
@@ -299,21 +300,21 @@ const hint = {
     hint.isItSkipped();
     hint.target = controls.list.right;
     hint.message = `Use arrows<br/>...or tap to move.`;
-    hint.okButton = 'hint.house';
+    hint.okButton = 'hint.confirm';
     hint.group = 't';
     hint.render();
   },
   house: function () {
     hint.target = buildings.list.home;
     hint.message = `Move UP<br/>...or tap a building to go inside.`;
-    hint.okButton = 'hint.spade';
+    hint.okButton = 'hint.confirm';
     hint.group = 'u';
     hint.render();
   },
   spade: function () {
     hint.target = tools.list.spade;
     hint.message = `Use your spade<br/>...or tap on yourself to dig where you stand.`;
-    hint.okButton = 'hint.field';
+    hint.okButton = 'hint.confirm';
     hint.group = 'v';
     hint.render();
   },
@@ -567,19 +568,19 @@ const hint = {
 
   scanner: function () {
     hint.target = tools.list.scanner;
-    hint.message = `You scanner flashes when something is buried near by.`;
-    hint.okButton = 'hint.scannerClick';
+    hint.message = `When your scanner flashes, something is buried near you.`;
+    hint.okButton = 'hint.confirm';
     hint.group = 's';
     hint.render();
   },
-
-  scannerClick: function () {
+  scanner2: function () {
     hint.target = tools.list.scanner;
-    hint.message = `Click your scanner to change settings.`;
+    hint.message = `Click your scanner to change settings.`
     hint.okButton = 'hint.confirm';
     hint.group = 's2';
     hint.render();
   },
+
   addTool: function (itemInfo) {
     hint.target = itemInfo;
     hint.message = `You dug up a ${itemInfo.item}. It's going straight to work.`;
