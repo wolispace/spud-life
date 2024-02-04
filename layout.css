@@ -228,6 +228,10 @@ button:hover {
   background-color: rgba(109, 160, 143, .75) !important;
 }
 
+.bodyPart {
+  cursor: pointer;
+}
+
 svg.wide {
   width: 100%;
 }

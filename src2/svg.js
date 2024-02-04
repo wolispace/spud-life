@@ -164,15 +164,15 @@ const svg = {
     paths.forEach((path) => {
       // path
       if (path.d) {
-        head += `<path d="${path.d}" style="${path.s}" />`;
+        head += `<path d="${path.d}" class="bodyPart ${path.o}" style="${path.s}" onclick="character.setBodyPart('${path.o}')" />`;
       }
       // circle
       if (path.r) {
-        head += `<circle cx="${path.cx}" cy="${path.cy}" r="${path.r}" style="${path.s}" />`;
+        head += `<circle cx="${path.cx}" cy="${path.cy}" r="${path.r}" class="bodyPart ${path.o}" style="${path.s}" onclick="character.setBodyPart('${path.o}')" />`;
       }
     });
 
-    let guts = `<g class="playerBody"><path style="${body.s}" d="${body.d}"></g><g class="playerHead">${head}</g>`;
+    let guts = `<g class="playerBody"><path class="bodyPart body" style="${body.s}" d="${body.d}" onclick="character.setBodyPart('body')" ></g><g class="playerHead">${head}</g>`;
 
     return svg.wrapPlayer(guts);
   },
@@ -196,8 +196,8 @@ const svg = {
   buildPath(partName, colour) {
     let path = svg.imgList[partName].paths[0];
     let bits = partName.split("-");
-    path.c = ` ${bits[0]}`;
     path.s = `fill: ${colour}; stroke: ${colour}`;
+    path.o = `${bits[0]}`;
 
     return path;
   },
