@@ -2,7 +2,7 @@ const svg = {
 
   inline: function (itemName, num = 3) {
     let style = `style="width: ${num}rem;"`;
-    return svg.render(itemName, 1, style);
+    return lists.raw.imgList[itemName] ? svg.render(itemName, 1, style) : '';
   },
 
   render: (svgName, repeat = 1, style = "", svgInfo = null) => {

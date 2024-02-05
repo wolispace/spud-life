@@ -111,6 +111,9 @@ const tools = {
       }
       let footer = "";
       footer += `<div></div>`;
+      if (isDev) {
+        footer += `<button class="buttonize" onclick="help.show()"> ? </button>`;
+      }
       footer += `<button class="buttonize" onclick="dialog.okButton()"> Ok </button>`;
       dialog.cancelButton = function () { dialog.hide(); };
       dialog.okButton = function () { dialog.hide(); };
@@ -127,6 +130,9 @@ const tools = {
       }
       let footer = "";
       footer += `<div></div>`;
+      if (isDev) {
+        footer += `<button class="buttonize" onclick="help.show()"> ? </button>`;
+      }
       footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
       dialog.cancelButton = function () { dialog.hide(); };
       dialog.okButton = function () { dialog.hide(); };

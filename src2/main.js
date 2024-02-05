@@ -141,6 +141,7 @@ function startGame() {
 
   controls.render();
   tools.setup();
+  help.setup();
   if (player.day && player.day > 0 && player.name != '') {
     field.redraw();
     if (player.day >= pet.daysToPet) {
@@ -246,6 +247,9 @@ function splashScreen() {
 
   let footer = '';
   footer += `<button class="buttonize" onclick="transferHere()"> Transfer </button>`;
+  if (isDev) {
+    footer += `<button class="buttonize" onclick="help.show()"> ? </button>`;
+  }
   if (!game.new) {
     content += `<div>Welcome back <b>${player.name}</b></div>`;
     //content += dialog.makeCheckbox("hintsOn", "Show hints?", player.hints);
@@ -295,7 +299,7 @@ function presentList() {
 function storyIntro() {
   let itemsShow = presentList();
   let content = `<div class="dialog-message-content">`;
-  content += '<div>You receive a letter from a distance aunt: </div>';
+  content += '<div>You receive a letter from a distant aunt: </div>';
   content += '<div class="paper"><i>"I am retiring from the food business and have no need for these things. See what you can do with them"</i>';
   content += `<div>${itemsShow}</div></div>`;
   content += '<div>During the day, you dig for potatoes (spuds).<sup>*</sup></div>';

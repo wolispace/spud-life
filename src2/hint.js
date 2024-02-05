@@ -258,6 +258,7 @@ const hint = {
   },
 
   myName: function () {
+    console.log('mnName');
     hint.target = document.querySelector('#playerName');
     hint.message = `What is your name? Leave blank for a random name.`;
     hint.okButton = 'hint.confirm';
@@ -320,7 +321,6 @@ const hint = {
   },
   field: function () {
     hint.target = player.fields[0][0][0];
-    hint.btnText = `Let's start digging!`;
     hint.message = `Rocks and logs block your path.`;
     hint.okButton = 'hint.confirm';
     hint.group = 'w';
@@ -560,7 +560,7 @@ const hint = {
 
   resetHints: function () {
     hint.target = game.playerItem;
-    hint.message = `This is you, and your hints have been reset`;
+    hint.message = `This is you, and your hints have been reset.`;
     hint.okButton = 'hint.controls';
     hint.group = 'm';
     hint.render();
@@ -568,7 +568,7 @@ const hint = {
 
   scanner: function () {
     hint.target = tools.list.scanner;
-    hint.message = `When your scanner flashes, something is buried near you.`;
+    hint.message = `When your scanner flashes, something is buried near by.`;
     hint.okButton = 'hint.confirm';
     hint.group = 's';
     hint.render();

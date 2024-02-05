@@ -4,8 +4,6 @@ const character = {
 
   render: function () {
     svg.showElement("#player");
-    let thisBlock = document.querySelector(`#lplayer svg`);
-    svg.animate(thisBlock, `grow`, 1);
   },
   hide: function () {
     svg.hideElement("#iplayer");
@@ -151,7 +149,7 @@ const character = {
   },
 
   editName: function () {
-    return `<div><input type="text" id="playerName" 
+    return `<div><input type="text" id="playerName"
       placeholder="Your name" value="${player.name}" 
       maxlength="14" onfocusout="hint.part()" /></div>`;
   },

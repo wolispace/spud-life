@@ -35,6 +35,10 @@ const buildings = {
   },
 
   enter: function (itemName) {
+    // if player hasnt seen the hint to go home.. dont let them yet.
+    if (player.newHint < 4) {
+      return;
+    }
     buildings.entering = itemName;
     game.playerItem.fixPos();
     svg.animate(game.playerItem.sprite, 'shrink', 0.6, function () {

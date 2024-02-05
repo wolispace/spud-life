@@ -228,6 +228,22 @@ button:hover {
   background-color: rgba(109, 160, 143, .75) !important;
 }
 
+#iHelp {
+  position:fixed;
+  top: 0;
+  right: 0.5rem;
+  color: white;
+  font-weight: bold;
+  font-size: 1.5rem;
+  text-shadow: 3px 3px 3px black;
+  cursor:pointer;
+  opacity: .6;
+}
+
+#iHelp:hover {
+  opacity: 1;
+}
+
 .bodyPart {
   cursor: pointer;
 }
