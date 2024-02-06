@@ -95,7 +95,7 @@ const character = {
 
     game.playerItem.refresh(svg.renderPerson(player.body));
     if (game.new) {
-      hint.player();
+      hint.show('player');
     } else {
       buildings.list.home.enter();
     }
@@ -145,13 +145,13 @@ const character = {
     dialog.hasInput = true;
     character.demoBody();
     character.setBodyPart('body');
-    hint.myName();
+    hint.show('myName');
   },
 
   editName: function () {
     return `<div><input type="text" id="playerName"
       placeholder="Your name" value="${player.name}" 
-      maxlength="14" onfocusout="hint.part()" /></div>`;
+      maxlength="14" onfocusout="hint.show('part')" /></div>`;
   },
 
   buildBodySelect: function (bodyPart) {

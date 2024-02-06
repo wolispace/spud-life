@@ -11,6 +11,7 @@ const hint = {
   reminder: {},
   toolNoneCount: -1,
   hintBasket: false,
+  stack: [],
 
   defaultParams: {
     autoRender: false,
@@ -45,36 +46,39 @@ const hint = {
     return player.hinted.indexOf(`${key},`) > -1;
   },
 
-  test: function () {
-    hint.target = document.querySelector(`.close`);
-    hint.group = '';
-    hint.force = true;
-    hint.okButton = 'hint.test2';
-    hint.message = 'This is the close button. This is not a pipe. This is not a pipe. This is not a pipe. This is not a pipe. This is not a pipe. ';
-    hint.render();
-  },
-
-  test2: function () {
-    dialog.hide();
-    hint.target = game.playerItem;
-    hint.group = '';
-    hint.force = true;
-    hint.okButton = 'hint.controls';
-    hint.message = 'This is not a pipe. This is not a pipe. This is not a pipe. This is not a pipe. This is not a pipe. ';
-    hint.render();
-  },
-
   done: function () {
     hint.hide();
   },
 
+  push: function () {
+    hint.stack.push({
+      target: hint.target,
+      message: hint.message,
+      group: hint.group,
+      next: hint.next,
+      force: hint.force,
+    });
+  },
 
+  pop: function() {
+    // remove the current hint from the stack
+    let lastState = hint.stack.pop();
+    if (lastState) {
+      hint.target = lastState.target;
+      hint.message = lastState.message;
+      hint.group = lastState.group;
+      hint.next = lastState.next;
+      hint.force = lastState.force;
+      hint.render();
+    }
+  },
 
   render: function () {
     if (hint.visible) {
+      hint.push();
       return;
     }
-    if ((hint.isHinted(hint.group) || !player.hints) && !hint.force) {
+    if ((hint.isHinted(hint.group) || !player.hints) && hint.force != '') {
       hint.hide();
       return;
     }
@@ -97,10 +101,7 @@ const hint = {
 
       hint.visible = true;
       let btnText = hint.btnText || hint.ok();
-      // hints show once
-      // let skipCheckbox = hint.buildSkip();
       let input = `<div class="hintButtons">`;
-      // input += `${skipCheckbox}`;
       input += ` <button class="button buttonize" onclick="hint.confirm()">${btnText}</button></div>`;
       hint.msg.innerHTML = `${hint.message} ${input}`;
       hint.pointAt();
@@ -131,31 +132,20 @@ const hint = {
     hint.btnText = null;
     hint.force = false;
     hint.visible = false;
+    hint.pop();
   },
 
   confirm: function () {
-    hint.isItSkipped();
     hint.hide();
     // if they don't want to see this again, then mark it as hinted
     if (hint.okButton == 'hint.confirm') {
       hint.okButton = 'hint.close';
     }
-    eval(`${hint.okButton}()`);
-  },
-
-  buildSkip: function () {
-    let skipCheckbox = '';
-    if (hint.group) {
-      skipCheckbox = `<span class="checkboxSpan">`;
-      skipCheckbox += `<input type="checkbox" id="hintSkip" />`;
-      skipCheckbox += `<label class="checkboxLabel" for="hintSkip">Hide</label></span>`;
+    if (hint.next) {
+      hint.show(hint.next);
+    } else {
+      eval(`${hint.okButton}()`);
     }
-    return skipCheckbox;
-  },
-
-  isItSkipped: function () {
-    player.hinted[hint.group] = true;
-    game.save();
   },
 
   reset: function () {
@@ -254,31 +244,18 @@ const hint = {
   random: function () {
     let randomHintMsg = getFromList('randomHint');
     return randomHintMsg.replaceAll('[maxScan]', game.maxScan);
-
   },
 
-  myName: function () {
-    console.log('mnName');
-    hint.target = document.querySelector('#playerName');
-    hint.message = `What is your name? Leave blank for a random name.`;
-    hint.okButton = 'hint.confirm';
-    hint.group = 'n';
-    hint.render();
-  },
-
-  part: function () {
-    hint.target = document.querySelector('.part_body');
-    hint.message = `Select a body part.<br/>Change its type with arrows`;
-    hint.okButton = 'hint.colour';
-    hint.group = 'o';
-    hint.render();
-  },
-
-  colour: function () {
-    hint.target = document.querySelector('.color-group');
-    hint.message = `Also change it's colour`;
-    hint.okButton = 'hint.confirm';
-    hint.group = 'p';
+  show(hintName) {
+    let hintSet = lists.raw.hintSet[hintName];
+    let hintInfo = hintSet.split('|');
+    hint.target = document.querySelector(hintInfo[0]);
+    // TODO: if target is null do something special like selecting first rock
+    hint.group = hintInfo[1] ?? '';
+    hint.message = hintInfo[2];
+    hint.next = hintInfo[3] || '';
+    hint.force = hintInfo[4] || '';
+    hint.okButton = hintInfo.okButton ?? 'hint.confirm';
     hint.render();
   },
 
@@ -290,21 +267,6 @@ const hint = {
     hint.render();
   },
 
-  player: function () {
-    hint.target = game.playerItem;
-    hint.message = `This is you`;
-    hint.okButton = 'hint.controls';
-    hint.group = 'r';
-    hint.render();
-  },
-  controls: function () {
-    hint.isItSkipped();
-    hint.target = controls.list.right;
-    hint.message = `Use arrows<br/>...or tap to move.`;
-    hint.okButton = 'hint.confirm';
-    hint.group = 't';
-    hint.render();
-  },
   house: function () {
     hint.target = buildings.list.home;
     hint.message = `Move UP<br/>...or tap a building to go inside.`;

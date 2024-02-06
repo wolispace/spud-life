@@ -281,7 +281,7 @@ function closeSplash() {
     storyIntro();
   } else {
     if (player.hints) {
-      hint.player();
+      hint.show('player');
     }
   }
 }

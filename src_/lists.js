@@ -418,6 +418,14 @@ const lists = {
       "approaches",
     ],
 
+    hintSet: {
+      "myName": "#playerName|n|What is your name? Leave blank for a random name.",
+      "part": ".part_body|o|Select a body part.<br/>Change its type with arrows|colour",
+      "colour": ".color-group|p|Also change it's colour",
+      "player": "#iplayer|r|This is you|controls",
+      "controls": "#iright|t|Use arrows<br/>...or tap to move.",
+    },
+
     randomHint: [
       "You may find things other than potatoes buried beneath you",
       `There are [maxScan] levels of scanner upgrade. The [maxScan]th shows what's directly under you`,
