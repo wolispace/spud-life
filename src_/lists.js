@@ -424,7 +424,21 @@ const lists = {
       "colour": ".color-group|p|Also change it's colour",
       "player": "#iplayer|r|This is you|controls",
       "controls": "#iright|t|Use arrows<br/>...or tap to move.",
+      "home": "#ihome|u|Move UP<br/>...or tap a building to go inside." ,
+      "spade": "#ispade|v|Use your spade<br/>...or tap on yourself to dig where you stand.",
+      "field": "#i5|w|Rocks and logs block your path.",
+      "scanner": "#iscanner|s|When your scanner flashes, something is buried near by.",
+      "scanner2": "#iscanner|s2|Click your scanner to change settings.",
     },
+
+    helpPage: [
+      [
+        'Use your spade [spade] to dig where you stand.',
+        'Use your pick [pick] to or axe [axe] to break things.',
+        'Move up [up] or click on buildings [home] to enter.',
+        'Something [here] here.'
+      ],
+    ],
 
     randomHint: [
       "You may find things other than potatoes buried beneath you",

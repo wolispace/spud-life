@@ -78,7 +78,8 @@ const hint = {
       hint.push();
       return;
     }
-    if ((hint.isHinted(hint.group) || !player.hints) && hint.force != '') {
+
+    if ((hint.isHinted(hint.group) || !player.hints) && hint.force == '') {
       hint.hide();
       return;
     }
@@ -264,28 +265,6 @@ const hint = {
     hint.message = `I suggest you first buy a pick or an axe to clear the ground`;
     hint.okButton = 'hint.confirm';
     hint.group = 'q';
-    hint.render();
-  },
-
-  house: function () {
-    hint.target = buildings.list.home;
-    hint.message = `Move UP<br/>...or tap a building to go inside.`;
-    hint.okButton = 'hint.confirm';
-    hint.group = 'u';
-    hint.render();
-  },
-  spade: function () {
-    hint.target = tools.list.spade;
-    hint.message = `Use your spade<br/>...or tap on yourself to dig where you stand.`;
-    hint.okButton = 'hint.confirm';
-    hint.group = 'v';
-    hint.render();
-  },
-  field: function () {
-    hint.target = player.fields[0][0][0];
-    hint.message = `Rocks and logs block your path.`;
-    hint.okButton = 'hint.confirm';
-    hint.group = 'w';
     hint.render();
   },
 
@@ -525,21 +504,6 @@ const hint = {
     hint.message = `This is you, and your hints have been reset.`;
     hint.okButton = 'hint.controls';
     hint.group = 'm';
-    hint.render();
-  },
-
-  scanner: function () {
-    hint.target = tools.list.scanner;
-    hint.message = `When your scanner flashes, something is buried near by.`;
-    hint.okButton = 'hint.confirm';
-    hint.group = 's';
-    hint.render();
-  },
-  scanner2: function () {
-    hint.target = tools.list.scanner;
-    hint.message = `Click your scanner to change settings.`
-    hint.okButton = 'hint.confirm';
-    hint.group = 's2';
     hint.render();
   },
 

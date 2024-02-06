@@ -1,7 +1,7 @@
 const help = {
   content: [
     [
-      'Use ',
+      'Use your spade [spade] to dig where you stand.',
       'Use your pick [pick] to or axe [axe] to break things.',
       'Move up [up] or click on buildings [home] to enter.',
       'Something [here] here.'
@@ -38,8 +38,8 @@ const help = {
 
   page: function (num = 0) {
     let html = '';
-    help.content[num].forEach((msg) => {
-      html += `<div>${help.parse(msg)}</div>`;
+    lists.raw.helpPage[num].forEach((msg) => {
+      html += `<div class="hintRow">${help.parse(msg)}</div>`;
     });
     return html;
   },
