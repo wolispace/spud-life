@@ -73,6 +73,25 @@ const hint = {
     }
   },
 
+  show(hintName, params = {}) {
+    let hintSet = lists.raw.hintSet[hintName];
+    let hintInfo = hintSet.split('|');
+    hint.target = document.querySelector(hintInfo[0]);
+    // TODO: if target is null do something special like selecting first rock
+    hint.group = hintInfo[1] ?? '';
+    hint.message = hint.parse(hintInfo[2], params);
+    hint.next = hintInfo[3] || '';
+    hint.force = hintInfo[4] || '';
+    hint.okButton = hintInfo.okButton ?? 'hint.confirm';
+    hint.render();
+  },
+
+  parse: function (msg, params) {
+    return msg.replace(/\[(.*?)\]/g, function (_, key) {
+      return params[key];
+    });
+  },
+
   render: function () {
     if (hint.visible) {
       hint.push();
@@ -153,7 +172,7 @@ const hint = {
     dialog.hide();
     player.hinted = '';
     character.resetMoved();
-    hint.resetHints();
+    hint.show('resetHints');
   },
 
   pointAt: function () {
@@ -247,18 +266,7 @@ const hint = {
     return randomHintMsg.replaceAll('[maxScan]', game.maxScan);
   },
 
-  show(hintName) {
-    let hintSet = lists.raw.hintSet[hintName];
-    let hintInfo = hintSet.split('|');
-    hint.target = document.querySelector(hintInfo[0]);
-    // TODO: if target is null do something special like selecting first rock
-    hint.group = hintInfo[1] ?? '';
-    hint.message = hintInfo[2];
-    hint.next = hintInfo[3] || '';
-    hint.force = hintInfo[4] || '';
-    hint.okButton = hintInfo.okButton ?? 'hint.confirm';
-    hint.render();
-  },
+
 
   buyTool: function () {
     hint.target = document.querySelectorAll('.hardware-button-buy')[0];
@@ -382,7 +390,7 @@ const hint = {
   },
 
 
-  itsNight: function () {
+  itsNight_OLD: function () {
     hint.target = `.dialog .close`;
     hint.message = `It's night time and too late to open your shop. Go home and get some sleep.`;
     hint.okButton = 'hint.confirm';
@@ -390,15 +398,7 @@ const hint = {
     hint.render();
   },
 
-  goHome: function () {
-    hint.target = buildings.list.home;
-    hint.message = `It's getting late. Go home and get some sleep.`;
-    hint.okButton = 'hint.confirm';
-    hint.group = 'd';
-    hint.render();
-  },
-
-  openShop: function () {
+  openShop_OLD: function () {
     hint.target = `.dialog .okButton`;
     hint.message = `When your ready, open your shop and sell your potato-based meals.`;
     hint.okButton = 'hint.confirm';
@@ -470,21 +470,6 @@ const hint = {
     hint.render();
   },
 
-  petIntro: function () {
-    hint.target = game.petItem;
-    hint.message = `Oh look.. a small black fluffy animal. I think its a stray`;
-    hint.okButton = 'hint.petHome';
-    hint.group = 'k';
-    hint.render();
-  },
-
-  petHome: function () {
-    hint.target = buildings.list.home;
-    hint.message = `Go home to interact with it`;
-    hint.okButton = 'hint.confirm';
-    hint.group = 'l';
-    hint.render();
-  },
 
   petMsg: function () {
     if (dialog.visible || hint.visible) {
@@ -496,14 +481,6 @@ const hint = {
     hint.okButton = 'hint.confirm';
     hint.group = '';
     hint.force = true;
-    hint.render();
-  },
-
-  resetHints: function () {
-    hint.target = game.playerItem;
-    hint.message = `This is you, and your hints have been reset.`;
-    hint.okButton = 'hint.controls';
-    hint.group = 'm';
     hint.render();
   },
 

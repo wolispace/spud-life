@@ -68,7 +68,7 @@ const customers = {
     });
     customers.coins();
     buildings.exit();
-    hint.goHome();
+    hint.show('goHome');
   },
 
   reset: function () {

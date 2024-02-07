@@ -419,16 +419,22 @@ const lists = {
     ],
 
     hintSet: {
-      "myName": "#playerName|n|What is your name? Leave blank for a random name.",
+      "myName": "#playerName|n|What is your name? Leave blank for a random name",
       "part": ".part_body|o|Select a body part.<br/>Change its type with arrows|colour",
       "colour": ".color-group|p|Also change it's colour",
       "player": "#iplayer|r|This is you|controls",
-      "controls": "#iright|t|Use arrows<br/>...or tap to move.",
-      "home": "#ihome|u|Move UP<br/>...or tap a building to go inside." ,
-      "spade": "#ispade|v|Use your spade<br/>...or tap on yourself to dig where you stand.",
-      "field": "#i5|w|Rocks and logs block your path.",
-      "scanner": "#iscanner|s|When your scanner flashes, something is buried near by.",
-      "scanner2": "#iscanner|s2|Click your scanner to change settings.",
+      "controls": "#iright|t|Use arrows<br/>...or tap to move",
+      "home": "#ihome|u|Move UP<br/>...or tap a building to go inside" ,
+      "spade": "#ispade|v|Use your spade<br/>...or tap on yourself to dig where you stand",
+      "field": "#i5|w|Rocks and logs block your path",
+      "scanner": "#iscanner|s|When your scanner flashes, something is buried near by",
+      "scanner2": "#iscanner|s2|Click your scanner to change settings",
+      "goHome": "#ihome|d|It's getting late. Go home and get some sleep",
+      "petIntro": "#ipet|k|Oh look.. a small black fluffy animal. I think its a stray|petHome",
+      "petHome": "#ihome|i|Go home to interact with it",
+      "resetHints": "#iplayer|m|This is you, and your hints have been reset [name]|controls",
+
+
     },
 
     helpPage: [

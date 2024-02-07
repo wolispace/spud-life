@@ -156,7 +156,7 @@ class Home extends game.Item {
       pet.goPlayer();
     } else if (player.day == pet.daysToPet) {
       pet.show();
-      hint.petIntro();
+      hint.show('petIntro');
     }
   }
 

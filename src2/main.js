@@ -146,8 +146,8 @@ function startGame() {
     field.redraw();
     if (player.day >= pet.daysToPet) {
       player.pet = pet.decode(player.pet);
-      hint.petIntro();
       pet.show();
+      hint.show('petIntro');
     }
   } else {
     game.new = true;
