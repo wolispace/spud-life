@@ -159,7 +159,10 @@ const controls = {
       };
       game.playerItem.fixPos();
       game.playerItem.jiggle('left', onEnd);
-      hint.noDigHome();
+      hint.show('noDigHome', {message:  hint.getReminder('noDigHome', ` can't dig here. Move down a bit and try again.`), force: hint.message.length > 0});
+
+
+    
     }
   },
 

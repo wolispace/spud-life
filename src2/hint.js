@@ -300,15 +300,6 @@ const hint = {
     hint.reminder = {};
   },
 
-  noDigHome: function () {
-    hint.target = game.playerItem;
-    hint.message = hint.getReminder('noDigHome', ` can't dig here. Move down a bit and try again.`);
-    hint.okButton = 'hint.confirm';
-    hint.group = '';
-    hint.force = hint.message.length > 0;
-    hint.render();
-  },
-
   toolUsedUp: function (toolName) {
     // only show the hint every 5 times.. 0, 5, 10
     hint.toolNoneCount++;

@@ -439,6 +439,8 @@ const lists = {
       "addTool": "|y|You dug up a [name]. It's going straight to work.",
       "addMachine": "#icart|z|You dug up a [name]. It's going straight to work",
       "gotMachine": "#ihardware|z2|You dug up a [name]. You already have one, so this muddy one was sold",
+      "noDigHome": "#iplayer||",
+
 
     },
       
