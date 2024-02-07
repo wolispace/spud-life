@@ -435,6 +435,7 @@ const lists = {
       "resetHints": "#iplayer|m|This is you, and your hints have been reset|controls",
       "firstTool": "|x|You need to hit this [qty] more times to remove it completely",
       "buyTool": "|q|I suggest you first buy a pick or an axe to clear the ground",
+      "holeLife": "|f2|Each hole clears after 5 days, then a new spud is randomly sown",
 
     },
 

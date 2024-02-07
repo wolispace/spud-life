@@ -76,21 +76,21 @@ const hint = {
   },
 
   // use params from list.hintSet, override target in params, replace [word] in message with params as well
-  show(hintName, params = {}) {
+  show: function(hintName, params = {}) {
     console.log('show', hintName, params);
-    let hintSet = lists.raw.hintSet[hintName];
-    let hintInfo = hintSet.split('|');
-    if (params.target) {
-      hint.target = params.target;
-    } else {
-      hint.target = document.querySelector(hintInfo[0]);
-    }
-    hint.group = hintInfo[1] ?? '';
-    hint.message = hint.parse(hintInfo[2], params);
-    hint.next = hintInfo[3] || '';
-    hint.force = hintInfo[4] || '';
-    hint.okButton = hintInfo.okButton ?? 'hint.confirm';
+    let hintInfo = hint.info(hintName);
+    hint.target = params.target || document.querySelector(hintInfo[0]);
+    hint.group = params.group || hintInfo[1] || '';
+    hint.message = params.message || hint.parse(hintInfo[2], params);
+    hint.next = params.next || hintInfo[3] || '';
+    hint.force = params.force || hintInfo[4] || '';
+    hint.okButton = params.okButton || 'hint.confirm';
     hint.render();
+  },
+
+  info: function(hintName) {
+    let hintSet = lists.raw.hintSet[hintName];
+    return hintSet.split('|');
   },
 
   parse: function (msg, params) {
@@ -379,23 +379,6 @@ const hint = {
     hint.render();
   },
 
-
-  itsNight_OLD: function () {
-    hint.target = `.dialog .close`;
-    hint.message = `It's night time and too late to open your shop. Go home and get some sleep.`;
-    hint.okButton = 'hint.confirm';
-    hint.group = 'c';
-    hint.render();
-  },
-
-  openShop_OLD: function () {
-    hint.target = `.dialog .okButton`;
-    hint.message = `When your ready, open your shop and sell your potato-based meals.`;
-    hint.okButton = 'hint.confirm';
-    hint.group = 'e';
-    hint.render();
-  },
-
   dugItem: function (item) {
     let itemInfo = items[item.item];
     let bookInfo = books.isBook(item.item);
@@ -420,20 +403,14 @@ const hint = {
     hint.message = `${wowMsg} You just dug up:<br/><b>${itemInfo.fullName}</b>`;
     hint.message += `<div class="hintIcon">${icon}</div>`;
     if (!hint.hintBasket) {
-      hint.message += `<div>Check your basket to see what you found.</div>`;
+      hint.message += `Check your basket to see what you found`;
     }
     hint.hintBasket = true;
     hint.group = item.item;
     hint.render();
   },
 
-  holeLife: function () {
-    hint.target = player.fields[0][game.SURFACE][0];
-    hint.message = `Each hole clears after 5 days, then a new spud is randomly sown`;
-    hint.okButton = 'hint.confirm';
-    hint.group = 'f2';
-    hint.render();
-  },
+
 
   dugTool: function (item) {
     hint.target = tools.list[toolName];

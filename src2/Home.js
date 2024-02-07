@@ -149,7 +149,10 @@ class Home extends game.Item {
     buildings.list.home.exit();
     hint.resetReminders();
     if (player.fields[0][game.SURFACE].length > 0) {
-      hint.holeLife();
+      hint.show('holeLife', {target: player.fields[0][game.SURFACE][0]});
+
+
+
     }
     if (game.petItem) {
       pet.locked = false;
