@@ -432,8 +432,9 @@ const lists = {
       "goHome": "#ihome|d|It's getting late. Go home and get some sleep",
       "petIntro": "#ipet|k|Oh look.. a small black fluffy animal. I think its a stray|petHome",
       "petHome": "#ihome|i|Go home to interact with it",
-      "resetHints": "#iplayer|m|This is you, and your hints have been reset [name]|controls",
-
+      "resetHints": "#iplayer|m|This is you, and your hints have been reset|controls",
+      "firstTool": "|x|You need to hit this [qty] more times to remove it completely",
+      "buyTool": "|q|I suggest you first buy a pick or an axe to clear the ground",
 
     },
 

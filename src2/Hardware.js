@@ -34,7 +34,7 @@ class Hardware extends game.Item {
     dialog.render(title, content, footer);
     
     if (tools.list['pick'].max < 1 || tools.list['axe'].max < 1) {
-      hint.buyTool();
+      hint.show('buyTool', {target: document.querySelectorAll('.hardware-button-buy')[0]});
     }
   }
 

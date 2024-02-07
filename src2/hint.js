@@ -58,6 +58,7 @@ const hint = {
       next: hint.next,
       force: hint.force,
     });
+    //console.log('pushed', hint.stack);
   },
 
   pop: function() {
@@ -71,13 +72,19 @@ const hint = {
       hint.force = lastState.force;
       hint.render();
     }
+    //console.log('popped', hint.stack);
   },
 
+  // use params from list.hintSet, override target in params, replace [word] in message with params as well
   show(hintName, params = {}) {
+    console.log('show', hintName, params);
     let hintSet = lists.raw.hintSet[hintName];
     let hintInfo = hintSet.split('|');
-    hint.target = document.querySelector(hintInfo[0]);
-    // TODO: if target is null do something special like selecting first rock
+    if (params.target) {
+      hint.target = params.target;
+    } else {
+      hint.target = document.querySelector(hintInfo[0]);
+    }
     hint.group = hintInfo[1] ?? '';
     hint.message = hint.parse(hintInfo[2], params);
     hint.next = hintInfo[3] || '';
@@ -123,7 +130,7 @@ const hint = {
       let btnText = hint.btnText || hint.ok();
       let input = `<div class="hintButtons">`;
       input += ` <button class="button buttonize" onclick="hint.confirm()">${btnText}</button></div>`;
-      hint.msg.innerHTML = `${hint.message} ${input}`;
+      hint.msg.innerHTML = `${hint.message}.${input}`;
       hint.pointAt();
       hint.showMsg();
       hint.overlay.style.display = 'block';
@@ -267,15 +274,6 @@ const hint = {
   },
 
 
-
-  buyTool: function () {
-    hint.target = document.querySelectorAll('.hardware-button-buy')[0];
-    hint.message = `I suggest you first buy a pick or an axe to clear the ground`;
-    hint.okButton = 'hint.confirm';
-    hint.group = 'q';
-    hint.render();
-  },
-
   // returns -1 if we have exceeded max msgs, otherwise return the reminderCount 
   getReminderCount: function (hintSet) {
     let reminderCount = hint.reminder[hintSet] ?? 0;
@@ -348,14 +346,6 @@ const hint = {
     hint.okButton = 'hint.confirm';
     hint.group = '';
     hint.force = hint.message.length > 0;
-    hint.render();
-  },
-
-  firstTool: function (hitItem) {
-    hint.target = hitItem;
-    hint.message = `You need to hit this ${game.blockHits - 1} more times to remove it completely`;
-    hint.okButton = 'hint.confirm';
-    hint.group = 'x';
     hint.render();
   },
 

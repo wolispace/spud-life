@@ -119,7 +119,7 @@ class Mobile extends game.Item {
               spriteBox.setPos();
               spriteBox.qty--;
               spriteBox.reduceAndPosition();
-              hint.firstTool(spriteBox);
+              hint.show('firstTool', {target: spriteBox, qty: game.blockHits - 1});
             }
             if (spriteBox.qty < 1) {
               game.digging = true;
