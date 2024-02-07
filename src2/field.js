@@ -155,6 +155,10 @@ const field = {
   
   // return an items based on its rareness, defaulting to most common
   rarenessItem: function() {
+
+    if (isDev) {
+      return list.all['masher'];
+    }
     let counter = 0;
     let maxItems = list.buriable.length;
     while (counter < maxItems) {
@@ -170,7 +174,7 @@ const field = {
       counter++;
     }
 
-    return list.items.byName['bone'];
+    return list.all['bone'];
   },
 
   add: function (fieldId) {

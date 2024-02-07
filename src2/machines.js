@@ -13,10 +13,10 @@ const machines = {
   add: function (spriteBox) {
     let itemInfo = list.all[spriteBox.item];
     if (player.cart[spriteBox.item] > -1) {
-      hint.gotMachine(itemInfo.fullName);
+      hint.show('gotMachine', {name: itemInfo.fullName});
       tools.list.wallet.addQty(100);
     } else {
-      hint.addMachine(itemInfo.fullName);
+      hint.show('addMachine', {name: itemInfo.fullName});
       player.cart[spriteBox.item] = 0;
     }
   },

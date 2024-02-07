@@ -77,7 +77,7 @@ const hint = {
 
   // use params from list.hintSet, override target in params, replace [word] in message with params as well
   show: function(hintName, params = {}) {
-    console.log('show', hintName, params);
+    //console.log('show', hintName, params);
     let hintInfo = hint.info(hintName);
     hint.target = params.target || document.querySelector(hintInfo[0]);
     hint.group = params.group || hintInfo[1] || '';
@@ -451,27 +451,6 @@ const hint = {
     hint.render();
   },
 
-  addTool: function (itemInfo) {
-    hint.target = itemInfo;
-    hint.message = `You dug up a ${itemInfo.item}. It's going straight to work.`;
-    hint.okButton = 'hint.confirm';
-    hint.group = 'y';
-    hint.render();
-  },
-  addMachine: function (machineName) {
-    hint.target = buildings.list.cart;
-    hint.message = `You dug up a ${machineName}. It's going straight to work.`;
-    hint.okButton = 'hint.confirm';
-    hint.group = 'z';
-    hint.render();
-  },
-  gotMachine: function (machineName) {
-    hint.target = buildings.list.hardware;
-    hint.message = `You dug up a ${machineName}. You already have one so sell this muddy one.`;
-    hint.okButton = 'hint.confirm';
-    hint.group = 'z2';
-    hint.render();
-  },
   hotelCheckout: function () {
     hint.target = document.querySelector('.part_name');
     hint.message = `You can checkout any time you like...`;

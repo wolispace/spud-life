@@ -198,7 +198,7 @@ const tools = {
     } else {
       thisTool.addQty(addQty);
     }
-    hint.addTool(thisTool);
+    hint.show('addTool',{target: thisTool, name: itemInfo.item});
   },
 
   fieldCount: function () {

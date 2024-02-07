@@ -436,8 +436,12 @@ const lists = {
       "firstTool": "|x|You need to hit this [qty] more times to remove it completely",
       "buyTool": "|q|I suggest you first buy a pick or an axe to clear the ground",
       "holeLife": "|f2|Each hole clears after 5 days, then a new spud is randomly sown",
+      "addTool": "|y|You dug up a [name]. It's going straight to work.",
+      "addMachine": "#icart|z|You dug up a [name]. It's going straight to work",
+      "gotMachine": "#ihardware|z2|You dug up a [name]. You already have one, so this muddy one was sold",
 
     },
+      
 
     helpPage: [
       [
