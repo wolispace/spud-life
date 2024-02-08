@@ -450,10 +450,16 @@ const lists = {
 
     helpPage: [
       [
-        'Use your spade [spade] to dig where you stand.',
-        'Use your pick [pick] to or axe [axe] to break things.',
-        'Move up [up] or click on buildings [home] to enter.',
-        'Something [here] here.'
+        '[spade] Use your spade to dig where you stand',
+        '[hole] Dug holes refill after 5 days', 
+        '[scanner] Your scanner flashes when something is buried near by',
+        '[pick] [axe] Use your pick to or axe to break things',
+        '[up] [home] Move up or click on buildings to enter',
+        '[basket] Click on your basket and other tools to see more about them',
+        '[cart] Use machines in your cart to make food to sell',
+        '[hardware] Sell and buy things in the store',
+        '[scanner] Try to find all the things. Check your potatadex',
+        '[home] Go home any time to start a new day and refresh your tools',
       ],
     ],
 

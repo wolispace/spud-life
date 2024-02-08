@@ -121,7 +121,7 @@ let items = {
   scanner: {
     type: "tools",
     fullName: "Scanner",
-    desc: "Scans the patches around you for buried items",
+    desc: "Scans around you for buried items",
     price: 500,
     rareness: 500,
     upgradeCost: 500,

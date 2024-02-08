@@ -39,7 +39,7 @@ const help = {
   page: function (num = 0) {
     let html = '';
     lists.raw.helpPage[num].forEach((msg) => {
-      html += `<div class="hintRow">${help.parse(msg)}</div>`;
+      html += `<div class="hintRow">${help.parse(msg)}.</div>`;
     });
     return html;
   },

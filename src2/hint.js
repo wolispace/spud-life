@@ -38,7 +38,7 @@ const hint = {
 
   addHinted: function (key) {
     if (!hint.isHinted(key)) {
-      player.hinted += `${key},`;  
+      player.hinted += `${key},`;
     }
   },
 
@@ -61,7 +61,7 @@ const hint = {
     //console.log('pushed', hint.stack);
   },
 
-  pop: function() {
+  pop: function () {
     // remove the current hint from the stack
     let lastState = hint.stack.pop();
     if (lastState) {
@@ -76,7 +76,7 @@ const hint = {
   },
 
   // use params from list.hintSet, override target in params, replace [word] in message with params as well
-  show: function(hintName, params = {}) {
+  show: function (hintName, params = {}) {
     let hintInfo = hint.info(hintName);
     //console.log('show', hintName, params, hintInfo);
     hint.target = params.target || document.querySelector(hintInfo[0]);
@@ -88,7 +88,7 @@ const hint = {
     hint.render();
   },
 
-  info: function(hintName) {
+  info: function (hintName) {
     let hintSet = lists.raw.hintSet[hintName];
     return hintSet.split('|');
   },
@@ -238,7 +238,6 @@ const hint = {
     }
   },
 
-
   showMsg: function () {
     // align msg with arrow that is already pointing at the item
     let verticalOffset = 6;
@@ -360,8 +359,8 @@ const hint = {
       itemInfo.desc = spuds.desc(itemInfo);
       itemInfo.fullName = `A spud called ${itemInfo.fullName}`;
     } else {
-      if (bookInfo) {      
-        icon =  bookInfo.icon;
+      if (bookInfo) {
+        icon = bookInfo.icon;
         itemInfo = {
           desc: bookInfo.desc,
           fullName: bookInfo.name,
@@ -395,8 +394,5 @@ const hint = {
     hint.force = true;
     hint.render();
   },
-
-
-
 
 };
