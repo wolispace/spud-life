@@ -17,7 +17,7 @@ const help = {
   },
 
   show: function () {
-    dialog.push();
+    //dialog.push();
     let title = `Help with Spud Life`;
     let content = `<div class="dialog-message-content">`;
     content += help.page();
@@ -33,7 +33,7 @@ const help = {
 
   hide: function () {
     dialog.hide();
-    dialog.pop();
+    //dialog.pop();
   },
 
   page: function (num = 0) {

@@ -77,8 +77,8 @@ const hint = {
 
   // use params from list.hintSet, override target in params, replace [word] in message with params as well
   show: function(hintName, params = {}) {
-    //console.log('show', hintName, params);
     let hintInfo = hint.info(hintName);
+    //console.log('show', hintName, params, hintInfo);
     hint.target = params.target || document.querySelector(hintInfo[0]);
     hint.group = params.group || hintInfo[1] || '';
     hint.message = params.message || hint.parse(hintInfo[2], params);
@@ -104,7 +104,6 @@ const hint = {
       hint.push();
       return;
     }
-
     if ((hint.isHinted(hint.group) || !player.hints) && hint.force == '') {
       hint.hide();
       return;
@@ -112,7 +111,6 @@ const hint = {
     if (isDev) {
       //return;
     }
-
     if (dialog.visible) {
       // scroll the target into view..
       var parentDiv = document.querySelector('.dialog .content');
@@ -401,34 +399,6 @@ const hint = {
     hint.render();
   },
 
-
-
-  dugTool: function (item) {
-    hint.target = tools.list[toolName];
-    hint.message = `You dug up a ${item.name} to add to your collection.`;
-    hint.okButton = 'hint.confirm';
-    hint.group = 'g';
-    hint.render();
-  },
-
-  dugMachine: function (tool) {
-    hint.target = buildings.list.cart;
-    hint.message = `You dug up a ${tool.name}. It's going straight to work.`;
-    hint.okButton = 'hint.confirm';
-    hint.group = 'h';
-    hint.render();
-  },
-
-
-  scannerUpgrade: function (tool) {
-    hint.target = tools.list.scanner;
-    hint.message = `You dug up a ${tool.name}. It's going straight to work.`;
-    hint.okButton = 'hint.confirm';
-    hint.group = 'j';
-    hint.render();
-  },
-
-
   petMsg: function () {
     if (dialog.visible || hint.visible) {
       return;
@@ -442,22 +412,7 @@ const hint = {
     hint.render();
   },
 
-  hotelCheckout: function () {
-    hint.target = document.querySelector('.part_name');
-    hint.message = `You can checkout any time you like...`;
-    hint.okButton = 'hint.confirm';
-    hint.group = '';
-    hint.force = true;
-    hint.render();
-  },
-  hotelLeave: function () {
-    hint.target = document.querySelector('.part_name');
-    hint.message = `.. but you can never leave.`;
-    hint.okButton = 'hint.confirm';
-    hint.group = '';
-    hint.force = true;
-    hint.render();
-  },
+
 
 
 };

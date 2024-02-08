@@ -74,7 +74,7 @@ class Hotel extends game.Item {
 
   checkout() {
     if (player.hotelName == "California") {
-      hint.hotelCheckout();
+      hint.show('hotelCheckout');
       return;
     }
     this.exit();
@@ -82,7 +82,7 @@ class Hotel extends game.Item {
 
   leave() {
     if (player.hotelName == "California") {
-      hint.hotelLeave();
+      hint.show('hotelLeave');
       return;
     }
     this.exit();

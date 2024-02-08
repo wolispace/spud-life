@@ -440,6 +440,8 @@ const lists = {
       "addMachine": "#icart|z|You dug up a [name]. It's going straight to work",
       "gotMachine": "#ihardware|z2|You dug up a [name]. You already have one, so this muddy one was sold",
       "noDigHome": "#iplayer||",
+      "hotelCheckout": ".part_name||You can checkout any time you like...||1",
+      "hotelLeave": ".part_name||.. but you can never leave||1",
 
 
     },
