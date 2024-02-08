@@ -442,7 +442,8 @@ const lists = {
       "noDigHome": "#iplayer||",
       "hotelCheckout": ".part_name||You can checkout any time you like...||1",
       "hotelLeave": ".part_name||.. but you can never leave||1",
-
+      "toolHW": "#ihardware|a|Check the hardware store for things to buy and sell|toolHome",
+      "toolHome": "#ihome|b|Then go home and get some sleep. Try again tomorrow",
 
     },
       

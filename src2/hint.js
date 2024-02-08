@@ -348,23 +348,7 @@ const hint = {
       hint.message = `You found no spuds today.`;
       hint.group = 'letsSleep';
     }
-    hint.okButton = 'hint.toolHW';
-    hint.render();
-  },
-
-  toolHW: function () {
-    hint.target = buildings.list.hardware;
-    hint.message = `Check the hardware store for things to buy and sell.`;
-    hint.okButton = 'hint.toolHome';
-    hint.group = 'a';
-    hint.render();
-  },
-
-  toolHome: function () {
-    hint.target = buildings.list.home;
-    hint.message = `Then go home and get some sleep. Try again tomorrow.`;
-    hint.okButton = 'hint.confirm';
-    hint.group = 'b';
+    hint.next = 'toolHW';
     hint.render();
   },
 
@@ -389,7 +373,7 @@ const hint = {
 
     let wowMsg = getFromList('wowMsgList');
     hint.target = tools.list.basket;
-    hint.message = `${wowMsg} You just dug up:<br/><b>${itemInfo.fullName}</b>`;
+    hint.message = `${wowMsg} You just found<br/><b>${itemInfo.fullName}</b>`;
     hint.message += `<div class="hintIcon">${icon}</div>`;
     if (!hint.hintBasket) {
       hint.message += `Check your basket to see what you found`;
