@@ -302,7 +302,7 @@ const character = {
       return;
     }
     player.newHint = player.newHint ?? 0;
-    let hintList = ['scanner', 'spade', 'field', 'home', 'scanner2'];
+    let hintList = ['spade', 'home'];
     if (hintList[player.newHint]) {
       hint.show(hintList[player.newHint]);
       player.newHint++;

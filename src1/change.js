@@ -1,5 +1,9 @@
 const change = {
   log: {
+    "1.10.0": [
+      "Added help dialog and reworked hints a bit",
+      ".1 - Stop doubling up spud names",
+    ],
     "1.9.0": [
       "Added hotel quests",
       ".1 - First dig books work now",

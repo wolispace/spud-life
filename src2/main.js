@@ -247,9 +247,6 @@ function splashScreen() {
 
   let footer = '';
   footer += `<button class="buttonize" onclick="transferHere()"> Transfer </button>`;
-  if (isDev) {
-    footer += `<button class="buttonize" onclick="help.show()"> ? </button>`;
-  }
   if (!game.new) {
     content += `<div>Welcome back <b>${player.name}</b></div>`;
     //content += dialog.makeCheckbox("hintsOn", "Show hints?", player.hints);
@@ -318,6 +315,7 @@ function storyIntro() {
 }
 
 function aboutGame() {
+  dialog.push();
   let content = `<div class="dialog-message-content">`;
   content += `<div>This game was inspired by 'Man Eats Fish' by <a href="http://www.supermoof.com/">SuperMoof</a></div>`;
   content += `<div>I wanted to make a browser-based game that:`;
@@ -336,8 +334,8 @@ function aboutGame() {
   footer += `<button class="buttonize" onclick="reviews.show()"> Reviews </button>`;
   footer += `<button class="buttonize" onclick="change.show()"> Changelog </button>`;
   footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
-  dialog.cancelButton = function () { dialog.hide(); };
-  dialog.okButton = function () { dialog.hide(); };
+  dialog.cancelButton = function () { dialog.hide(); dialog.pop();  };
+  dialog.okButton = function () { dialog.hide(); dialog.pop(); };
   dialog.render("About spud life", content, footer);
 }
 

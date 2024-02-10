@@ -36,7 +36,7 @@ const buildings = {
 
   enter: function (itemName) {
     // if player hasnt seen the hint to go home.. dont let them yet.
-    if (player.newHint < 4) {
+    if (player.newHint < 2) {
       return;
     }
     buildings.entering = itemName;

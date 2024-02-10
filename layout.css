@@ -228,7 +228,7 @@ button:hover {
   background-color: rgba(109, 160, 143, .75) !important;
 }
 
-#iHelp {
+#ihelp {
   position:fixed;
   top: 0;
   right: 0.5rem;
@@ -240,7 +240,7 @@ button:hover {
   opacity: .6;
 }
 
-#iHelp:hover {
+#ihelp:hover {
   opacity: 1;
 }
 

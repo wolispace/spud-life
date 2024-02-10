@@ -9,9 +9,9 @@ const help = {
   ],
 
   setup: function () {
-    let helpButton = document.querySelector('#iHelp');
+    let helpButton = document.querySelector('#ihelp');
     if (!helpButton) {
-      let html = '<div id="iHelp" onclick="help.show();">?</div>';
+      let html = '<div id="ihelp" onclick="help.show();">?</div>';
       addToBody(html);
     }
   },
@@ -24,7 +24,7 @@ const help = {
     content += `</div>`;
 
     let footer = ``;
-    footer += `<div></div>`;
+    footer += `<button class="buttonize" onclick="aboutGame()"> About </button>`;
     footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
     dialog.cancelButton = function () { change.hide(); };
     dialog.okButton = function () { change.hide() };

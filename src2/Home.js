@@ -30,10 +30,7 @@ class Home extends game.Item {
     let content = `<div class="dialog-message-content">`;
     content += `<div>${svg.inline('home')} Your house ${getFromList('insideList')}.</div>`;
     content += `<div class="hasButton"><button class="buttonize" onclick="buildings.list.home.evening()"> Bring on the night </button> If you have no spuds to sell.</div>`;
-    content += `<div>Go outside and use your spade to dig for potatoes.</div>`;
-    content += `<div>You can change how you look any time in your wardrobe.</div>`;
     content += `<div>${hint.random()}.</div>`;
-    content += `<div>Click on your scanner to adjust settings.</div>`;
     content += `</div>`;
 
     let footer = "";

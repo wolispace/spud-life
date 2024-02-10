@@ -354,17 +354,15 @@ const hint = {
   dugItem: function (item) {
     let itemInfo = items[item.item];
     let bookInfo = books.isBook(item.item);
+    let fullName = itemInfo.fullName;
+    let icon = '';
     if (!bookInfo && itemInfo.type == 'spuds') {
-      icon = spuds.build(itemInfo.name); //svg.render('spud1');
-      itemInfo.desc = spuds.desc(itemInfo);
-      itemInfo.fullName = `A spud called ${itemInfo.fullName}`;
+      icon = spuds.build(itemInfo.name);
+      fullName = `A spud called ${itemInfo.fullName}`;
     } else {
       if (bookInfo) {
         icon = bookInfo.icon;
-        itemInfo = {
-          desc: bookInfo.desc,
-          fullName: bookInfo.name,
-        };
+        fullName = bookInfo.name;
       } else {
         icon = svg.render(item.item);
       }
@@ -372,7 +370,7 @@ const hint = {
 
     let wowMsg = getFromList('wowMsgList');
     hint.target = tools.list.basket;
-    hint.message = `${wowMsg} You just found<br/><b>${itemInfo.fullName}</b>`;
+    hint.message = `${wowMsg} You just found<br/><b>${fullName}</b>`;
     hint.message += `<div class="hintIcon">${icon}</div>`;
     if (!hint.hintBasket) {
       hint.message += `Check your basket to see what you found`;
