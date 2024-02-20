@@ -1,5 +1,8 @@
 const change = {
   log: {
+    "1.11.0": [
+      "Clear url params so reloading doesn't redo last request",
+    ],
     "1.10.0": [
       "Added help dialog and reworked hints a bit",
       ".1 - Stop doubling up spud names",

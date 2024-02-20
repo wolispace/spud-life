@@ -8,7 +8,7 @@ let list = { all: {} };
 let scanner = null;
 
 // if savedate injected (by referencing it with ?id={dataFileId} then load it.
-if (typeof saveData !== 'undefined') {
+if (typeof saveData !== 'undefined' && saveData !== '') {
   game.transferred = true;
   game.write(saveData);
 }
@@ -22,6 +22,10 @@ if (urlParams.has('reset')) {
 if (urlParams.has('moar')) {
   isDev = true;
 }
+
+// clear out any url params
+window.history.replaceState({}, document.title, window.location.pathname);
+
 
 // all of the events..
 document.addEventListener("DOMContentLoaded", function () {
@@ -163,7 +167,7 @@ function startGame() {
     //game.save();
 
   }
-  if (!urlParams.has('id') && typeof saveId !== 'undefined') {
+  if (!urlParams.has('id') && typeof saveId !== 'undefined' && saveId !== '') {
     showTransferLink();
   } else {
     splashScreen();
