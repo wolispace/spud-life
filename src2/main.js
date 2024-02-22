@@ -13,6 +13,10 @@ if (typeof saveData !== 'undefined' && saveData !== '') {
   game.write(saveData);
 }
 
+if (typeof error !== 'undefined' && error !== '') {
+  alert(`Oh.. no transfer code [${saveId}] found`);
+}
+
 // start with ?reset to start a new game - link this to version of game != player.version
 const urlParams = new URLSearchParams(window.location.search);
 if (urlParams.has('reset')) {
