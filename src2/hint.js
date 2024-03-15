@@ -43,7 +43,7 @@ const hint = {
   },
 
   isHinted: function (key) {
-    return player.hinted.indexOf(`${key},`) > -1;
+    return player.hinted.indexOf(`,${key},`) > -1;
   },
 
   done: function () {
