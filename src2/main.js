@@ -155,7 +155,6 @@ function startGame() {
     if (player.day >= pet.daysToPet) {
       player.pet = pet.decode(player.pet);
       pet.show();
-      hint.show('petIntro');
     }
   } else {
     game.new = true;
@@ -287,6 +286,9 @@ function closeSplash() {
   } else {
     if (player.hints) {
       hint.show('player');
+      if (player.day >= pet.daysToPet) {
+        hint.show('petIntro');
+      }
     }
   }
 }
