@@ -9,6 +9,7 @@ const pet = {
   pawsMin: 5,
   locked: true,
   level: 0,
+  boneFactor: 10, // one bone * this = how many times it goes looking
 
   encode: function () {
     if (game.petItem) {
@@ -68,7 +69,7 @@ const pet = {
   think: function () {
     // TODO do more things like sleep, scratch.. 
     let paws = (rnd(pet.pawsTime) + pet.pawsMin) * 1000;
-    if (rnd(5) == 1 && pet.level > 0) {
+    if (rnd(10) == 1 && pet.level > 0) {
       pet.timer = setTimeout(pet.moveToRandomItem, paws);
     } else {
       pet.timer = setTimeout(pet.goPlayer, paws);
@@ -195,6 +196,9 @@ const pet = {
     content += dialog.makeCheckbox("petChatterOn", "Pet chatter", player.petChatter);
     let footer = "";
     footer += `<div></div>`;
+    if (isDev) {
+      footer += `<button class="buttonize" onclick="pet.giveBones(1)"> +bone </button>`;
+    }
     footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
     dialog.cancelButton = function () { pet.save(); };
     dialog.okButton = function () { pet.save(); };
@@ -205,7 +209,7 @@ const pet = {
   showLevel: function () {
     let html = `<div>`;
     if (pet.level > 0) {
-      html += `${pet.name} is happy and it will look for buried treasure.`;
+      html += `${pet.name} is happy and it will look for ${pet.level} buried treasure.`;
     } else {
       html += `${pet.name} is not all that interested in looking for buried treasure. Give it a present to cheer it up.`;
     }
@@ -229,7 +233,8 @@ const pet = {
   giveBones: function (boneQty) {
     tools.list.basket.list.bone = 0;
     basket.recount();
-    pet.level += boneQty;
+    pet.level += boneQty * pet.boneFactor;
+    game.save();
   },
 
   editName: function () {

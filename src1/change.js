@@ -3,6 +3,7 @@ const change = {
     "1.11.0": [
       "Clear url params so reloading doesn't redo last request",
       ".1 - Fixed missing hints",
+      ".2 - Pet more inclined to look for items longer",
     ],
     "1.10.0": [
       "Added help dialog and reworked hints a bit",
