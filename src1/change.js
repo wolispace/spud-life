@@ -4,6 +4,8 @@ const change = {
       "Clear url params so reloading doesn't redo last request",
       ".1 - Fixed missing hints",
       ".2 - Pet more inclined to look for items longer",
+      ".3 - Can give more items as gifts to your pet",
+      ".4 - Books don't break the game and pets are more eager to find things",
     ],
     "1.10.0": [
       "Added help dialog and reworked hints a bit",

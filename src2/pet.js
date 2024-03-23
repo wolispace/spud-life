@@ -8,8 +8,8 @@ const pet = {
   pawsTime: 5,
   pawsMin: 5,
   locked: true,
-  level: 0,
-  boneFactor: 10, // one bone * this = how many times it goes looking
+  level: 0, // how much give is left to inspire your pet
+  giftList: {'bone': 10, 'log': 2}, // one bone * this = how many times it goes looking
 
   encode: function () {
     if (game.petItem) {
@@ -28,7 +28,7 @@ const pet = {
       pet.currentField = parseInt(bit[1]);
       game.petItem.x = parseInt(bit[2]);
       game.petItem.y = parseInt(bit[3]);
-      game.level = parseInt(bit[4]) ?? 0;
+      pet.level = parseInt(bit[4]) ?? 0;
       game.petItem.setPos();
     }
   },
@@ -69,7 +69,7 @@ const pet = {
   think: function () {
     // TODO do more things like sleep, scratch.. 
     let paws = (rnd(pet.pawsTime) + pet.pawsMin) * 1000;
-    if (rnd(10) == 1 && pet.level > 0) {
+    if (rnd(3) == 1 && pet.level > 0) {
       pet.timer = setTimeout(pet.moveToRandomItem, paws);
     } else {
       pet.timer = setTimeout(pet.goPlayer, paws);
@@ -174,12 +174,8 @@ const pet = {
     let dialogInput = document.querySelector(`#petName`);
     pet.name = cleanString(dialogInput.value);
     player.petChatter = dialog.isChecked("petChatterOn");
-    if (tools.list.basket.list.bone) {
-      if (dialog.isChecked("boneQty")) {
-        let boneQty = tools.list.basket.list.bone;
-        pet.giveBones(boneQty);
-      }
-    }
+    pet.giveGifts();
+
     dialog.hide();
     game.save();
     buildings.list.home.enter();
@@ -192,12 +188,13 @@ const pet = {
     content += `<div>Its small, black and fluffy. is it a dog or cat?</div>`;
     content += pet.editName();
     content += pet.showLevel();
-    content += pet.showBones();
+    content += pet.showGifts();
     content += dialog.makeCheckbox("petChatterOn", "Pet chatter", player.petChatter);
     let footer = "";
     footer += `<div></div>`;
     if (isDev) {
-      footer += `<button class="buttonize" onclick="pet.giveBones(1)"> +bone </button>`;
+      footer += `<button class="buttonize devButton" onclick="pet.addGift('bone')"> +bone </button>`;
+      footer += `<button class="buttonize devButton" onclick="pet.addGift('log')"> +log </button>`;
     }
     footer += `<button class="buttonize" onclick="dialog.confirm()"> Ok </button>`;
     dialog.cancelButton = function () { pet.save(); };
@@ -209,7 +206,7 @@ const pet = {
   showLevel: function () {
     let html = `<div>`;
     if (pet.level > 0) {
-      html += `${pet.name} is happy and it will look for ${pet.level} buried treasure.`;
+      html += `${pet.name} is happy and will look for ${pet.level} buried treasure.`;
     } else {
       html += `${pet.name} is not all that interested in looking for buried treasure. Give it a present to cheer it up.`;
     }
@@ -217,25 +214,43 @@ const pet = {
     return html;
   },
 
-  showBones: function () {
+  showGifts: function () {
     let html = '<div>';
-    let boneCount = tools.list.basket.list.bone;
-    let itemSvg = svg.inline('bone', 2);
-    if (boneCount > 0) {
-      html += dialog.makeCheckbox("boneQty", `Give ${pet.name} ${boneCount} ${itemSvg}`, false);
-    } else {
-      html = `<div>You have no ${itemSvg} to give ${pet.name}.</div>`;
-    }
+    Object.keys(pet.giftList).forEach((itemName) => {
+      let itemCount = tools.list.basket.list[itemName];
+      let itemSvg = svg.inline(itemName, 2);
+      if (itemCount > 0) {
+        html += dialog.makeCheckbox(`${itemName}Qty`, `Give ${pet.name} ${itemCount} ${itemSvg}`, false);
+      } else {
+        html += `<div>You have no ${itemSvg} to give ${pet.name}.</div>`;
+      }
+    });
     html += `</div>`;
     return html;
   },
 
-  giveBones: function (boneQty) {
-    tools.list.basket.list.bone = 0;
-    basket.recount();
-    pet.level += boneQty * pet.boneFactor;
-    game.save();
+  giveGifts: function () {
+    Object.keys(pet.giftList).forEach((itemName) => {
+      if (tools.list.basket.list[itemName]) {
+        if (dialog.isChecked(`${itemName}Qty`)) {
+          let qty = tools.list.basket.list[itemName];
+          pet.giveGift(itemName, qty);
+        }
+      }
+    });
   },
+
+  giveGift: function (itemName, qty) {
+    tools.list.basket.list[itemName] = 0;
+    basket.recount();
+    pet.level += qty * pet.giftList[itemName];
+  },
+
+
+  addGift: function (itemName) {
+    basket.add({ item: itemName, qty: 1 });
+  },
+
 
   editName: function () {
     return `<div><label>You call it <input type="text" id="petName" 
@@ -280,7 +295,7 @@ const pet = {
   },
 
   showMsg: function () {
-    if (!dialog.visible && !hint.visible) {      
+    if (!dialog.visible && !hint.visible) {
       let paws = (rnd(2) + 2) * 1000;
       if (rnd(20) == 1) {
         setTimeout(hint.petMsg, paws);

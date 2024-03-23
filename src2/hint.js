@@ -354,7 +354,7 @@ const hint = {
   dugItem: function (item) {
     let itemInfo = items[item.item];
     let bookInfo = books.isBook(item.item);
-    let fullName = itemInfo.fullName;
+    let fullName = '';
     let icon = '';
     if (!bookInfo && itemInfo.type == 'spuds') {
       icon = spuds.build(itemInfo.name);
@@ -365,6 +365,7 @@ const hint = {
         fullName = bookInfo.name;
       } else {
         icon = svg.render(item.item);
+        fullName = itemInfo.fullName;
       }
     }
 
