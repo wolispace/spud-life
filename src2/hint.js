@@ -100,7 +100,7 @@ const hint = {
   },
 
   render: function () {
-    if (hint.visible) {
+    if (hint.visible || game.animating) {
       hint.push();
       return;
     }
@@ -111,6 +111,7 @@ const hint = {
     if (isDev) {
       //return;
     }
+
     if (dialog.visible) {
       // scroll the target into view..
       var parentDiv = document.querySelector('.dialog .content');

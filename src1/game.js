@@ -224,6 +224,7 @@ const game = {
         console.log('Missing sprite for', this);
         this.show();
       }
+      game.animating = true;
       // slow start fast middle
       var easing = 'cubic-bezier(0, 0, .25, 0)';
       // slow and get faster
@@ -238,7 +239,9 @@ const game = {
       this.sprite.addEventListener("animationend", function handler() {
         // this is the spriteBox
         if (this) {
-          this.classList.add('moving');
+          game.animating = false;
+          hint.pop();
+          this.classList.remove('moving');
           this.style.animation = 'none';
           this.style.display = 'none';
           if (typeof onEnd == "function") {
