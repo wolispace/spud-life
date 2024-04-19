@@ -58,7 +58,7 @@ const upgrade = {
   },
 
   current: function () {
-    let html = '<div>You can turn upgrades off if you like.</div>';
+    let html = '';
     Object.entries(upgrade.state).forEach(([itemName, itemState]) => {
       if (itemState != 0) {
         let icon = svg.inline(itemName);
@@ -72,7 +72,9 @@ const upgrade = {
       }
     });
     if (html == '') {
-      html += 'You have not bought any upgrades yet.';
+      html += '<div>You have not bought any upgrades yet.</div>';
+    } else {
+      html += '<div>You can turn upgrades off if you like.</div>';
     }
 
     return html;
