@@ -71,8 +71,8 @@ const basket = {
     }
 
     icon = svg.addOrientationClass(icon);
-
-    let content = `<div  class="hardware-button buttonize">`;
+    
+    let content = `<div  class="hardware-button buttonize button-${itemInfo.type}">`;
     content += ` <div class="hardware-button-desc"><b>${itemInfo.fullName}</b></div>`;
     content += ` <div class="hardware-button-info">`;
     content += `  <div class="hardware-button-icon">${icon}`;
