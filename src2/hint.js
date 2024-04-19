@@ -128,7 +128,7 @@ const hint = {
       hint.visible = true;
       let btnText = hint.btnText || hint.ok();
       let input = `<div class="hintButtons">`;
-      input += ` <button class="button buttonize" onclick="hint.confirm()">${btnText}</button></div>`;
+      input += ` <button class="button buttonize" onclick="hint.confirm(event)">${btnText}</button></div>`;
       hint.msg.innerHTML = `${hint.message}.${input}`;
       hint.pointAt();
       hint.showMsg();
@@ -141,9 +141,9 @@ const hint = {
 
   },
 
-  overlayClicked: function () {
-    // do nothing so player has to acknowledge the hint
-    //hint.confirm();
+  overlayClicked: function (event) {
+    setTimeout(hint.confirm, 1);
+    event.stopPropagation();
   },
 
   close: function () {
