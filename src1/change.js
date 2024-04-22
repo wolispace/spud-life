@@ -8,6 +8,7 @@ const change = {
       ".4 - Books don't break the game and pets are more eager to find things",
       ".5 - Hold off on hints if animating a dug item",
       ".6 - Clear hints by clicking outside and basket colours",
+      ".7 - Found lost last book",
     ],
     "1.10.0": [
       "Added help dialog and reworked hints a bit",
