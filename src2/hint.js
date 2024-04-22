@@ -143,7 +143,9 @@ const hint = {
 
   overlayClicked: function (event) {
     setTimeout(hint.confirm, 1);
-    event.stopPropagation();
+    if (event) {
+      event.stopPropagation();
+    }
   },
 
   close: function () {
