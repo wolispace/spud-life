@@ -16,7 +16,7 @@ if (empty($id)) {
 }
 
 function logIt($str) {
-  $dateTime = date('Ymd:His');
+  $dateTime = date('Ymd H:i:s');
   file_put_contents('_log.txt', "{$dateTime},{$_SERVER['REMOTE_ADDR']},{$str}\n", FILE_APPEND | LOCK_EX);
 }
 
