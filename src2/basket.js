@@ -62,6 +62,9 @@ const basket = {
       itemInfo.desc = spuds.desc(itemInfo);
     } else {
       if (bookInfo) {
+        if (bookInfo.field != -1) {
+          return '';
+        }
         icon =  bookInfo.icon;
         itemInfo.desc = bookInfo.desc;
         itemInfo.fullName = bookInfo.name;
