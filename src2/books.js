@@ -151,6 +151,28 @@ const books = {
     books.addAllToField(-1);
   },
 
+  // check each book is where it is supposed to be, ie is it in the field it thinks it is
+  check: function () {
+    books.list.forEach((bookInfo, _) => {
+      if (bookInfo.field > -1 && player.fields[bookInfo.field]) {
+        let present = false;
+        player.fields[bookInfo.field][game.UNDERGROUND].forEach((item) => {
+          if (item.item === bookInfo.item) {
+            present = true;
+          }
+        });
+
+        if (!present) {
+          // no book in field so place it in their basket
+          bookInfo.field = -1;
+          tools.list.basket.list[bookInfo.item] = 1;
+          tools.list.basket.addQty(1);
+          console.log(`${bookInfo.item} added to basket`, tools.list.basket, books.list);
+        }
+      }
+    });
+  },
+
   // returns a bookInfo if the passed in string is a book otherwise null eg 'book_1' returns book 1 info
   isBook: function(item) {
     let bits = item.split('_');
