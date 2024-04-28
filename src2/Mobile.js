@@ -180,6 +180,9 @@ class Mobile extends game.Item {
             } else {
               endItem = buildings.list.cart;
             }
+            if (player.currentField != 0) {
+              endItem = buildings.list.landBack;
+            }
           } else if (itemInfo.type == 'tools') {
             game.endItem = tools;
             endItem = tools.list[itemInfo.name];
