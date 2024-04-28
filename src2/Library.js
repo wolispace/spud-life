@@ -51,7 +51,7 @@ class Library extends game.Item {
   }
   
   showBooks() {
-    
+    books.check();
     let title = `Public Library`;
     let content = `<div>`;
     content += books.newFinds();
