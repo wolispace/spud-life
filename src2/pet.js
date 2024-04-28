@@ -182,6 +182,7 @@ const pet = {
   },
 
   interact: function () {
+    dialog.push();
     let title = `${pet.name}`;
 
     let content = `<div class="dialog-message-content">`;

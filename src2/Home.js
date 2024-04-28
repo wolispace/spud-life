@@ -30,19 +30,26 @@ class Home extends game.Item {
     let content = `<div class="dialog-message-content">`;
     content += `<div>${svg.inline('home')} Your house ${getFromList('insideList')}.</div>`;
     content += `<div class="hasButton"><button class="buttonize" onclick="buildings.list.home.evening()"> Bring on the night </button> If you have no spuds to sell.</div>`;
+    content += this.petButton();
     content += `<div>${hint.random()}.</div>`;
     content += `</div>`;
 
     let footer = "";
     footer += `<button class="buttonize" onclick="character.customize()"> Wardrobe </button>`;
     footer += `<button class="buttonize" onclick="upgrade.show()"> Upgrades </button>`;
-    if (game.petItem) {
-      footer += `<button class="buttonize" onclick="pet.interact()"> Pet </button>`;
-    }
     footer += `<button class="buttonize" onclick="dialog.cancel()"> Exit </button>`;
     dialog.cancelButton = function () { buildings.list.home.exit(); };
     dialog.render(title, content, footer);
 
+  }
+
+  petButton() {
+    let html = '';
+    if (game.petItem) {
+      html += `<div>Interact with your [pet-sitting] <button class="buttonize" onclick="pet.interact()"> Pet </button></div>`;
+      html = help.parse(html);
+    }
+    return html;
   }
 
   enterNighttime() {
@@ -50,6 +57,7 @@ class Home extends game.Item {
     let content = `<div class="dialog-message-content">`;
     content += `Its nighttime. You need to sleep`;
     content += `<div><button class="buttonize" onclick="dialog.confirm()"> Sleep </button></div>`;
+    content += this.petButton();
 
     let footer = "";
     footer += `<button class="buttonize" onclick="character.customize()"> Wardrobe </button>`;
