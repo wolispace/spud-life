@@ -6,6 +6,9 @@ class Hotel extends game.Item {
   findMax = 5;
   added = 0;
   rewardAmount = 200;
+  restCost = 10;
+  rested = false;
+  restDelay = 500;
 
   constructor() {
     let params = {
@@ -55,6 +58,7 @@ class Hotel extends game.Item {
     content += this.greet();
     content += this.quest();
     content += this.summary();
+    content += this.restMsg();
     content += `</div>`;
     content += `</div>`;
 
@@ -89,6 +93,7 @@ class Hotel extends game.Item {
   }
 
   exit() {
+    this.rested = false;
     dialog.hide();
     buildings.exit();
   }
@@ -134,6 +139,27 @@ class Hotel extends game.Item {
 
   greet() {
     return `The maitre d' ${getFromList('hotelGreetList')}`;
+  }
+
+  restMsg() {
+    const restButton = `<button class="buttonize" onclick="buildings.list.hotel.rest()"> Rest </button>`;
+    return `<div>${restButton} and refresh your tools for ${this.restCost}</div>`;
+  }
+
+  rest() {
+    if (this.rested) {
+      alert('You are well rested already. No charge.');
+      return;
+    } else {
+      this.rested = true;
+      // refresh tools
+      tools.reset();
+      // reduce money
+      tools.list.wallet.addQty(0-this.restCost);
+      game.save();
+      // confirm
+      setTimeout(() => {alert('Your feel refreshed and so to your tools!');}, this.restDelay);
+    }
   }
 
   accept() {
