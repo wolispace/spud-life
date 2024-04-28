@@ -74,7 +74,7 @@ const upgrade = {
     if (html == '') {
       html += '<div>You have not bought any upgrades yet.</div>';
     } else {
-      html += '<div>You can turn upgrades off if you like.</div>';
+      html = `<div>You can turn upgrades off if you like.</div>${html}`;
     }
 
     return html;
