@@ -141,11 +141,12 @@ const hint = {
 
   },
 
+  // what happens when the overlay is clicked
   overlayClicked: function (event) {
-    setTimeout(hint.confirm, 1);
-    if (event) {
-      event.stopPropagation();
-    }
+    // setTimeout(hint.confirm, 1);
+    // if (event) {
+    //   event.stopPropagation();
+    // }
   },
 
   close: function () {
