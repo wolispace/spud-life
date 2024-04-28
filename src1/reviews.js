@@ -2,8 +2,9 @@ const reviews = {
   list: [
     "This is terrible",
     "Endearing. Played longer than I should have",
+    "Pretty fun if very short",
   ],
-
+        
   show: function () {
     dialog.push();
     let title = `Reviews`;
