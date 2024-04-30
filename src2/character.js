@@ -264,6 +264,11 @@ const character = {
     }
   },
 
+  canDigHere() {
+    let skyBottom = (sprite.height * sky.height) - (sprite.height / 4);
+    return game.playerItem.y > skyBottom - (sprite.height / 2);
+  },
+
   getBodySet: function () {
     let partOptions = [];
     // extract body bits

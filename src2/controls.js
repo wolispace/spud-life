@@ -123,8 +123,7 @@ const controls = {
     if (game.digging || dialog.visible) {
       return;
     }
-    let skyBottom = (sprite.height * sky.height) - (sprite.height / 4);
-    if (game.playerItem.y > skyBottom - (sprite.height / 2)) {
+    if (character.canDigHere()) {
       if (tools.list['spade'].qty > 0) {
         game.digging = true;
 

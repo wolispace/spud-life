@@ -53,9 +53,13 @@ function handleTouchEvent(event) {
       return;
     }
     if (target.classList.contains('playerBody')) {
-      controls.dig();
-      character.stopMoving(false);
-      return;
+      if (character.canDigHere()) {
+        if (player.selfDig) {
+          controls.dig();
+        }
+        character.stopMoving(false);
+        return;
+      }
     }
     target = target.parentElement;
   }
@@ -66,6 +70,7 @@ function handleTouchEvent(event) {
       game.playerItem.moveToTouch();
     }
   }
+
 
   if (!['BUTTON', 'INPUT', 'LABEL', 'DIV', 'svg', 'path', 'rect', 'ellipse', 'text'].includes(event.target.tagName)) {
     event.preventDefault();
@@ -95,9 +100,14 @@ document.addEventListener('click', function (event) {
       return;
     }
     if (target.classList.contains('playerBody')) {
-      controls.dig();
-      character.stopMoving(false);
-      return;
+      // if over sky then let clicks go through to buildings.. otherwise click to dig if set.
+      if (character.canDigHere()) {
+        if (player.selfDig) {
+          controls.dig();
+        }
+        character.stopMoving(false);
+        return;
+      }
     }
     target = target.parentElement;
   }
