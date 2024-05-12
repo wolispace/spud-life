@@ -24,6 +24,11 @@ const tools = {
         params.name = itemName;
         tools.list[itemName] = new Tool(params);
         tools.list[itemName].sprite.onclick = tools.clicks[itemName];
+        // make sure tools are a fixed square
+        tools.list[itemName].w = sprite.width;
+        tools.list[itemName].h = sprite.height;
+        tools.list[itemName].position();
+        // shift x pos ready for next tool
         params.x = params.x - tools.list[itemName].w - game.tool.padding;
         tools.list[itemName].total = player.tools[itemName].total ?? 0;
         if (tools.buyable.includes(itemName) && player.tools[itemName].max === 0) {
@@ -35,6 +40,8 @@ const tools = {
       }
     });
   },
+
+  
 
   spadePos: function () {
     let params = tools.spadeCoords();

@@ -1,9 +1,34 @@
 const svg = {
 
   inline: function (itemName, num = 3) {
-    let style = `style="width: ${num}rem;"`;
+    // if its wider than high, set height otherwise width
+    const thisSvg = lists.raw.imgList[itemName];
+
+    // viewBox="0 0 86 83"
+    const width = svg.isWider(thisSvg) ? 'width' : 'height';
+    let style = `style="${width}: ${num}rem;"`;
     return lists.raw.imgList[itemName] ? svg.render(itemName, 1, style) : '';
   },
+
+  isWider: function (svgString) {
+    const params = svg.getWidthAndHeight(svgString);
+   return params.w > params.h;
+  },
+
+  getWidthAndHeight: function(svgString) {
+    let result = {w: 100, h: 100};
+    try {
+      let match = svgString.match(/viewBox="(\d+) (\d+) (\d+) (\d+)"/);
+      if (match) {
+        result.w = match[3];
+        result.h = match[4];
+      }
+    } catch {
+      console.log(svgString);
+    }
+    return result;
+  },
+
 
   render: (svgName, repeat = 1, style = "", svgInfo = null) => {
     let svgHtml = "";

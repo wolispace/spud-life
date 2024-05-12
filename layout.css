@@ -325,6 +325,9 @@ q {
   z-index: 2;
   opacity: 80%;
   pointer-events: auto;
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
 }
 
 .control:hover {
@@ -340,8 +343,9 @@ q {
 }
 
 .control>.qty {
-  position: relative;
-  top: -1.2rem;
+  position: absolute; 
+  bottom: .2rem; 
+  right: .2rem;
   text-shadow: 0 0 3px black;
 }
 
@@ -468,6 +472,9 @@ q {
   height: 2.5rem;
   flex-shrink: 0;
   position: relative;
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
 }
 
 .hardware-button-buy {
