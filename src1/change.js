@@ -2,6 +2,7 @@ const change = {
   log: {
     "1.12.0": [
       "Auto-find lost books, pets easier to interact with, enter building by self tapping in front of it",
+      ".1 - Tidy up image sizes",
     ],
     "1.11.0": [
       "Clear url params so reloading doesn't redo last request",
