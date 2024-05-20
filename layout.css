@@ -726,6 +726,7 @@ q {
   display: flex;
   width: 3rem;
   position: relative;
+  justify-content: center;
 }
 
 .cartQty {

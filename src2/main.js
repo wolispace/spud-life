@@ -307,7 +307,7 @@ function presentList() {
   let items = ['spade', 'basket', 'scanner', 'home', 'cart', 'chipper'];
   let html = '';
   items.forEach((item) => {
-    let itemSvg = svg.render(item);
+    let itemSvg = svg.inline(item, 3);
     html += `<div class="cartMachine buttonize button machine_${item}" onclick="machines.describe('${item}')">${itemSvg}</div>`;
   });
   return `<div class="cartMachines">${html}</div>`;
